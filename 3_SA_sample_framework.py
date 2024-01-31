@@ -46,7 +46,6 @@ ray.init(num_cpus=8)
 for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
     for poly_i, poly_label in zip([0,1],['34S_19E_258N','34S_19E_259N']):
         with rio.Env(GDAL_CACHEMAX=256*1e6) as env:
-            band_name = 'B12'
             file_glob = f"*{band_name}*.tif"    
             f_list = sorted(glob(file_glob))
             df_id = ray.put(gpd.read_file(polys[poly_i]).to_crs('EPSG:4326'))
@@ -76,10 +75,6 @@ for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
         result.to_parquet(f'./{band_name}_{poly_label}.parquet', 
                           engine='auto', 
                           compression='snappy')
-
-
-
-
 
 #%%
 # Use geowombat to extract imagery to polygons
