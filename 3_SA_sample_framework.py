@@ -51,7 +51,7 @@ for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
             f_list = sorted(glob(file_glob))
             df_id = ray.put(gpd.read_file(polys[poly_i]).to_crs('EPSG:4326'))
 
-            band_names=[i.split('.')[0] for i in f_list]
+            band_names=[i.split('.ti')[0] for i in f_list]
 
             # Since we are iterating over the image block by block, we do not need to load
             # a lazy dask array (i.e., chunked).
@@ -70,11 +70,12 @@ for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
 
         del df_id, actor_pool
         ray.shutdown()
-
-        result = pd.concat(results)
-        result.to_parquet(f'./{band_name}_{poly_label}.parquet', engine='auto', compression='snappy')
-
-
+        results2 = [df.reset_index(drop=True) for df in results if len(df) > 0]
+        result = pd.concat(results2, ignore_index=True,axis=0)
+        result = pd.DataFrame(result.drop(columns='geometry'))
+        result.to_parquet(f'./{band_name}_{poly_label}.parquet', 
+                          engine='auto', 
+                          compression='snappy')
 
 
 
