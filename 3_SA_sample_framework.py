@@ -4,14 +4,12 @@
 
 import geowombat as gw
 from geowombat.core.parallel import ParallelTask
-from geowombat.data import l8_224078_20200518_points, l8_224078_20200518
 import geopandas as gpd
 import rasterio as rio
 import ray
 from ray.util import ActorPool
 from glob import glob
 import os
-import numpy as np
 import numpy as np
 import pandas as pd
 
@@ -55,7 +53,7 @@ polys = glob(
 polys
 
 
-ray.init(num_cpus=8)
+ray.init(local_mode=True)  # this avoids thread conflicts for large objects
 
 for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
     for poly_i, poly_label in zip([0, 1], ["34S_19E_258N", "34S_19E_259N"]):
@@ -88,7 +86,7 @@ for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
                     row_chunks=4096,
                     col_chunks=4096,
                     scheduler="ray",
-                    n_chunks=1000,
+                    # n_chunks=1000,
                 )
                 results = pt.map(actor_pool)
 
@@ -103,7 +101,7 @@ for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
 
 # %%
 ################################################################
-# extract raw bandss
+# extract raw bands
 ################################################################
 
 # import other necessary modules...
@@ -114,11 +112,12 @@ polys = glob(
 )
 
 polys
-
-ray.init(num_cpus=8)
+# %%  Local mode seems to avoid thread conflicts for large objects
+ray.init(local_mode=True)
 
 for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
     for poly_i, poly_label in zip([0, 1], ["34S_19E_258N", "34S_19E_259N"]):
+
         with rio.Env(GDAL_CACHEMAX=256 * 1e6) as env:
 
             f_list = sorted(glob(f"*{band_name}*/*.tif"))
@@ -126,13 +125,16 @@ for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
 
             band_names = [i.split(".ti")[0] for i in f_list]
 
-            # Since we are iterating over the image block by block, we do not need to load
-            # a lazy dask array (i.e., chunked).
             with gw.open(
-                f_list, band_names=band_names, stack_dim="band", chunks=16
+                f_list,
+                band_names=band_names,
+                stack_dim="band",
+                chunks=2048,  # chunks controls how much is read in at once 1 is largest
             ) as src:
+                display(src)
+                chunk_sizes = src.chunks
+                print(chunk_sizes)
 
-                # Setup the pool of actors, one for each resource available to ``ray``.
                 actor_pool = ActorPool(
                     [
                         Actor.remote(
@@ -142,18 +144,15 @@ for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
                     ]
                 )
 
-                # Setup the task object
                 pt = ParallelTask(
                     src,
-                    row_chunks=4096,
-                    col_chunks=4096,
+                    row_chunks=2048,
+                    col_chunks=2048,
                     scheduler="ray",
-                    n_chunks=1000,
                 )
                 results = pt.map(actor_pool)
 
-        del df_id, actor_pool
-        ray.shutdown()
+        del df_id, actor_pool, pt
         results2 = [df.reset_index(drop=True) for df in results if len(df) > 0]
         result = pd.concat(results2, ignore_index=True, axis=0)
         result = pd.DataFrame(result.drop(columns="geometry"))
@@ -163,6 +162,78 @@ for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
             compression="snappy",
         )
 
+
+# %%  Experiment with local mode
+
+import ray
+
+# Initialize Ray in local mode
+ray.init(local_mode=True)
+
+import cProfile
+import pstats
+import io
+
+
+def process_bands():
+    for band_name in ["B12"]:  # , "B11", "B2", "B6", "EVI", "hue"]:
+        for poly_i, poly_label in zip([0, 1], ["34S_19E_258N", "34S_19E_259N"]):
+
+            with rio.Env(GDAL_CACHEMAX=256 * 1e6) as env:
+
+                f_list = sorted(glob(f"*{band_name}*/*.tif"))[0:1]
+                df_id = ray.put(gpd.read_file(polys[poly_i]).to_crs("EPSG:4326"))
+
+                band_names = [i.split(".ti")[0] for i in f_list]
+
+                with gw.open(
+                    f_list, band_names=band_names, stack_dim="band", chunks=16
+                ) as src:
+
+                    actor_pool = ActorPool(
+                        [
+                            Actor.remote(
+                                aoi_id=df_id, id_column="id", band_names=band_names
+                            )
+                            for n in range(0, int(ray.cluster_resources()["CPU"]))
+                        ]
+                    )
+
+                    pt = ParallelTask(
+                        src,
+                        row_chunks=2048 // 4,
+                        col_chunks=2048 // 4,
+                        scheduler="ray",
+                    )
+                    results = pt.map(actor_pool)
+
+            del df_id, actor_pool, pt
+            results2 = [df.reset_index(drop=True) for df in results if len(df) > 0]
+            result = pd.concat(results2, ignore_index=True, axis=0)
+            result = pd.DataFrame(result.drop(columns="geometry"))
+            result.to_parquet(
+                f"./{band_name}_raw_{poly_label}.parquet",
+                engine="auto",
+                compression="snappy",
+            )
+
+
+# Profile the function
+pr = cProfile.Profile()
+pr.enable()
+process_bands()
+pr.disable()
+
+# Print profiling results
+s = io.StringIO()
+sortby = "cumulative"
+ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+ps.print_stats()
+print(s.getvalue())
+# %%
+# write to text file
+with open("profile_stats.txt", "w") as f:
+    f.write(s.getvalue())
 
 # %% TOO SLOW
 
