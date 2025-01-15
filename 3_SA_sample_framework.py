@@ -162,78 +162,86 @@ for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
             compression="snappy",
         )
 
+# %% View the results
+import pandas as pd
 
-# %%  Experiment with local mode
+data = pd.read_parquet(
+    "/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/S1c_data/B2_raw_34S_19E_258N.parquet"
+)
+data
 
-import ray
-
-# Initialize Ray in local mode
-ray.init(local_mode=True)
-
-import cProfile
-import pstats
-import io
-
-
-def process_bands():
-    for band_name in ["B12"]:  # , "B11", "B2", "B6", "EVI", "hue"]:
-        for poly_i, poly_label in zip([0, 1], ["34S_19E_258N", "34S_19E_259N"]):
-
-            with rio.Env(GDAL_CACHEMAX=256 * 1e6) as env:
-
-                f_list = sorted(glob(f"*{band_name}*/*.tif"))[0:1]
-                df_id = ray.put(gpd.read_file(polys[poly_i]).to_crs("EPSG:4326"))
-
-                band_names = [i.split(".ti")[0] for i in f_list]
-
-                with gw.open(
-                    f_list, band_names=band_names, stack_dim="band", chunks=16
-                ) as src:
-
-                    actor_pool = ActorPool(
-                        [
-                            Actor.remote(
-                                aoi_id=df_id, id_column="id", band_names=band_names
-                            )
-                            for n in range(0, int(ray.cluster_resources()["CPU"]))
-                        ]
-                    )
-
-                    pt = ParallelTask(
-                        src,
-                        row_chunks=2048 // 4,
-                        col_chunks=2048 // 4,
-                        scheduler="ray",
-                    )
-                    results = pt.map(actor_pool)
-
-            del df_id, actor_pool, pt
-            results2 = [df.reset_index(drop=True) for df in results if len(df) > 0]
-            result = pd.concat(results2, ignore_index=True, axis=0)
-            result = pd.DataFrame(result.drop(columns="geometry"))
-            result.to_parquet(
-                f"./{band_name}_raw_{poly_label}.parquet",
-                engine="auto",
-                compression="snappy",
-            )
-
-
-# Profile the function
-pr = cProfile.Profile()
-pr.enable()
-process_bands()
-pr.disable()
-
-# Print profiling results
-s = io.StringIO()
-sortby = "cumulative"
-ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
-ps.print_stats()
-print(s.getvalue())
 # %%
-# write to text file
-with open("profile_stats.txt", "w") as f:
-    f.write(s.getvalue())
+# # %%  Experiment with local mode
+
+# import ray
+
+# # Initialize Ray in local mode
+# ray.init(local_mode=True)
+
+# import cProfile
+# import pstats
+# import io
+
+
+# def process_bands():
+#     for band_name in ["B12"]:  # , "B11", "B2", "B6", "EVI", "hue"]:
+#         for poly_i, poly_label in zip([0, 1], ["34S_19E_258N", "34S_19E_259N"]):
+
+#             with rio.Env(GDAL_CACHEMAX=256 * 1e6) as env:
+
+#                 f_list = sorted(glob(f"*{band_name}*/*.tif"))[0:1]
+#                 df_id = ray.put(gpd.read_file(polys[poly_i]).to_crs("EPSG:4326"))
+
+#                 band_names = [i.split(".ti")[0] for i in f_list]
+
+#                 with gw.open(
+#                     f_list, band_names=band_names, stack_dim="band", chunks=16
+#                 ) as src:
+
+#                     actor_pool = ActorPool(
+#                         [
+#                             Actor.remote(
+#                                 aoi_id=df_id, id_column="id", band_names=band_names
+#                             )
+#                             for n in range(0, int(ray.cluster_resources()["CPU"]))
+#                         ]
+#                     )
+
+#                     pt = ParallelTask(
+#                         src,
+#                         row_chunks=2048 // 4,
+#                         col_chunks=2048 // 4,
+#                         scheduler="ray",
+#                     )
+#                     results = pt.map(actor_pool)
+
+#             del df_id, actor_pool, pt
+#             results2 = [df.reset_index(drop=True) for df in results if len(df) > 0]
+#             result = pd.concat(results2, ignore_index=True, axis=0)
+#             result = pd.DataFrame(result.drop(columns="geometry"))
+#             result.to_parquet(
+#                 f"./{band_name}_raw_{poly_label}.parquet",
+#                 engine="auto",
+#                 compression="snappy",
+#             )
+
+
+# # Profile the function
+# pr = cProfile.Profile()
+# pr.enable()
+# process_bands()
+# pr.disable()
+
+# # Print profiling results
+# s = io.StringIO()
+# sortby = "cumulative"
+# ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+# ps.print_stats()
+# print(s.getvalue())
+# # %%
+# # write to text file
+# with open("profile_stats.txt", "w") as f:
+#     f.write(s.getvalue())
 
 # %% TOO SLOW
 
