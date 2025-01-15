@@ -170,6 +170,12 @@ data = pd.read_parquet(
 )
 data
 
+
+features = pd.read_parquet(
+    "/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/features/time series features extract/B6_34S_19E_258N.parquet"
+)
+features
+
 # %%
 # # %%  Experiment with local mode
 
