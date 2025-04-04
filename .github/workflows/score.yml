@@ -1,0 +1,42 @@
+name: Score Submission
+
+on:
+    pull_request:
+        paths:
+            - 'submissions/**'
+    workflow_dispatch:
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install pandas scikit-learn
+
+    - name: Run scoring script
+      run: python scoring/score.py
+      env:
+        GROUND_TRUTH: ${{ secrets.GROUND_TRUTH }}
+
+    - name: Capture and comment scores
+      run: |
+        OUTPUT=$(python scoring/score.py)
+        echo "$OUTPUT"
+        echo "## 🧪 Submission Results" > comment.md
+        echo "\`\`\`" >> comment.md
+        echo "$OUTPUT" >> comment.md
+        echo "\`\`\`" >> comment.md
+        gh pr comment "$PR_URL" --body-file comment.md
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GROUND_TRUTH: ${{ secrets.GROUND_TRUTH }}
+        PR_URL: ${{ github.event.pull_request.html_url }}
+permissions:
+  pull-requests: write
