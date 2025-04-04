@@ -5,14 +5,13 @@ import os
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import log_loss
+from io import StringIO
 
 # Load prediction
 pred = pd.read_csv("submissions/prediction.csv")
 
 # Decode and load ground truth from secret
-gt = pd.read_csv(
-    pd.compat.StringIO(base64.b64decode(os.environ["GROUND_TRUTH"]).decode())
-)
+gt = pd.read_csv(StringIO(base64.b64decode(os.environ["GROUND_TRUTH"]).decode()))
 
 kappa = cohen_kappa_score(gt["label"], pred["label"])
 f1 = f1_score(gt["label"], pred["label"], average="weighted")
