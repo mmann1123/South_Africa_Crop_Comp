@@ -14,6 +14,7 @@ for file in files:
 
 #%% create geofield boundaries without crops 
 import geopandas as gpd
+import numpy as np
 polys = glob(
     r"/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/ref_fusion_competition_south_africa_test_labels/ref_fusion_competition_south_africa_test_labels_34S_20E_259N/*.geojson"
 )
@@ -29,4 +30,11 @@ pd.read_parquet(files[0]).groupby("id").agg("first")["crop_name"].to_csv('ground
 
 # %%
 pd.read_parquet(files[0]).groupby("id").agg("first")["crop_name"].unique()
+# %%
+# Read the data, group by ID, get first occurrence, 
+# then randomly shuffle the DataFrame before saving
+truth_df = pd.read_parquet(files[0]).groupby("id").agg("first")["crop_name"]
+truth_df = truth_df.sample(frac=1, random_state=42).reset_index(drop=True)
+truth_df.to_csv('/home/mmann1123/Documents/github/South_Africa_Crop_Comp/submissions/prediction.csv', index=False)
+
 # %%

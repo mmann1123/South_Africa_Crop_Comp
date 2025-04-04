@@ -34,7 +34,7 @@ Wheat,0.87
  
 ### 📋 Submission Requirements
 
-- File **must be named** `prediction.csv`
+- File **must be named** `prediction.csv` and provide **field-level predictions**
 - Include either:
   - **One column** with header `crop_name`, or
   - **Two columns** with headers `crop_name` and `probability`
