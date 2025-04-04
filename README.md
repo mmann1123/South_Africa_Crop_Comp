@@ -42,6 +42,7 @@ Once your pull request is submitted:
 Good luck! 🌾📈
 
 Where Cross Entropy with binary outcome for each crop is calculated as:
+
 $J = -\frac{1}{N} \left( \sum_{i=1}^{9} y_{j,i} \ln(p_{j,i}) \right)$
 
 
