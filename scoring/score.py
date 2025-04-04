@@ -13,12 +13,15 @@ pred = pd.read_csv("submissions/prediction.csv")
 # Decode and load ground truth from secret
 gt = pd.read_csv(StringIO(base64.b64decode(os.environ["GROUND_TRUTH"]).decode()))
 
-kappa = cohen_kappa_score(gt["label"], pred["label"])
-f1 = f1_score(gt["label"], pred["label"], average="weighted")
+label_name = "crop_name"
+
+
+kappa = cohen_kappa_score(gt[label_name], pred[label_name])
+f1 = f1_score(gt[label_name], pred[label_name], average="weighted")
 
 # Score
 le = LabelEncoder()
-y_true = le.fit_transform(gt["label"])
+y_true = le.fit_transform(gt[label_name])
 
 
 # Calculate the J score (log loss)
@@ -26,7 +29,7 @@ y_true = le.fit_transform(gt["label"])
 
 if "probability" in pred.columns:
     # If probabilities are provided
-    J = log_loss(gt["label"], pred[["probability"]])
+    J = log_loss(gt[label_name], pred[["probability"]])
 else:
     # If only labels are provided, this is an approximation
     y_pred = le.transform(pred["label"])
