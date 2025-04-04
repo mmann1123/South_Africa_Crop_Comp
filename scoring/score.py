@@ -32,7 +32,7 @@ if "probability" in pred.columns:
     J = log_loss(gt[label_name], pred[["probability"]])
 else:
     # If only labels are provided, this is an approximation
-    y_pred = le.transform(pred["label"])
+    y_pred = le.transform(pred[label_name])
     y_pred_one_hot = np.zeros((len(y_pred), len(le.classes_)))
     for i, val in enumerate(y_pred):
         y_pred_one_hot[i, val] = 1
