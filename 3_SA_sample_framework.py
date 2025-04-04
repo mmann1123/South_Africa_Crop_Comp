@@ -177,6 +177,106 @@ features = pd.read_parquet(
 features
 
 # %%
+################################################################
+# extract time series features for all bands - OUT OF SAMPLE
+################################################################
+
+# import other necessary modules...
+os.chdir(r"/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/features")
+
+polys = glob(
+    r"/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/ref_fusion_competition_south_africa_test_labels/ref_fusion_competition_south_africa_test_labels_34S_20E_259N/*.geojson"
+)
+polys
+# %%
+
+ray.init(local_mode=True)  # this avoids thread conflicts for large objects
+
+for band_name in ["hue"]:  # "B12","B11", "B2","B6","EVI",
+    for poly_i, poly_label in zip([0], ["34S_20E_259N"]):
+        with rio.Env(GDAL_CACHEMAX=256 * 1e6) as env:
+            file_glob = f"{band_name}/*{band_name}*.tif"
+            f_list = sorted(glob(file_glob))
+            df_id = ray.put(gpd.read_file(polys[poly_i]).to_crs("EPSG:4326"))
+
+            band_names = [i.split(".ti")[0].split("/")[1] for i in f_list]
+            print("###################\n#################\n", band_names)
+            print(poly_i, poly_label)
+            # Since we are iterating over the image block by block, we do not need to load
+            # a lazy dask array (i.e., chunked).
+            with gw.open(
+                f_list,
+                band_names=band_names,
+                stack_dim="band",
+            ) as src:
+                # src = src.chunk(chunks="auto", block_size_limit=1e8)
+                src = src.chunk({"band": -1, "x": 4096 // 2, "y": 4096 // 2})
+                print(src)
+                # Setup the pool of actors, one for each resource available to ``ray``.
+                actor_pool = ActorPool(
+                    [
+                        Actor.remote(
+                            aoi_id=df_id, id_column="id", band_names=band_names
+                        )
+                        for n in range(0, int(ray.cluster_resources()["CPU"]))
+                    ]
+                )
+
+                # Setup the task object
+                pt = ParallelTask(
+                    src,
+                    row_chunks=4096 // 2,
+                    col_chunks=4096 // 2,
+                    scheduler="ray",
+                    # n_chunks=1000,
+                )
+                results = pt.map(actor_pool)
+
+        del df_id, actor_pool
+        ray.shutdown()
+        results2 = [df.reset_index(drop=True) for df in results if len(df) > 0]
+        result = pd.concat(results2, ignore_index=True, axis=0)
+        result = pd.DataFrame(result.drop(columns="geometry"))
+        result.to_parquet(
+            f"./testing_{band_name}_{poly_label}.parquet",
+            engine="auto",
+            compression="snappy",
+        )
+
+# %%
+# from dask.distributed import Client, LocalCluster
+
+# with LocalCluster(
+#     n_workers=1,
+#     threads_per_worker=8,
+#     scheduler_port=0,
+#     processes=False,
+#     memory_limit="16GB",
+# ) as cluster:
+
+#     for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:
+#         for poly_i, poly_label in zip([0], ["34S_20E_259N"]):
+#             with rio.Env(GDAL_CACHEMAX=256 * 1e6) as env:
+#                 file_glob = f"{band_name}/*{band_name}*.tif"
+#                 f_list = sorted(glob(file_glob))
+
+#                 band_names = [i.split(".ti")[0].split("/")[1] for i in f_list]
+#                 print("###################\n#################\n", band_names)
+#                 print(poly_i, poly_label)
+#                 # Since we are iterating over the image block by block, we do not need to load
+#                 # a lazy dask array (i.e., chunked).
+#                 with gw.open(
+#                     f_list, band_names=band_names, stack_dim="band", chunks=16
+#                 ) as src:
+
+#                     df = gw.extract(src, polys[0], use_client=True, address=cluster)
+
+#                     df.to_parquet(
+#                         f"./testing_{band_name}_{poly_label}.parquet",
+#                         engine="auto",
+#                         compression="snappy",
+#                     )
+# %%
 # # %%  Experiment with local mode
 
 # import ray
