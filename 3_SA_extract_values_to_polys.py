@@ -238,8 +238,10 @@ for band_name in ["hue"]:  # "B12","B11", "B2","B6","EVI",
         results2 = [df.reset_index(drop=True) for df in results if len(df) > 0]
         result = pd.concat(results2, ignore_index=True, axis=0)
         result = pd.DataFrame(result.drop(columns="geometry"))
+        result.drop(columns=["crop_id", "crop_name"], inplace=True)
+
         result.to_parquet(
-            f"./testing_{band_name}_{poly_label}.parquet",
+            f"./X_testing_{band_name}_{poly_label}.parquet",
             engine="auto",
             compression="snappy",
         )
@@ -307,7 +309,14 @@ for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:  #
             compression="snappy",
         )
         ray.shutdown()
-# %%
+# %% View the results
+import pandas as pd
+
+data = pd.read_parquet(
+    "/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/S1c_data/X_testing_B11_raw_34S_20E_259N.parquet"
+)
+data
+
 
 # %%
 # from dask.distributed import Client, LocalCluster
