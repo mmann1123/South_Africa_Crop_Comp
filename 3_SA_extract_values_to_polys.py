@@ -190,10 +190,11 @@ polys = glob(
 polys
 # %%
 
-ray.init(local_mode=True)  # this avoids thread conflicts for large objects
 
 for band_name in ["hue"]:  # "B12","B11", "B2","B6","EVI",
     for poly_i, poly_label in zip([0], ["34S_20E_259N"]):
+        ray.init(local_mode=True)  # this avoids thread conflicts for large objects
+
         with rio.Env(GDAL_CACHEMAX=256 * 1e6) as env:
             file_glob = f"{band_name}/*{band_name}*.tif"
             f_list = sorted(glob(file_glob))
@@ -242,6 +243,71 @@ for band_name in ["hue"]:  # "B12","B11", "B2","B6","EVI",
             engine="auto",
             compression="snappy",
         )
+
+# %%
+################################################################
+# extract raw bands - OUT OF SAMPLE
+################################################################
+
+os.chdir(r"/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/S1c_data/")
+
+polys = glob(
+    r"/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/ref_fusion_competition_south_africa_test_labels/ref_fusion_competition_south_africa_test_labels_34S_20E_259N/*.geojson"
+)
+polys
+polys
+# %%  Local mode seems to avoid thread conflicts for large objects
+
+for band_name in ["B12", "B11", "B2", "B6", "EVI", "hue"]:  #
+    for poly_i, poly_label in zip([0], ["34S_20E_259N"]):
+        ray.init(local_mode=True)
+
+        with rio.Env(GDAL_CACHEMAX=256 * 1e5) as env:
+            file_glob = f"{band_name}/*{band_name}*.tif"
+            f_list = sorted(glob(file_glob))
+            df_id = ray.put(gpd.read_file(polys[poly_i]).to_crs("EPSG:4326"))
+
+            band_names = [i.split(".ti")[0].split("/")[1] for i in f_list]
+            print("###################\n#################\n", band_names)
+            print(poly_i, poly_label)
+            with gw.open(
+                f_list,
+                band_names=band_names,
+                stack_dim="band",
+                chunks=2048,  # chunks controls how much is read in at once 1 is largest
+            ) as src:
+                chunk_sizes = src.chunks
+                print(chunk_sizes)
+
+                actor_pool = ActorPool(
+                    [
+                        Actor.remote(
+                            aoi_id=df_id, id_column="id", band_names=band_names
+                        )
+                        for n in range(0, int(ray.cluster_resources()["CPU"]))
+                    ]
+                )
+
+                pt = ParallelTask(
+                    src,
+                    row_chunks=2048,
+                    col_chunks=2048,
+                    scheduler="ray",
+                )
+                results = pt.map(actor_pool)
+
+        del df_id, actor_pool, pt
+        results2 = [df.reset_index(drop=True) for df in results if len(df) > 0]
+        result = pd.concat(results2, ignore_index=True, axis=0)
+        result = pd.DataFrame(result.drop(columns="geometry"))
+        result.drop(columns=["crop_id", "crop_name"], inplace=True)
+        result.to_parquet(
+            f"./X_testing_{band_name}_raw_{poly_label}.parquet",
+            engine="auto",
+            compression="snappy",
+        )
+        ray.shutdown()
+# %%
 
 # %%
 # from dask.distributed import Client, LocalCluster
