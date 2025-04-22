@@ -17,12 +17,12 @@ import geopandas as gpd
 import numpy as np
 polys = glob(
     r"/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/ref_fusion_competition_south_africa_test_labels/ref_fusion_competition_south_africa_test_labels_34S_20E_259N/*.geojson"
-)
+) 
 gpd.read_file(polys[0]).drop(columns=['crop_id','crop_name']).to_file('X_testing_34S_20E_259N.geojson',driver='GeoJSON')
 
 # %% Create answer
 
-pd.read_parquet(files[0]).groupby("id").agg("first")["crop_name"].to_csv('ground_truth.csv',index=False)
+gpd.read_file(polys[0])["crop_name"].to_csv('ground_truth.csv',index=False)
 !base64 ground_truth.csv
 
 #Go to your GitHub repo → Settings → Secrets and variables → Actions → New repository secret.

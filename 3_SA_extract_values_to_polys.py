@@ -191,7 +191,7 @@ polys
 # %%
 
 
-for band_name in ["hue"]:  # "B12","B11", "B2","B6","EVI",
+for band_name in ["B12"]:  # ,"B11", "B2","B6","EVI","hue"
     for poly_i, poly_label in zip([0], ["34S_20E_259N"]):
         ray.init(local_mode=True)  # this avoids thread conflicts for large objects
 
