@@ -10,7 +10,8 @@ files
 
 for file in files:
     data = pd.read_parquet(file).drop(columns=["crop_name", "crop_id"])
-    data.to_parquet("X_" + file)
+    # data.to_parquet("X_" + file)
+    print(data.groupby('id').aggregate('first').shape)
 
 #%% create geofield boundaries without crops 
 import geopandas as gpd
@@ -20,13 +21,18 @@ polys = glob(
 ) 
 gpd.read_file(polys[0]).drop(columns=['crop_id','crop_name']).to_file('X_testing_34S_20E_259N.geojson',driver='GeoJSON')
 
-# %% Create answer
+# %% Create answer - use the extracted values, because its missing two polygons
 
-gpd.read_file(polys[0])["crop_name"].to_csv('ground_truth.csv',index=False)
+pd.read_parquet(files[0]).groupby('id').aggregate('first')["crop_name"].to_csv('ground_truth.csv',index=False)
 !base64 ground_truth.csv
 
 #Go to your GitHub repo → Settings → Secrets and variables → Actions → New repository secret.
 # Name it something like GROUND_TRUTH, and paste in your base64-encoded CSV content. Let me know if you want a quick bash command to generate that base64!
+
+#%% get field id csv
+pd.read_parquet(files[0]).groupby('id', as_index=False).aggregate('first')["id"].to_csv('/home/mmann1123/Documents/github/South_Africa_Crop_Comp/scoring/field_id.csv',index=False)
+
+
 
 # %%
 pd.read_parquet(files[0]).groupby("id").agg("first")["crop_name"].unique()
