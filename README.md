@@ -48,7 +48,7 @@ submissions/prediction.csv
 
 ### Field ID Order
 
-The order of field ids (e.g. column `id`) can be found in `scoring/field_ids.csv`. Your submission should match the order of the field ids in this file.
+The order of field ids (e.g. column `id`) can be found in `scoring/field_ids.csv` and `scoring/field_fid.csv1. Your submission should match the order of the field ids or fids in these files.
 
 
 ### ⚙️ What Happens Next

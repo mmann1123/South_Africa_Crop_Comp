@@ -3,8 +3,10 @@ import pandas as pd
 from glob import glob
 import os
 
-os.chdir(r"/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/features")
-files = glob("testing*.parquet")
+# os.chdir(r"/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp")
+os.chdir(r"D:\Dropbox\South_Africa_data\Projects\Agriculture_Comp")
+
+files = glob("features/testing*.parquet")
 files
 # %% remove crop_name and id from parquet files for out of sample preds
 
@@ -16,9 +18,12 @@ for file in files:
 #%% create geofield boundaries without crops 
 import geopandas as gpd
 import numpy as np
+
 polys = glob(
-    r"/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/ref_fusion_competition_south_africa_test_labels/ref_fusion_competition_south_africa_test_labels_34S_20E_259N/*.geojson"
+    r"./ref_fusion_competition_south_africa_test_labels/ref_fusion_competition_south_africa_test_labels_34S_20E_259N/*.geojson"
 ) 
+
+#%%
 gpd.read_file(polys[0]).drop(columns=['crop_id','crop_name']).to_file('X_testing_34S_20E_259N.geojson',driver='GeoJSON')
 
 # %% Create answer - use the extracted values, because its missing two polygons
@@ -30,7 +35,8 @@ pd.read_parquet(files[0]).groupby('id').aggregate('first')["crop_name"].to_csv('
 # Name it something like GROUND_TRUTH, and paste in your base64-encoded CSV content. Let me know if you want a quick bash command to generate that base64!
 
 #%% get field id csv
-pd.read_parquet(files[0]).groupby('id', as_index=False).aggregate('first')["id"].to_csv('/home/mmann1123/Documents/github/South_Africa_Crop_Comp/scoring/field_id.csv',index=False)
+pd.read_parquet(files[0]).groupby('id', as_index=False).aggregate('first')["id"].to_csv('./field_id.csv',index=False)
+pd.read_parquet(files[0]).groupby('id', as_index=False).aggregate('first')["fid"].to_csv('./field_fid.csv',index=False)
 
 
 
