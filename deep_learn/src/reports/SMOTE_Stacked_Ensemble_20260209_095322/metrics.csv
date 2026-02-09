@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+SMOTE Stacked Ensemble,0.7493975903614458,0.6490586135538507,0.7403729036479284,0.684032884919733,test

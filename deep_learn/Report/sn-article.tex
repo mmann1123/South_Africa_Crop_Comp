@@ -1,0 +1,1004 @@
+\documentclass[pdflatex,sn-mathphys]{sn-jnl} % Springer Nature template for NCA
+
+%------------------------------------------------------------------------------
+% PACKAGES
+%------------------------------------------------------------------------------
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, allcolors=blue}
+\usepackage{textcomp}
+\usepackage[numbers]{natbib}
+\usepackage{rotating}
+\raggedbottom
+
+%------------------------------------------------------------------------------
+% BEGIN DOCUMENT
+%------------------------------------------------------------------------------
+\begin{document}
+
+%------------------------------------------------------------------------------
+% TITLE AND AUTHORS
+%------------------------------------------------------------------------------
+\title[Satellite Crop Classification]{Temporal Patterns and Pixel Precision: Satellite-Based Crop Classification Using Deep Learning and Machine Learning}
+\makeatletter
+\renewcommand{\@makefnmark}{\textsuperscript{*}}
+\renewcommand{\footnoterule}{
+  \kern -3pt
+  \hrule width 2cm height 0.4pt
+  \kern 2.6pt
+}
+\makeatother
+\footnotetext{Corresponding author: Disha Kacha, disha.kacha@gwu.edu}
+\author[1]{\fnm{Sairam} \sur{Venkatachalam}}\email{sairam.venkatachalam@gwu.edu}
+\author[1]{\fnm{Disha} \sur{Kacha}}\email{disha.kacha@gwu.edu}
+\author[1]{\fnm{Devarsh} \sur{Sheth}}\email{devarshapurva.sheth@gwu.edu}
+\author[2]{\fnm{Michael} \sur{Mann}}\email{mmann1123@email.gwu.edu}
+\author[2]{\fnm{Amir} \sur{Jafari}}\email{ajafari@email.gwu.edu}
+
+\affil{\orgdiv{Department of Geography \& Environment and the Data Science Program}, \orgname{The George Washington University}, \city{Washington}, \state{DC}, \country{USA}}
+\maketitle
+%------------------------------------------------------------------------------
+% DECLARATIONS
+%------------------------------------------------------------------------------
+\section*{Declarations}
+
+\textbf{Availability of data and material:} The datasets generated and/or analyzed during the current study are available from the corresponding author on reasonable request.
+
+\noindent\textbf{Competing interests:} The authors declare that they have no competing interests.
+
+\noindent\textbf{Funding:} This research received no external funding.
+
+\noindent\textbf{Author Contributions:} Sairam Venkatachalam, Disha Kacha, and Devarsh Sheth collectively contributed to the project design, data processing, model development, experimentation, and analysis. All authors were involved in manuscript writing, review, and final approval.
+
+\noindent\textbf{Acknowledgements:} The authors would like to thank Professor Michael Mann and Dr. Amir Jafari from The George Washington University for their valuable guidance, mentorship, and support throughout the research.\\
+
+%------------------------------------------------------------------------------
+% ABSTRACT
+%------------------------------------------------------------------------------
+\vspace{1em}
+\section*{Abstract}
+\noindent
+Accurate crop classification using satellite imagery is crucial for agricultural monitoring, yield forecasting, and sustainable resource management. However, existing methods face persistent challenges due to the spectral similarity between crop types, the incomplete exploitation of temporal dynamics, and the reliance on hand-crafted or generated features that limit generalizability. Traditional machine learning models often fail to fully leverage the rich spatiotemporal information inherent in multi-temporal optical Earth observation datasets such as Sentinel-2. To address these gaps, we developed and compared advanced deep learning models, including a CNN-BiLSTM hybrid, a TabTransformer ensemble, and a 3D CNN ensemble, that directly model raw pixel sequences across spectral bands and vegetation indices without depending on manually engineered features. We benchmarked these against classical machine learning approaches (e.g., XGBoost, Random Forest) enhanced with automated feature extraction via \texttt{xr\_fresh}. Our results show that while a voting-based machine learning classifier outperformed some deep learning models at the pixel level, the CNN-BiLSTM ensemble achieved the highest field-level performance, with a Cohen’s Kappa of 0.77 and F1 score of 0.84, surpassing traditional methods by over 0.1 in key metrics. Notably, this was accomplished without hand-crafted features, highlighting the model’s ability to learn robust representations from raw temporal data. By integrating sequence-based modeling, ensemble strategies, and data balancing techniques, our research advances the current state-of-the-art in crop classification and addresses key limitations in prior work. These findings offer meaningful improvements to remote sensing-based agricultural monitoring systems and establish a foundation for more scalable and generalizable crop classification pipelines.
+
+\vspace{1em}
+\noindent\textbf{Keywords:} Crop classification, Satellite imagery, Deep learning, Machine learning, Remote sensing
+
+\section{Introduction}
+
+Accurate and timely crop classification is foundational to precision agriculture, enabling yield forecasting, resource optimization, food security assessment, and climate-resilient decision-making \cite{mdpi2023, sciencedirect2023, ieee2017}. The widespread availability of high-resolution Earth observation data, especially from the Sentinel-2 satellite constellation, has transformed the landscape of agricultural monitoring. With 13 spectral bands, spatial resolutions ranging from 10 to 60 metres, and a revisit frequency of approximately five days, Sentinel-2 offers dense multi-temporal imagery rich in spatial and spectral information \cite{arxiv2024}.
+
+Despite these advancements, reliable crop classification remains a complex task. Spectral similarities between crops, temporal variability in planting and phenological cycles, and atmospheric disturbances such as cloud cover hinder classification accuracy. Traditional machine learning methods often rely heavily on manually engineered features, such as vegetation indices or statistical summaries, which may capture limited temporal dynamics and can lack generalizability across different agricultural contexts. While we include indices like the Enhanced Vegetation Index (EVI) as part of our input data, they serve as complementary signals rather than sole inputs. Our deep learning models ingest both raw spectral bands and derived indices, enabling them to learn rich, multiscale spatiotemporal patterns directly from the data, beyond what handcrafted features can provide in isolation. This hybrid approach bridges domain knowledge with end-to-end representation learning for improved accuracy and scalability.
+
+This study addresses a critical gap in the literature: the lack of robust, scalable crop classification pipelines that fully leverage the temporal depth of Sentinel-2 optical imagery without dependence on synthetic-aperture radar (SAR) or manual feature engineering. While SAR is widely recognized for its all-weather imaging capabilities and complementary spectral characteristics, we intentionally focus solely on optical data to assess the standalone potential of multi-temporal spectral signals. This approach allows for model simplicity, interpretability, and direct applicability to high-revisit optical platforms such as PlanetScope. It also provides a baseline for scenarios where SAR data may be unavailable or inconsistently preprocessed. Future research can expand upon this work by incorporating SAR as a complementary modality to further enhance classification robustness.
+
+We propose and evaluate multiple modelling strategies, including CNN-BiLSTM hybrids, TabTransformer ensembles, and 3D CNN architectures, that extract dynamic phenological features across time. These deep learning models are benchmarked against classical machine learning approaches such as XGBoost and Random Forest, enhanced with automated feature extraction using the \texttt{xr\_fresh} package. Our experiments utilise a labelled field-boundary dataset provided by Radiant Earth’s MLHub \cite{mlhub}, which captures ground-truth crop types for agricultural fields in South Africa during the 2017 growing season. All code is publicly available for reproducibility and future research \cite{capstone_repo}.
+
+\subsection{Study Area and Description}
+
+The study was conducted in an agriculturally productive region of South Africa, characterised by diverse agroecological conditions and cropping systems. Major crop types in the dataset include wheat, barley, canola, small grain grazing, and lucerne/medics. The region spans varying climatic zones, from semi-arid to subtropical — and exhibits seasonal differences in rainfall and temperature, contributing to distinct crop phenologies.
+
+Field parcels differ in size, shape, and management practices, introducing heterogeneity into the dataset. Sentinel-2 imagery was collected monthly across the 2017 growing season, covering key phenological stages from emergence to harvest. This temporal resolution is vital for capturing crop-specific growth patterns, which are often indistinguishable in single-date imagery.
+
+\subsection{Remote Sensing Approach}
+
+We utilised Sentinel-2 Level-2A surface reflectance products, which provide atmospherically corrected imagery across 13 spectral bands. From these, we selected six informative features for analysis: four optical bands, B2 (Blue, 490 nm), B6 (Red Edge 1, 740 nm), B11 (SWIR 1, 1610 nm), and B12 (SWIR 2, 2190 nm), alongside two vegetation indices: the Enhanced Vegetation Index (EVI) and Hue, a colorimetric feature derived from spectral reflectance to assess vegetation condition.
+
+Each feature was captured across 11 temporal observations during the growing season. Due to persistent cloud cover, data from May and June 2017 were excluded, leaving 10 valid monthly observations per feature. As a result, each pixel was represented by a 60-dimensional time-series feature vector, capturing rich phenological dynamics.
+
+By focusing solely on optical data rather than SAR imagery \cite{sar2022}, our study demonstrates the capability of multi-temporal spectral analysis alone for robust crop classification. This emphasis makes our approach directly transferable to emerging high-resolution optical platforms like PlanetScope, reinforcing the operational relevance of dense, temporally-aware optical remote sensing for agricultural monitoring at scale.
+
+\subsection{Feature Extraction vs Deep Learning}
+
+Traditional remote sensing approaches to crop classification often involve manual or semi-automated feature extraction. Features such as normalised difference vegetation indices (NDVI), spectral band ratios, textural measures, and phenology metrics are engineered based on domain knowledge and used as inputs to classifiers like Random Forests (RF), Support Vector Machines (SVM), and Gradient Boosted Trees (GBT) \cite{ieee2017, mdpi2023}. Although feature engineering has become faster and more automated through modern toolkits like \texttt{xr\_fresh}, these techniques may still struggle to capture the complex, nonlinear relationships embedded in multi-temporal satellite data.
+
+Deep learning offers an alternative paradigm by learning hierarchical feature representations directly from raw data, without relying heavily on manual intervention. Convolutional Neural Networks (CNNs) excel at capturing local spatial patterns, while Recurrent Neural Networks (RNNs) and Transformer-based architectures are adept at modelling temporal sequences and long-range dependencies \cite{arxiv2024, acm2020}. Hybrid models, such as CNN-Transformers, have also demonstrated the ability to integrate local spatial texture with global temporal dynamics, resulting in improved classification accuracy across diverse agricultural landscapes \cite{arxiv2024}.
+
+By comparing classical feature extraction pipelines with deep learning-based approaches, this study aimed to highlight the advantages and trade-offs associated with each methodology for large-scale crop classification.
+
+\section{Related Work}
+
+Crop classification using satellite imagery has become a cornerstone of precision agriculture, enabling large-scale monitoring, yield estimation, and resource management. Over the past decade, advances in both remote sensing technology and machine learning algorithms have significantly improved the accuracy and scalability of crop mapping efforts. However, challenges persist due to spectral similarity among crops, temporal variability, and the need for scalable, feature-independent models.
+
+\begin{itemize}
+    \item \textbf{Traditional Machine Learning Approaches:} Early research predominantly employed classical machine learning algorithms such as Random Forest (RF), Support Vector Machine (SVM), and Logistic Regression, which rely on engineered features derived from spectral and temporal properties of satellite imagery. Ensemble methods like LightGBM and XGBoost have gained traction for handling high-dimensional data and complex feature interactions \cite{liu2022}. Nonetheless, these models often require extensive feature engineering and domain knowledge, making them less generalisable to different regions or crop types \cite{zhang2023}.
+
+    \item \textbf{Deep Learning and Feature Learning:} With the rise of deep learning, models such as convolutional neural networks (CNNs) and transformers have been applied to crop classification tasks, automatically learning hierarchical spatial and spectral features from raw multispectral time series \cite{nasa2023}. Several studies \cite{liu2022,zhang2023} have demonstrated that deep learning models outperform traditional approaches in terms of classification accuracy. The NASA-IBM Prithvi-100M foundation model exemplifies the shift toward pre-trained, scalable architectures in agricultural remote sensing \cite{nasa2023}.
+
+    \item \textbf{Ensemble and Hybrid Methods:} Recent efforts have explored ensemble methods that combine multiple deep learning architectures. For instance, \cite{khan2024} demonstrated that a CNN ensemble combined with advanced feature extraction techniques could exceed 98\% accuracy for cotton classification.
+
+    \item \textbf{Remote Sensing Data and Feature Engineering:} Sentinel-2 has emerged as a preferred source for crop monitoring due to its high revisit rate and multi-spectral capability. Vegetation indices such as NDVI and EVI have been widely used to improve crop separability \cite{wang2022}. While useful, these indices are manually crafted and may not fully capture crop dynamics when used in isolation, limiting their utility in end-to-end learning pipelines.
+
+    \item \textbf{Temporal Analysis and Multi-Temporal Data:} Temporal dynamics provide essential information for distinguishing spectrally similar crops. Recurrent neural networks (RNNs), long short-term memory (LSTM) models, and temporal attention mechanisms have been explored to harness these dynamics \cite{russwurm2018, wang2022}.
+\end{itemize}
+
+\noindent\textbf{Synthesis and Research Gap:} \\
+While the literature demonstrates strong progress in crop classification using both traditional and deep learning methods, significant gaps remain. Most existing studies are either limited to single crop types, small regions, or heavily reliant on handcrafted features. Few studies rigorously evaluate field-level classification performance using large-scale, multi-temporal Sentinel-2 imagery with minimal feature engineering. Furthermore, the operational scalability and generalisation of ensemble deep learning models across diverse agroecological conditions remain underexplored. \textit{Our work addresses these gaps by proposing a scalable, field-level crop classification framework that integrates deep sequence models with minimal reliance on handcrafted features, benchmarked against both classical and ensemble learning baselines.}
+
+\section{Problem Statement}
+
+Accurate crop classification using satellite imagery remains a significant challenge due to spectral similarities among crops, temporal variability in growth cycles, and the limitations of traditional models that rely on manually engineered features. In regions like South Africa, where each field polygon typically represents a single crop type, these challenges hinder effective agricultural monitoring and decision-making. This study addresses the critical problem of how to effectively leverage the rich spectral and temporal information provided by multi-temporal Sentinel-2 imagery to classify crop types at the field level with high precision. By focusing on deep learning architectures that do not depend on handcrafted features and by comparing them with classical machine learning baselines, the research aims to overcome existing limitations and contribute a scalable, data-driven solution for accurate crop type identification.
+
+\section{Data Description}
+
+The dataset used for this study consists of two primary components: satellite imagery and field boundary data, as sourced from \cite{sa_comp}.
+
+\subsection{Satellite Imagery Data}
+
+Sentinel-2 Level-2A optical surface-reflectance data were acquired as monthly cloud-free composites for our study area in South Africa for the period between January–December 2017 growing season. Monthly median composites were generated with a 30\% \texttt{s2cloudless} cloud-probability filter and a morphological cloud-shadow mask clipped to the field boundaries, scaled to integer reflectance ($\times$10,000), and exported as 10 m single-band GeoTIFFs via Google Earth Engine. From each monthly composite, we extracted bands B2, B6, B11, and B12, as well as the Enhanced Vegetation Index (EVI) and Hue \cite{mann2023}.
+
+We acknowledge that computing EVI from monthly median composites may introduce spectral inconsistencies, as the EVI formula assumes band values collected simultaneously. Median compositing, while effective for reducing cloud contamination and noise, may distort the physical meaning of EVI due to temporal misalignment across bands. However, this approach was chosen as a pragmatic trade-off to maintain temporal continuity and ensure data availability across the growing season in the presence of frequent cloud cover. As our objective was to capture general phenological trends rather than precise instantaneous reflectance values, we found this method sufficient for downstream classification tasks. Future work may explore pixel-wise temporal filtering techniques or gap-filling methods that preserve per-date consistency for vegetation index computation.
+
+\subsection{Field Boundary Data}
+
+The field boundary polygons were drawn from the crop type classification dataset for Western Cape, South Africa \cite{mlhub}. This GeoJSON file delineated each agricultural field as a polygon, with boundaries digitised primarily from 50 cm aerial photography at scales of 1:2,500 for horticultural parcels and 1:7,500 for other fields between May and August 2017. In cases where ground reference was unavailable, Sentinel-2 imagery supplemented the digitising process. Each polygon fully encompassed the field area and carried a crop-type label obtained via aerial and vehicle surveys conducted from May 2017 to March 2018 \cite{mlhub}. 
+
+All predictions in our study were made at the field level.
+
+\subsection{Crop Types and Distribution}
+
+In this study, we classified five crop types: wheat, canola, lucerne/medics, barley, and small-grain grazing.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.55\textwidth]{fields_count.pdf}
+  \caption{Number of fields per crop type.}
+  \label{fig:EDA-1}
+\end{figure}
+
+Figure~\ref{fig:EDA-1} illustrates the distribution of crops in the study area. The data was notably imbalanced, with the majority of fields dedicated to lucerne/medics. The imbalance in crop representation has important implications for model training and evaluation, as classification algorithms may be biased towards the majority class unless appropriate balancing techniques are applied.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.55\textwidth]{avg_field_area.pdf}
+  \caption{Average field area by crop type.}
+  \label{fig:EDA-2}
+\end{figure}
+
+Figure~\ref{fig:EDA-2} presents the mean field area for each crop type, measured in square metres (m\textsuperscript{2}). Although lucerne/medics represent the majority of fields, their average area is smaller compared to other crop types.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.55\textwidth]{all_crops_boxplot.pdf}
+  \caption{Boxplots of spectral band intensities for each crop type, showing the distribution and overlap of spectral responses.}
+  \label{fig:EDA-3}
+\end{figure}
+
+Figure~\ref{fig:EDA-3} displays box plots of spectral band intensities for each crop type, illustrating the distribution and overlap of spectral responses. Although some differences in median and spread are evident, the substantial overlap in spectral intensities across crops demonstrates that classification based solely on a limited set of spectral bands is challenging and prone to confusion. This was particularly true for cereal crops such as wheat and barley, which exhibited highly similar spectral profiles, as shown in Figure~\ref{fig:wheat-barley-boxplot}. The close alignment of their spectral signatures underscores why models often struggle to distinguish between these two crops using spectral data alone~\cite{campbell2011introduction}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.55\textwidth]{wheat_barley_boxplot.pdf}
+  \caption{Boxplots comparing spectral band intensities of wheat and barley, highlighting their high degree of spectral similarity and potential for classification confusion.}
+  \label{fig:wheat-barley-boxplot}
+\end{figure}
+
+These findings highlight the need to incorporate temporal information that better represents phenological stages throughout the growing season to improve crop classification. The unique temporal dynamics associated with the stages of crop development (e.g., emergence, peak greenness, senescence) provide additional discriminatory power that can help resolve ambiguities between crops with similar spectral signatures~\cite{wardlow2007towards}. Therefore, integrating both spectral and temporal data was crucial to enhance classification accuracy, especially in complex agricultural landscapes where crops like wheat and barley were spectrally similar.
+
+\section{Methodology}
+
+This study explored two primary modeling paradigms: Classical Machine Learning and Deep Learning. Each paradigm was evaluated at both the pixel level and the field (or patch) level, with strategies designed to leverage both spatial and temporal information embedded in multi-spectral Sentinel-2 imagery.
+
+Model performance was assessed using a combination of standard classification metrics, including Cohen’s Kappa, F1-score, and prediction entropy. These metrics were selected to evaluate not only accuracy but also class balance and prediction confidence across imbalanced crop types.
+
+\subsection{Classical Machine Learning}
+\label{sec:pixelfield}
+
+In the classical approach, we automated feature extraction using the \texttt{xr\_fresh} toolkit to rapidly compute a comprehensive set of statistical and temporal features from each 11-month spectral time series \cite{mann2023,mann2024xr_fresh}. To address class imbalance, we applied SMOTE. Several classifiers such as Logistic Regression, Random Forest, LightGBM, and XGBoost were then evaluated.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.55\linewidth]{Time Series Feature Generation.pdf}
+  \caption{Extraction of statistical and temporal features from the 11-month spectral time series.}
+  \label{fig:ts_features}
+\end{figure}
+
+We extracted the following features from each pixel’s 11-month spectral profile \cite{mann2023}:
+\begin{itemize}
+  \item \textbf{Absolute Energy:} Sum of squared values, capturing overall signal magnitude.
+  \item \textbf{Absolute Sum of Changes:} Total absolute difference between consecutive measurements, reflecting temporal variability.
+  \item \textbf{Autocorrelation (1,2-month lag):} Correlation with its one- and two-month lagged versions, indicating series persistence.
+  \item \textbf{Count Above Mean:} Number of points above the series mean, quantifying high-value occurrences.
+  \item \textbf{Day of Year of Max/Min:} Julian day when the maximum and minimum occur, marking peak and low activity periods.
+  \item \textbf{Kurtosis:} Tail heaviness of the distribution, highlighting propensity for extremes.
+  \item \textbf{Linear Trend:} Slope of a least-squares fit, summarizing the overall upward or downward trend.
+  \item \textbf{Longest Strike Above/Below Mean:} Longest consecutive run above or below the mean, capturing sustained periods.
+  \item \textbf{Max/Min:} Absolute extreme values in the series.
+  \item \textbf{Mean/Median:} Measures of central tendency.
+  \item \textbf{Mean Absolute Change/Mean Change:} Average magnitude and signed change between consecutive points.
+  \item \textbf{Mean Second Derivative:} Mean of the series’ second differences, detecting acceleration or deceleration.
+  \item \textbf{Quantiles (0.05, 0.95):} Values at the 5th and 95th percentiles, summarizing distribution extremes.
+  \item \textbf{Ratio Beyond \(r\sigma\):} Proportion of points more than \(r\) standard deviations (r=1,2,3) from the mean.
+  \item \textbf{Skewness:} Asymmetry of the distribution around the mean.
+  \item \textbf{Standard Deviation/Variance:} Spread measures around the mean.
+  \item \textbf{Sum of Values:} Total sum of observations (mean × length).
+  \item \textbf{Symmetry Looking:} Similarity when the series is reversed.
+  \item \textbf{Time Series Complexity:} Complexity-Invariant Distance metric of sequence irregularity.
+\end{itemize}
+
+This toolkit allowed us to extract all required time-series features efficiently, ensuring each pixel’s temporal signature was well-represented for robust classification \cite{mann2024xr_fresh}.
+
+\subsubsection{Pixel-Level Analysis}
+
+For pixel-level analysis, each pixel was treated as an independent sample. Feature vectors from each pixel’s 11-month history were used to train classifiers. During inference, pixel predictions within a field polygon were aggregated via majority voting to determine the overall field label.
+
+\paragraph{Baseline Classical Models:}
+
+To benchmark crop classification, we used four classical models: Logistic Regression, Random Forest, LightGBM, and XGBoost—ranging from interpretable linear models to advanced tree-based learners.
+
+Each pixel was represented by a feature vector $\mathbf{x}_i \in \mathbb{R}^{174}$, formed from time-series features across ten months and six spectral indices (B2, B6, B11, B12, EVI, Hue), capturing phenological signatures over time.
+
+\begin{itemize}
+  \item \textbf{Logistic Regression (LR):} 
+  \[
+  P(y_i = 1 \mid \mathbf{x}_i) = \frac{1}{1 + \exp(-(\mathbf{w}^\top \mathbf{x}_i + b))}
+  \]
+  A linear model that provides interpretable weights \cite{james2013}.
+
+  \item \textbf{Random Forest (RF):} 
+  \[
+  \hat{y}_i = \text{mode}\left\{ T_1(\mathbf{x}_i), T_2(\mathbf{x}_i), \dots, T_K(\mathbf{x}_i) \right\}
+  \]
+  An ensemble of decision trees that captures non-linear interactions \cite{breiman2001}.
+
+  \item \textbf{LightGBM:}
+  \[
+  \hat{y}_i^{(t)} = \hat{y}_i^{(t-1)} + \eta \cdot f_t(\mathbf{x}_i)
+  \]
+  Gradient boosting with efficient leaf-wise learning \cite{ke2017}.
+
+  \item \textbf{XGBoost:}
+  \[
+  \mathcal{L} = \sum_i l(y_i, \hat{y}_i) + \sum_k \left[ \gamma T_k + \frac{1}{2} \lambda \sum_j w_j^2 \right]
+  \]
+  Regularized boosting to reduce overfitting \cite{chen2016, friedman2001}.
+\end{itemize}
+
+\paragraph{Pixel-Level Ensemble with Hybrid Voting:}
+
+We ensembled RF, XGBoost, and LightGBM using soft voting. Per-pixel class probabilities were averaged:
+\[
+\hat{P}_i = \frac{1}{3} \left( P_{\text{RF}}(x_i) + P_{\text{XGB}}(x_i) + P_{\text{LGBM}}(x_i) \right)
+\quad
+\hat{y}_i = \arg\max_k \hat{P}_i(k)
+\]
+
+\paragraph{Field-Level Aggregation:}
+
+Let field \( f \) consist of pixels \( i \in f \). Field-level soft voting is computed as:
+
+\[
+\bar{P}_f = \frac{1}{|f|} \sum_{i \in f} \hat{P}_i
+\quad
+\hat{y}_f^{\text{soft}} = \arg\max_k \bar{P}_f(k)
+\]
+
+We introduced a confidence margin:
+\[
+\Delta_f = \bar{P}_f^{(1)} - \bar{P}_f^{(2)}
+\]
+
+If \( \Delta_f < \theta \) (threshold = 0.10), we fallback to mode voting across pixel labels:
+
+\[
+\hat{y}_f^{\text{mode}} = \text{mode} \left\lbrace \hat{y}_i \mid i \in f \right\rbrace
+\]
+
+\paragraph{Final Hybrid Rule:}
+\[
+\hat{y}_f =
+\begin{cases}
+\hat{y}_f^{\text{soft}}, & \text{if } \Delta_f \geq \theta \\
+\hat{y}_f^{\text{mode}}, & \text{otherwise}
+\end{cases}
+\]
+
+This strategy balanced probabilistic confidence with categorical consistency, improving field-level classification stability.
+
+\subsubsection{Field-Level Analysis}
+In the field-level analysis, we aggregated all pixel features within each field polygon, as shown in Figure~\ref{fig:field_aggregation}, by computing the mean across pixels to form a single representative feature vector per field. This step reduced noise and the influence of outlier pixels while preserving meaningful spatial patterns. Classifiers were then trained using these aggregated field-level vectors to directly learn from spatially coherent crop representations. This approach aligns with previous findings that object-based aggregation helps in minimizing spectral confusion and enhances classification accuracy, especially in homogeneous agricultural regions \cite{maxwell2019}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.55\linewidth]{field_boundaries_by_crop.pdf}
+\caption{Illustration of field-level aggregation: pixel values are grouped by field polygon and summarized into a single feature vector.}
+\label{fig:field_aggregation}
+\end{figure}
+
+\vspace{0.5em}
+
+To address class imbalance at the field level, we combined \textbf{SMOTETomek} resampling with a \textbf{stacked ensemble classifier}. This approach ensured both balanced data and strong generalization performance.
+
+\begin{enumerate}
+    \item \textbf{SMOTETomek Resampling} \\
+    SMOTETomek combines oversampling and undersampling techniques:
+    \begin{itemize}
+        \item \textbf{SMOTE} generates synthetic samples for underrepresented classes by interpolating between existing samples.
+        \item \textbf{Tomek Links} removes borderline examples, improving class separability.
+    \end{itemize}
+    This helped mitigate the severe class imbalance visible in Figure~\ref{fig:EDA-1}, especially for crops like small grain grazing and canola.
+
+    \item \textbf{Stacked Ensemble Classifier} \\
+    We built a two-layer ensemble:
+    \begin{itemize}
+        \item \textbf{Base Learners:} Random Forest and XGBoost.
+        \item \textbf{Meta Learner:} Logistic Regression using \texttt{passthrough=True} to include both base predictions and original features.
+    \end{itemize}
+    The final prediction is defined as:
+    \[
+    \hat{y}_{\text{stacked}} = f_{\text{meta}}\left(f_{\text{RF}}(X), f_{\text{XGB}}(X), X\right)
+    \]
+    This hybrid model benefited from both tree-based non-linear modeling and interpretable linear refinements.
+     \item \textbf{Field-Based Aggregation + XGBoost Optimization Framework}
+     We also implemented an optimized field-level pipeline using XGBoost, structured as follows:
+
+\begin{enumerate}
+    \item \textbf{Data Preparation} \\
+    Field identifiers were used to ensure that no field contributed to more than one data split:
+    \begin{itemize}
+        \item Fields were split into train/validation/test using \texttt{fid}-based stratification.
+        \item Features were aggregated via the \textbf{mean} across pixels, and labels via the \textbf{mode} crop type per field.
+    \end{itemize}
+
+    \item \textbf{Hyperparameter Optimization via Optuna} \\
+    Optuna was used for tuning XGBoost with the following setup:
+    \begin{itemize}
+        \item \textbf{Search Space:} \texttt{n\_estimators}, \texttt{max\_depth}, \texttt{learning\_rate}, \texttt{subsample}, \texttt{colsample\_bytree}, \texttt{gamma}, \texttt{reg\_alpha}, \texttt{reg\_lambda}, and \texttt{min\_child\_weight}.
+        \item \textbf{Objective:} 5-fold stratified cross-validation maximizing the weighted F1 score.
+        \item \textbf{Trials:} 75 independent configurations.
+    \end{itemize}
+
+    The best configuration (Trial 32) achieved 76.61\% validation accuracy and is detailed in Table~\ref{tab:top5_trials}.
+
+    \begin{table}[htbp]
+\centering
+\scriptsize % Further reduce font size
+\caption{Top 5 trials from hyperparameter search with corresponding parameters and validation accuracies}
+\label{tab:top5_trials}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{3pt} % Tight column spacing
+\begin{tabular}{ccccccccccc}
+\toprule
+\textbf{Trial} & \textbf{Acc.} & \textbf{Est.} & \textbf{Depth} & \textbf{LR} & \textbf{SubS} & \textbf{ByTree} & \textbf{Gamma} & \textbf{Reg$\alpha$} & \textbf{Reg$\lambda$} & \textbf{MinCW} \\
+\midrule
+32 & \textbf{76.61\%} & 1141 & 13 & 0.0215 & 0.5749 & 0.6986 & 0.5589 & 0.00184 & 0.00259 & 5 \\
+12 & 76.46\% & 984  & 12 & 0.0145 & 0.6675 & 0.6946 & 0.0799 & 0.00503 & 0.00455 & 7 \\
+24 & 76.40\% & 1165 & 11 & 0.0162 & 0.7831 & 0.6403 & 0.00413 & 0.00481 & 0.00478 & 9 \\
+13 & 76.29\% & 995  & 12 & 0.0277 & 0.6345 & 0.6829 & 0.3999 & 0.00011 & 0.00567 & 6 \\
+18 & 76.29\% & 915  & 13 & 0.0121 & 0.6784 & 0.5958 & 0.1612 & 0.00491 & 0.1732 & 8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+    \item \textbf{Framework Summary} \\
+    This field-level framework:
+    \begin{itemize}
+        \item Enhanced robustness by summarizing noisy pixel-level data.
+        \item Leveraged Optuna for efficient, scalable hyperparameter tuning.
+        \item Adhered to best practices to ensure generalization and reproducibility.
+    \end{itemize}
+\end{enumerate}
+\end{enumerate}
+\subsection{Deep Learning}
+While classical machine learning offer valuable interpretability and computational efficiency, the feature engineering process, although increasingly automated and efficient, may still struggle to fully capture the complex spatial and temporal dependencies inherent in satellite imagery \cite{maxwell2019}. To overcome these limitations and leverage recent advances in representation learning, we turned to deep learning approaches, which have shown great promise in automatically extracting hierarchical features from raw data for various remote sensing tasks \cite{zhu2017,li2019}.
+
+Deep Learning models ingest raw spectral values and learn hierarchical representations that capture both spatial and temporal dependencies. We explore several architectures: 2D Convolutional Neural Networks (CNNs) that treat spectral bands as input channels, 3D CNNs that jointly model spatial and temporal dimensions, transformer-based models for long-range temporal attention, and ensemble approaches that combine multiple deep architectures for improved robustness.
+
+\subsubsection{Pixel-Level Analysis}
+
+Accurately modeling agricultural land cover at the pixel level is challenging due to seasonal variability, crop phenology, and mixed-crop patterns commonly observed in satellite imagery. Building on the multi-temporal features extracted from Sentinel-2 imagery, we constructed a structured data set where each row corresponds to an individual pixel characterized by 60 temporal features spanning the 2017 growing season.
+
+Each pixel was linked to a unique field identifier (fid) and labeled according to the field crop type, covering five major crop classes: wheat, barley, canola, small grain grazing and lucerne/medics. To ensure unbiased model evaluation and prevent spatial information leakage, we employed a field-aware data splitting strategy. In this approach, all pixels belonging to a given field were assigned exclusively to either the training, validation, or test set, thereby avoiding scenarios where a model could inadvertently learn from spatially neighboring pixels during both training and evaluation.
+
+This pixel-level organization served as the foundation for subsequent modeling stages, enabling both classical machine learning and deep learning architectures to leverage temporal crop signatures for classification.
+
+For the TabTransformer models, we applied z-score standardization to ensure scale consistency across numeric inputs. In contrast, CNN-based models were trained directly on the raw or scaled reflectance values without explicit normalization, allowing the convolutional layers to learn directly from the temporal magnitude patterns.
+
+\begin{enumerate}
+\item\textbf {CNN + BiLSTM Ensemble with Focal Loss:}\
+To capture the intricate temporal dynamics of crop growth patterns from satellite data, we developed a hybrid deep learning architecture that combines the local pattern recognition capability of 1D Convolutional Neural Networks (CNNs) with the sequence modeling power of Bidirectional Long Short-Term Memory (BiLSTM) networks~\ref{fig:dl_best_model_cm.pdf}. This model is uniquely designed to leverage the multi-temporal nature of remote sensing data and mitigate class imbalance via Focal Loss, while also stabilizing performance through ensembling.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.55\textwidth]{cnn_bilstm.pdf}
+\caption{Architecture of the CNN + BiLSTM model used for pixel-level crop classification. The model combines convolutional temporal feature extraction with sequential modeling through a BiLSTM layer.}
+\label{fig:dl_best_model_cm.pdf}
+\end{figure}
+
+    \begin{enumerate}
+        \item\textbf{Temporal Representation Through CNN + BiLSTM:}\\
+        The architecture processed an input tensor of shape \((B,6,T)\), where each of the six channels corresponded to a spectral or vegetation index (B2, B6, B11, B12, hue, EVI) recorded across 10 months. The sequence begins with a 1D Convolutional Layer with 64 filters and a kernel size of 5, applied along the temporal axis. Post-convolution, a ReLU activation is applied, followed by a tensor permutation to format \((B,T,F)\) for compatibility with the BiLSTM.
+
+        This is then processed by a Bidirectional LSTM with a hidden size of 64. The effectiveness of BiLSTMs in agricultural classification settings, particularly for Sentinel-1 and Sentinel-2 based time-series data, has been well-documented in prior research demonstrating up to 89.1\% accuracy across 15 crop classes~\cite{ijabs2020}.
+
+        From the BiLSTM output of shape \((B,T,128)\), we extracted the last timestep representation, followed by dropout and a fully connected layer. The softmax layer outputs class probabilities:
+        \[
+        \hat{y}_i = \frac{e^{z_i}}{\sum_{j} e^{z_j}}
+        \]
+
+        \item\textbf{Handling Class Imbalance: Focal Loss:}\\
+        To address class imbalance, we used the Focal Loss, defined as:
+        \[
+        \mathcal{L}_{\text{focal}} = -\alpha_t (1 - p_t)^{\gamma} \log(p_t)
+        \]
+        where \(\alpha_t\) is the weighting factor, \(\gamma\) the focusing parameter (set to 2.0), and \(p_t\) the probability for the true class. This imbalance-aware loss is beneficial for underrepresented crops~\cite{review_dl_crops}. \\
+
+        \item\textbf{Balanced Training via Weighted Sampling:}\\
+        A WeightedRandomSampler ensured equal representation of all crop classes by sampling inversely proportional to class frequencies. \\
+
+        \item\textbf{Ensemble Learning for Robustness:}\\
+        To reduce variance, we trained five identical CNN + BiLSTM models with different seeds. Their logits were averaged:
+        \[
+        \text{Logits}_{\text{ensemble}} = \frac{1}{N} \sum_{k=1}^{N} \text{Logits}^{(k)}
+        \]
+        This improved generalization and stabilized performance~\cite{review_dl_crops}.\\
+
+        \item\textbf{Field-Level Aggregation: From Pixels to Parcels:}\\
+        To align with field-level annotations, we applied majority voting:
+        \[
+        \hat{y}_{\text{field}} = \text{mode} \left( \left\{ \hat{y}_{\text{pixel}} \mid \text{pixel} \in \text{field} \right\} \right)
+        \]
+        This reduced noise and improved accuracy, a strategy validated in prior remote sensing work~\cite{cnn_multitemp}.\\
+    \end{enumerate}
+
+\item\textbf{Ensemble of TabTransformer Models (TabNet):}
+
+Although sequence-based architectures such as CNNs and LSTMs are effective for capturing dynamic temporal patterns in remote sensing data, certain crop classification scenarios call for a different perspective, one that treats satellite observations as structured tabular inputs, where each pixel’s repeated measurements (e.g., spectral bands and vegetation indices across different months) are organized into rows and columns like a spreadsheet. To address this, we incorporated TabNet, a deep learning architecture specifically designed for learning from tabular data. TabNet not only processed multi-temporal inputs in this flattened format, but also enabled interpretable learning through its attention-driven architecture~\ref{fig:tabnet_architecture}.
+
+    \begin{enumerate}
+        \item\textbf{TabNet for Structured Temporal Features:}\\
+        TabNet departs from traditional deep networks by integrating feature selection and attention into each layer of its architecture. It does this through two key components: the Feature Transformer and the Attentive Transformer. At every decision step, the Attentive Transformer generates a sparse mask over the input features, dynamically selecting a subset of dimensions most relevant for prediction. This mask guides the Feature Transformer, which performs nonlinear transformations on the masked inputs.
+
+        This iterative process repeated across a series of decision steps enables TabNet to focus on different subsets of features at different depths in the network. Such selective attention empowers the model to uncover complex patterns that arise across combinations of spectral and vegetation index features aggregated from satellite time-series. The model’s ability to navigate high-dimensional tabular input spaces without relying on temporal order has shown to be especially effective in flattened multitemporal settings, as well as when additional metadata or engineered features are included \cite{tabnet2024}. \\
+
+        \item\textbf{Training Setup and Parameterization:}\\
+        The network architecture consists of:
+        \begin{itemize}
+          \item Decision dimension (\(n_d\)) = 64
+          \item Attention dimension (\(n_a\)) = 64
+          \item Independent block width = 2
+          \item Shared block width = 2
+          \item Relaxation parameter (\(\gamma\)) = 1.5
+          \item Number of decision steps = 5
+        \end{itemize}
+
+        Optimization was performed using Adam with a StepLR learning rate scheduler. The model was trained with a batch size of 1024, a virtual batch size of 128 (for stabilization), and a maximum of 100 epochs. Early stopping was used to prevent overfitting by monitoring performance on a validation set constructed using field ID-based stratification. \\
+
+        \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.55\textwidth]{tabnet.pdf}
+        \caption{Architecture of the TabTransformer (TabNet) ensemble used for pixel-level crop classification. Each TabNet model applies iterative attention-based feature selection. Final predictions are obtained by averaging across five models, followed by field-level aggregation using majority voting.}
+        \label{fig:tabnet_architecture}
+        \end{figure}
+
+        \item\textbf{Ensembling for Generalization and Robustness}\\
+        Given the stochastic nature of training and the sensitivity of deep tabular models to initialization, we constructed an ensemble of five TabNet models, each initialized with a different random seed (42, 101, 202, 303, 404). This diversity in training paths encouraged each model to learn slightly different representations, making the ensemble more robust to noise and variance.
+
+        After all five models were trained independently, we averaged their softmax outputs for each input instance to compute the final class probabilities:
+        \[
+        \hat{y}_{\text{ensemble}} = \frac{1}{5} \sum_{i=1}^{5} \text{Softmax}(\text{Logits}^{(i)})
+        \]
+
+        The final predicted label was obtained via argmax over these averaged probabilities.\\
+
+        \item\textbf{Field-Level Aggregation for Agricultural Relevance}\\
+        Although TabNet operated on pixel-level features, practical applications in crop monitoring require field-level decisions. To translate pixel-level predictions into agriculturally actionable outputs, we applied a majority voting strategy over all pixels associated with the same fid (field ID):
+        \[
+        \hat{y}_{\text{field}} = \text{mode} \left( \left\{ \hat{y}_{\text{pixel}} \mid \text{pixel} \in \text{field} \right\} \right)
+        \]
+
+        This ensured that the final output reflects the dominant class label per agricultural parcel, aligning predictions with the spatial resolution of ground truth annotations and real-world decision-making units.\\
+
+        \item\textbf{Interpretable Deep Learning for Crop Monitoring:}\\
+        A standout advantage of TabNet lies in its interpretability. The sparse masks generated at each decision step can be analyzed to identify which features were most influential in making a prediction. This feature-level transparency is highly desirable in agricultural contexts where decision-makers need insight into why a particular crop label was assigned whether due to reflectance patterns in specific bands or seasonal vegetation indices.
+
+        Recent studies have validated the effectiveness of TabNet in remote sensing classification tasks, showing competitive accuracy and enhanced interpretability when compared to MLPs and ResNets in tabular crop classification \cite{tabnet2024}.\\
+    \end{enumerate}
+\end{enumerate}
+\subsection{Deep Learning}
+While classical machine learning offer valuable interpretability and computational efficiency, the feature engineering process, although increasingly automated and efficient, may still struggle to fully capture the complex spatial and temporal dependencies inherent in satellite imagery \cite{maxwell2019}. To overcome these limitations and leverage recent advances in representation learning, we turned to deep learning approaches, which have shown great promise in automatically extracting hierarchical features from raw data for various remote sensing tasks \cite{zhu2017,li2019}.
+
+Deep Learning models ingest raw spectral values and learn hierarchical representations that capture both spatial and temporal dependencies. We explore several architectures: 2D Convolutional Neural Networks (CNNs) that treat spectral bands as input channels, 3D CNNs that jointly model spatial and temporal dimensions, transformer-based models for long-range temporal attention, and ensemble approaches that combine multiple deep architectures for improved robustness.
+
+\subsubsection{Pixel-Level Analysis}
+
+Accurately modeling agricultural land cover at the pixel level is challenging due to seasonal variability, crop phenology, and mixed-crop patterns commonly observed in satellite imagery. Building on the multi-temporal features extracted from Sentinel-2 imagery, we constructed a structured data set where each row corresponds to an individual pixel characterized by 60 temporal features spanning the 2017 growing season.
+
+Each pixel was linked to a unique field identifier (fid) and labeled according to the field crop type, covering five major crop classes: wheat, barley, canola, small grain grazing and lucerne/medics. To ensure unbiased model evaluation and prevent spatial information leakage, we employed a field-aware data splitting strategy. In this approach, all pixels belonging to a given field were assigned exclusively to either the training, validation, or test set, thereby avoiding scenarios where a model could inadvertently learn from spatially neighboring pixels during both training and evaluation.
+
+This pixel-level organization served as the foundation for subsequent modeling stages, enabling both classical machine learning and deep learning architectures to leverage temporal crop signatures for classification.
+
+For the TabTransformer models, we applied z-score standardization to ensure scale consistency across numeric inputs. In contrast, CNN-based models were trained directly on the raw or scaled reflectance values without explicit normalization, allowing the convolutional layers to learn directly from the temporal magnitude patterns.
+
+\begin{enumerate}
+% [... Existing Items Here ...]
+
+\item\textbf{1D CNN with Optuna Hyperparameter Tuning:}\
+To build a streamlined and computationally efficient baseline for crop classification, we implemented a 1D Convolutional Neural Network (1D CNN) trained on temporal satellite features. This model focused on identifying subtle phenological patterns within multi-temporal reflectance signals by applying convolutional filters across time. Although lightweight, the architecture leveraged automated feature extraction and hyperparameter tuning to compete with deeper temporal models such as LSTMs and BiLSTMs \cite{cnn_optuna}.
+
+The pipeline begins with reshaping each input tensor to represent multichannel time-series sequences—six features (B2, B6, B11, B12, EVI, and hue) across monthly intervals. This representation allows the model to interpret the evolution of spectral characteristics throughout the crop life cycle.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.55\textwidth]{cnn_hyper.pdf}
+\caption{Architecture of the 1D CNN model optimized via Optuna. The model uses a single convolutional layer followed by ReLU activation, adaptive pooling, and a fully connected classification head.}
+\label{fig:cnn_architecture}
+\end{figure}
+
+\begin{enumerate}
+\item\textbf{Hyperparameter Optimization with Optuna}\
+Rather than relying on fixed architectural parameters, we used Optuna, an efficient, automated hyperparameter tuning framework. The goal was to identify the best combination of the following parameters:
+\begin{itemize}
+\item Learning rate (log-uniform:  to )
+\item Dropout rate (uniform: 0.2 to 0.5)
+\item Kernel size 
+\item Number of convolutional filters 
+\end{itemize}
+Each configuration (trial) was evaluated over 25 training epochs using a class-weighted sampler to address severe imbalance in crop classes. The validation accuracy guided Optuna’s pruning and selection mechanism. We formally define the hyperparameter optimization problem as:
+
+\[
+\theta^* = \arg\max_{\theta \in \mathcal{H}} \mathcal{A}_{\text{val}}(f_\theta)
+\]
+
+Where:
+\begin{itemize}
+    \item \(\theta\) is a set of hyperparameters: \(\theta = \{\text{lr}, \text{dropout}, \text{filters}, \text{kernel size}\}\)
+    \item \(\mathcal{H}\) is the search space defined above
+    \item \(f_\theta\) is the CNN model trained using configuration \(\theta\)
+    \item \(\mathcal{A}_{\text{val}}(f_\theta)\) is the validation accuracy after 25 epochs
+\end{itemize}
+
+This optimization problem was solved using the Tree-structured Parzen Estimator (TPE) algorithm implemented within the Optuna framework. This setup yielded the best validation accuracy of 75.5\%, with robust generalization confirmed through field-level aggregation.\\
+
+\item\textbf{Why This Configuration Was Chosen:}\\
+The selected trial balanced accuracy and convergence speed. The use of a larger kernel (7) helped capture wider temporal patterns, such as seasonal trends in vegetation indices. A moderate filter count (64) offered enough representational power without overfitting, and dropout \(\approx 0.49\) helped maintain generalization. Optuna dynamically explored a wide search space and converged on this optimal setting based on cross-validation performance.
+
+\begin{table}[htbp]
+\centering
+\caption{Top hyperparameter configurations based on validation accuracy}
+\label{tab:optuna_top_trials}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{cccccc}
+\toprule
+\textbf{Trial} & \textbf{Val. Acc.} & \textbf{LR} & \textbf{Dropout} & \textbf{Filters} & \textbf{Kernel} \\
+\midrule
+14 & \textbf{75.53\%} & 0.00116 & 0.5 & 64  & 7 \\
+13 & 74.06\%           & 0.00102 & 0.5 & 128 & 7 \\
+19 & 74.61\%           & 0.00118 & 0.4 & 64  & 7 \\
+7  & 73.20\%           & 0.00013 & 0.3 & 128 & 7 \\
+11 & 73.66\%           & 0.00006 & 0.4 & 128 & 7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\item\textbf{Field-Level Aggregation and Evaluation:}\\
+To align predictions with agricultural decision-making, we aggregated pixel-level outputs to the field-level using majority voting on field IDs. Evaluation metrics (Cohen’s kappa, F1-score, Entropy) were computed at both levels. A field-level confusion matrix was also generated for interpretability. Formally, for input feature map \(X\) and kernel \(K\) of size \((2M+1)\times(2N+1)\), we write:
+\[
+(X * K)[i,j] = \sum_{m=-M}^{M} \sum_{n=-N}^{N} X[i - m,\; j - n]\, K[m,n]
+\]
+Convolutions exploit local connectivity, weight sharing, and translation equivariance, making them ideal for learning hierarchical spatial features in satellite patches.
+\end{enumerate}
+\end{enumerate}
+\subsubsection{Patch-Level Analysis}
+To better capture spatial patterns and enable the use of matrix-based deep learning architectures, we transitioned to a patch-level analysis. We divided each field into a grid of fixed-size square patches (100x100 pixels), with each patch retaining the full 10-month spectral history for every pixel as shown in Figure~\ref{fig:example_patches}.
+
+This approach offered several advantages:
+\begin{itemize}
+\item \textbf{Spatial Context:} Unlike pixel-level models, patches explicitly encoded spatial relationships between neighboring pixels, capturing local patterns and textures characteristic of different crop types \cite{rustowicz2019, ji2018}.
+\item \textbf{Data Augmentation:} By extracting multiple patches from a single field, we effectively augmented the training dataset, reducing overfitting and improving generalization performance, particularly in data-scarce scenarios.
+\item \textbf{Compatibility with CNNs:} Patch-based inputs are naturally compatible with convolutional neural networks (CNNs), which are designed to learn hierarchical spatial features through convolution operations.
+\item \textbf{Multi-Scale Feature Extraction:} CNNs applied to patches can capture features at multiple scales, ranging from fine-grained textures within each patch to broader field-level patterns.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\linewidth]{Example_patches.pdf}
+\caption{Illustration showing how patches are generated for each field.}
+\label{fig:example_patches}
+\end{figure}
+
+\noindent The trade-off involved increased computational complexity due to processing larger spatial matrices and the omission of boundary pixels.
+
+\begin{enumerate}
+\item \textbf{Convolution for Feature Generation:}\
+Central to our patch-level architectures was the 2D convolution operation, which applies a small learnable kernel across an input image. 
+\item \textbf{Patch-Based Architectures:}\\
+We investigated four distinct patch-based architectures for crop classification, each leveraging different strategies to exploit the spectral, spatial, and temporal information present in remote sensing data.
+
+\begin{enumerate}
+    \item \textbf{Multi-Channel 2D CNN:}\\
+    This approach treats each spectral band and monthly observation as a separate channel, constructing a unified spectral-temporal profile for each patch. Let \(\mathbf{X}\in\mathbb{R}^{H\times W\times C}\) be the input patch (\(H=W=128\), \(C=66\)). Each Conv2D block with \(K\) filters computed:
+    \[
+    Y_k[i, j] =\; \mathrm{ReLU} \Biggl(\sum_{c=1}^{C} \sum_{m=-1}^{1} \sum_{n=-1}^{1} W_{k, c, m, n} \cdot X[i+m, j+n, c] + b_k \Biggr)
+    \]
+    After two such blocks and flattening to \(\mathbf{z}\in\mathbb{R}^{128}\), class scores are:
+    \[
+    \hat{\mathbf{p}} = \mathrm{softmax}\left(W_{\mathrm{fc}}\, \mathbf{z} + b_{\mathrm{fc}}\right)
+    \]
+
+    \item \textbf{3D CNN:}\\
+    The 3D CNN architecture processes the spectral and temporal dimensions jointly. Input is reshaped to \(\mathbf{X}\in\mathbb{R}^{T\times H\times W\times B}\), with \(T=11\), \(B=6\). A Conv3D block computes:
+    \[
+    Y_k[t, i, j] =\; \mathrm{ReLU}\Bigg( \sum_{c=1}^{B} \sum_{p=-1}^{1} \sum_{m=-1}^{1} \sum_{n=-1}^{1} W_{k,c,p,m,n} \cdot X[t+p,\, i+m,\, j+n,\, c] + b_k \Bigg)
+    \]
+    After three Conv3D–Pool3D layers, global average pooling yields:
+    \[
+    z_{k} = \frac{1}{T\,H\,W}\sum_{t,i,j} Y_{k}[t,i,j]
+    \]
+
+    \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\linewidth]{patch_model.pdf}
+    \caption{3D CNN Ensemble Architecture}
+    \label{fig:patch_extraction}
+    \end{figure}
+
+    \item \textbf{Transformer-Based Model:}\\
+    Each patch is flattened into \(N=T\times H\times W\) tokens \(\{\mathbf{x}_n\}\subset\mathbb{R}^B\) and embedded to \(\mathbf{E}\in\mathbb{R}^{N\times d}\). Multi-head attention computes:
+    \[
+    \mathrm{Attention}(Q, K, V) = \mathrm{softmax}\left( \frac{QK^\top}{\sqrt{d_k}} \right) V
+    \]
+    where \(Q = \mathbf{E}W_Q\), \(K = \mathbf{E}W_K\), \(V = \mathbf{E}W_V\). The final \([CLS]\) token is used for classification:
+    \[
+    \hat{\mathbf{p}} = \mathrm{softmax}\left(W_{\mathrm{cls}}\,\mathbf{h}_{\text{CLS}} + b_{\mathrm{cls}}\right)
+    \]
+
+    \item \textbf{Ensemble of Class-Specific 3D CNNs:}\\
+    Outputs of five class-specific 3D CNNs \(f_i(\mathbf{X})=p_i\) are combined using logistic regression:
+    \[
+    \hat{\mathbf{p}} = \mathrm{softmax}\left(W_{\mathrm{meta}}[p_1,\dots,p_5]^\top + b_{\mathrm{meta}}\right)
+    \]
+\end{enumerate}
+\end{enumerate}
+
+\section{Results and Discussion}
+
+This section presents the main findings of our study, highlighting key performance metrics for each modeling approach. All models were evaluated on an independent, held-out test set to ensure their ability to generalize to unseen data.
+
+\medskip
+
+\noindent
+To account for the highly imbalanced class distribution in our data, we report three metrics that are more informative than overall accuracy:
+\begin{itemize}
+  \item \textbf{Cohen’s Kappa (Kappa)}  
+    Measures agreement between predicted and true labels, corrected for chance:
+    \[
+    \kappa = \frac{p_o - p_e}{1 - p_e}
+    \]
+    where
+    \[
+    p_o = \frac{\text{number of correct predictions}}{N}, \quad
+    p_e = \sum_{c=1}^C \left( \frac{n_{c,\text{true}}}{N} \times \frac{n_{c,\text{pred}}}{N} \right)
+    \]
+
+  \item \textbf{Weighted F1 Score (F1)}  
+    The harmonic mean of precision and recall, weighted by the support of each class:
+    \[
+    \mathrm{F1}_{\mathrm{weighted}} = \sum_{c=1}^C \frac{n_c}{N}
+        \cdot
+        \frac{2 \cdot \text{Precision}_c \cdot \text{Recall}_c}{\text{Precision}_c + \text{Recall}_c}
+    \]
+    where \(n_c\) is the number of true instances of class \(c\).
+
+  \item \textbf{Entropy (Log Loss)}  
+    Quantifies the average surprise of the predicted probabilities (adapted from the standard cross‐entropy formula):
+    \[
+    \mathrm{Entropy} = -\frac{1}{N}\sum_{i=1}^N \sum_{c=1}^{5}
+         y_{i,c}\,\ln\bigl(p_{i,c}\bigr)
+    \]
+    where \(y_{i,c}\in\{0,1\}\) is the one‐hot true label for sample \(i\) in class \(c\), and \(p_{i,c}\) is the model’s predicted probability for that class.
+\end{itemize}
+
+\noindent
+We avoid reporting plain accuracy here because an imbalanced test set can yield deceptively high accuracy simply by predicting the majority class. In contrast, Cohen’s Kappa and the weighted F1 score reward correct classification across all classes. Higher values indicate better agreement and balanced precision/recall, while entropy (log loss) measures prediction uncertainty—lower values indicate more confident, accurate probability estimates.
+
+\subsection{Classical Machine Learning}
+
+\subsubsection{Pixel‑Level Analysis}
+Table~\ref{tab:cl_ml_pixel_results} summarizes the out-of-sample performance of classical machine learning models at the pixel level. Random Forest achieves the highest performance, with a Cohen’s Kappa of 0.69 and an F1 score of 0.77, indicating substantial agreement beyond chance. Figure~\ref{fig:conf_rf_pixel} shows the confusion matrix of the Random Forest model at the pixel level.
+
+\begin{table}[htbp]
+\centering
+\caption{Out-of-sample performance for classical ML pixel-level analysis}
+\label{tab:cl_ml_pixel_results}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model} & \textbf{Kappa} & \textbf{F1} & \textbf{Entropy} \\
+\midrule
+XGBoost             & 0.68 & 0.76 & 8.47 \\
+LightGBM            & 0.66 & 0.74 & 8.90 \\
+Random Forest\textsuperscript{\dag} & 0.69 & 0.77 & 7.99 \\
+Logistic Regression & 0.65 & 0.73 & 9.07 \\
+Voting Classifier   & 0.63 & 0.72 & 9.47 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Field‑Level Analysis}
+Table~\ref{tab:ml_field_pixel_results} presents the field-level results for classical models and ensemble approaches. The Voting Classifier achieves the best performance, with a Cohen’s Kappa of 0.69 and an F1 score of 0.76, highlighting the advantage of ensemble methods over individual classifiers.
+
+\begin{table}[htbp]
+\centering
+\caption{Out-of-sample performance across classical ML models at pixel and field levels}
+\label{tab:ml_field_pixel_results}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model} & \textbf{Kappa} & \textbf{F1} & \textbf{Entropy} \\
+\midrule
+XGBoost             & 0.65 & 0.74 & 8.95 \\
+LightGBM            & 0.67 & 0.76 & 8.29 \\
+Random Forest       & 0.67 & 0.76 & 8.25 \\
+Logistic Regression & 0.64 & 0.74 & 9.03 \\
+Voting Classifier\textsuperscript{\dag}   & 0.69 & 0.76 & 7.86 \\
+Stacking Classifier & 0.67 & 0.75 & 8.55 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Combining model predictions at the field level leads to improvements in classification reliability.
+
+Figures~\ref{fig:conf_field_stacking} and~\ref{fig:conf_field_voting} present the confusion matrices for the Stacking and Voting ensemble classifiers evaluated at the field level. Both models demonstrate strong diagonal dominance, indicating high agreement between predicted and true crop classes.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.55\linewidth]{confusion_matrix_rf_pixel.pdf}
+  \caption{Random Forest (Pixel Level) Confusion Matrix}
+  \label{fig:conf_rf_pixel}
+\end{figure}
+
+For the Stacking Ensemble (Figure~\ref{fig:conf_field_stacking}), lucerne/medics achieves the highest classification accuracy, with over 94\% of fields correctly identified. Wheat and canola, however, exhibit some misclassification, particularly as lucerne/medics and barley, suggesting these classes share spectral-temporal similarities during certain months. The model performs poorly on small grain grazing, with notable confusion spread across barley and wheat, indicating challenges in distinguishing these crops based solely on seasonal satellite signatures.
+
+In the Voting Ensemble (Figure~\ref{fig:conf_field_voting}), the Cohen's Kappa and F1 score improve further, with lucerne/medics again achieving the best performance at over 97\%. Wheat is classified more accurately than in the stacking approach, indicating enhanced stability due to ensemble consensus. Although minor crops such as barley and small grain grazing continue to show moderate confusion, their misclassification rates are notably lower compared to the stacking strategy, highlighting the robustness of the voting-based aggregation.
+
+These confusion matrices demonstrate that both ensemble methods effectively consolidate pixel-level predictions into robust field-level outputs. The Voting Ensemble offers better generalization, particularly for dominant crops, while the Stacking Ensemble provides competitive performance across all classes.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.55\linewidth]{confusion_matrix_Stacking Classifier.pdf}
+  \caption{Confusion matrix for Stacking Ensemble at field level.}
+  \label{fig:conf_field_stacking}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.55\linewidth]{confusion_matrix_Voting Classifier.pdf}
+  \caption{Confusion matrix for Voting Ensemble at field level.}
+  \label{fig:conf_field_voting}
+\end{figure}
+
+\subsubsection{Patch‑Level Analysis}
+
+We evaluated four patch-based deep learning models on spatially coherent image regions extracted from Sentinel-2 tiles. The classification was performed using aggregated patch-level information rather than individual pixels, preserving spatial context and allowing models to exploit neighboring structures.
+
+\begin{itemize}
+    \item \textbf{Performance Comparison:}
+
+    The results suggest that modeling local spatial coherence through patch-level inputs can improve crop classification performance, particularly when ensemble learning strategies are employed. As shown in Table~\ref{tab:dl_patch_results}, the Ensemble Architecture achieved the highest patch-level performance, with a Cohen’s Kappa of 0.66 and an F1 score of 0.75. This ensemble combined outputs from multiple base learners, including CNNs and transformer components, allowing a more generalized understanding of crop field characteristics (Figure~\ref{fig:conf_dl_patch}).
+
+    Among the individual models, the 3D CNN performed strongly with a Cohen’s Kappa of 0.65 and an F1 score of 0.74. By capturing volumetric relationships across spectral bands and spatial dimensions, the 3D CNN demonstrated an advantage over traditional 2D methods. The Multi-Channel CNN also achieved competitive results, reaching a Kappa of 0.62 and an F1 score of 0.70. These results highlight the effectiveness of band-specific spatial convolution for capturing vegetation structure and field texture.
+
+    \begin{table}[htbp]
+    \centering
+    \caption{Out-of-sample performance for deep learning patch-level analysis}
+    \label{tab:dl_patch_results}
+    \renewcommand{\arraystretch}{1.1}
+    \setlength{\tabcolsep}{6pt}
+    \begin{tabular}{lccc}
+    \toprule
+    \textbf{Model} & \textbf{Kappa} & \textbf{F1} & \textbf{Entropy} \\
+    \midrule
+    Multi-Channel CNN       & 0.62 & 0.70 & 10.57 \\
+    3D CNN                  & 0.65 & 0.74 & 8.99 \\
+    Transformer-based model & 0.48 & 0.60 & 13.11 \\
+    Ensemble Architecture\textsuperscript{\dag} & 0.66 & 0.75 & 8.82 \\
+    \bottomrule
+    \end{tabular}
+    \end{table}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.55\linewidth]{confusion_matrix_3dcnn.pdf}
+      \caption{Confusion matrix for 3D CNN model at patch level.}
+      \label{fig:conf_dl_patch}
+    \end{figure}
+
+    In contrast, the Transformer-based model underperformed, achieving a Cohen’s Kappa of 0.48 and an F1 score of 0.60. This suggests that pure attention-based architectures, without strong inductive biases like spatial locality, may struggle with small patch classification unless extensively pretrained or domain-adapted to remote sensing imagery.
+\end{itemize}
+
+\section{Discussion}
+
+Our experiments demonstrated that both classical and deep learning approaches can effectively leverage Sentinel-2 imagery for field-level crop classification, yet each paradigm has distinct strengths and limitations. Deep models, particularly the CNN + BiLSTM ensemble trained with Focal Loss, excel at capturing seasonal dynamics and mitigating class imbalance, achieving a 0.77 Cohen's Kappa score at the field level and an F1 score of 0.84. However, they require extensive hyperparameter tuning and remain sensitive to mixed pixels along field edges due to Sentinel-2’s 10–20 m resolution.
+
+Classical machine learning approaches remained highly competitive: a pixel‐level Random Forest trained on \texttt{xr\_fresh}-generated time‐series features generalizes well to unseen data, and a field‐level voting classifier that aggregates those pixel predictions outperforms several deep learning architectures on the held-out test set. By combining SMOTETomek resampling with ensemble methods (like Random Forest, LightGBM, XGBoost) and automated temporal feature engineering, these models achieve comparable or better accuracy with substantially lower computational cost and greater interpretability. However, because they rely primarily on temporal summaries, they do not utilize fine‐scale spatial textures unless supplemented with explicit textural indices.
+
+Our patch-level analysis incorporated spatial context while matching the performance of classical models based on time-series features. Dividing each field into fixed-size patches enabled 3D CNNs and patch-based ensembles to learn local texture and neighborhood patterns, boosting the patch-level Cohen’s Kappa to 0.66. This strategy also provided implicit data augmentation by generating multiple overlapping patches per field, which increases sample diversity and reduces overfitting. However, because patches are placed on a fixed grid, some pixels along field boundaries were left out. Additionally, processing dozens of patches per field significantly increased computational cost and memory requirements.
+
+Looking ahead, several avenues could further improve performance across paradigms:
+
+\begin{itemize}
+  \item \textbf{Higher resolution or increased revisit frequency.} PlanetScope or UAV imagery and biweekly acquisitions would reduce edge effects and better capture rapid phenological events. Using all Sentinel-2 observations rather than monthly composites could also achieve similar benefits.
+  
+  \item \textbf{Advanced augmentation.} Spectral band mixing, elastic deformations, or GAN-based patch generation could bolster deep model robustness, particularly for underrepresented crops.
+  
+  \item \textbf{Dynamic field delineation and ancillary data.} Change-detection algorithms, soil or elevation maps, and in-situ surveys would strengthen robustness in heterogeneous landscapes.
+  
+  \item \textbf{Hybrid workflows.} Combining time-series features with patch-based representation learning may yield a best-of-both-worlds solution—balancing interpretability, spatial detail, and temporal dynamics.
+\end{itemize}
+\section{Conclusion}
+
+This study presents a comprehensive evaluation of crop classification methods using multi-temporal Sentinel-2 imagery, highlighting the comparative strengths of deep learning, classical machine learning, and patch-based approaches. Our CNN–BiLSTM ensemble, trained with Focal Loss, achieved state-of-the-art performance with an F1 score of 0.84 and a Cohen’s Kappa of 0.77 at the field level, demonstrating the effectiveness of sequence modeling in capturing crop phenological patterns over time. Patch-based methods, particularly the 3D CNN ensemble, contributed valuable spatial context through implicit data augmentation and local texture learning, though at the cost of increased computational demand and the exclusion of edge pixels.
+
+Importantly, we showed that classical machine learning models such as LightGBM and XGBoost, when paired with temporal feature extraction via \texttt{xr\_fresh} and class-balancing techniques like SMOTETomek, offered competitive performance with significantly lower complexity and greater interpretability. These results underscore that classical approaches remain viable—and often preferable—in resource-constrained or operational settings where model transparency and rapid deployment are essential.
+
+Although this study used a fixed set of 60 hand-crafted temporal and spectral features to capture the dynamics of crop growth, it does not explicitly address the potential issue of redundancy or high-dimensional sparsity. Including numerous features without formal selection may introduce correlated or weakly informative variables, potentially affecting model generalization or inflating training complexity. Nevertheless, our goal was to establish a comprehensive baseline and evaluate the classification potential of both deep learning and classical models on a rich feature set. Future research should consider incorporating feature optimization and dimensionality reduction strategies to identify the most discriminative features and further enhance model performance.
+
+Looking ahead, promising directions include multi-source data fusion (e.g., integrating SAR), domain adaptation across regions and growing seasons, and attention-based temporal models to better capture crop-specific phenological traits. Furthermore, hybrid workflows that combine temporal feature engineering, spatial representation learning, and scalable inference across high-resolution platforms like PlanetScope hold strong potential for operationalizing crop monitoring systems at national and global scales.
+
+\section*{Conflict of Interest}
+
+The authors declare that they have no competing interests.
+
+\section*{Data Availability}
+
+This study relied on multiple sources of data. Ground-truth crop type labels were obtained from Radiant Earth’s MLHub platform \cite{mlhub}, while multi-temporal Sentinel-2 imagery was extracted using the Google Earth Engine API. Since the raw data was processed and combined in various ways specific to this study, the resulting dataset used for model training and evaluation is not hosted publicly but can be shared by the authors upon reasonable request for academic or research purposes.
+
+\section*{Code Availability}
+
+All source code used for data processing, modeling, and evaluation is publicly available \cite{capstone_repo}.
+
+\bibliographystyle{sn-mathphys} % Use Springer Nature's preferred style
+\begin{thebibliography}{99}
+
+\bibitem{mdpi2023}
+Zhang Y, Zhang Y, Zhang J, Wang F, Wang X (2023) A Spatio-Temporal Feature Fusion Network for Crop Classification Using Multi-Temporal Sentinel-2 Data. \textit{ISPRS Int J Geo-Inf} 12(11):450.
+
+\bibitem{sciencedirect2023}
+Ali S, Usama M, Usman M, Rizwan M, Rehman A (2023) A hybrid deep learning model for crop classification using Sentinel-2 time series data. \textit{Comput Electron Agric} 206:107673.
+
+\bibitem{ieee2017}
+Ienco A, Gaetano R, Dupaquier C, Minh DHT (2017) Land cover classification via multitemporal spatial data by deep recurrent neural networks. \textit{IEEE Trans Geosci Remote Sens} 55(4):2142--2154.
+
+\bibitem{arxiv2024}
+Li Y, Zhang Y, Wei Z (2024) Multi-Temporal Crop Classification via Transformer-Based Deep Learning Model. \textit{arXiv preprint} arXiv:2402.02121.
+
+\bibitem{mlhub}
+Radiant Earth Foundation (2024) South Africa Crop Type Competition. Source Cooperative repository.
+
+\bibitem{capstone_repo}
+Capstone Group 3 (2025) Capstone\_Group\_3: Source code for multitemporal crop classification. \textit{GitHub repository}.
+
+\bibitem{sar2022}
+Kordi F, Yousefi H (2022) Crop classification based on phenology information using time series of optical and synthetic-aperture radar images. \textit{Remote Sens Appl Soc Environ} 27:100812.
+
+\bibitem{sciencedirect2021}
+Wang R, Wang Y, Shao Z, Zhang Y (2021) Deep learning for crop classification in remote sensing images: A review. \textit{ISPRS J Photogramm Remote Sens} 186:63--77.
+
+\bibitem{mann2023}
+Mann ML, Colson L, Nealon R, Engstrom R, Nakacwa S (2023) Lite Learning: Efficient Crop Classification in Tanzania Using Traditional Machine Learning \& Crowd Sourcing. \textit{SSRN Preprint}.
+
+\bibitem{medium2023}
+Chauhan A (2023) Crop Classification via Satellite Image Time Series and PSETAE Deep Learning Model. \textit{Medium}.
+
+\bibitem{kuwait2023}
+Rangarajan AK, Purushothaman R, Prabhakar M, Szczepanski C (2023) Crop identification and disease classification using traditional machine learning and deep learning approaches. \textit{J Eng Res} 11(1B):1--12.
+
+\bibitem{acm2020}
+Gadiraju KK, Ramachandra B, Chen Z, Vatsavai RR (2020) Weakly supervised deep learning for rapid crop cover mapping with multi-temporal satellite imagery. In: \textit{Proc 26th ACM SIGKDD Int Conf Knowl Discov Data Min}.
+
+\bibitem{liu2022}
+Liu X, et al. (2022) Deep learning for crop classification. \textit{IEEE Trans Geosci Remote Sens} 60:1--14.
+
+\bibitem{zhang2023}
+Zhang Y, et al. (2023) Transformer-based crop classification. \textit{ISPRS J Photogramm Remote Sens} 195:200--215.
+
+\bibitem{nasa2023}
+NASA, IBM (2023) Prithvi-100M technical report.
+
+\bibitem{khan2024}
+Khan Z, et al. (2024) Ensemble methods for precision agriculture. \textit{Comput Electron Agric} 216:108495.
+
+\bibitem{wang2022}
+Wang L, et al. (2022) Multi-temporal crop classification. \textit{Agric Syst} 203:103517.
+
+\bibitem{russwurm2018}
+Russwurm M, Koerner M (2018) Temporal CNN for crop analysis. \textit{Remote Sens} 10(12):1930.
+
+\bibitem{sa_comp}
+Radiant Earth (2024) Spot The Crop Challenge. \textit{GitHub repository}.
+
+\bibitem{campbell2011introduction}
+Campbell JB, Wynne RH (2011) \textit{Introduction to Remote Sensing}. Guilford Press.
+
+\bibitem{mann2024xr_fresh}
+Mann ML (2024) mmann1123/xr\_fresh: SpeedySeries (v0.2.0). \textit{Zenodo}.
+
+\bibitem{wardlow2007towards}
+Wardlow BD, Melendez SN, Justice CM (2007) Towards an operational system for cropland monitoring using MODIS time series data. \textit{Remote Sens Environ} 110(3):349--361.
+
+\bibitem{james2013}
+James G, Witten D, Hastie T, Tibshirani R (2013) \textit{An Introduction to Statistical Learning}. Springer.
+
+\bibitem{breiman2001}
+Breiman L (2001) Random forests. \textit{Machine Learning} 45(1):5--32.
+
+\bibitem{biau2008}
+Biau G (2008) Consistency of random forests. \textit{Ann Stat} 36(4):2032--2068.
+
+\bibitem{ke2017}
+Ke G, Meng Q, Finley T, et al. (2017) LightGBM: A highly efficient gradient boosting decision tree. \textit{NeurIPS} 30.
+
+\bibitem{chen2016}
+Chen T, Guestrin C (2016) XGBoost: A scalable tree boosting system. In: \textit{Proc 22nd ACM SIGKDD Int Conf Knowl Discov Data Min}, pp 785--794.
+
+\bibitem{friedman2001}
+Friedman JH (2001) Greedy function approximation: A gradient boosting machine. \textit{Ann Stat} 29(5):1189--1232.
+
+\bibitem{dietterich2000}
+Dietterich TG (2000) An experimental comparison of three methods for constructing ensembles of decision trees: Bagging, boosting, and randomization. \textit{Machine Learning} 40(2):139--157.
+
+\bibitem{maxwell2019}
+Maxwell AE, Warner TA, Fang F (2019) Implementation of machine-learning classification in remote sensing: an overview. \textit{Remote Sens} 11(14):1633.
+
+\bibitem{zhu2017}
+Zhu XX, Tuia D, Mou L, et al. (2017) Deep learning in remote sensing: A comprehensive review and list of resources. \textit{IEEE Geosci Remote Sens Mag} 5(4):8--36.
+
+\bibitem{li2019}
+Li R, Zheng S, Zhang C, Huang C (2019) Object detection in remote sensing images based on improved Faster R-CNN. \textit{IEEE Access} 7:35813--35822.
+
+\bibitem{ijabs2020}
+Ijabs I (2020) Artificial Intelligence and Democracy: A Political-Theoretical Perspective. \textit{Baltic J Mod Comput} 8(4):607--616.
+
+\bibitem{review_dl_crops}
+Jayatilaka A, et al. (2023) Deep Learning Models for the Classification of Crops in Aerial Imagery: A Review. \textit{Remote Sens Rev} 46(1):1--24.
+
+\bibitem{cnn_multitemp}
+Kussul N, Lavreniuk M, Skakun S, Shelestov A (2017) Deep Learning Classification of Land Cover and Crop Types Using Remote Sensing Data. \textit{IEEE Geosci Remote Sens Lett} 14(5):778--782.
+
+\bibitem{tabnet2024}
+(2024) A Deep Learning Approach for Dealing with Tabular Data in Crop Classification. \textit{IEEE Access}.
+
+\bibitem{cnn_optuna}
+(2019) Deep learning based multi-temporal crop classification. \textit{Remote Sens Environ} 221:175--190.
+
+\bibitem{rustowicz2019}
+Rustowicz RM, Singh A, Davis A (2019) Semantic segmentation of crop type in African smallholder agriculture. In: \textit{Proc IEEE/CVF CVPR Workshops}, pp 75--82.
+
+\bibitem{ji2018}
+Ji S, Shen C, Zhu Y, Zhang S, Lu Y (2018) 3D convolutional neural networks for crop classification with multi-temporal remote sensing images. \textit{Remote Sens} 10(1):75.
+
+\bibitem{cropformer2023}
+Zhao Y, Li W, Li M, Wang J (2023) Cropformer: A new generalized deep learning classification framework for multi-scenario crop classification. \textit{Front Plant Sci} 14:1130659.
+
+\bibitem{sciencedirect2021b}
+Turkoglu MO, D’Aronco S, Perich G, Liebisch F, Streit C, Schindler K, Wegner JD (2021) Crop Type Classification with Satellite Imagery Using Deep Learning. \textit{Remote Sens Environ} 256:112331.
+
+\bibitem{ref_medium}
+Crop Classification via Satellite Image Time Series and PSETAE Deep Learning Model. \textit{Medium}.
+
+\bibitem{ref_mdpi}
+Crop Classification with Satellite Data. \textit{MDPI Proc} 82(1):95.
+
+\bibitem{ref_acm}
+Crop Monitoring with Deep Learning on Satellite Data. In: \textit{ACM KDD} 2020.
+
+\bibitem{ref_rse2021}
+Crop Type Classification with Satellite Imagery Using Deep Learning. \textit{Remote Sens Environ} 2021.
+
+\bibitem{ref_jer}
+Crop Classification using Machine Learning and Remote Sensing. \textit{J Eng Res} 2022.
+
+\end{thebibliography}
+
+
+\end{document}

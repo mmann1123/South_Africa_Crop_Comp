@@ -1,0 +1,21 @@
+# Data files (large, generated)
+data/*.parquet
+data/*.geojson
+
+# Model artifacts
+deep_learn/src/models/
+deep_learn/src/xgb_tuner/
+deep_learn/src/saved_models_tabnet/
+deep_learn/src/Data/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Prediction outputs
+out_of_sample/predictions_*.csv
+
+# IDE
+.vscode/
+.idea/

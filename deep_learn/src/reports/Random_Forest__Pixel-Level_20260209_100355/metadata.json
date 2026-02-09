@@ -1,0 +1,177 @@
+{
+  "model_name": "Random Forest (Pixel-Level)",
+  "timestamp": "2026-02-09T10:03:55.455193",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Classical Machine Learning/pixel_level/base_ml_models.py",
+  "hyperparameters": {
+    "bootstrap": "True",
+    "ccp_alpha": "0.0",
+    "class_weight": "None",
+    "criterion": "gini",
+    "max_depth": "None",
+    "max_features": "sqrt",
+    "max_leaf_nodes": "None",
+    "max_samples": "None",
+    "min_impurity_decrease": "0.0",
+    "min_samples_leaf": "1",
+    "min_samples_split": "2",
+    "min_weight_fraction_leaf": "0.0",
+    "monotonic_cst": "None",
+    "n_estimators": "20",
+    "n_jobs": "4",
+    "oob_score": "False",
+    "random_state": "None",
+    "verbose": "0",
+    "warm_start": "False"
+  },
+  "split_info": {
+    "train_count": 6058481,
+    "val_count": 0,
+    "test_count": 1484625,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.6930942157110381,
+    "cohen_kappa": 0.5922267227065257,
+    "f1_weighted": 0.6827785869255887,
+    "f1_macro": 0.6424316398256407,
+    "macro_avg": {
+      "precision": 0.6842905416697348,
+      "recall": 0.6294154945267545,
+      "f1-score": 0.6424316398256407,
+      "support": 1484625.0
+    },
+    "weighted_avg": {
+      "precision": 0.6907853525637999,
+      "recall": 0.6930942157110381,
+      "f1-score": 0.6827785869255887,
+      "support": 1484625.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      166482,
+      2274,
+      19854,
+      5615,
+      79611
+    ],
+    [
+      15583,
+      140114,
+      13326,
+      2003,
+      22079
+    ],
+    [
+      11945,
+      4087,
+      450067,
+      8978,
+      11858
+    ],
+    [
+      23452,
+      8606,
+      53392,
+      43309,
+      24564
+    ],
+    [
+      95789,
+      3111,
+      36685,
+      12828,
+      229013
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.5314651828725208,
+      "recall": 0.6079624300676317,
+      "f1-score": 0.5671459255612882,
+      "support": 273836.0
+    },
+    "Canola": {
+      "precision": 0.8857211489835137,
+      "recall": 0.7255845265529116,
+      "f1-score": 0.7976953973418504,
+      "support": 193105.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.7850133606826157,
+      "recall": 0.9242855822645732,
+      "f1-score": 0.8489755804949546,
+      "support": 486935.0
+    },
+    "Small grain grazing": {
+      "precision": 0.5954518581661694,
+      "recall": 0.282469035956771,
+      "f1-score": 0.3831705418126482,
+      "support": 153323.0
+    },
+    "Wheat": {
+      "precision": 0.6238011576438542,
+      "recall": 0.606775897791885,
+      "f1-score": 0.6151707539174617,
+      "support": 377426.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": {
+    "feature_names": [
+      "B12_standard_deviation",
+      "B12_variance",
+      "B11_standard_deviation",
+      "B11_minimum",
+      "B12_quantile_q_0.05",
+      "B11_mean_change",
+      "EVI_standard_deviation",
+      "B6_standard_deviation",
+      "B6_mean_change",
+      "B11_variance",
+      "B2_standard_deviation",
+      "B6_variance",
+      "B6_quantile_q_0.95",
+      "B12_kurtosis",
+      "B2_minimum",
+      "B11_kurtosis",
+      "B6_maximum",
+      "EVI_skewness",
+      "EVI_variance",
+      "EVI_median"
+    ],
+    "importance_values": [
+      0.039403463570713684,
+      0.03198237571769331,
+      0.03071638071763213,
+      0.02920011893059763,
+      0.02493387676241826,
+      0.02250311483743208,
+      0.021153803783191157,
+      0.020535451787074825,
+      0.02024509984108005,
+      0.01774395789966523,
+      0.01755650570787249,
+      0.016882478554234595,
+      0.015885884619524008,
+      0.015876147245957182,
+      0.01368782466602099,
+      0.013610857839120647,
+      0.013571005721975105,
+      0.012982705809469516,
+      0.012544256580635479,
+      0.011580822493542869
+    ]
+  },
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Random_Forest__Pixel-Level_20260209_100355/report.pdf"
+}

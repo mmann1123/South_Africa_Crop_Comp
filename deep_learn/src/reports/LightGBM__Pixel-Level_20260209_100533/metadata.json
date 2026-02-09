@@ -1,0 +1,177 @@
+{
+  "model_name": "LightGBM (Pixel-Level)",
+  "timestamp": "2026-02-09T10:05:33.964720",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Classical Machine Learning/pixel_level/base_ml_models.py",
+  "hyperparameters": {
+    "boosting_type": "gbdt",
+    "class_weight": "None",
+    "colsample_bytree": "1.0",
+    "importance_type": "split",
+    "learning_rate": "0.1",
+    "max_depth": "-1",
+    "min_child_samples": "20",
+    "min_child_weight": "0.001",
+    "min_split_gain": "0.0",
+    "n_estimators": "100",
+    "n_jobs": "-1",
+    "num_leaves": "31",
+    "objective": "None",
+    "random_state": "None",
+    "reg_alpha": "0.0",
+    "reg_lambda": "0.0",
+    "subsample": "1.0",
+    "subsample_for_bin": "200000",
+    "subsample_freq": "0"
+  },
+  "split_info": {
+    "train_count": 6058481,
+    "val_count": 0,
+    "test_count": 1484625,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.683730908478572,
+    "cohen_kappa": 0.5787164625468024,
+    "f1_weighted": 0.6725309154637986,
+    "f1_macro": 0.6310812265812019,
+    "macro_avg": {
+      "precision": 0.6735388957315823,
+      "recall": 0.6165151349743434,
+      "f1-score": 0.6310812265812019,
+      "support": 1484625.0
+    },
+    "weighted_avg": {
+      "precision": 0.6791660537056343,
+      "recall": 0.683730908478572,
+      "f1-score": 0.6725309154637986,
+      "support": 1484625.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      147824,
+      3344,
+      19630,
+      5251,
+      97787
+    ],
+    [
+      13873,
+      138220,
+      13094,
+      3853,
+      24065
+    ],
+    [
+      9256,
+      3194,
+      452929,
+      9046,
+      12510
+    ],
+    [
+      18878,
+      8826,
+      54080,
+      42670,
+      28869
+    ],
+    [
+      90740,
+      2487,
+      38426,
+      12332,
+      233441
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.5268684218967747,
+      "recall": 0.53982675762135,
+      "f1-score": 0.5332688800826829,
+      "support": 273836.0
+    },
+    "Canola": {
+      "precision": 0.885622569215293,
+      "recall": 0.7157763910825716,
+      "f1-score": 0.7916924416340184,
+      "support": 193105.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.7833986844449364,
+      "recall": 0.9301631634612423,
+      "f1-score": 0.8504958247816624,
+      "support": 486935.0
+    },
+    "Small grain grazing": {
+      "precision": 0.5833059930008749,
+      "recall": 0.2783013637875596,
+      "f1-score": 0.3768186334032454,
+      "support": 153323.0
+    },
+    "Wheat": {
+      "precision": 0.5884988101000322,
+      "recall": 0.6185079989189934,
+      "f1-score": 0.6031303530044,
+      "support": 377426.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": {
+    "feature_names": [
+      "B6_mean_change",
+      "EVI_median",
+      "B11_mean_second_derivative_central",
+      "B11_kurtosis",
+      "B6_absolute_sum_of_changes",
+      "B6_mean_second_derivative_central",
+      "EVI_skewness",
+      "B11_mean_change",
+      "B12_mean_change",
+      "B2_absolute_sum_of_changes",
+      "B2_mean_change",
+      "B2_mean_second_derivative_central",
+      "EVI_quantile_q_0.05",
+      "B12_kurtosis",
+      "B11_skewness",
+      "B2_quantile_q_0.05",
+      "EVI_minimum",
+      "B2_kurtosis",
+      "B12_absolute_sum_of_changes",
+      "B11_absolute_sum_of_changes"
+    ],
+    "importance_values": [
+      483,
+      449,
+      448,
+      441,
+      371,
+      361,
+      350,
+      342,
+      328,
+      320,
+      314,
+      309,
+      299,
+      277,
+      276,
+      274,
+      267,
+      263,
+      249,
+      236
+    ]
+  },
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/LightGBM__Pixel-Level_20260209_100533/report.pdf"
+}

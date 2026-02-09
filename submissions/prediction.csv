@@ -1,31 +1,22 @@
 crop_name
 Barley
-Lucerne/Medics
-Barley
-Lucerne/Medics
-Lucerne/Medics
 Barley
 Barley
-Lucerne/Medics
-Barley
-Canola
-Canola
-Wheat
 Lucerne/Medics
-Wheat
-Small grain grazing
-Small grain grazing
 Barley
 Barley
 Barley
-Wheat
+Lucerne/Medics
+Lucerne/Medics
 Wheat
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Barley
 Barley
 Barley
+Barley
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -36,9 +27,9 @@ Lucerne/Medics
 Lucerne/Medics
 Barley
 Lucerne/Medics
-Barley
-Barley
-Small grain grazing
+Wheat
+Wheat
+Wheat
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -64,8 +55,10 @@ Lucerne/Medics
 Lucerne/Medics
 Barley
 Barley
+Lucerne/Medics
 Small grain grazing
 Barley
+Barley
 Small grain grazing
 Barley
 Barley
@@ -81,14 +74,15 @@ Wheat
 Canola
 Lucerne/Medics
 Lucerne/Medics
+Canola
 Small grain grazing
 Wheat
 Barley
 Lucerne/Medics
 Lucerne/Medics
-Barley
-Wheat
 Barley
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Wheat
 Barley
@@ -117,6 +111,7 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
+Canola
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -134,7 +129,7 @@ Wheat
 Canola
 Lucerne/Medics
 Barley
-Lucerne/Medics
+Wheat
 Lucerne/Medics
 Lucerne/Medics
 Wheat
@@ -227,7 +222,7 @@ Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Barley
+Wheat
 Barley
 Wheat
 Lucerne/Medics
@@ -236,7 +231,7 @@ Wheat
 Canola
 Barley
 Small grain grazing
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Barley
@@ -280,13 +275,13 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Barley
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
-Barley
+Lucerne/Medics
+Wheat
 Barley
 Barley
 Barley
@@ -327,7 +322,7 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Barley
+Wheat
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -342,7 +337,7 @@ Barley
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Barley
+Lucerne/Medics
 Wheat
 Small grain grazing
 Wheat
@@ -353,7 +348,7 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Wheat
+Barley
 Wheat
 Wheat
 Lucerne/Medics
@@ -362,26 +357,26 @@ Wheat
 Lucerne/Medics
 Lucerne/Medics
 Wheat
-Barley
-Small grain grazing
-Lucerne/Medics
 Wheat
-Small grain grazing
 Lucerne/Medics
 Small grain grazing
+Wheat
+Wheat
+Lucerne/Medics
+Wheat
 Lucerne/Medics
 Wheat
 Barley
 Barley
 Canola
 Lucerne/Medics
-Barley
+Wheat
 Barley
 Small grain grazing
 Barley
 Lucerne/Medics
-Barley
 Barley
+Wheat
 Barley
 Barley
 Barley
@@ -391,13 +386,13 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Barley
 Small grain grazing
-Barley
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
+Wheat
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -409,32 +404,32 @@ Small grain grazing
 Small grain grazing
 Small grain grazing
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Wheat
-Wheat
-Lucerne/Medics
-Lucerne/Medics
 Lucerne/Medics
-Wheat
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
-Wheat
-Barley
 Small grain grazing
-Canola
-Canola
-Canola
 Small grain grazing
-Canola
+Small grain grazing
+Lucerne/Medics
+Small grain grazing
 Wheat
 Lucerne/Medics
 Lucerne/Medics
@@ -445,11 +440,11 @@ Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
-Wheat
 Lucerne/Medics
-Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -483,7 +478,7 @@ Small grain grazing
 Small grain grazing
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -506,7 +501,7 @@ Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Wheat
-Barley
+Wheat
 Small grain grazing
 Wheat
 Wheat
@@ -520,7 +515,7 @@ Small grain grazing
 Lucerne/Medics
 Small grain grazing
 Wheat
-Barley
+Wheat
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
@@ -529,17 +524,17 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
-Wheat
 Lucerne/Medics
+Wheat
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Small grain grazing
 Small grain grazing
 Lucerne/Medics
 Small grain grazing
-Wheat
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -548,13 +543,13 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Wheat
+Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
@@ -593,16 +588,16 @@ Small grain grazing
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Lucerne/Medics
 Small grain grazing
 Small grain grazing
 Wheat
-Small grain grazing
+Lucerne/Medics
 Small grain grazing
 Wheat
 Lucerne/Medics
@@ -617,93 +612,93 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Wheat
-Barley
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
-Barley
+Wheat
 Canola
 Canola
 Canola
 Lucerne/Medics
 Lucerne/Medics
-Barley
+Wheat
 Lucerne/Medics
 Barley
 Wheat
+Barley
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
-Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
 Small grain grazing
-Small grain grazing
-Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Canola
 Lucerne/Medics
+Wheat
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Canola
-Wheat
 Small grain grazing
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Wheat
-Lucerne/Medics
 Small grain grazing
 Small grain grazing
 Small grain grazing
-Wheat
-Barley
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
-Wheat
-Canola
 Lucerne/Medics
-Canola
-Barley
 Small grain grazing
+Small grain grazing
 Barley
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Wheat
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Barley
 Wheat
 Barley
-Canola
+Wheat
 Lucerne/Medics
 Wheat
-Canola
 Small grain grazing
+Small grain grazing
 Wheat
 Barley
 Wheat
 Small grain grazing
 Small grain grazing
-Canola
-Canola
-Canola
-Wheat
+Barley
+Small grain grazing
+Barley
+Barley
 Lucerne/Medics
 Lucerne/Medics
-Wheat
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -723,25 +718,24 @@ Small grain grazing
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
-Wheat
+Lucerne/Medics
 Barley
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Wheat
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -755,6 +749,7 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Lucerne/Medics
 Small grain grazing
 Small grain grazing
 Small grain grazing
@@ -798,7 +793,7 @@ Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
+Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
@@ -817,6 +812,7 @@ Small grain grazing
 Small grain grazing
 Barley
 Lucerne/Medics
+Wheat
 Wheat
 Wheat
 Wheat
@@ -835,7 +831,7 @@ Canola
 Small grain grazing
 Lucerne/Medics
 Small grain grazing
-Small grain grazing
+Wheat
 Small grain grazing
 Lucerne/Medics
 Small grain grazing
@@ -843,7 +839,8 @@ Barley
 Lucerne/Medics
 Small grain grazing
 Canola
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -865,7 +862,7 @@ Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
-Small grain grazing
+Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Canola
@@ -881,12 +878,12 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Barley
 Wheat
+Wheat
 Lucerne/Medics
 Barley
-Canola
 Lucerne/Medics
+Lucerne/Medics
 Wheat
 Lucerne/Medics
 Canola
@@ -902,7 +899,7 @@ Barley
 Lucerne/Medics
 Small grain grazing
 Small grain grazing
-Barley
+Wheat
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -910,8 +907,8 @@ Barley
 Canola
 Canola
 Small grain grazing
-Wheat
 Small grain grazing
+Small grain grazing
 Wheat
 Small grain grazing
 Lucerne/Medics
@@ -934,13 +931,14 @@ Small grain grazing
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
-Barley
+Wheat
 Small grain grazing
+Lucerne/Medics
 Wheat
 Wheat
 Wheat
-Barley
-Barley
+Wheat
+Wheat
 Lucerne/Medics
 Lucerne/Medics
 Canola
@@ -957,14 +955,14 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Barley
-Wheat
+Lucerne/Medics
 Barley
 Lucerne/Medics
 Lucerne/Medics
 Barley
-Barley
 Wheat
-Lucerne/Medics
+Wheat
+Small grain grazing
 Canola
 Lucerne/Medics
 Canola
@@ -979,7 +977,7 @@ Small grain grazing
 Barley
 Lucerne/Medics
 Barley
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Wheat
@@ -988,14 +986,14 @@ Small grain grazing
 Wheat
 Wheat
 Canola
-Barley
+Wheat
 Lucerne/Medics
 Canola
-Barley
-Lucerne/Medics
 Wheat
 Lucerne/Medics
 Wheat
+Lucerne/Medics
+Small grain grazing
 Small grain grazing
 Wheat
 Wheat
@@ -1005,29 +1003,30 @@ Small grain grazing
 Wheat
 Small grain grazing
 Wheat
-Wheat
 Small grain grazing
 Small grain grazing
 Small grain grazing
 Small grain grazing
-Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
+Lucerne/Medics
+Lucerne/Medics
 Canola
-Wheat
 Wheat
-Wheat
 Small grain grazing
-Wheat
 Small grain grazing
+Small grain grazing
 Wheat
+Small grain grazing
 Small grain grazing
 Wheat
+Wheat
+Wheat
 Barley
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Small grain grazing
+Lucerne/Medics
 Small grain grazing
 Wheat
 Small grain grazing
@@ -1038,13 +1037,14 @@ Small grain grazing
 Small grain grazing
 Small grain grazing
 Lucerne/Medics
-Small grain grazing
+Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
 Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1061,7 +1061,6 @@ Barley
 Lucerne/Medics
 Lucerne/Medics
 Wheat
-Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1070,6 +1069,7 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1080,7 +1080,7 @@ Wheat
 Wheat
 Lucerne/Medics
 Wheat
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1092,7 +1092,6 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1107,7 +1106,8 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1125,8 +1125,8 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Small grain grazing
 Small grain grazing
@@ -1149,17 +1149,6 @@ Canola
 Small grain grazing
 Lucerne/Medics
 Wheat
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1171,25 +1160,15 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
 Small grain grazing
 Small grain grazing
-Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
 Small grain grazing
 Small grain grazing
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1207,13 +1186,9 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1224,50 +1199,77 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Wheat
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1299,7 +1301,9 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1328,7 +1332,6 @@ Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
-Small grain grazing
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
@@ -1338,10 +1341,6 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
-Small grain grazing
-Small grain grazing
-Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1358,6 +1357,7 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
@@ -1366,45 +1366,43 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Wheat
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Small grain grazing
 Small grain grazing
 Wheat
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Wheat
 Lucerne/Medics
+Small grain grazing
 Small grain grazing
 Small grain grazing
 Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1418,10 +1416,9 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
-Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Barley
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1437,7 +1434,9 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1445,6 +1444,7 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Canola
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
@@ -1470,44 +1470,39 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
 Lucerne/Medics
-Small grain grazing
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
 Lucerne/Medics
 Wheat
+Lucerne/Medics
+Lucerne/Medics
 Wheat
 Wheat
-Lucerne/Medics
 Wheat
 Lucerne/Medics
 Wheat
-Small grain grazing
 Lucerne/Medics
+Barley
+Canola
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
 Lucerne/Medics
-Small grain grazing
-Small grain grazing
-Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1515,9 +1510,12 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Wheat
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1526,7 +1524,6 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
@@ -1534,33 +1531,29 @@ Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
 Small grain grazing
-Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Barley
-Small grain grazing
-Small grain grazing
 Small grain grazing
-Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Wheat
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1570,20 +1563,27 @@ Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
@@ -1594,27 +1594,26 @@ Small grain grazing
 Small grain grazing
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
 Small grain grazing
-Wheat
-Wheat
-Wheat
+Small grain grazing
 Lucerne/Medics
 Small grain grazing
 Small grain grazing
-Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1624,13 +1623,12 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
-Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
@@ -1638,35 +1636,34 @@ Small grain grazing
 Small grain grazing
 Small grain grazing
 Small grain grazing
-Lucerne/Medics
-Wheat
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Small grain grazing
 Small grain grazing
 Lucerne/Medics
-Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Wheat
-Lucerne/Medics
-Lucerne/Medics
-Wheat
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Small grain grazing
 Lucerne/Medics
 Small grain grazing
@@ -1674,25 +1671,28 @@ Small grain grazing
 Small grain grazing
 Small grain grazing
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Barley
+Lucerne/Medics
+Lucerne/Medics
 Small grain grazing
-Canola
-Canola
 Wheat
-Canola
-Canola
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Barley
 Canola
 Barley
 Lucerne/Medics
@@ -1704,68 +1704,67 @@ Wheat
 Wheat
 Lucerne/Medics
 Lucerne/Medics
-Barley
-Barley
 Wheat
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
 Wheat
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
 Small grain grazing
-Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
-Wheat
-Canola
-Canola
-Canola
-Barley
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Canola
-Canola
-Canola
-Canola
-Canola
 Lucerne/Medics
-Small grain grazing
-Canola
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Barley
-Canola
+Barley
+Wheat
+Wheat
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Barley
+Barley
+Wheat
+Wheat
+Wheat
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
-Barley
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Canola
 Lucerne/Medics
 Canola
 Lucerne/Medics
-Canola
 Canola
-Lucerne/Medics
 Canola
+Small grain grazing
 Wheat
 Wheat
-Lucerne/Medics
-Lucerne/Medics
+Wheat
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1773,6 +1772,7 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1785,7 +1785,7 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
+Wheat
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -1797,9 +1797,9 @@ Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Barley
-Barley
 Wheat
+Small grain grazing
+Small grain grazing
 Canola
 Canola
 Lucerne/Medics
@@ -1813,8 +1813,8 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Wheat
-Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Barley
 Barley
 Wheat
@@ -1873,166 +1873,165 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
 Small grain grazing
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
-Canola
-Canola
-Wheat
-Barley
 Lucerne/Medics
-Wheat
-Barley
 Small grain grazing
 Small grain grazing
-Barley
 Small grain grazing
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
-Wheat
-Barley
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
-Canola
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
-Small grain grazing
 Wheat
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
-Barley
-Canola
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
-Wheat
 Wheat
-Lucerne/Medics
 Small grain grazing
-Wheat
-Canola
 Lucerne/Medics
 Wheat
-Wheat
-Lucerne/Medics
-Barley
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Wheat
-Wheat
 Small grain grazing
 Small grain grazing
+Wheat
 Small grain grazing
 Small grain grazing
 Small grain grazing
-Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Barley
+Small grain grazing
 Lucerne/Medics
 Wheat
-Small grain grazing
+Lucerne/Medics
 Small grain grazing
+Wheat
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Wheat
 Lucerne/Medics
 Small grain grazing
 Small grain grazing
 Lucerne/Medics
-Small grain grazing
-Wheat
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
-Canola
 Wheat
+Small grain grazing
 Wheat
-Barley
-Canola
 Wheat
 Wheat
 Small grain grazing
 Wheat
+Small grain grazing
 Wheat
-Canola
+Wheat
 Small grain grazing
 Small grain grazing
 Wheat
-Canola
-Canola
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Wheat
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
-Barley
-Barley
-Barley
-Barley
-Canola
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Wheat
-Barley
-Barley
-Barley
 Wheat
-Canola
-Barley
 Wheat
-Barley
-Barley
-Canola
-Barley
-Barley
-Barley
+Wheat
+Wheat
 Canola
 Wheat
+Wheat
+Wheat
 Barley
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Wheat
-Lucerne/Medics
 Wheat
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Wheat
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
-Wheat
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
+Wheat
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -2042,58 +2041,59 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Wheat
-Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Canola
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Wheat
 Small grain grazing
-Canola
-Lucerne/Medics
 Barley
-Canola
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
+Wheat
+Wheat
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
+Wheat
 Wheat
 Small grain grazing
+Small grain grazing
+Small grain grazing
 Barley
 Small grain grazing
 Barley
 Barley
-Wheat
+Barley
 Lucerne/Medics
 Lucerne/Medics
 Wheat
 Wheat
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
 Small grain grazing
 Small grain grazing
-Wheat
-Wheat
 Small grain grazing
-Lucerne/Medics
-Lucerne/Medics
 Wheat
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Wheat
 Wheat
 Small grain grazing
@@ -2112,7 +2112,7 @@ Lucerne/Medics
 Wheat
 Wheat
 Lucerne/Medics
-Wheat
+Barley
 Canola
 Barley
 Barley
@@ -2128,9 +2128,9 @@ Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
 Barley
-Wheat
+Barley
 Wheat
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Barley
 Lucerne/Medics
@@ -2142,7 +2142,7 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Wheat
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -2165,12 +2165,12 @@ Lucerne/Medics
 Small grain grazing
 Barley
 Canola
-Barley
+Wheat
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -2188,88 +2188,88 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
 Small grain grazing
-Wheat
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Wheat
+Small grain grazing
 Wheat
 Small grain grazing
-Barley
 Lucerne/Medics
 Lucerne/Medics
-Wheat
-Small grain grazing
-Small grain grazing
 Wheat
 Wheat
 Wheat
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Wheat
-Wheat
-Barley
-Barley
 Small grain grazing
 Wheat
-Lucerne/Medics
 Small grain grazing
 Small grain grazing
-Wheat
-Wheat
+Small grain grazing
 Lucerne/Medics
 Wheat
-Lucerne/Medics
 Wheat
+Small grain grazing
 Wheat
 Lucerne/Medics
+Small grain grazing
+Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
-Wheat
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Canola
-Canola
 Lucerne/Medics
+Wheat
+Barley
 Small grain grazing
 Wheat
+Small grain grazing
+Small grain grazing
 Wheat
-Barley
-Lucerne/Medics
-Lucerne/Medics
+Wheat
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Wheat
-Canola
-Barley
 Wheat
-Lucerne/Medics
-Lucerne/Medics
+Wheat
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Barley
-Barley
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
+Wheat
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Wheat
+Wheat
 Barley
+Wheat
 Small grain grazing
-Barley
-Barley
-Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Small grain grazing
 Small grain grazing
@@ -2279,39 +2279,39 @@ Wheat
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Wheat
 Lucerne/Medics
+Wheat
 Small grain grazing
-Lucerne/Medics
 Small grain grazing
-Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
-Wheat
-Wheat
 Small grain grazing
 Wheat
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
-Barley
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
@@ -2324,14 +2324,14 @@ Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Canola
-Lucerne/Medics
 Lucerne/Medics
-Wheat
-Wheat
-Lucerne/Medics
 Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
 Barley
+Small grain grazing
+Small grain grazing
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Wheat
@@ -2394,22 +2394,22 @@ Barley
 Canola
 Canola
 Wheat
-Lucerne/Medics
-Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing
 Lucerne/Medics
-Lucerne/Medics
-Lucerne/Medics
+Small grain grazing
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
 Lucerne/Medics
+Small grain grazing
 Lucerne/Medics
 Lucerne/Medics
 Small grain grazing

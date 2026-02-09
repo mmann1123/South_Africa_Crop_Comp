@@ -1,0 +1,128 @@
+{
+  "model_name": "Logistic Regression (Pixel-Level)",
+  "timestamp": "2026-02-09T09:57:08.703057",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Classical Machine Learning/pixel_level/base_ml_models.py",
+  "hyperparameters": {
+    "C": "1.0",
+    "class_weight": "None",
+    "dual": "False",
+    "fit_intercept": "True",
+    "intercept_scaling": "1",
+    "l1_ratio": "None",
+    "max_iter": "100",
+    "multi_class": "deprecated",
+    "n_jobs": "4",
+    "penalty": "l2",
+    "random_state": "None",
+    "solver": "lbfgs",
+    "tol": "0.0001",
+    "verbose": "0",
+    "warm_start": "False"
+  },
+  "split_info": {
+    "train_count": 6058481,
+    "val_count": 0,
+    "test_count": 1484625,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.6761330302264882,
+    "cohen_kappa": 0.5691959294838163,
+    "f1_weighted": 0.6646457462067081,
+    "f1_macro": 0.6200485565980154,
+    "macro_avg": {
+      "precision": 0.6582397889616722,
+      "recall": 0.608080486101836,
+      "f1-score": 0.6200485565980154,
+      "support": 1484625.0
+    },
+    "weighted_avg": {
+      "precision": 0.6697651368422385,
+      "recall": 0.6761330302264882,
+      "f1-score": 0.6646457462067081,
+      "support": 1484625.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      151969,
+      2349,
+      19820,
+      5870,
+      93828
+    ],
+    [
+      16146,
+      138200,
+      12812,
+      3433,
+      22514
+    ],
+    [
+      8324,
+      2974,
+      452470,
+      9344,
+      13823
+    ],
+    [
+      18247,
+      11163,
+      50015,
+      38367,
+      35531
+    ],
+    [
+      101096,
+      2434,
+      36006,
+      15092,
+      222798
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.5137871810995936,
+      "recall": 0.5549635548284375,
+      "f1-score": 0.5335821550583022,
+      "support": 273836.0
+    },
+    "Canola": {
+      "precision": 0.879582484725051,
+      "recall": 0.7156728204862639,
+      "f1-score": 0.7892069383967449,
+      "support": 193105.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.792246153630654,
+      "recall": 0.9292205325146067,
+      "f1-score": 0.8552839258339335,
+      "support": 486935.0
+    },
+    "Small grain grazing": {
+      "precision": 0.532091642859124,
+      "recall": 0.25023642897673537,
+      "f1-score": 0.34039098784983296,
+      "support": 153323.0
+    },
+    "Wheat": {
+      "precision": 0.5734914824939381,
+      "recall": 0.5903090937031366,
+      "f1-score": 0.5817787758512638,
+      "support": 377426.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": null,
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Logistic_Regression__Pixel-Level_20260209_095708/report.pdf"
+}
