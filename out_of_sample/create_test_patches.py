@@ -42,8 +42,8 @@ TEST_LABELS_DIR = os.path.join(
 )
 TEST_LABELS_GEOJSON = os.path.join(TEST_LABELS_DIR, "labels.geojson")
 
-# Test region imagery (NOTE: may need to be extracted/processed first)
-TEST_DATA_DIR = "/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/S1c_data_test"
+# Test region imagery (same GeoTIFFs cover both training and test regions)
+TEST_DATA_DIR = "/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/S1c_data"
 
 # Output (centralized in data/)
 OUTPUT_PATCHES_GEOJSON = TEST_PATCHES_GEOJSON_PATH

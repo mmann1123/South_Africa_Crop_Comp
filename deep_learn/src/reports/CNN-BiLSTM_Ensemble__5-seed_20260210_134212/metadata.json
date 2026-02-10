@@ -1,0 +1,122 @@
+{
+  "model_name": "CNN-BiLSTM Ensemble (5-seed)",
+  "timestamp": "2026-02-10T13:42:12.674978",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Deep Learning/Pixel_Field_Level/cnn_bilstm.py",
+  "hyperparameters": {
+    "num_models": 5,
+    "conv_filters": 64,
+    "lstm_hidden": 64,
+    "kernel_size": 5,
+    "dropout": 0.3,
+    "learning_rate": 0.001,
+    "epochs": 25,
+    "batch_size": 1024,
+    "loss": "FocalLoss(gamma=2.0)"
+  },
+  "split_info": {
+    "train_count": 5407549,
+    "val_count": 600899,
+    "test_count": 1531914,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.7693897960329366,
+    "cohen_kappa": 0.6957476483784797,
+    "f1_weighted": 0.7682707614134314,
+    "f1_macro": 0.7264097118650703,
+    "macro_avg": {
+      "precision": 0.7335626460860769,
+      "recall": 0.7221107798888464,
+      "f1-score": 0.7264097118650703,
+      "support": 1531914.0
+    },
+    "weighted_avg": {
+      "precision": 0.7689909232965786,
+      "recall": 0.7693897960329366,
+      "f1-score": 0.7682707614134314,
+      "support": 1531914.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      217272,
+      8029,
+      9279,
+      7151,
+      50942
+    ],
+    [
+      11292,
+      198050,
+      6120,
+      7697,
+      11816
+    ],
+    [
+      13960,
+      6033,
+      499607,
+      24600,
+      18284
+    ],
+    [
+      20596,
+      8015,
+      33302,
+      74070,
+      21928
+    ],
+    [
+      58121,
+      1957,
+      17345,
+      16808,
+      189640
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.6763520223134656,
+      "recall": 0.7423711787558128,
+      "f1-score": 0.7078255260508801,
+      "support": 292673.0
+    },
+    "Canola": {
+      "precision": 0.8917796869652924,
+      "recall": 0.8428556229386105,
+      "f1-score": 0.8666277220227585,
+      "support": 234975.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.8832393711338931,
+      "recall": 0.8882154870182974,
+      "f1-score": 0.8857204399820234,
+      "support": 562484.0
+    },
+    "Small grain grazing": {
+      "precision": 0.5683439988950785,
+      "recall": 0.46906168664627546,
+      "f1-score": 0.5139520602837249,
+      "support": 157911.0
+    },
+    "Wheat": {
+      "precision": 0.6480981511226547,
+      "recall": 0.6680499240852359,
+      "f1-score": 0.6579228109859648,
+      "support": 283871.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": null,
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/CNN-BiLSTM_Ensemble__5-seed_20260210_134212/report.pdf"
+}

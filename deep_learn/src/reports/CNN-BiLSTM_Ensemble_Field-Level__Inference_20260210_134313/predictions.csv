@@ -1,0 +1,831 @@
+field_id,true_label,predicted_label
+75802,Lucerne/Medics,Lucerne/Medics
+75807,Barley,Barley
+75824,Lucerne/Medics,Lucerne/Medics
+78005,Lucerne/Medics,Wheat
+78006,Small grain grazing,Small grain grazing
+78007,Lucerne/Medics,Wheat
+78009,Wheat,Small grain grazing
+78018,Wheat,Wheat
+79969,Lucerne/Medics,Lucerne/Medics
+79971,Lucerne/Medics,Lucerne/Medics
+79975,Lucerne/Medics,Lucerne/Medics
+79977,Lucerne/Medics,Lucerne/Medics
+79980,Lucerne/Medics,Lucerne/Medics
+79988,Small grain grazing,Wheat
+79991,Small grain grazing,Small grain grazing
+79994,Lucerne/Medics,Lucerne/Medics
+79995,Wheat,Barley
+79997,Lucerne/Medics,Wheat
+79998,Lucerne/Medics,Lucerne/Medics
+80008,Lucerne/Medics,Lucerne/Medics
+80009,Lucerne/Medics,Lucerne/Medics
+80010,Lucerne/Medics,Lucerne/Medics
+80016,Canola,Canola
+80017,Small grain grazing,Wheat
+80021,Small grain grazing,Small grain grazing
+80023,Small grain grazing,Small grain grazing
+80028,Small grain grazing,Barley
+80034,Canola,Canola
+80035,Canola,Canola
+80039,Small grain grazing,Small grain grazing
+80042,Lucerne/Medics,Lucerne/Medics
+80046,Lucerne/Medics,Lucerne/Medics
+80069,Lucerne/Medics,Lucerne/Medics
+80072,Lucerne/Medics,Lucerne/Medics
+80077,Lucerne/Medics,Barley
+80080,Canola,Canola
+80086,Lucerne/Medics,Lucerne/Medics
+80087,Barley,Barley
+80101,Lucerne/Medics,Lucerne/Medics
+80105,Lucerne/Medics,Lucerne/Medics
+80113,Small grain grazing,Small grain grazing
+80115,Lucerne/Medics,Lucerne/Medics
+80120,Lucerne/Medics,Lucerne/Medics
+80122,Lucerne/Medics,Lucerne/Medics
+80126,Wheat,Wheat
+80132,Lucerne/Medics,Lucerne/Medics
+80133,Lucerne/Medics,Lucerne/Medics
+80137,Small grain grazing,Small grain grazing
+80141,Small grain grazing,Wheat
+80144,Lucerne/Medics,Lucerne/Medics
+80145,Wheat,Wheat
+80159,Small grain grazing,Small grain grazing
+80160,Lucerne/Medics,Lucerne/Medics
+80166,Lucerne/Medics,Lucerne/Medics
+80169,Lucerne/Medics,Lucerne/Medics
+80176,Small grain grazing,Small grain grazing
+80184,Lucerne/Medics,Lucerne/Medics
+80217,Barley,Lucerne/Medics
+80227,Barley,Wheat
+80231,Canola,Canola
+80232,Canola,Canola
+80233,Barley,Barley
+80234,Lucerne/Medics,Lucerne/Medics
+80236,Lucerne/Medics,Small grain grazing
+80237,Lucerne/Medics,Lucerne/Medics
+80239,Small grain grazing,Barley
+80243,Canola,Canola
+80247,Wheat,Wheat
+80250,Barley,Wheat
+80252,Canola,Canola
+80256,Wheat,Wheat
+80257,Wheat,Barley
+80261,Barley,Wheat
+80265,Lucerne/Medics,Lucerne/Medics
+80267,Small grain grazing,Small grain grazing
+80269,Barley,Barley
+80276,Wheat,Wheat
+80284,Lucerne/Medics,Lucerne/Medics
+80295,Small grain grazing,Lucerne/Medics
+80298,Lucerne/Medics,Lucerne/Medics
+80304,Lucerne/Medics,Lucerne/Medics
+80306,Lucerne/Medics,Lucerne/Medics
+80307,Lucerne/Medics,Lucerne/Medics
+80331,Lucerne/Medics,Lucerne/Medics
+80333,Wheat,Wheat
+80339,Lucerne/Medics,Lucerne/Medics
+80342,Lucerne/Medics,Lucerne/Medics
+80345,Lucerne/Medics,Lucerne/Medics
+80348,Lucerne/Medics,Small grain grazing
+80350,Wheat,Wheat
+80355,Wheat,Wheat
+80357,Lucerne/Medics,Lucerne/Medics
+80366,Barley,Barley
+80367,Lucerne/Medics,Lucerne/Medics
+80368,Lucerne/Medics,Lucerne/Medics
+80379,Barley,Wheat
+80384,Barley,Barley
+80385,Barley,Barley
+80391,Barley,Wheat
+80394,Lucerne/Medics,Lucerne/Medics
+80398,Barley,Barley
+80407,Barley,Wheat
+80417,Barley,Barley
+80419,Barley,Barley
+80423,Small grain grazing,Barley
+80424,Barley,Barley
+80426,Barley,Barley
+80427,Lucerne/Medics,Lucerne/Medics
+80436,Small grain grazing,Lucerne/Medics
+80439,Lucerne/Medics,Lucerne/Medics
+80440,Lucerne/Medics,Lucerne/Medics
+80445,Barley,Small grain grazing
+80446,Barley,Barley
+80449,Small grain grazing,Small grain grazing
+80452,Lucerne/Medics,Small grain grazing
+80453,Small grain grazing,Small grain grazing
+80456,Lucerne/Medics,Lucerne/Medics
+80462,Barley,Barley
+80464,Barley,Wheat
+80478,Barley,Barley
+80483,Barley,Barley
+80486,Barley,Barley
+80490,Lucerne/Medics,Lucerne/Medics
+80500,Small grain grazing,Small grain grazing
+80502,Lucerne/Medics,Lucerne/Medics
+80505,Lucerne/Medics,Small grain grazing
+80510,Small grain grazing,Lucerne/Medics
+80522,Lucerne/Medics,Lucerne/Medics
+80539,Lucerne/Medics,Wheat
+80542,Small grain grazing,Wheat
+80544,Barley,Barley
+80552,Canola,Canola
+80553,Barley,Barley
+80562,Canola,Canola
+80564,Small grain grazing,Lucerne/Medics
+80566,Lucerne/Medics,Lucerne/Medics
+80567,Lucerne/Medics,Barley
+80572,Wheat,Wheat
+80577,Lucerne/Medics,Lucerne/Medics
+80580,Lucerne/Medics,Lucerne/Medics
+80583,Small grain grazing,Wheat
+80588,Small grain grazing,Small grain grazing
+80593,Lucerne/Medics,Lucerne/Medics
+80601,Lucerne/Medics,Small grain grazing
+80602,Barley,Wheat
+80629,Lucerne/Medics,Lucerne/Medics
+80649,Lucerne/Medics,Lucerne/Medics
+80650,Lucerne/Medics,Lucerne/Medics
+80651,Lucerne/Medics,Lucerne/Medics
+80664,Lucerne/Medics,Lucerne/Medics
+80667,Lucerne/Medics,Lucerne/Medics
+80668,Lucerne/Medics,Lucerne/Medics
+80677,Lucerne/Medics,Lucerne/Medics
+80678,Lucerne/Medics,Lucerne/Medics
+80688,Lucerne/Medics,Lucerne/Medics
+80694,Lucerne/Medics,Lucerne/Medics
+80695,Lucerne/Medics,Lucerne/Medics
+80702,Lucerne/Medics,Lucerne/Medics
+80706,Lucerne/Medics,Lucerne/Medics
+80708,Lucerne/Medics,Lucerne/Medics
+80710,Lucerne/Medics,Lucerne/Medics
+80716,Canola,Canola
+80723,Barley,Lucerne/Medics
+80731,Lucerne/Medics,Lucerne/Medics
+80735,Lucerne/Medics,Lucerne/Medics
+80739,Barley,Barley
+80740,Lucerne/Medics,Lucerne/Medics
+80746,Small grain grazing,Lucerne/Medics
+80750,Lucerne/Medics,Lucerne/Medics
+80757,Small grain grazing,Barley
+80773,Wheat,Wheat
+80780,Barley,Barley
+80784,Small grain grazing,Lucerne/Medics
+80791,Lucerne/Medics,Lucerne/Medics
+80798,Barley,Canola
+80801,Wheat,Wheat
+80802,Canola,Canola
+80811,Small grain grazing,Small grain grazing
+80814,Barley,Barley
+80817,Small grain grazing,Barley
+80823,Barley,Lucerne/Medics
+80826,Lucerne/Medics,Lucerne/Medics
+80845,Wheat,Small grain grazing
+80847,Lucerne/Medics,Lucerne/Medics
+80855,Wheat,Wheat
+80859,Small grain grazing,Wheat
+80861,Lucerne/Medics,Lucerne/Medics
+80873,Lucerne/Medics,Lucerne/Medics
+80887,Canola,Canola
+80888,Barley,Barley
+80891,Barley,Wheat
+80901,Lucerne/Medics,Lucerne/Medics
+80902,Lucerne/Medics,Lucerne/Medics
+80951,Wheat,Wheat
+80964,Lucerne/Medics,Lucerne/Medics
+80965,Lucerne/Medics,Lucerne/Medics
+80967,Barley,Barley
+80975,Lucerne/Medics,Lucerne/Medics
+80980,Lucerne/Medics,Lucerne/Medics
+81012,Lucerne/Medics,Lucerne/Medics
+81016,Wheat,Lucerne/Medics
+81019,Lucerne/Medics,Wheat
+81024,Wheat,Wheat
+81028,Lucerne/Medics,Wheat
+81041,Small grain grazing,Barley
+81046,Small grain grazing,Barley
+81053,Barley,Barley
+81054,Lucerne/Medics,Lucerne/Medics
+81057,Canola,Small grain grazing
+81062,Wheat,Wheat
+81068,Canola,Canola
+81070,Lucerne/Medics,Lucerne/Medics
+81071,Barley,Barley
+81074,Barley,Wheat
+81078,Barley,Barley
+81084,Wheat,Barley
+81087,Barley,Barley
+81092,Lucerne/Medics,Lucerne/Medics
+81097,Barley,Barley
+81100,Lucerne/Medics,Lucerne/Medics
+81106,Lucerne/Medics,Lucerne/Medics
+81111,Lucerne/Medics,Lucerne/Medics
+81113,Barley,Barley
+81127,Barley,Wheat
+81128,Wheat,Wheat
+81132,Barley,Barley
+81147,Wheat,Wheat
+81150,Barley,Barley
+81160,Small grain grazing,Lucerne/Medics
+81170,Wheat,Wheat
+81174,Barley,Barley
+81175,Wheat,Wheat
+81177,Barley,Small grain grazing
+81181,Wheat,Wheat
+81187,Barley,Barley
+81189,Barley,Barley
+81198,Lucerne/Medics,Lucerne/Medics
+81199,Canola,Barley
+81201,Lucerne/Medics,Lucerne/Medics
+81212,Canola,Canola
+81218,Canola,Canola
+81219,Barley,Barley
+81223,Lucerne/Medics,Lucerne/Medics
+81224,Small grain grazing,Lucerne/Medics
+81237,Lucerne/Medics,Lucerne/Medics
+81242,Small grain grazing,Small grain grazing
+81243,Lucerne/Medics,Lucerne/Medics
+81246,Lucerne/Medics,Lucerne/Medics
+81286,Lucerne/Medics,Lucerne/Medics
+81287,Lucerne/Medics,Lucerne/Medics
+81296,Barley,Wheat
+81306,Lucerne/Medics,Wheat
+81311,Wheat,Barley
+81312,Wheat,Barley
+81315,Barley,Barley
+81319,Canola,Wheat
+81331,Lucerne/Medics,Lucerne/Medics
+81333,Lucerne/Medics,Lucerne/Medics
+81344,Wheat,Lucerne/Medics
+81347,Lucerne/Medics,Lucerne/Medics
+81348,Lucerne/Medics,Lucerne/Medics
+81351,Lucerne/Medics,Lucerne/Medics
+81355,Lucerne/Medics,Lucerne/Medics
+81369,Lucerne/Medics,Lucerne/Medics
+81378,Wheat,Wheat
+81384,Lucerne/Medics,Lucerne/Medics
+81387,Wheat,Lucerne/Medics
+81392,Lucerne/Medics,Lucerne/Medics
+81400,Wheat,Barley
+81401,Wheat,Barley
+81407,Wheat,Wheat
+81412,Lucerne/Medics,Lucerne/Medics
+81429,Wheat,Wheat
+81430,Lucerne/Medics,Lucerne/Medics
+81431,Wheat,Lucerne/Medics
+81443,Canola,Canola
+81447,Lucerne/Medics,Lucerne/Medics
+81449,Lucerne/Medics,Lucerne/Medics
+81465,Canola,Small grain grazing
+81469,Lucerne/Medics,Lucerne/Medics
+81473,Canola,Canola
+81476,Lucerne/Medics,Lucerne/Medics
+81477,Lucerne/Medics,Lucerne/Medics
+81498,Lucerne/Medics,Lucerne/Medics
+81503,Lucerne/Medics,Lucerne/Medics
+81505,Small grain grazing,Small grain grazing
+81509,Small grain grazing,Lucerne/Medics
+81510,Canola,Barley
+81562,Canola,Canola
+81572,Lucerne/Medics,Lucerne/Medics
+81574,Wheat,Wheat
+81579,Small grain grazing,Small grain grazing
+81583,Lucerne/Medics,Lucerne/Medics
+81585,Canola,Canola
+81589,Wheat,Wheat
+81591,Wheat,Barley
+81604,Canola,Canola
+81618,Barley,Barley
+81627,Barley,Lucerne/Medics
+81628,Wheat,Wheat
+81629,Wheat,Wheat
+81635,Small grain grazing,Small grain grazing
+81644,Barley,Barley
+81658,Lucerne/Medics,Lucerne/Medics
+81660,Lucerne/Medics,Lucerne/Medics
+81662,Wheat,Barley
+81670,Barley,Barley
+81672,Barley,Barley
+81674,Lucerne/Medics,Lucerne/Medics
+81675,Lucerne/Medics,Lucerne/Medics
+81685,Barley,Barley
+81687,Barley,Barley
+81692,Barley,Barley
+81693,Canola,Canola
+81698,Lucerne/Medics,Lucerne/Medics
+81702,Barley,Barley
+81704,Wheat,Barley
+81707,Barley,Barley
+81721,Wheat,Barley
+81730,Lucerne/Medics,Lucerne/Medics
+81735,Barley,Barley
+81739,Canola,Canola
+81743,Canola,Canola
+81748,Canola,Canola
+81749,Lucerne/Medics,Lucerne/Medics
+81753,Canola,Canola
+81759,Canola,Canola
+81763,Lucerne/Medics,Lucerne/Medics
+81766,Canola,Canola
+81776,Wheat,Wheat
+81785,Wheat,Wheat
+81800,Barley,Barley
+81806,Lucerne/Medics,Lucerne/Medics
+81808,Lucerne/Medics,Lucerne/Medics
+81816,Canola,Canola
+81819,Lucerne/Medics,Lucerne/Medics
+81825,Small grain grazing,Canola
+81826,Lucerne/Medics,Lucerne/Medics
+81840,Wheat,Wheat
+81841,Wheat,Lucerne/Medics
+81846,Lucerne/Medics,Lucerne/Medics
+81847,Lucerne/Medics,Lucerne/Medics
+81850,Lucerne/Medics,Lucerne/Medics
+81852,Wheat,Wheat
+81858,Lucerne/Medics,Lucerne/Medics
+81868,Canola,Canola
+81872,Canola,Canola
+81873,Small grain grazing,Canola
+81879,Lucerne/Medics,Lucerne/Medics
+81883,Canola,Canola
+81885,Barley,Wheat
+81890,Lucerne/Medics,Lucerne/Medics
+81894,Barley,Barley
+81895,Canola,Canola
+81898,Small grain grazing,Small grain grazing
+81907,Lucerne/Medics,Lucerne/Medics
+81908,Barley,Barley
+81909,Barley,Barley
+81910,Barley,Barley
+81911,Barley,Barley
+81913,Barley,Barley
+81916,Barley,Barley
+81921,Barley,Barley
+81924,Lucerne/Medics,Lucerne/Medics
+81928,Lucerne/Medics,Lucerne/Medics
+81931,Lucerne/Medics,Lucerne/Medics
+81933,Lucerne/Medics,Lucerne/Medics
+81937,Lucerne/Medics,Lucerne/Medics
+81939,Lucerne/Medics,Lucerne/Medics
+81940,Barley,Barley
+81943,Canola,Canola
+81953,Barley,Barley
+81954,Barley,Barley
+81955,Canola,Canola
+81956,Canola,Canola
+81984,Barley,Barley
+81985,Barley,Barley
+81986,Lucerne/Medics,Lucerne/Medics
+81992,Canola,Canola
+82002,Lucerne/Medics,Lucerne/Medics
+82006,Lucerne/Medics,Lucerne/Medics
+82015,Lucerne/Medics,Lucerne/Medics
+82016,Canola,Canola
+82020,Lucerne/Medics,Lucerne/Medics
+82025,Canola,Canola
+82040,Lucerne/Medics,Lucerne/Medics
+82053,Lucerne/Medics,Lucerne/Medics
+82064,Lucerne/Medics,Lucerne/Medics
+82069,Lucerne/Medics,Lucerne/Medics
+82070,Lucerne/Medics,Lucerne/Medics
+82072,Canola,Canola
+82075,Canola,Canola
+82079,Lucerne/Medics,Lucerne/Medics
+82084,Barley,Barley
+82086,Lucerne/Medics,Lucerne/Medics
+82102,Lucerne/Medics,Lucerne/Medics
+82103,Lucerne/Medics,Lucerne/Medics
+82104,Lucerne/Medics,Lucerne/Medics
+82107,Lucerne/Medics,Lucerne/Medics
+82108,Lucerne/Medics,Lucerne/Medics
+82117,Lucerne/Medics,Lucerne/Medics
+82122,Canola,Wheat
+82129,Wheat,Wheat
+82133,Lucerne/Medics,Lucerne/Medics
+82135,Canola,Wheat
+82136,Lucerne/Medics,Lucerne/Medics
+82147,Lucerne/Medics,Wheat
+82161,Canola,Canola
+82178,Lucerne/Medics,Lucerne/Medics
+82190,Lucerne/Medics,Lucerne/Medics
+82193,Canola,Canola
+82198,Wheat,Wheat
+82202,Canola,Canola
+82207,Lucerne/Medics,Lucerne/Medics
+82213,Canola,Canola
+82214,Lucerne/Medics,Lucerne/Medics
+82215,Barley,Barley
+82217,Barley,Barley
+82225,Lucerne/Medics,Lucerne/Medics
+82226,Lucerne/Medics,Lucerne/Medics
+82230,Wheat,Barley
+82236,Wheat,Wheat
+82237,Lucerne/Medics,Lucerne/Medics
+82238,Canola,Canola
+82246,Wheat,Wheat
+82255,Wheat,Wheat
+82259,Wheat,Wheat
+82260,Barley,Barley
+82283,Lucerne/Medics,Lucerne/Medics
+82288,Canola,Canola
+82289,Canola,Canola
+82292,Canola,Canola
+82293,Barley,Barley
+82299,Wheat,Wheat
+82306,Small grain grazing,Small grain grazing
+82316,Wheat,Lucerne/Medics
+82317,Wheat,Wheat
+82322,Lucerne/Medics,Lucerne/Medics
+82326,Lucerne/Medics,Lucerne/Medics
+82329,Small grain grazing,Small grain grazing
+82330,Small grain grazing,Small grain grazing
+82337,Wheat,Barley
+82342,Wheat,Barley
+82360,Small grain grazing,Small grain grazing
+82361,Wheat,Wheat
+82365,Wheat,Wheat
+82368,Wheat,Barley
+82371,Lucerne/Medics,Lucerne/Medics
+82384,Small grain grazing,Small grain grazing
+82390,Canola,Canola
+82401,Barley,Barley
+82406,Lucerne/Medics,Lucerne/Medics
+82411,Lucerne/Medics,Lucerne/Medics
+82415,Lucerne/Medics,Lucerne/Medics
+82427,Wheat,Wheat
+82430,Lucerne/Medics,Lucerne/Medics
+82435,Lucerne/Medics,Lucerne/Medics
+82438,Wheat,Wheat
+82439,Wheat,Wheat
+82451,Wheat,Wheat
+82452,Wheat,Wheat
+82458,Wheat,Wheat
+82464,Barley,Barley
+82478,Barley,Barley
+82481,Small grain grazing,Small grain grazing
+82482,Small grain grazing,Small grain grazing
+82487,Barley,Barley
+82488,Lucerne/Medics,Lucerne/Medics
+82493,Barley,Barley
+82494,Lucerne/Medics,Lucerne/Medics
+82495,Lucerne/Medics,Lucerne/Medics
+82497,Barley,Barley
+82508,Small grain grazing,Lucerne/Medics
+82510,Lucerne/Medics,Lucerne/Medics
+82525,Lucerne/Medics,Lucerne/Medics
+82532,Lucerne/Medics,Lucerne/Medics
+82537,Wheat,Barley
+82539,Barley,Barley
+82543,Lucerne/Medics,Lucerne/Medics
+82552,Lucerne/Medics,Lucerne/Medics
+82559,Lucerne/Medics,Lucerne/Medics
+82562,Lucerne/Medics,Lucerne/Medics
+82563,Lucerne/Medics,Lucerne/Medics
+82565,Lucerne/Medics,Lucerne/Medics
+82567,Lucerne/Medics,Lucerne/Medics
+82575,Barley,Lucerne/Medics
+82584,Lucerne/Medics,Lucerne/Medics
+82585,Lucerne/Medics,Lucerne/Medics
+82591,Lucerne/Medics,Lucerne/Medics
+82596,Wheat,Lucerne/Medics
+82601,Canola,Canola
+82604,Lucerne/Medics,Lucerne/Medics
+82606,Lucerne/Medics,Lucerne/Medics
+82607,Lucerne/Medics,Lucerne/Medics
+82611,Lucerne/Medics,Lucerne/Medics
+82612,Canola,Canola
+82620,Canola,Canola
+82621,Lucerne/Medics,Lucerne/Medics
+82624,Lucerne/Medics,Small grain grazing
+82627,Lucerne/Medics,Lucerne/Medics
+82631,Lucerne/Medics,Lucerne/Medics
+82644,Small grain grazing,Wheat
+82654,Lucerne/Medics,Lucerne/Medics
+82667,Lucerne/Medics,Lucerne/Medics
+82676,Wheat,Wheat
+82685,Canola,Canola
+82688,Barley,Barley
+82689,Lucerne/Medics,Lucerne/Medics
+82695,Lucerne/Medics,Lucerne/Medics
+82709,Lucerne/Medics,Lucerne/Medics
+82805,Lucerne/Medics,Lucerne/Medics
+82811,Lucerne/Medics,Lucerne/Medics
+82813,Lucerne/Medics,Lucerne/Medics
+82816,Wheat,Wheat
+82821,Wheat,Small grain grazing
+82824,Lucerne/Medics,Lucerne/Medics
+82829,Lucerne/Medics,Lucerne/Medics
+82832,Lucerne/Medics,Lucerne/Medics
+82843,Lucerne/Medics,Lucerne/Medics
+82846,Lucerne/Medics,Lucerne/Medics
+82879,Lucerne/Medics,Lucerne/Medics
+82890,Small grain grazing,Wheat
+82891,Lucerne/Medics,Lucerne/Medics
+82894,Lucerne/Medics,Lucerne/Medics
+82895,Lucerne/Medics,Lucerne/Medics
+82898,Lucerne/Medics,Lucerne/Medics
+82907,Lucerne/Medics,Lucerne/Medics
+82918,Lucerne/Medics,Barley
+82926,Lucerne/Medics,Lucerne/Medics
+82935,Canola,Canola
+82938,Barley,Barley
+82940,Barley,Barley
+82943,Barley,Barley
+82963,Small grain grazing,Small grain grazing
+82968,Wheat,Barley
+82977,Lucerne/Medics,Lucerne/Medics
+82978,Lucerne/Medics,Lucerne/Medics
+82984,Small grain grazing,Small grain grazing
+82990,Lucerne/Medics,Lucerne/Medics
+83017,Canola,Barley
+83024,Small grain grazing,Small grain grazing
+83048,Lucerne/Medics,Lucerne/Medics
+83063,Wheat,Wheat
+83066,Wheat,Wheat
+83069,Barley,Barley
+83080,Wheat,Wheat
+83081,Lucerne/Medics,Lucerne/Medics
+83085,Wheat,Barley
+83087,Canola,Canola
+83088,Barley,Barley
+83090,Barley,Barley
+83096,Barley,Wheat
+83098,Canola,Canola
+83105,Canola,Canola
+83108,Wheat,Lucerne/Medics
+83117,Small grain grazing,Canola
+83123,Lucerne/Medics,Lucerne/Medics
+83124,Lucerne/Medics,Lucerne/Medics
+83142,Lucerne/Medics,Lucerne/Medics
+83146,Lucerne/Medics,Lucerne/Medics
+83154,Lucerne/Medics,Lucerne/Medics
+83157,Lucerne/Medics,Lucerne/Medics
+83159,Lucerne/Medics,Lucerne/Medics
+83160,Lucerne/Medics,Lucerne/Medics
+83161,Lucerne/Medics,Lucerne/Medics
+83170,Lucerne/Medics,Lucerne/Medics
+83182,Lucerne/Medics,Lucerne/Medics
+83192,Lucerne/Medics,Lucerne/Medics
+83194,Lucerne/Medics,Lucerne/Medics
+83196,Lucerne/Medics,Lucerne/Medics
+83199,Lucerne/Medics,Lucerne/Medics
+83200,Lucerne/Medics,Lucerne/Medics
+83203,Lucerne/Medics,Lucerne/Medics
+83204,Small grain grazing,Small grain grazing
+83210,Lucerne/Medics,Lucerne/Medics
+83215,Lucerne/Medics,Lucerne/Medics
+83217,Lucerne/Medics,Lucerne/Medics
+83225,Lucerne/Medics,Lucerne/Medics
+83244,Small grain grazing,Barley
+83250,Wheat,Barley
+83251,Barley,Barley
+83271,Lucerne/Medics,Lucerne/Medics
+83272,Lucerne/Medics,Lucerne/Medics
+83273,Lucerne/Medics,Lucerne/Medics
+83274,Lucerne/Medics,Lucerne/Medics
+83277,Lucerne/Medics,Lucerne/Medics
+83296,Lucerne/Medics,Lucerne/Medics
+83297,Lucerne/Medics,Lucerne/Medics
+83299,Lucerne/Medics,Lucerne/Medics
+83311,Small grain grazing,Small grain grazing
+83317,Lucerne/Medics,Lucerne/Medics
+83320,Lucerne/Medics,Lucerne/Medics
+83326,Lucerne/Medics,Lucerne/Medics
+83331,Lucerne/Medics,Lucerne/Medics
+83335,Lucerne/Medics,Lucerne/Medics
+83336,Lucerne/Medics,Lucerne/Medics
+83346,Lucerne/Medics,Lucerne/Medics
+83351,Lucerne/Medics,Lucerne/Medics
+83354,Lucerne/Medics,Lucerne/Medics
+83356,Lucerne/Medics,Lucerne/Medics
+83358,Lucerne/Medics,Lucerne/Medics
+83360,Lucerne/Medics,Lucerne/Medics
+83369,Lucerne/Medics,Lucerne/Medics
+83385,Lucerne/Medics,Lucerne/Medics
+83388,Lucerne/Medics,Lucerne/Medics
+83390,Lucerne/Medics,Lucerne/Medics
+83391,Lucerne/Medics,Lucerne/Medics
+83393,Lucerne/Medics,Lucerne/Medics
+83400,Lucerne/Medics,Lucerne/Medics
+83409,Lucerne/Medics,Small grain grazing
+83412,Lucerne/Medics,Lucerne/Medics
+83437,Lucerne/Medics,Lucerne/Medics
+83438,Lucerne/Medics,Lucerne/Medics
+83458,Barley,Barley
+83464,Small grain grazing,Small grain grazing
+83490,Lucerne/Medics,Lucerne/Medics
+83492,Lucerne/Medics,Lucerne/Medics
+83494,Lucerne/Medics,Lucerne/Medics
+83498,Lucerne/Medics,Lucerne/Medics
+83499,Lucerne/Medics,Lucerne/Medics
+83519,Lucerne/Medics,Lucerne/Medics
+83520,Lucerne/Medics,Lucerne/Medics
+83772,Lucerne/Medics,Lucerne/Medics
+83897,Lucerne/Medics,Lucerne/Medics
+83928,Lucerne/Medics,Lucerne/Medics
+83931,Wheat,Wheat
+83952,Wheat,Wheat
+83966,Lucerne/Medics,Lucerne/Medics
+83993,Small grain grazing,Wheat
+84001,Canola,Canola
+84024,Lucerne/Medics,Lucerne/Medics
+84026,Wheat,Small grain grazing
+84042,Lucerne/Medics,Lucerne/Medics
+84045,Lucerne/Medics,Lucerne/Medics
+84059,Lucerne/Medics,Lucerne/Medics
+86436,Lucerne/Medics,Lucerne/Medics
+185160,Lucerne/Medics,Lucerne/Medics
+185168,Wheat,Wheat
+185170,Small grain grazing,Lucerne/Medics
+185174,Lucerne/Medics,Lucerne/Medics
+185180,Wheat,Small grain grazing
+185189,Canola,Canola
+185193,Barley,Wheat
+185195,Lucerne/Medics,Lucerne/Medics
+185199,Lucerne/Medics,Lucerne/Medics
+185203,Canola,Lucerne/Medics
+185213,Wheat,Lucerne/Medics
+185214,Wheat,Lucerne/Medics
+185234,Wheat,Barley
+185235,Canola,Canola
+185240,Wheat,Wheat
+185245,Wheat,Wheat
+185254,Small grain grazing,Lucerne/Medics
+185257,Barley,Canola
+185263,Barley,Barley
+185271,Barley,Barley
+185277,Barley,Barley
+185290,Wheat,Wheat
+185291,Canola,Barley
+185293,Barley,Barley
+185294,Barley,Barley
+185301,Canola,Canola
+185302,Canola,Canola
+185320,Barley,Barley
+185326,Barley,Small grain grazing
+185331,Canola,Barley
+185334,Barley,Barley
+185340,Barley,Barley
+185342,Barley,Barley
+185344,Lucerne/Medics,Lucerne/Medics
+185346,Canola,Canola
+185347,Canola,Canola
+185354,Lucerne/Medics,Lucerne/Medics
+185364,Canola,Canola
+185366,Lucerne/Medics,Lucerne/Medics
+185370,Canola,Canola
+185372,Canola,Canola
+185375,Canola,Canola
+185395,Small grain grazing,Small grain grazing
+185396,Small grain grazing,Small grain grazing
+185407,Canola,Canola
+185413,Canola,Canola
+185416,Canola,Canola
+185420,Canola,Canola
+185424,Canola,Canola
+185428,Small grain grazing,Small grain grazing
+185429,Small grain grazing,Lucerne/Medics
+185439,Lucerne/Medics,Lucerne/Medics
+185445,Small grain grazing,Small grain grazing
+185447,Lucerne/Medics,Lucerne/Medics
+185451,Lucerne/Medics,Lucerne/Medics
+185454,Lucerne/Medics,Lucerne/Medics
+185460,Canola,Canola
+185462,Canola,Canola
+185475,Barley,Canola
+185479,Lucerne/Medics,Lucerne/Medics
+185483,Barley,Barley
+185485,Lucerne/Medics,Lucerne/Medics
+185487,Barley,Barley
+185491,Canola,Canola
+185496,Canola,Canola
+185497,Canola,Canola
+185501,Barley,Barley
+185513,Lucerne/Medics,Lucerne/Medics
+185514,Barley,Barley
+185517,Barley,Barley
+185518,Barley,Barley
+185566,Barley,Barley
+185567,Small grain grazing,Barley
+185578,Barley,Barley
+185587,Small grain grazing,Small grain grazing
+185616,Lucerne/Medics,Lucerne/Medics
+185618,Small grain grazing,Small grain grazing
+185625,Lucerne/Medics,Lucerne/Medics
+185627,Small grain grazing,Small grain grazing
+185636,Wheat,Wheat
+185637,Wheat,Wheat
+185638,Barley,Barley
+185639,Canola,Canola
+185640,Barley,Barley
+185641,Canola,Canola
+185642,Canola,Canola
+185647,Barley,Barley
+185649,Canola,Canola
+185650,Barley,Barley
+185655,Wheat,Barley
+185666,Canola,Canola
+185734,Wheat,Wheat
+185739,Lucerne/Medics,Lucerne/Medics
+185766,Wheat,Wheat
+185777,Lucerne/Medics,Lucerne/Medics
+185794,Small grain grazing,Small grain grazing
+185796,Lucerne/Medics,Lucerne/Medics
+185799,Barley,Barley
+185802,Barley,Barley
+185805,Small grain grazing,Small grain grazing
+185813,Lucerne/Medics,Lucerne/Medics
+185835,Barley,Barley
+185842,Canola,Wheat
+185843,Wheat,Wheat
+185845,Lucerne/Medics,Lucerne/Medics
+185847,Small grain grazing,Small grain grazing
+185857,Wheat,Wheat
+185858,Lucerne/Medics,Lucerne/Medics
+185859,Lucerne/Medics,Lucerne/Medics
+185862,Lucerne/Medics,Barley
+185878,Lucerne/Medics,Lucerne/Medics
+185891,Wheat,Wheat
+185892,Lucerne/Medics,Lucerne/Medics
+185899,Small grain grazing,Lucerne/Medics
+185902,Barley,Barley
+185950,Canola,Canola
+185953,Canola,Canola
+185960,Lucerne/Medics,Lucerne/Medics
+185962,Canola,Canola
+185992,Wheat,Wheat
+186000,Lucerne/Medics,Lucerne/Medics
+186028,Lucerne/Medics,Lucerne/Medics
+186902,Lucerne/Medics,Lucerne/Medics
+187246,Lucerne/Medics,Lucerne/Medics
+187284,Lucerne/Medics,Lucerne/Medics
+187286,Canola,Canola
+187287,Lucerne/Medics,Lucerne/Medics
+187288,Wheat,Wheat
+187332,Lucerne/Medics,Lucerne/Medics
+187379,Wheat,Wheat
+187382,Canola,Canola
+187388,Wheat,Wheat
+187390,Lucerne/Medics,Lucerne/Medics
+187394,Wheat,Wheat
+187395,Wheat,Wheat
+187401,Canola,Canola
+187404,Wheat,Wheat
+187405,Canola,Canola
+187410,Canola,Canola
+187421,Lucerne/Medics,Lucerne/Medics
+187426,Lucerne/Medics,Canola
+187431,Lucerne/Medics,Lucerne/Medics
+187432,Lucerne/Medics,Lucerne/Medics
+187435,Lucerne/Medics,Lucerne/Medics
+187436,Lucerne/Medics,Lucerne/Medics
+187441,Canola,Canola
+187455,Wheat,Wheat
+187459,Lucerne/Medics,Lucerne/Medics
+187813,Wheat,Barley
+187960,Small grain grazing,Small grain grazing
+188050,Barley,Barley
+188051,Canola,Canola
+188057,Barley,Barley
+188059,Wheat,Barley
+188067,Barley,Barley
+188070,Barley,Barley
+188077,Lucerne/Medics,Lucerne/Medics
+188079,Lucerne/Medics,Lucerne/Medics
+188083,Barley,Barley
+188099,Wheat,Wheat
+188101,Barley,Barley
+188109,Lucerne/Medics,Lucerne/Medics
+188110,Wheat,Wheat
+188120,Lucerne/Medics,Lucerne/Medics
+188127,Wheat,Wheat
+188183,Lucerne/Medics,Lucerne/Medics
+188184,Small grain grazing,Small grain grazing
+188192,Lucerne/Medics,Lucerne/Medics
+188195,Lucerne/Medics,Small grain grazing
+188199,Lucerne/Medics,Lucerne/Medics
+188202,Barley,Barley
+188211,Wheat,Small grain grazing
+188215,Lucerne/Medics,Lucerne/Medics
+188235,Wheat,Lucerne/Medics
+188247,Lucerne/Medics,Small grain grazing
+188263,Small grain grazing,Small grain grazing
+188268,Lucerne/Medics,Lucerne/Medics
+188276,Wheat,Lucerne/Medics
+188277,Wheat,Lucerne/Medics
+188306,Small grain grazing,Lucerne/Medics
+188360,Lucerne/Medics,Lucerne/Medics
+188380,Lucerne/Medics,Lucerne/Medics
+188421,Lucerne/Medics,Lucerne/Medics
+188422,Lucerne/Medics,Lucerne/Medics
+188440,Lucerne/Medics,Lucerne/Medics
+188470,Lucerne/Medics,Lucerne/Medics
+188481,Lucerne/Medics,Lucerne/Medics
+188495,Lucerne/Medics,Lucerne/Medics
+188558,Wheat,Small grain grazing
+188613,Lucerne/Medics,Lucerne/Medics
+188647,Lucerne/Medics,Lucerne/Medics
+269893,Canola,Small grain grazing
+271189,Lucerne/Medics,Lucerne/Medics
+272759,Small grain grazing,Small grain grazing

@@ -1,10 +1,15 @@
 """
 Base ML models (pixel-level) inference on holdout test data (34S_20E_259N).
 
-Loads saved LR, RF, LightGBM, XGBoost models trained at pixel level,
-predicts on test pixels, then aggregates to field level via majority vote.
+Loads saved LR, RF, LightGBM, XGBoost models trained at pixel level
+on xr_fresh features. Predicts on field-level aggregated xr_fresh test
+features (combined_test_features.parquet).
 
-Input: merged_dl_test.parquet (pixel-level)
+Note: Models were trained at pixel level, but test inference uses
+field-level mean features since the test xr_fresh parquets have a B12
+pixel grid mismatch that prevents clean pixel-level merging.
+
+Input: combined_test_features.parquet (field-level xr_fresh features)
 Output: predictions_base_lr.csv, predictions_base_rf.csv,
         predictions_base_lgbm.csv, predictions_base_xgb.csv
 """
@@ -15,14 +20,13 @@ import glob
 import numpy as np
 import pandas as pd
 from joblib import load
-from collections import Counter
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(SCRIPT_DIR, "..", "deep_learn", "src"))
-from config import MERGED_DL_TEST_PATH, MODEL_DIR
+from config import COMBINED_TEST_FEATURES_PATH, MODEL_DIR
 
-# Input
-TEST_PARQUET = MERGED_DL_TEST_PATH
+# Input - field-level xr_fresh features (same feature space as training)
+TEST_PARQUET = COMBINED_TEST_FEATURES_PATH
 
 # Base ML model directory (timestamped subfolder under models/ml_base/)
 BASE_ML_DIR = os.path.join(MODEL_DIR, "ml_base")
@@ -96,19 +100,12 @@ def main():
         print(f"\n--- {short_name} ---")
         model = load(model_path)
 
-        # Pixel-level prediction
-        print("  Predicting (pixel-level)...")
+        # Field-level prediction (data is already aggregated to field means)
+        print("  Predicting (field-level)...")
         y_pred_codes = model.predict(X_scaled)
         y_pred_labels = label_encoder.inverse_transform(y_pred_codes)
 
-        # Field-level aggregation (majority vote)
-        print("  Aggregating to field level...")
-        pixel_df = pd.DataFrame({"fid": fids, "crop_name": y_pred_labels})
-        field_df = (
-            pixel_df.groupby("fid")["crop_name"]
-            .agg(lambda x: Counter(x).most_common(1)[0][0])
-            .reset_index()
-        )
+        field_df = pd.DataFrame({"fid": fids, "crop_name": y_pred_labels})
 
         output_csv = os.path.join(SCRIPT_DIR, f"predictions_{short_name}.csv")
         field_df.to_csv(output_csv, index=False)

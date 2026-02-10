@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+CNN-BiLSTM Ensemble (5-seed),0.7693897960329366,0.6957476483784797,0.7682707614134314,0.7264097118650703,test

@@ -17,6 +17,7 @@ from torchtoolbox.nn import FocalLoss
 
 os.makedirs(MODEL_DIR, exist_ok=True)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+torch.backends.cudnn.benchmark = True
 print(f"[INFO] Libraries imported. Using device: {device}")
 
 # ==================== Step 2: Dataset Loading & Split ====================
@@ -93,16 +94,20 @@ class CropCNNBiLSTM(nn.Module):
 print("[INFO] CNN + BiLSTM model class defined.")
 
 # ==================== Step 7: Training & Evaluation ====================
+scaler_amp = torch.amp.GradScaler("cuda")
+
 def train(model, optimizer, criterion, dataloader):
     model.train()
     total_loss = 0
     for X, y in dataloader:
-        X, y = X.to(device), y.to(device)
+        X, y = X.to(device, non_blocking=True), y.to(device, non_blocking=True)
         optimizer.zero_grad()
-        outputs = model(X)
-        loss = criterion(outputs, y)
-        loss.backward()
-        optimizer.step()
+        with torch.amp.autocast("cuda"):
+            outputs = model(X)
+            loss = criterion(outputs, y)
+        scaler_amp.scale(loss).backward()
+        scaler_amp.step(optimizer)
+        scaler_amp.update()
         total_loss += loss.item()
     return total_loss / len(dataloader)
 
@@ -110,9 +115,9 @@ def get_logits_and_labels(model, dataloader):
     model.eval()
     logits_list = []
     labels_list = []
-    with torch.no_grad():
+    with torch.no_grad(), torch.amp.autocast("cuda"):
         for X, y in dataloader:
-            X = X.to(device)
+            X = X.to(device, non_blocking=True)
             outputs = model(X)
             logits_list.append(outputs.cpu())
             labels_list.extend(y.tolist())
@@ -132,8 +137,10 @@ for seed in range(num_models):
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
     criterion = FocalLoss(classes=len(label_encoder.classes_), gamma=2.0).to(device)
 
-    train_loader = DataLoader(train_dataset, batch_size=128, sampler=sampler)
-    test_loader = DataLoader(test_dataset, batch_size=128, shuffle=False)
+    train_loader = DataLoader(train_dataset, batch_size=1024, sampler=sampler,
+                              num_workers=4, pin_memory=True, persistent_workers=True)
+    test_loader = DataLoader(test_dataset, batch_size=1024, shuffle=False,
+                             num_workers=4, pin_memory=True, persistent_workers=True)
 
     for epoch in range(25):
         loss = train(model, optimizer, criterion, train_loader)
@@ -172,7 +179,7 @@ report.set_hyperparameters({
     "dropout": 0.3,
     "learning_rate": 1e-3,
     "epochs": 25,
-    "batch_size": 128,
+    "batch_size": 1024,
     "loss": "FocalLoss(gamma=2.0)",
 })
 report.set_split_info(train=len(train_df), val=len(val_df), test=len(test_df), seed=42)

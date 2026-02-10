@@ -1037,6 +1037,123 @@
         "time_steps": 10
       },
       "notes": null
+    },
+    {
+      "run_id": "xgboost_field-level_20260210_100404",
+      "name": "XGBoost Field-Level",
+      "model_type": "xgboost",
+      "timestamp": "2026-02-10T10:04:04.531561",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.7457831325301205,
+        "cohen_kappa": 0.6439014074769926,
+        "f1_weighted": 0.736378330191564,
+        "f1_macro": 0.6770605266351846,
+        "macro_avg": {
+          "precision": 0.7026353909686147,
+          "recall": 0.6616658148198629,
+          "f1-score": 0.6770605266351846,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.7346177885919773,
+          "recall": 0.7457831325301205,
+          "f1-score": 0.736378330191564,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/XGBoost_Field-Level_20260210_100403"
+      },
+      "hyperparameters": {
+        "n_estimators": 1270,
+        "max_depth": 5,
+        "learning_rate": 0.012590803411298533,
+        "subsample": 0.7119692232592737,
+        "colsample_bytree": 0.5164695949521513,
+        "gamma": 0.3986968344122853,
+        "reg_alpha": 0.012399826939390844,
+        "reg_lambda": 0.5898882824824992,
+        "min_child_weight": 8
+      },
+      "notes": null
+    },
+    {
+      "run_id": "cnn-bilstm_ensemble_(5-seed)_20260210_134213",
+      "name": "CNN-BiLSTM Ensemble (5-seed)",
+      "model_type": "pytorch",
+      "timestamp": "2026-02-10T13:42:13.762970",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.7693897960329366,
+        "cohen_kappa": 0.6957476483784797,
+        "f1_weighted": 0.7682707614134314,
+        "f1_macro": 0.7264097118650703,
+        "macro_avg": {
+          "precision": 0.7335626460860769,
+          "recall": 0.7221107798888464,
+          "f1-score": 0.7264097118650703,
+          "support": 1531914.0
+        },
+        "weighted_avg": {
+          "precision": 0.7689909232965786,
+          "recall": 0.7693897960329366,
+          "f1-score": 0.7682707614134314,
+          "support": 1531914.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/CNN-BiLSTM_Ensemble__5-seed_20260210_134212"
+      },
+      "hyperparameters": {
+        "num_models": 5,
+        "conv_filters": 64,
+        "lstm_hidden": 64,
+        "kernel_size": 5,
+        "dropout": 0.3,
+        "learning_rate": 0.001,
+        "epochs": 25,
+        "batch_size": 1024,
+        "loss": "FocalLoss(gamma=2.0)"
+      },
+      "notes": null
+    },
+    {
+      "run_id": "cnn-bilstm_ensemble_field-level_(inference)_20260210_134314",
+      "name": "CNN-BiLSTM Ensemble Field-Level (Inference)",
+      "model_type": "pytorch",
+      "timestamp": "2026-02-10T13:43:14.147527",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.8313253012048193,
+        "cohen_kappa": 0.7619564638448333,
+        "f1_weighted": 0.8289065223399034,
+        "f1_macro": 0.7767107816629786,
+        "macro_avg": {
+          "precision": 0.7884035191781033,
+          "recall": 0.7685654754496871,
+          "f1-score": 0.7767107816629786,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.8287938073088419,
+          "recall": 0.8313253012048193,
+          "f1-score": 0.8289065223399034,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/CNN-BiLSTM_Ensemble_Field-Level__Inference_20260210_134313"
+      },
+      "hyperparameters": {
+        "num_models": 5,
+        "conv_filters": 64,
+        "lstm_hidden": 64,
+        "kernel_size": 5,
+        "dropout": 0.3,
+        "aggregation": "majority vote by FID"
+      },
+      "notes": null
     }
   ]
 }

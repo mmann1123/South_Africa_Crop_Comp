@@ -77,7 +77,7 @@ os.makedirs(model_dir, exist_ok=True)
 for i, seed in enumerate(seeds):
     print(f"\n[TIMER] === Model {i+1}/{n_models} (seed={seed}) ===")
     t_model = time.time()
-    model_path = os.path.join(model_dir, f"tabnet_seed_{seed}.zip")
+    model_path = os.path.join(model_dir, f"tabnet_seed_{seed}")
     model = TabNetClassifier(
         n_d=64, n_a=64, n_steps=5,
         gamma=1.5, n_independent=2, n_shared=2,

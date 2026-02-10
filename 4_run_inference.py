@@ -69,7 +69,7 @@ INFERENCE_STEPS = [
         "inference_base_ml.py",
         "Base ML Models (Pixel-Level)",
         os.path.join(OUT_OF_SAMPLE, "predictions_base_xgb.csv"),
-        [MERGED_DL_TEST_PATH],
+        [COMBINED_TEST_FEATURES_PATH],
         [os.path.join(MODEL_DIR, "ml_base")],  # just check dir exists
     ),
     (
