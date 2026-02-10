@@ -7,9 +7,12 @@ Runs all available inference scripts, skipping models whose trained artifacts do
 Output: out_of_sample/predictions_*.csv
 
 Usage:
-    python 4_run_inference.py              # Run all available models
-    python 4_run_inference.py --force      # Re-run even if outputs exist
-    python 4_run_inference.py --dry-run    # Show what would run
+    python 4_run_inference.py                      # Run all available models
+    python 4_run_inference.py --force               # Re-run even if outputs exist
+    python 4_run_inference.py --dry-run              # Show what would run
+    python 4_run_inference.py --models tabnet        # Run only TabNet
+    python 4_run_inference.py --models tabnet 3dcnn  # Run TabNet and 3D CNN
+    python 4_run_inference.py --list                 # Show available model names
 """
 
 import os
@@ -28,9 +31,10 @@ from config import (
     COMBINED_TEST_FEATURES_PATH, TEST_PATCH_DATA_PATH,
 )
 
-# (script, description, output_csv, required_data, required_models)
+# (key, script, description, output_csv, required_data, required_models)
 INFERENCE_STEPS = [
     (
+        "xgboost",
         "inference_xgboost.py",
         "XGBoost (Optuna-tuned)",
         os.path.join(OUT_OF_SAMPLE, "predictions_xgboost.csv"),
@@ -43,6 +47,7 @@ INFERENCE_STEPS = [
         ],
     ),
     (
+        "smote",
         "inference_smote_stacked.py",
         "SMOTE Stacked Ensemble",
         os.path.join(OUT_OF_SAMPLE, "predictions_smote_stacked.csv"),
@@ -55,6 +60,7 @@ INFERENCE_STEPS = [
         ],
     ),
     (
+        "classical",
         "inference_classical_ml.py",
         "Classical ML (Voting + Stacking)",
         os.path.join(OUT_OF_SAMPLE, "predictions_voting.csv"),
@@ -66,6 +72,7 @@ INFERENCE_STEPS = [
         ],
     ),
     (
+        "baseml",
         "inference_base_ml.py",
         "Base ML Models (Pixel-Level)",
         os.path.join(OUT_OF_SAMPLE, "predictions_base_xgb.csv"),
@@ -73,6 +80,7 @@ INFERENCE_STEPS = [
         [os.path.join(MODEL_DIR, "ml_base")],  # just check dir exists
     ),
     (
+        "cnn",
         "inference_cnn_bilstm.py",
         "CNN-BiLSTM Ensemble (5-seed)",
         os.path.join(OUT_OF_SAMPLE, "predictions_cnn_bilstm.csv"),
@@ -80,6 +88,7 @@ INFERENCE_STEPS = [
         [os.path.join(MODEL_DIR, f"new_model_seed_{i}_25epochs.pt") for i in range(5)],
     ),
     (
+        "tabnet",
         "inference_tabnet.py",
         "TabNet Ensemble (5-seed)",
         os.path.join(OUT_OF_SAMPLE, "predictions_tabnet.csv"),
@@ -87,6 +96,7 @@ INFERENCE_STEPS = [
         [os.path.join(TABNET_DIR, f"tabnet_seed_{s}.zip") for s in [42, 101, 202, 303, 404]],
     ),
     (
+        "3dcnn",
         "inference_3d_cnn.py",
         "3D CNN",
         os.path.join(OUT_OF_SAMPLE, "predictions_3d_cnn.csv"),
@@ -95,21 +105,48 @@ INFERENCE_STEPS = [
     ),
 ]
 
+ALL_KEYS = [step[0] for step in INFERENCE_STEPS]
+
 
 def main():
-    parser = argparse.ArgumentParser(description="Run out-of-sample inference")
+    parser = argparse.ArgumentParser(
+        description="Run out-of-sample inference",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=f"Available model keys: {', '.join(ALL_KEYS)}",
+    )
     parser.add_argument("--force", action="store_true", help="Re-run even if outputs exist")
     parser.add_argument("--dry-run", action="store_true", help="Show what would run")
+    parser.add_argument("--models", nargs="+", metavar="KEY",
+                        help=f"Only run these models (choices: {', '.join(ALL_KEYS)})")
+    parser.add_argument("--list", action="store_true", help="List available model keys and exit")
     args = parser.parse_args()
+
+    if args.list:
+        print("Available model keys:")
+        for key, script, desc, *_ in INFERENCE_STEPS:
+            print(f"  {key:10s}  {desc}  ({script})")
+        return
+
+    if args.models:
+        invalid = [m for m in args.models if m not in ALL_KEYS]
+        if invalid:
+            parser.error(f"Unknown model(s): {', '.join(invalid)}. Use --list to see options.")
+        selected_keys = set(args.models)
+    else:
+        selected_keys = None  # run all
 
     print("=" * 60)
     print("STEP 4: RUN INFERENCE")
+    if selected_keys:
+        print(f"Models:  {', '.join(sorted(selected_keys))}")
     print(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 
     results = []
 
-    for script, desc, output_csv, req_data, req_models in INFERENCE_STEPS:
+    for key, script, desc, output_csv, req_data, req_models in INFERENCE_STEPS:
+        if selected_keys and key not in selected_keys:
+            continue
         print(f"\n{'='*60}")
         print(f"  {desc}")
         print(f"{'='*60}")

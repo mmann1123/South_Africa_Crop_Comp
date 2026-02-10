@@ -2,6 +2,8 @@
 TabNet ensemble inference on holdout test data (34S_20E_259N).
 
 Uses saved TabNet models (5-seed ensemble) to generate predictions.
+Uses saved preprocessing artifacts (scaler, feature_columns, label_encoder)
+from training to ensure consistent feature space.
 
 Input: merged_dl_test_259N.parquet (pixel-level)
 Output: predictions_tabnet.csv (field-level)
@@ -15,7 +17,7 @@ import sys
 import numpy as np
 import pandas as pd
 from collections import Counter
-from sklearn.preprocessing import StandardScaler
+from joblib import load
 
 # Import config for shared paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -31,44 +33,49 @@ OUTPUT_CSV = os.path.join(SCRIPT_DIR, "predictions_tabnet.csv")
 # Model seeds (must match training)
 SEEDS = [42, 101, 202, 303, 404]
 
-# Class mapping: LabelEncoder on crop_id [1,2,3,4,5] -> [0,1,2,3,4]
-# crop_id mapping: 1=Wheat, 2=Barley, 3=Canola, 4=Lucerne/Medics, 5=Small grain grazing
-CLASS_NAMES = ["Wheat", "Barley", "Canola", "Lucerne/Medics", "Small grain grazing"]
-
 
 def load_test_data():
-    """Load and prepare test data."""
+    """Load and prepare test data using saved training artifacts."""
     print(f"Loading test data: {TEST_PARQUET}")
     df = pd.read_parquet(TEST_PARQUET)
     print(f"Shape: {df.shape}")
     print(f"Unique fields: {df['fid'].nunique()}")
 
-    # Exclude metadata columns
-    exclude_cols = {"id", "point", "fid", "crop_id", "crop_name"}
-    numeric_cols = [
-        col for col in df.select_dtypes(include=[np.number]).columns
-        if col not in exclude_cols
-    ]
+    # Load saved preprocessing artifacts from training
+    feature_columns = load(os.path.join(TABNET_DIR, "tabnet_feature_columns.joblib"))
+    scaler = load(os.path.join(TABNET_DIR, "tabnet_scaler.joblib"))
+    label_encoder = load(os.path.join(TABNET_DIR, "tabnet_label_encoder.joblib"))
+    print(f"Loaded training artifacts: {len(feature_columns)} feature columns")
 
-    # Fill NaN with median (same as training)
-    df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].median())
+    # Separate numeric vs one-hot columns (match training logic)
+    one_hot_cols = [col for col in feature_columns if col.startswith("Type_")]
+    numeric_cols = [col for col in feature_columns if col not in one_hot_cols]
 
-    # One-hot encode Type if present
+    # One-hot encode Type if present (before selecting feature columns)
     if "Type" in df.columns:
         df = pd.get_dummies(df, columns=["Type"])
 
-    one_hot_cols = [col for col in df.columns if col.startswith("Type_")]
-    feature_columns = numeric_cols + one_hot_cols
+    # Ensure all training feature columns exist; fill missing with 0
+    for col in feature_columns:
+        if col not in df.columns:
+            print(f"  Warning: missing column '{col}', filling with 0")
+            df[col] = 0
 
-    # Standardize
-    scaler = StandardScaler()
-    df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
+    # Fill NaN with median, then fill remaining NaN with 0 (match training)
+    present_numeric = [c for c in numeric_cols if c in df.columns]
+    df[present_numeric] = df[present_numeric].fillna(df[present_numeric].median())
+    df[present_numeric] = df[present_numeric].fillna(0)
+
+    # Use the TRAINING scaler (transform only, not fit_transform)
+    df[numeric_cols] = scaler.transform(df[numeric_cols])
+    # Handle NaN/inf from scaling (match training)
+    df[numeric_cols] = df[numeric_cols].replace([np.inf, -np.inf], 0).fillna(0)
 
     features = df[feature_columns].astype(np.float32).values
     fids = df["fid"].values
 
     print(f"Feature columns: {len(feature_columns)}")
-    return features, fids
+    return features, fids, label_encoder
 
 
 def load_models():
@@ -116,8 +123,16 @@ def main():
         print("Run TabTransformer_Final_Field.py first to train models.")
         return
 
+    # Check preprocessing artifacts exist
+    for artifact in ["tabnet_feature_columns.joblib", "tabnet_scaler.joblib", "tabnet_label_encoder.joblib"]:
+        path = os.path.join(TABNET_DIR, artifact)
+        if not os.path.exists(path):
+            print(f"\nError: Missing training artifact: {path}")
+            print("Re-run TabTransformer_Final_Field.py to save preprocessing artifacts.")
+            return
+
     # Load data
-    features, fids = load_test_data()
+    features, fids, label_encoder = load_test_data()
 
     # Load models
     print("\nLoading models...")
@@ -147,8 +162,10 @@ def main():
     field_preds = aggregate_to_field_level(preds, fids)
     print(f"Total fields: {len(field_preds)}")
 
-    # Convert label indices to class names
-    field_labels = [CLASS_NAMES[p] for p in field_preds.values]
+    # Convert label indices → crop_id (via label_encoder) → crop_name
+    CROP_ID_TO_NAME = {1: "Wheat", 2: "Barley", 3: "Canola", 4: "Lucerne/Medics", 5: "Small grain grazing"}
+    field_crop_ids = label_encoder.inverse_transform(field_preds.values)
+    field_labels = [CROP_ID_TO_NAME[cid] for cid in field_crop_ids]
 
     # Save predictions
     df_out = pd.DataFrame({

@@ -41,7 +41,7 @@ OUTPUT_CSV = os.path.join(SCRIPT_DIR, "predictions_3d_cnn.csv")
 # Model parameters (must match training)
 BAND_PREFIXES = ["SA_B11", "SA_B12", "SA_B2", "SA_B6", "SA_EVI", "SA_hue"]
 TARGET_SIZE = (128, 128)
-BATCH_SIZE = 8
+BATCH_SIZE = 16
 
 # Class names (alphabetical order as LabelEncoder encodes them)
 CLASS_NAMES = ["Barley", "Canola", "Lucerne/Medics", "Small grain grazing", "Wheat"]
@@ -69,71 +69,40 @@ def group_band_columns(channel_cols, band_prefixes):
     return band_mapping
 
 
-def patch_pixels_to_image(df_patch, cols):
-    """Reconstruct patch image from pixel rows."""
-    min_r = df_patch["row"].min()
-    max_r = df_patch["row"].max()
-    min_c = df_patch["col"].min()
-    max_c = df_patch["col"].max()
-    H = (max_r - min_r) + 1
-    W = (max_c - min_c) + 1
-    C = len(cols)
-    img = np.zeros((H, W, C), dtype=np.float32)
-
-    for _, px in df_patch.iterrows():
-        rr = int(px["row"] - min_r)
-        cc = int(px["col"] - min_c)
-        vals = [px[c] for c in cols]
-        img[rr, cc, :] = vals
-
-    return img
-
-
-def resize_image(image, target_size=(128, 128)):
-    """Resize image to target size."""
-    tensor = tf.convert_to_tensor(image, dtype=tf.float32)
-    tensor = tf.expand_dims(tensor, axis=0)
-    resized = tf.image.resize(tensor, target_size)
-    return tf.squeeze(resized, axis=0).numpy()
-
-
-def reconstruct_patch(df, patch_id, band_mapping, target_size):
-    """Reconstruct 3D patch tensor from pixel data."""
-    df_patch = df[df["patch_id"] == patch_id]
+def reconstruct_patch_vectorized(df_patch, band_mapping, target_size):
+    """Reconstruct 3D patch tensor from pixel data (vectorized)."""
     band_prefixes = sorted(band_mapping.keys())
     T = min(len(band_mapping[p]) for p in band_prefixes if p in band_mapping)
+
+    rows = df_patch["row"].values
+    cols = df_patch["col"].values
+    min_r, max_r = rows.min(), rows.max()
+    min_c, max_c = cols.min(), cols.max()
+    H = (max_r - min_r) + 1
+    W = (max_c - min_c) + 1
+    rr = rows - min_r
+    cc = cols - min_c
 
     band_images = []
     for prefix in band_prefixes:
         if prefix not in band_mapping:
             continue
-        cols = band_mapping[prefix][:T]
-        band_img = patch_pixels_to_image(df_patch, cols)
-
-        # Ensure consistent time dimension
-        if band_img.shape[-1] > T:
-            band_img = band_img[..., :T]
-        elif band_img.shape[-1] < T:
-            pad_width = T - band_img.shape[-1]
-            band_img = np.pad(band_img, ((0, 0), (0, 0), (0, pad_width)), mode="constant")
-
-        band_images.append(band_img)
+        col_names = band_mapping[prefix][:T]
+        # Extract all pixel values at once as numpy array
+        vals = df_patch[col_names].values  # (num_pixels, T)
+        img = np.zeros((H, W, T), dtype=np.float32)
+        img[rr, cc, :] = vals[:, :T]
+        band_images.append(img)
 
     # Stack to (H, W, T, num_bands)
     stacked = np.stack(band_images, axis=-1)
     # Transpose to (T, H, W, num_bands)
     patch_3d = np.transpose(stacked, (2, 0, 1, 3))
 
-    # Resize each time slice
-    resized_slices = []
-    for t_idx in range(patch_3d.shape[0]):
-        slice_img = patch_3d[t_idx]
-        resized_slice = resize_image(slice_img, target_size)
-        resized_slices.append(resized_slice)
-
-    # Final shape: (T, H, W, num_bands)
-    final_tensor = np.stack(resized_slices, axis=0)
-    return final_tensor
+    # Resize all time slices in one batch
+    # patch_3d shape: (T, H, W, num_bands)
+    resized = tf.image.resize(patch_3d, target_size)  # (T, 128, 128, num_bands)
+    return resized.numpy()
 
 
 def main():
@@ -183,30 +152,42 @@ def main():
     model = models.load_model(MODEL_PATH)
     print("Model loaded successfully")
 
-    # Run inference
-    print("\nRunning inference...")
+    # Pre-group dataframe by patch_id and extract field_id mapping
+    print("\nPre-grouping patches...")
+    grouped = dict(list(df.groupby("patch_id")))
+    patch_to_field = df.groupby("patch_id")["field_id"].first().to_dict()
+
+    # Run inference in batches
+    print(f"\nRunning inference (batch_size={BATCH_SIZE})...")
     patch_predictions = []
+    batch_tensors = []
+    batch_patch_ids = []
 
     for i, patch_id in enumerate(patch_ids):
-        if (i + 1) % 100 == 0:
+        # Reconstruct patch using pre-grouped data
+        df_patch = grouped[patch_id]
+        patch_tensor = reconstruct_patch_vectorized(df_patch, band_mapping, TARGET_SIZE)
+        batch_tensors.append(patch_tensor)
+        batch_patch_ids.append(patch_id)
+
+        # When batch is full or last patch, run prediction
+        if len(batch_tensors) == BATCH_SIZE or i == len(patch_ids) - 1:
+            X_batch = np.stack(batch_tensors, axis=0)
+            probs = model.predict(X_batch, verbose=0)
+            pred_labels = np.argmax(probs, axis=1)
+
+            for pid, pred in zip(batch_patch_ids, pred_labels):
+                patch_predictions.append({
+                    "patch_id": pid,
+                    "field_id": patch_to_field[pid],
+                    "pred_label": pred,
+                })
+
+            batch_tensors = []
+            batch_patch_ids = []
+
+        if (i + 1) % 500 == 0:
             print(f"  Processed {i + 1}/{len(patch_ids)} patches...")
-
-        # Reconstruct patch
-        patch_tensor = reconstruct_patch(df, patch_id, band_mapping, TARGET_SIZE)
-        X_input = np.expand_dims(patch_tensor, axis=0)
-
-        # Predict
-        probs = model.predict(X_input, verbose=0)
-        pred_label = np.argmax(probs, axis=1)[0]
-
-        # Get field ID
-        field_id = df.loc[df["patch_id"] == patch_id, "field_id"].iloc[0]
-
-        patch_predictions.append({
-            "patch_id": patch_id,
-            "field_id": field_id,
-            "pred_label": pred_label,
-        })
 
     print(f"Total patch predictions: {len(patch_predictions)}")
 
