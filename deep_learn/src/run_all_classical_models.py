@@ -30,21 +30,21 @@ STAGE_1A_SCRIPTS = [
         "Classical Machine Learning/Field Level/xg_boost_hyper.py",
         "XGBoost Optuna Hyperparameter Tuning",
     ),
-    # (
-    #     "Classical Machine Learning/Field Level/SMOTE_meta.py",
-    #     "SMOTE + Stacked Meta-Learner",
-    # ),
-    # (
-    #     "Classical Machine Learning/Field Level/Ensemble - Voting and Stacking.py",
-    #     "Ensemble Voting & Stacking",
-    # ),
+    (
+        "Classical Machine Learning/Field Level/SMOTE_meta.py",
+        "SMOTE + Stacked Meta-Learner",
+    ),
+    (
+        "Classical Machine Learning/Field Level/Ensemble - Voting and Stacking.py",
+        "Ensemble Voting & Stacking",
+    ),
 ]
 
 STAGE_1B_SCRIPTS = [
-    # (
-    #     "Classical Machine Learning/pixel_level/base_ml_models.py",
-    #     "Base ML Models (LightGBM, XGBoost, RF, SVM)",
-    # ),
+    (
+        "Classical Machine Learning/pixel_level/base_ml_models.py",
+        "Base ML Models (LightGBM, XGBoost, RF, SVM)",
+    ),
 ]
 
 # All classical ML scripts use FINAL_DATA_PATH from config
