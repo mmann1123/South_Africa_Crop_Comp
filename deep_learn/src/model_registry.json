@@ -934,6 +934,109 @@
         "verbosity": "None"
       },
       "notes": null
+    },
+    {
+      "run_id": "tabtransformer_ensemble_(field-level)_20260209_172240",
+      "name": "TabTransformer Ensemble (Field-Level)",
+      "model_type": "tabnet",
+      "timestamp": "2026-02-09T17:22:40.526735",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.8024096385542169,
+        "cohen_kappa": 0.7197112276121094,
+        "f1_weighted": 0.798469369508902,
+        "f1_macro": 0.7304868917934395,
+        "macro_avg": {
+          "precision": 0.7530828149834274,
+          "recall": 0.7190334283518729,
+          "f1-score": 0.7304868917934395,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.8009722817902025,
+          "recall": 0.8024096385542169,
+          "f1-score": 0.798469369508902,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/TabTransformer_Ensemble__Field-Level_20260209_172240"
+      },
+      "hyperparameters": {
+        "n_d": 64,
+        "n_a": 64,
+        "n_steps": 5,
+        "gamma": 1.5,
+        "n_independent": 2,
+        "n_shared": 2,
+        "lr": 0.001,
+        "scheduler": "StepLR(step=10, gamma=0.9)",
+        "max_epochs": 100,
+        "patience": 10,
+        "batch_size": 1024,
+        "n_models": 5,
+        "seeds": [
+          42,
+          101,
+          202,
+          303,
+          404
+        ]
+      },
+      "notes": null
+    },
+    {
+      "run_id": "3d_cnn_patch-level_20260209_194128",
+      "name": "3D CNN Patch-Level",
+      "model_type": "pytorch",
+      "timestamp": "2026-02-09T19:41:28.723974",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.746677091477717,
+        "cohen_kappa": 0.6718513180713159,
+        "f1_weighted": 0.737694464018077,
+        "f1_macro": 0.6936129764617551,
+        "macro_avg": {
+          "precision": 0.7052662062732431,
+          "recall": 0.6939569095491344,
+          "f1-score": 0.6936129764617551,
+          "support": 2558.0
+        },
+        "weighted_avg": {
+          "precision": 0.7403890907039049,
+          "recall": 0.746677091477717,
+          "f1-score": 0.737694464018077,
+          "support": 2558.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/3D_CNN_Patch-Level_20260209_194127"
+      },
+      "hyperparameters": {
+        "target_size": [
+          128,
+          128
+        ],
+        "batch_size": 8,
+        "epochs": 20,
+        "optimizer": "Adam(lr=1e-4)",
+        "loss": "sparse_categorical_crossentropy",
+        "conv3d_filters": [
+          32,
+          64,
+          128
+        ],
+        "bands": [
+          "SA_B11",
+          "SA_B12",
+          "SA_B2",
+          "SA_B6",
+          "SA_EVI",
+          "SA_hue"
+        ],
+        "time_steps": 10
+      },
+      "notes": null
     }
   ]
 }
