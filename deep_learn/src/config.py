@@ -29,7 +29,8 @@ FINAL_DATA_PATH = os.path.join(DATA_OUTPUT_DIR, "final_data.parquet")           
 # Patch-level data
 PATCH_GEOJSON_PATH = os.path.join(DATA_OUTPUT_DIR, "patch_level.geojson")
 PATCH_DATA_PATH = os.path.join(DATA_OUTPUT_DIR, "patch_level_data.parquet")
-COMBINED_FIELDS_PATH = os.path.join(LABELS_DIR, "combined_fields.geojson")
+COMBINED_FIELDS_PATH = os.path.join(DATA_OUTPUT_DIR, "combined_training_fields.geojson")
+TEST_FIELDS_PATH = os.path.join(DATA_OUTPUT_DIR, "test_fields.geojson")
 
 # Out-of-sample test data
 COMBINED_TEST_FEATURES_PATH = os.path.join(DATA_OUTPUT_DIR, "combined_test_features.parquet")
@@ -47,9 +48,12 @@ BANDS = ["B2", "B6", "B11", "B12", "EVI", "hue"]
 TRAIN_REGIONS = ["34S_19E_258N", "34S_19E_259N"]
 TEST_REGION = "34S_20E_259N"
 
-# Month number to name mapping (no June due to cloud cover)
+# Month number to name mapping (no June due to cloud cover, no May due to missing data)
 MONTH_MAP = {
     "01": "January", "02": "February", "03": "March", "04": "April",
-    "05": "May", "07": "July", "08": "August", "09": "September",
+    "07": "July", "08": "August", "09": "September",
     "10": "October", "11": "November", "12": "December",
 }
+
+# Months to exclude from raster loading (cloud cover / missing data)
+EXCLUDE_MONTHS = {"05", "06"}

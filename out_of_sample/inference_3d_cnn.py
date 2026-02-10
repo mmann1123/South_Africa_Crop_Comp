@@ -27,7 +27,7 @@ except ImportError:
 # Import config for shared paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(SCRIPT_DIR, "..", "deep_learn", "src"))
-from config import TEST_PATCH_DATA_PATH, MODEL_DIR
+from config import TEST_PATCH_DATA_PATH, PATCH_DATA_PATH, MODEL_DIR
 
 # Input
 TEST_PATCH_DATA = TEST_PATCH_DATA_PATH
@@ -129,15 +129,35 @@ def main():
     df = pd.read_parquet(TEST_PATCH_DATA)
     print(f"Shape: {df.shape}")
 
+    # Match training preprocessing: drop columns with ANY NaN, then fill remaining
+    # Training does df[channel_candidates].dropna(axis=1) which drops month_05 columns
+    # (all-NaN in training data). We replicate this exactly.
+    ignore_cols = {"patch_id", "field_id", "crop_name", "row", "col"}
+    channel_cols = sorted([c for c in df.columns if c not in ignore_cols])
+
+    # Load training data to determine which columns it kept
+    from config import PATCH_DATA_PATH
+    print("Loading training column info for NaN alignment...")
+    df_train_cols = pd.read_parquet(PATCH_DATA_PATH, columns=channel_cols)
+    train_nan_cols = df_train_cols.columns[df_train_cols.isna().any()].tolist()
+    clean_cols = [c for c in channel_cols if c not in train_nan_cols]
+    print(f"Training dropped {len(train_nan_cols)} NaN columns: {sorted(train_nan_cols)}")
+    print(f"Using {len(clean_cols)} clean columns")
+    del df_train_cols
+
+    # Fill any remaining NaN in test data with 0 (training had no NaN in surviving cols)
+    nan_count = df[clean_cols].isna().sum().sum()
+    if nan_count > 0:
+        print(f"Filling {nan_count} NaN values in test data with 0")
+        df[clean_cols] = df[clean_cols].fillna(0)
+
     # Get patch IDs
     patch_ids = df["patch_id"].unique()
     print(f"Unique patches: {len(patch_ids)}")
     print(f"Unique fields: {df['field_id'].nunique()}")
 
-    # Get band mapping
-    ignore_cols = {"patch_id", "field_id", "crop_name", "row", "col"}
-    channel_cols = [c for c in df.columns if c not in ignore_cols]
-    band_mapping = group_band_columns(channel_cols, BAND_PREFIXES)
+    # Get band mapping (using only clean columns)
+    band_mapping = group_band_columns(clean_cols, BAND_PREFIXES)
     print(f"Band prefixes found: {list(band_mapping.keys())}")
 
     if not band_mapping:
