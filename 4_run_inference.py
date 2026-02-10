@@ -24,12 +24,36 @@ DEEP_LEARN_SRC = os.path.join(REPO_ROOT, "deep_learn", "src")
 
 sys.path.insert(0, DEEP_LEARN_SRC)
 from config import (
-    MODEL_DIR, TABNET_DIR, MERGED_DL_TEST_PATH,
+    MODEL_DIR, TABNET_DIR, XGB_TUNER_DIR, MERGED_DL_TEST_PATH,
     COMBINED_TEST_FEATURES_PATH, TEST_PATCH_DATA_PATH,
 )
 
 # (script, description, output_csv, required_data, required_models)
 INFERENCE_STEPS = [
+    (
+        "inference_xgboost.py",
+        "XGBoost (Optuna-tuned)",
+        os.path.join(OUT_OF_SAMPLE, "predictions_xgboost.csv"),
+        [COMBINED_TEST_FEATURES_PATH],
+        [
+            os.path.join(XGB_TUNER_DIR, "final_xgb_model.joblib"),
+            os.path.join(XGB_TUNER_DIR, "imputer.joblib"),
+            os.path.join(XGB_TUNER_DIR, "scaler.joblib"),
+            os.path.join(XGB_TUNER_DIR, "label_encoder.joblib"),
+        ],
+    ),
+    (
+        "inference_smote_stacked.py",
+        "SMOTE Stacked Ensemble",
+        os.path.join(OUT_OF_SAMPLE, "predictions_smote_stacked.csv"),
+        [COMBINED_TEST_FEATURES_PATH],
+        [
+            os.path.join(MODEL_DIR, "stacked_model_v1.joblib"),
+            os.path.join(MODEL_DIR, "imputer.joblib"),
+            os.path.join(MODEL_DIR, "scaler.joblib"),
+            os.path.join(MODEL_DIR, "label_encoder.joblib"),
+        ],
+    ),
     (
         "inference_classical_ml.py",
         "Classical ML (Voting + Stacking)",
@@ -40,6 +64,13 @@ INFERENCE_STEPS = [
             os.path.join(MODEL_DIR, "ensemble_stacking.pkl"),
             os.path.join(MODEL_DIR, "label_encoder.pkl"),
         ],
+    ),
+    (
+        "inference_base_ml.py",
+        "Base ML Models (Pixel-Level)",
+        os.path.join(OUT_OF_SAMPLE, "predictions_base_xgb.csv"),
+        [MERGED_DL_TEST_PATH],
+        [os.path.join(MODEL_DIR, "ml_base")],  # just check dir exists
     ),
     (
         "inference_cnn_bilstm.py",
@@ -132,7 +163,9 @@ def main():
 
     # Show available predictions
     print(f"\n--- Available Predictions ---")
-    for name in ["voting", "stacking", "cnn_bilstm", "tabnet", "3d_cnn"]:
+    for name in ["xgboost", "smote_stacked", "voting", "stacking",
+                  "base_lr", "base_rf", "base_lgbm", "base_xgb",
+                  "cnn_bilstm", "tabnet", "3d_cnn"]:
         path = os.path.join(OUT_OF_SAMPLE, f"predictions_{name}.csv")
         if os.path.exists(path):
             import pandas as pd

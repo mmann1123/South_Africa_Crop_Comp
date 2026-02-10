@@ -27,22 +27,22 @@ from config import MERGED_DL_PATH, PATCH_DATA_PATH
 
 # Scripts to run in order
 STAGE_2_SCRIPTS = [
-    # (
-    #     "Deep Learning/Pixel_Field_Level/cnn_bilstm.py",
-    #     "CNN+BiLSTM Ensemble (5-seed, 25 epochs each)",
-    # ),
-    # (
-    #     "Deep Learning/Pixel_Field_Level/field_acc_cnnlstm.py",
-    #     "CNN+BiLSTM Field-Level Evaluation",
-    # ),
     (
-        "Deep Learning/Pixel_Field_Level/TabTransformer_Final_Field.py",
-        "TabNet Ensemble (5 models)",
+        "Deep Learning/Pixel_Field_Level/cnn_bilstm.py",
+        "CNN+BiLSTM Ensemble (5-seed, 25 epochs each)",
     ),
+    (
+        "Deep Learning/Pixel_Field_Level/field_acc_cnnlstm.py",
+        "CNN+BiLSTM Field-Level Evaluation",
+    ),
+    # (
+    #     "Deep Learning/Pixel_Field_Level/TabTransformer_Final_Field.py",
+    #     "TabNet Ensemble (5 models)",
+    # ),
 ]
 
 STAGE_3_SCRIPTS = [
-    ("Deep Learning/Patch Level/3D_CNN.py", "3D CNN Patch-Level (20 epochs)"),
+    # ("Deep Learning/Patch Level/3D_CNN.py", "3D CNN Patch-Level (20 epochs)"),
 ]
 
 # Files required for each stage (from config)

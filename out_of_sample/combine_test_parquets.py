@@ -19,64 +19,65 @@ from config import TEST_FEATURES_DIR, TEST_REGION, BANDS, COMBINED_TEST_FEATURES
 OUTPUT_PARQUET = COMBINED_TEST_FEATURES_PATH
 
 META_COLS = ["id", "point", "fid", "SHAPE_AREA", "SHAPE_LEN", "crop_id", "crop_name"]
-MERGE_KEYS = ["id", "point", "fid"]
 EXCLUDE_COLS = ["id", "point", "fid", "crop_id", "SHAPE_AREA", "SHAPE_LEN"]
 
 
+def aggregate_band_to_field(df):
+    """Aggregate a single band's pixel data to field level (mean per fid)."""
+    feature_cols = [c for c in df.columns if c not in EXCLUDE_COLS + ["crop_name"]]
+    mapping = {c: "mean" for c in feature_cols}
+    if "crop_name" in df.columns:
+        mapping["crop_name"] = lambda x: x.mode().iat[0] if not x.mode().empty else None
+    return df.groupby("fid").agg(mapping).reset_index()
+
+
 def merge_test_features():
-    """Merge all xr_fresh band features for the test region."""
+    """Aggregate each band to field level, then merge on fid.
+
+    Bands may have different pixel grids (e.g. B12 has extra pixels),
+    so we aggregate first to avoid inner-join data loss.
+    """
     base_df = None
 
     for band in BANDS:
         path = os.path.join(TEST_FEATURES_DIR, f"testing_{band}_{TEST_REGION}.parquet")
         print(f"Reading {os.path.basename(path)}...")
         df = pd.read_parquet(path)
-        print(f"  Shape: {df.shape}")
+        print(f"  Pixels: {df.shape}, Fields: {df['fid'].nunique()}")
+
+        # Aggregate to field level first
+        field_df = aggregate_band_to_field(df)
+        print(f"  Field-level: {field_df.shape}")
+        del df
 
         if base_df is None:
-            base_df = df
+            base_df = field_df
         else:
             # Only take feature columns not already in base_df (avoids _x/_y suffixes)
-            feature_cols = [c for c in df.columns if c not in META_COLS and c not in base_df.columns]
+            feature_cols = [c for c in field_df.columns if c not in META_COLS and c not in base_df.columns]
             if feature_cols:
                 base_df = base_df.merge(
-                    df[MERGE_KEYS + feature_cols],
-                    on=MERGE_KEYS,
+                    field_df[["fid"] + feature_cols],
+                    on="fid",
                     how="inner",
                 )
+                print(f"  After merge: {base_df.shape}")
+            else:
+                print(f"  Skipped (no new features)")
 
     return base_df
-
-
-def aggregate_to_field_level(df):
-    """Aggregate pixel-level data to field level (group by fid, mean)."""
-    feature_cols = [c for c in df.columns if c not in EXCLUDE_COLS + ["crop_name"]]
-
-    # Create aggregation mapping
-    mapping = {c: "mean" for c in feature_cols}
-    # Keep crop_name by mode (most common)
-    if "crop_name" in df.columns:
-        mapping["crop_name"] = lambda x: x.mode().iat[0] if not x.mode().empty else None
-
-    field_df = df.groupby("fid").agg(mapping).reset_index()
-    return field_df
 
 
 def main():
     print("=== Combining Test Parquets ===")
     print(f"Test region: {TEST_REGION}")
 
-    # Step 1: Merge all bands
-    merged = merge_test_features()
-    print(f"\nMerged shape: {merged.shape}")
-    print(f"Unique fields: {merged['fid'].nunique()}")
+    # Aggregate each band to field level, then merge
+    field_df = merge_test_features()
+    print(f"\nFinal shape: {field_df.shape}")
+    print(f"Unique fields: {field_df['fid'].nunique()}")
 
-    # Step 2: Aggregate to field level
-    print("\nAggregating to field level...")
-    field_df = aggregate_to_field_level(merged)
-    print(f"Field-level shape: {field_df.shape}")
-
-    # Step 3: Save
+    # Save
     os.makedirs(os.path.dirname(OUTPUT_PARQUET), exist_ok=True)
     field_df.to_parquet(OUTPUT_PARQUET, index=False)
     print(f"\nSaved to {OUTPUT_PARQUET}")
