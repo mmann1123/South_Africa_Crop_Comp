@@ -13,6 +13,7 @@ Output: Summary comparison + optional submission file
 
 import os
 import sys
+import json
 import pandas as pd
 import numpy as np
 from collections import Counter
@@ -26,7 +27,7 @@ from sklearn.preprocessing import label_binarize
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(SCRIPT_DIR)
 sys.path.insert(0, os.path.join(REPO_ROOT, "deep_learn", "src"))
-from config import TEST_LABELS_DIR, TEST_REGION
+from config import TEST_LABELS_DIR, TEST_REGION, REPORTS_DIR
 
 # Ground truth labels
 TEST_LABELS_GEOJSON = os.path.join(
@@ -35,25 +36,76 @@ TEST_LABELS_GEOJSON = os.path.join(
     "labels.geojson",
 )
 
-# Prediction files to compare: (path, training_level, training_obs)
-# Training level describes what granularity the model was trained on:
-#   "field"  = trained on mean features per field (xr_fresh aggregated to fid)
-#   "pixel"  = trained on individual pixels, predictions aggregated via majority vote
-#   "patch"  = trained on spatial patches, predictions aggregated via majority vote
-# Training obs = number of observations in the training set
-PREDICTION_FILES = {
-    "XGBoost (field)": (os.path.join(SCRIPT_DIR, "predictions_xgboost.csv"), "field", 3317),
-    "SMOTE Stacked (field)": (os.path.join(SCRIPT_DIR, "predictions_smote_stacked.csv"), "field", 2653),
-    "Voting (field)": (os.path.join(SCRIPT_DIR, "predictions_voting.csv"), "field", 3317),
-    "Stacking (field)": (os.path.join(SCRIPT_DIR, "predictions_stacking.csv"), "field", 3317),
-    "Base LR (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_lr.csv"), "pixel", 6058481),
-    "Base RF (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_rf.csv"), "pixel", 6058481),
-    "Base LightGBM (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_lgbm.csv"), "pixel", 6058481),
-    "Base XGBoost (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_xgb.csv"), "pixel", 6058481),
-    "CNN-BiLSTM (pixel)": (os.path.join(SCRIPT_DIR, "predictions_cnn_bilstm.csv"), "pixel", 5407549),
-    "TabNet (pixel)": (os.path.join(SCRIPT_DIR, "predictions_tabnet.csv"), "pixel", 4802658),
-    "3D CNN (patch)": (os.path.join(SCRIPT_DIR, "predictions_3d_cnn.csv"), "patch", 10996),
+# Map comparison display name -> report model_name (for dynamic train_count lookup)
+REPORT_NAME_MAP = {
+    "XGBoost (field)": "XGBoost Field-Level",
+    "SMOTE Stacked (field)": "SMOTE Stacked Ensemble",
+    "Voting (field)": "Voting Ensemble",
+    "Stacking (field)": "Stacking Ensemble",
+    "Base LR (pixel)": "Logistic Regression (Pixel-Level)",
+    "Base RF (pixel)": "Random Forest (Pixel-Level)",
+    "Base LightGBM (pixel)": "LightGBM (Pixel-Level)",
+    "Base XGBoost (pixel)": "XGBoost (Pixel-Level)",
+    "CNN-BiLSTM (pixel)": "CNN-BiLSTM Ensemble (5-seed)",
+    "TabNet (pixel)": "TabTransformer Ensemble (Field-Level)",
+    "3D CNN (patch)": "3D CNN Patch-Level",
+    "Multi-Ch CNN (patch)": "Multi-Channel CNN Patch-Level",
+    "Ensemble 3D CNN (patch)": "Ensemble 3D CNN Patch-Level",
 }
+
+
+def _load_report_train_counts():
+    """Scan reports/ for metadata.json and return {model_name: train_count} from latest report."""
+    counts = {}
+    if not os.path.isdir(REPORTS_DIR):
+        return counts
+    for entry in sorted(os.listdir(REPORTS_DIR)):
+        meta_path = os.path.join(REPORTS_DIR, entry, "metadata.json")
+        if os.path.isfile(meta_path):
+            try:
+                with open(meta_path) as f:
+                    meta = json.load(f)
+                name = meta.get("model_name", "")
+                tc = meta.get("split_info", {}).get("train_count")
+                if name and tc is not None:
+                    counts[name] = tc  # later entries (newer timestamps) overwrite older
+            except (json.JSONDecodeError, KeyError):
+                continue
+    return counts
+
+
+def _get_train_obs(display_name, report_counts):
+    """Look up training obs from reports, return None if not found."""
+    report_name = REPORT_NAME_MAP.get(display_name)
+    if report_name and report_name in report_counts:
+        return report_counts[report_name]
+    return None
+
+
+# Prediction files to compare: (path, training_level)
+# Training obs is looked up dynamically from reports/ metadata.json
+_PREDICTION_FILES_BASE = {
+    "XGBoost (field)": (os.path.join(SCRIPT_DIR, "predictions_xgboost.csv"), "field"),
+    "SMOTE Stacked (field)": (os.path.join(SCRIPT_DIR, "predictions_smote_stacked.csv"), "field"),
+    "Voting (field)": (os.path.join(SCRIPT_DIR, "predictions_voting.csv"), "field"),
+    "Stacking (field)": (os.path.join(SCRIPT_DIR, "predictions_stacking.csv"), "field"),
+    "Base LR (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_lr.csv"), "pixel"),
+    "Base RF (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_rf.csv"), "pixel"),
+    "Base LightGBM (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_lgbm.csv"), "pixel"),
+    "Base XGBoost (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_xgb.csv"), "pixel"),
+    "CNN-BiLSTM (pixel)": (os.path.join(SCRIPT_DIR, "predictions_cnn_bilstm.csv"), "pixel"),
+    "TabNet (pixel)": (os.path.join(SCRIPT_DIR, "predictions_tabnet.csv"), "pixel"),
+    "3D CNN (patch)": (os.path.join(SCRIPT_DIR, "predictions_3d_cnn.csv"), "patch"),
+    "Multi-Ch CNN (patch)": (os.path.join(SCRIPT_DIR, "predictions_multi_channel_cnn.csv"), "patch"),
+    "Ensemble 3D CNN (patch)": (os.path.join(SCRIPT_DIR, "predictions_ensemble_3d_cnn.csv"), "patch"),
+}
+
+# Build PREDICTION_FILES with dynamic train_obs from reports
+_report_counts = _load_report_train_counts()
+PREDICTION_FILES = {}
+for _name, (_path, _level) in _PREDICTION_FILES_BASE.items():
+    _train_obs = _get_train_obs(_name, _report_counts)
+    PREDICTION_FILES[_name] = (_path, _level, _train_obs)
 
 # Output
 SUBMISSION_PATH = os.path.join(REPO_ROOT, "submissions", "prediction.csv")
@@ -157,39 +209,83 @@ def find_disagreements(merged, predictions):
         print(disagree_sample[["fid"] + pred_cols].to_string(index=False))
 
 
-def ensemble_vote(predictions):
-    """Create ensemble prediction via majority vote."""
-    if len(predictions) < 2:
+# Model groupings for subset majority votes
+ML_FIELD_MODELS = {
+    "XGBoost (field)", "SMOTE Stacked (field)", "Voting (field)", "Stacking (field)",
+}
+ML_PIXEL_MODELS = {
+    "Base LR (pixel)", "Base RF (pixel)", "Base LightGBM (pixel)", "Base XGBoost (pixel)",
+}
+ML_MODELS = ML_FIELD_MODELS | ML_PIXEL_MODELS
+DL_MODELS = {
+    "CNN-BiLSTM (pixel)", "TabNet (pixel)",
+    "3D CNN (patch)", "Multi-Ch CNN (patch)", "Ensemble 3D CNN (patch)",
+}
+
+
+def _majority_vote_subset(predictions, subset_names, label):
+    """Create majority vote from a subset of models. Returns DataFrame or None."""
+    subset = {k: v for k, v in predictions.items() if k in subset_names}
+    if len(subset) < 2:
         return None
 
-    print("\n" + "=" * 60)
-    print("ENSEMBLE MAJORITY VOTE")
-    print("=" * 60)
-
-    # Merge all predictions
     merged = None
-    names = list(predictions.keys())
-
-    for name, df in predictions.items():
+    names = list(subset.keys())
+    for name, df in subset.items():
         df = df.rename(columns={"crop_name": name})
         if merged is None:
             merged = df[["fid", name]]
         else:
             merged = merged.merge(df[["fid", name]], on="fid", how="inner")
 
-    # Majority vote
     pred_cols = [n for n in names if n in merged.columns]
 
     def majority_vote(row):
         votes = [row[c] for c in pred_cols]
         return Counter(votes).most_common(1)[0][0]
 
-    merged["ensemble"] = merged.apply(majority_vote, axis=1)
+    merged["vote"] = merged.apply(majority_vote, axis=1)
 
-    print("\nEnsemble prediction distribution:")
-    print(merged["ensemble"].value_counts().to_string())
+    print(f"\n{label} ({len(names)} models: {', '.join(names)}):")
+    print(merged["vote"].value_counts().to_string())
 
-    return merged[["fid", "ensemble"]].rename(columns={"ensemble": "crop_name"})
+    return merged[["fid", "vote"]].rename(columns={"vote": "crop_name"})
+
+
+def ensemble_vote(predictions):
+    """Create ensemble predictions via majority vote: all, ML-only, DL-only."""
+    print("\n" + "=" * 60)
+    print("ENSEMBLE MAJORITY VOTES")
+    print("=" * 60)
+
+    results = {}
+
+    # All models
+    all_vote = _majority_vote_subset(predictions, set(predictions.keys()), "All Models")
+    if all_vote is not None:
+        results["Ensemble (all)"] = all_vote
+
+    # ML only (field + pixel)
+    ml_vote = _majority_vote_subset(predictions, ML_MODELS, "ML Models (all)")
+    if ml_vote is not None:
+        results["Ensemble (ML)"] = ml_vote
+
+    # ML field-level only
+    ml_field_vote = _majority_vote_subset(predictions, ML_FIELD_MODELS, "ML Models (field)")
+    if ml_field_vote is not None:
+        results["Ensemble (ML field)"] = ml_field_vote
+
+    # ML pixel-level only
+    ml_pixel_vote = _majority_vote_subset(predictions, ML_PIXEL_MODELS, "ML Models (pixel)")
+    if ml_pixel_vote is not None:
+        results["Ensemble (ML pixel)"] = ml_pixel_vote
+
+    # DL only
+    dl_vote = _majority_vote_subset(predictions, DL_MODELS, "DL Models")
+    if dl_vote is not None:
+        results["Ensemble (DL)"] = dl_vote
+
+    return results
 
 
 def load_ground_truth():
@@ -246,8 +342,8 @@ def score_predictions(predictions, ground_truth):
             ce_i = log_loss(y_true_bin[:, i], y_pred_prob[:, i])
             per_crop_ce[crop] = ce_i
 
-        # Look up training level and obs from PREDICTION_FILES, default to "ensemble"
-        info = PREDICTION_FILES.get(name, (None, "ensemble", None))
+        # Look up training level and obs from PREDICTION_FILES
+        info = PREDICTION_FILES.get(name, (None, "majority vote (all models)", None))
         level = info[1]
         train_obs = info[2] if len(info) > 2 else None
         row = {"Model": name, "Training Level": level, "Training Obs": train_obs,
@@ -337,16 +433,15 @@ def main():
     # Find disagreements
     find_disagreements(merged, predictions)
 
-    # Create ensemble if multiple models
-    ensemble_df = None
+    # Create ensemble votes (all, ML-only, DL-only)
+    ensemble_dfs = {}
     if len(predictions) >= 2:
-        ensemble_df = ensemble_vote(predictions)
+        ensemble_dfs = ensemble_vote(predictions)
 
     # Score against ground truth
     gt = load_ground_truth()
     all_to_score = dict(predictions)
-    if ensemble_df is not None:
-        all_to_score["Ensemble"] = ensemble_df
+    all_to_score.update(ensemble_dfs)
     score_predictions(all_to_score, gt)
 
     # Prompt for submission
@@ -354,9 +449,7 @@ def main():
     print("SELECT MODEL FOR SUBMISSION")
     print("=" * 60)
 
-    available = list(predictions.keys())
-    if len(predictions) >= 2:
-        available.append("Ensemble")
+    available = list(predictions.keys()) + list(ensemble_dfs.keys())
 
     print("\nAvailable models:")
     for i, name in enumerate(available, 1):
@@ -368,10 +461,9 @@ def main():
     print("(Edit this script to change the default or add command-line args)")
 
     # Create submission
-    if default_model == "Ensemble":
-        create_submission(ensemble_df, "Ensemble")
-    else:
-        create_submission(predictions[default_model], default_model)
+    all_preds = dict(predictions)
+    all_preds.update(ensemble_dfs)
+    create_submission(all_preds[default_model], default_model)
 
 
 if __name__ == "__main__":

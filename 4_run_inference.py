@@ -103,6 +103,25 @@ INFERENCE_STEPS = [
         [TEST_PATCH_DATA_PATH],
         [os.path.join(MODEL_DIR, "conv3d_time_patch_level2.h5")],
     ),
+    (
+        "multicnn",
+        "inference_multi_channel_cnn.py",
+        "Multi-Channel CNN",
+        os.path.join(OUT_OF_SAMPLE, "predictions_multi_channel_cnn.csv"),
+        [TEST_PATCH_DATA_PATH],
+        [os.path.join(MODEL_DIR, "patch_level_cnn.h5")],
+    ),
+    (
+        "ensemble3d",
+        "inference_ensemble_3d_cnn.py",
+        "Ensemble 3D CNN",
+        os.path.join(OUT_OF_SAMPLE, "predictions_ensemble_3d_cnn.csv"),
+        [TEST_PATCH_DATA_PATH],
+        [
+            os.path.join(MODEL_DIR, "meta_model.joblib"),
+            os.path.join(MODEL_DIR, "ensemble_3d_cnn_label_encoder.joblib"),
+        ],
+    ),
 ]
 
 ALL_KEYS = [step[0] for step in INFERENCE_STEPS]
@@ -202,7 +221,8 @@ def main():
     print(f"\n--- Available Predictions ---")
     for name in ["xgboost", "smote_stacked", "voting", "stacking",
                   "base_lr", "base_rf", "base_lgbm", "base_xgb",
-                  "cnn_bilstm", "tabnet", "3d_cnn"]:
+                  "cnn_bilstm", "tabnet", "3d_cnn",
+                  "multi_channel_cnn", "ensemble_3d_cnn"]:
         path = os.path.join(OUT_OF_SAMPLE, f"predictions_{name}.csv")
         if os.path.exists(path):
             import pandas as pd

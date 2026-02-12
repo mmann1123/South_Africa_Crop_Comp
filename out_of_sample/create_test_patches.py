@@ -24,6 +24,7 @@ from patch_utils import (
 )
 
 import geopandas as gpd
+import matplotlib.pyplot as plt
 
 
 def main():
@@ -43,9 +44,26 @@ def main():
     # Deduplicate (handles NaN fids and duplicates)
     gdf = deduplicate_fields(gdf)
 
+    print(f"Unique fields: {gdf['fid'].nunique()}")
+    if "crop_name" in gdf.columns:
+        print(f"Crop distribution:\n{gdf['crop_name'].value_counts()}")
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+    gdf.boundary.plot(ax=ax, color='black', linewidth=1)
+    ax.set_title("Test: Original Field Boundaries")
+    plt.tight_layout()
+    plt.show()
+
     # Create patches using shared utility
     print("\nCreating patches...")
     patches_gdf = create_patches(gdf, patch_size=100.0)
+
+    fig, ax = plt.subplots(figsize=(10, 8))
+    gdf.boundary.plot(ax=ax, color='black', linewidth=0.5)
+    patches_gdf.plot(ax=ax, color='red', alpha=0.4, edgecolor='red', linewidth=0.5)
+    ax.set_title(f"Test: {len(patches_gdf)} Patches from {gdf['fid'].nunique()} Fields")
+    plt.tight_layout()
+    plt.show()
 
     # Save patch geometries
     patches_gdf.to_file(TEST_PATCHES_GEOJSON_PATH, driver="GeoJSON")

@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+3D CNN Patch-Level,0.7548085901027077,0.6788591029349131,0.7484158306240506,0.6994056529822654,test

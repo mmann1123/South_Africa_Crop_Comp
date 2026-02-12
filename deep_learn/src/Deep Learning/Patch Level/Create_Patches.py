@@ -25,15 +25,18 @@ def main():
 
     fig, ax = plt.subplots(figsize=(8, 6))
     gdf.boundary.plot(ax=ax, color='black', linewidth=1)
-    ax.set_title("Original Field Boundaries")
+    ax.set_title("Training: Original Field Boundaries")
+    plt.tight_layout()
     plt.show()
 
     # Create patches using shared utility
     patches_gdf = create_patches(gdf, patch_size=100.0)
 
     fig, ax = plt.subplots(figsize=(10, 8))
-    patches_gdf.plot(ax=ax, color='red', alpha=0.5, edgecolor='red')
-    ax.set_title("Field Boundaries with Patch Grid")
+    gdf.boundary.plot(ax=ax, color='black', linewidth=0.5)
+    patches_gdf.plot(ax=ax, color='red', alpha=0.4, edgecolor='red', linewidth=0.5)
+    ax.set_title(f"Training: {len(patches_gdf)} Patches from {gdf['fid'].nunique()} Fields")
+    plt.tight_layout()
     plt.show()
 
     if patches_geojson_out:
