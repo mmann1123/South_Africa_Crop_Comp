@@ -41,6 +41,7 @@ TEST_PATCHES_GEOJSON_PATH = os.path.join(DATA_OUTPUT_DIR, "test_patches.geojson"
 MODEL_DIR = os.path.join(WORKING_DIR, "models")
 XGB_TUNER_DIR = os.path.join(WORKING_DIR, "xgb_tuner")
 TABNET_DIR = os.path.join(WORKING_DIR, "saved_models_tabnet")
+TABNET_FIELD_DIR = os.path.join(WORKING_DIR, "saved_models_tabnet_field")
 REPORTS_DIR = os.path.join(WORKING_DIR, "reports")
 
 # Band names and regions

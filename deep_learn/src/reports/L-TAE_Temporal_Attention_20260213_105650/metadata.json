@@ -1,0 +1,132 @@
+{
+  "model_name": "L-TAE Temporal Attention",
+  "timestamp": "2026-02-13T10:56:50.176021",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Deep Learning/Pixel_Field_Level/ltae_model.py",
+  "hyperparameters": {
+    "architecture": "L-TAE (Lightweight Temporal Attention Encoder)",
+    "d_model": 64,
+    "n_head": 16,
+    "d_k": 4,
+    "dropout": 0.2,
+    "lr": 0.001,
+    "epochs": 50,
+    "patience": 8,
+    "batch_size": 1024,
+    "n_models": 5,
+    "seeds": [
+      42,
+      101,
+      202,
+      303,
+      404
+    ],
+    "temporal_order": "chronological",
+    "positional_encoding": "sinusoidal (actual month positions)"
+  },
+  "split_info": {
+    "train_count": 4802658,
+    "val_count": 1205790,
+    "test_count": 1531914,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.8060240963855422,
+    "cohen_kappa": 0.7304640383397407,
+    "f1_weighted": 0.8082206111871634,
+    "f1_macro": 0.7541445529149347,
+    "macro_avg": {
+      "precision": 0.7583270100701303,
+      "recall": 0.7617358168532468,
+      "f1-score": 0.7541445529149347,
+      "support": 830.0
+    },
+    "weighted_avg": {
+      "precision": 0.817758673311221,
+      "recall": 0.8060240963855422,
+      "f1-score": 0.8082206111871634,
+      "support": 830.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      112,
+      4,
+      5,
+      9,
+      10
+    ],
+    [
+      5,
+      91,
+      2,
+      4,
+      5
+    ],
+    [
+      5,
+      2,
+      341,
+      26,
+      6
+    ],
+    [
+      5,
+      3,
+      11,
+      59,
+      5
+    ],
+    [
+      28,
+      0,
+      10,
+      16,
+      66
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.7225806451612903,
+      "recall": 0.8,
+      "f1-score": 0.7593220338983051,
+      "support": 140.0
+    },
+    "Canola": {
+      "precision": 0.91,
+      "recall": 0.8504672897196262,
+      "f1-score": 0.8792270531400966,
+      "support": 107.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.924119241192412,
+      "recall": 0.8973684210526316,
+      "f1-score": 0.910547396528705,
+      "support": 380.0
+    },
+    "Small grain grazing": {
+      "precision": 0.5175438596491229,
+      "recall": 0.7108433734939759,
+      "f1-score": 0.5989847715736041,
+      "support": 83.0
+    },
+    "Wheat": {
+      "precision": 0.717391304347826,
+      "recall": 0.55,
+      "f1-score": 0.6226415094339622,
+      "support": 120.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": null,
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/L-TAE_Temporal_Attention_20260213_105650/report.pdf"
+}

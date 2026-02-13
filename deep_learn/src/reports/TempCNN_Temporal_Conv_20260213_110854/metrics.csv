@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+TempCNN Temporal Conv,0.7951807228915663,0.7165226510657021,0.7991733848244449,0.7434127972784095,test

@@ -1,0 +1,133 @@
+{
+  "model_name": "TabNet Field-Level (xr_fresh)",
+  "timestamp": "2026-02-13T09:07:06.761412",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Classical Machine Learning/Field Level/tabnet_field.py",
+  "hyperparameters": {
+    "n_d": 64,
+    "n_a": 64,
+    "n_steps": 5,
+    "gamma": 1.5,
+    "n_independent": 2,
+    "n_shared": 2,
+    "lr": 0.001,
+    "scheduler": "StepLR(step=10, gamma=0.9)",
+    "max_epochs": 100,
+    "patience": 10,
+    "batch_size": 1024,
+    "n_models": 5,
+    "seeds": [
+      42,
+      101,
+      202,
+      303,
+      404
+    ],
+    "features": "xr_fresh time-series (field-level mean)"
+  },
+  "split_info": {
+    "train_count": 2653,
+    "val_count": 664,
+    "test_count": 830,
+    "random_seed": 42,
+    "split_method": "fid-wise (field-level)"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.6265060240963856,
+    "cohen_kappa": 0.4611744010722064,
+    "f1_weighted": 0.586917038947847,
+    "f1_macro": 0.4840999916387262,
+    "macro_avg": {
+      "precision": 0.528056590752243,
+      "recall": 0.4881431443369225,
+      "f1-score": 0.4840999916387262,
+      "support": 830.0
+    },
+    "weighted_avg": {
+      "precision": 0.5812130426467776,
+      "recall": 0.6265060240963856,
+      "f1-score": 0.586917038947847,
+      "support": 830.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      75,
+      4,
+      18,
+      1,
+      40
+    ],
+    [
+      9,
+      47,
+      16,
+      1,
+      14
+    ],
+    [
+      6,
+      2,
+      331,
+      1,
+      12
+    ],
+    [
+      14,
+      5,
+      48,
+      2,
+      19
+    ],
+    [
+      57,
+      2,
+      37,
+      4,
+      65
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.4658385093167702,
+      "recall": 0.5434782608695652,
+      "f1-score": 0.5016722408026756,
+      "support": 138.0
+    },
+    "Canola": {
+      "precision": 0.7833333333333333,
+      "recall": 0.5402298850574713,
+      "f1-score": 0.6394557823129252,
+      "support": 87.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.7355555555555555,
+      "recall": 0.9403409090909091,
+      "f1-score": 0.8254364089775561,
+      "support": 352.0
+    },
+    "Small grain grazing": {
+      "precision": 0.2222222222222222,
+      "recall": 0.022727272727272728,
+      "f1-score": 0.041237113402061855,
+      "support": 88.0
+    },
+    "Wheat": {
+      "precision": 0.43333333333333335,
+      "recall": 0.3939393939393939,
+      "f1-score": 0.4126984126984127,
+      "support": 165.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": null,
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/TabNet_Field-Level__xr_fresh_20260213_090706/report.pdf"
+}

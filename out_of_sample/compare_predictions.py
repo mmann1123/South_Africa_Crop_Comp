@@ -36,6 +36,26 @@ TEST_LABELS_GEOJSON = os.path.join(
     "labels.geojson",
 )
 
+# Map comparison display name -> feature type used for training
+FEATURE_TYPE_MAP = {
+    "XGBoost (field)": "xr_fresh time-series",
+    "SMOTE Stacked (field)": "xr_fresh time-series",
+    "Voting (field)": "xr_fresh time-series",
+    "Stacking (field)": "xr_fresh time-series",
+    "Base LR (pixel)": "raw pixel (band x month)",
+    "Base RF (pixel)": "raw pixel (band x month)",
+    "Base LightGBM (pixel)": "raw pixel (band x month)",
+    "Base XGBoost (pixel)": "raw pixel (band x month)",
+    "CNN-BiLSTM (pixel)": "raw pixel (band x month)",
+    "TabNet (pixel)": "raw pixel (band x month)",
+    "3D CNN (patch)": "raw pixel (spatial-temporal patch)",
+    "Multi-Ch CNN (patch)": "raw pixel (spatial-temporal patch)",
+    "Ensemble 3D CNN (patch)": "raw pixel (spatial-temporal patch)",
+    "TabNet Field (field)": "xr_fresh time-series",
+    "L-TAE (pixel)": "raw pixel (temporal sequence)",
+    "TempCNN (pixel)": "raw pixel (temporal sequence)",
+}
+
 # Map comparison display name -> report model_name (for dynamic train_count lookup)
 REPORT_NAME_MAP = {
     "XGBoost (field)": "XGBoost Field-Level",
@@ -51,6 +71,9 @@ REPORT_NAME_MAP = {
     "3D CNN (patch)": "3D CNN Patch-Level",
     "Multi-Ch CNN (patch)": "Multi-Channel CNN Patch-Level",
     "Ensemble 3D CNN (patch)": "Ensemble 3D CNN Patch-Level",
+    "TabNet Field (field)": "TabNet Field-Level (xr_fresh)",
+    "L-TAE (pixel)": "L-TAE Temporal Attention",
+    "TempCNN (pixel)": "TempCNN Temporal Conv",
 }
 
 
@@ -98,6 +121,9 @@ _PREDICTION_FILES_BASE = {
     "3D CNN (patch)": (os.path.join(SCRIPT_DIR, "predictions_3d_cnn.csv"), "patch"),
     "Multi-Ch CNN (patch)": (os.path.join(SCRIPT_DIR, "predictions_multi_channel_cnn.csv"), "patch"),
     "Ensemble 3D CNN (patch)": (os.path.join(SCRIPT_DIR, "predictions_ensemble_3d_cnn.csv"), "patch"),
+    "TabNet Field (field)": (os.path.join(SCRIPT_DIR, "predictions_tabnet_field.csv"), "field"),
+    "L-TAE (pixel)": (os.path.join(SCRIPT_DIR, "predictions_ltae.csv"), "pixel"),
+    "TempCNN (pixel)": (os.path.join(SCRIPT_DIR, "predictions_tempcnn.csv"), "pixel"),
 }
 
 # Build PREDICTION_FILES with dynamic train_obs from reports
@@ -212,6 +238,7 @@ def find_disagreements(merged, predictions):
 # Model groupings for subset majority votes
 ML_FIELD_MODELS = {
     "XGBoost (field)", "SMOTE Stacked (field)", "Voting (field)", "Stacking (field)",
+    "TabNet Field (field)",
 }
 ML_PIXEL_MODELS = {
     "Base LR (pixel)", "Base RF (pixel)", "Base LightGBM (pixel)", "Base XGBoost (pixel)",
@@ -220,6 +247,7 @@ ML_MODELS = ML_FIELD_MODELS | ML_PIXEL_MODELS
 DL_MODELS = {
     "CNN-BiLSTM (pixel)", "TabNet (pixel)",
     "3D CNN (patch)", "Multi-Ch CNN (patch)", "Ensemble 3D CNN (patch)",
+    "L-TAE (pixel)", "TempCNN (pixel)",
 }
 
 
@@ -342,11 +370,13 @@ def score_predictions(predictions, ground_truth):
             ce_i = log_loss(y_true_bin[:, i], y_pred_prob[:, i])
             per_crop_ce[crop] = ce_i
 
-        # Look up training level and obs from PREDICTION_FILES
+        # Look up training level, obs, and feature type from PREDICTION_FILES
         info = PREDICTION_FILES.get(name, (None, "majority vote (all models)", None))
         level = info[1]
         train_obs = info[2] if len(info) > 2 else None
-        row = {"Model": name, "Training Level": level, "Training Obs": train_obs,
+        feature_type = FEATURE_TYPE_MAP.get(name, "majority vote")
+        row = {"Model": name, "Training Level": level, "Feature Type": feature_type,
+               "Training Obs": train_obs,
                "Accuracy": acc, "F1 (weighted)": f1,
                "Cohen Kappa": kappa, "Cross Entropy": mean_ce, "Fields": len(merged)}
         results.append(row)

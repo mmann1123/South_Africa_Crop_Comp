@@ -27,7 +27,7 @@ DEEP_LEARN_SRC = os.path.join(REPO_ROOT, "deep_learn", "src")
 
 sys.path.insert(0, DEEP_LEARN_SRC)
 from config import (
-    MODEL_DIR, TABNET_DIR, XGB_TUNER_DIR, MERGED_DL_TEST_PATH,
+    MODEL_DIR, TABNET_DIR, TABNET_FIELD_DIR, XGB_TUNER_DIR, MERGED_DL_TEST_PATH,
     COMBINED_TEST_FEATURES_PATH, TEST_PATCH_DATA_PATH,
 )
 
@@ -121,6 +121,30 @@ INFERENCE_STEPS = [
             os.path.join(MODEL_DIR, "meta_model.joblib"),
             os.path.join(MODEL_DIR, "ensemble_3d_cnn_label_encoder.joblib"),
         ],
+    ),
+    (
+        "tabnet_field",
+        "inference_tabnet_field.py",
+        "TabNet Field (xr_fresh)",
+        os.path.join(OUT_OF_SAMPLE, "predictions_tabnet_field.csv"),
+        [COMBINED_TEST_FEATURES_PATH],
+        [os.path.join(TABNET_FIELD_DIR, f"tabnet_field_seed_{s}.zip") for s in [42, 101, 202, 303, 404]],
+    ),
+    (
+        "ltae",
+        "inference_ltae.py",
+        "L-TAE (temporal attention)",
+        os.path.join(OUT_OF_SAMPLE, "predictions_ltae.csv"),
+        [MERGED_DL_TEST_PATH],
+        [os.path.join(MODEL_DIR, f"ltae_seed_{s}.pt") for s in [42, 101, 202, 303, 404]],
+    ),
+    (
+        "tempcnn",
+        "inference_tempcnn.py",
+        "TempCNN (temporal conv)",
+        os.path.join(OUT_OF_SAMPLE, "predictions_tempcnn.csv"),
+        [MERGED_DL_TEST_PATH],
+        [os.path.join(MODEL_DIR, f"tempcnn_seed_{s}.pt") for s in [42, 101, 202, 303, 404]],
     ),
 ]
 
@@ -222,7 +246,8 @@ def main():
     for name in ["xgboost", "smote_stacked", "voting", "stacking",
                   "base_lr", "base_rf", "base_lgbm", "base_xgb",
                   "cnn_bilstm", "tabnet", "3d_cnn",
-                  "multi_channel_cnn", "ensemble_3d_cnn"]:
+                  "multi_channel_cnn", "ensemble_3d_cnn", "tabnet_field",
+                  "ltae", "tempcnn"]:
         path = os.path.join(OUT_OF_SAMPLE, f"predictions_{name}.csv")
         if os.path.exists(path):
             import pandas as pd

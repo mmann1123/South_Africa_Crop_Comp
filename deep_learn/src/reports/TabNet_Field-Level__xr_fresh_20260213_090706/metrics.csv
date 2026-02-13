@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+TabNet Field-Level (xr_fresh),0.6265060240963856,0.4611744010722064,0.586917038947847,0.4840999916387262,test
