@@ -29,20 +29,32 @@ from config import MERGED_DL_PATH, PATCH_DATA_PATH
 STAGE_2_SCRIPTS = [
     (
         "Deep Learning/Pixel_Field_Level/cnn_bilstm.py",
-        "CNN+BiLSTM Ensemble (5-seed, 25 epochs each)",
+        "CNN+BiLSTM Ensemble (5-seed)",
     ),
     (
         "Deep Learning/Pixel_Field_Level/field_acc_cnnlstm.py",
         "CNN+BiLSTM Field-Level Evaluation",
     ),
-    # (
-    #     "Deep Learning/Pixel_Field_Level/TabTransformer_Final_Field.py",
-    #     "TabNet Ensemble (5 models)",
-    # ),
+    (
+        "Deep Learning/Pixel_Field_Level/ltae_model.py",
+        "L-TAE Ensemble (5-seed)",
+    ),
+    (
+        "Deep Learning/Pixel_Field_Level/tempcnn_model.py",
+        "TempCNN Ensemble (5-seed)",
+    ),
+    (
+        "Deep Learning/Pixel_Field_Level/TabTransformer_Final_Field.py",
+        "TabNet Pixel-Level Ensemble (5 models)",
+    ),
+    (
+        "Classical Machine Learning/Field Level/tabnet_field.py",
+        "TabNet Field-Level Ensemble (5 models)",
+    ),
 ]
 
 STAGE_3_SCRIPTS = [
-    # ("Deep Learning/Patch Level/3D_CNN.py", "3D CNN Patch-Level (20 epochs)"),
+    ("Deep Learning/Patch Level/3D_CNN.py", "3D CNN Patch-Level (30 epochs)"),
 ]
 
 # Files required for each stage (from config)
