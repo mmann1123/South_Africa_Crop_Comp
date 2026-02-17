@@ -80,6 +80,7 @@ class ModelReport:
         self._feature_names = None
         self._top_n_features = 20
         self._predictions = None
+        self._training_time_seconds = None
         self._notes = None
 
     @staticmethod
@@ -176,6 +177,10 @@ class ModelReport:
         self._feature_importance = importances[idx]
         self._feature_names = [feature_names[i] for i in idx]
         self._top_n_features = top_n
+        return self
+
+    def set_training_time(self, seconds: float) -> "ModelReport":
+        self._training_time_seconds = float(seconds)
         return self
 
     def add_notes(self, notes: str) -> "ModelReport":
@@ -309,6 +314,11 @@ class ModelReport:
             lines.append(f"  Cohen Kappa:  {self._metrics['cohen_kappa']:.4f}")
             lines.append(f"  F1 Weighted:  {self._metrics['f1_weighted']:.4f}")
             lines.append(f"  F1 Macro:     {self._metrics['f1_macro']:.4f}")
+            lines.append("")
+
+        if self._training_time_seconds is not None:
+            mins = self._training_time_seconds / 60
+            lines.append(f"Training Time: {self._training_time_seconds:.0f}s ({mins:.1f} min)")
             lines.append("")
 
         if self._hyperparameters:
@@ -487,6 +497,7 @@ class ModelReport:
                 "feature_names": self._feature_names,
                 "importance_values": self._feature_importance.tolist(),
             } if self._feature_importance is not None else None,
+            "training_time_seconds": self._training_time_seconds,
             "notes": self._notes,
             "pdf_path": os.path.join(report_dir, "report.pdf"),
         }

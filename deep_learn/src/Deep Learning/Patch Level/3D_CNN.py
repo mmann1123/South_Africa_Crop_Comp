@@ -202,6 +202,8 @@ def patch_data_generator_time(df, patch_ids, band_mapping, label_encoder,
 
 
 def main():
+    import time as _time
+    t_train_start = _time.time()
 
     df = pd.read_parquet(PATCH_PARQUET)
     print("Loaded DF shape:", df.shape)
@@ -387,6 +389,7 @@ def main():
     report.set_split_info(train=len(train_ids), test=len(test_ids), seed=42, split_method="field-based (patch-level)")
     report.set_metrics(y_true, y_pred, le.classes_)
     report.set_training_history(history.history)
+    report.set_training_time(_time.time() - t_train_start)
     report.generate()
 
 

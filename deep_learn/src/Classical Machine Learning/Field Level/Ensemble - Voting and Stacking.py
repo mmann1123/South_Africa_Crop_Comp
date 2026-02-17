@@ -5,6 +5,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 from config import FINAL_DATA_PATH, MODEL_DIR
 
+import time
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -137,8 +138,10 @@ def eval_plot(name, pipe):
     plt.xlabel("Predicted"); plt.ylabel("True"); plt.xticks(rotation=45,ha='right'); plt.tight_layout(); plt.close()
     return preds
 
+t_train_start = time.time()
 preds_v = eval_plot("Voting",   voting_pipe)
 preds_s = eval_plot("Stacking", stack_pipe)
+training_time = time.time() - t_train_start
 
 # Save required files for standalone inference
 joblib.dump(voting_pipe, os.path.join(MODEL_DIR, "ensemble_voting.pkl"))
@@ -159,6 +162,7 @@ for name, preds in [("Voting Ensemble", preds_v), ("Stacking Ensemble", preds_s)
     report.set_split_info(train=len(train_df), test=len(test_df), seed=SEED)
     report.set_metrics(y_test, preds, le.classes_)
     report.set_predictions(test_df["fid"].values, y_test, preds, le.classes_)
+    report.set_training_time(training_time)
     report.generate()
 
 ### ---- End of Train script rest is test inference ---###

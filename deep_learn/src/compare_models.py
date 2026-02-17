@@ -42,6 +42,7 @@ def build_comparison_table(reports: list[dict]) -> pd.DataFrame:
     for r in reports:
         metrics = r.get("metrics", {})
         split = r.get("split_info", {})
+        train_secs = r.get("training_time_seconds")
         rows.append({
             "model_name": r.get("model_name", "unknown"),
             "timestamp": r.get("timestamp", ""),
@@ -49,6 +50,7 @@ def build_comparison_table(reports: list[dict]) -> pd.DataFrame:
             "cohen_kappa": metrics.get("cohen_kappa"),
             "f1_weighted": metrics.get("f1_weighted"),
             "f1_macro": metrics.get("f1_macro"),
+            "training_time_min": round(train_secs / 60, 1) if train_secs else None,
             "eval_level": metrics.get("level", "test"),
             "test_count": split.get("test_count"),
             "split_method": split.get("split_method"),
@@ -89,12 +91,16 @@ def render_comparison_bar_chart(df: pd.DataFrame, pdf: PdfPages):
 
 def render_comparison_table(df: pd.DataFrame, pdf: PdfPages):
     """Render the comparison DataFrame as a matplotlib table."""
-    display_cols = ["model_name", "accuracy", "cohen_kappa", "f1_weighted", "f1_macro"]
+    display_cols = ["model_name", "accuracy", "cohen_kappa", "f1_weighted", "f1_macro", "training_time_min"]
     display = df[[c for c in display_cols if c in df.columns]].copy()
 
     # Format numeric columns
     for col in display.columns:
-        if col != "model_name":
+        if col == "model_name":
+            continue
+        elif col == "training_time_min":
+            display[col] = display[col].apply(lambda v: f"{v:.1f}" if pd.notna(v) else "N/A")
+        else:
             display[col] = display[col].apply(lambda v: f"{v:.4f}" if pd.notna(v) else "N/A")
 
     fig, ax = plt.subplots(figsize=(10, max(3, len(display) * 0.5 + 1)))

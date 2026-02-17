@@ -3,6 +3,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 from config import FINAL_DATA_PATH, MODEL_DIR, XGB_TUNER_DIR
 
+import time
 import pandas as pd, numpy as np, gc, joblib
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.impute import SimpleImputer
@@ -67,6 +68,7 @@ joblib.dump(imputer, os.path.join(MODEL_DIR, 'imputer.joblib'))
 joblib.dump(scaler, os.path.join(MODEL_DIR, 'scaler.joblib'))
 
 # ===================== SMOTE-TOMEK =====================
+t_train_start = time.time()
 print("Balancing classes with SMOTETomek...")
 resampler = SMOTETomek(random_state=42)
 X_train_resampled, y_train_resampled = resampler.fit_resample(X_train_scaled, y_train)
@@ -148,4 +150,5 @@ report.set_hyperparameters({
 report.set_split_info(train=len(X_train), val=len(X_val), test=len(X_test), seed=42)
 report.set_metrics(y_test, y_pred, le.classes_)
 report.set_predictions(X_test.index, y_test, y_pred, le.classes_)
+report.set_training_time(time.time() - t_train_start)
 report.generate()

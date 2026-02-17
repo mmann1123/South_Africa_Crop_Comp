@@ -413,6 +413,7 @@ def main():
         seed=42,
     )
     report.set_metrics(field_true.values, field_pred.values, list(le.classes_))
+    report.set_training_time(time.time() - t0)
     report.generate()
 
     print(f"\n[TIMER] Total: {time.time()-t0:.1f}s ({(time.time()-t0)/60:.1f} min)")

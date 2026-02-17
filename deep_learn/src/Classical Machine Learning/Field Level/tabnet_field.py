@@ -229,6 +229,7 @@ def main():
         seed=42, split_method="fid-wise (field-level)",
     )
     report.set_metrics(y_test_arr, y_test_pred, list(le.classes_))
+    report.set_training_time(time.time() - t0)
     report.generate()
 
     print(f"\n[TIMER] Total: {time.time()-t0:.1f}s ({(time.time()-t0)/60:.1f} min)")

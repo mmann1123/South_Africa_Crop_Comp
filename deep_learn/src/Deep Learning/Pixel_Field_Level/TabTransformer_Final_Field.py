@@ -247,5 +247,6 @@ report.set_metrics(test_field_true.values, test_field_pred.values,
                    [str(c) for c in label_encoder.classes_])
 report.set_predictions(test_field_pred.index, test_field_true.values, test_field_pred.values,
                        [str(c) for c in label_encoder.classes_])
+report.set_training_time(time.time() - t0)
 report.generate()
 print(f"\n[TIMER] Total script time: {time.time()-t0:.1f}s ({(time.time()-t0)/60:.1f} min)")

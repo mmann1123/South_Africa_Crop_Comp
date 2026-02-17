@@ -116,8 +116,10 @@ if __name__ == "__main__":
     joblib.dump(feature_cols, os.path.join(save_path, 'feature_columns.joblib'))
 
     # Train, Predict, Evaluate and Save CSVs
+    import time
     for model_name, model in models.items():
         print(f"\nTraining and evaluating {model_name}...")
+        t_model_start = time.time()
         y_pred = train_predict_model(model, X_train_scaled, y_train, X_test_scaled)
 
         # Save model
@@ -135,6 +137,7 @@ if __name__ == "__main__":
         report.set_metrics(y_test, y_pred, label_encoder.classes_)
         if hasattr(model, 'feature_importances_'):
             report.set_feature_importance(model.feature_importances_, feature_cols)
+        report.set_training_time(time.time() - t_model_start)
         report.generate()
 
     print(f"\nAll models and outputs saved in: {save_path}")

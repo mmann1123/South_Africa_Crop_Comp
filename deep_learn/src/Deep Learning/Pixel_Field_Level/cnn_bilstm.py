@@ -144,6 +144,7 @@ def get_logits_and_labels(model, dataloader):
             labels_list.extend(y.tolist())
     return torch.cat(logits_list, dim=0), labels_list
 
+t_train_start = time.time()
 print("[INFO] Starting ensemble with CNN + BiLSTM + Weighted Focal Loss...")
 num_models = 5
 PATIENCE = 15
@@ -237,4 +238,5 @@ report.set_hyperparameters({
 })
 report.set_split_info(train=len(train_df), val=len(val_df), test=len(test_df), seed=42)
 report.set_metrics(test_labels, pred_labels, label_encoder.classes_)
+report.set_training_time(time.time() - t_train_start)
 report.generate()

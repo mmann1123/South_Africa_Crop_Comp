@@ -3,6 +3,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 from config import FINAL_DATA_PATH, XGB_TUNER_DIR
 
+import time
 import pandas as pd, numpy as np, gc, joblib
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.impute import SimpleImputer
@@ -70,6 +71,7 @@ joblib.dump(imputer, os.path.join(XGB_TUNER_DIR, 'imputer.joblib'))
 joblib.dump(scaler, os.path.join(XGB_TUNER_DIR, 'scaler.joblib'))
 
 # ===================== HYPERPARAMETER TUNING FOR XGBOOST =====================
+t_train_start = time.time()
 print("Starting Hyperparameter Tuning...")
 
 
@@ -157,4 +159,5 @@ report.set_metrics(y_test, y_pred, le.classes_)
 report.set_predictions(X_test.index, y_test, y_pred, le.classes_)
 report.set_feature_importance(final_model.feature_importances_, X_train.columns)
 report.add_notes(f"Optuna tuning: {study.best_trial.number + 1} trials, best F1 macro={study.best_value:.4f}")
+report.set_training_time(time.time() - t_train_start)
 report.generate()
