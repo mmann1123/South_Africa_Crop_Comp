@@ -159,7 +159,7 @@ def main():
             verbose=1,
         )
 
-        if os.path.exists(model_path):
+        if os.path.exists(model_path) and os.environ.get("FORCE_RETRAIN") != "1":
             print(f"Loading saved model for seed {seed}...")
             model.load_model(model_path)
             print(f"[TIMER] Model loaded in {time.time()-t_model:.1f}s")

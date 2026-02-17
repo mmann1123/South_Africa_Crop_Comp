@@ -11,6 +11,7 @@ Usage:
     python 1_train_all_models.py --classical-only   # Only classical ML
     python 1_train_all_models.py --dl-only          # Only deep learning
     python 1_train_all_models.py --dry-run          # Show what would run
+    python 1_train_all_models.py --force            # Force retrain (ignore saved models)
 """
 
 import os
@@ -58,6 +59,7 @@ def main():
     parser.add_argument("--classical-only", action="store_true", help="Only classical ML")
     parser.add_argument("--dl-only", action="store_true", help="Only deep learning")
     parser.add_argument("--dry-run", action="store_true", help="Show what would run")
+    parser.add_argument("--force", action="store_true", help="Force retrain (delete saved models)")
     args = parser.parse_args()
 
     print("=" * 60)
@@ -75,9 +77,11 @@ def main():
         print("[ERROR] No scripts selected.")
         sys.exit(1)
 
+    extra_args = ["--force"] if args.force else None
+
     results = []
     for script_path, desc in scripts_to_run:
-        success = run_script(script_path, desc, dry_run=args.dry_run)
+        success = run_script(script_path, desc, extra_args=extra_args, dry_run=args.dry_run)
         results.append((desc, success))
         if not success and not args.dry_run:
             print(f"\n[STOPPING] {desc} failed.")

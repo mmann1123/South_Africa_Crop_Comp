@@ -1,0 +1,121 @@
+{
+  "model_name": "Voting Ensemble",
+  "timestamp": "2026-02-17T10:37:16.481871",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Classical Machine Learning/Field Level/Ensemble - Voting and Stacking.py",
+  "hyperparameters": {
+    "estimators": [
+      "LR (OVR)",
+      "RF (OVR, n=400)",
+      "HGB (OVR)",
+      "XGB (OVR, n=400, depth=6, lr=0.1)"
+    ],
+    "voting": "soft",
+    "final_estimator": "N/A"
+  },
+  "split_info": {
+    "train_count": 3317,
+    "val_count": 0,
+    "test_count": 830,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.7807228915662651,
+    "cohen_kappa": 0.6815659887348646,
+    "f1_weighted": 0.7700645494480047,
+    "f1_macro": 0.6880288674302001,
+    "macro_avg": {
+      "precision": 0.7159773647278576,
+      "recall": 0.6744826780117068,
+      "f1-score": 0.6880288674302001,
+      "support": 830.0
+    },
+    "weighted_avg": {
+      "precision": 0.768026027875295,
+      "recall": 0.7807228915662651,
+      "f1-score": 0.7700645494480047,
+      "support": 830.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      84,
+      3,
+      9,
+      4,
+      33
+    ],
+    [
+      0,
+      86,
+      7,
+      2,
+      5
+    ],
+    [
+      3,
+      1,
+      374,
+      6,
+      4
+    ],
+    [
+      1,
+      7,
+      24,
+      24,
+      18
+    ],
+    [
+      30,
+      2,
+      16,
+      7,
+      80
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.711864406779661,
+      "recall": 0.631578947368421,
+      "f1-score": 0.6693227091633466,
+      "support": 133.0
+    },
+    "Canola": {
+      "precision": 0.8686868686868687,
+      "recall": 0.86,
+      "f1-score": 0.864321608040201,
+      "support": 100.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.8697674418604651,
+      "recall": 0.9639175257731959,
+      "f1-score": 0.9144254278728606,
+      "support": 388.0
+    },
+    "Small grain grazing": {
+      "precision": 0.5581395348837209,
+      "recall": 0.32432432432432434,
+      "f1-score": 0.41025641025641024,
+      "support": 74.0
+    },
+    "Wheat": {
+      "precision": 0.5714285714285714,
+      "recall": 0.5925925925925926,
+      "f1-score": 0.5818181818181818,
+      "support": 135.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": null,
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Voting_Ensemble_20260217_103716/report.pdf"
+}

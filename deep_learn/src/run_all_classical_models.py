@@ -16,6 +16,7 @@ Usage:
     python run_all_classical_models.py --stage 1a       # only field-level
     python run_all_classical_models.py --stage 1b       # only pixel-level
     python run_all_classical_models.py --dry-run        # print plan only
+    python run_all_classical_models.py --force          # force retrain (ignore saved models)
 """
 
 import subprocess
@@ -92,7 +93,14 @@ def main():
     parser.add_argument(
         "--dry-run", action="store_true", help="Print what would run without executing"
     )
+    parser.add_argument(
+        "--force", action="store_true", help="Force retrain (delete saved models)"
+    )
     args = parser.parse_args()
+
+    if args.force:
+        os.environ["FORCE_RETRAIN"] = "1"
+        print("[FORCE] Will retrain all models (ignoring saved checkpoints)")
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(script_dir)

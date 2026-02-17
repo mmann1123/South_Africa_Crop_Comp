@@ -1,0 +1,127 @@
+{
+  "model_name": "SMOTE Stacked Ensemble",
+  "timestamp": "2026-02-17T10:36:00.308715",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Classical Machine Learning/Field Level/SMOTE_meta.py",
+  "hyperparameters": {
+    "base_rf": {
+      "n_estimators": 300,
+      "max_depth": 20,
+      "class_weight": "balanced"
+    },
+    "base_xgb": {
+      "n_estimators": 300,
+      "max_depth": 8,
+      "learning_rate": 0.1,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8
+    },
+    "meta": "LogisticRegression(max_iter=1000, class_weight=balanced)",
+    "resampler": "SMOTETomek(random_state=42)"
+  },
+  "split_info": {
+    "train_count": 2653,
+    "val_count": 664,
+    "test_count": 830,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.7566265060240964,
+    "cohen_kappa": 0.6583749684171061,
+    "f1_weighted": 0.747285063133237,
+    "f1_macro": 0.6933965192483522,
+    "macro_avg": {
+      "precision": 0.7301999676585721,
+      "recall": 0.6736583412839035,
+      "f1-score": 0.6933965192483522,
+      "support": 830.0
+    },
+    "weighted_avg": {
+      "precision": 0.7498029643172005,
+      "recall": 0.7566265060240964,
+      "f1-score": 0.747285063133237,
+      "support": 830.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      74,
+      2,
+      9,
+      6,
+      47
+    ],
+    [
+      3,
+      70,
+      5,
+      1,
+      8
+    ],
+    [
+      4,
+      1,
+      339,
+      3,
+      5
+    ],
+    [
+      6,
+      2,
+      32,
+      35,
+      13
+    ],
+    [
+      33,
+      0,
+      13,
+      9,
+      110
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.6166666666666667,
+      "recall": 0.5362318840579711,
+      "f1-score": 0.5736434108527132,
+      "support": 138.0
+    },
+    "Canola": {
+      "precision": 0.9333333333333333,
+      "recall": 0.8045977011494253,
+      "f1-score": 0.8641975308641975,
+      "support": 87.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.8517587939698492,
+      "recall": 0.9630681818181818,
+      "f1-score": 0.904,
+      "support": 352.0
+    },
+    "Small grain grazing": {
+      "precision": 0.6481481481481481,
+      "recall": 0.3977272727272727,
+      "f1-score": 0.49295774647887325,
+      "support": 88.0
+    },
+    "Wheat": {
+      "precision": 0.6010928961748634,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.632183908045977,
+      "support": 165.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": null,
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/SMOTE_Stacked_Ensemble_20260217_103600/report.pdf"
+}

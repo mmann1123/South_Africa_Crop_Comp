@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+CNN-BiLSTM Ensemble Field-Level (Inference),0.8265060240963855,0.7556552760428912,0.8248939314087055,0.7714867232764511,test

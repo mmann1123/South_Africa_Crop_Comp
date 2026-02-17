@@ -1,0 +1,167 @@
+{
+  "model_name": "XGBoost Field-Level",
+  "timestamp": "2026-02-17T10:35:20.848919",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Classical Machine Learning/Field Level/xg_boost_hyper.py",
+  "hyperparameters": {
+    "n_estimators": 1467,
+    "max_depth": 12,
+    "learning_rate": 0.052820654373240856,
+    "subsample": 0.7863600753865799,
+    "colsample_bytree": 0.7913736072402858,
+    "gamma": 0.26187602212947425,
+    "reg_alpha": 0.7977043357331989,
+    "reg_lambda": 0.0005682727527875063,
+    "min_child_weight": 6
+  },
+  "split_info": {
+    "train_count": 2653,
+    "val_count": 664,
+    "test_count": 830,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.7493975903614458,
+    "cohen_kappa": 0.6521837237133176,
+    "f1_weighted": 0.7450029221236564,
+    "f1_macro": 0.6892167657472947,
+    "macro_avg": {
+      "precision": 0.7055320817213266,
+      "recall": 0.6770382422425152,
+      "f1-score": 0.6892167657472947,
+      "support": 830.0
+    },
+    "weighted_avg": {
+      "precision": 0.7437688863962464,
+      "recall": 0.7493975903614458,
+      "f1-score": 0.7450029221236564,
+      "support": 830.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      84,
+      3,
+      8,
+      7,
+      36
+    ],
+    [
+      6,
+      68,
+      6,
+      2,
+      5
+    ],
+    [
+      4,
+      2,
+      331,
+      11,
+      4
+    ],
+    [
+      9,
+      3,
+      24,
+      40,
+      12
+    ],
+    [
+      42,
+      0,
+      11,
+      13,
+      99
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.5793103448275863,
+      "recall": 0.6086956521739131,
+      "f1-score": 0.5936395759717314,
+      "support": 138.0
+    },
+    "Canola": {
+      "precision": 0.8947368421052632,
+      "recall": 0.7816091954022989,
+      "f1-score": 0.8343558282208589,
+      "support": 87.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.8710526315789474,
+      "recall": 0.9403409090909091,
+      "f1-score": 0.9043715846994536,
+      "support": 352.0
+    },
+    "Small grain grazing": {
+      "precision": 0.547945205479452,
+      "recall": 0.45454545454545453,
+      "f1-score": 0.4968944099378882,
+      "support": 88.0
+    },
+    "Wheat": {
+      "precision": 0.6346153846153846,
+      "recall": 0.6,
+      "f1-score": 0.616822429906542,
+      "support": 165.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": {
+    "feature_names": [
+      "hue_mean_abs_change",
+      "B11_variance",
+      "B11_standard_deviation",
+      "B6_standard_deviation",
+      "B6_variance",
+      "EVI_autocorr_lag_2",
+      "B2_variance",
+      "B6_quantile_q_0.95",
+      "B2_quantile_q_0.05",
+      "EVI_absolute_sum_of_changes",
+      "B12_count_below_mean",
+      "EVI_median",
+      "B2_standard_deviation",
+      "hue_maximum",
+      "hue_count_above_mean",
+      "B2_mean_change",
+      "EVI_autocorr_lag_1",
+      "B2_autocorr_lag_3",
+      "B11_count_above_mean",
+      "B2_minimum"
+    ],
+    "importance_values": [
+      0.06506971269845963,
+      0.06118409335613251,
+      0.0341578833758831,
+      0.03356504067778587,
+      0.03140972554683685,
+      0.02605649083852768,
+      0.019312787801027298,
+      0.01456495188176632,
+      0.013761060312390327,
+      0.013049563392996788,
+      0.012477737851440907,
+      0.01244210172444582,
+      0.011931849643588066,
+      0.011074339970946312,
+      0.01092695165425539,
+      0.010181145742535591,
+      0.009057397954165936,
+      0.008993556722998619,
+      0.00897801760584116,
+      0.008494904264807701
+    ]
+  },
+  "notes": "Optuna tuning: 68 trials, best F1 macro=0.7111",
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/XGBoost_Field-Level_20260217_103520/report.pdf"
+}
