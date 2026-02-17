@@ -147,7 +147,7 @@ def get_logits_and_labels(model, dataloader):
 print("[INFO] Starting ensemble with CNN + BiLSTM + Weighted Focal Loss...")
 num_models = 5
 PATIENCE = 15
-N_EPOCHS = 30
+N_EPOCHS = 100
 logits_ensemble = []
 
 val_loader = DataLoader(val_dataset, batch_size=1024, shuffle=False,
