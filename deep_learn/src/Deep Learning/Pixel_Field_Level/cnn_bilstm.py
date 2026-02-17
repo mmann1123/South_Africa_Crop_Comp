@@ -3,17 +3,21 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 from config import MERGED_DL_PATH, MODEL_DIR
 
+sys.stdout.reconfigure(line_buffering=True)
+
+import time
 import pandas as pd
 import numpy as np
 import torch
 from torch import nn
-from torch.utils.data import Dataset, DataLoader, WeightedRandomSampler
+import torch.nn.functional as F
+from torch.utils.data import Dataset, DataLoader
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report, accuracy_score, f1_score, cohen_kappa_score
-from sklearn.utils.class_weight import compute_class_weight
 import random
-from torchtoolbox.nn import FocalLoss
+import joblib
+from report import ModelReport
 
 os.makedirs(MODEL_DIR, exist_ok=True)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -27,6 +31,7 @@ df = pd.read_parquet(MERGED_DL_PATH)
 print("[INFO] Encoding labels...")
 label_encoder = LabelEncoder()
 df['label'] = label_encoder.fit_transform(df['crop_name'])
+num_classes = len(label_encoder.classes_)
 
 fids = df['fid'].unique()
 train_fids, test_fids = train_test_split(fids, test_size=0.2, random_state=42)
@@ -63,13 +68,27 @@ test_dataset = CropDataset(test_df, feature_cols)
 
 print("[INFO] Dataset classes created.")
 
-# ==================== Step 5: Weighted Sampler ====================
-class_counts = np.bincount(train_df['label'])
-class_weights_sampler = 1. / class_counts
-sample_weights = class_weights_sampler[train_df['label'].values]
-sampler = WeightedRandomSampler(sample_weights, len(sample_weights), replacement=True)
+# ==================== Step 5: Weighted Focal Loss ====================
+class WeightedFocalLoss(nn.Module):
+    """Weighted Focal Loss — class weights (alpha) + difficulty focusing (gamma)."""
+    def __init__(self, alpha, gamma=2.0):
+        super().__init__()
+        self.register_buffer('alpha', alpha)
+        self.gamma = gamma
 
-print("[INFO] Weighted sampler initialized.")
+    def forward(self, input, target):
+        ce = F.cross_entropy(input, target, reduction='none')
+        pt = torch.exp(-ce)
+        alpha_t = self.alpha[target]
+        loss = alpha_t * ((1 - pt) ** self.gamma) * ce
+        return loss.mean()
+
+class_counts = np.bincount(train_df['label'], minlength=num_classes).astype(np.float64)
+class_counts = np.maximum(class_counts, 1.0)
+alpha = 1.0 / class_counts
+alpha = alpha / alpha.sum() * num_classes
+alpha = torch.tensor(alpha, dtype=torch.float32)
+print(f"[INFO] Class weights (alpha): {alpha.tolist()}")
 
 # ==================== Step 6: CNN + BiLSTM Model ====================
 class CropCNNBiLSTM(nn.Module):
@@ -96,7 +115,7 @@ print("[INFO] CNN + BiLSTM model class defined.")
 # ==================== Step 7: Training & Evaluation ====================
 scaler_amp = torch.amp.GradScaler("cuda")
 
-def train(model, optimizer, criterion, dataloader):
+def train_epoch(model, optimizer, criterion, dataloader):
     model.train()
     total_loss = 0
     for X, y in dataloader:
@@ -106,6 +125,8 @@ def train(model, optimizer, criterion, dataloader):
             outputs = model(X)
             loss = criterion(outputs, y)
         scaler_amp.scale(loss).backward()
+        scaler_amp.unscale_(optimizer)
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         scaler_amp.step(optimizer)
         scaler_amp.update()
         total_loss += loss.item()
@@ -123,9 +144,16 @@ def get_logits_and_labels(model, dataloader):
             labels_list.extend(y.tolist())
     return torch.cat(logits_list, dim=0), labels_list
 
-print("[INFO] Starting ensemble with CNN + BiLSTM + Focal Loss...")
+print("[INFO] Starting ensemble with CNN + BiLSTM + Weighted Focal Loss...")
 num_models = 5
+PATIENCE = 15
+N_EPOCHS = 30
 logits_ensemble = []
+
+val_loader = DataLoader(val_dataset, batch_size=1024, shuffle=False,
+                        num_workers=4, pin_memory=True, persistent_workers=True)
+test_loader = DataLoader(test_dataset, batch_size=1024, shuffle=False,
+                         num_workers=4, pin_memory=True, persistent_workers=True)
 
 for seed in range(num_models):
     print(f"\n[ENSEMBLE] Training model with seed {seed}")
@@ -133,43 +161,65 @@ for seed in range(num_models):
     np.random.seed(seed)
     random.seed(seed)
 
-    model = CropCNNBiLSTM(len(feature_cols), len(label_encoder.classes_)).to(device)
+    model = CropCNNBiLSTM(len(feature_cols), num_classes).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
-    criterion = FocalLoss(classes=len(label_encoder.classes_), gamma=2.0).to(device)
+    criterion = WeightedFocalLoss(alpha, gamma=2.0).to(device)
 
-    train_loader = DataLoader(train_dataset, batch_size=1024, sampler=sampler,
+    train_loader = DataLoader(train_dataset, batch_size=1024, shuffle=True,
                               num_workers=4, pin_memory=True, persistent_workers=True)
-    test_loader = DataLoader(test_dataset, batch_size=1024, shuffle=False,
-                             num_workers=4, pin_memory=True, persistent_workers=True)
 
-    for epoch in range(25):
-        loss = train(model, optimizer, criterion, train_loader)
-        print(f"[SEED {seed}] Epoch {epoch+1}/25 - Loss: {loss:.4f}")
-
-    logits, test_labels = get_logits_and_labels(model, test_loader)
     model_path = os.path.join(MODEL_DIR, f"new_model_seed_{seed}_25epochs.pt")
-    torch.save(model.state_dict(), model_path)
+    torch.save(model.state_dict(), model_path)  # initial save
+
+    best_val_f1 = 0.0
+    patience_counter = 0
+
+    for epoch in range(N_EPOCHS):
+        t_ep = time.time()
+        loss = train_epoch(model, optimizer, criterion, train_loader)
+
+        # Validation — select by F1 macro
+        val_logits, val_labels = get_logits_and_labels(model, val_loader)
+        val_preds = val_logits.argmax(dim=1).tolist()
+        val_f1 = f1_score(val_labels, val_preds, average='macro')
+        val_acc = accuracy_score(val_labels, val_preds)
+
+        print(f"[SEED {seed}] Epoch {epoch+1}/{N_EPOCHS} - "
+              f"loss={loss:.4f}, val_f1_macro={val_f1:.4f}, "
+              f"val_acc={val_acc:.4f}, {time.time()-t_ep:.1f}s")
+
+        if val_f1 > best_val_f1:
+            best_val_f1 = val_f1
+            patience_counter = 0
+            torch.save(model.state_dict(), model_path)
+        else:
+            patience_counter += 1
+            if patience_counter >= PATIENCE:
+                print(f"[SEED {seed}] Early stopping at epoch {epoch+1}")
+                break
+
+    # Load best model for evaluation
+    model.load_state_dict(torch.load(model_path, map_location=device))
+    logits, test_labels = get_logits_and_labels(model, test_loader)
     print(f"[SEED {seed}] Model saved: {model_path}")
     logits_ensemble.append(logits.unsqueeze(0))
 
 # Save label encoder and feature columns for inference
-import joblib
 joblib.dump(label_encoder, os.path.join(MODEL_DIR, "cnn_bilstm_label_encoder.pkl"))
 joblib.dump(feature_cols, os.path.join(MODEL_DIR, "cnn_bilstm_feature_cols.pkl"))
 print(f"[INFO] Saved label_encoder and feature_cols to {MODEL_DIR}")
 
 print("\n[INFO] Averaging ensemble logits...")
-avg_logits = torch.cat(logits_ensemble, dim=0).mean(dim=0)
+avg_logits = torch.cat(logits_ensemble, dim=0).float().mean(dim=0)
 pred_labels = torch.argmax(avg_logits, dim=1).tolist()
 
-print("[ENSEMBLE + CNN+BiLSTM + FOCAL LOSS] Accuracy:", accuracy_score(test_labels, pred_labels))
-print("[ENSEMBLE + CNN+BiLSTM + FOCAL LOSS] F1 Score:", f1_score(test_labels, pred_labels, average='weighted'))
-print("[ENSEMBLE + CNN+BiLSTM + FOCAL LOSS] Cohen Kappa:", cohen_kappa_score(test_labels, pred_labels))
-print("[ENSEMBLE + CNN+BiLSTM + FOCAL LOSS] Classification Report:\n", classification_report(test_labels, pred_labels, target_names=label_encoder.classes_))
+print("[ENSEMBLE + CNN+BiLSTM + WeightedFocal] Accuracy:", accuracy_score(test_labels, pred_labels))
+print("[ENSEMBLE + CNN+BiLSTM + WeightedFocal] F1 Score:", f1_score(test_labels, pred_labels, average='weighted'))
+print("[ENSEMBLE + CNN+BiLSTM + WeightedFocal] F1 Macro:", f1_score(test_labels, pred_labels, average='macro'))
+print("[ENSEMBLE + CNN+BiLSTM + WeightedFocal] Cohen Kappa:", cohen_kappa_score(test_labels, pred_labels))
+print("[ENSEMBLE + CNN+BiLSTM + WeightedFocal] Classification Report:\n", classification_report(test_labels, pred_labels, target_names=label_encoder.classes_))
 
 # ===================== REPORT =====================
-from report import ModelReport
-
 report = ModelReport("CNN-BiLSTM Ensemble (5-seed)")
 report.set_hyperparameters({
     "num_models": num_models,
@@ -178,9 +228,12 @@ report.set_hyperparameters({
     "kernel_size": 5,
     "dropout": 0.3,
     "learning_rate": 1e-3,
-    "epochs": 25,
+    "epochs": N_EPOCHS,
+    "patience": PATIENCE,
     "batch_size": 1024,
-    "loss": "FocalLoss(gamma=2.0)",
+    "loss": "WeightedFocalLoss(gamma=2.0, alpha=1/class_counts)",
+    "model_selection": "val F1 macro (maximize)",
+    "gradient_clipping": 1.0,
 })
 report.set_split_info(train=len(train_df), val=len(val_df), test=len(test_df), seed=42)
 report.set_metrics(test_labels, pred_labels, label_encoder.classes_)

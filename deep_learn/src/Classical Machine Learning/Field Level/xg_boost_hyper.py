@@ -8,6 +8,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score
+from sklearn.utils.class_weight import compute_sample_weight
 import xgboost as xgb
 import optuna
 
@@ -101,9 +102,9 @@ def objective(trial):
     for train_idx, val_idx in kf.split(X_train_scaled, y_train):
         X_tr, X_val_fold = X_train_scaled.iloc[train_idx], X_train_scaled.iloc[val_idx]
         y_tr, y_val_fold = y_train.iloc[train_idx], y_train.iloc[val_idx]
-        model.fit(X_tr, y_tr)
+        model.fit(X_tr, y_tr, sample_weight=compute_sample_weight('balanced', y_tr))
         preds = model.predict(X_val_fold)
-        score = f1_score(y_val_fold, preds, average='weighted')
+        score = f1_score(y_val_fold, preds, average='macro')
         scores.append(score)
     return np.mean(scores)
 
@@ -128,7 +129,7 @@ final_model = xgb.XGBClassifier(
     **study.best_params
 )
 
-final_model.fit(X_train_scaled, y_train)
+final_model.fit(X_train_scaled, y_train, sample_weight=compute_sample_weight('balanced', y_train))
 
 # ===================== EVALUATE =====================
 print("Evaluating final model on test set...")
@@ -155,5 +156,5 @@ report.set_split_info(train=len(X_train), val=len(X_val), test=len(X_test), seed
 report.set_metrics(y_test, y_pred, le.classes_)
 report.set_predictions(X_test.index, y_test, y_pred, le.classes_)
 report.set_feature_importance(final_model.feature_importances_, X_train.columns)
-report.add_notes(f"Optuna tuning: {study.best_trial.number + 1} trials, best F1={study.best_value:.4f}")
+report.add_notes(f"Optuna tuning: {study.best_trial.number + 1} trials, best F1 macro={study.best_value:.4f}")
 report.generate()

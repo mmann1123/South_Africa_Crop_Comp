@@ -25,7 +25,7 @@ import pandas as pd
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.utils.data import Dataset, DataLoader, WeightedRandomSampler
+from torch.utils.data import Dataset, DataLoader
 import joblib
 import random
 from collections import Counter
@@ -83,20 +83,22 @@ class TemporalDataset(Dataset):
         return self.X[idx], self.y[idx]
 
 
-# =================== FocalLoss ===================
+# =================== Weighted Focal Loss ===================
 
-class FocalLoss(nn.Module):
-    """Focal Loss (Lin et al. 2017) — down-weights well-classified examples."""
+class WeightedFocalLoss(nn.Module):
+    """Weighted Focal Loss (Lin et al. 2017) — class weights (alpha) + difficulty focusing (gamma)."""
 
-    def __init__(self, gamma=2.0):
+    def __init__(self, alpha, gamma=2.0):
         super().__init__()
+        self.register_buffer('alpha', alpha)  # per-class weights
         self.gamma = gamma
 
     def forward(self, input, target):
         ce = F.cross_entropy(input, target, reduction='none')
         pt = torch.exp(-ce)
-        focal = ((1 - pt) ** self.gamma) * ce
-        return focal.mean()
+        alpha_t = self.alpha[target]
+        loss = alpha_t * ((1 - pt) ** self.gamma) * ce
+        return loss.mean()
 
 
 # =================== L-TAE Architecture ===================
@@ -293,19 +295,19 @@ def main():
     val_ds = TemporalDataset(X_val, y_val)
     test_ds = TemporalDataset(X_test, y_test)
 
-    # Weighted sampler for class imbalance (same as CNN-BiLSTM)
+    # Weighted Focal Loss — class weights handle imbalance, no sampler needed
     class_counts = np.bincount(y_train, minlength=num_classes).astype(np.float64)
     class_counts = np.maximum(class_counts, 1.0)
-    sample_weights = (1.0 / class_counts)[y_train]
-    sampler = WeightedRandomSampler(sample_weights, len(sample_weights), replacement=True)
+    alpha = 1.0 / class_counts
+    alpha = alpha / alpha.sum() * num_classes  # normalize so weights sum to num_classes
+    alpha = torch.tensor(alpha, dtype=torch.float32)
+    criterion = WeightedFocalLoss(alpha, gamma=2.0).to(device)
+    print(f"Class weights (alpha): {alpha.tolist()}")
 
     val_loader = DataLoader(val_ds, batch_size=BATCH_SIZE, shuffle=False,
                             num_workers=4, pin_memory=True, persistent_workers=True)
     test_loader = DataLoader(test_ds, batch_size=BATCH_SIZE, shuffle=False,
                              num_workers=4, pin_memory=True, persistent_workers=True)
-
-    # FocalLoss — same as CNN-BiLSTM, no class weights needed
-    criterion = FocalLoss(gamma=2.0).to(device)
 
     # 5-seed ensemble
     test_logits_ensemble = []
@@ -322,10 +324,10 @@ def main():
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=N_EPOCHS, eta_min=1e-6)
         scaler_amp = torch.amp.GradScaler("cuda")
 
-        train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, sampler=sampler,
+        train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True,
                                   num_workers=4, pin_memory=True, persistent_workers=True)
 
-        best_val_loss = float('inf')
+        best_val_f1 = 0.0
         patience_counter = 0
         model_path = os.path.join(MODEL_DIR, f"ltae_seed_{seed}.pt")
 
@@ -336,19 +338,20 @@ def main():
             t_ep = time.time()
             train_loss = train_epoch(model, optimizer, criterion, train_loader, scaler_amp)
 
-            # Validation
+            # Validation — select by F1 macro (treats all classes equally)
             val_logits, val_labels = evaluate(model, val_loader)
-            val_loss = F.cross_entropy(val_logits.float(), torch.tensor(val_labels)).item()
-            val_acc = accuracy_score(val_labels, val_logits.argmax(dim=1).tolist())
+            val_preds = val_logits.argmax(dim=1).tolist()
+            val_f1 = f1_score(val_labels, val_preds, average='macro')
+            val_acc = accuracy_score(val_labels, val_preds)
             scheduler.step()
 
             print(f"  Epoch {epoch+1}/{N_EPOCHS} - "
-                  f"train_loss={train_loss:.4f}, val_loss={val_loss:.4f}, "
+                  f"train_loss={train_loss:.4f}, val_f1_macro={val_f1:.4f}, "
                   f"val_acc={val_acc:.4f}, lr={optimizer.param_groups[0]['lr']:.2e}, "
                   f"{time.time()-t_ep:.1f}s")
 
-            if not math.isnan(val_loss) and val_loss < best_val_loss:
-                best_val_loss = val_loss
+            if val_f1 > best_val_f1:
+                best_val_f1 = val_f1
                 patience_counter = 0
                 torch.save(model.state_dict(), model_path)
             else:
@@ -396,7 +399,8 @@ def main():
         "dropout": 0.3, "lr": LR,
         "optimizer": "AdamW (wd=1e-4)",
         "scheduler": "CosineAnnealingLR",
-        "loss": "FocalLoss(gamma=2.0)",
+        "loss": "WeightedFocalLoss(gamma=2.0, alpha=1/class_counts)",
+        "model_selection": "val F1 macro (maximize)",
         "gradient_clipping": 1.0,
         "epochs": N_EPOCHS, "patience": PATIENCE,
         "batch_size": BATCH_SIZE,

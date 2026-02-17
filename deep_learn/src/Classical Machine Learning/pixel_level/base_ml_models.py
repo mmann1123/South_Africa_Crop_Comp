@@ -99,9 +99,9 @@ if __name__ == "__main__":
 
     # Models (n_jobs=4 for RF/LR to avoid OOM from forking 6M-row arrays across all cores)
     models = {
-        'Logistic Regression': LogisticRegression(max_iter=100, n_jobs=4),
-        'Random Forest': RandomForestClassifier(n_estimators=20, n_jobs=4),
-        'LightGBM': lgb.LGBMClassifier(n_jobs=-1),
+        'Logistic Regression': LogisticRegression(max_iter=100, n_jobs=4, class_weight='balanced'),
+        'Random Forest': RandomForestClassifier(n_estimators=20, n_jobs=4, class_weight='balanced'),
+        'LightGBM': lgb.LGBMClassifier(n_jobs=-1, is_unbalance=True),
         'XGBoost': xgb.XGBClassifier(eval_metric='logloss', device="cuda", tree_method="hist")
     }
 

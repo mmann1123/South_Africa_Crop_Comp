@@ -75,9 +75,9 @@ num_pipe   = Pipeline([
 preproc = ColumnTransformer([("num", num_pipe, feature_cols)])
 
 # Define One‑vs‑Rest base learners
-base_lr  = OneVsRestClassifier(LogisticRegression(max_iter=1000))
+base_lr  = OneVsRestClassifier(LogisticRegression(max_iter=1000, class_weight='balanced'))
 base_rf  = OneVsRestClassifier(RandomForestClassifier(
-    n_estimators=400, n_jobs=-1, random_state=SEED
+    n_estimators=400, n_jobs=-1, random_state=SEED, class_weight='balanced'
 ))
 base_hgb = OneVsRestClassifier(HistGradientBoostingClassifier(
     random_state=SEED
@@ -113,7 +113,7 @@ stack_pipe = Pipeline([
     ("prep", preproc),
     ("stack", StackingClassifier(
         estimators=estimators,
-        final_estimator=LogisticRegression(max_iter=1000),
+        final_estimator=LogisticRegression(max_iter=1000, class_weight='balanced'),
         passthrough=True,
         n_jobs=-1
     ))

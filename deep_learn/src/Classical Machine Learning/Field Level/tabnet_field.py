@@ -26,8 +26,38 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import accuracy_score, f1_score, cohen_kappa_score
+import torch.nn as nn
+import torch.nn.functional as F
 from pytorch_tabnet.tab_model import TabNetClassifier
+from pytorch_tabnet.metrics import Metric
 from report import ModelReport
+
+
+class WeightedFocalLoss(nn.Module):
+    """Weighted Focal Loss — class weights (alpha) + difficulty focusing (gamma)."""
+    def __init__(self, alpha, gamma=2.0):
+        super().__init__()
+        self.alpha = alpha
+        self.gamma = gamma
+
+    def forward(self, input, target):
+        alpha = self.alpha.to(input.device)
+        ce = F.cross_entropy(input, target, reduction='none')
+        pt = torch.exp(-ce)
+        alpha_t = alpha[target]
+        loss = alpha_t * ((1 - pt) ** self.gamma) * ce
+        return loss.mean()
+
+
+class F1MacroMetric(Metric):
+    """F1 Macro metric for TabNet eval_metric."""
+    def __init__(self):
+        self._name = "f1_macro"
+        self._maximize = True
+
+    def __call__(self, y_true, y_score):
+        preds = np.argmax(y_score, axis=1)
+        return f1_score(y_true, preds, average='macro')
 
 SEEDS = [42, 101, 202, 303, 404]
 
@@ -102,6 +132,14 @@ def main():
 
     print(f"Features: {len(feature_columns)}")
 
+    # Compute class weights for focal loss
+    class_counts = np.bincount(y_train_arr, minlength=len(le.classes_)).astype(np.float64)
+    class_counts = np.maximum(class_counts, 1.0)
+    alpha_weights = 1.0 / class_counts
+    alpha_weights = alpha_weights / alpha_weights.sum() * len(le.classes_)
+    alpha_tensor = torch.tensor(alpha_weights, dtype=torch.float32)
+    print(f"Class weights (alpha): {alpha_weights.tolist()}")
+
     # =================== 5-Seed Ensemble ===================
     val_preds_all, test_preds_all = [], []
 
@@ -131,7 +169,8 @@ def main():
             model.fit(
                 X_train=X_train_scaled, y_train=y_train_arr,
                 eval_set=[(X_val_scaled, y_val_arr)],
-                eval_metric=["accuracy"],
+                eval_metric=[F1MacroMetric],
+                loss_fn=WeightedFocalLoss(alpha_tensor, gamma=2.0),
                 max_epochs=100,
                 patience=10,
                 batch_size=1024,
@@ -179,6 +218,8 @@ def main():
         "n_d": 64, "n_a": 64, "n_steps": 5,
         "gamma": 1.5, "n_independent": 2, "n_shared": 2,
         "lr": 1e-3, "scheduler": "StepLR(step=10, gamma=0.9)",
+        "loss": "WeightedFocalLoss(gamma=2.0, alpha=1/class_counts)",
+        "model_selection": "val F1 macro (maximize)",
         "max_epochs": 100, "patience": 10, "batch_size": 1024,
         "n_models": len(SEEDS), "seeds": SEEDS,
         "features": "xr_fresh time-series (field-level mean)",

@@ -20,7 +20,7 @@ import tensorflow as tf
 from tensorflow.keras import layers, models
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, cohen_kappa_score, confusion_matrix
+from sklearn.metrics import accuracy_score, cohen_kappa_score, confusion_matrix, f1_score
 from collections import Counter
 import joblib
 
@@ -30,6 +30,59 @@ BATCH_SIZE = 8
 EPOCHS = 20
 
 BAND_PREFIXES = ['SA_B11', 'SA_B12', 'SA_B2', 'SA_B6', 'SA_EVI', 'SA_hue']
+
+
+class WeightedSparseFocalLoss(tf.keras.losses.Loss):
+    """Weighted Focal Loss for sparse categorical labels (TF/Keras)."""
+
+    def __init__(self, alpha, gamma=2.0, **kwargs):
+        super().__init__(**kwargs)
+        self.alpha = tf.constant(alpha, dtype=tf.float32)
+        self.gamma = gamma
+
+    def call(self, y_true, y_pred):
+        y_pred = tf.clip_by_value(y_pred, 1e-7, 1.0 - 1e-7)
+        y_true_int = tf.cast(tf.squeeze(y_true), tf.int32)
+        num_classes = tf.shape(y_pred)[-1]
+        ce = tf.keras.losses.sparse_categorical_crossentropy(y_true_int, y_pred)
+        pt = tf.reduce_sum(y_pred * tf.one_hot(y_true_int, num_classes), axis=-1)
+        alpha_t = tf.gather(self.alpha, y_true_int)
+        return alpha_t * tf.pow(1.0 - pt, self.gamma) * ce
+
+
+class F1MacroCheckpoint(tf.keras.callbacks.Callback):
+    """Compute F1 macro on validation data each epoch, save best model weights."""
+
+    def __init__(self, df_val, val_ids, band_mapping, le, batch_size, target_size, model_path):
+        super().__init__()
+        self.df_val = df_val
+        self.val_ids = val_ids
+        self.band_mapping = band_mapping
+        self.le = le
+        self.batch_size = batch_size
+        self.target_size = target_size
+        self.model_path = model_path
+        self.best_f1 = 0.0
+
+    def on_epoch_end(self, epoch, logs=None):
+        val_gen = patch_data_generator_time(
+            self.df_val, self.val_ids, self.band_mapping, self.le,
+            batch_size=self.batch_size, infinite=False, target_size=self.target_size,
+        )
+        y_true, y_pred = [], []
+        for X_batch, y_batch in val_gen:
+            preds = self.model.predict(X_batch, verbose=0)
+            y_true.extend(y_batch.tolist())
+            y_pred.extend(np.argmax(preds, axis=1).tolist())
+        if len(y_true) > 0:
+            f1 = f1_score(y_true, y_pred, average='macro')
+            print(f"  val_f1_macro={f1:.4f}", end="")
+            if f1 > self.best_f1:
+                self.best_f1 = f1
+                self.model.save_weights(self.model_path)
+                print(f" [saved]", end="")
+            print()
+
 
 def group_band_columns(channel_cols, band_prefixes):
     """
@@ -211,6 +264,13 @@ def main():
     patch_weight = {pid: (1.0 * total_patches) / (n_classes * patch_class_counts[cname]) for pid, cname in
                     patch_crop_map.items()}
 
+    # Compute class weights for focal loss
+    class_counts_arr = np.array([patch_class_counts.get(cls, 1) for cls in le.classes_], dtype=np.float64)
+    class_counts_arr = np.maximum(class_counts_arr, 1.0)
+    alpha = 1.0 / class_counts_arr
+    alpha = alpha / alpha.sum() * n_classes
+    print(f"Class weights (alpha): {alpha.tolist()}")
+
     # Build Data Generators.
     # The generator yields images of shape: (T, 128, 128, 6)
     train_gen = patch_data_generator_time(
@@ -249,7 +309,7 @@ def main():
         layers.Dense(num_classes, activation='softmax')
     ])
     model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-4),
-                  loss='sparse_categorical_crossentropy',
+                  loss=WeightedSparseFocalLoss(alpha, gamma=2.0),
                   metrics=['accuracy'])
     model.summary()
 
@@ -257,13 +317,26 @@ def main():
         print("No training patches found. Exiting.")
         return
 
+    best_weights_path = os.path.join(MODEL_DIR, "conv3d_best_weights.h5")
+    f1_callback = F1MacroCheckpoint(
+        df_val=df_test, val_ids=test_ids, band_mapping=band_mapping,
+        le=le, batch_size=BATCH_SIZE, target_size=TARGET_SIZE,
+        model_path=best_weights_path,
+    )
+
     history = model.fit(
         train_gen,
         steps_per_epoch=steps_per_epoch,
         epochs=EPOCHS,
         validation_data=val_gen,
-        validation_steps=validation_steps
+        validation_steps=validation_steps,
+        callbacks=[f1_callback],
     )
+
+    # Load best weights (selected by F1 macro)
+    if os.path.exists(best_weights_path):
+        model.load_weights(best_weights_path)
+        print(f"Loaded best weights (F1 macro={f1_callback.best_f1:.4f})")
 
     # Evaluate the Model.
     test_gen = patch_data_generator_time(
@@ -305,7 +378,8 @@ def main():
         "batch_size": BATCH_SIZE,
         "epochs": EPOCHS,
         "optimizer": "Adam(lr=1e-4)",
-        "loss": "sparse_categorical_crossentropy",
+        "loss": "WeightedSparseFocalLoss(gamma=2.0, alpha=1/class_counts)",
+        "model_selection": "val F1 macro (maximize)",
         "conv3d_filters": [32, 64, 128],
         "bands": BAND_PREFIXES,
         "time_steps": T,
