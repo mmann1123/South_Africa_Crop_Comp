@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+TabTransformer Ensemble (Field-Level),0.8,0.7182833646510848,0.7990844460174077,0.7329005223484552,test

@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+L-TAE Temporal Attention,0.8325301204819278,0.7635739535836876,0.8300321790527746,0.7755469456484294,test

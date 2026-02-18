@@ -1,0 +1,135 @@
+{
+  "model_name": "TabTransformer Ensemble (Field-Level)",
+  "timestamp": "2026-02-18T03:14:25.540138",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Deep Learning/Pixel_Field_Level/TabTransformer_Final_Field.py",
+  "hyperparameters": {
+    "n_d": 64,
+    "n_a": 64,
+    "n_steps": 5,
+    "gamma": 1.5,
+    "n_independent": 2,
+    "n_shared": 2,
+    "lr": 0.001,
+    "scheduler": "StepLR(step=10, gamma=0.9)",
+    "loss": "WeightedFocalLoss(gamma=2.0, alpha=1/class_counts)",
+    "model_selection": "val F1 macro (maximize)",
+    "max_epochs": 100,
+    "patience": 10,
+    "batch_size": 1024,
+    "n_models": 5,
+    "seeds": [
+      42,
+      101,
+      202,
+      303,
+      404
+    ]
+  },
+  "split_info": {
+    "train_count": 4802658,
+    "val_count": 1205790,
+    "test_count": 1531914,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.8,
+    "cohen_kappa": 0.7182833646510848,
+    "f1_weighted": 0.7990844460174077,
+    "f1_macro": 0.7329005223484552,
+    "macro_avg": {
+      "precision": 0.7434607860533768,
+      "recall": 0.7258952837560628,
+      "f1-score": 0.7329005223484552,
+      "support": 830.0
+    },
+    "weighted_avg": {
+      "precision": 0.8004004149902286,
+      "recall": 0.8,
+      "f1-score": 0.7990844460174077,
+      "support": 830.0
+    }
+  },
+  "class_names": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "confusion_matrix": [
+    [
+      78,
+      22,
+      1,
+      10,
+      9
+    ],
+    [
+      30,
+      97,
+      4,
+      5,
+      4
+    ],
+    [
+      7,
+      4,
+      90,
+      2,
+      4
+    ],
+    [
+      8,
+      3,
+      2,
+      357,
+      10
+    ],
+    [
+      14,
+      8,
+      3,
+      16,
+      42
+    ]
+  ],
+  "per_class": {
+    "1": {
+      "precision": 0.5693430656934306,
+      "recall": 0.65,
+      "f1-score": 0.6070038910505836,
+      "support": 120.0
+    },
+    "2": {
+      "precision": 0.7238805970149254,
+      "recall": 0.6928571428571428,
+      "f1-score": 0.708029197080292,
+      "support": 140.0
+    },
+    "3": {
+      "precision": 0.9,
+      "recall": 0.8411214953271028,
+      "f1-score": 0.8695652173913043,
+      "support": 107.0
+    },
+    "4": {
+      "precision": 0.9153846153846154,
+      "recall": 0.9394736842105263,
+      "f1-score": 0.9272727272727272,
+      "support": 380.0
+    },
+    "5": {
+      "precision": 0.6086956521739131,
+      "recall": 0.5060240963855421,
+      "f1-score": 0.5526315789473685,
+      "support": 83.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": null,
+  "training_time_seconds": 26708.181136131287,
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/TabTransformer_Ensemble__Field-Level_20260218_031425/report.pdf"
+}

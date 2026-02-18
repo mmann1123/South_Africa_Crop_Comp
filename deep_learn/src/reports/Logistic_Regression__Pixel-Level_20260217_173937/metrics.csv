@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+Logistic Regression (Pixel-Level),0.6458701692346552,0.5387590993261269,0.6487740959878029,0.6110733859691125,test

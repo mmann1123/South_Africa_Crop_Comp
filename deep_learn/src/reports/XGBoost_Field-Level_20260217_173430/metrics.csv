@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+XGBoost Field-Level,0.7493975903614458,0.6506401759750364,0.7423176699819467,0.6838339478830278,test
