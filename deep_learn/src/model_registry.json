@@ -2822,6 +2822,46 @@
         "temporal_order": "chronological"
       },
       "notes": null
+    },
+    {
+      "run_id": "xgboost_field-level_20260218_131657",
+      "name": "XGBoost Field-Level",
+      "model_type": "xgboost",
+      "timestamp": "2026-02-18T13:16:57.384274",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.7530120481927711,
+        "cohen_kappa": 0.6580318795082412,
+        "f1_weighted": 0.7490513787378377,
+        "f1_macro": 0.6956891171013388,
+        "macro_avg": {
+          "precision": 0.707240888392554,
+          "recall": 0.6868206237790195,
+          "f1-score": 0.6956891171013388,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.7475034880079772,
+          "recall": 0.7530120481927711,
+          "f1-score": 0.7490513787378377,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/XGBoost_Field-Level_20260218_131656"
+      },
+      "hyperparameters": {
+        "max_depth": 10,
+        "learning_rate": 0.008356528924637735,
+        "subsample": 0.9464400436783544,
+        "colsample_bytree": 0.5783708032760959,
+        "colsample_bylevel": 0.9224462016212964,
+        "gamma": 0.46974616480394255,
+        "reg_alpha": 0.07008063767873739,
+        "reg_lambda": 0.003603748188432082,
+        "min_child_weight": 9
+      },
+      "notes": null
     }
   ]
 }
