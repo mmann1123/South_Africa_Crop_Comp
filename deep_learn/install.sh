@@ -11,6 +11,19 @@ set -e
 
 FORCE_VARIANT="${1:-}"
 
+# Ensure we're inside a conda env and use its binaries directly
+# (avoids PATH issues with linuxbrew or other system pythons)
+if [ -z "$CONDA_PREFIX" ]; then
+    echo "ERROR: No conda environment active."
+    echo "  Run:  conda activate deep_field && bash install.sh"
+    exit 1
+fi
+PIP="$CONDA_PREFIX/bin/pip"
+PYTHON="$CONDA_PREFIX/bin/python3"
+echo "Using conda env: $CONDA_PREFIX"
+echo "  pip:    $PIP"
+echo "  python: $PYTHON"
+
 detect_cuda_version() {
     # Try nvidia-smi first (driver-level CUDA version)
     if command -v nvidia-smi &> /dev/null; then
@@ -72,18 +85,18 @@ fi
 echo ""
 echo "=== Installing TensorFlow ==="
 if [ "$VARIANT" = "cpu" ]; then
-    pip install "tensorflow~=2.18.0"
+    $PIP install "tensorflow~=2.18.0"
 else
-    pip install "tensorflow[and-cuda]~=2.18.0"
+    $PIP install "tensorflow[and-cuda]~=2.18.0"
 fi
 
 # Install PyTorch with correct CUDA variant (after TF so its nvidia packages take precedence)
 echo ""
 echo "=== Installing PyTorch (${VARIANT}) ==="
 if [ "$VARIANT" = "cpu" ]; then
-    pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+    $PIP install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 else
-    pip install torch torchvision --index-url "https://download.pytorch.org/whl/${VARIANT}"
+    $PIP install torch torchvision --index-url "https://download.pytorch.org/whl/${VARIANT}"
 fi
 
 # Set up LD_LIBRARY_PATH for nvidia pip packages (needed by TensorFlow)
@@ -94,7 +107,7 @@ if [ "$VARIANT" != "cpu" ] && [ -n "$CONDA_PREFIX" ]; then
     DEACTIVATE_DIR="$CONDA_PREFIX/etc/conda/deactivate.d"
     mkdir -p "$ACTIVATE_DIR" "$DEACTIVATE_DIR"
 
-    NVIDIA_LIB_DIRS=$(python3 -c "
+    NVIDIA_LIB_DIRS=$($PYTHON -c "
 import os, site
 sp = site.getsitepackages()[0]
 nvidia_dir = os.path.join(sp, 'nvidia')
@@ -126,12 +139,13 @@ DEACTIVATE_EOF
     echo "Created conda activation scripts for nvidia library paths"
 fi
 
-# Install remaining requirements (excluding lightgbm — installed separately for GPU)
+# Install remaining requirements
 echo ""
 echo "=== Installing other dependencies ==="
-pip install \
+$PIP install \
     "geopandas~=1.0.1" \
     "joblib~=1.4.2" \
+    "lightgbm~=4.6.0" \
     "matplotlib~=3.9.1" \
     "optuna~=4.2.1" \
     "pandas~=2.2.2" \
@@ -147,24 +161,10 @@ pip install \
     "pytorch-tabnet" \
     "imbalanced-learn"
 
-# Install LightGBM with CUDA support (builds from source)
-echo ""
-echo "=== Installing LightGBM with CUDA GPU support ==="
-pip install cmake  # required for building from source
-if [ "$VARIANT" = "cpu" ]; then
-    pip install "lightgbm~=4.6.0"
-else
-    pip install --no-binary lightgbm "lightgbm~=4.6.0" \
-        --config-settings=cmake.define.USE_CUDA=ON || {
-        echo "[WARNING] LightGBM CUDA build failed, falling back to CPU-only"
-        pip install "lightgbm~=4.6.0"
-    }
-fi
-
 # Verify
 echo ""
 echo "=== Verifying installation ==="
-python3 -c "
+$PYTHON -c "
 import torch
 print(f'PyTorch {torch.__version__}')
 print(f'  CUDA available: {torch.cuda.is_available()}')
@@ -179,21 +179,6 @@ print(f'  GPUs: {len(gpus)}')
 if gpus:
     for g in gpus:
         print(f'  Device: {g}')
-
-import xgboost
-print(f'XGBoost {xgboost.__version__}')
-
-import lightgbm
-print(f'LightGBM {lightgbm.__version__}')
-# Check if CUDA device works
-try:
-    import numpy as np
-    m = lightgbm.LGBMClassifier(device='cuda', n_estimators=2, verbose=-1)
-    m.fit(np.random.randn(20, 3), np.random.randint(0, 2, 20))
-    print('  CUDA GPU: available')
-except Exception as e:
-    print(f'  CUDA GPU: not available ({e})')
-    print('  Falling back to CPU for LightGBM')
 "
 
 echo ""
