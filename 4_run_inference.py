@@ -27,13 +27,13 @@ DEEP_LEARN_SRC = os.path.join(REPO_ROOT, "deep_learn", "src")
 
 sys.path.insert(0, DEEP_LEARN_SRC)
 from config import (
-    MODEL_DIR, TABNET_DIR, TABNET_FIELD_DIR, XGB_TUNER_DIR, MERGED_DL_TEST_PATH,
-    COMBINED_TEST_FEATURES_PATH, TEST_PATCH_DATA_PATH,
+    MODEL_DIR, TABNET_DIR, TABNET_FIELD_DIR, XGB_TUNER_DIR, LGBM_TUNER_DIR,
+    MERGED_DL_TEST_PATH, COMBINED_TEST_FEATURES_PATH, TEST_PATCH_DATA_PATH,
     ML_FIELD_PYTHON, DEEP_FIELD_PYTHON,
 )
 
 # Models that use the ml_field env (classical ML); all others use deep_field
-ML_FIELD_MODELS = {"xgboost", "smote", "classical", "baseml"}
+ML_FIELD_MODELS = {"xgboost", "lgbm", "smote", "classical", "baseml"}
 
 # (key, script, description, output_csv, required_data, required_models)
 INFERENCE_STEPS = [
@@ -48,6 +48,19 @@ INFERENCE_STEPS = [
             os.path.join(XGB_TUNER_DIR, "imputer.joblib"),
             os.path.join(XGB_TUNER_DIR, "scaler.joblib"),
             os.path.join(XGB_TUNER_DIR, "label_encoder.joblib"),
+        ],
+    ),
+    (
+        "lgbm",
+        "inference_lgbm.py",
+        "LightGBM (Optuna-tuned)",
+        os.path.join(OUT_OF_SAMPLE, "predictions_lgbm.csv"),
+        [COMBINED_TEST_FEATURES_PATH],
+        [
+            os.path.join(LGBM_TUNER_DIR, "final_lgbm_model.joblib"),
+            os.path.join(LGBM_TUNER_DIR, "imputer.joblib"),
+            os.path.join(LGBM_TUNER_DIR, "scaler.joblib"),
+            os.path.join(LGBM_TUNER_DIR, "label_encoder.joblib"),
         ],
     ),
     (
@@ -264,7 +277,7 @@ def main():
 
     # Show available predictions
     print(f"\n--- Available Predictions ---")
-    for name in ["xgboost", "smote_stacked", "voting", "stacking",
+    for name in ["xgboost", "lgbm", "smote_stacked", "voting", "stacking",
                   "base_lr", "base_rf", "base_lgbm", "base_xgb",
                   "cnn_bilstm", "tabnet", "3d_cnn",
                   "multi_channel_cnn", "ensemble_3d_cnn", "tabnet_field",

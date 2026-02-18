@@ -17,6 +17,13 @@ import xgboost as xgb
 os.makedirs(MODEL_DIR, exist_ok=True)
 os.makedirs(XGB_TUNER_DIR, exist_ok=True)
 
+# Try to load tuned XGBoost params from Optuna run
+_tuned_xgb_params = None
+_tuned_xgb_path = os.path.join(XGB_TUNER_DIR, 'best_xgb_params.joblib')
+if os.path.exists(_tuned_xgb_path):
+    _tuned_xgb_params = joblib.load(_tuned_xgb_path)
+    print(f"Loaded tuned XGBoost params from {_tuned_xgb_path}")
+
 # ===================== LOAD & SPLIT =====================
 print("Loading dataset...")
 data = pd.read_parquet(FINAL_DATA_PATH, engine="pyarrow")
@@ -76,19 +83,34 @@ X_train_resampled, y_train_resampled = resampler.fit_resample(X_train_scaled, y_
 # ===================== MODEL SETUP =====================
 print("Training model...")
 
-rf_model = RandomForestClassifier(n_estimators=300, max_depth=20, class_weight='balanced', n_jobs=-1, random_state=42)
-xgb_model = xgb.XGBClassifier(
-    n_estimators=300,
-    max_depth=8,
-    learning_rate=0.1,
-    subsample=0.8,
-    colsample_bytree=0.8,
-    eval_metric='mlogloss',
-    random_state=42,
-    n_jobs=-1,
-    device="cuda",
-    tree_method="hist",
-)
+rf_model = RandomForestClassifier(n_estimators=500, max_depth=None, class_weight='balanced', n_jobs=-1, random_state=42)
+
+# Use Optuna-tuned XGBoost params if available, otherwise use reasonable defaults
+if _tuned_xgb_params is not None:
+    _xgb_p = {k: v for k, v in _tuned_xgb_params.items() if k != 'n_estimators'}
+    xgb_model = xgb.XGBClassifier(
+        n_estimators=_tuned_xgb_params.get('n_estimators', 1000),
+        eval_metric='mlogloss',
+        random_state=42,
+        device="cuda",
+        tree_method="hist",
+        **_xgb_p
+    )
+    print("  Using Optuna-tuned XGBoost params for stacking base")
+else:
+    xgb_model = xgb.XGBClassifier(
+        n_estimators=500,
+        max_depth=8,
+        learning_rate=0.1,
+        subsample=0.8,
+        colsample_bytree=0.8,
+        eval_metric='mlogloss',
+        random_state=42,
+        device="cuda",
+        tree_method="hist",
+    )
+    print("  Using default XGBoost params (run xg_boost_hyper.py first for tuned params)")
+
 meta_model = LogisticRegression(max_iter=1000, class_weight='balanced')
 
 stacked = StackingClassifier(
@@ -142,8 +164,12 @@ from report import ModelReport
 
 report = ModelReport("SMOTE Stacked Ensemble")
 report.set_hyperparameters({
-    "base_rf": {"n_estimators": 300, "max_depth": 20, "class_weight": "balanced"},
-    "base_xgb": {"n_estimators": 300, "max_depth": 8, "learning_rate": 0.1, "subsample": 0.8, "colsample_bytree": 0.8},
+    "base_rf": {"n_estimators": 500, "max_depth": "None (unlimited)", "class_weight": "balanced"},
+    "base_xgb": {k: str(v) for k, v in xgb_model.get_params().items() if k in [
+        'n_estimators', 'max_depth', 'learning_rate', 'subsample', 'colsample_bytree',
+        'colsample_bylevel', 'gamma', 'reg_alpha', 'reg_lambda', 'min_child_weight',
+    ]},
+    "xgb_tuned": _tuned_xgb_params is not None,
     "meta": "LogisticRegression(max_iter=1000, class_weight=balanced)",
     "resampler": "SMOTETomek(random_state=42)",
 })

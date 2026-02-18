@@ -1,7 +1,7 @@
 # ===================== IMPORTS =====================
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
-from config import FINAL_DATA_PATH, XGB_TUNER_DIR
+from config import FINAL_DATA_PATH, LGBM_TUNER_DIR
 
 import time
 import pandas as pd, numpy as np, gc, joblib
@@ -10,11 +10,11 @@ from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score
 from sklearn.utils.class_weight import compute_sample_weight
-import xgboost as xgb
+import lightgbm as lgb
 import optuna
 from optuna.pruners import MedianPruner
 
-os.makedirs(XGB_TUNER_DIR, exist_ok=True)
+os.makedirs(LGBM_TUNER_DIR, exist_ok=True)
 
 # ===================== LOAD & SPLIT =====================
 print("Loading dataset...")
@@ -23,7 +23,7 @@ data = pd.read_parquet(FINAL_DATA_PATH, engine="pyarrow")
 # Label Encode
 le = LabelEncoder()
 data['crop_name_encoded'] = le.fit_transform(data['crop_name'])
-joblib.dump(le, os.path.join(XGB_TUNER_DIR, 'label_encoder.joblib'))
+joblib.dump(le, os.path.join(LGBM_TUNER_DIR, 'label_encoder.joblib'))
 
 # ===================== SPLIT BY FIELD =====================
 print("Splitting FIDs first...")
@@ -34,7 +34,7 @@ train_fids, val_fids = train_test_split(train_fids, test_size=0.2, random_state=
 train_data = data[data['fid'].isin(train_fids)].copy()
 val_data = data[data['fid'].isin(val_fids)].copy()
 test_data = data[data['fid'].isin(test_fids)].copy()
-joblib.dump(test_fids, os.path.join(XGB_TUNER_DIR, "test_fids.joblib"))
+joblib.dump(test_fids, os.path.join(LGBM_TUNER_DIR, "test_fids.joblib"))
 
 # ===================== AGGREGATE PER FIELD =====================
 print("Aggregating per field split...")
@@ -68,36 +68,37 @@ X_train_scaled = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.col
 X_val_scaled = pd.DataFrame(scaler.transform(X_val), columns=X_val.columns)
 X_test_scaled = pd.DataFrame(scaler.transform(X_test), columns=X_test.columns)
 
-joblib.dump(imputer, os.path.join(XGB_TUNER_DIR, 'imputer.joblib'))
-joblib.dump(scaler, os.path.join(XGB_TUNER_DIR, 'scaler.joblib'))
+joblib.dump(imputer, os.path.join(LGBM_TUNER_DIR, 'imputer.joblib'))
+joblib.dump(scaler, os.path.join(LGBM_TUNER_DIR, 'scaler.joblib'))
 
-# ===================== HYPERPARAMETER TUNING FOR XGBOOST =====================
+# ===================== HYPERPARAMETER TUNING FOR LIGHTGBM =====================
 t_train_start = time.time()
-print("Starting Hyperparameter Tuning...")
+print("Starting LightGBM Hyperparameter Tuning...")
+
+num_classes = len(np.unique(y_train))
 
 
 def objective(trial):
     params = {
-        'n_estimators': 2000,  # high ceiling; early stopping will cut it
+        'n_estimators': 2000,  # high ceiling; early stopping trims
         'max_depth': trial.suggest_int('max_depth', 3, 15),
+        'num_leaves': trial.suggest_int('num_leaves', 20, 300),
         'learning_rate': trial.suggest_float('learning_rate', 0.005, 0.3, log=True),
         'subsample': trial.suggest_float('subsample', 0.5, 1.0),
         'colsample_bytree': trial.suggest_float('colsample_bytree', 0.4, 1.0),
-        'colsample_bylevel': trial.suggest_float('colsample_bylevel', 0.4, 1.0),
-        'gamma': trial.suggest_float('gamma', 0, 10),
+        'min_child_samples': trial.suggest_int('min_child_samples', 5, 100),
         'reg_alpha': trial.suggest_float('reg_alpha', 1e-4, 10, log=True),
         'reg_lambda': trial.suggest_float('reg_lambda', 1e-4, 10, log=True),
-        'min_child_weight': trial.suggest_int('min_child_weight', 1, 10),
+        'min_split_gain': trial.suggest_float('min_split_gain', 0.0, 1.0),
     }
 
-    model = xgb.XGBClassifier(
-        objective='multi:softmax',
-        num_class=len(np.unique(y_train)),
+    model = lgb.LGBMClassifier(
+        objective='multiclass',
+        num_class=num_classes,
         device="cuda",
-        tree_method="hist",
-        eval_metric="mlogloss",
-        early_stopping_rounds=50,
+        is_unbalance=True,
         random_state=42,
+        verbose=-1,
         **params
     )
 
@@ -109,9 +110,8 @@ def objective(trial):
         y_tr, y_val_fold = y_train.iloc[train_idx], y_train.iloc[val_idx]
         model.fit(
             X_tr, y_tr,
-            sample_weight=compute_sample_weight('balanced', y_tr),
             eval_set=[(X_val_fold, y_val_fold)],
-            verbose=False,
+            callbacks=[lgb.early_stopping(50, verbose=False), lgb.log_evaluation(0)],
         )
         preds = model.predict(X_val_fold)
         score = f1_score(y_val_fold, preds, average='macro')
@@ -134,28 +134,26 @@ print(study.best_params)
 
 best_params = {k: v for k, v in study.best_params.items()}
 best_params['n_estimators'] = 2000  # early stopping will find optimal count
-joblib.dump(best_params, os.path.join(XGB_TUNER_DIR, 'best_xgb_params.joblib'))
+joblib.dump(best_params, os.path.join(LGBM_TUNER_DIR, 'best_lgbm_params.joblib'))
 
 # ===================== TRAIN FINAL MODEL =====================
-print("Training final XGBoost model with early stopping on val set...")
-final_model = xgb.XGBClassifier(
-    objective='multi:softmax',
-    num_class=len(np.unique(y_train)),
+print("Training final LightGBM model with early stopping on val set...")
+final_model = lgb.LGBMClassifier(
+    objective='multiclass',
+    num_class=num_classes,
     device="cuda",
-    tree_method="hist",
-    eval_metric="mlogloss",
-    early_stopping_rounds=50,
+    is_unbalance=True,
     random_state=42,
+    verbose=-1,
     **best_params
 )
 
 final_model.fit(
     X_train_scaled, y_train,
-    sample_weight=compute_sample_weight('balanced', y_train),
     eval_set=[(X_val_scaled, y_val)],
-    verbose=False,
+    callbacks=[lgb.early_stopping(50, verbose=False), lgb.log_evaluation(0)],
 )
-print(f"  Best iteration: {final_model.best_iteration} / {best_params['n_estimators']}")
+print(f"  Best iteration: {final_model.best_iteration_} / {best_params['n_estimators']}")
 
 # ===================== EVALUATE =====================
 print("Evaluating final model on test set...")
@@ -167,24 +165,25 @@ print(classification_report(y_test, y_pred))
 print("Confusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
 print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
-print(f"F1 Score: {f1_score(y_test, y_pred, average='weighted'):.4f}")
+print(f"F1 Macro: {f1_score(y_test, y_pred, average='macro'):.4f}")
+print(f"F1 Weighted: {f1_score(y_test, y_pred, average='weighted'):.4f}")
 
 # ===================== SAVE MODEL =====================
 print("Saving final model...")
-joblib.dump(final_model, os.path.join(XGB_TUNER_DIR, "final_xgb_model.joblib"), compress=3)
+joblib.dump(final_model, os.path.join(LGBM_TUNER_DIR, "final_lgbm_model.joblib"), compress=3)
 
 # ===================== REPORT =====================
 from report import ModelReport
 
-report = ModelReport("XGBoost Field-Level")
-report.set_hyperparameters(study.best_params)
+report = ModelReport("LightGBM Field-Level")
+report.set_hyperparameters(best_params)
 report.set_split_info(train=len(X_train), val=len(X_val), test=len(X_test), seed=42)
 report.set_metrics(y_test, y_pred, le.classes_)
 report.set_predictions(X_test.index, y_test, y_pred, le.classes_)
 report.set_feature_importance(final_model.feature_importances_, X_train.columns)
 report.add_notes(
     f"Optuna tuning: {len(study.trials)} trials ({study.best_trial.number + 1} best), "
-    f"F1 macro={study.best_value:.4f}, best_iteration={final_model.best_iteration}"
+    f"F1 macro={study.best_value:.4f}, best_iteration={final_model.best_iteration_}"
 )
 report.set_training_time(time.time() - t_train_start)
 report.generate()

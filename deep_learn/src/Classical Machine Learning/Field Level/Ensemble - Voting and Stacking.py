@@ -3,7 +3,7 @@ Ensemble Voting and Tacking classifier
 """
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
-from config import FINAL_DATA_PATH, MODEL_DIR
+from config import FINAL_DATA_PATH, MODEL_DIR, XGB_TUNER_DIR
 
 import time
 import warnings
@@ -33,8 +33,16 @@ from sklearn.metrics         import (
     confusion_matrix
 )
 from sklearn.model_selection import train_test_split
+import joblib as _jl
 
 os.makedirs(MODEL_DIR, exist_ok=True)
+
+# Try to load tuned XGBoost params from Optuna run
+_tuned_xgb_params = None
+_tuned_xgb_path = os.path.join(XGB_TUNER_DIR, 'best_xgb_params.joblib')
+if os.path.exists(_tuned_xgb_path):
+    _tuned_xgb_params = _jl.load(_tuned_xgb_path)
+    print(f"Loaded tuned XGBoost params from {_tuned_xgb_path}")
 
 # Set paths
 PARQUET_PATH = FINAL_DATA_PATH
@@ -75,36 +83,50 @@ num_pipe   = Pipeline([
 ])
 preproc = ColumnTransformer([("num", num_pipe, feature_cols)])
 
-# Define One‑vs‑Rest base learners
+# Define One-vs-Rest base learners
 base_lr  = OneVsRestClassifier(LogisticRegression(max_iter=1000, class_weight='balanced'))
 base_rf  = OneVsRestClassifier(RandomForestClassifier(
-    n_estimators=400, n_jobs=-1, random_state=SEED, class_weight='balanced'
+    n_estimators=500, n_jobs=-1, random_state=SEED, class_weight='balanced'
 ))
 base_hgb = OneVsRestClassifier(HistGradientBoostingClassifier(
-    random_state=SEED
+    max_iter=500, class_weight='balanced', random_state=SEED
 ))
 estimators = [('lr', base_lr), ('rf', base_rf), ('hgb', base_hgb)]
 
-# Added try catch for XGBoost due to load issues. Can omit
+# Use Optuna-tuned XGBoost params if available
 try:
     from xgboost import XGBClassifier
-    base_xgb = OneVsRestClassifier(
-        XGBClassifier(
-            n_estimators=400,
-            max_depth=6,
-            learning_rate=0.1,
-            subsample=0.8,
-            colsample_bytree=0.8,
-            objective="binary:logistic",
-            eval_metric="logloss",
-            device="cuda",
-            tree_method="hist",
-            n_jobs=-1,
-            random_state=SEED
+    if _tuned_xgb_params is not None:
+        _xgb_p = {k: v for k, v in _tuned_xgb_params.items() if k != 'n_estimators'}
+        base_xgb = OneVsRestClassifier(
+            XGBClassifier(
+                n_estimators=_tuned_xgb_params.get('n_estimators', 1000),
+                objective="binary:logistic",
+                eval_metric="logloss",
+                device="cuda",
+                tree_method="hist",
+                random_state=SEED,
+                **_xgb_p
+            )
         )
-    )
+        print("xgboost: added (Optuna-tuned params).")
+    else:
+        base_xgb = OneVsRestClassifier(
+            XGBClassifier(
+                n_estimators=500,
+                max_depth=6,
+                learning_rate=0.1,
+                subsample=0.8,
+                colsample_bytree=0.8,
+                objective="binary:logistic",
+                eval_metric="logloss",
+                device="cuda",
+                tree_method="hist",
+                random_state=SEED,
+            )
+        )
+        print("xgboost: added (default params).")
     estimators.append(('xgb', base_xgb))
-    print("xgboost: added.")
 except ImportError:
     print("xgboost: not installed, skipping.")
 

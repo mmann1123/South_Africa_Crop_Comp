@@ -29,15 +29,19 @@ from config import FINAL_DATA_PATH, ML_FIELD_PYTHON
 STAGE_1A_SCRIPTS = [
     (
         "Classical Machine Learning/Field Level/xg_boost_hyper.py",
-        "XGBoost Optuna Hyperparameter Tuning",
+        "XGBoost Optuna Hyperparameter Tuning (150 trials, early stopping)",
+    ),
+    (
+        "Classical Machine Learning/Field Level/lgbm_hyper.py",
+        "LightGBM Optuna Hyperparameter Tuning (150 trials, GPU)",
     ),
     (
         "Classical Machine Learning/Field Level/SMOTE_meta.py",
-        "SMOTE + Stacked Meta-Learner",
+        "SMOTE + Stacked Meta-Learner (uses tuned XGB params)",
     ),
     (
         "Classical Machine Learning/Field Level/Ensemble - Voting and Stacking.py",
-        "Ensemble Voting & Stacking",
+        "Ensemble Voting & Stacking (uses tuned XGB params)",
     ),
 ]
 

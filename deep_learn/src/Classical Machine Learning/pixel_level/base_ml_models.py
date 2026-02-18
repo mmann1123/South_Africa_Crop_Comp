@@ -16,6 +16,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix, cohen_kappa_score, classification_report, f1_score
 from sklearn.model_selection import train_test_split
+from sklearn.utils.class_weight import compute_sample_weight
 
 # ===================== DATA PREPROCESSING =====================
 def prepare_data(df, label_encoder, exclude_cols=None):
@@ -75,11 +76,13 @@ if __name__ == "__main__":
     print("Loading dataset...")
     data = pd.read_parquet(FINAL_DATA_PATH)
 
-    # Split by Field
+    # Split by Field (train / val / test)
     print("Splitting data by field IDs...")
     fids = data['fid'].unique()
     train_fids, test_fids = train_test_split(fids, test_size=0.2, random_state=42)
+    train_fids, val_fids = train_test_split(train_fids, test_size=0.15, random_state=42)
     train_df = data[data['fid'].isin(train_fids)].copy()
+    val_df = data[data['fid'].isin(val_fids)].copy()
     test_df = data[data['fid'].isin(test_fids)].copy()
 
     # Prepare Data
@@ -87,23 +90,36 @@ if __name__ == "__main__":
     label_encoder = LabelEncoder()
     label_encoder.fit(data['crop_name'])
     X_train, y_train, feature_cols = prepare_data(train_df, label_encoder)
+    X_val, y_val, _ = prepare_data(val_df, label_encoder)
     X_test, y_test, _ = prepare_data(test_df, label_encoder)
 
     # Scale (use float32 to halve memory: 6M x 183 features)
     print("Scaling features...")
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train).astype(np.float32)
+    X_val_scaled = scaler.transform(X_val).astype(np.float32)
     X_test_scaled = scaler.transform(X_test).astype(np.float32)
     del data  # free raw data before training
     import gc; gc.collect()
 
+    # Compute sample weights for class imbalance
+    sample_weights = compute_sample_weight('balanced', y_train)
+
     # Models (n_jobs=4 for RF/LR to avoid OOM from forking 6M-row arrays across all cores)
     models = {
-        'Logistic Regression': LogisticRegression(max_iter=100, n_jobs=4, class_weight='balanced'),
-        'Random Forest': RandomForestClassifier(n_estimators=20, n_jobs=4, class_weight='balanced'),
-        'LightGBM': lgb.LGBMClassifier(n_jobs=-1, is_unbalance=True, device="cuda"),
-        'XGBoost': xgb.XGBClassifier(eval_metric='logloss', device="cuda", tree_method="hist")
+        'Logistic Regression': LogisticRegression(max_iter=500, n_jobs=4, class_weight='balanced'),
+        'Random Forest': RandomForestClassifier(n_estimators=300, n_jobs=4, class_weight='balanced', random_state=42),
+        'LightGBM': lgb.LGBMClassifier(
+            n_estimators=1000, device="cuda", is_unbalance=True,
+            verbose=-1, random_state=42,
+        ),
+        'XGBoost': xgb.XGBClassifier(
+            n_estimators=1000, eval_metric='mlogloss', device="cuda",
+            tree_method="hist", early_stopping_rounds=50, random_state=42,
+        ),
     }
+    # Models that support early stopping via eval_set
+    EARLY_STOP_MODELS = {'LightGBM', 'XGBoost'}
 
     # Save Directory
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -120,7 +136,26 @@ if __name__ == "__main__":
     for model_name, model in models.items():
         print(f"\nTraining and evaluating {model_name}...")
         t_model_start = time.time()
-        y_pred = train_predict_model(model, X_train_scaled, y_train, X_test_scaled)
+
+        if model_name in EARLY_STOP_MODELS:
+            if model_name == 'LightGBM':
+                model.fit(
+                    X_train_scaled, y_train,
+                    eval_set=[(X_val_scaled, y_val)],
+                    callbacks=[lgb.early_stopping(50, verbose=False), lgb.log_evaluation(0)],
+                )
+                print(f"  Best iteration: {model.best_iteration_}")
+            else:  # XGBoost
+                model.fit(
+                    X_train_scaled, y_train,
+                    sample_weight=sample_weights,
+                    eval_set=[(X_val_scaled, y_val)],
+                    verbose=False,
+                )
+                print(f"  Best iteration: {model.best_iteration}")
+            y_pred = model.predict(X_test_scaled)
+        else:
+            y_pred = train_predict_model(model, X_train_scaled, y_train, X_test_scaled)
 
         # Save model
         print(f"Saving model {model_name}...")
