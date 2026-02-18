@@ -24,7 +24,7 @@ import sys
 import os
 import argparse
 from datetime import datetime
-from config import FINAL_DATA_PATH
+from config import FINAL_DATA_PATH, ML_FIELD_PYTHON
 
 STAGE_1A_SCRIPTS = [
     (
@@ -62,7 +62,7 @@ def run_script(script_path: str, description: str) -> bool:
 
     try:
         result = subprocess.run(
-            [sys.executable, script_path],
+            [ML_FIELD_PYTHON, script_path],
             cwd=os.path.dirname(os.path.abspath(__file__)),
             check=False,
         )

@@ -23,25 +23,31 @@ from datetime import datetime
 REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 DEEP_LEARN_SRC = os.path.join(REPO_ROOT, "deep_learn", "src")
 
+sys.path.insert(0, DEEP_LEARN_SRC)
+from config import ML_FIELD_PYTHON, DEEP_FIELD_PYTHON
+
 SCRIPTS = {
     "classical": (
         os.path.join(DEEP_LEARN_SRC, "run_all_classical_models.py"),
         "Classical ML Models (SMOTE, Ensemble, base ML)",
+        ML_FIELD_PYTHON,
     ),
     "dl": (
         os.path.join(DEEP_LEARN_SRC, "run_all_dl_models.py"),
         "Deep Learning Models (TabNet, CNN-BiLSTM, 3D CNN)",
+        DEEP_FIELD_PYTHON,
     ),
 }
 
 
-def run_script(script_path, description, extra_args=None, dry_run=False):
+def run_script(script_path, description, python_exe, extra_args=None, dry_run=False):
     print(f"\n{'='*60}")
     print(f"  {description}")
     print(f"  Script: {os.path.relpath(script_path, REPO_ROOT)}")
+    print(f"  Python: {python_exe}")
     print(f"{'='*60}")
 
-    cmd = [sys.executable, script_path]
+    cmd = [python_exe, script_path]
     if extra_args:
         cmd.extend(extra_args)
     if dry_run:
@@ -80,8 +86,8 @@ def main():
     extra_args = ["--force"] if args.force else None
 
     results = []
-    for script_path, desc in scripts_to_run:
-        success = run_script(script_path, desc, extra_args=extra_args, dry_run=args.dry_run)
+    for script_path, desc, python_exe in scripts_to_run:
+        success = run_script(script_path, desc, python_exe, extra_args=extra_args, dry_run=args.dry_run)
         results.append((desc, success))
         if not success and not args.dry_run:
             print(f"\n[STOPPING] {desc} failed.")

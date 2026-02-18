@@ -29,7 +29,11 @@ sys.path.insert(0, DEEP_LEARN_SRC)
 from config import (
     MODEL_DIR, TABNET_DIR, TABNET_FIELD_DIR, XGB_TUNER_DIR, MERGED_DL_TEST_PATH,
     COMBINED_TEST_FEATURES_PATH, TEST_PATCH_DATA_PATH,
+    ML_FIELD_PYTHON, DEEP_FIELD_PYTHON,
 )
+
+# Models that use the ml_field env (classical ML); all others use deep_field
+ML_FIELD_MODELS = {"xgboost", "smote", "classical", "baseml"}
 
 # (key, script, description, output_csv, required_data, required_models)
 INFERENCE_STEPS = [
@@ -236,8 +240,9 @@ def main():
             continue
 
         script_path = os.path.join(OUT_OF_SAMPLE, script)
+        python_exe = ML_FIELD_PYTHON if key in ML_FIELD_MODELS else DEEP_FIELD_PYTHON
         result = subprocess.run(
-            [sys.executable, script_path],
+            [python_exe, script_path],
             cwd=OUT_OF_SAMPLE,
             check=False,
         )

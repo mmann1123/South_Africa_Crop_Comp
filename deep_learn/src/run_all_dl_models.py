@@ -24,7 +24,7 @@ import sys
 import os
 import argparse
 from datetime import datetime
-from config import MERGED_DL_PATH, PATCH_DATA_PATH
+from config import MERGED_DL_PATH, PATCH_DATA_PATH, DEEP_FIELD_PYTHON
 
 # Scripts to run in order
 STAGE_2_SCRIPTS = [
@@ -81,7 +81,7 @@ def run_script(script_path: str, description: str) -> bool:
 
     try:
         result = subprocess.run(
-            [sys.executable, script_path],
+            [DEEP_FIELD_PYTHON, script_path],
             cwd=os.path.dirname(os.path.abspath(__file__)),
             check=False,
         )

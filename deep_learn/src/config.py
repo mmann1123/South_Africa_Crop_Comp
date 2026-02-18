@@ -58,3 +58,24 @@ MONTH_MAP = {
 
 # Months to exclude from raster loading (cloud cover / missing data)
 EXCLUDE_MONTHS = {"05", "06"}
+
+# ── Conda environment Python paths ──────────────────────────────────
+# Used by orchestrator scripts to invoke the correct env per model type.
+# Falls back to sys.executable if the env doesn't exist.
+import sys as _sys
+
+def _conda_python(env_name):
+    """Return the Python binary path for a conda environment."""
+    # Try common miniconda/anaconda locations
+    for base in [
+        os.path.expanduser("~/miniconda3"),
+        os.path.expanduser("~/anaconda3"),
+        "/opt/conda",
+    ]:
+        p = os.path.join(base, "envs", env_name, "bin", "python3")
+        if os.path.isfile(p):
+            return p
+    return _sys.executable  # fallback
+
+DEEP_FIELD_PYTHON = _conda_python("deep_field")
+ML_FIELD_PYTHON = _conda_python("ml_field")
