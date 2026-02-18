@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+TempCNN Field-Level (temporal),0.7506024096385542,0.6497854602158648,0.7522159143491212,0.6749455410787389,test

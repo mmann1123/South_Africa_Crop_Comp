@@ -126,13 +126,12 @@ DEACTIVATE_EOF
     echo "Created conda activation scripts for nvidia library paths"
 fi
 
-# Install remaining requirements
+# Install remaining requirements (excluding lightgbm — installed separately for GPU)
 echo ""
 echo "=== Installing other dependencies ==="
 pip install \
     "geopandas~=1.0.1" \
     "joblib~=1.4.2" \
-    "lightgbm~=4.6.0" \
     "matplotlib~=3.9.1" \
     "optuna~=4.2.1" \
     "pandas~=2.2.2" \
@@ -145,7 +144,22 @@ pip install \
     "shapely~=2.0.7" \
     "torchtoolbox~=0.1.8.2" \
     "xgboost~=2.1.4" \
-    "pytorch-tabnet"
+    "pytorch-tabnet" \
+    "imbalanced-learn"
+
+# Install LightGBM with CUDA support (builds from source)
+echo ""
+echo "=== Installing LightGBM with CUDA GPU support ==="
+pip install cmake  # required for building from source
+if [ "$VARIANT" = "cpu" ]; then
+    pip install "lightgbm~=4.6.0"
+else
+    pip install --no-binary lightgbm "lightgbm~=4.6.0" \
+        --config-settings=cmake.define.USE_CUDA=ON || {
+        echo "[WARNING] LightGBM CUDA build failed, falling back to CPU-only"
+        pip install "lightgbm~=4.6.0"
+    }
+fi
 
 # Verify
 echo ""
@@ -165,6 +179,21 @@ print(f'  GPUs: {len(gpus)}')
 if gpus:
     for g in gpus:
         print(f'  Device: {g}')
+
+import xgboost
+print(f'XGBoost {xgboost.__version__}')
+
+import lightgbm
+print(f'LightGBM {lightgbm.__version__}')
+# Check if CUDA device works
+try:
+    import numpy as np
+    m = lightgbm.LGBMClassifier(device='cuda', n_estimators=2, verbose=-1)
+    m.fit(np.random.randn(20, 3), np.random.randint(0, 2, 20))
+    print('  CUDA GPU: available')
+except Exception as e:
+    print(f'  CUDA GPU: not available ({e})')
+    print('  Falling back to CPU for LightGBM')
 "
 
 echo ""

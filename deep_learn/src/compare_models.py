@@ -57,7 +57,11 @@ def build_comparison_table(reports: list[dict]) -> pd.DataFrame:
         })
     df = pd.DataFrame(rows)
     if not df.empty:
-        df = df.sort_values("f1_weighted", ascending=False).reset_index(drop=True)
+        # Keep only the most recent report per model name
+        df = (df.sort_values("timestamp", ascending=False)
+                .drop_duplicates(subset="model_name", keep="first")
+                .sort_values("f1_weighted", ascending=False)
+                .reset_index(drop=True))
     return df
 
 

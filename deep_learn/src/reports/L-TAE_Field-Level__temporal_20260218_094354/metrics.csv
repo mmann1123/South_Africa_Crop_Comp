@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+L-TAE Field-Level (temporal),0.7457831325301205,0.6419143972372223,0.745725007323671,0.6657451097608144,test

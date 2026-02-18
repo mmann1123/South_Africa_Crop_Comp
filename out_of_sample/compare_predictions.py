@@ -54,6 +54,8 @@ FEATURE_TYPE_MAP = {
     "TabNet Field (field)": "xr_fresh time-series",
     "L-TAE (pixel)": "raw pixel (temporal sequence)",
     "TempCNN (pixel)": "raw pixel (temporal sequence)",
+    "L-TAE Field (field)": "raw temporal (field-averaged)",
+    "TempCNN Field (field)": "raw temporal (field-averaged)",
 }
 
 # Map comparison display name -> report model_name (for dynamic train_count lookup)
@@ -74,14 +76,16 @@ REPORT_NAME_MAP = {
     "TabNet Field (field)": "TabNet Field-Level (xr_fresh)",
     "L-TAE (pixel)": "L-TAE Temporal Attention",
     "TempCNN (pixel)": "TempCNN Temporal Conv",
+    "L-TAE Field (field)": "L-TAE Field-Level (temporal)",
+    "TempCNN Field (field)": "TempCNN Field-Level (temporal)",
 }
 
 
-def _load_report_train_counts():
-    """Scan reports/ for metadata.json and return {model_name: train_count} from latest report."""
-    counts = {}
+def _load_report_metadata():
+    """Scan reports/ for metadata.json and return {model_name: {train_count, training_time_seconds}} from latest report."""
+    info = {}
     if not os.path.isdir(REPORTS_DIR):
-        return counts
+        return info
     for entry in sorted(os.listdir(REPORTS_DIR)):
         meta_path = os.path.join(REPORTS_DIR, entry, "metadata.json")
         if os.path.isfile(meta_path):
@@ -89,19 +93,21 @@ def _load_report_train_counts():
                 with open(meta_path) as f:
                     meta = json.load(f)
                 name = meta.get("model_name", "")
+                if not name:
+                    continue
                 tc = meta.get("split_info", {}).get("train_count")
-                if name and tc is not None:
-                    counts[name] = tc  # later entries (newer timestamps) overwrite older
+                tt = meta.get("training_time_seconds")
+                info[name] = {"train_count": tc, "training_time_seconds": tt}
             except (json.JSONDecodeError, KeyError):
                 continue
-    return counts
+    return info
 
 
-def _get_train_obs(display_name, report_counts):
-    """Look up training obs from reports, return None if not found."""
+def _get_report_field(display_name, report_info, field):
+    """Look up a field from report metadata, return None if not found."""
     report_name = REPORT_NAME_MAP.get(display_name)
-    if report_name and report_name in report_counts:
-        return report_counts[report_name]
+    if report_name and report_name in report_info:
+        return report_info[report_name].get(field)
     return None
 
 
@@ -124,13 +130,15 @@ _PREDICTION_FILES_BASE = {
     "TabNet Field (field)": (os.path.join(SCRIPT_DIR, "predictions_tabnet_field.csv"), "field"),
     "L-TAE (pixel)": (os.path.join(SCRIPT_DIR, "predictions_ltae.csv"), "pixel"),
     "TempCNN (pixel)": (os.path.join(SCRIPT_DIR, "predictions_tempcnn.csv"), "pixel"),
+    "L-TAE Field (field)": (os.path.join(SCRIPT_DIR, "predictions_ltae_field.csv"), "field"),
+    "TempCNN Field (field)": (os.path.join(SCRIPT_DIR, "predictions_tempcnn_field.csv"), "field"),
 }
 
 # Build PREDICTION_FILES with dynamic train_obs from reports
-_report_counts = _load_report_train_counts()
+_report_info = _load_report_metadata()
 PREDICTION_FILES = {}
 for _name, (_path, _level) in _PREDICTION_FILES_BASE.items():
-    _train_obs = _get_train_obs(_name, _report_counts)
+    _train_obs = _get_report_field(_name, _report_info, "train_count")
     PREDICTION_FILES[_name] = (_path, _level, _train_obs)
 
 # Output
@@ -248,6 +256,7 @@ DL_MODELS = {
     "CNN-BiLSTM (pixel)", "TabNet (pixel)",
     "3D CNN (patch)", "Multi-Ch CNN (patch)", "Ensemble 3D CNN (patch)",
     "L-TAE (pixel)", "TempCNN (pixel)",
+    "L-TAE Field (field)", "TempCNN Field (field)",
 }
 
 
@@ -370,13 +379,15 @@ def score_predictions(predictions, ground_truth):
             ce_i = log_loss(y_true_bin[:, i], y_pred_prob[:, i])
             per_crop_ce[crop] = ce_i
 
-        # Look up training level, obs, and feature type from PREDICTION_FILES
+        # Look up training level, obs, feature type, and training time from PREDICTION_FILES
         info = PREDICTION_FILES.get(name, (None, "majority vote (all models)", None))
         level = info[1]
         train_obs = info[2] if len(info) > 2 else None
         feature_type = FEATURE_TYPE_MAP.get(name, "majority vote")
+        train_time_s = _get_report_field(name, _report_info, "training_time_seconds")
+        train_time_min = round(train_time_s / 60, 1) if train_time_s else None
         row = {"Model": name, "Training Level": level, "Feature Type": feature_type,
-               "Training Obs": train_obs,
+               "Training Obs": train_obs, "Training Time (min)": train_time_min,
                "Accuracy": acc, "F1 (weighted)": f1,
                "Cohen Kappa": kappa, "Cross Entropy": mean_ce, "Fields": len(merged)}
         results.append(row)
@@ -416,9 +427,26 @@ def score_predictions(predictions, ground_truth):
         summary = pd.DataFrame(results).sort_values("Cohen Kappa", ascending=False)
         print(summary.to_string(index=False, float_format="%.4f"))
 
-        # Save summary CSV
+        # Save combined summary CSV
         summary.to_csv(os.path.join(results_dir, "model_comparison.csv"), index=False)
+
+        # Save split CSVs by training level
+        field_levels = {"field"}
+        pixel_levels = {"pixel", "patch"}
+        field_rows = summary[summary["Training Level"].isin(field_levels)]
+        pixel_rows = summary[summary["Training Level"].isin(pixel_levels)]
+
+        if not field_rows.empty:
+            field_rows.to_csv(os.path.join(results_dir, "model_comparison_field.csv"), index=False)
+        if not pixel_rows.empty:
+            pixel_rows.to_csv(os.path.join(results_dir, "model_comparison_pixel.csv"), index=False)
+
         print(f"\nCSVs saved to {results_dir}/")
+        print(f"  model_comparison.csv       ({len(summary)} models)")
+        if not field_rows.empty:
+            print(f"  model_comparison_field.csv ({len(field_rows)} field-level models)")
+        if not pixel_rows.empty:
+            print(f"  model_comparison_pixel.csv ({len(pixel_rows)} pixel/patch-level models)")
 
     return results
 

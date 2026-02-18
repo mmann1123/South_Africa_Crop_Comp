@@ -146,6 +146,22 @@ INFERENCE_STEPS = [
         [MERGED_DL_TEST_PATH],
         [os.path.join(MODEL_DIR, f"tempcnn_seed_{s}.pt") for s in [42, 101, 202, 303, 404]],
     ),
+    (
+        "ltae_field",
+        "inference_ltae_field.py",
+        "L-TAE Field-Level (temporal)",
+        os.path.join(OUT_OF_SAMPLE, "predictions_ltae_field.csv"),
+        [MERGED_DL_TEST_PATH],
+        [os.path.join(MODEL_DIR, f"ltae_field_seed_{s}.pt") for s in [42, 101, 202, 303, 404]],
+    ),
+    (
+        "tempcnn_field",
+        "inference_tempcnn_field.py",
+        "TempCNN Field-Level (temporal)",
+        os.path.join(OUT_OF_SAMPLE, "predictions_tempcnn_field.csv"),
+        [MERGED_DL_TEST_PATH],
+        [os.path.join(MODEL_DIR, f"tempcnn_field_seed_{s}.pt") for s in [42, 101, 202, 303, 404]],
+    ),
 ]
 
 ALL_KEYS = [step[0] for step in INFERENCE_STEPS]
@@ -247,7 +263,7 @@ def main():
                   "base_lr", "base_rf", "base_lgbm", "base_xgb",
                   "cnn_bilstm", "tabnet", "3d_cnn",
                   "multi_channel_cnn", "ensemble_3d_cnn", "tabnet_field",
-                  "ltae", "tempcnn"]:
+                  "ltae", "tempcnn", "ltae_field", "tempcnn_field"]:
         path = os.path.join(OUT_OF_SAMPLE, f"predictions_{name}.csv")
         if os.path.exists(path):
             import pandas as pd

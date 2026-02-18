@@ -101,7 +101,7 @@ if __name__ == "__main__":
     models = {
         'Logistic Regression': LogisticRegression(max_iter=100, n_jobs=4, class_weight='balanced'),
         'Random Forest': RandomForestClassifier(n_estimators=20, n_jobs=4, class_weight='balanced'),
-        'LightGBM': lgb.LGBMClassifier(n_jobs=-1, is_unbalance=True),
+        'LightGBM': lgb.LGBMClassifier(n_jobs=-1, is_unbalance=True, device="cuda"),
         'XGBoost': xgb.XGBClassifier(eval_metric='logloss', device="cuda", tree_method="hist")
     }
 

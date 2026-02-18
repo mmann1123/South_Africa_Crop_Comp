@@ -97,6 +97,8 @@ try:
             colsample_bytree=0.8,
             objective="binary:logistic",
             eval_metric="logloss",
+            device="cuda",
+            tree_method="hist",
             n_jobs=-1,
             random_state=SEED
         )

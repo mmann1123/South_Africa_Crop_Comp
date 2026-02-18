@@ -52,6 +52,14 @@ STAGE_2_SCRIPTS = [
         "Classical Machine Learning/Field Level/tabnet_field.py",
         "TabNet Field-Level Ensemble (5 models)",
     ),
+    (
+        "Deep Learning/Pixel_Field_Level/ltae_field.py",
+        "L-TAE Field-Level (temporal, 5-seed)",
+    ),
+    (
+        "Deep Learning/Pixel_Field_Level/tempcnn_field.py",
+        "TempCNN Field-Level (temporal, 5-seed)",
+    ),
 ]
 
 STAGE_3_SCRIPTS = [
