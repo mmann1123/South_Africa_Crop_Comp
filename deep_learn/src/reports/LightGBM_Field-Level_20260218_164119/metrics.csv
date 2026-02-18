@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+LightGBM Field-Level,0.7506024096385542,0.6495833180366386,0.7394696849086874,0.679438682772855,test

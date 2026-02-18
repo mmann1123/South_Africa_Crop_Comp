@@ -1,0 +1,122 @@
+{
+  "model_name": "Stacking Ensemble",
+  "timestamp": "2026-02-18T16:45:22.349954",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Classical Machine Learning/Field Level/Ensemble - Voting and Stacking.py",
+  "hyperparameters": {
+    "estimators": [
+      "LR (OVR)",
+      "RF (OVR, n=400)",
+      "HGB (OVR)",
+      "XGB (OVR, n=400, depth=6, lr=0.1)"
+    ],
+    "voting": "N/A",
+    "final_estimator": "LogisticRegression(max_iter=1000)"
+  },
+  "split_info": {
+    "train_count": 3317,
+    "val_count": 0,
+    "test_count": 830,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.727710843373494,
+    "cohen_kappa": 0.6183954625719145,
+    "f1_weighted": 0.731943658559793,
+    "f1_macro": 0.6427586792320146,
+    "macro_avg": {
+      "precision": 0.6400403985037592,
+      "recall": 0.6477865303486573,
+      "f1-score": 0.6427586792320146,
+      "support": 830.0
+    },
+    "weighted_avg": {
+      "precision": 0.7375607240784926,
+      "recall": 0.727710843373494,
+      "f1-score": 0.731943658559793,
+      "support": 830.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      83,
+      5,
+      7,
+      8,
+      30
+    ],
+    [
+      1,
+      88,
+      4,
+      4,
+      3
+    ],
+    [
+      5,
+      1,
+      339,
+      37,
+      6
+    ],
+    [
+      5,
+      7,
+      17,
+      27,
+      18
+    ],
+    [
+      40,
+      3,
+      8,
+      17,
+      67
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.6194029850746269,
+      "recall": 0.6240601503759399,
+      "f1-score": 0.6217228464419475,
+      "support": 133.0
+    },
+    "Canola": {
+      "precision": 0.8461538461538461,
+      "recall": 0.88,
+      "f1-score": 0.8627450980392157,
+      "support": 100.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.904,
+      "recall": 0.8737113402061856,
+      "f1-score": 0.8885976408912188,
+      "support": 388.0
+    },
+    "Small grain grazing": {
+      "precision": 0.2903225806451613,
+      "recall": 0.36486486486486486,
+      "f1-score": 0.32335329341317365,
+      "support": 74.0
+    },
+    "Wheat": {
+      "precision": 0.5403225806451613,
+      "recall": 0.4962962962962963,
+      "f1-score": 0.5173745173745173,
+      "support": 135.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": null,
+  "training_time_seconds": 108.68832349777222,
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Stacking_Ensemble_20260218_164522/report.pdf"
+}

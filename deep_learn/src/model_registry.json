@@ -2862,6 +2862,222 @@
         "min_child_weight": 9
       },
       "notes": null
+    },
+    {
+      "run_id": "lightgbm_field-level_20260218_164119",
+      "name": "LightGBM Field-Level",
+      "model_type": "unknown",
+      "timestamp": "2026-02-18T16:41:19.996550",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.7506024096385542,
+        "cohen_kappa": 0.6495833180366386,
+        "f1_weighted": 0.7394696849086874,
+        "f1_macro": 0.679438682772855,
+        "macro_avg": {
+          "precision": 0.7113356254515165,
+          "recall": 0.6627200604243333,
+          "f1-score": 0.679438682772855,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.7388877039867445,
+          "recall": 0.7506024096385542,
+          "f1-score": 0.7394696849086874,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/LightGBM_Field-Level_20260218_164119"
+      },
+      "hyperparameters": {
+        "max_depth": 3,
+        "num_leaves": 275,
+        "learning_rate": 0.005346562611200563,
+        "subsample": 0.7870377492572178,
+        "colsample_bytree": 0.6665961627174174,
+        "min_child_samples": 44,
+        "reg_alpha": 0.0022021212753236493,
+        "reg_lambda": 0.0037095711999320393,
+        "min_split_gain": 0.8131870489857559,
+        "n_estimators": 2000
+      },
+      "notes": null
+    },
+    {
+      "run_id": "smote_stacked_ensemble_20260218_164321",
+      "name": "SMOTE Stacked Ensemble",
+      "model_type": "sklearn",
+      "timestamp": "2026-02-18T16:43:21.562556",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.7578313253012048,
+        "cohen_kappa": 0.6608153605933444,
+        "f1_weighted": 0.7492069518312932,
+        "f1_macro": 0.6944753038426906,
+        "macro_avg": {
+          "precision": 0.7267151929345601,
+          "recall": 0.6763117304983871,
+          "f1-score": 0.6944753038426906,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.7504504242838363,
+          "recall": 0.7578313253012048,
+          "f1-score": 0.7492069518312932,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/SMOTE_Stacked_Ensemble_20260218_164320"
+      },
+      "hyperparameters": {
+        "base_rf": {
+          "n_estimators": 500,
+          "max_depth": "None (unlimited)",
+          "class_weight": "balanced"
+        },
+        "base_xgb": {
+          "colsample_bylevel": "0.9224462016212964",
+          "colsample_bytree": "0.5783708032760959",
+          "gamma": "0.46974616480394255",
+          "learning_rate": "0.008356528924637735",
+          "max_depth": "10",
+          "min_child_weight": "9",
+          "n_estimators": "2000",
+          "reg_alpha": "0.07008063767873739",
+          "reg_lambda": "0.003603748188432082",
+          "subsample": "0.9464400436783544"
+        },
+        "xgb_tuned": true,
+        "meta": "LogisticRegression(max_iter=1000, class_weight=balanced)",
+        "resampler": "SMOTETomek(random_state=42)"
+      },
+      "notes": null
+    },
+    {
+      "run_id": "voting_ensemble_20260218_164522",
+      "name": "Voting Ensemble",
+      "model_type": "sklearn",
+      "timestamp": "2026-02-18T16:45:22.348136",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.7807228915662651,
+        "cohen_kappa": 0.6817498072296264,
+        "f1_weighted": 0.7692107974598409,
+        "f1_macro": 0.6853908785036593,
+        "macro_avg": {
+          "precision": 0.7112875994726722,
+          "recall": 0.6738245311430336,
+          "f1-score": 0.6853908785036593,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.7659552514189346,
+          "recall": 0.7807228915662651,
+          "f1-score": 0.7692107974598409,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Voting_Ensemble_20260218_164521"
+      },
+      "hyperparameters": {
+        "estimators": [
+          "LR (OVR)",
+          "RF (OVR, n=400)",
+          "HGB (OVR)",
+          "XGB (OVR, n=400, depth=6, lr=0.1)"
+        ],
+        "voting": "soft",
+        "final_estimator": "N/A"
+      },
+      "notes": null
+    },
+    {
+      "run_id": "stacking_ensemble_20260218_164522",
+      "name": "Stacking Ensemble",
+      "model_type": "sklearn",
+      "timestamp": "2026-02-18T16:45:22.784726",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.727710843373494,
+        "cohen_kappa": 0.6183954625719145,
+        "f1_weighted": 0.731943658559793,
+        "f1_macro": 0.6427586792320146,
+        "macro_avg": {
+          "precision": 0.6400403985037592,
+          "recall": 0.6477865303486573,
+          "f1-score": 0.6427586792320146,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.7375607240784926,
+          "recall": 0.727710843373494,
+          "f1-score": 0.731943658559793,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Stacking_Ensemble_20260218_164522"
+      },
+      "hyperparameters": {
+        "estimators": [
+          "LR (OVR)",
+          "RF (OVR, n=400)",
+          "HGB (OVR)",
+          "XGB (OVR, n=400, depth=6, lr=0.1)"
+        ],
+        "voting": "N/A",
+        "final_estimator": "LogisticRegression(max_iter=1000)"
+      },
+      "notes": null
+    },
+    {
+      "run_id": "logistic_regression_(pixel-level)_20260218_165405",
+      "name": "Logistic Regression (Pixel-Level)",
+      "model_type": "unknown",
+      "timestamp": "2026-02-18T16:54:05.156755",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.642581796750021,
+        "cohen_kappa": 0.5352671839631213,
+        "f1_weighted": 0.6458897902368911,
+        "f1_macro": 0.6094622545535615,
+        "macro_avg": {
+          "precision": 0.6203890252099064,
+          "recall": 0.6076621753007282,
+          "f1-score": 0.6094622545535615,
+          "support": 1484625.0
+        },
+        "weighted_avg": {
+          "precision": 0.6569866275916919,
+          "recall": 0.642581796750021,
+          "f1-score": 0.6458897902368911,
+          "support": 1484625.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Logistic_Regression__Pixel-Level_20260218_165404"
+      },
+      "hyperparameters": {
+        "C": "1.0",
+        "class_weight": "balanced",
+        "dual": "False",
+        "fit_intercept": "True",
+        "intercept_scaling": "1",
+        "l1_ratio": "None",
+        "max_iter": "500",
+        "multi_class": "deprecated",
+        "n_jobs": "4",
+        "penalty": "l2",
+        "random_state": "None",
+        "solver": "lbfgs",
+        "tol": "0.0001",
+        "verbose": "0",
+        "warm_start": "False"
+      },
+      "notes": null
     }
   ]
 }
