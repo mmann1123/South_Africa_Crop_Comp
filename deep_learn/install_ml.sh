@@ -24,15 +24,19 @@ else
     echo "=== Environment ${ENV_NAME} already exists ==="
 fi
 
-# Activate the environment
+# Activate the environment and use its binaries directly (avoids PATH issues)
 eval "$(conda shell.bash hook)"
 conda activate "$ENV_NAME"
-echo "Active env: $CONDA_DEFAULT_ENV (Python $(python --version 2>&1))"
+PIP="$CONDA_PREFIX/bin/pip"
+PYTHON="$CONDA_PREFIX/bin/python3"
+echo "Active env: $CONDA_DEFAULT_ENV"
+echo "  pip:    $PIP"
+echo "  python: $PYTHON"
 
 # ── Install pip packages ──────────────────────────────────────────────
 echo ""
 echo "=== Installing classical ML packages ==="
-pip install \
+$PIP install \
     "geopandas~=1.0.1" \
     "joblib~=1.4.2" \
     "matplotlib~=3.9.1" \
@@ -53,45 +57,38 @@ pip install \
 if [ "$SKIP_LGBM_BUILD" = true ]; then
     echo ""
     echo "=== Skipping LightGBM CUDA build (installing CPU version) ==="
-    pip install "lightgbm~=4.6.0"
+    $PIP install "lightgbm~=4.6.0"
 else
     echo ""
     echo "=== Building LightGBM with CUDA support ==="
 
-    # Check prerequisites
-    if ! command -v cmake &> /dev/null; then
-        echo "ERROR: cmake not found. Install with: sudo apt install cmake"
-        exit 1
-    fi
-    if ! command -v nvcc &> /dev/null; then
+    # Install build deps (cmake >= 3.28 required by LightGBM v4.6)
+    $PIP install "cmake>=3.28" scikit-build-core
+
+    # Find CUDA toolkit
+    if [ -d "/usr/local/cuda" ]; then
+        CUDA_HOME="/usr/local/cuda"
+    elif command -v nvcc &> /dev/null; then
+        CUDA_HOME="$(dirname "$(dirname "$(which nvcc)")")"
+    else
         echo "ERROR: nvcc not found. Ensure CUDA toolkit is installed and on PATH."
         exit 1
     fi
+    echo "CUDA_HOME: $CUDA_HOME"
+    export CUDA_HOME
 
-    BUILD_DIR=$(mktemp -d)
-    echo "Build directory: $BUILD_DIR"
+    # Build from source via pip with CUDA cmake settings
+    $PIP install --force-reinstall --no-binary lightgbm "lightgbm~=4.6.0" \
+        --config-settings=cmake.define.USE_CUDA=ON \
+        --config-settings=cmake.define.CMAKE_CUDA_COMPILER="$CUDA_HOME/bin/nvcc"
 
-    cd "$BUILD_DIR"
-    git clone --recursive --branch v4.6.0 --depth 1 https://github.com/microsoft/LightGBM.git
-    cd LightGBM
-
-    mkdir -p build && cd build
-    cmake .. -DUSE_CUDA=ON -DCMAKE_BUILD_TYPE=Release
-    make -j$(nproc)
-
-    cd ../python-package
-    pip install --no-build-isolation .
-
-    # Clean up
-    cd /
-    rm -rf "$BUILD_DIR"
     echo "LightGBM CUDA build complete"
 fi
 
 # ── Verify ────────────────────────────────────────────────────────────
 echo ""
 echo "=== Verifying installation ==="
-python -c "
+$PYTHON -c "
 import sklearn
 print(f'scikit-learn {sklearn.__version__}')
 
