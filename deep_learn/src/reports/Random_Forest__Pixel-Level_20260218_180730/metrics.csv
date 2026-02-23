@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+Random Forest (Pixel-Level),0.6978637703123685,0.5977719557725699,0.6863532650511643,0.6453111997274846,test

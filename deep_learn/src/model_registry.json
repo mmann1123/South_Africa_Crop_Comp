@@ -3078,6 +3078,232 @@
         "warm_start": "False"
       },
       "notes": null
+    },
+    {
+      "run_id": "random_forest_(pixel-level)_20260218_180732",
+      "name": "Random Forest (Pixel-Level)",
+      "model_type": "unknown",
+      "timestamp": "2026-02-18T18:07:32.547701",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.6978637703123685,
+        "cohen_kappa": 0.5977719557725699,
+        "f1_weighted": 0.6863532650511643,
+        "f1_macro": 0.6453111997274846,
+        "macro_avg": {
+          "precision": 0.6951402204106316,
+          "recall": 0.6312312806707926,
+          "f1-score": 0.6453111997274846,
+          "support": 1484625.0
+        },
+        "weighted_avg": {
+          "precision": 0.6969601907932935,
+          "recall": 0.6978637703123685,
+          "f1-score": 0.6863532650511643,
+          "support": 1484625.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Random_Forest__Pixel-Level_20260218_180730"
+      },
+      "hyperparameters": {
+        "bootstrap": "True",
+        "ccp_alpha": "0.0",
+        "class_weight": "balanced",
+        "criterion": "gini",
+        "max_depth": "None",
+        "max_features": "sqrt",
+        "max_leaf_nodes": "None",
+        "max_samples": "None",
+        "min_impurity_decrease": "0.0",
+        "min_samples_leaf": "1",
+        "min_samples_split": "2",
+        "min_weight_fraction_leaf": "0.0",
+        "monotonic_cst": "None",
+        "n_estimators": "300",
+        "n_jobs": "4",
+        "oob_score": "False",
+        "random_state": "42",
+        "verbose": "0",
+        "warm_start": "False"
+      },
+      "notes": null
+    },
+    {
+      "run_id": "lightgbm_(pixel-level)_20260218_180803",
+      "name": "LightGBM (Pixel-Level)",
+      "model_type": "unknown",
+      "timestamp": "2026-02-18T18:08:03.798213",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.6772531784120569,
+        "cohen_kappa": 0.5706326086223308,
+        "f1_weighted": 0.6665473842477344,
+        "f1_macro": 0.6247739686270255,
+        "macro_avg": {
+          "precision": 0.662444585466505,
+          "recall": 0.6113057823501966,
+          "f1-score": 0.6247739686270255,
+          "support": 1484625.0
+        },
+        "weighted_avg": {
+          "precision": 0.6716057348778147,
+          "recall": 0.6772531784120569,
+          "f1-score": 0.6665473842477344,
+          "support": 1484625.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/LightGBM__Pixel-Level_20260218_180802"
+      },
+      "hyperparameters": {
+        "boosting_type": "gbdt",
+        "class_weight": "None",
+        "colsample_bytree": "1.0",
+        "importance_type": "split",
+        "learning_rate": "0.1",
+        "max_depth": "-1",
+        "min_child_samples": "20",
+        "min_child_weight": "0.001",
+        "min_split_gain": "0.0",
+        "n_estimators": "1000",
+        "n_jobs": "None",
+        "num_leaves": "31",
+        "objective": "None",
+        "random_state": "42",
+        "reg_alpha": "0.0",
+        "reg_lambda": "0.0",
+        "subsample": "1.0",
+        "subsample_for_bin": "200000",
+        "subsample_freq": "0",
+        "device": "cuda",
+        "is_unbalance": "True",
+        "verbose": "-1"
+      },
+      "notes": null
+    },
+    {
+      "run_id": "xgboost_(pixel-level)_20260218_180835",
+      "name": "XGBoost (Pixel-Level)",
+      "model_type": "xgboost",
+      "timestamp": "2026-02-18T18:08:35.512668",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.6724647638292498,
+        "cohen_kappa": 0.5705782606222292,
+        "f1_weighted": 0.6710381866954657,
+        "f1_macro": 0.6369401670421632,
+        "macro_avg": {
+          "precision": 0.649263363007664,
+          "recall": 0.6306330477889,
+          "f1-score": 0.6369401670421632,
+          "support": 1484625.0
+        },
+        "weighted_avg": {
+          "precision": 0.6750770378211114,
+          "recall": 0.6724647638292498,
+          "f1-score": 0.6710381866954657,
+          "support": 1484625.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/XGBoost__Pixel-Level_20260218_180834"
+      },
+      "hyperparameters": {
+        "objective": "multi:softprob",
+        "base_score": "None",
+        "booster": "None",
+        "callbacks": "None",
+        "colsample_bylevel": "None",
+        "colsample_bynode": "None",
+        "colsample_bytree": "None",
+        "device": "cuda",
+        "early_stopping_rounds": "50",
+        "enable_categorical": "False",
+        "eval_metric": "mlogloss",
+        "feature_types": "None",
+        "gamma": "None",
+        "grow_policy": "None",
+        "importance_type": "None",
+        "interaction_constraints": "None",
+        "learning_rate": "None",
+        "max_bin": "None",
+        "max_cat_threshold": "None",
+        "max_cat_to_onehot": "None",
+        "max_delta_step": "None",
+        "max_depth": "None",
+        "max_leaves": "None",
+        "min_child_weight": "None",
+        "missing": "nan",
+        "monotone_constraints": "None",
+        "multi_strategy": "None",
+        "n_estimators": "1000",
+        "n_jobs": "None",
+        "num_parallel_tree": "None",
+        "random_state": "42",
+        "reg_alpha": "None",
+        "reg_lambda": "None",
+        "sampling_method": "None",
+        "scale_pos_weight": "None",
+        "subsample": "None",
+        "tree_method": "hist",
+        "validate_parameters": "None",
+        "verbosity": "None"
+      },
+      "notes": null
+    },
+    {
+      "run_id": "tabnet_field-level_(temporal)_20260220_105132",
+      "name": "TabNet Field-Level (temporal)",
+      "model_type": "tabnet",
+      "timestamp": "2026-02-20T10:51:32.100308",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.7,
+        "cohen_kappa": 0.5867715716756476,
+        "f1_weighted": 0.7116300230632546,
+        "f1_macro": 0.6240999631821975,
+        "macro_avg": {
+          "precision": 0.6306416272153882,
+          "recall": 0.6242670802668194,
+          "f1-score": 0.6240999631821975,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.7278073125085797,
+          "recall": 0.7,
+          "f1-score": 0.7116300230632546,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/TabNet_Field-Level__temporal_20260220_105131"
+      },
+      "hyperparameters": {
+        "n_d": 64,
+        "n_a": 64,
+        "n_steps": 5,
+        "gamma": 1.5,
+        "n_independent": 2,
+        "n_shared": 2,
+        "lr": 0.001,
+        "scheduler": "StepLR(step=10, gamma=0.9)",
+        "loss": "WeightedFocalLoss(gamma=2.0, alpha=1/class_counts)",
+        "model_selection": "val F1 macro (maximize)",
+        "max_epochs": 100,
+        "patience": 10,
+        "batch_size": 1024,
+        "n_models": 5,
+        "seeds": [
+          42,
+          101,
+          202,
+          303,
+          404
+        ],
+        "features": "raw temporal (field-level mean, 6 bands x 10 months)"
+      },
+      "notes": null
     }
   ]
 }

@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+LightGBM (Pixel-Level),0.6772531784120569,0.5706326086223308,0.6665473842477344,0.6247739686270255,test

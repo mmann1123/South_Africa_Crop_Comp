@@ -1,0 +1,25 @@
+Model,Training Level,Feature Type,Train F1 (macro),OOS F1 (macro),Delta (OOS - Train)
+CNN-BiLSTM (pixel),pixel,raw pixel (band x month),0.7226820864153078,0.4582844101916811,-0.26439767622362675
+3D CNN (patch),patch,raw pixel (spatial-temporal patch),0.6994056529822654,0.47918776924334316,-0.22021788373892226
+TempCNN (pixel),pixel,raw pixel (temporal sequence),0.7749194490387156,0.5638581702221455,-0.2110612788165701
+SMOTE Stacked (field),field,xr_fresh time-series,0.6944753038426906,0.4887371602524812,-0.20573814359020942
+L-TAE (pixel),pixel,raw pixel (temporal sequence),0.7755469456484294,0.5794242870418496,-0.19612265860657985
+TabNet Temporal Field (field),field,raw temporal (field-averaged),0.6240999631821975,0.4332835081148989,-0.1908164550672986
+TabNet Field (field),field,xr_fresh time-series,0.5147737686654602,0.3696306351952517,-0.14514313347020852
+TempCNN Field (field),field,raw temporal (field-averaged),0.6749455410787389,0.5354850915265806,-0.1394604495521583
+XGBoost (field),field,xr_fresh time-series,0.6956891171013388,0.564787223127966,-0.13090189397337282
+TabNet (pixel),pixel,raw pixel (band x month),0.7329005223484552,0.6030216570423871,-0.12987886530606807
+Voting (field),field,xr_fresh time-series,0.6853908785036593,0.5641829795605188,-0.12120789894314055
+LightGBM (field),field,xr_fresh time-series,0.679438682772855,0.5587634754786438,-0.12067520729421122
+Base RF (pixel),pixel,raw pixel (band x month),0.6453111997274846,0.5478903904305266,-0.09742080929695807
+Base XGBoost (pixel),pixel,raw pixel (band x month),0.6369401670421632,0.5440440233914763,-0.09289614365068688
+Stacking (field),field,xr_fresh time-series,0.6427586792320146,0.5536012551967411,-0.08915742403527349
+L-TAE Field (field),field,raw temporal (field-averaged),0.6657451097608144,0.5938929204673029,-0.07185218929351145
+Base LightGBM (pixel),pixel,raw pixel (band x month),0.6247739686270255,0.5632958573213636,-0.06147811130566194
+Base LR (pixel),pixel,raw pixel (band x month),0.6094622545535615,0.5629564243693472,-0.04650583018421428
+Ensemble (all),majority vote (all models),majority vote,,0.6041899234012831,
+Ensemble (ML pixel),majority vote (all models),majority vote,,0.575472882942903,
+Ensemble (ML),majority vote (all models),majority vote,,0.5683343641661922,
+Ensemble (ML field),majority vote (all models),majority vote,,0.5659225617957215,
+Ensemble (DL),majority vote (all models),majority vote,,0.5624271571754249,
+Ensemble 3D CNN (patch),patch,raw pixel (spatial-temporal patch),,0.45745539269989594,

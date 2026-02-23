@@ -60,6 +60,10 @@ STAGE_2_SCRIPTS = [
         "Deep Learning/Pixel_Field_Level/tempcnn_field.py",
         "TempCNN Field-Level (temporal, 5-seed)",
     ),
+    (
+        "Classical Machine Learning/Field Level/tabnet_temporal_field.py",
+        "TabNet Field-Level Temporal (5 models)",
+    ),
 ]
 
 STAGE_3_SCRIPTS = [

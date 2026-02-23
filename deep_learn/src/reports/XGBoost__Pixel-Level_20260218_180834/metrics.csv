@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+XGBoost (Pixel-Level),0.6724647638292498,0.5705782606222292,0.6710381866954657,0.6369401670421632,test

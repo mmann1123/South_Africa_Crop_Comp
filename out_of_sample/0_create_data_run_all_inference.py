@@ -21,7 +21,7 @@ from datetime import datetime
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(SCRIPT_DIR, "..", "deep_learn", "src"))
 from config import (
-    MODEL_DIR, TABNET_DIR, MERGED_DL_TEST_PATH,
+    MODEL_DIR, TABNET_DIR, TABNET_TEMPORAL_FIELD_DIR, MERGED_DL_TEST_PATH,
     COMBINED_TEST_FEATURES_PATH, TEST_PATCH_DATA_PATH, TEST_PATCHES_GEOJSON_PATH,
     DATA_OUTPUT_DIR,
 )
@@ -66,6 +66,16 @@ STEPS = {
             for seed in [42, 101, 202, 303, 404]
         ],
     },
+    "tabnet_temporal_field": {
+        "name": "TabNet Temporal Field Inference",
+        "script": "inference_tabnet_temporal_field.py",
+        "output": os.path.join(SCRIPT_DIR, "predictions_tabnet_temporal_field.csv"),
+        "required_files": [MERGED_DL_TEST_PATH],
+        "required_models": [
+            os.path.join(TABNET_TEMPORAL_FIELD_DIR, f"tabnet_temporal_field_seed_{seed}.zip")
+            for seed in [42, 101, 202, 303, 404]
+        ],
+    },
     "patch_data": {
         "name": "Create Test Patches",
         "script": "create_test_patches.py",
@@ -92,7 +102,7 @@ STEPS = {
 }
 
 # Run order
-RUN_ORDER = ["data_prep", "cnn_bilstm", "classical_ml", "tabnet", "patch_data", "3d_cnn", "compare"]
+RUN_ORDER = ["data_prep", "cnn_bilstm", "classical_ml", "tabnet", "tabnet_temporal_field", "patch_data", "3d_cnn", "compare"]
 
 
 def check_file_exists(path):
@@ -222,6 +232,7 @@ def main():
         "predictions_stacking.csv",
         "predictions_cnn_bilstm.csv",
         "predictions_tabnet.csv",
+        "predictions_tabnet_temporal_field.csv",
         "predictions_3d_cnn.csv",
     ]
     for f in pred_files:

@@ -1,0 +1,181 @@
+{
+  "model_name": "LightGBM (Pixel-Level)",
+  "timestamp": "2026-02-18T18:08:02.615096",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Classical Machine Learning/pixel_level/base_ml_models.py",
+  "hyperparameters": {
+    "boosting_type": "gbdt",
+    "class_weight": "None",
+    "colsample_bytree": "1.0",
+    "importance_type": "split",
+    "learning_rate": "0.1",
+    "max_depth": "-1",
+    "min_child_samples": "20",
+    "min_child_weight": "0.001",
+    "min_split_gain": "0.0",
+    "n_estimators": "1000",
+    "n_jobs": "None",
+    "num_leaves": "31",
+    "objective": "None",
+    "random_state": "42",
+    "reg_alpha": "0.0",
+    "reg_lambda": "0.0",
+    "subsample": "1.0",
+    "subsample_for_bin": "200000",
+    "subsample_freq": "0",
+    "device": "cuda",
+    "is_unbalance": "True",
+    "verbose": "-1"
+  },
+  "split_info": {
+    "train_count": 5154802,
+    "val_count": 0,
+    "test_count": 1484625,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.6772531784120569,
+    "cohen_kappa": 0.5706326086223308,
+    "f1_weighted": 0.6665473842477344,
+    "f1_macro": 0.6247739686270255,
+    "macro_avg": {
+      "precision": 0.662444585466505,
+      "recall": 0.6113057823501966,
+      "f1-score": 0.6247739686270255,
+      "support": 1484625.0
+    },
+    "weighted_avg": {
+      "precision": 0.6716057348778147,
+      "recall": 0.6772531784120569,
+      "f1-score": 0.6665473842477344,
+      "support": 1484625.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      149819,
+      3775,
+      19915,
+      5592,
+      94735
+    ],
+    [
+      13149,
+      137263,
+      13937,
+      3831,
+      24925
+    ],
+    [
+      9162,
+      3211,
+      451828,
+      9943,
+      12791
+    ],
+    [
+      19637,
+      9135,
+      52878,
+      42463,
+      29210
+    ],
+    [
+      97957,
+      2639,
+      37341,
+      15395,
+      224094
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.5171093868647403,
+      "recall": 0.5471121401130604,
+      "f1-score": 0.5316878415785364,
+      "support": 273836.0
+    },
+    "Canola": {
+      "precision": 0.8797613172416887,
+      "recall": 0.7108205380492478,
+      "f1-score": 0.7863190577667789,
+      "support": 193105.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.7845611817349917,
+      "recall": 0.9279020813866327,
+      "f1-score": 0.8502324916214573,
+      "support": 486935.0
+    },
+    "Small grain grazing": {
+      "precision": 0.5498679167098312,
+      "recall": 0.27695127280316717,
+      "f1-score": 0.3683674044771782,
+      "support": 153323.0
+    },
+    "Wheat": {
+      "precision": 0.5809231247812731,
+      "recall": 0.5937428793988755,
+      "f1-score": 0.5872630476911768,
+      "support": 377426.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": {
+    "feature_names": [
+      "B11_mean_second_derivative_central",
+      "EVI_median",
+      "B6_mean_change",
+      "B11_kurtosis",
+      "EVI_skewness",
+      "B12_mean_change",
+      "B6_mean_second_derivative_central",
+      "EVI_quantile_q_0.05",
+      "B2_mean_change",
+      "B12_kurtosis",
+      "B2_mean_second_derivative_central",
+      "B2_quantile_q_0.05",
+      "EVI_minimum",
+      "B11_mean_change",
+      "B6_kurtosis",
+      "B2_kurtosis",
+      "B12_mean_second_derivative_central",
+      "B11_skewness",
+      "EVI_mean_change",
+      "B6_variance"
+    ],
+    "importance_values": [
+      301,
+      297,
+      279,
+      275,
+      247,
+      245,
+      237,
+      223,
+      221,
+      207,
+      203,
+      191,
+      178,
+      175,
+      164,
+      164,
+      147,
+      145,
+      143,
+      140
+    ]
+  },
+  "training_time_seconds": 30.527441263198853,
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/LightGBM__Pixel-Level_20260218_180802/report.pdf"
+}

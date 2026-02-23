@@ -56,6 +56,8 @@ FEATURE_TYPE_MAP = {
     "TempCNN (pixel)": "raw pixel (temporal sequence)",
     "L-TAE Field (field)": "raw temporal (field-averaged)",
     "TempCNN Field (field)": "raw temporal (field-averaged)",
+    "TabNet Temporal Field (field)": "raw temporal (field-averaged)",
+    "LightGBM (field)": "xr_fresh time-series",
 }
 
 # Map comparison display name -> report model_name (for dynamic train_count lookup)
@@ -78,6 +80,8 @@ REPORT_NAME_MAP = {
     "TempCNN (pixel)": "TempCNN Temporal Conv",
     "L-TAE Field (field)": "L-TAE Field-Level (temporal)",
     "TempCNN Field (field)": "TempCNN Field-Level (temporal)",
+    "TabNet Temporal Field (field)": "TabNet Field-Level (temporal)",
+    "LightGBM (field)": "LightGBM Field-Level",
 }
 
 
@@ -97,7 +101,8 @@ def _load_report_metadata():
                     continue
                 tc = meta.get("split_info", {}).get("train_count")
                 tt = meta.get("training_time_seconds")
-                info[name] = {"train_count": tc, "training_time_seconds": tt}
+                f1m = meta.get("metrics", {}).get("f1_macro")
+                info[name] = {"train_count": tc, "training_time_seconds": tt, "f1_macro": f1m}
             except (json.JSONDecodeError, KeyError):
                 continue
     return info
@@ -132,6 +137,8 @@ _PREDICTION_FILES_BASE = {
     "TempCNN (pixel)": (os.path.join(SCRIPT_DIR, "predictions_tempcnn.csv"), "pixel"),
     "L-TAE Field (field)": (os.path.join(SCRIPT_DIR, "predictions_ltae_field.csv"), "field"),
     "TempCNN Field (field)": (os.path.join(SCRIPT_DIR, "predictions_tempcnn_field.csv"), "field"),
+    "TabNet Temporal Field (field)": (os.path.join(SCRIPT_DIR, "predictions_tabnet_temporal_field.csv"), "field"),
+    "LightGBM (field)": (os.path.join(SCRIPT_DIR, "predictions_lgbm.csv"), "field"),
 }
 
 # Build PREDICTION_FILES with dynamic train_obs from reports
@@ -246,7 +253,7 @@ def find_disagreements(merged, predictions):
 # Model groupings for subset majority votes
 ML_FIELD_MODELS = {
     "XGBoost (field)", "SMOTE Stacked (field)", "Voting (field)", "Stacking (field)",
-    "TabNet Field (field)",
+    "TabNet Field (field)", "LightGBM (field)",
 }
 ML_PIXEL_MODELS = {
     "Base LR (pixel)", "Base RF (pixel)", "Base LightGBM (pixel)", "Base XGBoost (pixel)",
@@ -363,6 +370,7 @@ def score_predictions(predictions, ground_truth):
 
         acc = accuracy_score(y_true, y_pred)
         f1 = f1_score(y_true, y_pred, average="weighted")
+        f1_macro = f1_score(y_true, y_pred, average="macro")
         kappa = cohen_kappa_score(y_true, y_pred)
 
         # Binary cross entropy per crop (one-vs-rest)
@@ -388,13 +396,14 @@ def score_predictions(predictions, ground_truth):
         train_time_min = round(train_time_s / 60, 1) if train_time_s else None
         row = {"Model": name, "Training Level": level, "Feature Type": feature_type,
                "Training Obs": train_obs, "Training Time (min)": train_time_min,
-               "Accuracy": acc, "F1 (weighted)": f1,
+               "Accuracy": acc, "F1 (weighted)": f1, "F1 (macro)": f1_macro,
                "Cohen Kappa": kappa, "Cross Entropy": mean_ce, "Fields": len(merged)}
         results.append(row)
 
         print(f"\n--- {name} ({len(merged)} fields) ---")
         print(f"  Accuracy:      {acc:.4f}")
         print(f"  F1 (weighted): {f1:.4f}")
+        print(f"  F1 (macro):    {f1_macro:.4f}")
         print(f"  Cohen Kappa:   {kappa:.4f}")
         print(f"  Cross Entropy: {mean_ce:.4f}")
         print(f"  Per-crop CE:   {', '.join(f'{c}: {v:.4f}' for c, v in per_crop_ce.items())}")
@@ -451,6 +460,52 @@ def score_predictions(predictions, ground_truth):
     return results
 
 
+def generate_f1_macro_comparison(oos_results):
+    """Generate CSV comparing training F1 macro vs OOS F1 macro for each model."""
+    if not oos_results:
+        print("\nNo OOS results to compare.")
+        return
+
+    results_dir = os.path.join(REPO_ROOT, "out_of_sample", "scoring_results")
+
+    rows = []
+    for r in oos_results:
+        display_name = r["Model"]
+        oos_f1_macro = r.get("F1 (macro)")
+        train_f1_macro = _get_report_field(display_name, _report_info, "f1_macro")
+
+        delta = None
+        if train_f1_macro is not None and oos_f1_macro is not None:
+            delta = oos_f1_macro - train_f1_macro
+
+        rows.append({
+            "Model": display_name,
+            "Training Level": r.get("Training Level", ""),
+            "Feature Type": r.get("Feature Type", ""),
+            "Train F1 (macro)": train_f1_macro,
+            "OOS F1 (macro)": oos_f1_macro,
+            "Delta (OOS - Train)": delta,
+        })
+
+    df = pd.DataFrame(rows).sort_values("OOS F1 (macro)", ascending=False).reset_index(drop=True)
+
+    print("\n" + "=" * 60)
+    print("TRAINING vs OUT-OF-SAMPLE F1 MACRO")
+    print("=" * 60)
+    print(df.to_string(index=False, float_format="%.4f"))
+
+    missing_train = df[df["Train F1 (macro)"].isna()]["Model"].tolist()
+    if missing_train:
+        print(f"\n  Note: No training F1 macro for: {', '.join(missing_train)}")
+        print("  (These are ensemble/majority-vote models with no single training report.)")
+
+    csv_path = os.path.join(results_dir, "f1_macro_train_vs_oos.csv")
+    df.to_csv(csv_path, index=False)
+    print(f"\n  Saved: {csv_path}")
+
+    return df
+
+
 def create_submission(df, model_name):
     """Create submission file from predictions."""
     print(f"\n" + "=" * 60)
@@ -500,7 +555,10 @@ def main():
     gt = load_ground_truth()
     all_to_score = dict(predictions)
     all_to_score.update(ensemble_dfs)
-    score_predictions(all_to_score, gt)
+    oos_results = score_predictions(all_to_score, gt)
+
+    # Generate training vs OOS F1 macro comparison
+    generate_f1_macro_comparison(oos_results)
 
     # Prompt for submission
     print("\n" + "=" * 60)

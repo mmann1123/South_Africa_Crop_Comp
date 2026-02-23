@@ -43,6 +43,7 @@ XGB_TUNER_DIR = os.path.join(WORKING_DIR, "xgb_tuner")
 LGBM_TUNER_DIR = os.path.join(WORKING_DIR, "lgbm_tuner")
 TABNET_DIR = os.path.join(WORKING_DIR, "saved_models_tabnet")
 TABNET_FIELD_DIR = os.path.join(WORKING_DIR, "saved_models_tabnet_field")
+TABNET_TEMPORAL_FIELD_DIR = os.path.join(WORKING_DIR, "saved_models_tabnet_temporal_field")
 REPORTS_DIR = os.path.join(WORKING_DIR, "reports")
 
 # Band names and regions

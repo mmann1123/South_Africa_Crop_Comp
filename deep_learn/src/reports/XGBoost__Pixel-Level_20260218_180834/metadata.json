@@ -1,0 +1,198 @@
+{
+  "model_name": "XGBoost (Pixel-Level)",
+  "timestamp": "2026-02-18T18:08:34.334247",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Classical Machine Learning/pixel_level/base_ml_models.py",
+  "hyperparameters": {
+    "objective": "multi:softprob",
+    "base_score": "None",
+    "booster": "None",
+    "callbacks": "None",
+    "colsample_bylevel": "None",
+    "colsample_bynode": "None",
+    "colsample_bytree": "None",
+    "device": "cuda",
+    "early_stopping_rounds": "50",
+    "enable_categorical": "False",
+    "eval_metric": "mlogloss",
+    "feature_types": "None",
+    "gamma": "None",
+    "grow_policy": "None",
+    "importance_type": "None",
+    "interaction_constraints": "None",
+    "learning_rate": "None",
+    "max_bin": "None",
+    "max_cat_threshold": "None",
+    "max_cat_to_onehot": "None",
+    "max_delta_step": "None",
+    "max_depth": "None",
+    "max_leaves": "None",
+    "min_child_weight": "None",
+    "missing": "nan",
+    "monotone_constraints": "None",
+    "multi_strategy": "None",
+    "n_estimators": "1000",
+    "n_jobs": "None",
+    "num_parallel_tree": "None",
+    "random_state": "42",
+    "reg_alpha": "None",
+    "reg_lambda": "None",
+    "sampling_method": "None",
+    "scale_pos_weight": "None",
+    "subsample": "None",
+    "tree_method": "hist",
+    "validate_parameters": "None",
+    "verbosity": "None"
+  },
+  "split_info": {
+    "train_count": 5154802,
+    "val_count": 0,
+    "test_count": 1484625,
+    "random_seed": 42,
+    "split_method": "fid-wise"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.6724647638292498,
+    "cohen_kappa": 0.5705782606222292,
+    "f1_weighted": 0.6710381866954657,
+    "f1_macro": 0.6369401670421632,
+    "macro_avg": {
+      "precision": 0.649263363007664,
+      "recall": 0.6306330477889,
+      "f1-score": 0.6369401670421632,
+      "support": 1484625.0
+    },
+    "weighted_avg": {
+      "precision": 0.6750770378211114,
+      "recall": 0.6724647638292498,
+      "f1-score": 0.6710381866954657,
+      "support": 1484625.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      162213,
+      3984,
+      17369,
+      14041,
+      76229
+    ],
+    [
+      13690,
+      137808,
+      11214,
+      7955,
+      22438
+    ],
+    [
+      10979,
+      4198,
+      431930,
+      28528,
+      11300
+    ],
+    [
+      20109,
+      8610,
+      39485,
+      65655,
+      19464
+    ],
+    [
+      109105,
+      3149,
+      30456,
+      33964,
+      200752
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.5131763767969224,
+      "recall": 0.5923728070816109,
+      "f1-score": 0.5499379589512011,
+      "support": 273836.0
+    },
+    "Canola": {
+      "precision": 0.873590323868931,
+      "recall": 0.7136428367986328,
+      "f1-score": 0.7855575253524258,
+      "support": 193105.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.8142647618832171,
+      "recall": 0.8870383110682124,
+      "f1-score": 0.8490950855572451,
+      "support": 486935.0
+    },
+    "Small grain grazing": {
+      "precision": 0.4372831234223374,
+      "recall": 0.4282136404844674,
+      "f1-score": 0.4327008626996105,
+      "support": 153323.0
+    },
+    "Wheat": {
+      "precision": 0.6080022290669114,
+      "recall": 0.5318976435115758,
+      "f1-score": 0.5674094026503337,
+      "support": 377426.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": {
+    "feature_names": [
+      "B11_variance",
+      "B11_standard_deviation",
+      "B2_variance",
+      "B6_variance",
+      "B11_sum",
+      "B6_standard_deviation",
+      "B2_quantile_q_0.05",
+      "B11_count_above_mean",
+      "hue_maximum",
+      "EVI_count_above_mean",
+      "B2_mean_change",
+      "hue_absolute_sum_of_changes",
+      "B12_count_above_mean",
+      "EVI_ratio_beyond_r_sigma_r_1",
+      "B11_symmetry_looking",
+      "B6_count_below_mean",
+      "B6_ratio_beyond_r_sigma_r_2",
+      "B12_sum",
+      "B6_ratio_beyond_r_sigma_r_1",
+      "B12_symmetry_looking"
+    ],
+    "importance_values": [
+      0.07234064489603043,
+      0.07142185419797897,
+      0.06671953946352005,
+      0.05721306428313255,
+      0.0521627739071846,
+      0.0498846173286438,
+      0.03515953943133354,
+      0.022637341171503067,
+      0.015592989511787891,
+      0.014631700702011585,
+      0.01459978986531496,
+      0.01453921664506197,
+      0.014262386597692966,
+      0.011888599023222923,
+      0.011880938895046711,
+      0.011424267664551735,
+      0.01138863805681467,
+      0.010708656162023544,
+      0.01030547171831131,
+      0.010280665941536427
+    ]
+  },
+  "training_time_seconds": 31.006622314453125,
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/XGBoost__Pixel-Level_20260218_180834/report.pdf"
+}
