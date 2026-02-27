@@ -3,6 +3,10 @@
 Loads trained model artifacts from models/{name}/frac_{F}/ and runs inference
 on the holdout test data, producing prediction CSVs in results/predictions/.
 
+DL models (tabnet, ltae) require torch — run with deep_field python.
+ML models (xgboost, lgbm, lr) need only sklearn/joblib — run with ml_field python.
+The orchestrator (run_experiment.py) dispatches each group with the correct env.
+
 Usage:
     python predict_oos.py                          # all models, all fractions
     python predict_oos.py --models xgboost_field   # single model
@@ -12,12 +16,8 @@ Usage:
 import argparse
 import os
 import sys
-import math
 import numpy as np
 import pandas as pd
-import torch
-import torch.nn as nn
-from torch.utils.data import Dataset, DataLoader
 from collections import Counter
 from joblib import load as jl_load
 
@@ -29,10 +29,6 @@ from experiment_config import (
     MODELS_DIR,
     PREDICTIONS_DIR,
 )
-from models_arch import (
-    LTAE, PositionalEncoding, get_chrono_feature_cols,
-    T_SEQ, N_BANDS, MONTH_POSITIONS,
-)
 
 sys.stdout.reconfigure(line_buffering=True)
 
@@ -42,20 +38,14 @@ CROP_ID_TO_NAME = {
     4: "Lucerne/Medics", 5: "Small grain grazing",
 }
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# DL models that require torch
+DL_MODELS = {"tabnet_pixel", "ltae_field", "ltae_pixel"}
 
 
-class InferenceTemporalDataset(Dataset):
-    """Dataset for L-TAE inference (no labels, just features + fids)."""
-    def __init__(self, X, fids):
-        self.X = torch.tensor(X.reshape(-1, T_SEQ, N_BANDS), dtype=torch.float32)
-        self.fids = fids
-
-    def __len__(self):
-        return len(self.fids)
-
-    def __getitem__(self, idx):
-        return self.X[idx], self.fids[idx]
+def _get_torch_device():
+    """Lazy import torch and return device."""
+    import torch
+    return torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 # =================== Prediction functions per model ===================
@@ -120,6 +110,12 @@ def predict_tabnet(model_dir, output_csv):
 
 def predict_ltae_field(model_dir, output_csv):
     """L-TAE field: aggregate test pixels to field → 5-seed ensemble."""
+    import torch
+    from torch.utils.data import Dataset, DataLoader
+    from models_arch import LTAE, T_SEQ, N_BANDS
+
+    device = _get_torch_device()
+
     feature_cols = jl_load(os.path.join(model_dir, "feature_columns.joblib"))
     scaler = jl_load(os.path.join(model_dir, "scaler.joblib"))
     le = jl_load(os.path.join(model_dir, "label_encoder.joblib"))
@@ -136,8 +132,14 @@ def predict_ltae_field(model_dir, output_csv):
     X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
     fids = df_field["fid"].values
 
-    dataset = InferenceTemporalDataset(X, fids)
-    dataloader = DataLoader(dataset, batch_size=256, shuffle=False)
+    X_tensor = torch.tensor(X.reshape(-1, T_SEQ, N_BANDS), dtype=torch.float32)
+    fid_list = list(fids)
+
+    class _Dataset(Dataset):
+        def __len__(self): return len(fid_list)
+        def __getitem__(self, idx): return X_tensor[idx], fid_list[idx]
+
+    dataloader = DataLoader(_Dataset(), batch_size=256, shuffle=False)
 
     # 5-seed ensemble
     logits_all = []
@@ -166,6 +168,12 @@ def predict_ltae_field(model_dir, output_csv):
 
 def predict_ltae_pixel(model_dir, output_csv):
     """L-TAE pixel: 5-seed ensemble → avg logits → majority vote per field."""
+    import torch
+    from torch.utils.data import Dataset, DataLoader
+    from models_arch import LTAE, T_SEQ, N_BANDS
+
+    device = _get_torch_device()
+
     feature_cols = jl_load(os.path.join(model_dir, "feature_columns.joblib"))
     scaler = jl_load(os.path.join(model_dir, "scaler.joblib"))
     le = jl_load(os.path.join(model_dir, "label_encoder.joblib"))
@@ -180,8 +188,14 @@ def predict_ltae_pixel(model_dir, output_csv):
     X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
     fids = df["fid"].values
 
-    dataset = InferenceTemporalDataset(X, fids)
-    dataloader = DataLoader(dataset, batch_size=2048, shuffle=False)
+    X_tensor = torch.tensor(X.reshape(-1, T_SEQ, N_BANDS), dtype=torch.float32)
+    fid_list = list(fids)
+
+    class _Dataset(Dataset):
+        def __len__(self): return len(fid_list)
+        def __getitem__(self, idx): return X_tensor[idx], fid_list[idx]
+
+    dataloader = DataLoader(_Dataset(), batch_size=2048, shuffle=False)
 
     logits_all = []
     for seed in SEEDS_ENSEMBLE:
@@ -277,6 +291,9 @@ PREDICT_FNS = {
     "xgboost_field": lambda md, out: predict_xgboost_field(md, out),
     "base_lgbm_pixel": lambda md, out: predict_base_ml(md, "lightgbm.joblib", out),
     "base_lr_pixel": lambda md, out: predict_base_ml(md, "logistic_regression.joblib", out),
+    # L2 variants — same prediction logic, different model dirs
+    "xgboost_field_l2": lambda md, out: predict_xgboost_field(md, out),
+    "base_lgbm_pixel_l2": lambda md, out: predict_base_ml(md, "lightgbm.joblib", out),
 }
 
 
@@ -287,7 +304,15 @@ def main():
     args = parser.parse_args()
 
     os.makedirs(PREDICTIONS_DIR, exist_ok=True)
-    print(f"=== OOS Prediction === Device: {device}")
+
+    # Only show torch device for DL models
+    has_dl = any(m in DL_MODELS for m in args.models)
+    if has_dl:
+        device = _get_torch_device()
+        print(f"=== OOS Prediction === Device: {device}")
+    else:
+        print("=== OOS Prediction === (ML models, no torch needed)")
+
     print(f"Models: {args.models}")
     print(f"Fractions: {args.fractions}")
 

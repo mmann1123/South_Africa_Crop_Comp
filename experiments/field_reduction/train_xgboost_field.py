@@ -4,6 +4,7 @@ Uses pre-tuned Optuna hyperparameters (no re-tuning).
 
 Usage:
     python train_xgboost_field.py --fraction 0.50 --output-dir models/xgboost_field/frac_0.50
+    python train_xgboost_field.py --fraction 0.50 --output-dir models/xgboost_field_l2/frac_0.50 --reg-lambda 1.0
 """
 
 import argparse
@@ -47,6 +48,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--fraction', type=float, required=True)
     parser.add_argument('--output-dir', type=str, required=True)
+    parser.add_argument('--reg-lambda', type=float, default=None,
+                        help='Override L2 regularization (reg_lambda). Default: use pre-tuned value.')
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -101,6 +104,11 @@ def main():
     best_params['n_estimators'] = 2000
     print(f"Loaded pre-tuned params from {params_path}")
 
+    if args.reg_lambda is not None:
+        old_val = best_params.get('reg_lambda', 'default')
+        best_params['reg_lambda'] = args.reg_lambda
+        print(f"Override reg_lambda: {old_val} -> {args.reg_lambda}")
+
     # Train
     print("Training XGBoost...")
     t_train = time.time()
@@ -139,7 +147,8 @@ def main():
     joblib.dump(list(X_train.columns), os.path.join(args.output_dir, 'feature_columns.joblib'))
 
     metadata = {
-        "model": "xgboost_field",
+        "model": "xgboost_field" + ("_l2" if args.reg_lambda is not None else ""),
+        "reg_lambda": args.reg_lambda or best_params.get('reg_lambda'),
         "fraction": fraction,
         "train_fields": int(len(sub_train_fids)),
         "val_fields": int(len(X_val)),

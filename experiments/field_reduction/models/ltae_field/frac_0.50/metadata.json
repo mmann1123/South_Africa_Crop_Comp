@@ -1,0 +1,21 @@
+{
+  "model": "ltae_field",
+  "fraction": 0.5,
+  "train_fields": 1326,
+  "val_fields": 664,
+  "test_fields": 830,
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "training_time_sec": 50.0,
+  "metrics": {
+    "accuracy": 0.73253,
+    "f1_macro": 0.6445,
+    "f1_weighted": 0.730829,
+    "cohen_kappa": 0.623129
+  }
+}

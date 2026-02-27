@@ -23,8 +23,8 @@ Output:
   - experiments/field_reduction/results/field_reduction_plot.png
 
 Usage:
-    python 6_field_reduction_experiment.py                # all models except TabNet
-    python 6_field_reduction_experiment.py --models tabnet_pixel  # TabNet only
+    python 6_field_reduction_experiment.py                # all models
+    python 6_field_reduction_experiment.py --skip-tabnet  # skip TabNet (slowest)
     python 6_field_reduction_experiment.py --dry-run       # show commands only
 """
 
@@ -51,10 +51,6 @@ def main():
 
     # Forward all CLI arguments to run_experiment.py
     cmd = [sys.executable, script_path] + sys.argv[1:]
-
-    # Default to --skip-tabnet if no --models flag provided
-    if "--models" not in sys.argv:
-        cmd.append("--skip-tabnet")
 
     print(f"Running: {' '.join(cmd)}\n")
 

@@ -1,0 +1,15 @@
+{
+  "model": "base_lgbm_pixel_l2",
+  "reg_lambda": 1.0,
+  "fraction": 0.25,
+  "train_fields": 704,
+  "train_pixels": 1244800,
+  "training_time_sec": 10.4,
+  "best_iteration": 23,
+  "metrics": {
+    "accuracy": 0.706024,
+    "f1_macro": 0.612581,
+    "f1_weighted": 0.688182,
+    "cohen_kappa": 0.58634
+  }
+}

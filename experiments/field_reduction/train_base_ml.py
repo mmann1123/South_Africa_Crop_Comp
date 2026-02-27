@@ -3,6 +3,8 @@
 Usage:
     python train_base_ml.py --fraction 0.50 --output-dir-lgbm models/base_lgbm_pixel/frac_0.50 \
                             --output-dir-lr models/base_lr_pixel/frac_0.50
+    python train_base_ml.py --fraction 0.50 --output-dir-lgbm models/base_lgbm_pixel_l2/frac_0.50 \
+                            --output-dir-lr models/base_lr_pixel/frac_0.50 --reg-lambda 1.0
 """
 
 import argparse
@@ -67,6 +69,8 @@ def main():
     parser.add_argument('--fraction', type=float, required=True)
     parser.add_argument('--output-dir-lgbm', type=str, required=True)
     parser.add_argument('--output-dir-lr', type=str, required=True)
+    parser.add_argument('--reg-lambda', type=float, default=None,
+                        help='L2 regularization for LightGBM. Default: LightGBM default (0).')
     args = parser.parse_args()
 
     os.makedirs(args.output_dir_lgbm, exist_ok=True)
@@ -121,11 +125,15 @@ def main():
 
     # ========== LightGBM ==========
     print("\n--- Training LightGBM ---")
-    t_lgbm = time.time()
-    lgbm_model = lgb.LGBMClassifier(
+    lgbm_kwargs = dict(
         n_estimators=1000, device="cuda", is_unbalance=True,
         verbose=-1, random_state=42,
     )
+    if args.reg_lambda is not None:
+        lgbm_kwargs['reg_lambda'] = args.reg_lambda
+        print(f"  L2 regularization: reg_lambda={args.reg_lambda}")
+    t_lgbm = time.time()
+    lgbm_model = lgb.LGBMClassifier(**lgbm_kwargs)
     lgbm_model.fit(
         X_train_scaled, y_train,
         eval_set=[(X_val_scaled, y_val)],
@@ -147,7 +155,8 @@ def main():
     joblib.dump(feature_cols, os.path.join(args.output_dir_lgbm, 'feature_columns.joblib'))
     with open(os.path.join(args.output_dir_lgbm, 'metadata.json'), 'w') as f:
         json.dump({
-            "model": "base_lgbm_pixel",
+            "model": "base_lgbm_pixel" + ("_l2" if args.reg_lambda is not None else ""),
+            "reg_lambda": args.reg_lambda,
             "fraction": fraction,
             "train_fields": int(len(sub_train_fids)),
             "train_pixels": int(len(X_train)),

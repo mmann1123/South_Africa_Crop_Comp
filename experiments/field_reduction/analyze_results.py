@@ -11,6 +11,7 @@ Usage:
 import json
 import os
 import sys
+from collections import Counter
 
 import geopandas as gpd
 import matplotlib.pyplot as plt
@@ -27,6 +28,9 @@ from experiment_config import (
     OOS_COMPARISON_CSV,
     BASELINE_NAME_MAP,
     DISPLAY_NAME_MAP,
+    MODEL_TRAINING_LEVEL,
+    MODEL_FEATURE_TYPE,
+    ML_ENSEMBLE_MODELS,
 )
 
 sys.stdout.reconfigure(line_buffering=True)
@@ -59,6 +63,48 @@ def score_predictions(pred_csv, gt):
         "f1_weighted": f1_score(y_true, y_pred, average="weighted"),
         "cohen_kappa": cohen_kappa_score(y_true, y_pred),
     }
+
+
+def score_df(pred_df, gt):
+    """Score a prediction DataFrame against ground truth."""
+    merged = gt.merge(pred_df, on="fid", suffixes=("_true", "_pred"))
+    if len(merged) == 0:
+        return None
+    y_true = merged["crop_name_true"]
+    y_pred = merged["crop_name_pred"]
+    return {
+        "fields": len(merged),
+        "accuracy": accuracy_score(y_true, y_pred),
+        "f1_macro": f1_score(y_true, y_pred, average="macro"),
+        "f1_weighted": f1_score(y_true, y_pred, average="weighted"),
+        "cohen_kappa": cohen_kappa_score(y_true, y_pred),
+    }
+
+
+def majority_vote_ensemble(model_names, frac):
+    """Build majority vote from individual model prediction CSVs."""
+    frac_str = f"{frac:.2f}"
+    dfs = []
+    for m in model_names:
+        csv_path = os.path.join(PREDICTIONS_DIR, f"{m}_frac_{frac_str}.csv")
+        if not os.path.exists(csv_path):
+            return None
+        dfs.append(pd.read_csv(csv_path))
+
+    # Merge all predictions on fid
+    merged = dfs[0][["fid"]].copy()
+    for i, df in enumerate(dfs):
+        merged = merged.merge(df, on="fid", suffixes=("", f"_{i}"))
+
+    # Get all crop_name columns
+    crop_cols = [c for c in merged.columns if c.startswith("crop_name")]
+
+    def _vote(row):
+        votes = [row[c] for c in crop_cols]
+        return Counter(votes).most_common(1)[0][0]
+
+    merged["crop_name"] = merged.apply(_vote, axis=1)
+    return merged[["fid", "crop_name"]]
 
 
 def load_baselines():
@@ -108,11 +154,16 @@ def main():
     for model_name in ALL_MODELS:
         display = DISPLAY_NAME_MAP[model_name]
 
+        training_level = MODEL_TRAINING_LEVEL.get(model_name, "")
+        feature_type = MODEL_FEATURE_TYPE.get(model_name, "")
+
         # Baseline (fraction=1.0)
         if model_name in baselines:
             bl = baselines[model_name]
             rows.append({
                 "Model": display,
+                "Training Level": training_level,
+                "Feature Type": feature_type,
                 "Fraction": 1.00,
                 "Train Fields": "",
                 "Train F1 (macro)": "",
@@ -147,6 +198,8 @@ def main():
 
             rows.append({
                 "Model": display,
+                "Training Level": training_level,
+                "Feature Type": feature_type,
                 "Fraction": frac,
                 "Train Fields": train_fields,
                 "Train F1 (macro)": round(train_f1, 4) if isinstance(train_f1, float) else train_f1,
@@ -157,6 +210,54 @@ def main():
             })
 
             print(f"  {display} frac={frac_str}: OOS F1 macro={metrics['f1_macro']:.4f}, delta={delta:+.4f}" if not np.isnan(delta) else f"  {display} frac={frac_str}: OOS F1 macro={metrics['f1_macro']:.4f}")
+
+    # Classical ML ensemble (majority vote)
+    ensemble_display = "Ensemble ML (majority vote)"
+    ensemble_baseline_f1 = baselines.get("ensemble_ml", {}).get("f1_macro", np.nan)
+
+    # Baseline (fraction=1.0) from existing model_comparison.csv
+    if "ensemble_ml" in baselines:
+        bl = baselines["ensemble_ml"]
+        rows.append({
+            "Model": ensemble_display,
+            "Training Level": "majority vote (ML models)",
+            "Feature Type": "majority vote",
+            "Fraction": 1.00,
+            "Train Fields": "",
+            "Train F1 (macro)": "",
+            "OOS F1 (macro)": bl["f1_macro"],
+            "OOS Accuracy": bl["accuracy"],
+            "OOS Cohen Kappa": bl["cohen_kappa"],
+            "Delta vs 1.0": 0.0,
+        })
+
+    for frac in FRACTIONS:
+        frac_str = f"{frac:.2f}"
+        ensemble_pred = majority_vote_ensemble(ML_ENSEMBLE_MODELS, frac)
+        if ensemble_pred is None:
+            print(f"  [SKIP] Missing predictions for ML ensemble frac={frac_str}")
+            continue
+
+        metrics = score_df(ensemble_pred, gt)
+        if metrics is None:
+            continue
+
+        delta = metrics["f1_macro"] - ensemble_baseline_f1 if not np.isnan(ensemble_baseline_f1) else np.nan
+
+        rows.append({
+            "Model": ensemble_display,
+            "Training Level": "majority vote (ML models)",
+            "Feature Type": "majority vote",
+            "Fraction": frac,
+            "Train Fields": "",
+            "Train F1 (macro)": "",
+            "OOS F1 (macro)": round(metrics["f1_macro"], 4),
+            "OOS Accuracy": round(metrics["accuracy"], 4),
+            "OOS Cohen Kappa": round(metrics["cohen_kappa"], 4),
+            "Delta vs 1.0": round(delta, 4) if not np.isnan(delta) else "",
+        })
+
+        print(f"  {ensemble_display} frac={frac_str}: OOS F1 macro={metrics['f1_macro']:.4f}, delta={delta:+.4f}" if not np.isnan(delta) else f"  {ensemble_display} frac={frac_str}: OOS F1 macro={metrics['f1_macro']:.4f}")
 
     if not rows:
         print("No results found. Run training and prediction first.")
@@ -172,17 +273,19 @@ def main():
     # Plot: fraction vs OOS F1 macro
     print("\nGenerating plot...")
     fig, ax = plt.subplots(figsize=(10, 6))
-    colors = plt.cm.Set2(np.linspace(0, 1, len(ALL_MODELS)))
+    plot_models = results_df["Model"].unique()
+    colors = plt.cm.Set2(np.linspace(0, 1, len(plot_models)))
 
-    for i, model_name in enumerate(ALL_MODELS):
-        display = DISPLAY_NAME_MAP[model_name]
+    for i, display in enumerate(plot_models):
         model_rows = results_df[results_df["Model"] == display].copy()
         if len(model_rows) == 0:
             continue
         model_rows = model_rows.sort_values("Fraction")
         fracs = model_rows["Fraction"].values
         f1s = pd.to_numeric(model_rows["OOS F1 (macro)"], errors="coerce").values
-        ax.plot(fracs, f1s, marker='o', label=display, color=colors[i], linewidth=2)
+        style = '--' if "Ensemble" in display else '-'
+        ax.plot(fracs, f1s, marker='o', label=display, color=colors[i],
+                linewidth=2.5 if "Ensemble" in display else 2, linestyle=style)
 
     ax.set_xlabel("Fraction of Training Fields", fontsize=12)
     ax.set_ylabel("OOS F1 Macro", fontsize=12)

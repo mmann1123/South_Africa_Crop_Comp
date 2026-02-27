@@ -1,0 +1,20 @@
+{
+  "model": "tabnet_pixel",
+  "fraction": 0.5,
+  "train_fields": 1326,
+  "train_pixels": 2430759,
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "training_time_sec": 9029.9,
+  "metrics": {
+    "accuracy": 0.795181,
+    "f1_macro": 0.723568,
+    "f1_weighted": 0.79307,
+    "cohen_kappa": 0.710667
+  }
+}

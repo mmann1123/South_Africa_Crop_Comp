@@ -1,0 +1,13 @@
+{
+  "model": "base_lr_pixel",
+  "fraction": 0.25,
+  "train_fields": 704,
+  "train_pixels": 1244800,
+  "training_time_sec": 130.9,
+  "metrics": {
+    "accuracy": 0.673494,
+    "f1_macro": 0.611526,
+    "f1_weighted": 0.676635,
+    "cohen_kappa": 0.553061
+  }
+}

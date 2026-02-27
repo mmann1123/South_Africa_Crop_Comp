@@ -24,6 +24,7 @@ from experiment_config import (
     FRACTIONS,
     MODEL_ENV_MAP,
     MODEL_SCRIPT_MAP,
+    L2_REG_LAMBDA,
 )
 
 sys.stdout.reconfigure(line_buffering=True)
@@ -38,6 +39,8 @@ TIME_ESTIMATES = {
     "xgboost_field": 2,
     "base_lgbm_pixel": 0.5,
     "base_lr_pixel": 8,
+    "xgboost_field_l2": 2,
+    "base_lgbm_pixel_l2": 9,
 }
 
 
@@ -45,8 +48,9 @@ def build_train_cmd(model_name, fraction, python_exe):
     """Build the subprocess command for a training script."""
     script = MODEL_SCRIPT_MAP[model_name]
     frac_str = f"{fraction:.2f}"
+    is_l2 = model_name.endswith("_l2")
 
-    if model_name == "base_lgbm_pixel" or model_name == "base_lr_pixel":
+    if model_name in ("base_lgbm_pixel", "base_lr_pixel"):
         # base_ml.py trains both LightGBM and LR together
         lgbm_dir = os.path.join(MODELS_DIR, "base_lgbm_pixel", f"frac_{frac_str}")
         lr_dir = os.path.join(MODELS_DIR, "base_lr_pixel", f"frac_{frac_str}")
@@ -56,13 +60,27 @@ def build_train_cmd(model_name, fraction, python_exe):
             "--output-dir-lgbm", lgbm_dir,
             "--output-dir-lr", lr_dir,
         ]
+    elif model_name == "base_lgbm_pixel_l2":
+        # L2 variant: trains LightGBM with reg_lambda, LR output goes to a throwaway dir
+        lgbm_dir = os.path.join(MODELS_DIR, "base_lgbm_pixel_l2", f"frac_{frac_str}")
+        lr_dir = os.path.join(MODELS_DIR, "base_lr_pixel", f"frac_{frac_str}")
+        return [
+            python_exe, script,
+            "--fraction", str(fraction),
+            "--output-dir-lgbm", lgbm_dir,
+            "--output-dir-lr", lr_dir,
+            "--reg-lambda", str(L2_REG_LAMBDA),
+        ]
     else:
         output_dir = os.path.join(MODELS_DIR, model_name, f"frac_{frac_str}")
-        return [
+        cmd = [
             python_exe, script,
             "--fraction", str(fraction),
             "--output-dir", output_dir,
         ]
+        if is_l2:
+            cmd += ["--reg-lambda", str(L2_REG_LAMBDA)]
+        return cmd
 
 
 def run_command(cmd, dry_run=False):
@@ -114,6 +132,7 @@ def main():
             pass
 
     # Deduplicate base_ml (train_base_ml.py trains both LightGBM and LR)
+    # Only deduplicate the non-L2 pair; L2 variant runs separately
     train_models = []
     base_ml_added = False
     for m in models:

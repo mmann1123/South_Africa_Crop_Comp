@@ -47,7 +47,11 @@ BASELINE_NAME_MAP = {
     "xgboost_field": "XGBoost (field)",
     "base_lgbm_pixel": "Base LightGBM (pixel)",
     "base_lr_pixel": "Base LR (pixel)",
+    "ensemble_ml": "Ensemble (ML)",
 }
+
+# Classical ML models used in the ensemble majority vote
+ML_ENSEMBLE_MODELS = ["xgboost_field", "base_lgbm_pixel", "base_lr_pixel"]
 
 # Map experiment model names -> display names for results
 DISPLAY_NAME_MAP = {
@@ -57,7 +61,35 @@ DISPLAY_NAME_MAP = {
     "xgboost_field": "XGBoost (field)",
     "base_lgbm_pixel": "Base LightGBM (pixel)",
     "base_lr_pixel": "Base LR (pixel)",
+    "xgboost_field_l2": "XGBoost L2 (field)",
+    "base_lgbm_pixel_l2": "LightGBM L2 (pixel)",
 }
+
+# Training Level and Feature Type (matches model_comparison.csv)
+MODEL_TRAINING_LEVEL = {
+    "tabnet_pixel": "pixel",
+    "ltae_field": "field",
+    "ltae_pixel": "pixel",
+    "xgboost_field": "field",
+    "base_lgbm_pixel": "pixel",
+    "base_lr_pixel": "pixel",
+    "xgboost_field_l2": "field",
+    "base_lgbm_pixel_l2": "pixel",
+}
+
+MODEL_FEATURE_TYPE = {
+    "tabnet_pixel": "raw pixel (band x month)",
+    "ltae_field": "raw temporal (field-averaged)",
+    "ltae_pixel": "raw pixel (temporal sequence)",
+    "xgboost_field": "xr_fresh time-series",
+    "base_lgbm_pixel": "raw pixel (band x month)",
+    "base_lr_pixel": "raw pixel (band x month)",
+    "xgboost_field_l2": "xr_fresh time-series",
+    "base_lgbm_pixel_l2": "raw pixel (band x month)",
+}
+
+# L2 regularization strength for _l2 model variants
+L2_REG_LAMBDA = 1.0
 
 # Model -> conda environment
 MODEL_ENV_MAP = {
@@ -67,6 +99,8 @@ MODEL_ENV_MAP = {
     "xgboost_field": ML_FIELD_PYTHON,
     "base_lgbm_pixel": ML_FIELD_PYTHON,
     "base_lr_pixel": ML_FIELD_PYTHON,
+    "xgboost_field_l2": ML_FIELD_PYTHON,
+    "base_lgbm_pixel_l2": ML_FIELD_PYTHON,
 }
 
 # Model -> training script
@@ -77,6 +111,8 @@ MODEL_SCRIPT_MAP = {
     "xgboost_field": os.path.join(EXPERIMENT_DIR, "train_xgboost_field.py"),
     "base_lgbm_pixel": os.path.join(EXPERIMENT_DIR, "train_base_ml.py"),
     "base_lr_pixel": os.path.join(EXPERIMENT_DIR, "train_base_ml.py"),
+    "xgboost_field_l2": os.path.join(EXPERIMENT_DIR, "train_xgboost_field.py"),
+    "base_lgbm_pixel_l2": os.path.join(EXPERIMENT_DIR, "train_base_ml.py"),
 }
 
 # OOS comparison CSV (for baseline metrics)
