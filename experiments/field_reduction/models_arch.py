@@ -78,6 +78,219 @@ class WeightedFocalLoss(nn.Module):
 
 # =================== L-TAE Architecture ===================
 
+# =================== Sparsemax ===================
+
+def sparsemax(z, dim=-1):
+    """Sparsemax activation (Martins & Astudillo, 2016).
+
+    Projects input onto the probability simplex, producing exact zeros
+    for small values (unlike softmax which is always dense).
+
+    Args:
+        z: input tensor of any shape
+        dim: dimension along which to apply sparsemax
+
+    Returns:
+        Tensor of same shape with values in [0,1] summing to 1 along dim,
+        with many exact zeros.
+    """
+    z = z - z.max(dim=dim, keepdim=True).values  # numerical stability
+    z_sorted, _ = z.sort(dim=dim, descending=True)
+    z_cumsum = z_sorted.cumsum(dim=dim)
+
+    k = torch.arange(1, z.size(dim) + 1, device=z.device, dtype=z.dtype)
+    # Reshape k for broadcasting across all other dims
+    shape = [1] * z.dim()
+    shape[dim] = -1
+    k = k.view(shape)
+
+    support = (z_sorted - (z_cumsum - 1) / k) > 0
+    k_z = support.sum(dim=dim, keepdim=True).clamp(min=1).float()
+    # Gather the cumulative sum at the support boundary
+    idx = (k_z - 1).long().clamp(min=0)
+    tau = (z_cumsum.gather(dim, idx) - 1) / k_z
+    return torch.clamp(z - tau, min=0)
+
+
+# =================== L-TAE-S Components ===================
+
+class SparseFeatureGate(nn.Module):
+    """TabNet-inspired sparse channel selection gate for multi-head attention.
+
+    For each head h, produces a sparse mask over the embedding dimension E
+    using sparsemax. A prior scale mechanism discourages redundant selections
+    across heads.
+
+    Args:
+        d_model: embedding dimension E
+        n_head: number of attention heads
+        gamma: prior scale coefficient (higher = more feature reuse allowed)
+        time_varying: if True, gate varies per timestep; if False, uses time-averaged input
+    """
+
+    def __init__(self, d_model, n_head, gamma=1.5, time_varying=True):
+        super().__init__()
+        self.d_model = d_model
+        self.n_head = n_head
+        self.gamma = gamma
+        self.time_varying = time_varying
+
+        self.gate_fc = nn.ModuleList([
+            nn.Linear(d_model, d_model, bias=False) for _ in range(n_head)
+        ])
+        self.gate_bn = nn.ModuleList([
+            nn.BatchNorm1d(d_model) for _ in range(n_head)
+        ])
+
+    def forward(self, x):
+        """
+        Args:
+            x: (B, T, E) embedded + positionally-encoded input
+
+        Returns:
+            masked_xs: list of n_head tensors, each (B, T, E)
+            masks: (B, n_head, T, E) for sparsity loss and interpretability
+        """
+        B, T, E = x.shape
+
+        if self.time_varying:
+            gate_input = x
+        else:
+            gate_input = x.mean(dim=1, keepdim=True).expand(-1, T, -1)
+
+        prior = torch.ones(B, T, E, device=x.device)
+
+        masked_xs = []
+        all_masks = []
+
+        for h in range(self.n_head):
+            gi_flat = gate_input.reshape(B * T, E)
+            h_logits = self.gate_fc[h](gi_flat)
+            h_logits = self.gate_bn[h](h_logits)
+            h_logits = h_logits.view(B, T, E)
+
+            h_logits = h_logits * prior
+            mask_h = sparsemax(h_logits, dim=-1)
+
+            prior = prior * torch.clamp(self.gamma - mask_h, min=0)
+
+            masked_xs.append(x * mask_h)
+            all_masks.append(mask_h)
+
+        masks = torch.stack(all_masks, dim=1)  # (B, n_head, T, E)
+        return masked_xs, masks
+
+
+class LTAESparse(nn.Module):
+    """L-TAE with Sparse Channel Attention (L-TAE-S).
+
+    Extends LTAE with a SparseFeatureGate that gives each attention head
+    a learned, sparse, instance-dependent view of the embedding channels.
+
+    Args:
+        in_channels: number of input bands (6)
+        d_model: embedding dimension (128)
+        n_head: number of attention heads (16)
+        d_k: key dimension per head (8)
+        dropout: dropout rate (0.3)
+        num_classes: number of output classes (5)
+        gamma: prior scale coefficient for feature gate (1.5)
+        time_varying_gate: whether gate varies per timestep (True)
+    """
+
+    def __init__(self, in_channels=6, d_model=128, n_head=16, d_k=8,
+                 dropout=0.3, num_classes=5, gamma=1.5, time_varying_gate=True):
+        super().__init__()
+        self.d_model = d_model
+        self.n_head = n_head
+        self.d_k = d_k
+
+        # Same embedding as LTAE
+        self.embedding = nn.Sequential(
+            nn.Linear(in_channels, d_model),
+            nn.LayerNorm(d_model),
+            nn.ReLU(),
+        )
+        self.pos_enc = PositionalEncoding(d_model, positions=MONTH_POSITIONS)
+
+        # Sparse feature gate (novel component)
+        self.feature_gate = SparseFeatureGate(
+            d_model, n_head, gamma=gamma, time_varying=time_varying_gate
+        )
+
+        # Per-head key and value projections
+        self.key_projs = nn.ModuleList([
+            nn.Linear(d_model, d_k) for _ in range(n_head)
+        ])
+        self.value_projs = nn.ModuleList([
+            nn.Linear(d_model, d_k) for _ in range(n_head)
+        ])
+
+        # Learnable query per head (same as LTAE)
+        self.query = nn.Parameter(torch.randn(n_head, d_k))
+        nn.init.normal_(self.query, mean=0, std=0.5)
+        self.attention_dropout = nn.Dropout(dropout)
+
+        # Same downstream as LTAE
+        self.norm = nn.LayerNorm(n_head * d_k)
+        self.mlp = nn.Sequential(
+            nn.Linear(n_head * d_k, 256),
+            nn.BatchNorm1d(256),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(256, 128),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+        )
+        self.classifier = nn.Linear(128, num_classes)
+
+    def forward(self, x):
+        """
+        Args:
+            x: (B, T, C) raw temporal input
+
+        Returns:
+            logits: (B, num_classes)
+            aux: dict with 'sparsity_loss' (scalar) and 'masks' (B, H, T, E)
+        """
+        B, T, C = x.shape
+        x = self.embedding(x)       # (B, T, E)
+        x = self.pos_enc(x)         # (B, T, E)
+
+        # Sparse feature gating
+        masked_xs, masks = self.feature_gate(x)
+
+        # Per-head temporal attention
+        head_outputs = []
+        for h in range(self.n_head):
+            x_h = masked_xs[h]  # (B, T, E)
+
+            keys_h = self.key_projs[h](x_h)      # (B, T, d_k)
+            values_h = self.value_projs[h](x_h)   # (B, T, d_k)
+
+            query_h = self.query[h].unsqueeze(0).unsqueeze(0)  # (1, 1, d_k)
+            query_h = query_h.expand(B, -1, -1)                # (B, 1, d_k)
+
+            attn = torch.matmul(query_h, keys_h.transpose(-2, -1)) / math.sqrt(self.d_k)
+            attn = torch.softmax(attn, dim=-1)      # (B, 1, T)
+            attn = self.attention_dropout(attn)
+
+            out_h = torch.matmul(attn, values_h)     # (B, 1, d_k)
+            head_outputs.append(out_h.squeeze(1))     # (B, d_k)
+
+        # Concatenate heads: (B, n_head * d_k) = (B, 128)
+        out = torch.cat(head_outputs, dim=-1)
+        out = self.norm(out)
+        out = self.mlp(out)
+        logits = self.classifier(out)
+
+        sparsity_loss = masks.mean()
+        aux = {"sparsity_loss": sparsity_loss, "masks": masks}
+
+        return logits, aux
+
+
 class PositionalEncoding(nn.Module):
     """Sinusoidal positional encoding with actual month positions."""
 
@@ -151,6 +364,53 @@ class LTAE(nn.Module):
         return self.classifier(out)
 
 
+class LTAELinear(nn.Module):
+    """L-TAE with a single linear classification head (no MLP decoder).
+
+    Same temporal attention encoder as LTAE, but replaces the 2-layer MLP
+    decoder with a single nn.Linear layer. Designed to be paired with
+    balanced cross-entropy loss for improved macro F1 on minority classes.
+    """
+
+    def __init__(self, in_channels=6, d_model=128, n_head=16, d_k=8,
+                 dropout=0.3, num_classes=5):
+        super().__init__()
+        self.d_model = d_model
+        self.n_head = n_head
+        self.d_k = d_k
+
+        self.embedding = nn.Sequential(
+            nn.Linear(in_channels, d_model),
+            nn.LayerNorm(d_model),
+            nn.ReLU(),
+        )
+        self.pos_enc = PositionalEncoding(d_model, positions=MONTH_POSITIONS)
+        self.query = nn.Parameter(torch.randn(n_head, d_k))
+        nn.init.normal_(self.query, mean=0, std=0.5)
+        self.key_proj = nn.Linear(d_model, n_head * d_k)
+        self.value_proj = nn.Linear(d_model, n_head * d_k)
+        self.attention_dropout = nn.Dropout(dropout)
+
+        self.norm = nn.LayerNorm(n_head * d_k)
+        self.classifier = nn.Linear(n_head * d_k, num_classes)
+
+    def forward(self, x):
+        B, T, C = x.shape
+        x = self.embedding(x)
+        x = self.pos_enc(x)
+        keys = self.key_proj(x).view(B, T, self.n_head, self.d_k)
+        values = self.value_proj(x).view(B, T, self.n_head, self.d_k)
+        keys = keys.permute(2, 0, 1, 3)
+        values = values.permute(2, 0, 1, 3)
+        query = self.query.unsqueeze(1).unsqueeze(2).expand(-1, B, -1, -1)
+        attn = torch.matmul(query, keys.transpose(-2, -1)) / math.sqrt(self.d_k)
+        attn = torch.softmax(attn, dim=-1)
+        attn = self.attention_dropout(attn)
+        out = torch.matmul(attn, values).squeeze(2).permute(1, 0, 2).reshape(B, -1)
+        out = self.norm(out)
+        return self.classifier(out)
+
+
 # =================== TabNet metric ===================
 
 try:
@@ -221,6 +481,45 @@ def aggregate_field_preds(fids, y_true, y_pred):
     return field_true, field_pred
 
 
+def train_epoch_sparse(model, optimizer, criterion, dataloader, scaler_amp, device,
+                       lambda_sparse=1e-3):
+    """Run one training epoch for L-TAE-S with sparsity regularization."""
+    model.train()
+    total_loss = 0
+    total_sparse = 0
+    for X, y in dataloader:
+        X, y = X.to(device, non_blocking=True), y.to(device, non_blocking=True)
+        optimizer.zero_grad()
+        with torch.amp.autocast("cuda"):
+            logits, aux = model(X)
+            task_loss = criterion(logits, y)
+            sparse_loss = aux["sparsity_loss"]
+            loss = task_loss + lambda_sparse * sparse_loss
+        scaler_amp.scale(loss).backward()
+        scaler_amp.unscale_(optimizer)
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+        scaler_amp.step(optimizer)
+        scaler_amp.update()
+        total_loss += loss.item()
+        total_sparse += sparse_loss.item()
+    n = len(dataloader)
+    return total_loss / n, total_sparse / n
+
+
+@torch.no_grad()
+def evaluate_sparse(model, dataloader, device):
+    """Evaluate L-TAE-S model, returning logits and labels (ignoring aux output)."""
+    model.eval()
+    logits_all, labels_all = [], []
+    with torch.amp.autocast("cuda"):
+        for X, y in dataloader:
+            X = X.to(device, non_blocking=True)
+            logits, _ = model(X)
+            logits_all.append(logits.float().cpu())
+            labels_all.extend(y.tolist())
+    return torch.cat(logits_all, dim=0), labels_all
+
+
 def compute_focal_loss_weights(y_train, num_classes):
     """Compute class weights for WeightedFocalLoss from training labels."""
     class_counts = np.bincount(y_train, minlength=num_classes).astype(np.float64)
@@ -228,3 +527,12 @@ def compute_focal_loss_weights(y_train, num_classes):
     alpha = 1.0 / class_counts
     alpha = alpha / alpha.sum() * num_classes
     return torch.tensor(alpha, dtype=torch.float32)
+
+
+def compute_balanced_ce_weights(y_train, num_classes):
+    """Compute sklearn-style balanced class weights: n_samples / (n_classes * count_i)."""
+    class_counts = np.bincount(y_train, minlength=num_classes).astype(np.float64)
+    class_counts = np.maximum(class_counts, 1.0)
+    n_samples = class_counts.sum()
+    weights = n_samples / (num_classes * class_counts)
+    return torch.tensor(weights, dtype=torch.float32)

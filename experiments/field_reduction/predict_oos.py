@@ -39,7 +39,7 @@ CROP_ID_TO_NAME = {
 }
 
 # DL models that require torch
-DL_MODELS = {"tabnet_pixel", "ltae_field", "ltae_pixel"}
+DL_MODELS = {"tabnet_pixel", "ltae_field", "ltae_pixel", "ltae_sparse_pixel", "ltae_linear_pixel"}
 
 
 def _get_torch_device():
@@ -227,6 +227,129 @@ def predict_ltae_pixel(model_dir, output_csv):
     return len(df_out)
 
 
+def predict_ltae_sparse_pixel(model_dir, output_csv):
+    """L-TAE-S pixel: 5-seed ensemble → avg logits → majority vote per field."""
+    import torch
+    from torch.utils.data import Dataset, DataLoader
+    from models_arch import LTAESparse, T_SEQ, N_BANDS
+
+    device = _get_torch_device()
+
+    feature_cols = jl_load(os.path.join(model_dir, "feature_columns.joblib"))
+    scaler = jl_load(os.path.join(model_dir, "scaler.joblib"))
+    le = jl_load(os.path.join(model_dir, "label_encoder.joblib"))
+
+    df = pd.read_parquet(MERGED_DL_TEST_PATH)
+    for col in feature_cols:
+        if col not in df.columns:
+            df[col] = 0
+    df[feature_cols] = df[feature_cols].fillna(0)
+
+    X = scaler.transform(df[feature_cols].values).astype(np.float32)
+    X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
+    fids = df["fid"].values
+
+    X_tensor = torch.tensor(X.reshape(-1, T_SEQ, N_BANDS), dtype=torch.float32)
+    fid_list = list(fids)
+
+    class _Dataset(Dataset):
+        def __len__(self): return len(fid_list)
+        def __getitem__(self, idx): return X_tensor[idx], fid_list[idx]
+
+    dataloader = DataLoader(_Dataset(), batch_size=2048, shuffle=False)
+
+    logits_all = []
+    for seed in SEEDS_ENSEMBLE:
+        model_path = os.path.join(model_dir, f"ltae_sparse_seed_{seed}.pt")
+        if not os.path.exists(model_path):
+            raise FileNotFoundError(f"L-TAE-S model not found: {model_path}")
+        model = LTAESparse(in_channels=N_BANDS, num_classes=len(le.classes_)).to(device)
+        model.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
+        model.eval()
+
+        seed_logits = []
+        with torch.no_grad(), torch.amp.autocast("cuda"):
+            for X_batch, _ in dataloader:
+                logits, _ = model(X_batch.to(device))  # unpack (logits, aux)
+                seed_logits.append(logits.cpu())
+        logits_all.append(torch.cat(seed_logits, dim=0).unsqueeze(0))
+
+    avg_logits = torch.cat(logits_all, dim=0).float().mean(dim=0)
+    preds = avg_logits.argmax(dim=1).tolist()
+
+    # Field-level majority vote
+    pred_df = pd.DataFrame({"fid": fids, "pred": preds})
+    field_preds = pred_df.groupby("fid")["pred"].agg(
+        lambda x: Counter(x).most_common(1)[0][0]
+    )
+    labels = le.inverse_transform(field_preds.values)
+
+    df_out = pd.DataFrame({"fid": field_preds.index, "crop_name": labels})
+    df_out.to_csv(output_csv, index=False)
+    return len(df_out)
+
+
+def predict_ltae_linear_pixel(model_dir, output_csv):
+    """L-TAE-Lin pixel: 5-seed ensemble → avg logits → majority vote per field."""
+    import torch
+    from torch.utils.data import Dataset, DataLoader
+    from models_arch import LTAELinear, T_SEQ, N_BANDS
+
+    device = _get_torch_device()
+
+    feature_cols = jl_load(os.path.join(model_dir, "feature_columns.joblib"))
+    scaler = jl_load(os.path.join(model_dir, "scaler.joblib"))
+    le = jl_load(os.path.join(model_dir, "label_encoder.joblib"))
+
+    df = pd.read_parquet(MERGED_DL_TEST_PATH)
+    for col in feature_cols:
+        if col not in df.columns:
+            df[col] = 0
+    df[feature_cols] = df[feature_cols].fillna(0)
+
+    X = scaler.transform(df[feature_cols].values).astype(np.float32)
+    X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
+    fids = df["fid"].values
+
+    X_tensor = torch.tensor(X.reshape(-1, T_SEQ, N_BANDS), dtype=torch.float32)
+    fid_list = list(fids)
+
+    class _Dataset(Dataset):
+        def __len__(self): return len(fid_list)
+        def __getitem__(self, idx): return X_tensor[idx], fid_list[idx]
+
+    dataloader = DataLoader(_Dataset(), batch_size=2048, shuffle=False)
+
+    logits_all = []
+    for seed in SEEDS_ENSEMBLE:
+        model_path = os.path.join(model_dir, f"ltae_linear_seed_{seed}.pt")
+        if not os.path.exists(model_path):
+            raise FileNotFoundError(f"L-TAE-Lin model not found: {model_path}")
+        model = LTAELinear(in_channels=N_BANDS, num_classes=len(le.classes_)).to(device)
+        model.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
+        model.eval()
+
+        seed_logits = []
+        with torch.no_grad(), torch.amp.autocast("cuda"):
+            for X_batch, _ in dataloader:
+                seed_logits.append(model(X_batch.to(device)).cpu())
+        logits_all.append(torch.cat(seed_logits, dim=0).unsqueeze(0))
+
+    avg_logits = torch.cat(logits_all, dim=0).float().mean(dim=0)
+    preds = avg_logits.argmax(dim=1).tolist()
+
+    # Field-level majority vote
+    pred_df = pd.DataFrame({"fid": fids, "pred": preds})
+    field_preds = pred_df.groupby("fid")["pred"].agg(
+        lambda x: Counter(x).most_common(1)[0][0]
+    )
+    labels = le.inverse_transform(field_preds.values)
+
+    df_out = pd.DataFrame({"fid": field_preds.index, "crop_name": labels})
+    df_out.to_csv(output_csv, index=False)
+    return len(df_out)
+
+
 def predict_xgboost_field(model_dir, output_csv):
     """XGBoost field: load model + imputer + scaler, predict on field-level test data."""
     model = jl_load(os.path.join(model_dir, "xgboost_model.joblib"))
@@ -288,6 +411,8 @@ PREDICT_FNS = {
     "tabnet_pixel": lambda md, out: predict_tabnet(md, out),
     "ltae_field": lambda md, out: predict_ltae_field(md, out),
     "ltae_pixel": lambda md, out: predict_ltae_pixel(md, out),
+    "ltae_sparse_pixel": lambda md, out: predict_ltae_sparse_pixel(md, out),
+    "ltae_linear_pixel": lambda md, out: predict_ltae_linear_pixel(md, out),
     "xgboost_field": lambda md, out: predict_xgboost_field(md, out),
     "base_lgbm_pixel": lambda md, out: predict_base_ml(md, "lightgbm.joblib", out),
     "base_lr_pixel": lambda md, out: predict_base_ml(md, "logistic_regression.joblib", out),

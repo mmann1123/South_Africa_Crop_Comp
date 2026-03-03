@@ -41,6 +41,8 @@ TIME_ESTIMATES = {
     "base_lr_pixel": 8,
     "xgboost_field_l2": 2,
     "base_lgbm_pixel_l2": 9,
+    "ltae_sparse_pixel": 35,
+    "ltae_linear_pixel": 20,
 }
 
 

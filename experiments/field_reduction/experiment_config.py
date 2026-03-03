@@ -63,6 +63,8 @@ DISPLAY_NAME_MAP = {
     "base_lr_pixel": "Base LR (pixel)",
     "xgboost_field_l2": "XGBoost L2 (field)",
     "base_lgbm_pixel_l2": "LightGBM L2 (pixel)",
+    "ltae_sparse_pixel": "L-TAE-S (pixel)",
+    "ltae_linear_pixel": "L-TAE-Lin (pixel)",
 }
 
 # Training Level and Feature Type (matches model_comparison.csv)
@@ -75,6 +77,8 @@ MODEL_TRAINING_LEVEL = {
     "base_lr_pixel": "pixel",
     "xgboost_field_l2": "field",
     "base_lgbm_pixel_l2": "pixel",
+    "ltae_sparse_pixel": "pixel",
+    "ltae_linear_pixel": "pixel",
 }
 
 MODEL_FEATURE_TYPE = {
@@ -86,6 +90,8 @@ MODEL_FEATURE_TYPE = {
     "base_lr_pixel": "raw pixel (band x month)",
     "xgboost_field_l2": "xr_fresh time-series",
     "base_lgbm_pixel_l2": "raw pixel (band x month)",
+    "ltae_sparse_pixel": "raw pixel (temporal sequence)",
+    "ltae_linear_pixel": "raw pixel (temporal sequence)",
 }
 
 # L2 regularization strength for _l2 model variants
@@ -101,6 +107,8 @@ MODEL_ENV_MAP = {
     "base_lr_pixel": ML_FIELD_PYTHON,
     "xgboost_field_l2": ML_FIELD_PYTHON,
     "base_lgbm_pixel_l2": ML_FIELD_PYTHON,
+    "ltae_sparse_pixel": DEEP_FIELD_PYTHON,
+    "ltae_linear_pixel": DEEP_FIELD_PYTHON,
 }
 
 # Model -> training script
@@ -113,6 +121,8 @@ MODEL_SCRIPT_MAP = {
     "base_lr_pixel": os.path.join(EXPERIMENT_DIR, "train_base_ml.py"),
     "xgboost_field_l2": os.path.join(EXPERIMENT_DIR, "train_xgboost_field.py"),
     "base_lgbm_pixel_l2": os.path.join(EXPERIMENT_DIR, "train_base_ml.py"),
+    "ltae_sparse_pixel": os.path.join(EXPERIMENT_DIR, "train_ltae_sparse_pixel.py"),
+    "ltae_linear_pixel": os.path.join(EXPERIMENT_DIR, "train_ltae_linear_pixel.py"),
 }
 
 # OOS comparison CSV (for baseline metrics)
