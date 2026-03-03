@@ -32,6 +32,9 @@ LightGBM L2 (pixel),pixel,raw pixel (band x month),0.75,2114,0.6342,0.5518,0.695
 L-TAE-S (pixel),pixel,raw pixel (temporal sequence),0.25,663,0.6974,0.5808,0.7085,0.5171,
 L-TAE-S (pixel),pixel,raw pixel (temporal sequence),0.5,1326,0.729,0.5578,0.6861,0.4929,
 L-TAE-S (pixel),pixel,raw pixel (temporal sequence),0.75,1989,0.7482,0.6142,0.718,0.538,
+L-TAE-Lin (pixel),pixel,raw pixel (temporal sequence),0.25,663,0.6983,0.5754,0.7064,0.5179,
+L-TAE-Lin (pixel),pixel,raw pixel (temporal sequence),0.5,1326,0.6935,0.4891,0.5727,0.3721,
+L-TAE-Lin (pixel),pixel,raw pixel (temporal sequence),0.75,1989,0.7202,0.5248,0.5826,0.3834,
 Ensemble ML (majority vote),majority vote (ML models),majority vote,1.0,,,0.5683343641661922,0.6997929606625258,0.4695759970698874,0.0
 Ensemble ML (majority vote),majority vote (ML models),majority vote,0.25,,,0.5797,0.7072,0.5046,0.0114
 Ensemble ML (majority vote),majority vote (ML models),majority vote,0.5,,,0.5657,0.6961,0.4816,-0.0027

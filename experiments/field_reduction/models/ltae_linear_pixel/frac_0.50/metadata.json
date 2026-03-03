@@ -1,0 +1,25 @@
+{
+  "model": "ltae_linear_pixel",
+  "fraction": 0.5,
+  "train_fields": 1326,
+  "train_pixels": 2430759,
+  "val_pixels": 1205790,
+  "test_pixels": 1531914,
+  "test_fields": 830,
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "loss": "balanced_ce",
+  "decoder": "linear",
+  "training_time_sec": 718.3,
+  "metrics": {
+    "accuracy": 0.778313,
+    "f1_macro": 0.693532,
+    "f1_weighted": 0.773818,
+    "cohen_kappa": 0.686435
+  }
+}
