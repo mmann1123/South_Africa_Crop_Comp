@@ -39,7 +39,7 @@ CROP_ID_TO_NAME = {
 }
 
 # DL models that require torch
-DL_MODELS = {"tabnet_pixel", "ltae_field", "ltae_pixel", "ltae_sparse_pixel", "ltae_linear_pixel"}
+DL_MODELS = {"tabnet_pixel", "tabnet2_pixel", "ltae_field", "ltae_pixel", "ltae_sparse_pixel", "ltae_lr_stack", "fasttabnet_pixel", "lassonet_pixel"}
 
 
 def _get_torch_device():
@@ -52,7 +52,7 @@ def _get_torch_device():
 
 def predict_tabnet(model_dir, output_csv):
     """TabNet pixel: 5-seed ensemble → avg proba → majority vote per field."""
-    from pytorch_tabnet.tab_model import TabNetClassifier
+    from pytorch_tabnet import TabNetClassifier
 
     # Load artifacts
     feature_columns = jl_load(os.path.join(model_dir, "tabnet_feature_columns.joblib"))
@@ -289,28 +289,38 @@ def predict_ltae_sparse_pixel(model_dir, output_csv):
     return len(df_out)
 
 
-def predict_ltae_linear_pixel(model_dir, output_csv):
-    """L-TAE-Lin pixel: 5-seed ensemble → avg logits → majority vote per field."""
+def predict_ltae_lr_stack(model_dir, output_csv):
+    """L-TAE+LR Stack: load stacker, run both base models, predict via stacker."""
     import torch
     from torch.utils.data import Dataset, DataLoader
-    from models_arch import LTAELinear, T_SEQ, N_BANDS
+    from models_arch import LTAE, T_SEQ, N_BANDS
 
     device = _get_torch_device()
 
-    feature_cols = jl_load(os.path.join(model_dir, "feature_columns.joblib"))
-    scaler = jl_load(os.path.join(model_dir, "scaler.joblib"))
+    # Load artifacts
+    base_lr = jl_load(os.path.join(model_dir, "base_lr.joblib"))
+    stacker = jl_load(os.path.join(model_dir, "stacker.joblib"))
+    stacker_scaler = jl_load(os.path.join(model_dir, "stacker_scaler.joblib"))
     le = jl_load(os.path.join(model_dir, "label_encoder.joblib"))
+    feature_cols = jl_load(os.path.join(model_dir, "feature_columns.joblib"))
 
+    # Derive L-TAE model dir (same fraction, different model name)
+    ltae_dir = model_dir.replace("ltae_lr_stack", "ltae_pixel")
+    ltae_scaler = jl_load(os.path.join(ltae_dir, "scaler.joblib"))
+
+    # Load and preprocess test data (same pipeline as L-TAE pixel)
     df = pd.read_parquet(MERGED_DL_TEST_PATH)
     for col in feature_cols:
         if col not in df.columns:
             df[col] = 0
     df[feature_cols] = df[feature_cols].fillna(0)
 
-    X = scaler.transform(df[feature_cols].values).astype(np.float32)
+    X = ltae_scaler.transform(df[feature_cols].values).astype(np.float32)
     X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
     fids = df["fid"].values
+    num_classes = len(le.classes_)
 
+    # --- L-TAE probs: 5-seed ensemble → avg logits → softmax ---
     X_tensor = torch.tensor(X.reshape(-1, T_SEQ, N_BANDS), dtype=torch.float32)
     fid_list = list(fids)
 
@@ -322,10 +332,10 @@ def predict_ltae_linear_pixel(model_dir, output_csv):
 
     logits_all = []
     for seed in SEEDS_ENSEMBLE:
-        model_path = os.path.join(model_dir, f"ltae_linear_seed_{seed}.pt")
+        model_path = os.path.join(ltae_dir, f"ltae_seed_{seed}.pt")
         if not os.path.exists(model_path):
-            raise FileNotFoundError(f"L-TAE-Lin model not found: {model_path}")
-        model = LTAELinear(in_channels=N_BANDS, num_classes=len(le.classes_)).to(device)
+            raise FileNotFoundError(f"L-TAE pixel model not found: {model_path}")
+        model = LTAE(in_channels=N_BANDS, num_classes=num_classes).to(device)
         model.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
         model.eval()
 
@@ -336,7 +346,142 @@ def predict_ltae_linear_pixel(model_dir, output_csv):
         logits_all.append(torch.cat(seed_logits, dim=0).unsqueeze(0))
 
     avg_logits = torch.cat(logits_all, dim=0).float().mean(dim=0)
+    ltae_probs = torch.softmax(avg_logits, dim=1).numpy()
+
+    # --- LR probs ---
+    lr_probs = base_lr.predict_proba(X)
+
+    # --- Stacker predict ---
+    meta_features = np.hstack([ltae_probs, lr_probs])
+    meta_scaled = stacker_scaler.transform(meta_features)
+    preds = stacker.predict(meta_scaled)
+
+    # Field-level majority vote
+    pred_df = pd.DataFrame({"fid": fids, "pred": preds})
+    field_preds = pred_df.groupby("fid")["pred"].agg(
+        lambda x: Counter(x).most_common(1)[0][0]
+    )
+    labels = le.inverse_transform(field_preds.values)
+
+    df_out = pd.DataFrame({"fid": field_preds.index, "crop_name": labels})
+    df_out.to_csv(output_csv, index=False)
+    return len(df_out)
+
+
+def predict_fasttabnet_pixel(model_dir, output_csv):
+    """FastTabNet pixel: 5-seed ensemble → avg logits → majority vote per field."""
+    import torch
+    from torch.utils.data import Dataset, DataLoader
+    from models_arch import FastTabNet
+
+    device = _get_torch_device()
+
+    feature_cols = jl_load(os.path.join(model_dir, "feature_columns.joblib"))
+    scaler = jl_load(os.path.join(model_dir, "scaler.joblib"))
+    le = jl_load(os.path.join(model_dir, "label_encoder.joblib"))
+
+    # Read architecture params from metadata
+    with open(os.path.join(model_dir, "metadata.json")) as f:
+        meta = __import__("json").load(f)
+
+    df = pd.read_parquet(MERGED_DL_TEST_PATH)
+    for col in feature_cols:
+        if col not in df.columns:
+            df[col] = 0
+    df[feature_cols] = df[feature_cols].fillna(0)
+
+    X = scaler.transform(df[feature_cols].values).astype(np.float32)
+    X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
+    fids = df["fid"].values
+
+    X_tensor = torch.tensor(X, dtype=torch.float32)
+
+    class _Dataset(Dataset):
+        def __len__(self): return len(X_tensor)
+        def __getitem__(self, idx): return X_tensor[idx], 0
+
+    dataloader = DataLoader(_Dataset(), batch_size=2048, shuffle=False)
+
+    logits_all = []
+    for seed in SEEDS_ENSEMBLE:
+        model_path = os.path.join(model_dir, f"fasttabnet_seed_{seed}.pt")
+        if not os.path.exists(model_path):
+            raise FileNotFoundError(f"FastTabNet model not found: {model_path}")
+        model = FastTabNet(
+            in_dim=meta.get("in_dim", 60),
+            n_d=meta.get("n_d", 64),
+            n_a=meta.get("n_a", 64),
+            n_steps=meta.get("n_steps", 5),
+            gamma=meta.get("gamma", 1.5),
+            n_shared=meta.get("n_shared", 2),
+            n_independent=meta.get("n_independent", 2),
+            virtual_batch_size=meta.get("virtual_batch_size", 128),
+            num_classes=len(le.classes_),
+        ).to(device)
+        model.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
+        model.eval()
+
+        seed_logits = []
+        with torch.no_grad(), torch.amp.autocast("cuda"):
+            for X_batch, _ in dataloader:
+                logits, _ = model(X_batch.to(device))
+                seed_logits.append(logits.float().cpu())
+        logits_all.append(torch.cat(seed_logits, dim=0).unsqueeze(0))
+
+    avg_logits = torch.cat(logits_all, dim=0).float().mean(dim=0)
     preds = avg_logits.argmax(dim=1).tolist()
+
+    # Field-level majority vote
+    pred_df = pd.DataFrame({"fid": fids, "pred": preds})
+    field_preds = pred_df.groupby("fid")["pred"].agg(
+        lambda x: Counter(x).most_common(1)[0][0]
+    )
+    labels = le.inverse_transform(field_preds.values)
+
+    df_out = pd.DataFrame({"fid": field_preds.index, "crop_name": labels})
+    df_out.to_csv(output_csv, index=False)
+    return len(df_out)
+
+
+def predict_lassonet_pixel(model_dir, output_csv):
+    """LassoNet pixel: load best model from path, predict, majority vote per field."""
+    import torch
+    from lassonet import LassoNetClassifier
+
+    feature_cols = jl_load(os.path.join(model_dir, "feature_columns.joblib"))
+    scaler = jl_load(os.path.join(model_dir, "scaler.joblib"))
+    le = jl_load(os.path.join(model_dir, "label_encoder.joblib"))
+
+    # Read architecture params from metadata
+    with open(os.path.join(model_dir, "metadata.json")) as f:
+        meta = __import__("json").load(f)
+
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model = LassoNetClassifier(
+        hidden_dims=tuple(meta.get("hidden_dims", [128])),
+        dropout=meta.get("dropout", 0.3),
+        device=device,
+        verbose=0,
+    )
+    state_dict = torch.load(
+        os.path.join(model_dir, "lassonet_state_dict.pt"),
+        map_location=device,
+        weights_only=True,
+    )
+    model.load(state_dict)
+
+    # Load and preprocess test data
+    df = pd.read_parquet(MERGED_DL_TEST_PATH)
+    for col in feature_cols:
+        if col not in df.columns:
+            df[col] = 0
+    df[feature_cols] = df[feature_cols].fillna(0)
+
+    X = scaler.transform(df[feature_cols].values).astype(np.float32)
+    X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
+    fids = df["fid"].values
+
+    preds = model.predict(X)
 
     # Field-level majority vote
     pred_df = pd.DataFrame({"fid": fids, "pred": preds})
@@ -409,10 +554,13 @@ def predict_base_ml(model_dir, model_file, output_csv):
 
 PREDICT_FNS = {
     "tabnet_pixel": lambda md, out: predict_tabnet(md, out),
+    "tabnet2_pixel": lambda md, out: predict_tabnet(md, out),  # same artifact format
     "ltae_field": lambda md, out: predict_ltae_field(md, out),
     "ltae_pixel": lambda md, out: predict_ltae_pixel(md, out),
     "ltae_sparse_pixel": lambda md, out: predict_ltae_sparse_pixel(md, out),
-    "ltae_linear_pixel": lambda md, out: predict_ltae_linear_pixel(md, out),
+    "ltae_lr_stack": lambda md, out: predict_ltae_lr_stack(md, out),
+    "fasttabnet_pixel": lambda md, out: predict_fasttabnet_pixel(md, out),
+    "lassonet_pixel": lambda md, out: predict_lassonet_pixel(md, out),
     "xgboost_field": lambda md, out: predict_xgboost_field(md, out),
     "base_lgbm_pixel": lambda md, out: predict_base_ml(md, "lightgbm.joblib", out),
     "base_lr_pixel": lambda md, out: predict_base_ml(md, "logistic_regression.joblib", out),

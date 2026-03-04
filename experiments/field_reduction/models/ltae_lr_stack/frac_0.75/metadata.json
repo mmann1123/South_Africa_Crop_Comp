@@ -1,0 +1,35 @@
+{
+  "model": "ltae_lr_stack",
+  "fraction": 0.75,
+  "fusion": "grid_search_stacked",
+  "n_folds": 5,
+  "best_params": {
+    "lr__C": 0.001,
+    "lr__class_weight": null,
+    "lr__penalty": "l1"
+  },
+  "best_cv_f1_macro": 0.735279,
+  "train_fields": 1989,
+  "train_pixels": 3601264,
+  "val_pixels": 1205790,
+  "test_pixels": 1531914,
+  "test_fields": 830,
+  "num_classes": 5,
+  "ltae_model_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/field_reduction/models/ltae_pixel/frac_0.75",
+  "ltae_seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "base_lr_train_time_sec": 98.5,
+  "grid_search_time_sec": 3646.2,
+  "training_time_sec": 3763.7,
+  "metrics": {
+    "accuracy": 0.812048,
+    "f1_macro": 0.737661,
+    "f1_weighted": 0.804678,
+    "cohen_kappa": 0.732069
+  }
+}

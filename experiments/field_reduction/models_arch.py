@@ -520,6 +520,246 @@ def evaluate_sparse(model, dataloader, device):
     return torch.cat(logits_all, dim=0), labels_all
 
 
+# =================== FastTabNet Architecture ===================
+
+
+class FlatDataset(Dataset):
+    """Dataset returning flat feature tensors + labels (no temporal reshape)."""
+
+    def __init__(self, X, y):
+        self.X = torch.tensor(X, dtype=torch.float32)
+        self.y = torch.tensor(y, dtype=torch.long)
+
+    def __len__(self):
+        return len(self.y)
+
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx]
+
+
+class GhostBN(nn.Module):
+    """Ghost Batch Normalization — splits batch into virtual sub-batches for BN.
+
+    Matches pytorch_tabnet's GBN. Each virtual chunk is normalized independently
+    using the same BN parameters, reducing sensitivity to batch composition.
+    """
+
+    def __init__(self, dim, virtual_batch_size=128, momentum=0.02):
+        super().__init__()
+        self.vbs = virtual_batch_size
+        self.bn = nn.BatchNorm1d(dim, momentum=momentum)
+
+    def forward(self, x):
+        if self.training and x.shape[0] > self.vbs:
+            n_chunks = max(1, (x.shape[0] + self.vbs - 1) // self.vbs)
+            chunks = x.chunk(n_chunks, dim=0)
+            return torch.cat([self.bn(c) for c in chunks], dim=0)
+        return self.bn(x)
+
+
+def _init_glu(linear, input_dim, output_dim):
+    """TabNet-style Xavier init with custom gain for GLU layers."""
+    gain = math.sqrt((input_dim + output_dim) / math.sqrt(input_dim))
+    nn.init.xavier_normal_(linear.weight, gain=gain)
+
+
+def _init_non_glu(linear, input_dim, output_dim):
+    """TabNet-style Xavier init for non-GLU layers (attention transforms)."""
+    gain = math.sqrt((input_dim + output_dim) / math.sqrt(4 * input_dim))
+    nn.init.xavier_normal_(linear.weight, gain=gain)
+
+
+class FastTabNet(nn.Module):
+    """Custom TabNet faithfully reimplemented with L-TAE training optimizations.
+
+    Matches pytorch_tabnet's architecture: sequential decision steps with
+    sparsemax feature masks, shared+independent GLU layers with residual
+    connections (sqrt(0.5) scaling), Ghost Batch Normalization, and
+    per-step BN for shared linear weights.
+
+    Returns (logits, aux) — compatible with train_epoch_sparse()/evaluate_sparse().
+
+    Args:
+        in_dim: number of input features (60 for 10 months x 6 bands)
+        n_d: decision step output dimension
+        n_a: attention dimension (feeds next step's mask)
+        n_steps: number of sequential decision steps
+        gamma: prior scale coefficient (controls feature reuse across steps)
+        n_shared: number of shared GLU layers (weights reused, BN per-step)
+        n_independent: number of step-specific GLU layers per step
+        virtual_batch_size: chunk size for Ghost Batch Normalization
+        momentum: BatchNorm momentum
+        num_classes: number of output classes
+    """
+
+    def __init__(self, in_dim=60, n_d=64, n_a=64, n_steps=5, gamma=1.5,
+                 n_shared=2, n_independent=2, virtual_batch_size=128,
+                 momentum=0.02, num_classes=5):
+        super().__init__()
+        self.in_dim = in_dim
+        self.n_d = n_d
+        self.n_a = n_a
+        self.n_steps = n_steps
+        self.n_shared = n_shared
+        self.n_independent = n_independent
+        self.gamma = gamma
+        self.epsilon = 1e-15
+        feat_dim = n_d + n_a
+
+        # Initial batch normalization on raw input
+        self.initial_bn = nn.BatchNorm1d(in_dim, momentum=momentum)
+
+        # Shared linear weights (reused across initial splitter + all steps)
+        # Each step gets its own BN but shares these Linear modules.
+        self.shared_linears = nn.ModuleList()
+        for i in range(n_shared):
+            in_d = in_dim if i == 0 else feat_dim
+            linear = nn.Linear(in_d, feat_dim * 2, bias=False)
+            _init_glu(linear, in_d, feat_dim * 2)
+            self.shared_linears.append(linear)
+
+        # Initial splitter: own GhostBN for shared layers + own independent layers
+        self.init_shared_bns = nn.ModuleList([
+            GhostBN(feat_dim * 2, virtual_batch_size, momentum)
+            for _ in range(n_shared)
+        ])
+        self.init_indep_linears = nn.ModuleList()
+        self.init_indep_bns = nn.ModuleList()
+        for _ in range(n_independent):
+            linear = nn.Linear(feat_dim, feat_dim * 2, bias=False)
+            _init_glu(linear, feat_dim, feat_dim * 2)
+            self.init_indep_linears.append(linear)
+            self.init_indep_bns.append(
+                GhostBN(feat_dim * 2, virtual_batch_size, momentum))
+
+        # Per-step: own GhostBN for shared layers + own independent layers
+        self.step_shared_bns = nn.ModuleList()
+        self.step_indep_linears = nn.ModuleList()
+        self.step_indep_bns = nn.ModuleList()
+        for _ in range(n_steps):
+            self.step_shared_bns.append(nn.ModuleList([
+                GhostBN(feat_dim * 2, virtual_batch_size, momentum)
+                for _ in range(n_shared)
+            ]))
+            s_linears = nn.ModuleList()
+            s_bns = nn.ModuleList()
+            for _ in range(n_independent):
+                linear = nn.Linear(feat_dim, feat_dim * 2, bias=False)
+                _init_glu(linear, feat_dim, feat_dim * 2)
+                s_linears.append(linear)
+                s_bns.append(
+                    GhostBN(feat_dim * 2, virtual_batch_size, momentum))
+            self.step_indep_linears.append(s_linears)
+            self.step_indep_bns.append(s_bns)
+
+        # Attention transforms (one per step)
+        self.attn_linears = nn.ModuleList()
+        self.attn_bns = nn.ModuleList()
+        for _ in range(n_steps):
+            linear = nn.Linear(n_a, in_dim, bias=False)
+            _init_non_glu(linear, n_a, in_dim)
+            self.attn_linears.append(linear)
+            self.attn_bns.append(
+                GhostBN(in_dim, virtual_batch_size, momentum))
+
+        # Final classifier
+        self.final_fc = nn.Linear(n_d, num_classes)
+
+    @staticmethod
+    def _glu(x):
+        """GLU activation: split in half, value * sigmoid(gate)."""
+        x1, x2 = x.chunk(2, dim=-1)
+        return x1 * torch.sigmoid(x2)
+
+    def _feat_transform(self, x, shared_bns, indep_linears, indep_bns):
+        """Shared + independent GLU layers with residual connections.
+
+        Matches pytorch_tabnet's GLU_Block: first shared layer has no residual
+        (dimension change in_dim → feat_dim), all subsequent layers use
+        residual + sqrt(0.5) scaling.
+        """
+        SCALE = math.sqrt(0.5)
+
+        # Shared layers (reuse self.shared_linears weights, per-step BN)
+        for i, (linear, bn) in enumerate(zip(self.shared_linears, shared_bns)):
+            h = self._glu(bn(linear(x)))
+            if i == 0:
+                x = h  # First layer: no residual (dimension change)
+            else:
+                x = (x + h) * SCALE  # Residual + scaling
+
+        # Independent layers (always residual since shared already transformed)
+        for linear, bn in zip(indep_linears, indep_bns):
+            h = self._glu(bn(linear(x)))
+            x = (x + h) * SCALE
+
+        return x
+
+    def forward(self, x):
+        """
+        Args:
+            x: (B, in_dim) flat input features
+
+        Returns:
+            logits: (B, num_classes)
+            aux: dict with 'sparsity_loss' scalar and 'masks' list
+        """
+        B = x.shape[0]
+
+        # Batch normalize input (saved for masking at each step)
+        x_bn = self.initial_bn(x)
+
+        # Initial splitter: full shared+independent transform to get first h_a
+        h = self._feat_transform(
+            x_bn, self.init_shared_bns,
+            self.init_indep_linears, self.init_indep_bns)
+        h_a = h[:, self.n_d:]  # (B, n_a) — feeds first attention transform
+
+        # Prior: starts uniform, gets reduced as features are used
+        prior = torch.ones(B, self.in_dim, device=x.device)
+
+        # Accumulated decision output
+        output_agg = torch.zeros(B, self.n_d, device=x.device)
+
+        masks = []
+
+        for step in range(self.n_steps):
+            # 1. Attention mask from previous step's h_a
+            a = self.attn_linears[step](h_a)
+            a = self.attn_bns[step](a)
+            a = a * prior
+            # Run sparsemax in float32 for numerical stability under AMP
+            a = sparsemax(a.float(), dim=-1).to(x_bn.dtype)
+            masks.append(a)
+
+            # 2. Update prior (discourage reuse)
+            prior = prior * (self.gamma - a)
+
+            # 3. Apply mask to batch-normalized input
+            masked_x = a * x_bn
+
+            # 4. Feature transform (shared + independent with residuals)
+            h = self._feat_transform(
+                masked_x, self.step_shared_bns[step],
+                self.step_indep_linears[step], self.step_indep_bns[step])
+
+            # 5. Split and accumulate
+            output_agg = output_agg + F.relu(h[:, :self.n_d])
+            h_a = h[:, self.n_d:]
+
+        # Classification
+        logits = self.final_fc(output_agg)
+
+        # Sparsity loss: entropy of masks (matches TabNet's M_loss / n_steps)
+        mask_stack = torch.stack(masks, dim=1)  # (B, n_steps, in_dim)
+        sparsity_loss = (
+            -mask_stack * torch.log(mask_stack + self.epsilon)
+        ).sum(dim=-1).mean()
+
+        aux = {"sparsity_loss": sparsity_loss, "masks": masks}
+        return logits, aux
+
+
 def compute_focal_loss_weights(y_train, num_classes):
     """Compute class weights for WeightedFocalLoss from training labels."""
     class_counts = np.bincount(y_train, minlength=num_classes).astype(np.float64)

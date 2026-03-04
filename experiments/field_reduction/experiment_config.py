@@ -64,7 +64,10 @@ DISPLAY_NAME_MAP = {
     "xgboost_field_l2": "XGBoost L2 (field)",
     "base_lgbm_pixel_l2": "LightGBM L2 (pixel)",
     "ltae_sparse_pixel": "L-TAE-S (pixel)",
-    "ltae_linear_pixel": "L-TAE-Lin (pixel)",
+    "ltae_lr_stack": "L-TAE+LR Stack (pixel)",
+    "fasttabnet_pixel": "FastTabNet (pixel)",
+    "lassonet_pixel": "LassoNet (pixel)",
+    "tabnet2_pixel": "TabNet2 (pixel)",
 }
 
 # Training Level and Feature Type (matches model_comparison.csv)
@@ -78,7 +81,10 @@ MODEL_TRAINING_LEVEL = {
     "xgboost_field_l2": "field",
     "base_lgbm_pixel_l2": "pixel",
     "ltae_sparse_pixel": "pixel",
-    "ltae_linear_pixel": "pixel",
+    "ltae_lr_stack": "pixel",
+    "fasttabnet_pixel": "pixel",
+    "lassonet_pixel": "pixel",
+    "tabnet2_pixel": "pixel",
 }
 
 MODEL_FEATURE_TYPE = {
@@ -91,7 +97,10 @@ MODEL_FEATURE_TYPE = {
     "xgboost_field_l2": "xr_fresh time-series",
     "base_lgbm_pixel_l2": "raw pixel (band x month)",
     "ltae_sparse_pixel": "raw pixel (temporal sequence)",
-    "ltae_linear_pixel": "raw pixel (temporal sequence)",
+    "ltae_lr_stack": "stacked (L-TAE + LR probs)",
+    "fasttabnet_pixel": "raw pixel (band x month)",
+    "lassonet_pixel": "raw pixel (band x month)",
+    "tabnet2_pixel": "raw pixel (band x month)",
 }
 
 # L2 regularization strength for _l2 model variants
@@ -108,7 +117,10 @@ MODEL_ENV_MAP = {
     "xgboost_field_l2": ML_FIELD_PYTHON,
     "base_lgbm_pixel_l2": ML_FIELD_PYTHON,
     "ltae_sparse_pixel": DEEP_FIELD_PYTHON,
-    "ltae_linear_pixel": DEEP_FIELD_PYTHON,
+    "ltae_lr_stack": DEEP_FIELD_PYTHON,
+    "fasttabnet_pixel": DEEP_FIELD_PYTHON,
+    "lassonet_pixel": DEEP_FIELD_PYTHON,
+    "tabnet2_pixel": DEEP_FIELD_PYTHON,
 }
 
 # Model -> training script
@@ -122,7 +134,10 @@ MODEL_SCRIPT_MAP = {
     "xgboost_field_l2": os.path.join(EXPERIMENT_DIR, "train_xgboost_field.py"),
     "base_lgbm_pixel_l2": os.path.join(EXPERIMENT_DIR, "train_base_ml.py"),
     "ltae_sparse_pixel": os.path.join(EXPERIMENT_DIR, "train_ltae_sparse_pixel.py"),
-    "ltae_linear_pixel": os.path.join(EXPERIMENT_DIR, "train_ltae_linear_pixel.py"),
+    "ltae_lr_stack": os.path.join(EXPERIMENT_DIR, "train_stacker_pixel.py"),
+    "fasttabnet_pixel": os.path.join(EXPERIMENT_DIR, "train_fasttabnet_pixel.py"),
+    "lassonet_pixel": os.path.join(EXPERIMENT_DIR, "train_lassonet_pixel.py"),
+    "tabnet2_pixel": os.path.join(EXPERIMENT_DIR, "train_tabnet2_pixel.py"),
 }
 
 # OOS comparison CSV (for baseline metrics)

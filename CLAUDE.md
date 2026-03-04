@@ -52,6 +52,8 @@ Place predictions in `submissions/prediction.csv` with either:
 
 Predictions must be ordered by field ID (see `scoring/field_id.csv` and `scoring/field_fid.csv`).
 
+**Primary competition metric**: F1 macro.
+
 **Automated evaluation**: PRs that modify `submissions/` trigger a GitHub Action (`score.yml`) that computes Cohen's Kappa, weighted F1, and Cross Entropy against hidden ground truth stored in a GitHub secret.
 
 Run scoring locally (requires `GROUND_TRUTH` env var):

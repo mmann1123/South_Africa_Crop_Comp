@@ -42,8 +42,14 @@ TIME_ESTIMATES = {
     "xgboost_field_l2": 2,
     "base_lgbm_pixel_l2": 9,
     "ltae_sparse_pixel": 35,
-    "ltae_linear_pixel": 20,
+    "ltae_lr_stack": 5,
+    "fasttabnet_pixel": 40,
+    "lassonet_pixel": 20,
+    "tabnet2_pixel": 60,
 }
+
+# Training priority (higher = train later). ltae_lr_stack depends on ltae_pixel.
+TRAIN_PRIORITY = {"ltae_lr_stack": 99}
 
 
 def build_train_cmd(model_name, fraction, python_exe):
@@ -144,6 +150,9 @@ def main():
                 base_ml_added = True
         else:
             train_models.append(m)
+
+    # Ensure dependency order (e.g. ltae_lr_stack needs ltae_pixel trained first)
+    train_models.sort(key=lambda m: TRAIN_PRIORITY.get(m, 50))
 
     # Print plan
     print("=" * 60)

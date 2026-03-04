@@ -263,8 +263,11 @@ def main():
         print("No results found. Run training and prediction first.")
         return
 
-    # Save CSV
+    # Save CSV (sorted by Fraction desc, then OOS F1 macro desc)
     results_df = pd.DataFrame(rows)
+    results_df = results_df.sort_values(
+        ["Fraction", "OOS F1 (macro)"], ascending=[False, False]
+    ).reset_index(drop=True)
     csv_path = os.path.join(RESULTS_DIR, "field_reduction_results.csv")
     results_df.to_csv(csv_path, index=False)
     print(f"\nSaved: {csv_path}")
