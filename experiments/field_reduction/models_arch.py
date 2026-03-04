@@ -422,7 +422,11 @@ try:
             self._name = "f1_macro"
             self._maximize = True
 
-        def __call__(self, y_true, y_score):
+        def __call__(self, y_true, y_score, weights=None):
+            if isinstance(y_score, torch.Tensor):
+                y_score = y_score.detach().cpu().numpy()
+            if isinstance(y_true, torch.Tensor):
+                y_true = y_true.detach().cpu().numpy()
             preds = np.argmax(y_score, axis=1)
             return f1_score(y_true, preds, average='macro')
 
