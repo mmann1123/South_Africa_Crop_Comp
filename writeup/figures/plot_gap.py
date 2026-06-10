@@ -7,7 +7,11 @@ Source: out_of_sample/scoring_results/f1_macro_train_vs_oos.csv
 """
 import os
 import pandas as pd
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+
+mpl.rcParams.update({"font.size": 13, "axes.titlesize": 15, "axes.labelsize": 14,
+                     "xtick.labelsize": 12, "ytick.labelsize": 12, "legend.fontsize": 12})
 
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 SRC = os.path.join(REPO, "out_of_sample", "scoring_results", "f1_macro_train_vs_oos.csv")
@@ -18,7 +22,7 @@ df = df.dropna(subset=["Train F1 (macro)", "OOS F1 (macro)"]).copy()
 df["Delta"] = df["OOS F1 (macro)"] - df["Train F1 (macro)"]
 df = df.sort_values("Delta")  # most-overfit first (most negative)
 
-fig, ax = plt.subplots(figsize=(7.2, 6.4))
+fig, ax = plt.subplots(figsize=(8.2, 7.6))
 y = range(len(df))
 for yi, (_, r) in zip(y, df.iterrows()):
     ax.plot([r["Train F1 (macro)"], r["OOS F1 (macro)"]], [yi, yi],
@@ -28,10 +32,10 @@ ax.scatter(df["Train F1 (macro)"], list(y), color="#c44e52", s=42, zorder=2,
 ax.scatter(df["OOS F1 (macro)"], list(y), color="#4c72b0", s=42, zorder=2,
            label="True spatial holdout")
 ax.set_yticks(list(y))
-ax.set_yticklabels(df["Model"], fontsize=8)
+ax.set_yticklabels(df["Model"], fontsize=12)
 ax.set_xlabel("F1 (macro)")
 ax.set_title("In-region validation vs. spatial-holdout generalization")
-ax.legend(loc="lower right", fontsize=8, frameon=False)
+ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.10), ncol=2, frameon=False)
 ax.grid(axis="x", color="0.9")
 for spine in ("top", "right"):
     ax.spines[spine].set_visible(False)

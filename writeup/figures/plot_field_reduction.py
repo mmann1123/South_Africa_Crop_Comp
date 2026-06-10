@@ -6,7 +6,11 @@ Source: experiments/field_reduction/results/field_reduction_results.csv
 """
 import os
 import pandas as pd
+import matplotlib as mpl
 import matplotlib.pyplot as plt
+
+mpl.rcParams.update({"font.size": 13, "axes.titlesize": 15, "axes.labelsize": 14,
+                     "xtick.labelsize": 12, "ytick.labelsize": 12, "legend.fontsize": 12})
 
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 SRC = os.path.join(REPO, "experiments", "field_reduction", "results", "field_reduction_results.csv")
@@ -23,7 +27,7 @@ MODELS = [
     ("LassoNet (pixel)", "#937860", "v", "--"),
 ]
 
-fig, ax = plt.subplots(figsize=(6.6, 4.8))
+fig, ax = plt.subplots(figsize=(8.2, 5.6))
 for name, color, marker, ls in MODELS:
     sub = df[df["Model"] == name].sort_values("Fraction")
     if sub.empty:
@@ -38,7 +42,7 @@ ax.set_title("Data efficiency under spatial holdout")
 ax.set_xticks([0.25, 0.50, 0.75, 1.00])
 ax.invert_xaxis()
 ax.grid(color="0.9")
-ax.legend(fontsize=8, frameon=False)
+ax.legend(frameon=False)
 for spine in ("top", "right"):
     ax.spines[spine].set_visible(False)
 fig.tight_layout()

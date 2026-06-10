@@ -1,0 +1,3 @@
+Region,Fields,Total field area (km^2),Mean field area (ha),Median field area (ha),Bounding extent (km^2)
+Training (34S_19E_258N + 34S_19E_259N),4150,622.15,14.99,10.95,1117.1
+Holdout (34S_20E_259N),2417,281.92,11.66,6.92,585.4

@@ -9,8 +9,12 @@ import os
 import re
 import glob
 import pandas as pd
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
+
+mpl.rcParams.update({"font.size": 13, "axes.titlesize": 15, "axes.labelsize": 14,
+                     "xtick.labelsize": 12, "ytick.labelsize": 12, "legend.fontsize": 12})
 
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 SCORES = os.path.join(REPO, "out_of_sample", "scoring_results")
@@ -36,7 +40,7 @@ for p in glob.glob(os.path.join(SCORES, "per_class_*.csv")):
     key = norm(os.path.basename(p)[len("per_class_"):-len(".csv")])
     files[key] = p
 
-fig, ax = plt.subplots(figsize=(7.6, 4.8))
+fig, ax = plt.subplots(figsize=(8.6, 5.2))
 x = np.arange(len(CLASSES))
 w = 0.2
 for i, (name, color) in enumerate(MODELS):
@@ -49,12 +53,12 @@ for i, (name, color) in enumerate(MODELS):
     ax.bar(x + (i - 1.5) * w, vals, w, label=name, color=color)
 
 ax.set_xticks(x)
-ax.set_xticklabels(CLASSES, rotation=20, ha="right", fontsize=8)
+ax.set_xticklabels(CLASSES, rotation=18, ha="right", fontsize=11)
 ax.set_ylabel("Out-of-sample F1")
 ax.set_title("Per-class holdout performance")
 ax.set_ylim(0, 1)
 ax.grid(axis="y", color="0.9")
-ax.legend(fontsize=8, frameon=False, ncol=2)
+ax.legend(frameon=False, ncol=2)
 for spine in ("top", "right"):
     ax.spines[spine].set_visible(False)
 fig.tight_layout()
