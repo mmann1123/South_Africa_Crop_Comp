@@ -1,0 +1,24 @@
+{
+  "model": "tabnet2_pixel",
+  "fraction": 0.75,
+  "train_fields": 1989,
+  "train_pixels": 3601264,
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "optimizer": "AdamW",
+  "scheduler": "CosineAnnealingLR",
+  "batch_size": 2048,
+  "patience": 15,
+  "training_time_sec": 29546.4,
+  "metrics": {
+    "accuracy": 0.8,
+    "f1_macro": 0.735201,
+    "f1_weighted": 0.799048,
+    "cohen_kappa": 0.717945
+  }
+}
