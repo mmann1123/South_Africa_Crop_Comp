@@ -1,45 +1,36 @@
 #!/usr/bin/env python
-"""Deliverable A / Fig: in-region vs spatial-holdout F1-macro gap (the headline figure).
-
-Dumbbell chart: for each model, the in-region (k-fold/validation) F1-macro and the
-true out-of-sample holdout F1-macro, connected by a line, sorted by the drop (Delta).
+"""In-region vs spatial-holdout F1-macro gap (headline figure), dumbbell chart.
 Source: out_of_sample/scoring_results/f1_macro_train_vs_oos.csv
 """
 import os
 import pandas as pd
-import matplotlib as mpl
 import matplotlib.pyplot as plt
+from figstyle import apply_style, COND_INREGION, COND_HOLDOUT
 
-mpl.rcParams.update({"font.size": 13, "axes.titlesize": 15, "axes.labelsize": 14,
-                     "xtick.labelsize": 12, "ytick.labelsize": 12, "legend.fontsize": 12})
-
+apply_style()
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 SRC = os.path.join(REPO, "out_of_sample", "scoring_results", "f1_macro_train_vs_oos.csv")
-OUT = os.path.join(REPO, "writeup", "train_vs_oos_gap.pdf")
+OUT = os.path.join(REPO, "writeup", "figures", "train_vs_oos_gap.pdf")
 
-df = pd.read_csv(SRC)
-df = df.dropna(subset=["Train F1 (macro)", "OOS F1 (macro)"]).copy()
+df = pd.read_csv(SRC).dropna(subset=["Train F1 (macro)", "OOS F1 (macro)"]).copy()
 df["Delta"] = df["OOS F1 (macro)"] - df["Train F1 (macro)"]
-df = df.sort_values("Delta")  # most-overfit first (most negative)
+df = df.sort_values("Delta")
 
-fig, ax = plt.subplots(figsize=(8.2, 7.6))
+fig, ax = plt.subplots(figsize=(9.5, 8.5))
 y = range(len(df))
 for yi, (_, r) in zip(y, df.iterrows()):
     ax.plot([r["Train F1 (macro)"], r["OOS F1 (macro)"]], [yi, yi],
-            color="0.7", lw=1.6, zorder=1)
-ax.scatter(df["Train F1 (macro)"], list(y), color="#c44e52", s=42, zorder=2,
-           label="In-region (field-wise k-fold)")
-ax.scatter(df["OOS F1 (macro)"], list(y), color="#4c72b0", s=42, zorder=2,
-           label="True spatial holdout")
+            color="0.75", lw=2.2, zorder=1)
+ax.scatter(df["Train F1 (macro)"], list(y), color=COND_INREGION, s=90, zorder=3,
+           label="In-region (field-wise k-fold)", edgecolor="white", linewidth=0.6)
+ax.scatter(df["OOS F1 (macro)"], list(y), color=COND_HOLDOUT, s=90, zorder=3,
+           label="True spatial holdout", edgecolor="white", linewidth=0.6)
 ax.set_yticks(list(y))
-ax.set_yticklabels(df["Model"], fontsize=12)
+ax.set_yticklabels(df["Model"])
 ax.set_xlabel("F1 (macro)")
 ax.set_title("In-region validation vs. spatial-holdout generalization")
-ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.10), ncol=2, frameon=False)
-ax.grid(axis="x", color="0.9")
-for spine in ("top", "right"):
-    ax.spines[spine].set_visible(False)
-fig.tight_layout()
-fig.savefig(OUT, dpi=300, bbox_inches="tight")
+ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.08), ncol=2, frameon=False)
+ax.grid(axis="x")
+ax.set_axisbelow(True)
+fig.savefig(OUT)
 print("wrote", OUT)
-print(df[["Model", "Train F1 (macro)", "OOS F1 (macro)", "Delta"]].to_string(index=False))

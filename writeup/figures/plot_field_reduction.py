@@ -1,50 +1,44 @@
 #!/usr/bin/env python
-"""Deliverable A / Fig: out-of-sample F1-macro vs. training-set size (field reduction).
-
-One line per model across training fractions 1.00 / 0.75 / 0.50 / 0.25.
+"""Out-of-sample F1-macro vs training-set size (field reduction).
 Source: experiments/field_reduction/results/field_reduction_results.csv
 """
 import os
 import pandas as pd
-import matplotlib as mpl
 import matplotlib.pyplot as plt
+from figstyle import apply_style, color_for_model
 
-mpl.rcParams.update({"font.size": 13, "axes.titlesize": 15, "axes.labelsize": 14,
-                     "xtick.labelsize": 12, "ytick.labelsize": 12, "legend.fontsize": 12})
-
+apply_style()
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 SRC = os.path.join(REPO, "experiments", "field_reduction", "results", "field_reduction_results.csv")
-OUT = os.path.join(REPO, "writeup", "field_reduction.pdf")
+OUT = os.path.join(REPO, "writeup", "figures", "field_reduction.pdf")
 
 df = pd.read_csv(SRC)
 
-# Curated set telling the data-efficiency / feature-selection story.
+# (csv name, display label, marker)
 MODELS = [
-    ("TabNet (pixel)", "#4c72b0", "o", "-"),
-    ("L-TAE (pixel)", "#55a868", "s", "-"),
-    ("XGBoost (field)", "#8172b3", "^", "-"),
-    ("Base LR (pixel)", "#c44e52", "D", "-"),
-    ("LassoNet (pixel)", "#937860", "v", "--"),
+    ("TabNet (pixel)", "TabNet", "o"),
+    ("L-TAE (pixel)", "L-TAE", "s"),
+    ("XGBoost (field)", "XGBoost", "^"),
+    ("Base LR (pixel)", "Logistic Regression", "D"),
+    ("LassoNet (pixel)", "LassoNet", "v"),
 ]
 
-fig, ax = plt.subplots(figsize=(8.2, 5.6))
-for name, color, marker, ls in MODELS:
+fig, ax = plt.subplots(figsize=(9.0, 6.0))
+for name, label, marker in MODELS:
     sub = df[df["Model"] == name].sort_values("Fraction")
     if sub.empty:
-        print("WARNING: no rows for", name)
-        continue
-    ax.plot(sub["Fraction"], sub["OOS F1 (macro)"], color=color, marker=marker,
-            ls=ls, lw=1.8, ms=6, label=name)
+        print("WARNING: no rows for", name); continue
+    ls = "--" if label == "LassoNet" else "-"
+    ax.plot(sub["Fraction"], sub["OOS F1 (macro)"], color=color_for_model(label),
+            marker=marker, ls=ls, label=label)
 
 ax.set_xlabel("Fraction of training fields retained")
 ax.set_ylabel("Out-of-sample F1 (macro)")
 ax.set_title("Data efficiency under spatial holdout")
 ax.set_xticks([0.25, 0.50, 0.75, 1.00])
 ax.invert_xaxis()
-ax.grid(color="0.9")
+ax.grid(True)
+ax.set_axisbelow(True)
 ax.legend(frameon=False)
-for spine in ("top", "right"):
-    ax.spines[spine].set_visible(False)
-fig.tight_layout()
-fig.savefig(OUT, dpi=300, bbox_inches="tight")
+fig.savefig(OUT)
 print("wrote", OUT)
