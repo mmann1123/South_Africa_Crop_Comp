@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.2.2)  15 JUN 2026 14:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.2.2)  15 JUN 2026 15:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -399,6 +399,10 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box76
 \@float@everytoks=\toks37
 \@floatcapt=\box77
+) (/usr/share/texlive/texmf-dist/tex/latex/base/flafter.sty
+Package: flafter 2021/07/31 v1.4e Standard LaTeX floats after reference (FMi)
+Applying: [2015/01/01] float order in 2-column on input line 49.
+Already applied: [0000/00/00] float order in 2-column on input line 151.
 ) (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2020/10/07 v1.3j Sub-captions (AR)
  (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
@@ -453,7 +457,7 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 19.
+Package hyperref Info: Option `colorlinks' set `true' on input line 28.
  (/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 ) (/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
@@ -474,24 +478,24 @@ LaTeX Warning: Unused global option(s):
 (./sn-article.aux)
 \openout1 = `sn-article.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -553,13 +557,13 @@ Package grfext Info: Graphics extension search list:
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Info: Redefining \S on input line 28.
-LaTeX Font Info:    Redeclaring symbol font `AMSa' on input line 28.
+LaTeX Info: Redefining \S on input line 37.
+LaTeX Font Info:    Redeclaring symbol font `AMSa' on input line 37.
 LaTeX Font Info:    Overwriting symbol font `AMSa' in version `normal'
-(Font)                  U/msa/m/n --> U/msa/m/n on input line 28.
+(Font)                  U/msa/m/n --> U/msa/m/n on input line 37.
 LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
-(Font)                  U/msa/m/n --> U/msa/m/n on input line 28.
-Package hyperref Info: Link coloring ON on input line 28.
+(Font)                  U/msa/m/n --> U/msa/m/n on input line 37.
+Package hyperref Info: Link coloring ON on input line 37.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -569,31 +573,31 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count318
 )
-LaTeX Info: Redefining \ref on input line 28.
-LaTeX Info: Redefining \pageref on input line 28.
-LaTeX Info: Redefining \nameref on input line 28.
+LaTeX Info: Redefining \ref on input line 37.
+LaTeX Info: Redefining \pageref on input line 37.
+LaTeX Info: Redefining \nameref on input line 37.
  (./sn-article.out) (./sn-article.out)
 \@outlinefile=\write3
 \openout3 = `sn-article.out'.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 42.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 51.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 51.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
-Package hyperref Warning: Ignoring empty anchor on input line 42.
+Package hyperref Warning: Ignoring empty anchor on input line 51.
 
-LaTeX Font Info:    Calculating math sizes for size <12.045> on input line 54.
-LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 54.
-LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 54.
+LaTeX Font Info:    Calculating math sizes for size <12.045> on input line 63.
+LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 63.
+LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 63.
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
+Underfull \hbox (badness 10000) in paragraph at lines 73--74
 
  []
 
@@ -627,70 +631,70 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <figures//fields_count.pdf, id=330, 553.8473pt x 385.71103pt>
 File: figures//fields_count.pdf Graphic file (type pdf)
 <use figures//fields_count.pdf>
-Package pdftex.def Info: figures//fields_count.pdf  used on input line 162.
+Package pdftex.def Info: figures//fields_count.pdf  used on input line 169.
 (pdftex.def)             Requested size: 334.79773pt x 233.15872pt.
-<figures//avg_field_area.pdf, id=333, 549.37749pt x 385.71103pt>
+<figures//avg_field_area.pdf, id=331, 549.37749pt x 385.71103pt>
 File: figures//avg_field_area.pdf Graphic file (type pdf)
 <use figures//avg_field_area.pdf>
-Package pdftex.def Info: figures//avg_field_area.pdf  used on input line 171.
+Package pdftex.def Info: figures//avg_field_area.pdf  used on input line 177.
 (pdftex.def)             Requested size: 334.79773pt x 235.05383pt.
-<figures//all_crops_boxplot.pdf, id=335, 622.82063pt x 448.17827pt>
+<figures//all_crops_boxplot.pdf, id=333, 622.82063pt x 448.17827pt>
 File: figures//all_crops_boxplot.pdf Graphic file (type pdf)
 <use figures//all_crops_boxplot.pdf>
-Package pdftex.def Info: figures//all_crops_boxplot.pdf  used on input line 180.
+Package pdftex.def Info: figures//all_crops_boxplot.pdf  used on input line 186.
 (pdftex.def)             Requested size: 334.79773pt x 240.91847pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9]
-<figures//wheat_barley_boxplot.pdf, id=346, 622.82063pt x 427.55434pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10 <./figures//fields_count.pdf> <./figures//avg_field_area.pdf>]
+<figures//wheat_barley_boxplot.pdf, id=432, 622.82063pt x 427.55434pt>
 File: figures//wheat_barley_boxplot.pdf Graphic file (type pdf)
 <use figures//wheat_barley_boxplot.pdf>
-Package pdftex.def Info: figures//wheat_barley_boxplot.pdf  used on input line 189.
+Package pdftex.def Info: figures//wheat_barley_boxplot.pdf  used on input line 195.
 (pdftex.def)             Requested size: 334.79773pt x 229.83206pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [10 <./figures//fields_count.pdf>]
+ [11 <./figures//all_crops_boxplot.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11 <./figures//avg_field_area.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [12 <./figures//all_crops_boxplot.pdf>]
+ [12 <./figures//wheat_barley_boxplot.pdf>]
 
 pdfTeX warning: pdflatex (file ./figures//Time_Series_Feature_Generation.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<figures//Time_Series_Feature_Generation.pdf, id=498, 885.43108pt x 547.37108pt>
+<figures//Time_Series_Feature_Generation.pdf, id=539, 885.43108pt x 547.37108pt>
 File: figures//Time_Series_Feature_Generation.pdf Graphic file (type pdf)
 <use figures//Time_Series_Feature_Generation.pdf>
-Package pdftex.def Info: figures//Time_Series_Feature_Generation.pdf  used on input line 221.
+Package pdftex.def Info: figures//Time_Series_Feature_Generation.pdf  used on input line 227.
 (pdftex.def)             Requested size: 334.79773pt x 206.97585pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13 <./figures//wheat_barley_boxplot.pdf>]
+ [13]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [14 <./figures//Time_Series_Feature_Generation.pdf>]
+ [14]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [15]
-Underfull \hbox (badness 10000) in paragraph at lines 310--311
+ [15 <./figures//Time_Series_Feature_Generation.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 315--316
 
  []
 
-<figures//field_boundaries_by_crop.pdf, id=586, 512.44675pt x 482.96059pt>
+<figures//field_boundaries_by_crop.pdf, id=584, 512.44675pt x 482.96059pt>
 File: figures//field_boundaries_by_crop.pdf Graphic file (type pdf)
 <use figures//field_boundaries_by_crop.pdf>
-Package pdftex.def Info: figures//field_boundaries_by_crop.pdf  used on input line 334.
+Package pdftex.def Info: figures//field_boundaries_by_crop.pdf  used on input line 339.
 (pdftex.def)             Requested size: 334.79773pt x 315.53455pt.
 
-Underfull \hbox (badness 1418) in paragraph at lines 343--344
+Underfull \hbox (badness 1418) in paragraph at lines 348--349
 \OT1/cmr/m/n/10 SMOTETomek com-bines over-sam-pling and under-sam-pling tech-niques. SMOTE
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 343--344
+Underfull \hbox (badness 10000) in paragraph at lines 348--349
 
  []
 
@@ -698,20 +702,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 343--344
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [16]
-Underfull \hbox (badness 10000) in paragraph at lines 350--352
+Underfull \hbox (badness 10000) in paragraph at lines 355--357
 
- []
-
-
-Underfull \hbox (badness 1360) in paragraph at lines 356--357
-[]\OT1/cmr/m/n/10 Optuna was then used to tune XGBoost over 75 tri-als, search-ing across
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [17 <./figures//field_boundaries_by_crop.pdf>]
-Overfull \hbox (16.84048pt too wide) in paragraph at lines 358--376
+Overfull \hbox (16.84048pt too wide) in paragraph at lines 363--381
  [] 
  []
 
@@ -722,7 +721,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <figures//cnn_bilstm.pdf, id=654, 3898.1315pt x 3089.8819pt>
 File: figures//cnn_bilstm.pdf Graphic file (type pdf)
 <use figures//cnn_bilstm.pdf>
-Package pdftex.def Info: figures//cnn_bilstm.pdf  used on input line 425.
+Package pdftex.def Info: figures//cnn_bilstm.pdf  used on input line 430.
 (pdftex.def)             Requested size: 334.79773pt x 265.34749pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -731,7 +730,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <figures//tabnet.pdf, id=691, 4477.36852pt x 2078.15508pt>
 File: figures//tabnet.pdf Graphic file (type pdf)
 <use figures//tabnet.pdf>
-Package pdftex.def Info: figures//tabnet.pdf  used on input line 472.
+Package pdftex.def Info: figures//tabnet.pdf  used on input line 477.
 (pdftex.def)             Requested size: 334.79773pt x 155.37926pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -740,9 +739,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <figures//cnn_hyper.pdf, id=721, 3742.03pt x 2797.80363pt>
 File: figures//cnn_hyper.pdf Graphic file (type pdf)
 <use figures//cnn_hyper.pdf>
-Package pdftex.def Info: figures//cnn_hyper.pdf  used on input line 517.
+Package pdftex.def Info: figures//cnn_hyper.pdf  used on input line 522.
 (pdftex.def)             Requested size: 334.79773pt x 250.29727pt.
-LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 530.
+LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 535.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -753,7 +752,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <figures//Example_patches.pdf, id=756, 614.13142pt x 636.80286pt>
 File: figures//Example_patches.pdf Graphic file (type pdf)
 <use figures//Example_patches.pdf>
-Package pdftex.def Info: figures//Example_patches.pdf  used on input line 596.
+Package pdftex.def Info: figures//Example_patches.pdf  used on input line 601.
 (pdftex.def)             Requested size: 334.79773pt x 347.15271pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -765,7 +764,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <figures//patch_model.pdf, id=810, 3891.26428pt x 3089.8819pt>
 File: figures//patch_model.pdf Graphic file (type pdf)
 <use figures//patch_model.pdf>
-Package pdftex.def Info: figures//patch_model.pdf  used on input line 639.
+Package pdftex.def Info: figures//patch_model.pdf  used on input line 644.
 (pdftex.def)             Requested size: 334.79773pt x 265.81895pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -777,7 +776,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <figures//train_vs_oos_gap.pdf, id=844, 753.45552pt x 576.91328pt>
 File: figures//train_vs_oos_gap.pdf Graphic file (type pdf)
 <use figures//train_vs_oos_gap.pdf>
-Package pdftex.def Info: figures//train_vs_oos_gap.pdf  used on input line 776.
+Package pdftex.def Info: figures//train_vs_oos_gap.pdf  used on input line 781.
 (pdftex.def)             Requested size: 372.0pt x 284.8379pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -786,15 +785,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [28]
-<figures//pixel_vs_field.pdf, id=919, 568.44241pt x 377.58139pt>
+<figures//pixel_vs_field.pdf, id=917, 568.44241pt x 377.58139pt>
 File: figures//pixel_vs_field.pdf Graphic file (type pdf)
 <use figures//pixel_vs_field.pdf>
-Package pdftex.def Info: figures//pixel_vs_field.pdf  used on input line 864.
+Package pdftex.def Info: figures//pixel_vs_field.pdf  used on input line 869.
 (pdftex.def)             Requested size: 372.0pt x 247.0958pt.
-<figures//field_reduction.pdf, id=921, 577.38206pt x 409.2408pt>
+<figures//field_reduction.pdf, id=919, 577.38206pt x 409.2408pt>
 File: figures//field_reduction.pdf Graphic file (type pdf)
 <use figures//field_reduction.pdf>
-Package pdftex.def Info: figures//field_reduction.pdf  used on input line 887.
+Package pdftex.def Info: figures//field_reduction.pdf  used on input line 892.
 (pdftex.def)             Requested size: 372.0pt x 263.66792pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -803,10 +802,10 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [30 <./figures//pixel_vs_field.pdf>]
-<figures//per_class_f1.pdf, id=991, 624.45172pt x 412.44945pt>
+<figures//per_class_f1.pdf, id=988, 624.45172pt x 412.44945pt>
 File: figures//per_class_f1.pdf Graphic file (type pdf)
 <use figures//per_class_f1.pdf>
-Package pdftex.def Info: figures//per_class_f1.pdf  used on input line 926.
+Package pdftex.def Info: figures//per_class_f1.pdf  used on input line 931.
 (pdftex.def)             Requested size: 372.0pt x 245.7094pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -814,21 +813,21 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [31 <./figures//field_reduction.pdf>]
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 943.
+(hyperref)                than one, level fixed on input line 948.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [32 <./figures//per_class_f1.pdf>]
-<figures//inductive_bias_gap.pdf, id=1110, 589.70938pt x 393.31519pt>
+<figures//inductive_bias_gap.pdf, id=1105, 589.70938pt x 393.31519pt>
 File: figures//inductive_bias_gap.pdf Graphic file (type pdf)
 <use figures//inductive_bias_gap.pdf>
-Package pdftex.def Info: figures//inductive_bias_gap.pdf  used on input line 968.
+Package pdftex.def Info: figures//inductive_bias_gap.pdf  used on input line 973.
 (pdftex.def)             Requested size: 372.0pt x 248.11395pt.
 
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 976.
+(hyperref)                than one, level fixed on input line 981.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -846,67 +845,67 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [37]
-Underfull \hbox (badness 2096) in paragraph at lines 1201--1202
+Underfull \hbox (badness 2096) in paragraph at lines 1206--1207
 []\OT1/cmr/m/n/10 Jin Z, Azzari G, You C, Di Tom-maso S, Aston S, Burke M, Lobell
  []
 
 
-Underfull \hbox (badness 8019) in paragraph at lines 1201--1202
+Underfull \hbox (badness 8019) in paragraph at lines 1206--1207
 \OT1/cmr/m/n/10 DB (2019) Small-holder maize area and yield map-ping at national
  []
 
 
-Underfull \hbox (badness 4981) in paragraph at lines 1201--1202
+Underfull \hbox (badness 4981) in paragraph at lines 1206--1207
 \OT1/cmr/m/n/10 scales with Google Earth Engine. \OT1/cmr/m/it/10.03749 Remote Sens Env-i-ron \OT1/cmr/m/n/10 228:115--128.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1204--1205
+Underfull \hbox (badness 10000) in paragraph at lines 1209--1210
 []\OT1/cmr/m/n/10 Pe~na-Barrag^^San JM, Ngugi MK, Plant RE, Six J (2011) Object-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1204--1205
+Underfull \hbox (badness 10000) in paragraph at lines 1209--1210
 \OT1/cmr/m/n/10 based crop iden-ti-fi-ca-tion using mul-ti-ple veg-e-ta-tion indices, tex-tu-ral
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1204--1205
+Underfull \hbox (badness 10000) in paragraph at lines 1209--1210
 \OT1/cmr/m/n/10 fea-tures and crop phe-nol-ogy. \OT1/cmr/m/it/10.03749 Remote Sens Env-i-ron \OT1/cmr/m/n/10 115:1301--1316.
  []
 
 
-Underfull \hbox (badness 1389) in paragraph at lines 1210--1211
+Underfull \hbox (badness 1389) in paragraph at lines 1215--1216
 []\OT1/cmr/m/n/10 Rangarajan AK, Purushothaman R, Prab-hakar M, Szczepa^^Snski C (2023)
  []
 
 
-Underfull \hbox (badness 5119) in paragraph at lines 1210--1211
+Underfull \hbox (badness 5119) in paragraph at lines 1215--1216
 \OT1/cmr/m/n/10 Crop iden-ti-fi-ca-tion and dis-ease clas-si-fi-ca-tion using tra-di-tional machine
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1210--1211
+Underfull \hbox (badness 10000) in paragraph at lines 1215--1216
 \OT1/cmr/m/n/10 learn-ing and deep learn-ing approaches. \OT1/cmr/m/it/10.03749 J Eng Res \OT1/cmr/m/n/10 11(1):228--252.
  []
 
 
-Underfull \hbox (badness 3000) in paragraph at lines 1216--1217
+Underfull \hbox (badness 3000) in paragraph at lines 1221--1222
 []\OT1/cmr/m/n/10 Ru^^Ywurm M, K^^?orner M (2018) Multi-Temporal Land Cover Clas-si-fi-ca-
  []
 
 
-Underfull \hbox (badness 1048) in paragraph at lines 1216--1217
+Underfull \hbox (badness 1048) in paragraph at lines 1221--1222
 \OT1/cmr/m/n/10 tion with Sequen-tial Recur-rent Encoders. \OT1/cmr/m/it/10.03749 ISPRS Int J Geo-Inf \OT1/cmr/m/n/10 7(4):129.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1231--1232
+Underfull \hbox (badness 10000) in paragraph at lines 1236--1237
 []\OT1/cmr/m/n/10 Breiman L (2001) Ran-dom forests. \OT1/cmr/m/it/10.03749 Machine Learn-ing \OT1/cmr/m/n/10 45(1):5--32.
  []
 
 
-Underfull \hbox (badness 1024) in paragraph at lines 1241--1242
+Underfull \hbox (badness 1024) in paragraph at lines 1246--1247
 []\OT1/cmr/m/n/10 Friedman JH (2001) Greedy func-tion approx-i-ma-tion: A gra-di-ent boost-ing
  []
 
@@ -914,42 +913,42 @@ Underfull \hbox (badness 1024) in paragraph at lines 1241--1242
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [38]
-Underfull \hbox (badness 4569) in paragraph at lines 1254--1255
+Underfull \hbox (badness 4569) in paragraph at lines 1259--1260
 []\OT1/cmr/m/n/10 Muruganantham P, Wibowo S, Grandhi S, Islam N (2024) A Deep
  []
 
 
-Underfull \hbox (badness 6825) in paragraph at lines 1254--1255
+Underfull \hbox (badness 6825) in paragraph at lines 1259--1260
 \OT1/cmr/m/n/10 Learn-ing Approach for Deal-ing with Tab-u-lar Data in Crop Clas-si-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1254--1255
+Underfull \hbox (badness 10000) in paragraph at lines 1259--1260
 \OT1/cmr/m/n/10 fi-ca-tion. \OT1/cmr/m/it/10.03749 Proc IEEE Int Conf ICT Con-ver-gence (ICTC)\OT1/cmr/m/n/10 :2054--2059.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1257--1258
+Underfull \hbox (badness 10000) in paragraph at lines 1262--1263
 []\OT1/cmr/m/n/10 Arik S[]O, Pfis-ter T (2021) Tab-Net: Atten-tive Inter-pretable Tab-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1257--1258
+Underfull \hbox (badness 10000) in paragraph at lines 1262--1263
 \OT1/cmr/m/n/10 u-lar Learn-ing. \OT1/cmr/m/it/10.03749 Proc AAAI Conf Artif Intell \OT1/cmr/m/n/10 35(8):6679--6687.
  []
 
 
-Underfull \hbox (badness 3396) in paragraph at lines 1273--1274
+Underfull \hbox (badness 3396) in paragraph at lines 1278--1279
 []\OT1/cmr/m/n/10 Wang H, Chang W, Yao Y, Yao Z, Zhao Y, Li S, Liu Z, Zhang
  []
 
 
-Underfull \hbox (badness 6316) in paragraph at lines 1273--1274
+Underfull \hbox (badness 6316) in paragraph at lines 1278--1279
 \OT1/cmr/m/n/10 X (2023) Crop-former: A new gen-er-al-ized deep learn-ing clas-si-fi-ca-tion
  []
 
 
-Underfull \hbox (badness 1838) in paragraph at lines 1287--1288
+Underfull \hbox (badness 1838) in paragraph at lines 1292--1293
 \OT1/cmr/m/n/10 Remote Sens-ing and Grid-ded Data. \OT1/cmr/m/it/10.03749 J Open Source Softw \OT1/cmr/m/n/10 10(115):9009.
  []
 
@@ -957,27 +956,27 @@ Underfull \hbox (badness 1838) in paragraph at lines 1287--1288
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [39]
-Underfull \hbox (badness 2384) in paragraph at lines 1296--1297
+Underfull \hbox (badness 2384) in paragraph at lines 1301--1302
 []\OT1/cmr/m/n/10 Buttar PK et al. (2024) Satel-lite imagery anal-y-sis for crop type seg-
  []
 
 
-Underfull \hbox (badness 1831) in paragraph at lines 1296--1297
+Underfull \hbox (badness 1831) in paragraph at lines 1301--1302
 \OT1/cmr/m/n/10 men-ta-tion using U-net archi-tec-ture. \OT1/cmr/m/it/10.03749 Pro-ce-dia Com-put Sci \OT1/cmr/m/n/10 235:3418--3427.
  []
 
 
-Underfull \hbox (badness 2753) in paragraph at lines 1299--1300
+Underfull \hbox (badness 2753) in paragraph at lines 1304--1305
 \OT1/cmr/m/n/10 for multi-source image fusion. \OT1/cmr/m/it/10.03749 Int J Remote Sens \OT1/cmr/m/n/10 45(19--20):7605--7633.
  []
 
 
-Underfull \hbox (badness 4981) in paragraph at lines 1311--1312
+Underfull \hbox (badness 4981) in paragraph at lines 1316--1317
 []\OT1/cmr/m/n/10 Yang S, Gu L, Li X, Jiang T, Ren R (2020) Crop Clas-si-fi-ca-tion
  []
 
 
-Underfull \hbox (badness 1584) in paragraph at lines 1311--1312
+Underfull \hbox (badness 1584) in paragraph at lines 1316--1317
 \OT1/cmr/m/n/10 Method Based on Opti-mal Fea-ture Selec-tion and Hybrid CNN-RF Net-
  []
 
@@ -989,17 +988,17 @@ Package rerunfilecheck Info: File `sn-article.out' has not changed.
 (rerunfilecheck)             Checksum: 9465AB987C50CB288C2722E470F8C3E7;9773.
  ) 
 Here is how much of TeX's memory you used:
- 14042 strings out of 478287
- 226025 string characters out of 5849290
- 535394 words of memory out of 5000000
- 31831 multiletter control sequences out of 15000+600000
+ 14064 strings out of 478287
+ 226674 string characters out of 5849290
+ 536372 words of memory out of 5000000
+ 31850 multiletter control sequences out of 15000+600000
  496298 words of font info for 132 fonts, out of 8000000 for 9000
  1151 hyphenation exceptions out of 8191
- 85i,14n,90p,2784b,583s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 85i,14n,90p,2787b,583s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on sn-article.pdf (40 pages, 1308984 bytes).
+Output written on sn-article.pdf (40 pages, 1304370 bytes).
 PDF statistics:
- 1406 PDF objects out of 1440 (max. 8388607)
+ 1399 PDF objects out of 1440 (max. 8388607)
  791 compressed objects within 8 object streams
  166 named destinations out of 1000 (max. 500000)
  449 words of extra memory for PDF output out of 10000 (max. 10000000)

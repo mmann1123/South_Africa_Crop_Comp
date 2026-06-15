@@ -33,8 +33,8 @@ for name, label, marker in MODELS:
             marker=marker, ls=ls, label=label)
 
 ax.set_xlabel("Fraction of training fields retained")
-ax.set_ylabel("Out-of-sample F1 (macro)")
-ax.set_title("Data efficiency under spatial holdout")
+ax.set_ylabel("Spatial-transfer F1 (macro)")
+ax.set_title("Data efficiency under spatial transfer")
 ax.set_xticks([0.25, 0.50, 0.75, 1.00])
 ax.invert_xaxis()
 ax.grid(True)

@@ -46,8 +46,8 @@ for i, (csvname, label) in enumerate(MODELS):
 
 ax.set_xticks(x)
 ax.set_xticklabels(CLASSES, rotation=15, ha="right")
-ax.set_ylabel("Out-of-sample F1")
-ax.set_title("Per-class holdout performance")
+ax.set_ylabel("Spatial-transfer F1")
+ax.set_title("Per-class spatial-transfer performance")
 ax.set_ylim(0, 1)
 ax.grid(axis="y")
 ax.set_axisbelow(True)

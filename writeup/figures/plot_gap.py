@@ -22,13 +22,13 @@ for yi, (_, r) in zip(y, df.iterrows()):
     ax.plot([r["Train F1 (macro)"], r["OOS F1 (macro)"]], [yi, yi],
             color="0.75", lw=2.2, zorder=1)
 ax.scatter(df["Train F1 (macro)"], list(y), color=COND_INREGION, s=90, zorder=3,
-           label="In-region (field-wise k-fold)", edgecolor="white", linewidth=0.6)
+           label="In-region (field-wise validation)", edgecolor="white", linewidth=0.6)
 ax.scatter(df["OOS F1 (macro)"], list(y), color=COND_HOLDOUT, s=90, zorder=3,
-           label="True spatial holdout", edgecolor="white", linewidth=0.6)
+           label="Spatial transfer (ST)", edgecolor="white", linewidth=0.6)
 ax.set_yticks(list(y))
 ax.set_yticklabels(df["Model"])
 ax.set_xlabel("F1 (macro)")
-ax.set_title("In-region validation vs. spatial-holdout generalization")
+ax.set_title("In-region validation vs. spatial transfer")
 ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.08), ncol=2, frameon=False)
 ax.grid(axis="x")
 ax.set_axisbelow(True)
