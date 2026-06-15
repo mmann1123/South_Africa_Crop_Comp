@@ -1,0 +1,44 @@
+# Recent Trends, Challenges, and Limitations of Explainable AI in Remote Sensing
+
+**Citation:** Höhl, A.; Obadic, I.; Fernández-Torres, M.-Á.; Oliveira, D.; Zhu, X.X. (2024). Recent Trends, Challenges, and Limitations of Explainable AI in Remote Sensing. *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops*, pp. 8199-8205. (CVF Open Access; also IEEE Xplore.) DOI: not found in PDF (CVPR Workshop / CVF open-access paper; no Crossref DOI located — one title search returned no matching record).
+
+> Review/theory-leaning paper (scoping review of explainability/XAI in remote sensing). Per authoring rule 7, the empirical evaluation-protocol question is skipped; the Relevance section focuses on conceptual implications — interpretability/XAI, inductive bias, and domain-transfer trust — for our study.
+
+## Objectives
+
+Conduct a scoping review of explainable-AI (xAI) methods applied to remote sensing (RS) / earth observation (EO), to (a) chart current trends in which EO tasks and which xAI families are being used, (b) connect those trends to the *fundamental properties of RS data that violate the assumptions of off-the-shelf xAI methods*, and (c) identify promising research directions (self-interpretable / interpretable-by-design models, and standardized explanation evaluation). The explicit gap the authors target: prior xAI-in-EO reviews do not reflect on the *limitations* of popular methods when confronted with RS-specific data properties, nor on how recent xAI developments integrate into RS.
+
+## Methods
+
+Systematic literature search over Scopus, Springer, and IEEE with a two-part query (EO/RS keywords AND xAI keywords), restricted to 2017 onward, excluding reviews and short conference papers. From 1075 hits, three screening stages (deduplication, abstract, full text) left 964 / 357 / 147 papers; the final 147 (plus 60 from the authors' own library) are synthesized by EO task, xAI family, and evaluation procedure. The analysis is qualitative/bibliometric — counting publications per EO task per year (Fig. 1a), per xAI category per year (Fig. 1b), per adapted xAI method (Fig. 2), and per evaluation type (Fig. 3) — rather than running experiments.
+
+**Evaluation protocol.** Not applicable as a primary-study protocol (this is a scoping review). However, the paper's most relevant methodological contribution *is* a meta-finding about evaluation: it tallies how the surveyed xAI works assess explanation quality and reports that the overwhelming majority rely on **anecdotal evidence (cherry-picked qualitative examples)**, with comparatively few using quantitative metrics, toy tasks, or user studies (Fig. 3). The authors stress that no standardized, objective evaluation methodology for xAI in RS has been established — a "silence" finding that parallels our own critique of weak evaluation norms in the crop-classification literature.
+
+## Key Findings
+
+- **xAI usage is shifting away from established tasks.** Land-cover mapping and agricultural monitoring — the most established EO tasks — have *stagnated* in xAI attention, while critical-application tasks (natural-hazard, atmosphere, weather/climate) are rising. Mature tasks with standard datasets get less interpretability scrutiny precisely where established benchmarks exist.
+- **Model-agnostic local-approximation/perturbation methods dominate.** SHAP is the single most-used xAI approach (~38% of papers); CAM/Grad-CAM and backpropagation methods are also common, favored because they need no established dataset and give quick black-box assessments.
+- **RS data properties break standard xAI assumptions.** Four RS-specific properties are highlighted: (1) *scale/resolution* — objects (land cover, mountains) lack crisp boundaries, so feature-attribution granularity is semantically loaded; (2) *spectral richness* — sensors capture many bands, yet most CAM-style methods attribute only spatially, ignoring per-band importance; (3) *topology* — geographic/spatial relations are hidden confounders not captured by the data matrix, breaking feature-independence assumptions of SHAP/perturbation; (4) *temporal/sequential* structure — most xAI methods ignore time dependencies.
+- **Adaptation is emerging.** New work adapts Grad-CAM for finer granularity and spectral attribution (3D CAM), decouples scale across neighborhoods, builds location-aware prototype networks, and applies integrated gradients per neighboring-pixel feature for spatial-relation-aware explanations.
+- **Self-interpretable / interpretable-by-design DNNs are the recommended direction** (attention-based transformers like Earthformer/ViTs-for-SITS, prototype networks, BagNets, GAM-DNN hybrids), over post-hoc methods that surface only raw, non-intuitive features.
+- **Evaluation is the field's weak point:** mostly anecdotal/qualitative; no standardized objective protocol; user studies rare.
+
+## Relevance to Our Crop-Classification Study
+
+This review reinforces two pillars of our manuscript from the interpretability/trust angle.
+
+First, it independently documents a **methodological-rigor deficit** in the RS-DL literature — here, that xAI evaluation is overwhelmingly anecdotal and unstandardized — which rhymes with our finding that classification evaluation is overwhelmingly in-region and misranks models. Both are cases where the field's headline claims (a "good explanation"; a "best model") rest on protocols too weak to support them. We can cite Höhl et al. to argue that *evaluation rigor is the systematic blind spot in RS deep learning*, and that our spatially-disjoint-holdout contribution is the classification-accuracy analogue of the standardized-xAI-evaluation they call for.
+
+Second, the review's **RS-data-property critique directly supports our inductive-bias thesis.** The authors note that standard xAI assumes feature independence and natural-image structure, assumptions broken by RS scale, spectral, topological, and temporal properties — i.e., by exactly the spatial autocorrelation and high-dimensional entanglement that let dense temporal/patch nets overfit a single tile. Their observation that *most CAM/Grad-CAM methods attribute only spatially and ignore per-band importance* is relevant to our optical-only, band-engineered setting (`B2`, `B6`, `B11`, `B12`, `EVI`, `hue`): for our study, a sparse feature-selecting model (gradient-boosted trees, TabNet) is *interpretable by construction* in the band/month dimension, sidestepping the spectral-attribution gap they flag for dense CNNs. This connects our transfer-robust winners to a built-in explainability advantage — the sparse models are both more generalizable *and* more honestly interpretable.
+
+Third, the recommended direction — **interpretable-by-design and attention/prototype models over post-hoc patching** — maps onto our TabNet result: TabNet's sparsemax attention masks are a self-interpretable mechanism in the spirit of the prototype/attention DNNs the review endorses, giving us a citable framing for why an attentive-sparse model is preferable to post-hoc-explained dense nets.
+
+For our paper, this review is best used in the discussion/related-work framing of interpretability and trust under domain shift: it establishes that the RS community lacks rigorous evaluation norms (for both explanations and, by extension, accuracy), and that RS-specific data structure undermines naive black-box methods — both of which motivate our preference for sparse, interpretable, transfer-validated models.
+
+## Evaluation Caveats
+
+- **Scoping review, not benchmark.** No experiments, no datasets, no accuracy or transfer measurements; conclusions are bibliometric trends and conceptual synthesis. It establishes *that* the field under-evaluates, not *how much* any specific method's explanations or accuracy are inflated.
+- **xAI focus, not classification accuracy.** The paper is about explanation quality, not about train/test leakage or spatial validation of classifiers. Its relevance to our accuracy/transfer thesis is by analogy (shared rigor deficit) and through the data-property critique, not via direct evidence on misranking.
+- **Search scope bounds the trend claims.** Three databases, 2017+, reviews/short papers excluded; the trend counts (e.g., SHAP at 38%, task stagnation) are sensitive to query and database coverage and may under-represent agricultural xAI work outside these venues.
+- **Anecdotal-evaluation finding is itself qualitative.** The headline that most xAI evaluation is anecdotal is drawn from the authors' categorization (Fig. 3), without a quantitative reliability check — a mild irony, but it does not weaken the directional point.
+- **DOI absent.** As a CVPR Workshop / CVF open-access paper, no Crossref DOI was located; cite via the CVF/IEEE proceedings. Verify the exact page range and proceedings entry before final bibliography inclusion.
