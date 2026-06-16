@@ -235,7 +235,7 @@ Table~\ref{tab:features} lists the time-series features extracted from each pixe
 \begin{table}[htbp]
 \centering
 \small
-\caption{Time-series features extracted from each pixel's spectral profile with \texttt{xr\_fresh}.}
+\caption{Extracted time-series features.}
 \label{tab:features}
 \renewcommand{\arraystretch}{1.15}
 \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}p{0.62\textwidth}@{}}
@@ -263,6 +263,9 @@ Symmetry Looking & Similarity when the series is reversed. \\
 Time Series Complexity & Complexity-Invariant Distance metric of sequence irregularity. \\
 \bottomrule
 \end{tabular}
+
+\par\vspace{4pt}
+{\footnotesize Time-series features extracted from each pixel's spectral profile with \texttt{xr\_fresh}.\par}
 \end{table}
 
 \subsubsection{Pixel-Level Analysis}
@@ -363,7 +366,7 @@ Optuna was then used to tune XGBoost over 75 trials, searching over the number o
 \begin{table}[htbp]
 \centering
 \scriptsize % Further reduce font size
-\caption{Top 5 trials from hyperparameter search with corresponding parameters and validation accuracies}
+\caption{XGBoost hyperparameter search results.}
 \label{tab:top5_trials}
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{3pt} % Tight column spacing
@@ -378,6 +381,10 @@ Optuna was then used to tune XGBoost over 75 trials, searching over the number o
 18 & 76.29\% & 915  & 13 & 0.0121 & 0.6784 & 0.5958 & 0.1612 & 0.00491 & 0.1732 & 8 \\
 \bottomrule
 \end{tabular}
+
+\par\vspace{4pt}
+{\footnotesize Top 5 trials from the hyperparameter search with corresponding parameters and
+validation accuracies. Bold marks the highest validation accuracy (trial 32).\par}
 \end{table}
 
 \subsection{Deep Learning Architectures for Crop Classification}
@@ -699,25 +706,14 @@ nets look strongest — CNN-BiLSTM, TempCNN, and L-TAE all reach F1$_m\approx0.7
 and conventional field-level evaluation (on which the original analysis of this
 dataset relied \cite{capstone_repo}) singled out CNN-BiLSTM as the best model. On the holdout tile that conclusion
 collapses: CNN-BiLSTM falls to F1$_m=0.46$ (Kappa 0.32), the \emph{largest} drop
-of any model and third-worst absolute score (only the two weak TabNet variants score
-lower). The same fate befalls the 3D CNN
-patch ensemble ($-0.22$) and SMOTE-resampled stacking ($-0.21$).
+of any model and among the lowest absolute scores. The same fate befalls the 3D CNN
+patch ensemble ($-0.22$), the Multi-Channel 2D CNN ($-0.22$), and SMOTE-resampled
+stacking ($-0.21$).
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{In-region (field-wise validation) versus spatial-transfer (ST) macro-F1
-for every individual model, ranked by spatial-transfer macro-F1 — the metric we argue
-model selection should use. In-region macro-F1 and the gap $\Delta$ are shown
-alongside (Figure~\ref{fig:gap} orders the same data by $\Delta$); ST Kappa, weighted
-F1 (wF1), and cross-entropy (Xent) complete the picture. The best transferer is a
-TabNet pixel ensemble, whereas the model conventional field-level evaluation singles
-out as best (CNN-BiLSTM) is among the worst; the highest in-region scores (L-TAE,
-TempCNN) do not yield the highest spatial-transfer scores. The \emph{Features} column
-marks whether a model is fed the automated \texttt{xr\_fresh} time-series statistics
-(174 features) or raw reflectance; the \texttt{xr\_fresh} models are the classical
-learners — the four \emph{Base} models on per-pixel statistics, the field ensembles on
-field-averaged statistics.}
+\caption{In-region versus spatial-transfer performance of all models.}
 \label{tab:gap}
 \renewcommand{\arraystretch}{1.12}
 \setlength{\tabcolsep}{4pt}
@@ -727,14 +723,14 @@ field-averaged statistics.}
 \cmidrule(lr){4-4}\cmidrule(lr){6-9}
 \textbf{Model} & \textbf{Level} & \textbf{Features} & \textbf{F1$_m$} & \textbf{$\Delta$} & \textbf{F1$_m$} & \textbf{$\kappa$} & \textbf{wF1} & \textbf{Xent} \\
 \midrule
-\textbf{TabNet}       & \textbf{pixel} & \textbf{raw} & \textbf{0.73} & $-0.13$ & \textbf{0.60} & \textbf{0.54} & \textbf{0.70} & \textbf{4.42} \\
+TabNet                & pixel & raw & 0.73 & $-0.13$ & \textbf{0.60} & \textbf{0.54} & \textbf{0.70} & \textbf{4.42} \\
 L-TAE                 & field & raw & 0.67 & $-0.07$ & 0.59 & 0.47 & 0.67 & 5.51 \\
-L-TAE                 & pixel & raw & 0.78 & $-0.20$ & 0.58 & 0.49 & 0.68 & 5.20 \\
+L-TAE                 & pixel & raw & \textbf{0.78} & $-0.20$ & 0.58 & 0.49 & 0.68 & 5.20 \\
 XGBoost               & field & \texttt{xr\_fresh} & 0.70 & $-0.13$ & 0.56 & 0.47 & 0.68 & 4.89 \\
 Voting                & field & \texttt{xr\_fresh} & 0.69 & $-0.12$ & 0.56 & 0.47 & 0.66 & 4.82 \\
 TempCNN               & pixel & raw & 0.77 & $-0.21$ & 0.56 & 0.49 & 0.68 & 5.09 \\
 Base LightGBM         & pixel & \texttt{xr\_fresh} & 0.62 & $-0.06$ & 0.56 & 0.47 & 0.66 & 4.85 \\
-Logistic Regression   & pixel & \texttt{xr\_fresh} & 0.61 & $-0.05$ & 0.56 & 0.47 & 0.67 & 4.93 \\
+Logistic Regression   & pixel & \texttt{xr\_fresh} & 0.61 & $\mathbf{-0.05}$ & 0.56 & 0.47 & 0.67 & 4.93 \\
 LightGBM              & field & \texttt{xr\_fresh} & 0.68 & $-0.12$ & 0.56 & 0.45 & 0.66 & 4.99 \\
 Stacking              & field & \texttt{xr\_fresh} & 0.64 & $-0.09$ & 0.55 & 0.47 & 0.67 & 5.01 \\
 Random Forest         & pixel & \texttt{xr\_fresh} & 0.65 & $-0.10$ & 0.55 & 0.45 & 0.65 & 5.07 \\
@@ -744,9 +740,25 @@ SMOTE Stacked         & field & \texttt{xr\_fresh} & 0.69 & $-0.21$ & 0.49 & 0.4
 3D CNN                & patch & raw & 0.70 & $-0.22$ & 0.48 & 0.30 & 0.55 & 7.79 \\
 CNN-BiLSTM            & field & raw & 0.77 & $-0.31$ & 0.46 & 0.32 & 0.56 & 7.73 \\
 TabNet Temporal       & field & raw & 0.62 & $-0.19$ & 0.43 & 0.31 & 0.56 & 7.35 \\
+Multi-Channel CNN     & patch & raw & 0.63 & $-0.22$ & 0.40 & 0.25 & 0.50 & 8.62 \\
 TabNet                & field & \texttt{xr\_fresh} & 0.51 & $-0.15$ & 0.37 & 0.25 & 0.53 & 6.13 \\
 \bottomrule
 \end{tabular}
+
+\par\vspace{4pt}
+{\footnotesize In-region (field-wise validation) versus spatial-transfer (ST) macro-F1
+for every individual model, ranked by spatial-transfer macro-F1 --- the metric we argue
+model selection should use. In-region macro-F1 and the gap $\Delta$ are shown
+alongside (Figure~\ref{fig:gap} orders the same data by $\Delta$); ST Kappa, weighted
+F1 (wF1), and cross-entropy (Xent) complete the picture. Bold marks the best value in
+each metric column. The best transferer is a
+TabNet pixel ensemble, whereas the model conventional field-level evaluation singles
+out as best (CNN-BiLSTM) is among the worst; the highest in-region scores (L-TAE,
+TempCNN) do not yield the highest spatial-transfer scores. The \emph{Features} column
+marks whether a model is fed the automated \texttt{xr\_fresh} time-series statistics
+(174 features) or raw reflectance; the \texttt{xr\_fresh} models are the classical
+learners --- the four \emph{Base} models on per-pixel statistics, the field ensembles on
+field-averaged statistics.\par}
 \end{table}
 
 \begin{figure}[htbp]
@@ -771,7 +783,7 @@ well, whereas the deep nets that learn from raw sequences do not. A majority-vot
 ensemble over all models reaches F1$_m=0.60$
 (Kappa 0.52), essentially tying TabNet but not exceeding it, indicating that
 voting cannot rescue the fragile members. The practical implication is immediate:
-a practitioner who selected a model by in-region validation would have
+a practitioner who selected a model by in-region validation might have
 deployed the single worst transferer.
 
 \subsection{Pixel versus field level: aggregation as variance reduction}
@@ -814,15 +826,7 @@ from field-level averaging.
 
 \begin{table}[htbp]
 \centering
-\caption{Spatial-transfer (ST) macro-F1 (and gap $\Delta$) at pixel versus field level for
-architectures evaluated at both granularities. The pixel input is raw reflectance for
-the deep models and per-pixel \texttt{xr\_fresh} statistics for the tree learners; the
-\emph{Field input} column gives the field-level representation — \texttt{xr\_fresh}
-(field-averaged) for the trees or the field-averaged raw time series (raw-avg) for the
-deep models. For the tree learners (XGBoost, LightGBM) the pixel$\rightarrow$field change
-is therefore purely an aggregation change at a fixed \texttt{xr\_fresh} representation.
-Field aggregation helps the dense temporal nets and is roughly neutral for the tree
-models, but degrades TabNet.}
+\caption{Pixel- versus field-level spatial transfer.}
 \label{tab:pixfield}
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{5.5pt}
@@ -839,6 +843,17 @@ XGBoost  & 0.54 & $-0.09$ & 0.56 & $-0.13$ & \texttt{xr\_fresh} \\
 LightGBM & 0.56 & $-0.06$ & 0.56 & $-0.12$ & \texttt{xr\_fresh} \\
 \bottomrule
 \end{tabular}
+
+\par\vspace{4pt}
+{\footnotesize Spatial-transfer (ST) macro-F1 (and gap $\Delta$) at pixel versus field level for
+architectures evaluated at both granularities. The pixel input is raw reflectance for
+the deep models and per-pixel \texttt{xr\_fresh} statistics for the tree learners; the
+\emph{Field input} column gives the field-level representation --- \texttt{xr\_fresh}
+(field-averaged) for the trees or the field-averaged raw time series (raw-avg) for the
+deep models. For the tree learners (XGBoost, LightGBM) the pixel$\rightarrow$field change
+is therefore purely an aggregation change at a fixed \texttt{xr\_fresh} representation.
+Field aggregation helps the dense temporal nets and is roughly neutral for the tree
+models, but degrades TabNet.\par}
 \end{table}
 
 \begin{figure}[htbp]
@@ -927,7 +942,7 @@ The single clearest pattern in our results is that transfer tracks
 groups every model by inductive bias and plots its generalization gap. The
 ordering is stark: linear models lose the least (mean $\Delta=-0.05$), tree-based
 models little (mean $-0.11$), while dense temporal/patch deep nets lose the most
-(mean $-0.22$) and SMOTE-augmented stacking is similarly fragile ($-0.21$).
+(mean $-0.23$) and SMOTE-augmented stacking is similarly fragile ($-0.21$).
 Random Forest and gradient-boosted trees have been the remote-sensing workhorse
 for two decades precisely because their sparse, axis-aligned splits select a few
 informative features at each node and ignore the rest, which resists overfitting
@@ -987,8 +1002,10 @@ resource-constrained deployment.
 
 \paragraph{Patch-level spatial modeling.}
 
-Patch-level 3D CNN models did not exceed pixel-level models in-region and
-transferred poorly (F1$_m=0.48$, $\Delta=-0.22$). This is partly structural. At
+Patch-level convolutional models did not exceed pixel-level models in-region and
+transferred poorly: the 3D CNN reached F1$_m=0.48$ ($\Delta=-0.22$) and the
+Multi-Channel 2D CNN only F1$_m=0.40$ ($\Delta=-0.22$), the second-lowest transfer
+score of any model. This is partly structural. At
 Sentinel-2's 10\,m resolution the native 100\,m patches are only $\sim$10$\times$10
 pixels, so the local spatial context they can encode is limited, and resampling them
 to the network's $128\times128$ input adds interpolated rather than genuine detail.
@@ -1248,9 +1265,6 @@ Martins A, Astudillo R (2016) From Softmax to Sparsemax: A Sparse Model of Atten
 
 \bibitem{tempcnn2019}
 Pelletier C, Webb GI, Petitjean F (2019) Temporal Convolutional Neural Network for the Classification of Satellite Image Time Series. \textit{Remote Sens} 11(5):523. \href{https://doi.org/10.3390/rs11050523}{https://doi.org/10.3390/rs11050523}
-
-\bibitem{cnn_optuna}
-Zhong L, Hu L, Zhou H (2018) Deep learning based multi-temporal crop classification. \textit{Remote Sens Environ} 221:430--443. doi:10.1016/j.rse.2018.11.032
 
 \bibitem{rustowicz2019}
 Rustowicz RM, Cheong R, Wang L, Ermon S, Burke M, Lobell D (2019) Semantic Segmentation of Crop Type in Africa: A Novel Dataset and Analysis of Deep Learning Methods. In: \textit{Proc IEEE/CVF CVPR Workshops}, pp 75--82.

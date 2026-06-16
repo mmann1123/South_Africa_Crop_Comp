@@ -20,7 +20,6 @@ MODELS = [
     ("L-TAE (pixel)", "L-TAE", "s"),
     ("XGBoost (field)", "XGBoost", "^"),
     ("Base LR (pixel)", "Logistic Regression", "D"),
-    ("LassoNet (pixel)", "LassoNet", "v"),
 ]
 
 fig, ax = plt.subplots(figsize=(9.0, 6.0))

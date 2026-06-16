@@ -22,7 +22,8 @@ FAMILIES = {
          "XGBoost (field)", "LightGBM (field)", "TabNet (pixel)"], FAMILY_COLORS["tree"]),
     "Linear\n(LogReg)": (["Base LR (pixel)"], FAMILY_COLORS["linear"]),
     "Dense temporal /\npatch DL": (
-        ["CNN-BiLSTM (pixel)", "TempCNN (pixel)", "L-TAE (pixel)", "3D CNN (patch)"],
+        ["CNN-BiLSTM (field)", "TempCNN (pixel)", "L-TAE (pixel)", "3D CNN (patch)",
+         "Multi-Ch CNN (patch)"],
         FAMILY_COLORS["dense"]),
     "Synthetic\naugmentation": (["SMOTE Stacked (field)"], FAMILY_COLORS["aug"]),
 }

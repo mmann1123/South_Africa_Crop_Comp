@@ -1,0 +1,123 @@
+{
+  "model_name": "Multi-Channel CNN Patch-Level",
+  "timestamp": "2026-06-16T11:24:48.816697",
+  "script_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/Deep Learning/Patch Level/Multi_Channel_CNN.py",
+  "hyperparameters": {
+    "target_size": [
+      128,
+      128
+    ],
+    "batch_size": 64,
+    "epochs": 20,
+    "optimizer": "Adam",
+    "loss": "sparse_categorical_crossentropy",
+    "channels": 60
+  },
+  "split_info": {
+    "train_count": 21741,
+    "val_count": 0,
+    "test_count": 830,
+    "random_seed": 42,
+    "split_method": "field-based (patch-level)"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.7072289156626506,
+    "cohen_kappa": 0.5927009687210338,
+    "f1_weighted": 0.700734181003023,
+    "f1_macro": 0.628380114980193,
+    "macro_avg": {
+      "precision": 0.6501678180263631,
+      "recall": 0.6218732131054668,
+      "f1-score": 0.628380114980193,
+      "support": 830.0
+    },
+    "weighted_avg": {
+      "precision": 0.7043734692218853,
+      "recall": 0.7072289156626506,
+      "f1-score": 0.700734181003023,
+      "support": 830.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      87,
+      0,
+      7,
+      5,
+      26
+    ],
+    [
+      4,
+      66,
+      6,
+      5,
+      8
+    ],
+    [
+      6,
+      2,
+      324,
+      17,
+      7
+    ],
+    [
+      8,
+      2,
+      27,
+      22,
+      26
+    ],
+    [
+      64,
+      1,
+      13,
+      9,
+      88
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.514792899408284,
+      "recall": 0.696,
+      "f1-score": 0.5918367346938775,
+      "support": 125.0
+    },
+    "Canola": {
+      "precision": 0.9295774647887324,
+      "recall": 0.7415730337078652,
+      "f1-score": 0.825,
+      "support": 89.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.8594164456233422,
+      "recall": 0.9101123595505618,
+      "f1-score": 0.8840381991814461,
+      "support": 356.0
+    },
+    "Small grain grazing": {
+      "precision": 0.3793103448275862,
+      "recall": 0.25882352941176473,
+      "f1-score": 0.3076923076923077,
+      "support": 85.0
+    },
+    "Wheat": {
+      "precision": 0.567741935483871,
+      "recall": 0.5028571428571429,
+      "f1-score": 0.5333333333333333,
+      "support": 175.0
+    }
+  },
+  "training_history": null,
+  "feature_importance": null,
+  "training_time_seconds": null,
+  "notes": null,
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Multi-Channel_CNN_Patch-Level_20260616_112448/report.pdf"
+}

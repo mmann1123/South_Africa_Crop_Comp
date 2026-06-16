@@ -10,7 +10,8 @@ import tensorflow as tf
 from tensorflow.keras import layers, models
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, cohen_kappa_score, confusion_matrix
+from sklearn.metrics import accuracy_score, cohen_kappa_score, f1_score
+from collections import Counter
 from report import ModelReport
 
 PATCH_PARQUET = PATCH_DATA_PATH
@@ -18,13 +19,19 @@ TARGET_SIZE = (128, 128)
 BATCH_SIZE = 64
 EPOCHS = 20
 
+# Reproducibility (split already uses random_state=42)
+np.random.seed(42)
+tf.random.set_seed(42)
 
-def precompute_patches(df, patch_ids, channel_cols, label_encoder, target_size):
-    """Vectorized: convert all patches to images in one pass. Returns X, y arrays."""
+
+def build_patch_store(df, patch_ids, channel_cols, label_encoder):
+    """Pre-extract per-patch pixel arrays once (keeps raw pixels in RAM, ~1-2 GB
+    total — NOT the resized 128x128 tensors, which would be ~100 GB). Patches are
+    reconstructed and resized lazily, per batch, in PatchSequence."""
     grouped = df.groupby("patch_id")
-    images = []
-    labels = []
-
+    store = {}
+    labels = {}
+    valid_ids = []
     for pid in patch_ids:
         grp = grouped.get_group(pid)
         crops = grp["crop_name"].unique()
@@ -33,41 +40,57 @@ def precompute_patches(df, patch_ids, channel_cols, label_encoder, target_size):
         crop_str = crops[0]
         if crop_str not in label_encoder.classes_:
             continue
-
-        # Vectorized pixel placement
         rows = grp["row"].values
         cols = grp["col"].values
-        min_r, min_c = rows.min(), cols.min()
-        H = (rows.max() - min_r) + 1
-        W = (cols.max() - min_c) + 1
+        rr = (rows - rows.min()).astype(np.int16)
+        cc = (cols - cols.min()).astype(np.int16)
+        vals = grp[channel_cols].values.astype(np.float32)
+        store[pid] = (rr, cc, vals)
+        labels[pid] = int(label_encoder.transform([crop_str])[0])
+        valid_ids.append(pid)
+        if len(valid_ids) % 5000 == 0:
+            print(f"  Indexed {len(valid_ids)} patches...")
+    print(f"  Total: {len(valid_ids)} patches")
+    return store, labels, valid_ids
 
-        img = np.zeros((H, W, len(channel_cols)), dtype=np.float32)
-        img[rows - min_r, cols - min_c, :] = grp[channel_cols].values
 
-        images.append(img)
-        labels.append(label_encoder.transform([crop_str])[0])
+class PatchSequence(tf.keras.utils.Sequence):
+    """Streams patches to the model one batch at a time. Each patch is placed on
+    its native HxW grid and resized to TARGET_SIZE on the fly (matching the
+    per-patch resize used at inference time), so memory stays bounded."""
 
-        if len(images) % 2000 == 0:
-            print(f"  Reconstructed {len(images)} patches...")
+    def __init__(self, store, labels, ids, n_channels, target_size, batch_size, shuffle):
+        self.store = store
+        self.labels = labels
+        self.ids = list(ids)
+        self.n_channels = n_channels
+        self.target_size = target_size
+        self.batch_size = batch_size
+        self.shuffle = shuffle
+        self.on_epoch_end()
 
-    print(f"  Total: {len(images)} patches")
+    def __len__(self):
+        return math.ceil(len(self.ids) / self.batch_size)
 
-    # Batch-resize all images
-    print("  Resizing to target size...")
-    resized = np.zeros((len(images), target_size[0], target_size[1], len(channel_cols)), dtype=np.float32)
-    batch_sz = 256
-    for i in range(0, len(images), batch_sz):
-        batch = images[i:i+batch_sz]
-        # Pad to uniform size for batch resize
-        max_h = max(img.shape[0] for img in batch)
-        max_w = max(img.shape[1] for img in batch)
-        padded = np.zeros((len(batch), max_h, max_w, len(channel_cols)), dtype=np.float32)
-        for j, img in enumerate(batch):
-            padded[j, :img.shape[0], :img.shape[1], :] = img
-        resized_batch = tf.image.resize(padded, target_size).numpy()
-        resized[i:i+len(batch)] = resized_batch
+    def on_epoch_end(self):
+        self.order = np.arange(len(self.ids))
+        if self.shuffle:
+            np.random.shuffle(self.order)
 
-    return resized, np.array(labels, dtype=np.int64)
+    def __getitem__(self, idx):
+        sel = self.order[idx * self.batch_size:(idx + 1) * self.batch_size]
+        X = np.zeros((len(sel), self.target_size[0], self.target_size[1], self.n_channels), dtype=np.float32)
+        y = np.zeros(len(sel), dtype=np.int64)
+        for j, i in enumerate(sel):
+            pid = self.ids[i]
+            rr, cc, vals = self.store[pid]
+            H = int(rr.max()) + 1
+            W = int(cc.max()) + 1
+            img = np.zeros((H, W, self.n_channels), dtype=np.float32)
+            img[rr, cc, :] = vals
+            X[j] = tf.image.resize(img[np.newaxis], self.target_size)[0].numpy()
+            y[j] = self.labels[pid]
+        return X, y
 
 
 def main():
@@ -109,24 +132,17 @@ def main():
     print(f"\nChannel/Band columns used: {len(channel_cols)}")
     print(f"Classes: {list(le.classes_)}")
 
-    # Precompute all patches into numpy arrays (vectorized)
-    print("\nPrecomputing training patches...")
-    X_train, y_train = precompute_patches(df_train, train_patch_ids, channel_cols, le, TARGET_SIZE)
-    print(f"X_train: {X_train.shape}, y_train: {y_train.shape}")
+    # Index patches (lazy reconstruction happens in the Sequence)
+    print("\nIndexing training patches...")
+    store_tr, labels_tr, ids_tr = build_patch_store(df_train, train_patch_ids, channel_cols, le)
+    print("\nIndexing test patches...")
+    store_te, labels_te, ids_te = build_patch_store(df_test, test_patch_ids, channel_cols, le)
 
-    print("\nPrecomputing test patches...")
-    X_test, y_test = precompute_patches(df_test, test_patch_ids, channel_cols, le, TARGET_SIZE)
-    print(f"X_test: {X_test.shape}, y_test: {y_test.shape}")
-
-    # Create tf.data datasets with prefetching
-    train_ds = tf.data.Dataset.from_tensor_slices((X_train, y_train))
-    train_ds = train_ds.shuffle(len(X_train)).batch(BATCH_SIZE).prefetch(tf.data.AUTOTUNE)
-
-    val_ds = tf.data.Dataset.from_tensor_slices((X_test, y_test))
-    val_ds = val_ds.batch(BATCH_SIZE).prefetch(tf.data.AUTOTUNE)
-
-    n_channels = X_train.shape[-1]
+    n_channels = len(channel_cols)
     n_classes = len(le.classes_)
+
+    train_seq = PatchSequence(store_tr, labels_tr, ids_tr, n_channels, TARGET_SIZE, BATCH_SIZE, shuffle=True)
+    val_seq = PatchSequence(store_te, labels_te, ids_te, n_channels, TARGET_SIZE, BATCH_SIZE, shuffle=False)
 
     model = models.Sequential([
         layers.Input(shape=(TARGET_SIZE[0], TARGET_SIZE[1], n_channels)),
@@ -141,33 +157,44 @@ def main():
     model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
     model.summary()
 
-    history = model.fit(
-        train_ds,
-        epochs=EPOCHS,
-        validation_data=val_ds,
-    )
+    model.fit(train_seq, epochs=EPOCHS, validation_data=val_seq)
 
-    # Evaluate
-    y_pred = np.argmax(model.predict(X_test, batch_size=BATCH_SIZE), axis=1)
+    # ---- Patch-level predictions on the held-out (in-region) test split ----
+    y_pred_patch = np.argmax(model.predict(val_seq), axis=1)
+    y_true_patch = np.array([labels_te[pid] for pid in ids_te], dtype=np.int64)
 
-    acc = accuracy_score(y_test, y_pred)
-    kappa = cohen_kappa_score(y_test, y_pred)
-    cm = confusion_matrix(y_test, y_pred)
+    acc_patch = accuracy_score(y_true_patch, y_pred_patch)
+    print(f"\n--- PATCH-LEVEL TEST ---  acc={acc_patch:.4f}  "
+          f"kappa={cohen_kappa_score(y_true_patch, y_pred_patch):.4f}")
 
-    print("\n--- TEST EVALUATION ---")
-    print(f"Accuracy: {acc:.4f}")
-    print(f"Cohen's Kappa: {kappa:.4f}")
-    print("Confusion Matrix:\n", cm)
+    # ---- Aggregate patch predictions to field level (majority vote) ----
+    patch_to_field = df_test.groupby("patch_id")["field_id"].first()
+    patch_df = pd.DataFrame({
+        "patch_id": ids_te,
+        "pred": y_pred_patch,
+    })
+    patch_df["field_id"] = patch_df["patch_id"].map(patch_to_field)
+    field_pred = patch_df.groupby("field_id")["pred"].agg(
+        lambda x: Counter(x).most_common(1)[0][0])
+    # True field label: encode the (single) crop per field
+    field_true_str = df_test.groupby("field_id")["crop_name"].first()
+    common_fields = field_pred.index.intersection(field_true_str.index)
+    y_field_pred = field_pred.loc[common_fields].values
+    y_field_true = le.transform(field_true_str.loc[common_fields].values)
+
+    f1m = f1_score(y_field_true, y_field_pred, average="macro")
+    print(f"--- FIELD-LEVEL TEST ---  fields={len(common_fields)}  "
+          f"F1_macro={f1m:.4f}  kappa={cohen_kappa_score(y_field_true, y_field_pred):.4f}")
 
     os.makedirs(MODEL_DIR, exist_ok=True)
     model.save(os.path.join(MODEL_DIR, "patch_level_cnn.h5"))
     print("CNN model saved to", os.path.join(MODEL_DIR, "patch_level_cnn.h5"))
 
-    # Save label encoder
     import joblib
     joblib.dump(le, os.path.join(MODEL_DIR, "multi_channel_cnn_label_encoder.joblib"))
 
-    # Generate report
+    # Report field-level metrics (matches the field-based convention used for the
+    # 3D CNN patch model and the spatial-transfer table).
     report = ModelReport("Multi-Channel CNN Patch-Level", os.path.abspath(__file__))
     report.set_hyperparameters({
         "target_size": list(TARGET_SIZE),
@@ -177,10 +204,9 @@ def main():
         "loss": "sparse_categorical_crossentropy",
         "channels": n_channels,
     })
-    report.set_split_info(train=len(train_patch_ids), test=len(test_patch_ids),
+    report.set_split_info(train=len(ids_tr), test=len(common_fields),
                           seed=42, split_method="field-based (patch-level)")
-    report.set_metrics(y_test, y_pred, le.classes_)
-    report.set_training_history(history.history)
+    report.set_metrics(y_field_true, y_field_pred, le.classes_)
     report.generate()
 
 

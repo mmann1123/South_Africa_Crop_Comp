@@ -3304,6 +3304,46 @@
         "features": "raw temporal (field-level mean, 6 bands x 10 months)"
       },
       "notes": null
+    },
+    {
+      "run_id": "multi-channel_cnn_patch-level_20260616_112449",
+      "name": "Multi-Channel CNN Patch-Level",
+      "model_type": "pytorch",
+      "timestamp": "2026-06-16T11:24:49.138500",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.7072289156626506,
+        "cohen_kappa": 0.5927009687210338,
+        "f1_weighted": 0.700734181003023,
+        "f1_macro": 0.628380114980193,
+        "macro_avg": {
+          "precision": 0.6501678180263631,
+          "recall": 0.6218732131054668,
+          "f1-score": 0.628380114980193,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.7043734692218853,
+          "recall": 0.7072289156626506,
+          "f1-score": 0.700734181003023,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Multi-Channel_CNN_Patch-Level_20260616_112448"
+      },
+      "hyperparameters": {
+        "target_size": [
+          128,
+          128
+        ],
+        "batch_size": 64,
+        "epochs": 20,
+        "optimizer": "Adam",
+        "loss": "sparse_categorical_crossentropy",
+        "channels": 60
+      },
+      "notes": null
     }
   ]
 }

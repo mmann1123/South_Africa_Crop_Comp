@@ -46,7 +46,7 @@ FEATURE_TYPE_MAP = {
     "Base RF (pixel)": "raw pixel (band x month)",
     "Base LightGBM (pixel)": "raw pixel (band x month)",
     "Base XGBoost (pixel)": "raw pixel (band x month)",
-    "CNN-BiLSTM (pixel)": "raw pixel (band x month)",
+    "CNN-BiLSTM (field)": "raw pixel (band x month)",
     "TabNet (pixel)": "raw pixel (band x month)",
     "3D CNN (patch)": "raw pixel (spatial-temporal patch)",
     "Multi-Ch CNN (patch)": "raw pixel (spatial-temporal patch)",
@@ -70,7 +70,7 @@ REPORT_NAME_MAP = {
     "Base RF (pixel)": "Random Forest (Pixel-Level)",
     "Base LightGBM (pixel)": "LightGBM (Pixel-Level)",
     "Base XGBoost (pixel)": "XGBoost (Pixel-Level)",
-    "CNN-BiLSTM (pixel)": "CNN-BiLSTM Ensemble (5-seed)",
+    "CNN-BiLSTM (field)": "CNN-BiLSTM Ensemble Field-Level (Inference)",
     "TabNet (pixel)": "TabTransformer Ensemble (Field-Level)",
     "3D CNN (patch)": "3D CNN Patch-Level",
     "Multi-Ch CNN (patch)": "Multi-Channel CNN Patch-Level",
@@ -127,7 +127,7 @@ _PREDICTION_FILES_BASE = {
     "Base RF (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_rf.csv"), "pixel"),
     "Base LightGBM (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_lgbm.csv"), "pixel"),
     "Base XGBoost (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_xgb.csv"), "pixel"),
-    "CNN-BiLSTM (pixel)": (os.path.join(SCRIPT_DIR, "predictions_cnn_bilstm.csv"), "pixel"),
+    "CNN-BiLSTM (field)": (os.path.join(SCRIPT_DIR, "predictions_cnn_bilstm.csv"), "field"),
     "TabNet (pixel)": (os.path.join(SCRIPT_DIR, "predictions_tabnet.csv"), "pixel"),
     "3D CNN (patch)": (os.path.join(SCRIPT_DIR, "predictions_3d_cnn.csv"), "patch"),
     "Multi-Ch CNN (patch)": (os.path.join(SCRIPT_DIR, "predictions_multi_channel_cnn.csv"), "patch"),
@@ -260,7 +260,7 @@ ML_PIXEL_MODELS = {
 }
 ML_MODELS = ML_FIELD_MODELS | ML_PIXEL_MODELS
 DL_MODELS = {
-    "CNN-BiLSTM (pixel)", "TabNet (pixel)",
+    "CNN-BiLSTM (field)", "TabNet (pixel)",
     "3D CNN (patch)", "Multi-Ch CNN (patch)", "Ensemble 3D CNN (patch)",
     "L-TAE (pixel)", "TempCNN (pixel)",
     "L-TAE Field (field)", "TempCNN Field (field)",
