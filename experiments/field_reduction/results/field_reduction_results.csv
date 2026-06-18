@@ -45,3 +45,4 @@ Base LightGBM (pixel),pixel,raw pixel (band x month),0.25,704,0.6181,0.5502,0.69
 XGBoost (field),field,xr_fresh time-series,0.25,663,0.6316,0.5329,0.6857,0.4736,-0.0318
 XGBoost L2 (field),field,xr_fresh time-series,0.25,663,0.6271,0.5267,0.682,0.4671,
 LassoNet (pixel),pixel,raw pixel (band x month),0.25,663,0.6963,0.4596,0.489,0.2916,
+L-TAE-S (pixel),pixel,raw pixel (temporal sequence),1.0,,,0.5987,0.7126,0.5274,0.0

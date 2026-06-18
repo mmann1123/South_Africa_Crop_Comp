@@ -39,7 +39,7 @@ CROP_ID_TO_NAME = {
 }
 
 # DL models that require torch
-DL_MODELS = {"tabnet_pixel", "tabnet2_pixel", "ltae_field", "ltae_pixel", "ltae_sparse_pixel", "ltae_lr_stack", "fasttabnet_pixel", "lassonet_pixel"}
+DL_MODELS = {"tabnet_pixel", "tabnet2_pixel", "ltae_field", "ltae_pixel", "ltae_sparse_pixel", "ltae_sparse_field", "ltae_lr_stack", "fasttabnet_pixel", "lassonet_pixel"}
 
 
 def _get_torch_device():
@@ -285,6 +285,65 @@ def predict_ltae_sparse_pixel(model_dir, output_csv):
     labels = le.inverse_transform(field_preds.values)
 
     df_out = pd.DataFrame({"fid": field_preds.index, "crop_name": labels})
+    df_out.to_csv(output_csv, index=False)
+    return len(df_out)
+
+
+def predict_ltae_sparse_field(model_dir, output_csv):
+    """L-TAE-S field: aggregate test pixels to field → 5-seed ensemble."""
+    import torch
+    from torch.utils.data import Dataset, DataLoader
+    from models_arch import LTAESparse, T_SEQ, N_BANDS
+
+    device = _get_torch_device()
+
+    feature_cols = jl_load(os.path.join(model_dir, "feature_columns.joblib"))
+    scaler = jl_load(os.path.join(model_dir, "scaler.joblib"))
+    le = jl_load(os.path.join(model_dir, "label_encoder.joblib"))
+
+    df = pd.read_parquet(MERGED_DL_TEST_PATH)
+    for col in feature_cols:
+        if col not in df.columns:
+            df[col] = 0
+    df[feature_cols] = df[feature_cols].fillna(0)
+
+    # Aggregate to field level
+    df_field = df.groupby('fid')[feature_cols].mean().reset_index()
+    X = scaler.transform(df_field[feature_cols].values).astype(np.float32)
+    X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
+    fids = df_field["fid"].values
+
+    X_tensor = torch.tensor(X.reshape(-1, T_SEQ, N_BANDS), dtype=torch.float32)
+    fid_list = list(fids)
+
+    class _Dataset(Dataset):
+        def __len__(self): return len(fid_list)
+        def __getitem__(self, idx): return X_tensor[idx], fid_list[idx]
+
+    dataloader = DataLoader(_Dataset(), batch_size=256, shuffle=False)
+
+    # 5-seed ensemble
+    logits_all = []
+    for seed in SEEDS_ENSEMBLE:
+        model_path = os.path.join(model_dir, f"ltae_sparse_field_seed_{seed}.pt")
+        if not os.path.exists(model_path):
+            raise FileNotFoundError(f"L-TAE-S field model not found: {model_path}")
+        model = LTAESparse(in_channels=N_BANDS, num_classes=len(le.classes_)).to(device)
+        model.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
+        model.eval()
+
+        seed_logits = []
+        with torch.no_grad(), torch.amp.autocast("cuda"):
+            for X_batch, _ in dataloader:
+                logits, _ = model(X_batch.to(device))  # unpack (logits, aux)
+                seed_logits.append(logits.cpu())
+        logits_all.append(torch.cat(seed_logits, dim=0).unsqueeze(0))
+
+    avg_logits = torch.cat(logits_all, dim=0).float().mean(dim=0)
+    preds = avg_logits.argmax(dim=1).tolist()
+    labels = le.inverse_transform(preds)
+
+    df_out = pd.DataFrame({"fid": fids, "crop_name": labels})
     df_out.to_csv(output_csv, index=False)
     return len(df_out)
 
@@ -558,6 +617,7 @@ PREDICT_FNS = {
     "ltae_field": lambda md, out: predict_ltae_field(md, out),
     "ltae_pixel": lambda md, out: predict_ltae_pixel(md, out),
     "ltae_sparse_pixel": lambda md, out: predict_ltae_sparse_pixel(md, out),
+    "ltae_sparse_field": lambda md, out: predict_ltae_sparse_field(md, out),
     "ltae_lr_stack": lambda md, out: predict_ltae_lr_stack(md, out),
     "fasttabnet_pixel": lambda md, out: predict_fasttabnet_pixel(md, out),
     "lassonet_pixel": lambda md, out: predict_lassonet_pixel(md, out),

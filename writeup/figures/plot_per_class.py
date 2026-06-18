@@ -19,7 +19,7 @@ MODELS = [
     ("TabNet (pixel)", "TabNet"),
     ("XGBoost (field)", "XGBoost"),
     ("Base LR (pixel)", "Logistic Regression"),
-    ("CNN-BiLSTM (field)", "CNN-BiLSTM"),
+    ("CNN-BiLSTM (pixel)", "CNN-BiLSTM"),
 ]
 CLASSES = ["Lucerne/Medics", "Canola", "Barley", "Wheat", "Small grain grazing"]
 

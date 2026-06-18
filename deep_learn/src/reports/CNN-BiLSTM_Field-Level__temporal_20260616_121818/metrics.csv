@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+CNN-BiLSTM Field-Level (temporal),0.7180722891566265,0.6095766493788445,0.7284309676049512,0.642909423284715,test

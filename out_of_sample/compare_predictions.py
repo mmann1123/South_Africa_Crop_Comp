@@ -46,7 +46,7 @@ FEATURE_TYPE_MAP = {
     "Base RF (pixel)": "raw pixel (band x month)",
     "Base LightGBM (pixel)": "raw pixel (band x month)",
     "Base XGBoost (pixel)": "raw pixel (band x month)",
-    "CNN-BiLSTM (field)": "raw pixel (band x month)",
+    "CNN-BiLSTM (pixel)": "raw pixel (band x month)",
     "TabNet (pixel)": "raw pixel (band x month)",
     "3D CNN (patch)": "raw pixel (spatial-temporal patch)",
     "Multi-Ch CNN (patch)": "raw pixel (spatial-temporal patch)",
@@ -56,6 +56,7 @@ FEATURE_TYPE_MAP = {
     "TempCNN (pixel)": "raw pixel (temporal sequence)",
     "L-TAE Field (field)": "raw temporal (field-averaged)",
     "TempCNN Field (field)": "raw temporal (field-averaged)",
+    "CNN-BiLSTM Field (field)": "raw temporal (field-averaged)",
     "TabNet Temporal Field (field)": "raw temporal (field-averaged)",
     "LightGBM (field)": "xr_fresh time-series",
 }
@@ -70,7 +71,7 @@ REPORT_NAME_MAP = {
     "Base RF (pixel)": "Random Forest (Pixel-Level)",
     "Base LightGBM (pixel)": "LightGBM (Pixel-Level)",
     "Base XGBoost (pixel)": "XGBoost (Pixel-Level)",
-    "CNN-BiLSTM (field)": "CNN-BiLSTM Ensemble Field-Level (Inference)",
+    "CNN-BiLSTM (pixel)": "CNN-BiLSTM Ensemble (5-seed)",
     "TabNet (pixel)": "TabTransformer Ensemble (Field-Level)",
     "3D CNN (patch)": "3D CNN Patch-Level",
     "Multi-Ch CNN (patch)": "Multi-Channel CNN Patch-Level",
@@ -80,6 +81,7 @@ REPORT_NAME_MAP = {
     "TempCNN (pixel)": "TempCNN Temporal Conv",
     "L-TAE Field (field)": "L-TAE Field-Level (temporal)",
     "TempCNN Field (field)": "TempCNN Field-Level (temporal)",
+    "CNN-BiLSTM Field (field)": "CNN-BiLSTM Field-Level (temporal)",
     "TabNet Temporal Field (field)": "TabNet Field-Level (temporal)",
     "LightGBM (field)": "LightGBM Field-Level",
 }
@@ -127,7 +129,7 @@ _PREDICTION_FILES_BASE = {
     "Base RF (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_rf.csv"), "pixel"),
     "Base LightGBM (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_lgbm.csv"), "pixel"),
     "Base XGBoost (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_xgb.csv"), "pixel"),
-    "CNN-BiLSTM (field)": (os.path.join(SCRIPT_DIR, "predictions_cnn_bilstm.csv"), "field"),
+    "CNN-BiLSTM (pixel)": (os.path.join(SCRIPT_DIR, "predictions_cnn_bilstm.csv"), "pixel"),
     "TabNet (pixel)": (os.path.join(SCRIPT_DIR, "predictions_tabnet.csv"), "pixel"),
     "3D CNN (patch)": (os.path.join(SCRIPT_DIR, "predictions_3d_cnn.csv"), "patch"),
     "Multi-Ch CNN (patch)": (os.path.join(SCRIPT_DIR, "predictions_multi_channel_cnn.csv"), "patch"),
@@ -137,6 +139,7 @@ _PREDICTION_FILES_BASE = {
     "TempCNN (pixel)": (os.path.join(SCRIPT_DIR, "predictions_tempcnn.csv"), "pixel"),
     "L-TAE Field (field)": (os.path.join(SCRIPT_DIR, "predictions_ltae_field.csv"), "field"),
     "TempCNN Field (field)": (os.path.join(SCRIPT_DIR, "predictions_tempcnn_field.csv"), "field"),
+    "CNN-BiLSTM Field (field)": (os.path.join(SCRIPT_DIR, "predictions_cnn_bilstm_field.csv"), "field"),
     "TabNet Temporal Field (field)": (os.path.join(SCRIPT_DIR, "predictions_tabnet_temporal_field.csv"), "field"),
     "LightGBM (field)": (os.path.join(SCRIPT_DIR, "predictions_lgbm.csv"), "field"),
 }
@@ -260,10 +263,10 @@ ML_PIXEL_MODELS = {
 }
 ML_MODELS = ML_FIELD_MODELS | ML_PIXEL_MODELS
 DL_MODELS = {
-    "CNN-BiLSTM (field)", "TabNet (pixel)",
+    "CNN-BiLSTM (pixel)", "TabNet (pixel)",
     "3D CNN (patch)", "Multi-Ch CNN (patch)", "Ensemble 3D CNN (patch)",
     "L-TAE (pixel)", "TempCNN (pixel)",
-    "L-TAE Field (field)", "TempCNN Field (field)",
+    "L-TAE Field (field)", "TempCNN Field (field)", "CNN-BiLSTM Field (field)",
 }
 
 

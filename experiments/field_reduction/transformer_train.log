@@ -1,0 +1,174 @@
+=== Transformer Encoder Training === Device: cuda
+[TIMER] Loading data...
+Shape: (7540362, 73)
+Feature cols: 60 (expected 60)
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+Split: train=4802658, val=1205790, test=1531914
+Class weights (alpha): [0.9655604958534241, 1.0919249057769775, 0.5310647487640381, 1.681188941001892, 0.7302609086036682]
+
+=== Seed 42 ===
+  Epoch 1/100 - train_loss=0.1504, val_f1_macro=0.7033, val_acc=0.7491, lr=1.00e-03, 47.0s
+  Epoch 2/100 - train_loss=0.0733, val_f1_macro=0.6886, val_acc=0.7340, lr=9.99e-04, 45.6s
+  Epoch 3/100 - train_loss=0.0583, val_f1_macro=0.6975, val_acc=0.7415, lr=9.98e-04, 45.6s
+  Epoch 4/100 - train_loss=0.0502, val_f1_macro=0.6971, val_acc=0.7415, lr=9.96e-04, 45.7s
+  Epoch 5/100 - train_loss=0.0451, val_f1_macro=0.6948, val_acc=0.7379, lr=9.94e-04, 45.8s
+  Epoch 6/100 - train_loss=0.0413, val_f1_macro=0.6985, val_acc=0.7399, lr=9.91e-04, 45.8s
+  Epoch 7/100 - train_loss=0.0385, val_f1_macro=0.7004, val_acc=0.7436, lr=9.88e-04, 45.9s
+  Epoch 8/100 - train_loss=0.0361, val_f1_macro=0.7028, val_acc=0.7484, lr=9.84e-04, 45.7s
+  Epoch 9/100 - train_loss=0.0343, val_f1_macro=0.6946, val_acc=0.7404, lr=9.80e-04, 45.9s
+  Epoch 10/100 - train_loss=0.0326, val_f1_macro=0.6981, val_acc=0.7413, lr=9.76e-04, 46.0s
+  Epoch 11/100 - train_loss=0.0312, val_f1_macro=0.6945, val_acc=0.7359, lr=9.70e-04, 46.1s
+  Epoch 12/100 - train_loss=0.0300, val_f1_macro=0.6994, val_acc=0.7430, lr=9.65e-04, 46.0s
+  Epoch 13/100 - train_loss=0.0289, val_f1_macro=0.6989, val_acc=0.7413, lr=9.59e-04, 46.1s
+  Epoch 14/100 - train_loss=0.0279, val_f1_macro=0.6886, val_acc=0.7316, lr=9.52e-04, 46.3s
+  Epoch 15/100 - train_loss=0.0272, val_f1_macro=0.6956, val_acc=0.7364, lr=9.46e-04, 46.3s
+  Epoch 16/100 - train_loss=0.0263, val_f1_macro=0.6908, val_acc=0.7337, lr=9.38e-04, 46.3s
+  Early stopping at epoch 16
+  Test acc=0.7374, kappa=0.6537
+
+=== Seed 101 ===
+  Epoch 1/100 - train_loss=0.1462, val_f1_macro=0.6735, val_acc=0.7212, lr=1.00e-03, 47.1s
+  Epoch 2/100 - train_loss=0.0717, val_f1_macro=0.6867, val_acc=0.7307, lr=9.99e-04, 46.4s
+  Epoch 3/100 - train_loss=0.0572, val_f1_macro=0.6914, val_acc=0.7352, lr=9.98e-04, 46.5s
+  Epoch 4/100 - train_loss=0.0497, val_f1_macro=0.6733, val_acc=0.7160, lr=9.96e-04, 46.5s
+  Epoch 5/100 - train_loss=0.0446, val_f1_macro=0.6862, val_acc=0.7240, lr=9.94e-04, 46.6s
+  Epoch 6/100 - train_loss=0.0409, val_f1_macro=0.6779, val_acc=0.7213, lr=9.91e-04, 46.6s
+  Epoch 7/100 - train_loss=0.0381, val_f1_macro=0.6793, val_acc=0.7241, lr=9.88e-04, 46.5s
+  Epoch 8/100 - train_loss=0.0358, val_f1_macro=0.6868, val_acc=0.7238, lr=9.84e-04, 46.6s
+  Epoch 9/100 - train_loss=0.0339, val_f1_macro=0.6843, val_acc=0.7193, lr=9.80e-04, 46.7s
+  Epoch 10/100 - train_loss=0.0323, val_f1_macro=0.6839, val_acc=0.7216, lr=9.76e-04, 46.7s
+  Epoch 11/100 - train_loss=0.0309, val_f1_macro=0.6756, val_acc=0.7173, lr=9.70e-04, 46.9s
+  Epoch 12/100 - train_loss=0.0297, val_f1_macro=0.6908, val_acc=0.7264, lr=9.65e-04, 46.7s
+  Epoch 13/100 - train_loss=0.0287, val_f1_macro=0.6869, val_acc=0.7222, lr=9.59e-04, 46.8s
+  Epoch 14/100 - train_loss=0.0277, val_f1_macro=0.6769, val_acc=0.7175, lr=9.52e-04, 46.8s
+  Epoch 15/100 - train_loss=0.0268, val_f1_macro=0.6914, val_acc=0.7312, lr=9.46e-04, 46.9s
+  Epoch 16/100 - train_loss=0.0261, val_f1_macro=0.6869, val_acc=0.7243, lr=9.38e-04, 46.8s
+  Epoch 17/100 - train_loss=0.0253, val_f1_macro=0.6895, val_acc=0.7277, lr=9.30e-04, 46.7s
+  Epoch 18/100 - train_loss=0.0248, val_f1_macro=0.6807, val_acc=0.7203, lr=9.22e-04, 46.8s
+  Epoch 19/100 - train_loss=0.0242, val_f1_macro=0.6832, val_acc=0.7196, lr=9.14e-04, 46.8s
+  Epoch 20/100 - train_loss=0.0235, val_f1_macro=0.6822, val_acc=0.7198, lr=9.05e-04, 46.8s
+  Epoch 21/100 - train_loss=0.0230, val_f1_macro=0.6840, val_acc=0.7228, lr=8.95e-04, 47.1s
+  Epoch 22/100 - train_loss=0.0225, val_f1_macro=0.6857, val_acc=0.7246, lr=8.85e-04, 46.9s
+  Epoch 23/100 - train_loss=0.0221, val_f1_macro=0.6790, val_acc=0.7174, lr=8.75e-04, 47.0s
+  Epoch 24/100 - train_loss=0.0216, val_f1_macro=0.6840, val_acc=0.7212, lr=8.65e-04, 46.9s
+  Epoch 25/100 - train_loss=0.0211, val_f1_macro=0.6862, val_acc=0.7220, lr=8.54e-04, 46.9s
+  Epoch 26/100 - train_loss=0.0207, val_f1_macro=0.6826, val_acc=0.7189, lr=8.42e-04, 46.9s
+  Epoch 27/100 - train_loss=0.0204, val_f1_macro=0.6847, val_acc=0.7211, lr=8.31e-04, 47.0s
+  Epoch 28/100 - train_loss=0.0201, val_f1_macro=0.6738, val_acc=0.7109, lr=8.19e-04, 47.0s
+  Epoch 29/100 - train_loss=0.0197, val_f1_macro=0.6863, val_acc=0.7230, lr=8.07e-04, 47.0s
+  Epoch 30/100 - train_loss=0.0194, val_f1_macro=0.6869, val_acc=0.7252, lr=7.94e-04, 47.1s
+  Early stopping at epoch 30
+  Test acc=0.7466, kappa=0.6665
+
+=== Seed 202 ===
+  Epoch 1/100 - train_loss=0.1502, val_f1_macro=0.6985, val_acc=0.7398, lr=1.00e-03, 47.9s
+  Epoch 2/100 - train_loss=0.0740, val_f1_macro=0.6998, val_acc=0.7418, lr=9.99e-04, 46.9s
+  Epoch 3/100 - train_loss=0.0591, val_f1_macro=0.6897, val_acc=0.7297, lr=9.98e-04, 47.0s
+  Epoch 4/100 - train_loss=0.0510, val_f1_macro=0.6862, val_acc=0.7252, lr=9.96e-04, 47.1s
+  Epoch 5/100 - train_loss=0.0457, val_f1_macro=0.6887, val_acc=0.7314, lr=9.94e-04, 47.0s
+  Epoch 6/100 - train_loss=0.0417, val_f1_macro=0.6889, val_acc=0.7307, lr=9.91e-04, 47.1s
+  Epoch 7/100 - train_loss=0.0389, val_f1_macro=0.6870, val_acc=0.7289, lr=9.88e-04, 47.0s
+  Epoch 8/100 - train_loss=0.0364, val_f1_macro=0.6867, val_acc=0.7256, lr=9.84e-04, 47.0s
+  Epoch 9/100 - train_loss=0.0344, val_f1_macro=0.6711, val_acc=0.7126, lr=9.80e-04, 47.1s
+  Epoch 10/100 - train_loss=0.0330, val_f1_macro=0.6946, val_acc=0.7329, lr=9.76e-04, 47.0s
+  Epoch 11/100 - train_loss=0.0313, val_f1_macro=0.6857, val_acc=0.7270, lr=9.70e-04, 47.0s
+  Epoch 12/100 - train_loss=0.0303, val_f1_macro=0.6925, val_acc=0.7331, lr=9.65e-04, 47.0s
+  Epoch 13/100 - train_loss=0.0290, val_f1_macro=0.6878, val_acc=0.7291, lr=9.59e-04, 47.0s
+  Epoch 14/100 - train_loss=0.0280, val_f1_macro=0.6901, val_acc=0.7303, lr=9.52e-04, 46.9s
+  Epoch 15/100 - train_loss=0.0271, val_f1_macro=0.6886, val_acc=0.7292, lr=9.46e-04, 46.9s
+  Epoch 16/100 - train_loss=0.0263, val_f1_macro=0.6907, val_acc=0.7298, lr=9.38e-04, 47.2s
+  Epoch 17/100 - train_loss=0.0257, val_f1_macro=0.6850, val_acc=0.7254, lr=9.30e-04, 46.9s
+  Early stopping at epoch 17
+  Test acc=0.7489, kappa=0.6686
+
+=== Seed 303 ===
+  Epoch 1/100 - train_loss=0.1512, val_f1_macro=0.6874, val_acc=0.7351, lr=1.00e-03, 47.7s
+  Epoch 2/100 - train_loss=0.0754, val_f1_macro=0.6927, val_acc=0.7336, lr=9.99e-04, 47.0s
+  Epoch 3/100 - train_loss=0.0602, val_f1_macro=0.6921, val_acc=0.7379, lr=9.98e-04, 46.9s
+  Epoch 4/100 - train_loss=0.0519, val_f1_macro=0.6950, val_acc=0.7431, lr=9.96e-04, 46.9s
+  Epoch 5/100 - train_loss=0.0467, val_f1_macro=0.6956, val_acc=0.7390, lr=9.94e-04, 46.9s
+  Epoch 6/100 - train_loss=0.0429, val_f1_macro=0.6932, val_acc=0.7355, lr=9.91e-04, 47.0s
+  Epoch 7/100 - train_loss=0.0400, val_f1_macro=0.6812, val_acc=0.7253, lr=9.88e-04, 47.0s
+  Epoch 8/100 - train_loss=0.0376, val_f1_macro=0.6963, val_acc=0.7403, lr=9.84e-04, 46.9s
+  Epoch 9/100 - train_loss=0.0357, val_f1_macro=0.6920, val_acc=0.7342, lr=9.80e-04, 47.0s
+  Epoch 10/100 - train_loss=0.0339, val_f1_macro=0.6907, val_acc=0.7335, lr=9.76e-04, 47.0s
+  Epoch 11/100 - train_loss=0.0325, val_f1_macro=0.6893, val_acc=0.7293, lr=9.70e-04, 47.0s
+  Epoch 12/100 - train_loss=0.0313, val_f1_macro=0.7057, val_acc=0.7508, lr=9.65e-04, 47.0s
+  Epoch 13/100 - train_loss=0.0301, val_f1_macro=0.6952, val_acc=0.7402, lr=9.59e-04, 46.8s
+  Epoch 14/100 - train_loss=0.0290, val_f1_macro=0.6943, val_acc=0.7372, lr=9.52e-04, 47.2s
+  Epoch 15/100 - train_loss=0.0282, val_f1_macro=0.6955, val_acc=0.7355, lr=9.46e-04, 46.9s
+  Epoch 16/100 - train_loss=0.0275, val_f1_macro=0.6855, val_acc=0.7263, lr=9.38e-04, 46.9s
+  Epoch 17/100 - train_loss=0.0266, val_f1_macro=0.6978, val_acc=0.7424, lr=9.30e-04, 47.0s
+  Epoch 18/100 - train_loss=0.0260, val_f1_macro=0.6933, val_acc=0.7373, lr=9.22e-04, 46.8s
+  Epoch 19/100 - train_loss=0.0254, val_f1_macro=0.6908, val_acc=0.7365, lr=9.14e-04, 47.1s
+  Epoch 20/100 - train_loss=0.0246, val_f1_macro=0.6956, val_acc=0.7356, lr=9.05e-04, 47.0s
+  Epoch 21/100 - train_loss=0.0243, val_f1_macro=0.6934, val_acc=0.7346, lr=8.95e-04, 46.8s
+  Epoch 22/100 - train_loss=0.0236, val_f1_macro=0.6897, val_acc=0.7302, lr=8.85e-04, 46.9s
+  Epoch 23/100 - train_loss=0.0231, val_f1_macro=0.6885, val_acc=0.7308, lr=8.75e-04, 46.9s
+  Epoch 24/100 - train_loss=0.0226, val_f1_macro=0.6857, val_acc=0.7276, lr=8.65e-04, 47.0s
+  Epoch 25/100 - train_loss=0.0222, val_f1_macro=0.6974, val_acc=0.7402, lr=8.54e-04, 47.0s
+  Epoch 26/100 - train_loss=0.0219, val_f1_macro=0.6996, val_acc=0.7417, lr=8.42e-04, 47.0s
+  Epoch 27/100 - train_loss=0.0214, val_f1_macro=0.6916, val_acc=0.7324, lr=8.31e-04, 47.0s
+  Early stopping at epoch 27
+  Test acc=0.7497, kappa=0.6701
+
+=== Seed 404 ===
+  Epoch 1/100 - train_loss=0.1501, val_f1_macro=0.6830, val_acc=0.7315, lr=1.00e-03, 47.8s
+  Epoch 2/100 - train_loss=0.0747, val_f1_macro=0.6931, val_acc=0.7377, lr=9.99e-04, 46.9s
+  Epoch 3/100 - train_loss=0.0591, val_f1_macro=0.6913, val_acc=0.7314, lr=9.98e-04, 47.0s
+  Epoch 4/100 - train_loss=0.0508, val_f1_macro=0.6886, val_acc=0.7339, lr=9.96e-04, 47.2s
+  Epoch 5/100 - train_loss=0.0455, val_f1_macro=0.6842, val_acc=0.7291, lr=9.94e-04, 47.1s
+  Epoch 6/100 - train_loss=0.0415, val_f1_macro=0.6873, val_acc=0.7329, lr=9.91e-04, 47.0s
+  Epoch 7/100 - train_loss=0.0385, val_f1_macro=0.6863, val_acc=0.7298, lr=9.88e-04, 47.1s
+  Epoch 8/100 - train_loss=0.0363, val_f1_macro=0.6918, val_acc=0.7339, lr=9.84e-04, 47.0s
+  Epoch 9/100 - train_loss=0.0341, val_f1_macro=0.6910, val_acc=0.7348, lr=9.80e-04, 47.0s
+  Epoch 10/100 - train_loss=0.0326, val_f1_macro=0.6955, val_acc=0.7425, lr=9.76e-04, 47.0s
+  Epoch 11/100 - train_loss=0.0310, val_f1_macro=0.6919, val_acc=0.7362, lr=9.70e-04, 47.1s
+  Epoch 12/100 - train_loss=0.0299, val_f1_macro=0.6806, val_acc=0.7245, lr=9.65e-04, 47.2s
+  Epoch 13/100 - train_loss=0.0287, val_f1_macro=0.6968, val_acc=0.7391, lr=9.59e-04, 47.2s
+  Epoch 14/100 - train_loss=0.0278, val_f1_macro=0.7010, val_acc=0.7423, lr=9.52e-04, 47.1s
+  Epoch 15/100 - train_loss=0.0268, val_f1_macro=0.6882, val_acc=0.7262, lr=9.46e-04, 47.0s
+  Epoch 16/100 - train_loss=0.0261, val_f1_macro=0.6858, val_acc=0.7311, lr=9.38e-04, 47.0s
+  Epoch 17/100 - train_loss=0.0253, val_f1_macro=0.6970, val_acc=0.7382, lr=9.30e-04, 47.2s
+  Epoch 18/100 - train_loss=0.0246, val_f1_macro=0.7018, val_acc=0.7402, lr=9.22e-04, 47.1s
+  Epoch 19/100 - train_loss=0.0240, val_f1_macro=0.6835, val_acc=0.7272, lr=9.14e-04, 47.1s
+  Epoch 20/100 - train_loss=0.0235, val_f1_macro=0.6876, val_acc=0.7334, lr=9.05e-04, 47.3s
+  Epoch 21/100 - train_loss=0.0229, val_f1_macro=0.6845, val_acc=0.7271, lr=8.95e-04, 47.1s
+  Epoch 22/100 - train_loss=0.0224, val_f1_macro=0.6907, val_acc=0.7317, lr=8.85e-04, 47.1s
+  Epoch 23/100 - train_loss=0.0220, val_f1_macro=0.6866, val_acc=0.7342, lr=8.75e-04, 47.1s
+  Epoch 24/100 - train_loss=0.0214, val_f1_macro=0.6930, val_acc=0.7339, lr=8.65e-04, 47.1s
+  Epoch 25/100 - train_loss=0.0211, val_f1_macro=0.6869, val_acc=0.7272, lr=8.54e-04, 47.1s
+  Epoch 26/100 - train_loss=0.0208, val_f1_macro=0.6915, val_acc=0.7333, lr=8.42e-04, 47.2s
+  Epoch 27/100 - train_loss=0.0202, val_f1_macro=0.6847, val_acc=0.7323, lr=8.31e-04, 47.1s
+  Epoch 28/100 - train_loss=0.0199, val_f1_macro=0.6911, val_acc=0.7332, lr=8.19e-04, 47.1s
+  Epoch 29/100 - train_loss=0.0195, val_f1_macro=0.6932, val_acc=0.7341, lr=8.07e-04, 47.0s
+  Epoch 30/100 - train_loss=0.0193, val_f1_macro=0.6886, val_acc=0.7291, lr=7.94e-04, 47.1s
+  Epoch 31/100 - train_loss=0.0190, val_f1_macro=0.6891, val_acc=0.7320, lr=7.81e-04, 47.2s
+  Epoch 32/100 - train_loss=0.0186, val_f1_macro=0.6971, val_acc=0.7365, lr=7.68e-04, 47.1s
+  Epoch 33/100 - train_loss=0.0182, val_f1_macro=0.6938, val_acc=0.7351, lr=7.55e-04, 47.2s
+  Early stopping at epoch 33
+  Test acc=0.7401, kappa=0.6592
+
+Saved artifacts to /home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/models
+
+--- Ensemble Field-Level Results ---
+  Accuracy:    0.8337
+  F1 weighted: 0.8320
+  Kappa:       0.7656
+                     precision    recall  f1-score   support
+
+             Barley       0.75      0.76      0.75       140
+             Canola       0.90      0.88      0.89       107
+     Lucerne/Medics       0.92      0.94      0.93       380
+Small grain grazing       0.72      0.58      0.64        83
+              Wheat       0.67      0.71      0.69       120
+
+           accuracy                           0.83       830
+          macro avg       0.79      0.77      0.78       830
+       weighted avg       0.83      0.83      0.83       830
+
+[Registry] Registered: transformer_encoder_(sits)_20260618_000706
+  Metrics: {'level': 'test', 'accuracy': 0.8337349397590361, 'cohen_kappa': 0.7655995792498123, 'f1_weighted': 0.8319860749688691, 'f1_macro': 0.7809921749814286, 'macro_avg': {'precision': 0.7918974040593836, 'recall': 0.7734061916981396, 'f1-score': 0.7809921749814286, 'support': 830.0}, 'weighted_avg': {'precision': 0.8320935763415112, 'recall': 0.8337349397590361, 'f1-score': 0.8319860749688691, 'support': 830.0}}
+[Report] Saved to /home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Transformer_Encoder__SITS_20260618_000706/
+
+[TIMER] Total: 5802.8s (96.7 min)

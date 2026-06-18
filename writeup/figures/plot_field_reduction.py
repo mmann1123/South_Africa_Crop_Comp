@@ -18,6 +18,7 @@ df = pd.read_csv(SRC)
 MODELS = [
     ("TabNet (pixel)", "TabNet", "o"),
     ("L-TAE (pixel)", "L-TAE", "s"),
+    ("L-TAE-S (pixel)", "L-TAE-S", "v"),
     ("XGBoost (field)", "XGBoost", "^"),
     ("Base LR (pixel)", "Logistic Regression", "D"),
 ]
@@ -27,7 +28,7 @@ for name, label, marker in MODELS:
     sub = df[df["Model"] == name].sort_values("Fraction")
     if sub.empty:
         print("WARNING: no rows for", name); continue
-    ls = "--" if label == "LassoNet" else "-"
+    ls = "--" if label in ("LassoNet", "L-TAE-S") else "-"
     ax.plot(sub["Fraction"], sub["OOS F1 (macro)"], color=color_for_model(label),
             marker=marker, ls=ls, label=label)
 

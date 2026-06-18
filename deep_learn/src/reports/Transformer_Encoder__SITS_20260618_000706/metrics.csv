@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+Transformer Encoder (SITS),0.8337349397590361,0.7655995792498123,0.8319860749688691,0.7809921749814286,test

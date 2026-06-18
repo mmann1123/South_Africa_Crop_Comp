@@ -36,6 +36,7 @@ FAMILY_COLORS = {
     "tree":   OKABE["green"],
     "linear": OKABE["orange"],
     "dense":  OKABE["vermillion"],
+    "sparse": OKABE["skyblue"],
     "aug":    OKABE["purple"],
 }
 

@@ -3344,6 +3344,117 @@
         "channels": 60
       },
       "notes": null
+    },
+    {
+      "run_id": "cnn-bilstm_field-level_(temporal)_20260616_121818",
+      "name": "CNN-BiLSTM Field-Level (temporal)",
+      "model_type": "pytorch",
+      "timestamp": "2026-06-16T12:18:18.824391",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.7180722891566265,
+        "cohen_kappa": 0.6095766493788445,
+        "f1_weighted": 0.7284309676049512,
+        "f1_macro": 0.642909423284715,
+        "macro_avg": {
+          "precision": 0.6430956097760627,
+          "recall": 0.651763608271476,
+          "f1-score": 0.642909423284715,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.7447502206129843,
+          "recall": 0.7180722891566265,
+          "f1-score": 0.7284309676049512,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/CNN-BiLSTM_Field-Level__temporal_20260616_121818"
+      },
+      "hyperparameters": {
+        "architecture": "CNN(1D, 6->64, k=5) + BiLSTM(64) ",
+        "training_level": "field (pixel means per FID)",
+        "conv_filters": 64,
+        "lstm_hidden": 64,
+        "kernel_size": 5,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "optimizer": "AdamW (wd=1e-4)",
+        "scheduler": "CosineAnnealingLR",
+        "loss": "WeightedFocalLoss(gamma=2.0)",
+        "features": "raw reflectance (unscaled)",
+        "epochs": 100,
+        "patience": 15,
+        "batch_size": 128,
+        "n_models": 5,
+        "seeds": [
+          42,
+          101,
+          202,
+          303,
+          404
+        ]
+      },
+      "notes": null
+    },
+    {
+      "run_id": "transformer_encoder_(sits)_20260618_000706",
+      "name": "Transformer Encoder (SITS)",
+      "model_type": "unknown",
+      "timestamp": "2026-06-18T00:07:06.504176",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.8337349397590361,
+        "cohen_kappa": 0.7655995792498123,
+        "f1_weighted": 0.8319860749688691,
+        "f1_macro": 0.7809921749814286,
+        "macro_avg": {
+          "precision": 0.7918974040593836,
+          "recall": 0.7734061916981396,
+          "f1-score": 0.7809921749814286,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.8320935763415112,
+          "recall": 0.8337349397590361,
+          "f1-score": 0.8319860749688691,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Transformer_Encoder__SITS_20260618_000706"
+      },
+      "hyperparameters": {
+        "architecture": "Transformer encoder (multi-head self-attention, mean-pooled)",
+        "d_model": 128,
+        "n_head": 8,
+        "n_layers": 3,
+        "dim_feedforward": 256,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "optimizer": "AdamW (wd=1e-4)",
+        "scheduler": "CosineAnnealingLR",
+        "loss": "WeightedFocalLoss(gamma=2.0, alpha=1/class_counts)",
+        "model_selection": "val F1 macro (maximize)",
+        "gradient_clipping": 1.0,
+        "epochs": 100,
+        "patience": 15,
+        "batch_size": 2048,
+        "n_models": 5,
+        "seeds": [
+          42,
+          101,
+          202,
+          303,
+          404
+        ],
+        "temporal_order": "chronological",
+        "positional_encoding": "sinusoidal (actual month positions)",
+        "pooling": "temporal mean",
+        "norm": "pre-norm (norm_first=True)"
+      },
+      "notes": null
     }
   ]
 }

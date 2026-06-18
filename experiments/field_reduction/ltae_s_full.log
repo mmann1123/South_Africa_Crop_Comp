@@ -1,0 +1,68 @@
+[Tue Jun 16 11:34:03 AM EDT 2026] === L-TAE-S full-data (fraction=1.0) queued run ===
+[Tue Jun 16 11:34:03 AM EDT 2026] Waiting for GPU job PID 1872269 to finish...
+[Tue Jun 16 11:34:03 AM EDT 2026] PID 1872269 has exited.
+[Tue Jun 16 11:34:03 AM EDT 2026] Waiting for >= 9000 MiB free GPU memory...
+[Tue Jun 16 11:34:03 AM EDT 2026] GPU free=11896 MiB. Starting training.
+[Tue Jun 16 11:34:03 AM EDT 2026] >>> TRAINING: train_ltae_sparse_pixel.py --fraction 1.0
+=== L-TAE-S Pixel Training === Fraction: 1.0, Device: cuda
+  gamma=1.5, lambda_sparse=0.001, time_varying=True
+Loading data...
+Shape: (7540362, 73)
+Feature cols: 60
+Train FIDs: 2653 -> 2653 (100%)
+Pixels: train=4802658, val=1205790, test=1531914
+
+=== Seed 42 ===
+  Epoch 1/100 - loss=0.2317, sparse=0.0078, val_f1=0.6883, 100.7s
+  Epoch 10/100 - loss=0.1072, sparse=0.0078, val_f1=0.7035, 127.9s
+  Epoch 20/100 - loss=0.0932, sparse=0.0078, val_f1=0.7105, 100.7s
+  Epoch 30/100 - loss=0.0854, sparse=0.0078, val_f1=0.7074, 100.9s
+  Epoch 40/100 - loss=0.0805, sparse=0.0078, val_f1=0.7137, 110.1s
+  Epoch 50/100 - loss=0.0765, sparse=0.0078, val_f1=0.7093, 100.6s
+  Epoch 60/100 - loss=0.0727, sparse=0.0078, val_f1=0.7102, 102.6s
+  Early stopping at epoch 62
+
+=== Seed 101 ===
+  Epoch 1/100 - loss=0.2281, sparse=0.0078, val_f1=0.6949, 102.1s
+  Epoch 10/100 - loss=0.1067, sparse=0.0078, val_f1=0.7075, 101.2s
+  Epoch 20/100 - loss=0.0925, sparse=0.0078, val_f1=0.7129, 100.9s
+  Epoch 30/100 - loss=0.0855, sparse=0.0078, val_f1=0.7111, 100.9s
+  Early stopping at epoch 34
+
+=== Seed 202 ===
+  Epoch 1/100 - loss=0.2298, sparse=0.0078, val_f1=0.6964, 102.5s
+  Epoch 10/100 - loss=0.1063, sparse=0.0078, val_f1=0.7054, 101.6s
+  Epoch 20/100 - loss=0.0923, sparse=0.0078, val_f1=0.7084, 101.9s
+  Epoch 30/100 - loss=0.0853, sparse=0.0078, val_f1=0.7112, 101.5s
+  Epoch 40/100 - loss=0.0802, sparse=0.0078, val_f1=0.7120, 101.4s
+  Epoch 50/100 - loss=0.0754, sparse=0.0078, val_f1=0.7146, 101.1s
+  Early stopping at epoch 56
+
+=== Seed 303 ===
+  Epoch 1/100 - loss=0.2288, sparse=0.0078, val_f1=0.6986, 101.9s
+Traceback (most recent call last):
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/field_reduction/train_ltae_sparse_pixel.py", line 224, in <module>
+    main()
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/field_reduction/train_ltae_sparse_pixel.py", line 146, in main
+    train_loss, sparse_loss = train_epoch_sparse(
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/field_reduction/models_arch.py", line 505, in train_epoch_sparse
+    scaler_amp.step(optimizer)
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/amp/grad_scaler.py", line 463, in step
+    retval = self._maybe_opt_step(optimizer, optimizer_state, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/amp/grad_scaler.py", line 356, in _maybe_opt_step
+    if not sum(v.item() for v in optimizer_state["found_inf_per_device"].values()):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/amp/grad_scaler.py", line 356, in <genexpr>
+    if not sum(v.item() for v in optimizer_state["found_inf_per_device"].values()):
+               ^^^^^^^^
+torch.AcceleratorError: CUDA error: an illegal memory access was encountered
+Search for `cudaErrorIllegalAddress' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[Tue Jun 16 03:58:28 PM EDT 2026] Training exit code: 1
+[Tue Jun 16 03:58:28 PM EDT 2026] Skipping prediction because training failed.
+[Tue Jun 16 03:58:28 PM EDT 2026] === DONE ===

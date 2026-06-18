@@ -18,7 +18,9 @@ df = pd.read_csv(SRC).set_index("Model")
 # (architecture label, pixel-variant row, field-variant row)
 PAIRS = [
     ("L-TAE", "L-TAE (pixel)", "L-TAE Field (field)"),
+    ("L-TAE-S", "L-TAE-S (pixel)", "L-TAE-S Field (field)"),
     ("TempCNN", "TempCNN (pixel)", "TempCNN Field (field)"),
+    ("CNN-BiLSTM", "CNN-BiLSTM (pixel)", "CNN-BiLSTM Field (field)"),
     ("TabNet", "TabNet (pixel)", "TabNet Temporal Field (field)"),
     ("XGBoost", "Base XGBoost (pixel)", "XGBoost (field)"),
     ("LightGBM", "Base LightGBM (pixel)", "LightGBM (field)"),

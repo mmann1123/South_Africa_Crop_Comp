@@ -1,0 +1,62 @@
+[Tue Jun 16 11:49:11 AM EDT 2026] === L-TAE-S field-level (fraction=1.0) run ===
+[Tue Jun 16 11:49:11 AM EDT 2026] >>> TRAINING
+=== L-TAE-S Field Training === Fraction: 1.0, Device: cuda
+  gamma=1.5, lambda_sparse=0.001, time_varying=True
+Loading data...
+Feature cols: 60 (expected 60)
+Aggregating to field level...
+Field-level shape: (4147, 62)
+Train FIDs: 2653 -> 2653 (100%)
+Split: train=2653, val=664, test=830
+
+=== Seed 42 ===
+  Epoch 1/100 - loss=0.7001, sparse=0.0078, val_f1=0.5286, 1.1s
+  Epoch 10/100 - loss=0.3114, sparse=0.0078, val_f1=0.6601, 0.6s
+  Epoch 20/100 - loss=0.2321, sparse=0.0078, val_f1=0.6404, 0.6s
+  Early stopping at epoch 24
+  Seed 42: test_acc=0.7024
+
+=== Seed 101 ===
+  Epoch 1/100 - loss=0.7059, sparse=0.0078, val_f1=0.5220, 0.7s
+  Epoch 10/100 - loss=0.2979, sparse=0.0078, val_f1=0.6551, 0.6s
+  Epoch 20/100 - loss=0.2261, sparse=0.0078, val_f1=0.6531, 0.6s
+  Early stopping at epoch 27
+  Seed 101: test_acc=0.7084
+
+=== Seed 202 ===
+  Epoch 1/100 - loss=0.6879, sparse=0.0078, val_f1=0.5470, 0.6s
+  Epoch 10/100 - loss=0.3276, sparse=0.0078, val_f1=0.6321, 0.6s
+  Epoch 20/100 - loss=0.2393, sparse=0.0078, val_f1=0.6696, 0.6s
+  Epoch 30/100 - loss=0.1820, sparse=0.0078, val_f1=0.6467, 0.6s
+  Early stopping at epoch 35
+  Seed 202: test_acc=0.7133
+
+=== Seed 303 ===
+  Epoch 1/100 - loss=0.7077, sparse=0.0078, val_f1=0.5222, 0.6s
+  Epoch 10/100 - loss=0.3091, sparse=0.0078, val_f1=0.6314, 0.6s
+  Epoch 20/100 - loss=0.2217, sparse=0.0078, val_f1=0.6295, 0.6s
+  Early stopping at epoch 21
+  Seed 303: test_acc=0.6892
+
+=== Seed 404 ===
+  Epoch 1/100 - loss=0.7059, sparse=0.0078, val_f1=0.4779, 0.6s
+  Epoch 10/100 - loss=0.2934, sparse=0.0078, val_f1=0.6334, 0.6s
+  Epoch 20/100 - loss=0.2367, sparse=0.0078, val_f1=0.6361, 0.6s
+  Epoch 30/100 - loss=0.1923, sparse=0.0078, val_f1=0.6641, 0.6s
+  Early stopping at epoch 39
+  Seed 404: test_acc=0.7337
+
+--- Ensemble Results ---
+  acc=0.7289, f1_macro=0.6431, f1_weighted=0.7292, kappa=0.6179
+Artifacts saved to models/ltae_sparse_field/frac_1.00
+Total time: 99.7s
+[Tue Jun 16 11:50:53 AM EDT 2026] training rc=0
+[Tue Jun 16 11:50:53 AM EDT 2026] >>> OOS PREDICTION
+=== OOS Prediction === Device: cuda
+Models: ['ltae_sparse_field']
+Fractions: [1.0]
+
+--- ltae_sparse_field frac=1.00 ---
+  Saved 2415 field predictions -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/field_reduction/results/predictions/ltae_sparse_field_frac_1.00.csv
+[Tue Jun 16 11:51:02 AM EDT 2026] predict rc=0
+[Tue Jun 16 11:51:02 AM EDT 2026] === DONE ===
