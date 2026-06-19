@@ -116,69 +116,69 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Deep Learning Architectures for Crop Classification}{18}{subsection.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Pixel-Level Architectures}{19}{subsubsection.3.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{CNN + BiLSTM Ensemble with Focal Loss.}{19}{section*.20}\protected@file@percent }
-\citation{tabnet_orig,tabnet2024}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Architecture of the CNN + BiLSTM model. The model combines 1D convolutional temporal feature extraction with sequential modeling through a BiLSTM layer.\relax }}{20}{figure.caption.21}\protected@file@percent }
 \newlabel{fig:cnn_bilstm}{{7}{20}{Architecture of the CNN + BiLSTM model. The model combines 1D convolutional temporal feature extraction with sequential modeling through a BiLSTM layer.\relax }{figure.caption.21}{}}
 \@writefile{toc}{\contentsline {paragraph}{Ensemble of TabNet Models.}{20}{section*.22}\protected@file@percent }
+\citation{tabnet_orig,tabnet2024}
 \citation{tabnet2024}
 \citation{hohl2024}
 \citation{ltae2020}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Architecture of the TabNet ensemble. Each model applies iterative attention-based feature selection. Final predictions are obtained by averaging softmax outputs across five models, followed by field-level majority voting.\relax }}{21}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:tabnet_architecture}{{8}{21}{Architecture of the TabNet ensemble. Each model applies iterative attention-based feature selection. Final predictions are obtained by averaging softmax outputs across five models, followed by field-level majority voting.\relax }{figure.caption.23}{}}
-\@writefile{toc}{\contentsline {paragraph}{Lightweight Temporal Attention Encoder (L-TAE).}{21}{section*.24}\protected@file@percent }
 \citation{vaswani2017,russwurm2020}
+\@writefile{toc}{\contentsline {paragraph}{Lightweight Temporal Attention Encoder (L-TAE).}{21}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Transformer encoder.}{21}{section*.24}\protected@file@percent }
 \citation{sparsemax2016}
 \citation{tabnet_orig}
 \citation{ltae2020}
 \citation{entmax2019}
 \citation{tempcnn2019}
-\@writefile{toc}{\contentsline {paragraph}{Transformer encoder.}{22}{section*.25}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Sparse-attention L-TAE (L-TAE-S).}{22}{section*.26}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Temporal Convolutional Network (TempCNN).}{22}{section*.27}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Patch-Level Architectures}{23}{subsubsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Sparse-attention L-TAE (L-TAE-S).}{22}{section*.25}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Architecture of the sparse-attention L-TAE-S. Each ensemble member embeds the per-pixel Sentinel-2 time series, adds month-aware positional encoding, and --- before the multi-head temporal attention --- applies a TabNet-style \emph  {sparse feature gate} (highlighted): a per-head \texttt  {sparsemax} mask selects a small subset of embedding channels, with a relaxation prior ($\gamma =1.5$) discouraging heads from re-selecting the same channels. This single block, which grafts a tree-like sparse feature-selection inductive bias onto the attention backbone, is the only architectural difference from the L-TAE. Five seeds are ensembled and aggregated to field level.\relax }}{23}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:ltae_s}{{8}{23}{Architecture of the sparse-attention L-TAE-S. Each ensemble member embeds the per-pixel Sentinel-2 time series, adds month-aware positional encoding, and --- before the multi-head temporal attention --- applies a TabNet-style \emph {sparse feature gate} (highlighted): a per-head \texttt {sparsemax} mask selects a small subset of embedding channels, with a relaxation prior ($\gamma =1.5$) discouraging heads from re-selecting the same channels. This single block, which grafts a tree-like sparse feature-selection inductive bias onto the attention backbone, is the only architectural difference from the L-TAE. Five seeds are ensembled and aggregated to field level.\relax }{figure.caption.26}{}}
+\@writefile{toc}{\contentsline {paragraph}{Temporal Convolutional Network (TempCNN).}{23}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Patch-Level Architectures}{24}{subsubsection.3.2.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Illustration of patch generation per field.\relax }}{24}{figure.caption.28}\protected@file@percent }
 \newlabel{fig:example_patches}{{9}{24}{Illustration of patch generation per field.\relax }{figure.caption.28}{}}
-\@writefile{toc}{\contentsline {paragraph}{Multi-Channel 2D CNN.}{24}{section*.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Multi-Channel 2D CNN.}{25}{section*.29}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Ensemble of Class-Specific 3D CNNs.}{25}{section*.30}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces 3D CNN ensemble architecture for patch-level crop classification.\relax }}{25}{figure.caption.31}\protected@file@percent }
-\newlabel{fig:patch_model}{{10}{25}{3D CNN ensemble architecture for patch-level crop classification.\relax }{figure.caption.31}{}}
 \@writefile{toc}{\contentsline {paragraph}{Transformer-Based Model.}{25}{section*.32}\protected@file@percent }
-\citation{capstone_repo}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces 3D CNN ensemble architecture for patch-level crop classification.\relax }}{26}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:patch_model}{{10}{26}{3D CNN ensemble architecture for patch-level crop classification.\relax }{figure.caption.31}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Performance Metrics}{26}{subsection.3.3}\protected@file@percent }
 \newlabel{subsec:performance_metrics}{{3.3}{26}{Performance Metrics}{subsection.3.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{26}{section.4}\protected@file@percent }
-\newlabel{sec:results}{{4}{26}{Results}{section.4}{}}
+\citation{capstone_repo}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{27}{section.4}\protected@file@percent }
+\newlabel{sec:results}{{4}{27}{Results}{section.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}In-region validation overstates performance and misranks models}{27}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Pixel versus field level: aggregation as variance reduction}{27}{subsection.4.2}\protected@file@percent }
-\newlabel{subsec:pixel_field}{{4.2}{27}{Pixel versus field level: aggregation as variance reduction}{subsection.4.2}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces In-region versus spatial-transfer performance of all models.\relax }}{28}{table.caption.34}\protected@file@percent }
 \newlabel{tab:gap}{{3}{28}{In-region versus spatial-transfer performance of all models.\relax }{table.caption.34}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Pixel versus field level: aggregation as variance reduction}{28}{subsection.4.2}\protected@file@percent }
+\newlabel{subsec:pixel_field}{{4.2}{28}{Pixel versus field level: aggregation as variance reduction}{subsection.4.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces In-region (field-wise validation) versus spatial-transfer macro-F1 for each model, sorted by the gap. Dense temporal/patch deep nets (top) suffer the largest degradation; tree-based, linear, and field-aggregated models (bottom) transfer with the smallest gaps.\relax }}{29}{figure.caption.35}\protected@file@percent }
 \newlabel{fig:gap}{{11}{29}{In-region (field-wise validation) versus spatial-transfer macro-F1 for each model, sorted by the gap. Dense temporal/patch deep nets (top) suffer the largest degradation; tree-based, linear, and field-aggregated models (bottom) transfer with the smallest gaps.\relax }{figure.caption.35}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Pixel- versus field-level spatial transfer.\relax }}{30}{table.caption.37}\protected@file@percent }
 \newlabel{tab:pixfield}{{4}{30}{Pixel- versus field-level spatial transfer.\relax }{table.caption.37}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Data efficiency under spatial transfer}{30}{subsection.4.3}\protected@file@percent }
 \newlabel{subsec:reduction}{{4.3}{30}{Data efficiency under spatial transfer}{subsection.4.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Feature dimensionality and redundancy}{30}{subsection.4.4}\protected@file@percent }
-\newlabel{subsec:featdim}{{4.4}{30}{Feature dimensionality and redundancy}{subsection.4.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Spatial-transfer macro-F1 at pixel versus field level. Field-level aggregation recovers transfer for dense temporal models (L-TAE, CNN-BiLSTM) but collapses the sparsity-reliant TabNet.\relax }}{31}{figure.caption.38}\protected@file@percent }
 \newlabel{fig:pixfield}{{12}{31}{Spatial-transfer macro-F1 at pixel versus field level. Field-level aggregation recovers transfer for dense temporal models (L-TAE, CNN-BiLSTM) but collapses the sparsity-reliant TabNet.\relax }{figure.caption.38}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Feature dimensionality and redundancy}{31}{subsection.4.4}\protected@file@percent }
+\newlabel{subsec:featdim}{{4.4}{31}{Feature dimensionality and redundancy}{subsection.4.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Per-class performance and persistent confusions}{31}{subsection.4.5}\protected@file@percent }
 \newlabel{subsec:perclass}{{4.5}{31}{Per-class performance and persistent confusions}{subsection.4.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{31}{section.5}\protected@file@percent }
-\newlabel{sec:discussion}{{5}{31}{Discussion}{section.5}{}}
 \citation{belgiu2016,maxwell2019}
 \citation{tabnet_orig}
 \citation{obadic2022}
 \@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Spatial-transfer macro-F1 as the number of training fields is reduced to $75\%$, $50\%$, and $25\%$. Robust models (TabNet, logistic regression, and the sparse-attention L-TAE-S) are nearly flat.\relax }}{32}{figure.caption.39}\protected@file@percent }
 \newlabel{fig:reduction}{{13}{32}{Spatial-transfer macro-F1 as the number of training fields is reduced to $75\%$, $50\%$, and $25\%$. Robust models (TabNet, logistic regression, and the sparse-attention L-TAE-S) are nearly flat.\relax }{figure.caption.39}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{32}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{5}{32}{Discussion}{section.5}{}}
 \@writefile{toc}{\contentsline {paragraph}{Why tree-like inductive bias transfers.}{32}{section*.41}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Per-class spatial-transfer F1 for four representative models. Lucerne/medics and canola are classified well by all; barley, wheat, and small-grain grazing concentrate the errors. CNN-BiLSTM degrades across every class.\relax }}{33}{figure.caption.40}\protected@file@percent }
 \newlabel{fig:perclass}{{14}{33}{Per-class spatial-transfer F1 for four representative models. Lucerne/medics and canola are classified well by all; barley, wheat, and small-grain grazing concentrate the errors. CNN-BiLSTM degrades across every class.\relax }{figure.caption.40}{}}
-\@writefile{toc}{\contentsline {paragraph}{Two robustness levers.}{33}{section*.43}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Generalization gap ($\Delta $ macro-F1, spatial-transfer minus in-region) grouped by inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta |$); dense temporal/patch deep nets and synthetic augmentation overfit the training region. The sparse-attention L-TAE-S falls between the two regimes ($\Delta =-0.17$), showing that adding feature sparsity to a dense attention backbone partly recovers transfer. Bars show family means; points are individual models.\relax }}{34}{figure.caption.42}\protected@file@percent }
 \newlabel{fig:bias}{{15}{34}{Generalization gap ($\Delta $ macro-F1, spatial-transfer minus in-region) grouped by inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta |$); dense temporal/patch deep nets and synthetic augmentation overfit the training region. The sparse-attention L-TAE-S falls between the two regimes ($\Delta =-0.17$), showing that adding feature sparsity to a dense attention backbone partly recovers transfer. Bars show family means; points are individual models.\relax }{figure.caption.42}{}}
-\@writefile{toc}{\contentsline {paragraph}{Automated feature extraction and computational cost.}{34}{section*.44}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Two robustness levers.}{34}{section*.43}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Automated feature extraction and computational cost.}{35}{section*.44}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Patch-level spatial modeling.}{35}{section*.45}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Persistent difficulty with small-grain grazing and barley.}{35}{section*.46}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Limitations.}{35}{section*.47}\protected@file@percent }
@@ -187,12 +187,14 @@
 \citation{primary_repo}
 \citation{james2013}
 \citation{breiman2001}
-\citation{ke2017}
-\citation{chen2016,friedman2001}
 \@writefile{toc}{\contentsline {section}{\numberline {A}Baseline classical model definitions}{37}{appendix.A}\protected@file@percent }
 \newlabel{app:models}{{A}{37}{Baseline classical model definitions}{appendix.A}{}}
+\citation{ke2017}
+\citation{chen2016,friedman2001}
 \bibstyle{sn-mathphys}
 \bibcite{ieee2017}{{1}{}{{}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Performance metric definitions}{38}{appendix.B}\protected@file@percent }
+\newlabel{app:metrics}{{B}{38}{Performance metric definitions}{appendix.B}{}}
 \bibcite{mlhub}{{2}{}{{}}{{}}}
 \bibcite{primary_repo}{{3}{}{{}}{{}}}
 \bibcite{capstone_repo}{{4}{}{{}}{{}}}
@@ -200,8 +202,6 @@
 \bibcite{fan2023hcrnn}{{6}{}{{}}{{}}}
 \bibcite{tufail2025cnnrnn}{{7}{}{{}}{{}}}
 \bibcite{bandar2024bilstm}{{8}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {section}{\numberline {B}Performance metric definitions}{38}{appendix.B}\protected@file@percent }
-\newlabel{app:metrics}{{B}{38}{Performance metric definitions}{appendix.B}{}}
 \bibcite{mann2023}{{9}{}{{}}{{}}}
 \bibcite{saini2018}{{10}{}{{}}{{}}}
 \bibcite{jin2019}{{11}{}{{}}{{}}}

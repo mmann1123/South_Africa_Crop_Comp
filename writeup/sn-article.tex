@@ -215,7 +215,7 @@ Beyond pixel-level modeling, patch-based approaches introduce an additional spat
 
 This study systematically compares these paradigms to evaluate their relative strengths, computational trade-offs, and effectiveness in handling complex agricultural environments, particularly under conditions of spectral similarity and temporal variability.
 
-Model performance was assessed using a combination of standard classification metrics: macro-averaged F1 (our primary metric), Cohen’s Kappa, weighted F1, and log-loss (cross-entropy). These metrics were selected to evaluate not only overall accuracy but also class balance and prediction confidence across imbalanced crop types; they are motivated in Section~\ref{subsec:performance_metrics} and formally defined in Appendix~\ref{app:metrics}.
+Model performance was assessed using a combination of standard classification metrics: macro-averaged F1 (our primary metric), Cohen’s Kappa, weighted F1, and log-loss (cross-entropy). These metrics were selected to evaluate not only overall accuracy but also class balance across imbalanced crop types; they are motivated in Section~\ref{subsec:performance_metrics} and formally defined in Appendix~\ref{app:metrics}.
 
 \subsection{Classical Machine Learning}
 \label{sec:pixelfield}
@@ -472,23 +472,23 @@ identical models were trained with different random seeds and their logits avera
 
 TabNet treats satellite observations as structured tabular inputs — each pixel's
 repeated measurements organized as a flat feature vector — and learns through
-iterative attention-based feature selection rather than temporal ordering
-(Figure~\ref{fig:tabnet_architecture}). At each decision step, an Attentive
-Transformer generates a sparse mask selecting the most relevant input dimensions,
-which are then transformed by a Feature Transformer. This enables the model to
-focus on different feature subsets at different depths without relying on
-explicit temporal structure~\cite{tabnet_orig, tabnet2024}.
+iterative attention-based feature selection rather than temporal ordering. At each
+of $n_{\text{steps}}$ decision steps, an Attentive Transformer produces a sparse feature
+mask via \emph{sparsemax},
+\[
+  \mathbf{M}[i]=\operatorname{sparsemax}\!\big(\mathbf{P}[i-1]\odot h_i(\mathbf{a}[i-1])\big),
+  \qquad
+  \mathbf{P}[i]=\prod_{j=1}^{i}\big(\gamma-\mathbf{M}[j]\big),
+\]
+where $h_i$ is a trainable transform of the previous step's processed features
+$\mathbf{a}[i-1]$ and the prior scale $\mathbf{P}$ enforces the relaxation $\gamma$ that
+discourages re-selecting the same features across steps; the masked features
+$\mathbf{M}[i]\odot\mathbf{f}$ are then handled by a Feature Transformer. This lets the
+model focus on different feature subsets at different depths without relying on explicit
+temporal structure~\cite{tabnet_orig, tabnet2024} --- and this sparsemax feature-mask
+mechanism is precisely what the L-TAE-S (below) grafts onto a temporal-attention backbone.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.9\textwidth]{tabnet.pdf}
-\caption{Architecture of the TabNet ensemble. Each model applies iterative
-attention-based feature selection. Final predictions are obtained by averaging
-softmax outputs across five models, followed by field-level majority voting.}
-\label{fig:tabnet_architecture}
-\end{figure}
-
-The network used $n_d = n_a = 64$, independent and shared block widths of 2,
+The network used $n_d = n_a = 64$, 2 independent and 2 shared feature-transformer blocks,
 relaxation parameter $\gamma = 1.5$, and 5 decision steps. Training used the
 Adam optimizer with a step-decay learning-rate schedule, batch size 1024, virtual batch size
 128, and early stopping monitored on a field ID-stratified validation set.
@@ -532,13 +532,21 @@ five-seed ensemble.
 As a dense-attention reference point we evaluated a standard Transformer encoder applied
 to the per-pixel reflectance sequence \cite{vaswani2017, russwurm2020}. After the same
 linear band embedding and sinusoidal positional encoding used for the L-TAE (with the
-true month indices, so the May--June gap is preserved), the embedded sequence passes
-through three pre-norm multi-head self-attention layers ($d_{\text{model}}=128$,
-$8$ heads, feed-forward width $256$); the encoded time steps are mean-pooled and passed
-to a two-layer classification head. Whereas the L-TAE summarizes the season with a single
-lightweight query, here every observation attends to every other across stacked layers,
-making this the most expressive attention model we evaluate --- yet, unlike the L-TAE-S
-below, it contains no feature-sparsity mechanism. It therefore serves as a control that
+true month indices, so the May--June gap is preserved), the embedded sequence
+$\mathbf{Z}=[\mathbf{z}_1,\dots,\mathbf{z}_T]$ passes through three pre-norm multi-head
+self-attention layers, each computing
+\[
+  \operatorname{head}_i=\operatorname{softmax}\!\Big(
+    \tfrac{(\mathbf{Z}W_i^{Q})(\mathbf{Z}W_i^{K})^{\top}}{\sqrt{d_k}}\Big)\mathbf{Z}W_i^{V},
+  \qquad
+  \operatorname{MHSA}(\mathbf{Z})=\big[\operatorname{head}_1\,\Vert\cdots\Vert\,
+    \operatorname{head}_{8}\big]\,W^{O},
+\]
+with $d_{\text{model}}=128$, $8$ heads, and feed-forward width $256$; unlike the L-TAE's
+single learned query, every time step here attends to every other. The encoded time steps
+are mean-pooled and passed to a two-layer classification head. This makes it the most expressive attention
+model we evaluate --- yet, unlike the L-TAE-S below, it contains no feature-sparsity
+mechanism. It therefore serves as a control that
 separates attention \emph{capacity} from feature \emph{sparsity}. We trained it at the
 pixel level as a five-seed ensemble under the same weighted-focal-loss objective and
 field-aggregation protocol as the other temporal models.
@@ -548,16 +556,31 @@ field-aggregation protocol as the other temporal models.
 
 To test whether a tree-like, sparse inductive bias can be grafted onto the temporal
 attention encoder, we implemented a sparse-attention variant (L-TAE-S) that inserts a
-TabNet-inspired channel-selection gate before the attention heads. For each of the
+TabNet-inspired channel-selection gate before the attention heads (Figure~\ref{fig:ltae_s}). For each of the
 $n_{\text{head}}=16$ heads, a per-head linear projection of the embedded sequence
 ($d_{\text{model}}=128$) is passed through \emph{sparsemax}~\cite{sparsemax2016} to
 produce a sparse, instance-dependent mask over the embedding channels, so each head
-attends to a small learned subset of features (with key dimension $d_k=8$). A
-TabNet-style prior with relaxation $\gamma=1.5$ discourages different heads from
-re-selecting the same channels, and a sparsity penalty ($\lambda=10^{-3}$) is added to
-the loss; the resulting masks (which can be time-varying) are differentiable and
+attends to a small learned subset of features (with key dimension $d_k=8$). The
+TabNet-style relaxation prior uses $\gamma=1.5$ and the sparsity weight is
+$\lambda=10^{-3}$; the resulting masks (which can be time-varying) are differentiable and
 interpretable, mirroring TabNet's sparsemax feature masks~\cite{tabnet_orig} while
-retaining the temporal-attention backbone of the L-TAE~\cite{ltae2020}. (We use
+retaining the temporal-attention backbone of the L-TAE~\cite{ltae2020}.
+Formally, for head $h$ and embedded, positionally-encoded time step
+$\mathbf{z}_t\in\mathbb{R}^{E}$ (with $E=d_{\text{model}}$), the gate produces a sparse
+channel mask $\mathbf{m}_{h,t}$ and a masked embedding $\tilde{\mathbf{z}}_{h,t}$,
+\[
+  \mathbf{m}_{h,t}=\operatorname{sparsemax}\!\big(\mathbf{P}_{h,t}\odot
+    \operatorname{BN}(W_h\mathbf{z}_t)\big),\qquad
+  \tilde{\mathbf{z}}_{h,t}=\mathbf{m}_{h,t}\odot\mathbf{z}_t,\qquad
+  \mathbf{P}_{h+1,t}=\mathbf{P}_{h,t}\odot\max(\gamma-\mathbf{m}_{h,t},\,0),
+\]
+initialized at $\mathbf{P}_{1,t}=\mathbf{1}$; head $h$ then forms its keys and values from
+$\tilde{\mathbf{z}}_{h,t}$ before applying the L-TAE attention above. Because
+\emph{sparsemax} projects onto the probability simplex, most channels of
+$\mathbf{m}_{h,t}$ are exactly zero, and the relaxation prior $\mathbf{P}_{h,t}$
+(coefficient $\gamma$) discourages successive heads from re-selecting the same channels;
+a penalty $\lambda\sum_{h,t}\lVert\mathbf{m}_{h,t}\rVert_{1}$ adds mild additional
+pressure. (We use
 \emph{sparsemax}; the $\alpha$-entmax family~\cite{entmax2019} generalizes it with a
 tunable sparsity level and is a natural alternative we leave to future work.) We evaluate
 L-TAE-S as a first-class model at both the pixel and field level --- a five-seed ensemble
@@ -565,6 +588,20 @@ trained under the same weighted-focal-loss objective and field-aggregation proto
 other temporal networks --- and find that this single architectural change makes it one of
 the most transferable models in the study (Tables~\ref{tab:gap}--\ref{tab:pixfield};
 Section~\ref{subsec:featdim}).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{ltae_s.pdf}
+\caption{Architecture of the sparse-attention L-TAE-S. Each ensemble member embeds the
+per-pixel Sentinel-2 time series, adds month-aware positional encoding, and --- before the
+multi-head temporal attention --- applies a TabNet-style \emph{sparse feature gate}
+(highlighted): a per-head \texttt{sparsemax} mask selects a small subset of embedding
+channels, with a relaxation prior ($\gamma=1.5$) discouraging heads from re-selecting the
+same channels. This single block, which grafts a tree-like sparse feature-selection
+inductive bias onto the attention backbone, is the only architectural difference from the
+L-TAE. Five seeds are ensembled and aggregated to field level.}
+\label{fig:ltae_s}
+\end{figure}
 
 % --- 5. TempCNN ---
 \paragraph{Temporal Convolutional Network (TempCNN).}
@@ -611,15 +648,17 @@ We investigated three distinct patch-based architectures.
 Each spectral band and monthly observation is treated as a separate input channel,
 giving a patch tensor $\mathbf{X} \in \mathbb{R}^{H \times W \times C}$
 ($H = W = 128$ after resampling, $C = 60 = 6\text{ features} \times 10\text{ months}$).
-Two 2D-convolutional blocks with $K$ filters each compute:
+Two 2D-convolutional blocks ($32$ and $64$ filters, $3\times3$ kernels), each followed by
+max-pooling, compute (for filter $k$):
 \[
     Y_k[i,j] = \operatorname{ReLU}\!\left(
         \sum_{c=1}^{C}\sum_{m=-1}^{1}\sum_{n=-1}^{1}
         W_{k,c,m,n}\cdot X[i+m,\,j+n,\,c] + b_k
     \right)
 \]
-The feature map is flattened to $\mathbf{z} \in \mathbb{R}^{128}$ and passed to
-a fully connected classification head:
+The pooled feature map is flattened and projected by a dense hidden layer to
+$\mathbf{z} \in \mathbb{R}^{64}$ (ReLU), then passed to a fully connected
+classification head:
 \[
     \hat{\mathbf{p}} = \operatorname{softmax}\!\left(W_{\mathrm{fc}}\,\mathbf{z} + b_{\mathrm{fc}}\right)
 \]
@@ -696,9 +735,10 @@ unweighted mean of the per-class F1 scores, as our primary metric: it weights
 every crop equally and so directly penalizes failure on the minority cereals, which
 is exactly where models differ. We report three further metrics alongside it:
 Cohen's Kappa, chance-corrected agreement between predicted and true labels;
-weighted F1, the support-weighted mean of per-class F1; and log-loss
-(cross-entropy), the mean negative log-probability assigned to the true class
-(lower is better, capturing prediction confidence). Higher Kappa and F1 indicate
+weighted F1, the support-weighted mean of per-class F1; and cross-entropy
+(Xent), an error-penalizing log-loss computed on hard (one-hot) predictions rather than
+calibrated probabilities (lower is better; defined in Appendix~\ref{app:metrics}).
+Higher Kappa and F1 indicate
 better, more balanced classification. Formal definitions of all four metrics are
 given in Appendix~\ref{app:metrics}.
 
@@ -1224,11 +1264,21 @@ Macro-averaged F1 (our primary metric) and weighted F1 are
 \qquad
 \mathrm{F1}_c = \frac{2\,\mathrm{Prec}_c\,\mathrm{Rec}_c}{\mathrm{Prec}_c+\mathrm{Rec}_c}.
 \]
-Log-loss (cross-entropy), with one-hot labels $y_{i,c}$ and predicted
-probabilities $p_{i,c}$:
+Cross-entropy (Xent). We report the value returned by scikit-learn's \texttt{log\_loss}
+applied to one-hot--encoded labels. Our pipeline scores \emph{hard} class predictions
+rather than calibrated probabilities, so the predicted distribution $\hat{q}_{i,c}$ is the
+one-hot indicator of the predicted label clipped to $[\epsilon, 1-\epsilon]$ with
+$\epsilon=10^{-7}$:
 \[
-\mathrm{LogLoss} = -\frac{1}{N}\sum_{i=1}^N \sum_{c=1}^{C} y_{i,c}\,\ln\!\big(p_{i,c}\big).
+\mathrm{Xent} = -\frac{1}{N}\sum_{i=1}^N \sum_{c=1}^{C} y_{i,c}\,\ln\!\big(\hat{q}_{i,c}\big),
+\qquad
+\hat{q}_{i,c} = \operatorname{clip}\!\big(\mathbb{1}[\hat{y}_i = c],\,\epsilon,\,1-\epsilon\big),
 \]
+where $y_{i,c}$ is the one-hot true label and $\hat{y}_i$ the predicted class. Because the
+predictions are hard assignments, each misclassification contributes a fixed
+$\approx-\ln\epsilon$ while a correct one contributes $\approx 0$; Xent is therefore a
+bounded, monotone transform of the error rate rather than a measure of probabilistic
+calibration, and we report it only as a secondary companion to F1 and Kappa.
 
 \bibliographystyle{sn-mathphys} % Use Springer Nature's preferred style
 \begin{thebibliography}{99}

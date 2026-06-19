@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1781787519 "sn-article.tex" "sn-article.pdf" "sn-article" 1781787520
+["pdflatex"] 1781867550 "sn-article.tex" "sn-article.pdf" "sn-article" 1781867551
   "/etc/texmf/web2c/texmf.cnf" 1673971414 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1246382020 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -51,6 +51,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm" 1136768653 520 4889cce2180234b97cad636b6039c722 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1248133631 34811 78b52f49e893bcba91bd7581cdc144c0 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb" 1248133631 32007 e8fa0078355f39467039935974716569 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb" 1248133631 32166 b0c356b15f19587482a9217ce1d8fa67 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb" 1248133631 32298 c6d25bb16d1eac01ebdc6d7084126a1e ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb" 1248133631 36554 b67dc2cfa451409e100b3fcf5f506509 ""
@@ -169,15 +170,15 @@
   "figures//field_reduction.pdf" 1781784636 18060 3a387e66e423d28f5e589e9c8702784a ""
   "figures//fields_count.pdf" 1781540457 13759 6d0c3bf7bbe7f757209c8990b57819ee ""
   "figures//inductive_bias_gap.pdf" 1781784637 18373 b1d551fbb4e2eca1a7793d2c2a437ac8 ""
+  "figures//ltae_s.pdf" 1781798348 42864 e64d6399f8f54687240aeedbff195239 ""
   "figures//patch_model.pdf" 1781099044 33804 1dee3733a2f479cc93afbc08fdda2e4e ""
   "figures//per_class_f1.pdf" 1781625597 16680 aff97d4cc5f481b002b40088414d3c06 ""
   "figures//pixel_vs_field.pdf" 1781784003 16858 5dabd9443a7d20d95fca7c59f0f11184 ""
-  "figures//tabnet.pdf" 1781099044 28998 738ebe0c56446b6bbe073b649cf1f00b ""
   "figures//train_vs_oos_gap.pdf" 1781784002 20704 8fedc022fb17d968abb2025fa9e9b986 ""
   "figures//wheat_barley_boxplot.pdf" 1781541004 15090 9ef1cc0310d960bf27021a404bb7a01f ""
-  "sn-article.aux" 1781787519 20389 4b0ecde6fcc16740c741c7308413fb45 "pdflatex"
-  "sn-article.out" 1781787519 9894 af7a4dde719d558aa022f078f062248a "pdflatex"
-  "sn-article.tex" 1781787510 115507 8f9943c27caa478872a112d5aae99a54 ""
+  "sn-article.aux" 1781867551 21272 def269a31da0a4c1edbdb9381facf25a "pdflatex"
+  "sn-article.out" 1781867551 9894 549f22bae64272bcbdf36bd4909c9e8d "pdflatex"
+  "sn-article.tex" 1781867541 118676 b120a357da2d4f45a75cd50118a2e38b ""
   "sn-jnl.cls" 1781099044 55857 7d4515312123fd1744517a7415d792ff ""
   (generated)
   "sn-article.aux"

@@ -932,11 +932,11 @@ INPUT ./figures//cnn_bilstm.pdf
 INPUT figures//cnn_bilstm.pdf
 INPUT ./figures//cnn_bilstm.pdf
 INPUT ./figures//cnn_bilstm.pdf
-INPUT ./figures//tabnet.pdf
-INPUT ./figures//tabnet.pdf
-INPUT figures//tabnet.pdf
-INPUT ./figures//tabnet.pdf
-INPUT ./figures//tabnet.pdf
+INPUT ./figures//ltae_s.pdf
+INPUT ./figures//ltae_s.pdf
+INPUT figures//ltae_s.pdf
+INPUT ./figures//ltae_s.pdf
+INPUT ./figures//ltae_s.pdf
 INPUT ./figures//Example_patches.pdf
 INPUT ./figures//Example_patches.pdf
 INPUT figures//Example_patches.pdf
@@ -1000,6 +1000,7 @@ INPUT ./sn-article.out
 INPUT ./sn-article.out
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb
