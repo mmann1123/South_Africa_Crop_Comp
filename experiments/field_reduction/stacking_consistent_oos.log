@@ -1,0 +1,18 @@
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  field-level feature cols: 170; train fields=2653, test fields=830
+  using Optuna-tuned XGB params
+Training stacked ensemble (no SMOTE)...
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6408 wF1=0.6945 kappa=0.5784 acc=0.6892 Xent=5.0102 n=830
+Loading holdout field features...
+  saved 2415 field predictions -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/out_of_sample/predictions_stacking.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5328 wF1=0.6651 kappa=0.4777 acc=0.6700 Xent=5.3193 n=2415
+
+==== SUMMARY (Stacking, RF+XGB+LR-meta, no SMOTE) ====
+In-region  F1m=0.6408 kappa=0.5784 wF1=0.6945 Xent=5.0102
+Spatial    F1m=0.5328 kappa=0.4777 wF1=0.6651 Xent=5.3193
+Delta (ST - in-region) F1m = -0.1079

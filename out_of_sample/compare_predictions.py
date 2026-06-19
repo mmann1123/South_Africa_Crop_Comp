@@ -40,7 +40,7 @@ TEST_LABELS_GEOJSON = os.path.join(
 FEATURE_TYPE_MAP = {
     "XGBoost (field)": "xr_fresh time-series",
     "SMOTE Stacked (field)": "xr_fresh time-series",
-    "Voting (field)": "xr_fresh time-series",
+    "Voting (pixel)": "xr_fresh time-series",
     "Stacking (field)": "xr_fresh time-series",
     "Base LR (pixel)": "raw pixel (band x month)",
     "Base RF (pixel)": "raw pixel (band x month)",
@@ -65,7 +65,7 @@ FEATURE_TYPE_MAP = {
 REPORT_NAME_MAP = {
     "XGBoost (field)": "XGBoost Field-Level",
     "SMOTE Stacked (field)": "SMOTE Stacked Ensemble",
-    "Voting (field)": "Voting Ensemble",
+    "Voting (pixel)": "Voting Ensemble",
     "Stacking (field)": "Stacking Ensemble",
     "Base LR (pixel)": "Logistic Regression (Pixel-Level)",
     "Base RF (pixel)": "Random Forest (Pixel-Level)",
@@ -123,7 +123,7 @@ def _get_report_field(display_name, report_info, field):
 _PREDICTION_FILES_BASE = {
     "XGBoost (field)": (os.path.join(SCRIPT_DIR, "predictions_xgboost.csv"), "field"),
     "SMOTE Stacked (field)": (os.path.join(SCRIPT_DIR, "predictions_smote_stacked.csv"), "field"),
-    "Voting (field)": (os.path.join(SCRIPT_DIR, "predictions_voting.csv"), "field"),
+    "Voting (pixel)": (os.path.join(SCRIPT_DIR, "predictions_voting.csv"), "pixel"),
     "Stacking (field)": (os.path.join(SCRIPT_DIR, "predictions_stacking.csv"), "field"),
     "Base LR (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_lr.csv"), "pixel"),
     "Base RF (pixel)": (os.path.join(SCRIPT_DIR, "predictions_base_rf.csv"), "pixel"),
@@ -255,7 +255,7 @@ def find_disagreements(merged, predictions):
 
 # Model groupings for subset majority votes
 ML_FIELD_MODELS = {
-    "XGBoost (field)", "SMOTE Stacked (field)", "Voting (field)", "Stacking (field)",
+    "XGBoost (field)", "SMOTE Stacked (field)", "Voting (pixel)", "Stacking (field)",
     "TabNet Field (field)", "LightGBM (field)",
 }
 ML_PIXEL_MODELS = {

@@ -215,7 +215,7 @@ Beyond pixel-level modeling, patch-based approaches introduce an additional spat
 
 This study systematically compares these paradigms to evaluate their relative strengths, computational trade-offs, and effectiveness in handling complex agricultural environments, particularly under conditions of spectral similarity and temporal variability.
 
-Model performance was assessed using a combination of standard classification metrics: macro-averaged F1 (our primary metric), Cohen’s Kappa, weighted F1, and log-loss (cross-entropy). These metrics were selected to evaluate not only overall accuracy but also class balance across imbalanced crop types; they are motivated in Section~\ref{subsec:performance_metrics} and formally defined in Appendix~\ref{app:metrics}.
+Model performance was assessed using a combination of standard classification metrics: macro-averaged F1 (our primary metric), Cohen’s Kappa, weighted F1, and log-loss (cross-entropy). These metrics were selected to evaluate not only overall accuracy but also class balance across imbalanced crop types, and to express out-of-sample performance on the source challenge's official field-level cross-entropy metric; they are motivated in Section~\ref{subsec:performance_metrics} and formally defined in Appendix~\ref{app:metrics}.
 
 \subsection{Classical Machine Learning}
 \label{sec:pixelfield}
@@ -357,6 +357,7 @@ To address class imbalance at the field level, we combined SMOTETomek resampling
     f_{\text{XGB}}(\mathbf{x}_i),\; \mathbf{x}_i\right)
     \]
     This architecture combines the non-linear modeling capacity of tree-based learners with a linear meta-learner that integrates both base predictions and original input features.\\
+We report this stacked ensemble in two forms that share the architecture above and differ only in resampling: \emph{SMOTE Stacked}, trained on SMOTETomek-resampled data as described, and \emph{Stacking}, the identical pipeline without resampling --- so the pair isolates the effect of class rebalancing on spatial transfer.\\
 
 \paragraph{Field-Based Aggregation and XGBoost Optimization}
     We also implemented an optimized field-level pipeline using XGBoost. Field identifiers were used to ensure that no field contributed to more than one data split, with fields split into train/validation/test sets at the field level. Features were aggregated via the mean across pixels, and labels via the mode crop type per field.
@@ -736,8 +737,9 @@ every crop equally and so directly penalizes failure on the minority cereals, wh
 is exactly where models differ. We report three further metrics alongside it:
 Cohen's Kappa, chance-corrected agreement between predicted and true labels;
 weighted F1, the support-weighted mean of per-class F1; and cross-entropy
-(Xent), an error-penalizing log-loss computed on hard (one-hot) predictions rather than
-calibrated probabilities (lower is better; defined in Appendix~\ref{app:metrics}).
+(Xent), the field-level cross-entropy that served as the official scoring metric of the
+AI4FoodSecurity (South Africa) challenge~\cite{ai4foodsecurity} from which our dataset is
+drawn (lower is better; computed on hard crop-label predictions, Appendix~\ref{app:metrics}).
 Higher Kappa and F1 indicate
 better, more balanced classification. Formal definitions of all four metrics are
 given in Appendix~\ref{app:metrics}.
@@ -795,15 +797,15 @@ L-TAE                 & field & raw & 0.67 & $-0.07$ & 0.59 & 0.47 & 0.67 & 5.51
 L-TAE                 & pixel & raw & \textbf{0.78} & $-0.20$ & 0.58 & 0.49 & 0.68 & 5.20 \\
 Transformer           & pixel & raw & \textbf{0.78} & $-0.20$ & 0.58 & 0.50 & 0.69 & 4.94 \\
 XGBoost               & field & \texttt{xr\_fresh} & 0.70 & $-0.13$ & 0.56 & 0.47 & 0.68 & 4.89 \\
-Voting                & field & \texttt{xr\_fresh} & 0.69 & $-0.12$ & 0.56 & 0.47 & 0.66 & 4.82 \\
 TempCNN               & pixel & raw & 0.77 & $-0.21$ & 0.56 & 0.49 & 0.68 & 5.09 \\
 Base LightGBM         & pixel & \texttt{xr\_fresh} & 0.62 & $-0.06$ & 0.56 & 0.47 & 0.66 & 4.85 \\
 Logistic Regression   & pixel & \texttt{xr\_fresh} & 0.61 & $-0.05$ & 0.56 & 0.47 & 0.67 & 4.93 \\
 LightGBM              & field & \texttt{xr\_fresh} & 0.68 & $-0.12$ & 0.56 & 0.45 & 0.66 & 4.99 \\
-Stacking              & field & \texttt{xr\_fresh} & 0.64 & $-0.09$ & 0.55 & 0.47 & 0.67 & 5.01 \\
+Voting                & pixel & \texttt{xr\_fresh} & 0.65 & $-0.09$ & 0.56 & 0.48 & 0.66 & 4.85 \\
 Random Forest         & pixel & \texttt{xr\_fresh} & 0.65 & $-0.10$ & 0.55 & 0.45 & 0.65 & 5.07 \\
 Base XGBoost          & pixel & \texttt{xr\_fresh} & 0.64 & $-0.09$ & 0.54 & 0.47 & 0.66 & 5.01 \\
 TempCNN               & field & raw & 0.67 & $-0.14$ & 0.54 & 0.43 & 0.64 & 6.07 \\
+Stacking              & field & \texttt{xr\_fresh} & 0.64 & $-0.11$ & 0.53 & 0.48 & 0.67 & 5.32 \\
 CNN-BiLSTM            & field & raw & 0.64 & $-0.14$ & 0.51 & 0.33 & 0.54 & 7.86 \\
 SMOTE Stacked         & field & \texttt{xr\_fresh} & 0.69 & $-0.21$ & 0.49 & 0.43 & 0.63 & 5.37 \\
 3D CNN                & patch & raw & 0.70 & $-0.22$ & 0.48 & 0.30 & 0.55 & 7.79 \\
@@ -819,7 +821,7 @@ TabNet                & field & \texttt{xr\_fresh} & 0.51 & $-0.15$ & 0.37 & 0.2
 for every individual model, ranked by spatial-transfer macro-F1 --- the metric we argue
 model selection should use. In-region macro-F1 and the gap $\Delta$ are shown
 alongside (Figure~\ref{fig:gap} orders the same data by $\Delta$); ST Kappa, weighted
-F1 (wF1), and cross-entropy (Xent) complete the picture. Bold marks the best value in
+F1 (wF1), and cross-entropy (Xent --- the AI4FoodSecurity challenge's official field-level scoring metric~\cite{ai4foodsecurity}, lower is better) complete the picture. Bold marks the best value in
 each metric column. The best transferer is a
 TabNet pixel ensemble, whereas the model conventional field-level evaluation singles
 out as best (CNN-BiLSTM) is among the worst; the highest in-region scores (L-TAE,
@@ -841,14 +843,14 @@ transfer with the smallest gaps.}
 \end{figure}
 
 The winners under spatial transfer are a different group entirely. The best single
-model is the TabNet pixel ensemble (F1$_m=0.60$, Kappa 0.54), tied on macro-F1 by both
+model is the TabNet pixel ensemble (F1$_m=0.60$, Kappa 0.54), which also posts the lowest holdout cross-entropy on the challenge's official metric ($4.42$) of any model, tied on macro-F1 by both
 sparse-attention L-TAE-S variants (F1$_m=0.60$; Section~\ref{subsec:featdim}). The most
 \emph{robust} models — those with the smallest gaps — are the sparse learners: the
 field-level L-TAE-S posts the single smallest gap of any model ($\Delta=-0.04$), just
 ahead of logistic regression ($-0.05$), pixel-level LightGBM ($-0.06$), and the
 tree-based field ensembles. That a sparse-attention deep net sits atop the robustness
 ranking is itself evidence for the inductive-bias thesis: its TabNet-style sparsemax
-gating buys exactly the transfer stability the dense temporal nets lack. Notably, the robust field ensembles in the upper-middle of the
+gating buys exactly the transfer stability the dense temporal nets lack. Notably, the robust \texttt{xr\_fresh} classical ensembles in the upper-middle of the
 table (XGBoost, Voting, LightGBM, Stacking) are precisely the models fed the
 automated \texttt{xr\_fresh} features (Table~\ref{tab:gap}, Features column): the
 combination of a rich automated feature representation with a tree learner transfers
@@ -1088,8 +1090,8 @@ lever engaged.
 \paragraph{Automated feature extraction and computational cost.}
 
 The classical pipelines paired with \texttt{xr\_fresh} were not only robust but
-cheap: the field-level Voting and Stacking ensembles transfer as well as the best
-deep models (ST F1$_m$ 0.55–0.56) while training in under two minutes, versus
+cheap: the \texttt{xr\_fresh} Voting and Stacking ensembles transfer as well as the best
+deep models (ST F1$_m$ 0.55–0.56) while training in minutes, versus
 hours for the temporal deep nets (Table~\ref{tab:gap}). To our knowledge this is
 the first evaluation of \texttt{xr\_fresh} in a crop-classification context, and
 the result is encouraging: automated time-series feature extraction yields a
@@ -1264,21 +1266,22 @@ Macro-averaged F1 (our primary metric) and weighted F1 are
 \qquad
 \mathrm{F1}_c = \frac{2\,\mathrm{Prec}_c\,\mathrm{Rec}_c}{\mathrm{Prec}_c+\mathrm{Rec}_c}.
 \]
-Cross-entropy (Xent). We report the value returned by scikit-learn's \texttt{log\_loss}
-applied to one-hot--encoded labels. Our pipeline scores \emph{hard} class predictions
-rather than calibrated probabilities, so the predicted distribution $\hat{q}_{i,c}$ is the
-one-hot indicator of the predicted label clipped to $[\epsilon, 1-\epsilon]$ with
-$\epsilon=10^{-7}$:
+Cross-entropy (Xent). This is the official field-level scoring metric of the
+AI4FoodSecurity (South Africa) challenge~\cite{ai4foodsecurity}, in which our
+field-label dataset was used: a cross-entropy with a binary outcome for each crop.
+Because challenge submissions consist of a single predicted crop ID per field --- a hard
+label, not a probability vector --- the metric is evaluated on the one-hot encoding of the
+predicted label, clipped to $[\epsilon, 1-\epsilon]$ with $\epsilon=10^{-7}$, against the
+one-hot true label:
 \[
 \mathrm{Xent} = -\frac{1}{N}\sum_{i=1}^N \sum_{c=1}^{C} y_{i,c}\,\ln\!\big(\hat{q}_{i,c}\big),
 \qquad
 \hat{q}_{i,c} = \operatorname{clip}\!\big(\mathbb{1}[\hat{y}_i = c],\,\epsilon,\,1-\epsilon\big),
 \]
-where $y_{i,c}$ is the one-hot true label and $\hat{y}_i$ the predicted class. Because the
-predictions are hard assignments, each misclassification contributes a fixed
-$\approx-\ln\epsilon$ while a correct one contributes $\approx 0$; Xent is therefore a
-bounded, monotone transform of the error rate rather than a measure of probabilistic
-calibration, and we report it only as a secondary companion to F1 and Kappa.
+where $y_{i,c}$ is the one-hot true label and $\hat{y}_i$ the predicted class (lower is
+better). We adopt it so that out-of-sample performance is also expressed on the source
+challenge's standardized, operationally-defined metric, alongside the balanced-accuracy
+measures above.
 
 \bibliographystyle{sn-mathphys} % Use Springer Nature's preferred style
 \begin{thebibliography}{99}
@@ -1291,6 +1294,9 @@ arXiv:1704.04055. \href{https://arxiv.org/abs/1704.04055}{paper}
 
 \bibitem{mlhub}
 Radiant Earth Foundation (2024) South Africa Crop Type Competition. Source Cooperative repository.
+
+\bibitem{ai4foodsecurity}
+AI4EO (2021) AI4FoodSecurity Challenge (South Africa), European Space Agency (ESA), in partnership with Planet, TUM, DLR and Radiant Earth. \href{https://platform.ai4eo.eu/ai4food-security-south-africa}{https://platform.ai4eo.eu/ai4food-security-south-africa}
 
 \bibitem{primary_repo}
 Mann ML (2025) South\_Africa\_Crop\_Comp: Source code for multitemporal crop classification. \textit{GitHub repository}

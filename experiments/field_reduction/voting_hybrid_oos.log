@@ -1,0 +1,21 @@
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  feature cols: 168
+Training RF/XGB/LGBM...
+  RF done
+  XGB done
+  LGBM done
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6501 wF1=0.7193 kappa=0.6273 acc=0.7349 Xent=4.2723 n=830
+Assembling holdout pixel features...
+  holdout shape: (3409489, 171), fields: 2415
+  saved 2415 field predictions -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/out_of_sample/predictions_voting.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5573 wF1=0.6621 kappa=0.4761 acc=0.6994 Xent=4.8454 n=2415
+
+==== SUMMARY (Voting hybrid) ====
+In-region  F1m=0.6501 kappa=0.6273 wF1=0.7193 Xent=4.2723
+Spatial    F1m=0.5573 kappa=0.4761 wF1=0.6621 Xent=4.8454
+Delta (ST - in-region) F1m = -0.0928

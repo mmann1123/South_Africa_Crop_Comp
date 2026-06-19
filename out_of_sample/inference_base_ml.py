@@ -5,9 +5,13 @@ Loads saved LR, RF, LightGBM, XGBoost models trained at pixel level
 on xr_fresh features. Predicts on field-level aggregated xr_fresh test
 features (combined_test_features.parquet).
 
-Note: Models were trained at pixel level, but test inference uses
-field-level mean features since the test xr_fresh parquets have a B12
-pixel grid mismatch that prevents clean pixel-level merging.
+Note: Models were trained at pixel level. The older testing_*_34S_20E_259N
+xr_fresh parquets had a B12 pixel-grid mismatch (B12 = 3,410,595 rows vs
+3,409,489 for the other bands) that prevented clean pixel-level merging, which
+is why this script predicts on field-level mean features. The newer, aligned
+X_testing_*_34S_20E_259N parquets (all 3,409,489 rows) merge cleanly at pixel
+level -- see experiments/field_reduction/voting_hybrid_oos.py -- so pixel-level
+holdout inference is now viable and this script could be updated to use it.
 
 Input: combined_test_features.parquet (field-level xr_fresh features)
 Output: predictions_base_lr.csv, predictions_base_rf.csv,
