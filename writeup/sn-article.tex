@@ -951,27 +951,39 @@ transfer.
 \subsection{Per-class performance and persistent confusions}
 \label{subsec:perclass}
 
-Figure~\ref{fig:perclass} breaks out per-class holdout F1 for the best transferer
-(TabNet), a robust tree model (XGBoost field), a robust linear baseline (logistic
-regression), and the largest faller (CNN-BiLSTM). The gap is highly
-class-dependent. All models classify the majority crop lucerne/medics and the
-spectrally distinct canola well (TabNet F1 0.88 and 0.81 respectively), but accuracy
-on the minority cereals is poor and is where the transfer loss concentrates: TabNet
-reaches only 0.55 on barley, 0.48 on wheat, and 0.30 on small-grain grazing. CNN-BiLSTM
-underperforms across \emph{all} classes, not just the rare ones, confirming a
-spatial-transfer failure rather than an imbalance failure. The wheat–barley and small-grain grazing
-confusions are consistent with their spectral overlap (Figure~\ref{fig:wheat-barley-boxplot})
-and persist across every model and paradigm.
+Figure~\ref{fig:perclass} breaks down accuracy crop by crop for four representative
+models on the holdout region: the best overall transferer (TabNet), our sparse-attention
+network (L-TAE-S), its standard counterpart without the sparsity gate (L-TAE), and
+CNN-BiLSTM, whose accuracy fell the most from the training region to the holdout.
+The errors are highly uneven across crops. All three robust models classify the dominant crop
+lucerne/medics and the distinctive canola well (TabNet F1 0.88 and 0.81; L-TAE-S
+0.87 and 0.76; L-TAE 0.84 and 0.66), but every model struggles with the cereals
+and with small-grain grazing: even TabNet, the best transferer, reaches only 0.55
+on barley, 0.48 on wheat, and 0.30 on small-grain grazing. The L-TAE $\rightarrow$
+L-TAE-S contrast is informative. Adding the sparsity gate to the same temporal
+backbone modestly improves the easier classes (canola $0.66\rightarrow0.76$,
+lucerne/medics $0.84\rightarrow0.87$) while leaving the hard cereals essentially
+unchanged (barley $0.50\rightarrow0.50$, wheat $0.48\rightarrow0.47$); the
+average-F1 gain therefore reflects sharper performance on the easy classes, not a
+breakthrough on the difficult ones. CNN-BiLSTM, by contrast, loses accuracy on
+\emph{every} class --- including the easy ones (lucerne/medics drops to $0.71$,
+canola to $0.65$, and the cereals collapse to roughly $0.28$ each) --- showing that
+its failure is a general inability to transfer to the new region, not a problem
+caused by the minority crops alone. The persistent confusion between wheat and barley
+is consistent with their spectral overlap (Figure~\ref{fig:wheat-barley-boxplot}) and
+appears across every model we examined.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{per_class_f1.pdf}
-\caption{Per-class spatial-transfer F1 for four representative models.}
+\caption{Per-class accuracy (F1) on the holdout region for four representative models.}
 \label{fig:perclass}
 \par\vspace{4pt}
-{\footnotesize Lucerne/medics and canola are classified well by all models; barley,
-wheat, and small-grain grazing concentrate the errors. CNN-BiLSTM degrades across every
-class.\par}
+{\footnotesize Each group of bars shows the four models' accuracy on one crop class.
+TabNet, L-TAE-S, and L-TAE classify lucerne/medics and canola well; the cereals
+(barley, wheat) and small-grain grazing are where most of the errors concentrate.
+CNN-BiLSTM's accuracy drops on every class, including the easy ones --- a sign that
+its failure is a general transfer problem, not just an imbalance problem.\par}
 \end{figure}
 
 % ================================================================
@@ -990,8 +1002,10 @@ The single clearest pattern in our results is that transfer tracks
 \emph{inductive bias}, not model family or capacity per se. Figure~\ref{fig:bias}
 groups every model by inductive bias and plots its spatial-transfer gap. The
 ordering is stark: linear models lose the least (mean $\Delta=-0.05$), tree-based
-models little (mean $-0.11$), while dense temporal/patch deep nets lose the most
-(mean $-0.22$) and SMOTE-augmented stacking is similarly fragile ($-0.21$).
+models little (mean $-0.11$), the sparse-attention L-TAE-S sits essentially with
+the trees (mean $-0.11$ across its pixel and field-aggregated variants), while
+dense temporal/patch deep nets lose the most (mean $-0.22$) and SMOTE-augmented
+stacking is similarly fragile ($-0.21$).
 Random Forest and gradient-boosted trees have been the remote-sensing workhorse
 for two decades precisely because their sparse, axis-aligned splits select a few
 informative features at each node and ignore the rest, which resists overfitting
@@ -1027,9 +1041,11 @@ backbone, or model size, as the property that governs spatial transfer.
 {\footnotesize $\Delta$ macro-F1 (spatial transfer minus in-region) grouped by
 inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta|$);
 dense temporal/patch deep nets and synthetic augmentation overfit the training region.
-The sparse-attention L-TAE-S falls between the two regimes ($\Delta=-0.17$), showing
-that adding feature sparsity to a dense attention backbone partly recovers transfer.
-Bars show family means; points are individual models.\par}
+L-TAE-S, which adds sparse feature selection to a dense attention backbone, lies
+between L-TAE and the trees at the pixel level ($\Delta=-0.17$) and reaches the
+smallest gap in the study when field-aggregated ($\Delta=-0.04$); its family mean
+($-0.11$) therefore tracks the tree-based models. Bars show family means;
+points are individual models.\par}
 \end{figure}
 
 \paragraph{Two robustness levers.}
@@ -1038,19 +1054,25 @@ We are careful not to overclaim a single tidy axis, because two caveats sharpen
 rather than weaken the story. First, it is \emph{pixel-level} TabNet that wins:
 the field-aggregated TabNet variants are among the worst transferers
 (Table~\ref{tab:gap}), because aggregation removes the per-pixel observation volume
-that the sparse model exploits. Second, L-TAE (an attention model) transfers
-well \emph{when} applied at the field level ($\Delta=-0.07$). These observations
-point to two distinct, partly substitutable routes to robustness. The first is a
-sparse, tree-like inductive bias baked into the model (trees, TabNet),
-which confers transfer intrinsically. The second is variance reduction
-imposed from outside via field-level aggregation
+that the sparse model exploits. Second, dense temporal attention transfers well
+\emph{when} applied at the field level: L-TAE's gap shrinks from $\Delta=-0.20$
+at the pixel level to $-0.07$ at the field level, and our sparse-attention
+L-TAE-S shrinks further still, from $-0.17$ to $-0.04$ when field-aggregated,
+the smallest in-region-to-holdout gap of any model in the study
+(Table~\ref{tab:pixfield}). These observations point to two distinct, partly
+substitutable pathways to robust models. The first is sparse, axis-aligned feature
+selection baked into the model (trees, TabNet, and now L-TAE-S via its sparsemax
+channel gate), which confers transfer intrinsically. The second is variance
+reduction imposed from outside via field-level aggregation
 (Section~\ref{subsec:pixel_field}), which averages away region-specific pixel
 noise and rescues otherwise-fragile dense models. A model that already possesses
-the first lever gains nothing, and may lose observation volume, from the second,
-which is exactly why TabNet prefers pixels and L-TAE prefers fields. The fragile
-cluster (CNN-BiLSTM, 3D CNN, SMOTE stacking) combines high capacity, dense
-temporal representation, and (for SMOTE) synthetic interpolation, with neither
-lever engaged.
+the first lever gains nothing, and may lose observation volume, from the second;
+this is exactly why TabNet prefers pixels. But the two levers also
+\emph{point to a novel solution}: L-TAE-S layers a sparse channel gate on top of a temporal-attention
+backbone, then benefits further from field aggregation, ending with the smallest
+transfer gap in the benchmark. The fragile cluster (CNN-BiLSTM, 3D CNN, SMOTE
+stacking) combines high capacity, dense temporal representation, and (for SMOTE)
+synthetic interpolation, with neither lever engaged.
 
 \paragraph{Automated feature extraction and computational cost.}
 
@@ -1080,17 +1102,18 @@ little to exploit and the weakest spatial-transfer performance of any paradigm.
 
 \paragraph{Persistent difficulty with small-grain grazing and barley.}
 
-Small grain grazing, barley, and wheat are the hardest classes for every model and
-paradigm (Figure~\ref{fig:perclass}), and they concentrate the spatial-transfer loss.
-Small grain grazing has both the fewest distinctive observations and a
-spectral-temporal signature that closely resembles the other cereals, particularly
-early in the season; wheat–barley confusion is similarly persistent and consistent
-with their spectral overlap (Figure~\ref{fig:wheat-barley-boxplot}). That even the
-robust models struggle here, and that CNN-BiLSTM degrades across \emph{all}
-classes (not only the rare ones), indicates the limitation is partly intrinsic
-class similarity and partly spatial transfer, not class imbalance alone. Targeted
-collection for these classes, and richer temporal sampling, are the most promising
-remedies.
+Small-grain grazing, barley, and wheat are the hardest classes for every model we
+examined (Figure~\ref{fig:perclass}), and they account for most of the accuracy lost
+when moving from the training region to the holdout. Small-grain grazing has both
+the fewest distinctive observations and a seasonal spectral signature that closely
+resembles the other cereals, particularly early in the season; the wheat–barley
+confusion is similarly persistent and consistent with their spectral overlap
+(Figure~\ref{fig:wheat-barley-boxplot}). That even the robust models struggle here,
+and that CNN-BiLSTM loses accuracy on \emph{every} class (not only the rare ones),
+indicates the limitation is partly intrinsic similarity between these crops and
+partly the spatial-transfer problem itself, not class imbalance alone. Targeted
+label collection for these classes, and richer temporal sampling, are the most
+promising remedies.
 
 \paragraph{Limitations.}
 

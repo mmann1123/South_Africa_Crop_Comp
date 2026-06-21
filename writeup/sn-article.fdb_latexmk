@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1782012371.35537 "sn-article.tex" "sn-article.pdf" "sn-article" 1782012372.3854 0
+["pdflatex"] 1782013475.51334 "sn-article.tex" "sn-article.pdf" "sn-article" 1782013476.56938 0
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1246382020 1120 1e8878807317373affa7f7bba4cf2f6a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy7.tfm" 1246382020 1120 7f9f170e8aa57527ad6c49feafd45d54 ""
@@ -165,18 +165,18 @@
   "figures//avg_field_area.pdf" 1781910991.95863 14719 040ece122668ce055f50a7e1380b386b ""
   "figures//cnn_bilstm.pdf" 1781910991.95863 83158 0f10a9f4e5c970e6cf28771bec45fabd ""
   "figures//field_boundaries_by_crop.pdf" 1781910991.95963 490160 31bff6e2deb6a0e45f3291817731a541 ""
-  "figures//field_reduction.pdf" 1781910991.95963 18060 3a387e66e423d28f5e589e9c8702784a ""
+  "figures//field_reduction.pdf" 1782012807.1314 18087 f657dc8ae4c752d84a8a49e35ab39e64 ""
   "figures//fields_count.pdf" 1781910991.95963 13759 6d0c3bf7bbe7f757209c8990b57819ee ""
-  "figures//inductive_bias_gap.pdf" 1782012323.30653 19419 e472213e8d0209b95cae9b3854b4308d ""
+  "figures//inductive_bias_gap.pdf" 1782013340.18369 19620 fa34f0725a8b3a93ae5877a31a09ad58 ""
   "figures//ltae_s.pdf" 1781910991.95963 42864 e64d6399f8f54687240aeedbff195239 ""
   "figures//patch_model.pdf" 1781910991.96063 33804 1dee3733a2f479cc93afbc08fdda2e4e ""
-  "figures//per_class_f1.pdf" 1781910991.96063 16680 aff97d4cc5f481b002b40088414d3c06 ""
-  "figures//pixel_vs_field.pdf" 1782011197.65577 16937 bf6f7931dad5480149ee8d51dce54f29 ""
-  "figures//train_vs_oos_gap.pdf" 1781910991.96063 20715 b4d08d63ccb39a50b35fac60f38aad9a ""
+  "figures//per_class_f1.pdf" 1782012805.6584 16171 cb8609f54e95f077244e896450c98333 ""
+  "figures//pixel_vs_field.pdf" 1782012811.51737 16937 0e44606ef9ec0dc33642e6d64934d422 ""
+  "figures//train_vs_oos_gap.pdf" 1782012810.08438 20717 fefb71a71a3979410aa48e7b6a68bb75 ""
   "figures//wheat_barley_boxplot.pdf" 1781910991.96063 15090 9ef1cc0310d960bf27021a404bb7a01f ""
-  "sn-article.aux" 1782012372.18833 17181 0182c8cdf1ec09fd04ab75a398dbaf3c "pdflatex"
-  "sn-article.out" 1782012372.18933 9623 e099dca228a34acdae7468579fd812f3 "pdflatex"
-  "sn-article.tex" 1782012370.25833 117405 402dcfc5f7ad3b042d59de12bd69ec38 ""
+  "sn-article.aux" 1782013476.36697 17213 d25d4da6a344f8448767d685a7ed0e77 "pdflatex"
+  "sn-article.out" 1782013476.36797 9623 e099dca228a34acdae7468579fd812f3 "pdflatex"
+  "sn-article.tex" 1782013463.35404 119308 78e01860236590bebabac7ff951155df ""
   "sn-jnl.cls" 1781910992.51357 55857 7d4515312123fd1744517a7415d792ff ""
   (generated)
   "sn-article.aux"

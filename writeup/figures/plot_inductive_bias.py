@@ -25,7 +25,8 @@ FAMILIES = {
         ["CNN-BiLSTM (pixel)", "TempCNN (pixel)", "L-TAE (pixel)", "Transformer (pixel)",
          "3D CNN (patch)", "Multi-Ch CNN (patch)"],
         FAMILY_COLORS["dense"]),
-    "Sparse-attention": (["L-TAE-S (pixel)"], FAMILY_COLORS["sparse"]),
+    "Sparse-attention": (["L-TAE-S (pixel)", "L-TAE-S Field (field)"],
+                         FAMILY_COLORS["sparse"]),
     "Synthetic augmentation": (["SMOTE Stacked (field)"], FAMILY_COLORS["aug"]),
 }
 
@@ -43,7 +44,8 @@ SHORT_NAMES = {
     "Transformer (pixel)": "Transformer",
     "3D CNN (patch)": "3D CNN",
     "Multi-Ch CNN (patch)": "Multi-Ch CNN",
-    "L-TAE-S (pixel)": "L-TAE-S",
+    "L-TAE-S (pixel)": "L-TAE-S (px)",
+    "L-TAE-S Field (field)": "L-TAE-S (fd)",
     "SMOTE Stacked (field)": "SMOTE Stacked",
 }
 

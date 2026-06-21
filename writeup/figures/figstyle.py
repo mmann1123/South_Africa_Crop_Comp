@@ -19,12 +19,15 @@ OKABE = {
 }
 
 # Fixed colors per model — used wherever that model appears.
+# Note: L-TAE-S shares "skyblue" with LightGBM and the sparse family;
+# these never co-occur in the same figure, so no actual conflict.
 MODEL_COLORS = {
     "TabNet":              OKABE["blue"],
     "XGBoost":             OKABE["green"],
     "LightGBM":            OKABE["skyblue"],
     "Logistic Regression": OKABE["orange"],
     "L-TAE":               OKABE["vermillion"],
+    "L-TAE-S":             OKABE["skyblue"],
     "TempCNN":             OKABE["purple"],
     "CNN-BiLSTM":          OKABE["black"],
     "LassoNet":            OKABE["grey"],
@@ -57,9 +60,14 @@ COND_FIELD    = OKABE["blue"]     # field level
 
 
 def color_for_model(name):
-    """Return the fixed color for a model given any of its label variants."""
+    """Return the fixed color for a model given any of its label variants.
+
+    Order matters: more specific keys ("l-tae-s") must come before more general
+    substrings ("l-tae") so the lookup picks the correct entry.
+    """
     n = name.lower()
     table = [
+        ("l-tae-s", "L-TAE-S"),  # must precede "l-tae"
         ("lightgbm", "LightGBM"), ("l-tae", "L-TAE"), ("tabnet", "TabNet"),
         ("xgboost", "XGBoost"), ("tempcnn", "TempCNN"), ("cnn-bilstm", "CNN-BiLSTM"),
         ("lassonet", "LassoNet"), ("random forest", "Random Forest"),
