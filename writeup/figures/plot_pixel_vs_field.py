@@ -40,7 +40,7 @@ ax.bar(x - w / 2, pix, w, label="Pixel level", color=COND_PIXEL,
 ax.bar(x + w / 2, fld, w, label="Field level (aggregated)", color=COND_FIELD,
        edgecolor="white", linewidth=0.5)
 ax.set_xticks(x)
-ax.set_xticklabels(labels)
+ax.set_xticklabels(labels, rotation=30, ha="right")
 ax.set_ylabel("Spatial-transfer F1 (macro)")
 ax.set_title("Pixel vs. field-level aggregation")
 ax.set_ylim(0, 0.72)

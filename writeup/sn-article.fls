@@ -2,7 +2,7 @@ PWD /home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/sn-article.tex
+INPUT sn-article.tex
 OUTPUT sn-article.log
 INPUT ./sn-jnl.cls
 INPUT ./sn-jnl.cls
@@ -928,6 +928,7 @@ INPUT ./figures//ltae_s.pdf
 INPUT figures//ltae_s.pdf
 INPUT ./figures//ltae_s.pdf
 INPUT ./figures//ltae_s.pdf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT ./figures//Example_patches.pdf
 INPUT figures//Example_patches.pdf
 INPUT ./figures//Example_patches.pdf
@@ -937,7 +938,6 @@ INPUT figures//patch_model.pdf
 INPUT ./figures//patch_model.pdf
 INPUT ./figures//patch_model.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt9.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT ./figures//train_vs_oos_gap.pdf
 INPUT figures//train_vs_oos_gap.pdf
 INPUT ./figures//train_vs_oos_gap.pdf

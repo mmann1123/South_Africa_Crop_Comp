@@ -17,8 +17,8 @@ OUT = os.path.join(REPO, "writeup", "figures", "per_class_f1.pdf")
 
 MODELS = [
     ("TabNet (pixel)", "TabNet"),
-    ("XGBoost (field)", "XGBoost"),
-    ("Base LR (pixel)", "Logistic Regression"),
+    ("L-TAE-S (pixel)", "L-TAE-S"),
+    ("L-TAE (pixel)", "L-TAE"),
     ("CNN-BiLSTM (pixel)", "CNN-BiLSTM"),
 ]
 CLASSES = ["Lucerne/Medics", "Canola", "Barley", "Wheat", "Small grain grazing"]
