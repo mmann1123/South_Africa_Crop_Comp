@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1782013475.51334 "sn-article.tex" "sn-article.pdf" "sn-article" 1782013476.56938 0
+["pdflatex"] 1782014192.42648 "sn-article.tex" "sn-article.pdf" "sn-article" 1782014193.4828 0
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1246382020 1120 1e8878807317373affa7f7bba4cf2f6a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy7.tfm" 1246382020 1120 7f9f170e8aa57527ad6c49feafd45d54 ""
@@ -174,9 +174,9 @@
   "figures//pixel_vs_field.pdf" 1782012811.51737 16937 0e44606ef9ec0dc33642e6d64934d422 ""
   "figures//train_vs_oos_gap.pdf" 1782012810.08438 20717 fefb71a71a3979410aa48e7b6a68bb75 ""
   "figures//wheat_barley_boxplot.pdf" 1781910991.96063 15090 9ef1cc0310d960bf27021a404bb7a01f ""
-  "sn-article.aux" 1782013476.36697 17213 d25d4da6a344f8448767d685a7ed0e77 "pdflatex"
-  "sn-article.out" 1782013476.36797 9623 e099dca228a34acdae7468579fd812f3 "pdflatex"
-  "sn-article.tex" 1782013463.35404 119308 78e01860236590bebabac7ff951155df ""
+  "sn-article.aux" 1782014193.28519 17214 25dcd7bc428ab855ecc61a5cad2d7b2b "pdflatex"
+  "sn-article.out" 1782014193.28619 9623 e099dca228a34acdae7468579fd812f3 "pdflatex"
+  "sn-article.tex" 1782014182.14225 119698 ec19b659d950539d16250bfc47b72c9c ""
   "sn-jnl.cls" 1781910992.51357 55857 7d4515312123fd1744517a7415d792ff ""
   (generated)
   "sn-article.aux"
