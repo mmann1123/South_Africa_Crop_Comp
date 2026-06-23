@@ -81,7 +81,11 @@ def load_test_data():
 def load_models():
     """Load all TabNet models."""
     try:
-        from pytorch_tabnet.tab_model import TabNetClassifier
+        # pytorch-tabnet moved the class from tab_model -> tab_models in 4.6.0
+        try:
+            from pytorch_tabnet.tab_model import TabNetClassifier
+        except ImportError:
+            from pytorch_tabnet.tab_models import TabNetClassifier
     except ImportError:
         raise ImportError("pytorch-tabnet not installed. Run: pip install pytorch-tabnet")
 
@@ -174,6 +178,16 @@ def main():
     })
     df_out.to_csv(OUTPUT_CSV, index=False)
     print(f"\nSaved: {OUTPUT_CSV}")
+
+    # Per-seed field predictions (for seed-variability / uncertainty analysis).
+    # preds_all holds each seed's class probabilities; ensemble output above unchanged.
+    for si, seed in enumerate(SEEDS):
+        s_pred = np.argmax(preds_all[si], axis=1)
+        s_fp = aggregate_to_field_level(s_pred, fids)
+        s_labels = [CROP_ID_TO_NAME[cid] for cid in label_encoder.inverse_transform(s_fp.values)]
+        pd.DataFrame({"fid": s_fp.index, "crop_name": s_labels}).to_csv(
+            OUTPUT_CSV.replace(".csv", f"_seed{seed}.csv"), index=False)
+    print(f"Saved per-seed predictions: {OUTPUT_CSV.replace('.csv', '_seed*.csv')}")
 
     # Summary
     print("\n=== Prediction Distribution ===")

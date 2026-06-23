@@ -152,6 +152,15 @@ def main():
     print(f"\nSaved: {OUTPUT_CSV}")
     print(f"\n{df_out['crop_name'].value_counts()}")
 
+    # Per-seed field predictions (for seed-variability / uncertainty analysis).
+    for si, seed in enumerate(SEEDS):
+        s_pred = logits_all[si].squeeze(0).float().argmax(dim=1).tolist()
+        s_df = pd.DataFrame({"fid": fids, "pred": s_pred})
+        s_fp = s_df.groupby("fid")["pred"].agg(lambda x: Counter(x).most_common(1)[0][0])
+        s_out = pd.DataFrame({"fid": s_fp.index, "crop_name": le.inverse_transform(s_fp.values)})
+        s_out.to_csv(OUTPUT_CSV.replace(".csv", f"_seed{seed}.csv"), index=False)
+    print(f"Saved per-seed predictions: {OUTPUT_CSV.replace('.csv', '_seed*.csv')}")
+
 
 if __name__ == "__main__":
     main()

@@ -98,7 +98,7 @@ This study addresses a critical yet underexplored gap in the crop-classification
 
 We evaluate multiple deep learning architectures, including CNN-BiLSTM hybrids, TabNet ensembles, light-weight temporal-attention (L-TAE) and full Transformer-encoder networks, temporal-convolution (TempCNN) networks, and 3D CNN models, that extract dynamic phenological features across time, and benchmark these against traditional ensemble methods including XGBoost, LightGBM, and Random Forest. Critically, we evaluate every model twice: under the conventional protocol, random or field-wise cross-validation \emph{within} the training region, and on a spatially disjoint holdout tile that no training pixel touches. This dual evaluation exposes a large and architecture-dependent spatial-transfer gap that single-region validation hides entirely, and it reorders the models. Throughout, we restrict our inputs to multi-temporal Sentinel-2 optical imagery alone, without recourse to SAR data, in order to isolate the signal available from spectral time series and maximize applicability to contexts where only optical data is available or technical capacity is limited. All code is publicly available to support reproducibility and future research \cite{primary_repo}.
 
-This study makes five contributions. First, a multi-architecture benchmark (twenty-three classical, deep, and patch-based models) showing that in-region versus spatial-transfer evaluation produce \emph{inverted} rankings on the same data. Second, a mechanistic account of \emph{why}: sparse, axis-aligned feature selection, the property behind two decades of Random Forest and gradient-boosted-tree dominance, is what survives the move to a holdout tile, and TabNet inherits it via sparsemax masks. Third, a controlled architectural comparison isolating sparse feature selection rather than attention capacity as the lever, including L-TAE-S, a sparse-attention encoder we introduce that ties TabNet for the smallest transfer gap of any model. Fourth, an identification of field-level aggregation as a second, substitutable robustness lever that recovers transfer for dense models but is redundant for sparse ones. Fifth, a training-set reduction experiment and the first evaluation of \texttt{xr\_fresh} automated time-series feature extraction in crop classification.
+This study makes five contributions. First, a multi-architecture benchmark (twenty-three classical, deep, and patch-based models) showing that in-region versus spatial-transfer evaluation produce \emph{inverted} rankings on the same data. Second, a mechanistic account of \emph{why}: sparse, axis-aligned feature selection, the property behind two decades of Random Forest and gradient-boosted-tree dominance, is what survives the move to a holdout tile, and TabNet inherits it via sparsemax masks. Third, a controlled architectural comparison isolating sparse feature selection rather than attention capacity as the lever, including L-TAE-S, a sparse-attention encoder we introduce that ties TabNet for the smallest transfer gap of any model. Fourth, an identification of field-level aggregation as a second, substitutable robustness lever that recovers transfer for dense models but is redundant for sparse ones. Fifth, a training-set reduction experiment and the first evaluation of \texttt{xr\_fresh} automated time-series feature extraction in crop classification. Taken together, these make the work at once a benchmark, a methodological, and a spatial-transfer study: we benchmark twenty-three models under two evaluation protocols, and use controlled architectural variants to identify \emph{why} transfer succeeds or fails.
 
 This leads to the central research question: across a range of machine learning, deep learning, and hybrid architectures, which approach most reliably classifies crop types from multi-temporal Sentinel-2 optical imagery in a complex dryland farming environment \emph{when evaluated on a spatially disjoint region}, and what properties of a model determine whether its in-distribution accuracy survives the transfer to unseen terrain?
 
@@ -207,7 +207,7 @@ In contrast, deep learning follows a representation learning paradigm, where mod
 
 Beyond pixel-level modeling, patch-based approaches introduce an additional spatial dimension by processing contiguous regions of imagery rather than individual pixels. This enables models to capture local texture, spatial heterogeneity, and contextual relationships between neighboring pixels, which are particularly important in agricultural landscapes where crop patterns exhibit strong spatial coherence. Patch-based models therefore complement both classical and deep learning approaches by explicitly incorporating spatial context into the classification process.
 
-This study systematically compares these paradigms to evaluate their relative strengths, computational trade-offs, and effectiveness in handling complex agricultural environments, particularly under conditions of spectral similarity and temporal variability. Model performance was assessed using a combination of standard classification metrics: macro-averaged F1 (our primary metric), Cohen’s Kappa, weighted F1, and log-loss (cross-entropy). These metrics were selected to evaluate not only overall accuracy but also class balance across imbalanced crop types, and to express out-of-sample performance on the source challenge's official field-level cross-entropy metric; they are motivated in Section~\ref{subsec:performance_metrics} and formally defined in Appendix~\ref{app:metrics}.
+This study systematically compares these paradigms to evaluate their relative strengths, computational trade-offs (per-model training times are tabulated in Appendix~\ref{app:training_times}), and effectiveness in handling complex agricultural environments, particularly under conditions of spectral similarity and temporal variability. Model performance was assessed using a combination of standard classification metrics: macro-averaged F1 (our primary metric), Cohen’s Kappa, weighted F1, and log-loss (cross-entropy). These metrics were selected to evaluate not only overall accuracy but also class balance across imbalanced crop types, and to express out-of-sample performance on the source challenge's official field-level cross-entropy metric; they are motivated in Section~\ref{subsec:performance_metrics} and formally defined in Appendix~\ref{app:metrics}.
 
 \subsection{Classical Machine Learning}
 \label{sec:pixelfield}
@@ -457,6 +457,9 @@ identical models were trained with different random seeds and their logits avera
     \text{Logits}_{\text{ensemble}}
     = \frac{1}{N} \sum_{k=1}^{N} \text{Logits}^{(k)}
 \]
+Appendix~\ref{app:ablations} isolates the separate contributions of the five-seed
+ensemble and the weighted-focal objective (Tables~\ref{tab:abl_ensemble}
+and~\ref{tab:abl_loss}); both affect holdout accuracy only at the margin.
 
 % --- 2. TabNet ---
 \paragraph{TabNet with Sparsemax Feature Masks.}
@@ -709,6 +712,29 @@ Higher Kappa and F1 indicate
 better, more balanced classification. Formal definitions of all four metrics are
 given in Appendix~\ref{app:metrics}.
 
+\subsection{Quantifying uncertainty}
+\label{subsec:uncertainty}
+
+Because our claims rest on between-model differences, we quantify two sources of
+variability. First, to capture sampling uncertainty in the finite holdout, we apply a
+\emph{nonparametric bootstrap} over the holdout fields: for each model we resample its
+$\sim$2{,}415 per-field predictions with replacement $B=10{,}000$ times and recompute
+macro-F1 (and per-class F1) on each replicate, reporting the $2.5$th--$97.5$th percentile
+interval as a 95\% confidence interval (CI) on its ST F1$_m$ (Table~\ref{tab:gap},
+Figures~\ref{fig:gap}--\ref{fig:pixfield}). For a between-model gap $\Delta$ we take the
+difference of the two models' independent bootstrap distributions and report its CI and a
+two-sided bootstrap $p$-value; treating the resamples as independent is conservative,
+since it ignores the positive correlation induced by the shared holdout, so any gap
+flagged significant is robustly so. Second, to capture optimization noise, we report the
+spread of ST F1$_m$ across the five random-seed members of the deep ensembles
+(Section~\ref{subsec:performance_metrics} describes the ensembling): the per-seed standard
+deviation is $0.015$--$0.037$ for the headline temporal models (L-TAE, TempCNN, CNN-BiLSTM
+at the pixel and field levels), so a single-seed run varies by up to $\approx0.04$
+macro-F1, which is precisely why we report five-seed ensembles rather than individual runs
+throughout. Both sources are small relative to the ranking effects we report: every
+field-bootstrap CI spans only $\approx\pm0.02$--$0.03$ macro-F1, so we treat ST F1$_m$
+differences below $\approx0.05$ as not statistically distinguishable throughout.
+
 \section{Results}
 \label{sec:results}
 
@@ -746,36 +772,36 @@ Multi-Channel 2D CNN ($-0.18$), and SMOTE-resampled stacking ($-0.21$).
 \caption{In-region versus spatial-transfer performance of all models.}
 \label{tab:gap}
 \renewcommand{\arraystretch}{1.12}
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lllcccccc}
+\setlength{\tabcolsep}{2.7pt}
+\begin{tabular}{lllccccccc}
 \toprule
- & & & \textbf{In-reg} & & \multicolumn{4}{c}{\textbf{Spatial transfer (ST)}} \\
-\cmidrule(lr){4-4}\cmidrule(lr){6-9}
-\textbf{Model} & \textbf{Level} & \textbf{Features} & \textbf{F1$_m$} & \textbf{$\Delta$} & \textbf{F1$_m$} & \textbf{$\kappa$} & \textbf{wF1} & \textbf{Xent} \\
+ & & & \textbf{In-reg} & & \multicolumn{5}{c}{\textbf{Spatial transfer (ST)}} \\
+\cmidrule(lr){4-4}\cmidrule(lr){6-10}
+\textbf{Model} & \textbf{Level} & \textbf{Features} & \textbf{F1$_m$} & \textbf{$\Delta$} & \textbf{F1$_m$} & \textbf{95\% CI} & \textbf{$\kappa$} & \textbf{wF1} & \textbf{Xent} \\
 \midrule
-TabNet                & pixel & raw & 0.73 & $-0.13$ & \textbf{0.60} & \textbf{0.54} & 0.70 & \textbf{4.42} \\
-L-TAE-S               & field & raw & 0.64 & $\mathbf{-0.04}$ & 0.60 & 0.52 & 0.69 & 4.77 \\
-L-TAE-S               & pixel & raw & 0.77 & $-0.17$ & 0.60 & 0.53 & \textbf{0.70} & 4.63 \\
-L-TAE                 & field & raw & 0.67 & $-0.07$ & 0.59 & 0.47 & 0.67 & 5.51 \\
-L-TAE                 & pixel & raw & \textbf{0.78} & $-0.20$ & 0.58 & 0.49 & 0.68 & 5.20 \\
-Transformer           & pixel & raw & \textbf{0.78} & $-0.20$ & 0.58 & 0.50 & 0.69 & 4.94 \\
-XGBoost               & field & \texttt{xr\_fresh} & 0.70 & $-0.13$ & 0.56 & 0.47 & 0.68 & 4.89 \\
-TempCNN               & pixel & raw & 0.77 & $-0.21$ & 0.56 & 0.49 & 0.68 & 5.09 \\
-Base LightGBM         & pixel & \texttt{xr\_fresh} & 0.62 & $-0.06$ & 0.56 & 0.47 & 0.66 & 4.85 \\
-Logistic Regression   & pixel & \texttt{xr\_fresh} & 0.61 & $-0.05$ & 0.56 & 0.47 & 0.67 & 4.93 \\
-LightGBM              & field & \texttt{xr\_fresh} & 0.68 & $-0.12$ & 0.56 & 0.45 & 0.66 & 4.99 \\
-Voting                & pixel & \texttt{xr\_fresh} & 0.65 & $-0.09$ & 0.56 & 0.48 & 0.66 & 4.85 \\
-Random Forest         & pixel & \texttt{xr\_fresh} & 0.65 & $-0.10$ & 0.55 & 0.45 & 0.65 & 5.07 \\
-Base XGBoost          & pixel & \texttt{xr\_fresh} & 0.64 & $-0.09$ & 0.54 & 0.47 & 0.66 & 5.01 \\
-TempCNN               & field & raw & 0.67 & $-0.14$ & 0.54 & 0.43 & 0.64 & 6.07 \\
-Stacking              & field & \texttt{xr\_fresh} & 0.64 & $-0.11$ & 0.53 & 0.48 & 0.67 & 5.32 \\
-CNN-BiLSTM            & field & raw & 0.64 & $-0.14$ & 0.51 & 0.33 & 0.54 & 7.86 \\
-3D CNN                & patch & raw & 0.70 & $-0.20$ & 0.50 & 0.29 & 0.54 & 7.98 \\
-SMOTE Stacked         & field & \texttt{xr\_fresh} & 0.69 & $-0.21$ & 0.49 & 0.43 & 0.63 & 5.37 \\
-CNN-BiLSTM            & pixel & raw & 0.72 & $-0.26$ & 0.46 & 0.32 & 0.56 & 7.73 \\
-Multi-Channel CNN     & patch & raw & 0.63 & $-0.18$ & 0.45 & 0.30 & 0.54 & 7.62 \\
-TabNet Temporal       & field & raw & 0.62 & $-0.19$ & 0.43 & 0.31 & 0.56 & 7.35 \\
-TabNet                & field & \texttt{xr\_fresh} & 0.51 & $-0.15$ & 0.37 & 0.25 & 0.53 & 6.13 \\
+TabNet                & pixel & raw & 0.73 & $-0.13$ & \textbf{0.60} & .58--.63 & \textbf{0.54} & 0.70 & \textbf{4.42} \\
+L-TAE-S               & field & raw & 0.64 & $\mathbf{-0.04}$ & 0.60 & .58--.62 & 0.52 & 0.69 & 4.77 \\
+L-TAE-S               & pixel & raw & 0.77 & $-0.17$ & 0.60 & .57--.62 & 0.53 & \textbf{0.70} & 4.63 \\
+L-TAE                 & field & raw & 0.67 & $-0.07$ & 0.59 & .57--.62 & 0.47 & 0.67 & 5.51 \\
+L-TAE                 & pixel & raw & \textbf{0.78} & $-0.20$ & 0.58 & .55--.60 & 0.49 & 0.68 & 5.20 \\
+Transformer           & pixel & raw & \textbf{0.78} & $-0.20$ & 0.58 & .55--.60 & 0.50 & 0.69 & 4.94 \\
+XGBoost               & field & \texttt{xr\_fresh} & 0.70 & $-0.13$ & 0.56 & .54--.59 & 0.47 & 0.68 & 4.89 \\
+TempCNN               & pixel & raw & 0.77 & $-0.21$ & 0.56 & .54--.59 & 0.49 & 0.68 & 5.09 \\
+Base LightGBM         & pixel & \texttt{xr\_fresh} & 0.62 & $-0.06$ & 0.56 & .54--.59 & 0.47 & 0.66 & 4.85 \\
+Logistic Regression   & pixel & \texttt{xr\_fresh} & 0.61 & $-0.05$ & 0.56 & .54--.59 & 0.47 & 0.67 & 4.93 \\
+LightGBM              & field & \texttt{xr\_fresh} & 0.68 & $-0.12$ & 0.56 & .53--.58 & 0.45 & 0.66 & 4.99 \\
+Voting                & pixel & \texttt{xr\_fresh} & 0.65 & $-0.09$ & 0.56 & .53--.58 & 0.48 & 0.66 & 4.85 \\
+Random Forest         & pixel & \texttt{xr\_fresh} & 0.65 & $-0.10$ & 0.55 & .52--.57 & 0.45 & 0.65 & 5.07 \\
+Base XGBoost          & pixel & \texttt{xr\_fresh} & 0.64 & $-0.09$ & 0.54 & .52--.57 & 0.47 & 0.66 & 5.01 \\
+TempCNN               & field & raw & 0.67 & $-0.14$ & 0.54 & .51--.56 & 0.43 & 0.64 & 6.07 \\
+Stacking              & field & \texttt{xr\_fresh} & 0.64 & $-0.11$ & 0.53 & .51--.56 & 0.48 & 0.67 & 5.32 \\
+CNN-BiLSTM            & field & raw & 0.64 & $-0.14$ & 0.51 & .48--.53 & 0.33 & 0.54 & 7.86 \\
+3D CNN                & patch & raw & 0.70 & $-0.20$ & 0.50 & .48--.53 & 0.29 & 0.54 & 7.98 \\
+SMOTE Stacked         & field & \texttt{xr\_fresh} & 0.69 & $-0.21$ & 0.49 & .46--.51 & 0.43 & 0.63 & 5.37 \\
+CNN-BiLSTM            & pixel & raw & 0.72 & $-0.26$ & 0.46 & .44--.48 & 0.32 & 0.56 & 7.73 \\
+Multi-Channel CNN     & patch & raw & 0.63 & $-0.18$ & 0.45 & .43--.47 & 0.30 & 0.54 & 7.62 \\
+TabNet Temporal       & field & raw & 0.62 & $-0.19$ & 0.43 & .41--.46 & 0.31 & 0.56 & 7.35 \\
+TabNet                & field & \texttt{xr\_fresh} & 0.51 & $-0.15$ & 0.37 & .34--.40 & 0.25 & 0.53 & 6.13 \\
 \bottomrule
 \end{tabular}
 
@@ -784,8 +810,10 @@ TabNet                & field & \texttt{xr\_fresh} & 0.51 & $-0.15$ & 0.37 & 0.2
 for every individual model, ranked by spatial-transfer macro-F1, the metric we argue
 model selection should use. In-region macro-F1 and the gap $\Delta$ are shown
 alongside (Figure~\ref{fig:gap} orders the same data by $\Delta$); ST Kappa, weighted
-F1 (wF1), and cross-entropy (Xent, the AI4FoodSecurity challenge's official field-level scoring metric~\cite{ai4foodsecurity}, lower is better) complete the picture. Bold marks the best value in
-each metric column. The best transferer is a TabNet pixel ensemble; the highest in-region
+F1 (wF1), and cross-entropy (Xent, the AI4FoodSecurity challenge's official field-level scoring metric~\cite{ai4foodsecurity}, lower is better) complete the picture. The
+\textbf{95\% CI} column gives the percentile bootstrap interval on ST F1$_m$ from
+$10{,}000$ resamples of the 2{,}415 holdout fields (Section~\ref{subsec:uncertainty}).
+Bold marks the best value in each metric column. The best transferer is a TabNet pixel ensemble; the highest in-region
 scores (L-TAE and Transformer pixel, both $0.78$; L-TAE-S and TempCNN pixel, both $0.77$)
 do not yield the highest spatial-transfer scores, and CNN-BiLSTM, singled out by prior
 analysis of this dataset~\cite{capstone_repo}, suffers the largest drop of any model
@@ -804,7 +832,9 @@ field-averaged statistics.\par}
 \par\vspace{4pt}
 {\footnotesize In-region performance is from field-wise validation. Dense temporal/patch
 deep nets (top) suffer the largest degradation; tree-based, linear, and field-aggregated
-models (bottom) transfer with the smallest gaps.\par}
+models (bottom) transfer with the smallest gaps. Whiskers on the spatial-transfer points
+are 95\% bootstrap confidence intervals over the holdout fields
+(Section~\ref{subsec:uncertainty}).\par}
 \end{figure}
 
 The winners under spatial transfer are a different group entirely. The best single
@@ -828,6 +858,19 @@ drops to 0.56--0.58 on the holdout and falls below TabNet (0.60). CNN-BiLSTM, th
 model prior analysis of this dataset singled out~\cite{capstone_repo}, fares worse
 still under transfer (F1$_m=0.46$, among the lowest absolute scores in the
 benchmark).
+
+The field bootstrap (Section~\ref{subsec:uncertainty}) confirms which of these
+differences are statistically real and which are not. The thesis-critical gaps survive:
+the best transferers beat CNN-BiLSTM by a wide, significant margin (TabNet over
+CNN-BiLSTM pixel, $\Delta=0.14$, 95\% CI $[0.11, 0.18]$, $p<0.001$; the same holds for
+both L-TAE-S variants), so the ranking inversion is not an artifact of holdout noise.
+At the very top, by contrast, the leaders are statistically indistinguishable: TabNet,
+the field- and pixel-level L-TAE-S, and the field-level L-TAE all fall within
+$0.59$--$0.60$ and their pairwise gaps are not significant (TabNet vs.\ L-TAE-S,
+$\Delta=0.004$, $p=0.80$; TabNet vs.\ pixel L-TAE, $\Delta=0.024$, $p=0.19$). We
+therefore do not claim a single best model; we claim that a sparse-feature-selection
+group occupies the top of the spatial-transfer ranking and that the dense temporal nets
+prized by in-region validation fall significantly below it.
 
 \subsection{Pixel versus field level: aggregation as variance reduction}
 \label{subsec:pixel_field}
@@ -863,12 +906,10 @@ feature representation held fixed. That change is essentially neutral under spat
 transfer: XGBoost moves from F1$_m=0.54$ (pixel) to $0.56$ (field) and LightGBM stays at
 $0.56$, even though aggregation raises the in-region score (e.g.\ XGBoost
 $0.64\rightarrow0.70$) and therefore widens the gap. Aggregation thus adds little for
-the already-sparse tree learners. Because every classical model here is built on
-\texttt{xr\_fresh}, our experiments do not isolate the marginal value of the
-\texttt{xr\_fresh} representation against raw reflectance for the trees; \texttt{xr\_fresh}'s
-contribution is operational (it compresses each pixel's ten-month, six-band series into a
-single compact vector that a tree fits in minutes) rather than a demonstrated gain in
-spatial-transfer accuracy. TabNet, run at the field level with both raw field-averaged and
+the already-sparse tree learners; the marginal value of the \texttt{xr\_fresh}
+representation itself, as opposed to the aggregation level, is taken up separately in
+Section~\ref{subsec:featdim}.
+TabNet, run at the field level with both raw field-averaged and
 \texttt{xr\_fresh} inputs, behaves consistently: moving its raw inputs from pixel to field
 level costs F1$_m$ $0.60\rightarrow0.43$ (the aggregation/observation-volume penalty), and the
 field \texttt{xr\_fresh} variant is lower still at $0.37$. So for TabNet aggregation does
@@ -907,7 +948,12 @@ the deep models and per-pixel \texttt{xr\_fresh} statistics for the tree learner
 deep models. For the tree learners (XGBoost, LightGBM) the pixel$\rightarrow$field change
 is therefore purely an aggregation change at a fixed \texttt{xr\_fresh} representation.
 Field aggregation helps the dense temporal nets and is roughly neutral for the tree
-models, but degrades TabNet.\par}
+models, but degrades TabNet. The field bootstrap (Section~\ref{subsec:uncertainty};
+95\% CIs shown in Figure~\ref{fig:pixfield}) confirms that the two largest aggregation
+effects are statistically significant, CNN-BiLSTM improves ($\Delta=+0.05$, $p=0.005$)
+and TabNet degrades ($\Delta=-0.17$, $p<0.001$), whereas the pixel$\leftrightarrow$field
+changes for L-TAE, TempCNN, and the tree learners fall within the $\approx\pm0.02$--$0.03$
+CIs and are not significant.\par}
 \end{table}
 
 \begin{figure}[htbp]
@@ -917,7 +963,8 @@ models, but degrades TabNet.\par}
 \label{fig:pixfield}
 \par\vspace{4pt}
 {\footnotesize Field-level aggregation recovers transfer for dense temporal models
-(L-TAE, CNN-BiLSTM) but collapses the sparsity-reliant TabNet.\par}
+(L-TAE, CNN-BiLSTM) but collapses the sparsity-reliant TabNet. Error bars are 95\%
+bootstrap confidence intervals over the holdout fields (Section~\ref{subsec:uncertainty}).\par}
 \end{figure}
 
 \subsection{Data efficiency under spatial transfer}
@@ -945,11 +992,66 @@ the training fields and re-evaluated on the holdout tile. Robust models (TabNet,
 regression, and the sparse-attention L-TAE-S) are nearly flat.\par}
 \end{figure}
 
-\subsection{Feature dimensionality and redundancy}
+\subsection{The \texttt{xr\_fresh} representation: value and redundancy}
 \label{subsec:featdim}
 
-A natural concern with the 174-dimensional \texttt{xr\_fresh} representation is feature
-redundancy. We tested two forms of explicit dimensionality control. A
+\begin{table}[t]
+\centering
+\caption{Raw reflectance versus \texttt{xr\_fresh} for a fixed tree learner.}
+\label{tab:repr}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{llcccc}
+\toprule
+\textbf{Representation} & \textbf{Split} & \textbf{F1$_m$} & \textbf{wF1} & \textbf{$\kappa$} & \textbf{Xent} \\
+\midrule
+Raw reflectance    & In-region        & 0.73 & 0.80 & 0.71 & 0.65 \\
+\texttt{xr\_fresh} & In-region        & 0.72 & 0.76 & 0.68 & 0.74 \\
+\midrule
+Raw reflectance    & Spatial transfer & 0.59 & 0.69 & 0.50 & 0.85 \\
+\texttt{xr\_fresh} & Spatial transfer & 0.56 & 0.69 & 0.50 & 0.82 \\
+\bottomrule
+\end{tabular}
+\par\vspace{4pt}
+{\footnotesize A single XGBoost learner (the manuscript's pixel-level configuration)
+trained on raw monthly reflectance (six bands $\times$ ten months) versus per-pixel
+\texttt{xr\_fresh} statistics, with identical FID-wise splits, preprocessing, and
+field-level mean pooling; only the input representation differs. In-region uses held-out
+fields from the two training tiles; spatial transfer uses the disjoint holdout tile
+(34S\_20E\_259N). The two representations are essentially indistinguishable under transfer,
+confirming that \texttt{xr\_fresh}'s value for the trees is operational (compactness and
+training speed; Appendix~\ref{app:training_times}) rather than a transfer-accuracy gain.\par}
+\end{table}
+
+The classical learners that transfer best in Table~\ref{tab:gap} are precisely those fed
+the automated \texttt{xr\_fresh} statistics, yet that table alone cannot say whether their
+robustness comes from the representation or from the tree learners themselves: every
+raw-reflectance model in it is a deep net and every \texttt{xr\_fresh} model is a tree, so
+representation and model family are confounded. To separate them we ran a controlled
+comparison in which only the representation changes. A single XGBoost learner (the
+manuscript's pixel-level configuration), with the FID-wise splits, preprocessing, and
+field-level mean pooling all held fixed, was trained once on raw monthly reflectance (six
+bands $\times$ ten months) and once on per-pixel \texttt{xr\_fresh} statistics, each
+evaluated both in-region and under spatial transfer (Table~\ref{tab:repr}). The two
+representations are essentially indistinguishable under transfer: raw reflectance reaches
+F1$_m=0.59$ and \texttt{xr\_fresh} $0.56$ on the holdout tile ($0.73$ vs.\ $0.72$
+in-region), with \texttt{xr\_fresh} marginally lower on macro-F1 but marginally better on
+field-level cross-entropy ($0.82$ vs.\ $0.85$) and equal on weighted-F1 and $\kappa$. The
+\texttt{xr\_fresh} representation therefore yields no measurable spatial-transfer gain over
+raw reflectance for the trees; its value is operational and interpretive rather than an
+accuracy advantage. Operationally, it compresses each pixel's ten-month, six-band series
+into a single compact vector that a tree fits in seconds to minutes, versus tens of minutes
+to hours per seed for the dense deep nets (Appendix~\ref{app:training_times}).
+Interpretively, unlike an anonymous vector of monthly reflectances each \texttt{xr\_fresh}
+feature carries an explicit, agronomically readable meaning, such as the day-of-year of a
+band's seasonal maximum, its temporal autocorrelation, or the skewness of its trajectory,
+so feature-importance rankings translate directly into phenological statements about how
+the crops separate.
+
+Given that we adopt the \texttt{xr\_fresh} representation for these operational and
+interpretive reasons rather than for any accuracy edge, a natural follow-on concern is
+whether its 174 dimensions are themselves a liability through feature redundancy. We
+tested two forms of explicit dimensionality control. A
 \emph{sparse-attention} L-TAE variant (L-TAE-S, TabNet-style channel gating via
 sparsemax) modestly improved transfer over the dense L-TAE at full data
 ($0.60$ vs.\ $0.58$ at the pixel level and $0.60$ vs.\ $0.59$ at the field level;
@@ -996,7 +1098,10 @@ appears across every model we examined.
 TabNet, L-TAE-S, and L-TAE classify lucerne/medics and canola well; the cereals
 (barley, wheat) and small-grain grazing are where most of the errors concentrate.
 CNN-BiLSTM's accuracy drops on every class, including the easy ones --- a sign that
-its failure is a general transfer problem, not just an imbalance problem.\par}
+its failure is a general transfer problem, not just an imbalance problem. Error bars are
+95\% bootstrap confidence intervals over the holdout fields
+(Section~\ref{subsec:uncertainty}); they widen on the minority classes (canola,
+small-grain grazing), whose per-class F1 is estimated from fewer fields.\par}
 \end{figure}
 
 % ================================================================
@@ -1117,7 +1222,10 @@ solution: L-TAE-S adds a sparse feature gate to a temporal-attention backbone, t
 benefits further from field aggregation, ending with the smallest transfer gap in the
 benchmark. The fragile cluster (CNN-BiLSTM, 3D CNN, SMOTE stacking) combines high
 capacity, dense temporal representation, and (for SMOTE) synthetic interpolation,
-with neither lever engaged.
+with neither lever engaged. Appendix~\ref{app:ablations} consolidates the five
+controlled comparisons behind this account and confirms that the remaining
+candidate explanations, ensemble size and the imbalance-handling objective, move
+holdout accuracy only at the margin and leave the robust--fragile ordering intact.
 
 Practitioners can read the two levers as a flowchart. If you have the freedom to
 choose or modify the model, build feature selection into it (lever 1). If you are
@@ -1327,6 +1435,218 @@ better). We adopt it so that out-of-sample performance is also expressed on the 
 challenge's standardized, operationally-defined metric, alongside the balanced-accuracy
 measures above.
 
+\section{Training cost}
+\label{app:training_times}
+
+Table~\ref{tab:training_times} reports the wall-clock training time for a single
+training run of each model, measured on one workstation (NVIDIA RTX 3080~Ti GPU;
+deep networks and the GPU-accelerated gradient-boosted trees use the GPU, while the
+scikit-learn Random Forest and Logistic Regression run on CPU). Times exclude
+feature extraction (\texttt{xr\_fresh}) and data loading, and are intended to convey
+order-of-magnitude differences in computational cost across paradigms rather than
+exact benchmarks. For the multi-seed ensembles the figure is the mean time for one
+seed; the full ensemble costs roughly five times as much.
+
+The pattern reinforces the computational-cost argument made in
+Section~\ref{sec:results} and Section~\ref{sec:discussion}: classical tree and linear
+learners on the compact \texttt{xr\_fresh} representation train in seconds to a few
+minutes at the field level, whereas the dense temporal and patch deep networks
+require tens of minutes to hours per seed even on a GPU. The robust models that
+transfer best (the \texttt{xr\_fresh} tree ensembles and the sparse-attention
+L-TAE-S at the field level) are also among the cheapest to train, while the most
+expensive models (TabTransformer, the patch CNNs, the pixel-level Transformer) do
+not lead the holdout ranking.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Training time for a single run (one seed) of each model.}
+\label{tab:training_times}
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lllr}
+\toprule
+\textbf{Model} & \textbf{Level} & \textbf{Features} & \textbf{Time / run} \\
+\midrule
+\multicolumn{4}{l}{\emph{Classical, field-level}}\\
+XGBoost                & field & \texttt{xr\_fresh} & 12\,s \\
+LightGBM               & field & \texttt{xr\_fresh} & 31\,s \\
+Voting                 & field & \texttt{xr\_fresh} & 109\,s \\
+Stacking               & field & \texttt{xr\_fresh} & 109\,s \\
+SMOTE Stacked          & field & \texttt{xr\_fresh} & 99\,s \\
+\midrule
+\multicolumn{4}{l}{\emph{Classical, pixel-level}}\\
+Base XGBoost           & pixel & \texttt{xr\_fresh} & 31\,s \\
+Base LightGBM          & pixel & \texttt{xr\_fresh} & 31\,s \\
+Logistic Regression    & pixel & \texttt{xr\_fresh} & 8.0\,min \\
+Random Forest          & pixel & \texttt{xr\_fresh} & 73\,min \\
+\midrule
+\multicolumn{4}{l}{\emph{Deep, field-level (raw sequences)}}\\
+TabNet (\texttt{xr\_fresh}) & field & \texttt{xr\_fresh} & 34\,s \\
+TabNet (temporal)      & field & raw & 39\,s \\
+CNN-BiLSTM             & field & raw & 53\,s \\
+L-TAE                  & field & raw & 61\,s \\
+TempCNN                & field & raw & 64\,s \\
+L-TAE-S                & field & raw & 18\,s\textsuperscript{$\dagger$} \\
+TabTransformer         & field & \texttt{xr\_fresh} & 7.4\,h \\
+\midrule
+\multicolumn{4}{l}{\emph{Deep, pixel-level (raw sequences)}}\\
+CNN-BiLSTM             & pixel & raw & 10\,min\textsuperscript{$\dagger$} \\
+L-TAE-S                & pixel & raw & 24\,min\textsuperscript{$\dagger$} \\
+TempCNN                & pixel & raw & 29\,min \\
+L-TAE                  & pixel & raw & 38\,min \\
+TabNet                 & pixel & raw & 61\,min\textsuperscript{$\dagger\ddagger$} \\
+Transformer            & pixel & raw & 97\,min \\
+\midrule
+\multicolumn{4}{l}{\emph{Deep, patch-level (raw sequences)}}\\
+3D CNN                 & patch & raw & 22\,min\textsuperscript{$\dagger$} \\
+Multi-Channel CNN      & patch & raw & 38\,min\textsuperscript{$\dagger$} \\
+\bottomrule
+\end{tabular}
+
+\par\vspace{4pt}
+{\footnotesize The gradient-boosted trees (XGBoost, LightGBM) are timed as a single
+best-configuration fit, excluding the one-time 150-trial Optuna hyperparameter search
+(roughly 1.8\,h and 3.4\,h respectively), so that they are comparable to the
+single-fit pixel-level trees. \textsuperscript{$\dagger$}Mean time per seed for a
+5-seed ensemble. \textsuperscript{$\ddagger$}Measured on the $75\%$ training fraction,
+the best-transferring TabNet pixel configuration used in Table~\ref{tab:gap}.\par}
+\end{table}
+
+\clearpage
+
+\section{Ablation studies}
+\label{app:ablations}
+
+A natural question is whether the spatial-transfer results of
+Section~\ref{sec:results} are driven by architecture, by ensembling, by
+prediction aggregation, or by imbalance handling. We answer it with five
+controlled comparisons, three already embedded in the main text and two added
+here, each varying one factor while holding the others fixed. Read together they
+attribute the holdout ranking primarily to two architectural and representational
+levers --- built-in sparse feature selection and field-level aggregation --- and
+show that ensemble size and the imbalance-handling objective are second-order:
+they shift absolute scores but never reorder the robust and fragile model groups.
+
+\paragraph{(i) Field-level aggregation.}
+Running the same architecture on per-pixel versus field-averaged inputs isolates
+aggregation as a variance-reduction lever (Section~\ref{subsec:pixel_field},
+Table~\ref{tab:pixfield}). It recovers most of the transfer gap for dense temporal
+networks --- L-TAE's gap shrinks from $\Delta=-0.20$ (pixel) to $-0.07$ (field)
+and L-TAE-S's from $-0.17$ to $-0.04$, the smallest of any model --- while being
+roughly neutral for the already-sparse tree learners and actively \emph{harmful}
+for TabNet, whose F1$_m$ falls from $0.60$ to $0.43$ because field training
+starves its sparse gate of the per-pixel observation volume it exploits.
+
+\paragraph{(ii) Sparse feature selection versus attention capacity.}
+A plain Transformer encoder with far greater attention capacity than L-TAE
+transfers no better than it (both ST F1$_m=0.58$, $\Delta=-0.20$ at the pixel
+level; Table~\ref{tab:gap}), whereas grafting a TabNet-style sparse channel gate
+onto the same lightweight backbone (L-TAE-S) lifts transfer to F1$_m=0.60$ and,
+when field-aggregated, to the smallest gap in the benchmark. Capacity is not the
+lever; sparse feature selection is.
+
+\paragraph{(iii) Resampling.}
+The \emph{Stacking} and \emph{SMOTE Stacked} ensembles share an identical
+architecture and differ only in SMOTETomek resampling, isolating class
+rebalancing. Resampling
+\emph{widens} the transfer gap (from $\Delta=-0.11$ to $-0.21$) and lowers holdout
+F1$_m$ (from $0.53$ to $0.49$; Table~\ref{tab:gap}): synthetic minority
+interpolation aids in-region fit but hurts spatial transfer.
+
+\paragraph{(iv) Ensemble size.}
+Table~\ref{tab:abl_ensemble} sweeps the seed-ensemble size (1/3/5) for three
+field-level models by re-inference of the saved per-seed checkpoints. Ensembling
+gives a small, monotone lift (L-TAE-S rises from F1$_m=0.56$ at one seed to $0.60$
+at five) but does not change the ordering: a \emph{single}-seed L-TAE-S (mean
+F1$_m=0.56$) already exceeds the five-seed CNN-BiLSTM and TabNet field ensembles
+($0.51$ and $0.43$). The robustness ranking is therefore not an artifact of
+ensembling.
+
+\paragraph{(v) Imbalance-handling objective and resampling.}
+Table~\ref{tab:abl_loss} retrains each field-level model under five
+imbalance-handling settings: weighted focal loss ($\gamma=2$, the main-text
+default), class-weighted cross-entropy ($\gamma=0$), plain unweighted
+cross-entropy, and the focal and plain losses each combined with class-balanced
+oversampling. The robust L-TAE-S is almost invariant to these choices (ST F1$_m$
+in $0.59$--$0.60$ across all five), whereas the fragile CNN-BiLSTM is sensitive to
+them (F1$_m$ ranging $0.41$--$0.56$): imbalance handling matters most where the
+architecture is weakest. Crucially, even CNN-BiLSTM's best setting ($0.56$)
+remains below L-TAE-S's worst ($0.59$), so the objective never reorders the two.
+TabNet is shown at the field level, where retraining is cheap; its flagship
+pixel-level ensemble --- the best transferer overall at F1$_m=0.60$ --- is
+reported in Table~\ref{tab:gap}.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Ablation (iv): spatial-transfer holdout performance versus
+seed-ensemble size, by re-inference of the saved per-seed checkpoints. The
+single-seed row reports the mean$\pm$standard deviation across the five individual
+seeds; the 3-seed row uses seeds $\{42,101,202\}$ and the 5-seed row the full set.
+The 5-seed rows reproduce the main-text configuration.}
+\label{tab:abl_ensemble}
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Model} & \textbf{Ensemble} & \textbf{F1$_m$} & \textbf{$\kappa$} \\
+\midrule
+TabNet (field)     & 1 seed  & $0.31\pm0.02$ & $0.18\pm0.03$ \\
+                   & 3 seeds & 0.39 & 0.29 \\
+                   & 5 seeds & 0.43 & 0.34 \\
+\midrule
+L-TAE-S (field)    & 1 seed  & $0.56\pm0.02$ & $0.47\pm0.02$ \\
+                   & 3 seeds & 0.58 & 0.50 \\
+                   & 5 seeds & 0.60 & 0.52 \\
+\midrule
+CNN-BiLSTM (field) & 1 seed  & $0.48\pm0.02$ & $0.31\pm0.02$ \\
+                   & 3 seeds & 0.52 & 0.34 \\
+                   & 5 seeds & 0.51 & 0.33 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Ablation (v): effect of the imbalance-handling objective and resampling
+on spatial-transfer holdout performance (field-level retrains, 5-seed ensembles).
+The baseline (weighted focal, $\gamma{=}2$, no resampling) is the main-text
+configuration. ``Resample'' denotes class-balanced oversampling of the training
+set: a \texttt{WeightedRandomSampler} with inverse-frequency weights for the
+neural models, and a one-shot balanced oversample for TabNet, whose library
+exposes no equivalent sampler hook.}
+\label{tab:abl_loss}
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{lllcc}
+\toprule
+\textbf{Model} & \textbf{Loss} & \textbf{Resample} & \textbf{F1$_m$} & \textbf{$\kappa$} \\
+\midrule
+TabNet (field)     & Weighted focal ($\gamma{=}2$) & no  & 0.43 & 0.34 \\
+                   & Weighted CE ($\gamma{=}0$)    & no  & 0.42 & 0.33 \\
+                   & Plain CE                       & no  & 0.35 & 0.25 \\
+                   & Weighted focal ($\gamma{=}2$) & yes & 0.40 & 0.23 \\
+                   & Plain CE                       & yes & 0.46 & 0.37 \\
+\midrule
+L-TAE-S (field)    & Weighted focal ($\gamma{=}2$) & no  & 0.60 & 0.52 \\
+                   & Weighted CE ($\gamma{=}0$)    & no  & 0.60 & 0.50 \\
+                   & Plain CE                       & no  & 0.59 & 0.50 \\
+                   & Weighted focal ($\gamma{=}2$) & yes & 0.60 & 0.49 \\
+                   & Plain CE                       & yes & 0.60 & 0.50 \\
+\midrule
+CNN-BiLSTM (field) & Weighted focal ($\gamma{=}2$) & no  & 0.51 & 0.34 \\
+                   & Weighted CE ($\gamma{=}0$)    & no  & 0.49 & 0.34 \\
+                   & Plain CE                       & no  & 0.41 & 0.30 \\
+                   & Weighted focal ($\gamma{=}2$) & yes & 0.56 & 0.39 \\
+                   & Plain CE                       & yes & 0.50 & 0.34 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\clearpage
+
 \bibliographystyle{sn-mathphys} % Use Springer Nature's preferred style
 \begin{thebibliography}{99}
 
@@ -1499,7 +1819,7 @@ Yang S, Gu L, Li X, Jiang T, Ren R (2020) Crop Classification Method Based on Op
 Nowakowski A, Mrziglod J, Spiller D, Bonifacio R, Ferrari I, Mathieu PP, Garcia-Herranz M, Kim DH (2021) Crop type mapping by using transfer learning. \textit{Int J Appl Earth Obs Geoinf} 98:102313. \href{https://doi.org/10.1016/j.jag.2021.102313}{https://doi.org/10.1016/j.jag.2021.102313}
 
 \bibitem{begue2020}
-Bégué, A., Leroux, L., Soumaré, M., Faure, J.F., Diouf, A.A., Augusseau, X., Touré, L., Tonneau, J.P., 2020. Remote sensing products and services in support of agricultural public policies in Africa: overview and challenges. \textit{Frontiers in Sustainable Food Systems}, 4. \href{https://doi.org/10.3389/fsufs.2020.00058}{https://doi.org/10.3389/fsufs.2020.00058}
+Bégué A, Leroux L, Soumaré M, Faure JF, Diouf AA, Augusseau X, Touré L, Tonneau JP (2020) Remote sensing products and services in support of agricultural public policies in Africa: overview and challenges. \textit{Front Sustain Food Syst} 4:58. \href{https://doi.org/10.3389/fsufs.2020.00058}{https://doi.org/10.3389/fsufs.2020.00058}
 
 \end{thebibliography}
 

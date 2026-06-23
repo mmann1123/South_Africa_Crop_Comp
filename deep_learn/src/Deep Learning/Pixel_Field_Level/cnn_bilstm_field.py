@@ -26,13 +26,14 @@ from config import MERGED_DL_PATH, MERGED_DL_TEST_PATH, MODEL_DIR
 
 sys.stdout.reconfigure(line_buffering=True)
 
+import argparse
 import time
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset, DataLoader, WeightedRandomSampler
 import joblib
 import random
 from sklearn.model_selection import train_test_split
@@ -141,8 +142,24 @@ def predict_logits(model, loader):
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--loss', choices=['focal', 'weighted_ce', 'plain_ce'], default='focal',
+                        help="Imbalance objective ablation (3.4).")
+    parser.add_argument('--sampler', choices=['off', 'on'], default='off',
+                        help="WeightedRandomSampler (inverse class frequency) on/off.")
+    parser.add_argument('--output-dir', default=MODEL_DIR,
+                        help="Where to write checkpoints + artifacts (default: MODEL_DIR).")
+    parser.add_argument('--pred-csv', default=PRED_CSV,
+                        help="Where to write OOS predictions (default: production path).")
+    parser.add_argument('--no-report', action='store_true',
+                        help="Skip ModelReport generation (for ablation variants).")
+    args = parser.parse_args()
+    out_dir = args.output_dir
+    os.makedirs(out_dir, exist_ok=True)
+
     t0 = time.time()
     print(f"=== CNN-BiLSTM Field-Level Training === Device: {device}")
+    print(f"  loss={args.loss}, sampler={args.sampler}, output_dir={out_dir}")
 
     df = pd.read_parquet(MERGED_DL_PATH)
     feature_cols = get_feature_cols(df)
@@ -169,7 +186,18 @@ def main():
 
     counts = np.maximum(np.bincount(y_tr, minlength=num_classes).astype(np.float64), 1.0)
     alpha = (1.0 / counts); alpha = alpha / alpha.sum() * num_classes
-    criterion = WeightedFocalLoss(torch.tensor(alpha, dtype=torch.float32)).to(device)
+    alpha_t = torch.tensor(alpha, dtype=torch.float32).to(device)
+    if args.loss == 'focal':
+        criterion = WeightedFocalLoss(alpha_t).to(device)
+    elif args.loss == 'weighted_ce':
+        criterion = nn.CrossEntropyLoss(weight=alpha_t)
+    else:  # plain_ce
+        criterion = nn.CrossEntropyLoss()
+
+    # Optional weighted sampler (inverse class frequency per training field)
+    train_sample_weights = None
+    if args.sampler == 'on':
+        train_sample_weights = torch.tensor((1.0 / counts)[y_tr], dtype=torch.double)
 
     val_loader = DataLoader(CropDataset(X_va, y_va), batch_size=BATCH_SIZE, shuffle=False)
     test_loader = DataLoader(CropDataset(X_te, y_te), batch_size=BATCH_SIZE, shuffle=False)
@@ -183,7 +211,13 @@ def main():
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=N_EPOCHS, eta_min=1e-6)
         train_loader = DataLoader(CropDataset(X_tr, y_tr), batch_size=BATCH_SIZE, shuffle=True)
 
-        best_f1, patience, mpath = 0.0, 0, os.path.join(MODEL_DIR, f"cnn_bilstm_field_seed_{seed}.pt")
+        if train_sample_weights is not None:
+            seed_sampler = WeightedRandomSampler(train_sample_weights, len(train_sample_weights),
+                                                 replacement=True)
+            train_loader = DataLoader(CropDataset(X_tr, y_tr), batch_size=BATCH_SIZE,
+                                      sampler=seed_sampler)
+
+        best_f1, patience, mpath = 0.0, 0, os.path.join(out_dir, f"cnn_bilstm_field_seed_{seed}.pt")
         torch.save(model.state_dict(), mpath)
         for epoch in range(N_EPOCHS):
             loss = train_epoch(model, optimizer, criterion, train_loader)
@@ -201,8 +235,8 @@ def main():
         test_logits_ens.append(predict_logits(model, test_loader).unsqueeze(0))
         print(f"  seed {seed} done, best val F1 macro={best_f1:.4f}")
 
-    joblib.dump(le, os.path.join(MODEL_DIR, "cnn_bilstm_field_label_encoder.joblib"))
-    joblib.dump(feature_cols, os.path.join(MODEL_DIR, "cnn_bilstm_field_feature_columns.joblib"))
+    joblib.dump(le, os.path.join(out_dir, "cnn_bilstm_field_label_encoder.joblib"))
+    joblib.dump(feature_cols, os.path.join(out_dir, "cnn_bilstm_field_feature_columns.joblib"))
 
     avg = torch.cat(test_logits_ens, 0).mean(0)
     pred = avg.argmax(1).tolist()
@@ -211,20 +245,21 @@ def main():
           f"F1_w={f1_score(y_te, pred, average='weighted'):.4f}  kappa={cohen_kappa_score(y_te, pred):.4f}")
     print(classification_report(y_te, pred, target_names=le.classes_))
 
-    report = ModelReport("CNN-BiLSTM Field-Level (temporal)")
-    report.set_hyperparameters({
-        "architecture": "CNN(1D, 6->64, k=5) + BiLSTM(64) ", "training_level": "field (pixel means per FID)",
-        "conv_filters": 64, "lstm_hidden": 64, "kernel_size": 5, "dropout": 0.3, "lr": LR,
-        "optimizer": "AdamW (wd=1e-4)", "scheduler": "CosineAnnealingLR",
-        "loss": "WeightedFocalLoss(gamma=2.0)", "features": "raw reflectance (unscaled)",
-        "epochs": N_EPOCHS, "patience": PATIENCE, "batch_size": BATCH_SIZE,
-        "n_models": len(SEEDS), "seeds": SEEDS,
-    })
-    report.set_split_info(train=len(tr), val=len(va), test=len(te), seed=42,
-                          split_method="fid-wise (field-level training)")
-    report.set_metrics(y_te, np.array(pred), list(le.classes_))
-    report.set_training_time(time.time() - t0)
-    report.generate()
+    if not args.no_report:
+        report = ModelReport("CNN-BiLSTM Field-Level (temporal)")
+        report.set_hyperparameters({
+            "architecture": "CNN(1D, 6->64, k=5) + BiLSTM(64) ", "training_level": "field (pixel means per FID)",
+            "conv_filters": 64, "lstm_hidden": 64, "kernel_size": 5, "dropout": 0.3, "lr": LR,
+            "optimizer": "AdamW (wd=1e-4)", "scheduler": "CosineAnnealingLR",
+            "loss": "WeightedFocalLoss(gamma=2.0)", "features": "raw reflectance (unscaled)",
+            "epochs": N_EPOCHS, "patience": PATIENCE, "batch_size": BATCH_SIZE,
+            "n_models": len(SEEDS), "seeds": SEEDS,
+        })
+        report.set_split_info(train=len(tr), val=len(va), test=len(te), seed=42,
+                              split_method="fid-wise (field-level training)")
+        report.set_metrics(y_te, np.array(pred), list(le.classes_))
+        report.set_training_time(time.time() - t0)
+        report.generate()
 
     # ---- OOS holdout predictions ----
     print(f"\n=== OOS inference on holdout ({MERGED_DL_TEST_PATH}) ===")
@@ -240,12 +275,12 @@ def main():
     logits_all = []
     for seed in SEEDS:
         model = CropCNNBiLSTM(num_classes=num_classes).to(device)
-        model.load_state_dict(torch.load(os.path.join(MODEL_DIR, f"cnn_bilstm_field_seed_{seed}.pt"),
+        model.load_state_dict(torch.load(os.path.join(out_dir, f"cnn_bilstm_field_seed_{seed}.pt"),
                                          map_location=device))
         logits_all.append(predict_logits(model, oos_loader).unsqueeze(0))
     oos_pred = torch.cat(logits_all, 0).mean(0).argmax(1).tolist()
-    pd.DataFrame({"fid": oos_fids, "crop_name": le.inverse_transform(oos_pred)}).to_csv(PRED_CSV, index=False)
-    print(f"Saved OOS predictions: {PRED_CSV}  ({len(oos_fids)} fields)")
+    pd.DataFrame({"fid": oos_fids, "crop_name": le.inverse_transform(oos_pred)}).to_csv(args.pred_csv, index=False)
+    print(f"Saved OOS predictions: {args.pred_csv}  ({len(oos_fids)} fields)")
     print(f"\n[TIMER] Total: {(time.time()-t0)/60:.1f} min")
 
 

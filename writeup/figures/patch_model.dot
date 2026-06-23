@@ -1,6 +1,8 @@
 // 3D CNN (patch-level) architecture diagram. Style matches ltae_s.dot /
 // cnn_bilstm.pdf / tabnet.pdf (Graphviz dot, pastel rounded boxes, yellow
-// architecture cluster, seed circles, diamonds for ensemble/loss).
+// architecture cluster, seed circles, rectangle for the ensemble-averaging
+// process, parallelogram for the loss objective). Diamonds are reserved for
+// genuine YES/NO decisions only.
 // Render:  dot -Tpdf patch_model.dot -o patch_model.pdf
 digraph Patch3DCNN {
   rankdir=TB;
@@ -30,7 +32,7 @@ digraph Patch3DCNN {
     m3 [label="Model 3\nSeed 202", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
     m4 [label="Model 4\nSeed 303", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
     m5 [label="Model 5\nSeed 404", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
-    ens [label="Average\nEnsemble\nSoftmax", shape=diamond, fillcolor="#FCE883", width=1.5, height=1.1, fixedsize=true];
+    ens [label="Average\nEnsemble\nSoftmax", shape=box, fillcolor="#FCE883"];
     m1 -> ens; m2 -> ens; m3 -> ens; m4 -> ens; m5 -> ens;
   }
 
@@ -50,7 +52,7 @@ digraph Patch3DCNN {
   }
 
   loss [label="Weighted Focal Loss\n(gamma = 2.0,\nalpha = 1 / class freq)",
-        shape=diamond, fillcolor="#AED6F1", width=3.0, height=1.8, fixedsize=true];
+        shape=parallelogram, fillcolor="#AED6F1"];
 
   // ---- pipeline edges ----
   RawData -> prep1 [lhead=cluster_prep];

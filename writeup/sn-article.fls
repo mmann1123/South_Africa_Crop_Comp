@@ -985,6 +985,7 @@ INPUT ./figures//field_reduction.pdf
 INPUT figures//field_reduction.pdf
 INPUT ./figures//field_reduction.pdf
 INPUT ./figures//field_reduction.pdf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt12.tfm
 INPUT ./figures//per_class_f1.pdf
 INPUT ./figures//per_class_f1.pdf
 INPUT figures//per_class_f1.pdf
@@ -996,6 +997,7 @@ INPUT ./figures//inductive_bias_gap.pdf
 INPUT figures//inductive_bias_gap.pdf
 INPUT ./figures//inductive_bias_gap.pdf
 INPUT ./figures//inductive_bias_gap.pdf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti9.tfm
 INPUT sn-article.aux
 INPUT ./sn-article.out
 INPUT ./sn-article.out
@@ -1026,7 +1028,9 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

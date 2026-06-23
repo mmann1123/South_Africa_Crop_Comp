@@ -137,6 +137,20 @@ def run_inference(models, dataloader):
     return all_preds, all_fids
 
 
+def run_inference_per_model(models, dataloader):
+    """Run inference for each ensemble member separately (for seed-variability)."""
+    per_model_preds = [[] for _ in models]
+    all_fids = []
+    with torch.no_grad():
+        for X_batch, fid_batch in dataloader:
+            X_batch = X_batch.to(device)
+            for mi, model in enumerate(models):
+                logits = model(X_batch)
+                per_model_preds[mi].extend(torch.argmax(logits, dim=1).cpu().tolist())
+            all_fids.extend(fid_batch.tolist())
+    return per_model_preds, all_fids
+
+
 def aggregate_to_field_level(preds, fids):
     """Aggregate pixel predictions to field level by majority vote."""
     df = pd.DataFrame({"fid": fids, "pred_label": preds})
@@ -185,6 +199,16 @@ def main():
     })
     df_out.to_csv(OUTPUT_CSV, index=False)
     print(f"\nSaved: {OUTPUT_CSV}")
+
+    # Per-seed field predictions (for seed-variability / uncertainty analysis).
+    print("\nGenerating per-seed predictions...")
+    per_model_preds, ps_fids = run_inference_per_model(models, dataloader)
+    for mi, mpreds in enumerate(per_model_preds):
+        s_fp = aggregate_to_field_level(mpreds, ps_fids)
+        s_labels = [CLASS_NAMES[p] for p in s_fp.values]
+        pd.DataFrame({"fid": s_fp.index, "crop_name": s_labels}).to_csv(
+            OUTPUT_CSV.replace(".csv", f"_seed{mi}.csv"), index=False)
+    print(f"Saved per-seed predictions: {OUTPUT_CSV.replace('.csv', '_seed*.csv')}")
 
     # Summary
     print("\n=== Prediction Distribution ===")

@@ -1,6 +1,8 @@
 // L-TAE-S architecture diagram. Style matches cnn_bilstm.pdf / tabnet.pdf
 // (Graphviz dot, pastel rounded boxes, yellow architecture cluster, seed circles,
-//  diamonds for ensemble/loss). Render:  dot -Tpdf ltae_s.dot -o ltae_s.pdf
+//  rectangle for the ensemble-averaging process, parallelogram for the loss
+//  objective). Diamonds are reserved for genuine YES/NO decisions only.
+//  Render:  dot -Tpdf ltae_s.dot -o ltae_s.pdf
 digraph LTAES {
   rankdir=TB;
   compound=true;
@@ -29,7 +31,7 @@ digraph LTAES {
     m3 [label="Model 3\nSeed 202", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
     m4 [label="Model 4\nSeed 303", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
     m5 [label="Model 5\nSeed 404", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
-    ens [label="Average\nEnsemble\nLogits", shape=diamond, fillcolor="#FCE883", width=1.5, height=1.1, fixedsize=true];
+    ens [label="Average\nEnsemble\nLogits", shape=box, fillcolor="#FCE883"];
     m1 -> ens; m2 -> ens; m3 -> ens; m4 -> ens; m5 -> ens;
   }
 
@@ -49,7 +51,7 @@ digraph LTAES {
   }
 
   loss [label="Weighted Focal Loss\n+ lambda * mask\nsparsity (lambda=1e-3)",
-        shape=diamond, fillcolor="#AED6F1", width=3.0, height=1.8, fixedsize=true];
+        shape=parallelogram, fillcolor="#AED6F1"];
 
   // ---- pipeline edges ----
   RawData -> prep1 [lhead=cluster_prep];

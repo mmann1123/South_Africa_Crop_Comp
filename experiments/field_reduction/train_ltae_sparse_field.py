@@ -20,7 +20,8 @@ import joblib
 import numpy as np
 import pandas as pd
 import torch
-from torch.utils.data import DataLoader
+import torch.nn as nn
+from torch.utils.data import DataLoader, WeightedRandomSampler
 from sklearn.metrics import accuracy_score, f1_score, cohen_kappa_score
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
@@ -49,6 +50,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--fraction', type=float, required=True)
     parser.add_argument('--output-dir', type=str, required=True)
+    parser.add_argument('--loss', choices=['focal', 'weighted_ce', 'plain_ce'],
+                        default='focal',
+                        help="Imbalance objective ablation (3.4): focal=WeightedFocal(gamma=2), "
+                             "weighted_ce=class-weighted CE (gamma=0), plain_ce=unweighted CE.")
+    parser.add_argument('--sampler', choices=['off', 'on'], default='off',
+                        help="WeightedRandomSampler (inverse class frequency) on/off.")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -112,9 +119,23 @@ def main():
     val_ds = TemporalDataset(X_val, y_val)
     test_ds = TemporalDataset(X_test, y_test)
 
-    # Weighted Focal Loss (recomputed from subsampled data)
+    # Imbalance objective ablation (reviewer comment 3.4)
     alpha = compute_focal_loss_weights(y_train, num_classes)
-    criterion = WeightedFocalLoss(alpha, gamma=2.0).to(device)
+    if args.loss == 'focal':
+        criterion = WeightedFocalLoss(alpha, gamma=2.0).to(device)
+    elif args.loss == 'weighted_ce':
+        criterion = nn.CrossEntropyLoss(weight=alpha.to(device))
+    else:  # plain_ce
+        criterion = nn.CrossEntropyLoss()
+    print(f"  loss={args.loss}, sampler={args.sampler}")
+
+    # Optional weighted sampler (inverse class frequency per training field)
+    sampler = None
+    if args.sampler == 'on':
+        counts = np.maximum(np.bincount(y_train, minlength=num_classes).astype(np.float64), 1.0)
+        per_class_w = 1.0 / counts
+        sample_weights = torch.tensor(per_class_w[y_train], dtype=torch.double)
+        sampler = sample_weights  # materialized into a WeightedRandomSampler per seed
 
     val_loader = DataLoader(val_ds, batch_size=BATCH_SIZE, shuffle=False,
                             num_workers=2, pin_memory=True)
@@ -140,8 +161,13 @@ def main():
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=N_EPOCHS, eta_min=1e-6)
         scaler_amp = torch.amp.GradScaler("cuda")
 
-        train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True,
-                                  num_workers=2, pin_memory=True)
+        if sampler is not None:
+            seed_sampler = WeightedRandomSampler(sampler, len(sampler), replacement=True)
+            train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, sampler=seed_sampler,
+                                      num_workers=2, pin_memory=True)
+        else:
+            train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True,
+                                      num_workers=2, pin_memory=True)
 
         best_val_f1 = 0.0
         patience_counter = 0
@@ -206,6 +232,8 @@ def main():
         json.dump({
             "model": "ltae_sparse_field",
             "fraction": fraction,
+            "loss": args.loss,
+            "sampler": args.sampler,
             "train_fields": int(train_mask.sum()),
             "val_fields": int(val_mask.sum()),
             "test_fields": int(test_mask.sum()),
