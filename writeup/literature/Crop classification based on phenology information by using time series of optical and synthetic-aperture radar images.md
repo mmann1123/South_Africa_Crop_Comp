@@ -1,6 +1,7 @@
 # Crop classification based on phenology information by using time series of optical and synthetic-aperture radar images
 
 **Citation:** Fatemeh Kordi and Hossein Yousefi (2022). *Remote Sensing Applications: Society and Environment*, Vol. 27, Article 100812. DOI: 10.1016/j.rsase.2022.100812
+**BibTeX key:** `kordi2022phenology`
 
 ## Objectives
 

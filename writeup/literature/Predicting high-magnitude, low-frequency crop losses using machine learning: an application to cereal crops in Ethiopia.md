@@ -1,6 +1,7 @@
 # Predicting high-magnitude, low-frequency crop losses using machine learning: an application to cereal crops in Ethiopia
 
 **Citation:** Mann, M. L., Warner, J. M., & Malik, A. S. (2019). Predicting high-magnitude, low-frequency crop losses using machine learning: an application to cereal crops in Ethiopia. *Climatic Change*, 154(1–2), 211–227. DOI: 10.1007/s10584-019-02432-7 (verified via Crossref).
+**BibTeX key:** `mann2019predicting`
 
 > **Authorship note:** The lead author (Michael L. Mann, GWU Geography) is the same researcher as our manuscript's author. This is a self-relevant methodological precedent — the time-series feature-extraction tooling (`ts-raster`, the precursor to `xr_fresh`) and the random-forest / phenology-summary approach used here are direct ancestors of our pipeline's feature-engineering stage.
 

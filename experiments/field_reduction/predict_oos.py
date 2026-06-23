@@ -50,9 +50,11 @@ def _get_torch_device():
 
 # =================== Prediction functions per model ===================
 
-def predict_tabnet(model_dir, output_csv):
-    """TabNet pixel: 5-seed ensemble → avg proba → majority vote per field."""
+def predict_tabnet(model_dir, output_csv, seeds=None):
+    """TabNet pixel: seed ensemble → avg proba → majority vote per field."""
     from pytorch_tabnet import TabNetClassifier
+    if seeds is None:
+        seeds = SEEDS_ENSEMBLE
 
     # Load artifacts
     feature_columns = jl_load(os.path.join(model_dir, "tabnet_feature_columns.joblib"))
@@ -82,7 +84,7 @@ def predict_tabnet(model_dir, output_csv):
 
     # Load models and predict
     preds_all = []
-    for seed in SEEDS_ENSEMBLE:
+    for seed in seeds:
         model_path = os.path.join(model_dir, f"tabnet_seed_{seed}.zip")
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"TabNet model not found: {model_path}")
@@ -104,6 +106,54 @@ def predict_tabnet(model_dir, output_csv):
     field_labels = [CROP_ID_TO_NAME[cid] for cid in field_crop_ids]
 
     df_out = pd.DataFrame({"fid": field_preds.index, "crop_name": field_labels})
+    df_out.to_csv(output_csv, index=False)
+    return len(df_out)
+
+
+def predict_tabnet_field(model_dir, output_csv, seeds=None):
+    """TabNet field (xr_fresh): seed ensemble → avg proba (each row is a field).
+
+    Ports out_of_sample/inference_tabnet_field.py. Artifacts in model_dir are
+    prefixed tabnet_field_*; the label encoder is fitted on crop_name directly
+    (no crop_id mapping). Test features are already field-level.
+    """
+    from pytorch_tabnet import TabNetClassifier
+    if seeds is None:
+        seeds = SEEDS_ENSEMBLE
+
+    feature_columns = jl_load(os.path.join(model_dir, "tabnet_field_feature_columns.joblib"))
+    imputer = jl_load(os.path.join(model_dir, "tabnet_field_imputer.joblib"))
+    scaler = jl_load(os.path.join(model_dir, "tabnet_field_scaler.joblib"))
+    le = jl_load(os.path.join(model_dir, "tabnet_field_label_encoder.joblib"))
+
+    df = pd.read_parquet(COMBINED_TEST_FEATURES_PATH)
+    fids = df["fid"].to_numpy()
+    X = df.drop(columns=["fid", "crop_name"], errors="ignore")
+    X = X.select_dtypes(include=[np.number])
+
+    train_cols = list(feature_columns)
+    for col in set(train_cols) - set(X.columns):
+        X[col] = 0.0
+    X = X[train_cols]
+
+    X_imp = imputer.transform(X)
+    X_scaled = scaler.transform(X_imp).astype(np.float32)
+    X_scaled = np.nan_to_num(X_scaled, nan=0.0, posinf=0.0, neginf=0.0)
+
+    preds_all = []
+    for seed in seeds:
+        model_path = os.path.join(model_dir, f"tabnet_field_seed_{seed}.zip")
+        if not os.path.exists(model_path):
+            raise FileNotFoundError(f"TabNet field model not found: {model_path}")
+        model = TabNetClassifier()
+        model.load_model(model_path)
+        preds_all.append(model.predict_proba(X_scaled))
+
+    pred_mean = np.mean(preds_all, axis=0)
+    preds = np.argmax(pred_mean, axis=1)
+    labels = le.inverse_transform(preds)
+
+    df_out = pd.DataFrame({"fid": fids, "crop_name": labels})
     df_out.to_csv(output_csv, index=False)
     return len(df_out)
 
@@ -289,12 +339,14 @@ def predict_ltae_sparse_pixel(model_dir, output_csv):
     return len(df_out)
 
 
-def predict_ltae_sparse_field(model_dir, output_csv):
-    """L-TAE-S field: aggregate test pixels to field → 5-seed ensemble."""
+def predict_ltae_sparse_field(model_dir, output_csv, seeds=None):
+    """L-TAE-S field: aggregate test pixels to field → seed ensemble."""
     import torch
     from torch.utils.data import Dataset, DataLoader
     from models_arch import LTAESparse, T_SEQ, N_BANDS
 
+    if seeds is None:
+        seeds = SEEDS_ENSEMBLE
     device = _get_torch_device()
 
     feature_cols = jl_load(os.path.join(model_dir, "feature_columns.joblib"))
@@ -322,9 +374,9 @@ def predict_ltae_sparse_field(model_dir, output_csv):
 
     dataloader = DataLoader(_Dataset(), batch_size=256, shuffle=False)
 
-    # 5-seed ensemble
+    # seed ensemble
     logits_all = []
-    for seed in SEEDS_ENSEMBLE:
+    for seed in seeds:
         model_path = os.path.join(model_dir, f"ltae_sparse_field_seed_{seed}.pt")
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"L-TAE-S field model not found: {model_path}")
@@ -337,6 +389,90 @@ def predict_ltae_sparse_field(model_dir, output_csv):
             for X_batch, _ in dataloader:
                 logits, _ = model(X_batch.to(device))  # unpack (logits, aux)
                 seed_logits.append(logits.cpu())
+        logits_all.append(torch.cat(seed_logits, dim=0).unsqueeze(0))
+
+    avg_logits = torch.cat(logits_all, dim=0).float().mean(dim=0)
+    preds = avg_logits.argmax(dim=1).tolist()
+    labels = le.inverse_transform(preds)
+
+    df_out = pd.DataFrame({"fid": fids, "crop_name": labels})
+    df_out.to_csv(output_csv, index=False)
+    return len(df_out)
+
+
+def predict_cnn_bilstm_field(model_dir, output_csv, seeds=None):
+    """CNN-BiLSTM field: aggregate test pixels to field (mean) → seed ensemble.
+
+    Ports the OOS-inference half of
+    deep_learn/src/Deep Learning/Pixel_Field_Level/cnn_bilstm_field.py. Uses raw
+    (unscaled) reflectance and band-major feature columns, exactly as trained.
+    Artifacts in model_dir are prefixed cnn_bilstm_field_*.
+    """
+    import torch
+    import torch.nn as nn
+    from torch.utils.data import Dataset, DataLoader
+
+    if seeds is None:
+        seeds = SEEDS_ENSEMBLE
+    device = _get_torch_device()
+
+    class CropCNNBiLSTM(nn.Module):
+        """Identical to cnn_bilstm_field.py: 1D conv over 6 bands -> BiLSTM -> last step."""
+        def __init__(self, num_classes, conv_filters=64, lstm_hidden=64, kernel_size=5, dropout=0.3):
+            super().__init__()
+            self.conv1 = nn.Conv1d(6, conv_filters, kernel_size, padding=kernel_size // 2)
+            self.relu = nn.ReLU()
+            self.bilstm = nn.LSTM(input_size=conv_filters, hidden_size=lstm_hidden, num_layers=1,
+                                  batch_first=True, bidirectional=True)
+            self.dropout = nn.Dropout(dropout)
+            self.fc = nn.Linear(2 * lstm_hidden, num_classes)
+
+        def forward(self, x):
+            x = x.view(x.size(0), 6, -1)
+            x = self.relu(self.conv1(x))
+            x = x.permute(0, 2, 1)
+            x, _ = self.bilstm(x)
+            x = x[:, -1, :]
+            x = self.dropout(x)
+            return self.fc(x)
+
+    feature_cols = jl_load(os.path.join(model_dir, "cnn_bilstm_field_feature_columns.joblib"))
+    le = jl_load(os.path.join(model_dir, "cnn_bilstm_field_label_encoder.joblib"))
+    num_classes = len(le.classes_)
+
+    df = pd.read_parquet(MERGED_DL_TEST_PATH)
+    for col in feature_cols:
+        if col not in df.columns:
+            df[col] = 0
+    df[feature_cols] = df[feature_cols].fillna(0)
+
+    # Aggregate to field level (mean), raw reflectance (no scaling)
+    df_field = df.groupby("fid")[feature_cols].mean().reset_index()
+    df_field[feature_cols] = df_field[feature_cols].fillna(0)
+    X = df_field[feature_cols].values.astype(np.float32)
+    fids = df_field["fid"].values
+
+    X_tensor = torch.tensor(X, dtype=torch.float32)
+
+    class _Dataset(Dataset):
+        def __len__(self): return len(X_tensor)
+        def __getitem__(self, idx): return X_tensor[idx], idx
+
+    dataloader = DataLoader(_Dataset(), batch_size=256, shuffle=False)
+
+    logits_all = []
+    for seed in seeds:
+        model_path = os.path.join(model_dir, f"cnn_bilstm_field_seed_{seed}.pt")
+        if not os.path.exists(model_path):
+            raise FileNotFoundError(f"CNN-BiLSTM field model not found: {model_path}")
+        model = CropCNNBiLSTM(num_classes=num_classes).to(device)
+        model.load_state_dict(torch.load(model_path, map_location=device))
+        model.eval()
+
+        seed_logits = []
+        with torch.no_grad():
+            for X_batch, _ in dataloader:
+                seed_logits.append(model(X_batch.to(device)).cpu())
         logits_all.append(torch.cat(seed_logits, dim=0).unsqueeze(0))
 
     avg_logits = torch.cat(logits_all, dim=0).float().mean(dim=0)

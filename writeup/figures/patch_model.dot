@@ -1,0 +1,67 @@
+// 3D CNN (patch-level) architecture diagram. Style matches ltae_s.dot /
+// cnn_bilstm.pdf / tabnet.pdf (Graphviz dot, pastel rounded boxes, yellow
+// architecture cluster, seed circles, rectangle for the ensemble-averaging
+// process, parallelogram for the loss objective). Diamonds are reserved for
+// genuine YES/NO decisions only.
+// Render:  dot -Tpdf patch_model.dot -o patch_model.pdf
+digraph Patch3DCNN {
+  rankdir=TB;
+  compound=true;
+  graph [fontname="Helvetica", fontsize=15, splines=true, nodesep=0.45, ranksep=0.55];
+  node  [fontname="Helvetica", fontsize=12, style="rounded,filled", shape=box,
+         color=black, penwidth=1.2];
+  edge  [color=black, arrowsize=0.8];
+
+  // ---- palette: blue #AED6F1  yellow #FCE883  pink #F5B7B1  green #ABEBC6 ----
+
+  RawData [label="Raw Data\n(Sentinel-2: 10 months x 6 bands)", fillcolor="#FCE883"];
+
+  subgraph cluster_prep {
+    label="Data Pre-processing";
+    style="rounded,filled"; fillcolor="#AED6F1"; color="#5DADE2"; fontsize=15;
+    prep1 [label="label encoding\ncrop_name -> label", fillcolor="#F5B7B1"];
+    prep2 [label="Patch generation\ntile fields into 100 m patches\n(discard mixed-boundary patches)", fillcolor="#F5B7B1"];
+    prep3 [label="Field-ID split\n+ resample to 128 x 128", fillcolor="#F5B7B1"];
+  }
+
+  subgraph cluster_train {
+    label="Model Training (5-seed ensemble)";
+    style="rounded,filled"; fillcolor="#AED6F1"; color="#5DADE2"; fontsize=15;
+    m1 [label="Model 1\nSeed 42",  shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
+    m2 [label="Model 2\nSeed 101", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
+    m3 [label="Model 3\nSeed 202", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
+    m4 [label="Model 4\nSeed 303", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
+    m5 [label="Model 5\nSeed 404", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
+    ens [label="Average\nEnsemble\nSoftmax", shape=box, fillcolor="#FCE883"];
+    m1 -> ens; m2 -> ens; m3 -> ens; m4 -> ens; m5 -> ens;
+  }
+
+  argmax [label="ArgMax per patch\n-> field-level majority vote", fillcolor="#F5B7B1"];
+
+  subgraph cluster_arch {
+    label="3D CNN Model Architecture";
+    style="rounded,filled"; fillcolor="#FCE883"; color="#F1C40F"; fontsize=15;
+    a_in  [label="Input Patch Volume\n(T=10 x 128 x 128 x 6 bands)", fillcolor="#AED6F1"];
+    a_c1  [label="Conv3D (32, 3x3x3) + ReLU\n-> MaxPool3D (1,2,2)", fillcolor="#AED6F1"];
+    a_c2  [label="Conv3D (64, 3x3x3) + ReLU\n-> MaxPool3D (1,2,2)", fillcolor="#AED6F1"];
+    a_c3  [label="Conv3D (128, 3x3x3) + ReLU", fillcolor="#AED6F1"];
+    a_gap [label="Global Average Pooling 3D\n-> 128-d vector", fillcolor="#AED6F1"];
+    a_fc  [label="Dense (128) + ReLU", fillcolor="#AED6F1"];
+    a_out [label="Softmax Classifier\n(num_classes = 5)", fillcolor="#AED6F1"];
+    a_in -> a_c1 -> a_c2 -> a_c3 -> a_gap -> a_fc -> a_out;
+  }
+
+  loss [label="Weighted Focal Loss\n(gamma = 2.0,\nalpha = 1 / class freq)",
+        shape=parallelogram, fillcolor="#AED6F1"];
+
+  // ---- pipeline edges ----
+  RawData -> prep1 [lhead=cluster_prep];
+  prep3 -> m1 [ltail=cluster_prep, lhead=cluster_train];
+  ens -> argmax;
+
+  // architecture detail of each ensemble member (placed to the right)
+  m3 -> a_in [ltail=cluster_train, lhead=cluster_arch, style=dashed,
+              label="each ensemble\nmember is a\n3D CNN", fontsize=10,
+              constraint=false];
+  a_out -> loss [label="  training objective", fontsize=10];
+}

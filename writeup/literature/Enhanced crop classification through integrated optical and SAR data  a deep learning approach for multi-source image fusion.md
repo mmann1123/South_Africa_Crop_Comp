@@ -1,6 +1,7 @@
 # Enhanced Crop Classification Through Integrated Optical and SAR Data: A Deep Learning Approach for Multi-Source Image Fusion
 
 **Citation:** Liu, N.; Zhao, Q.; Williams, R.; Barrett, B. (2024). Enhanced crop classification through integrated optical and SAR data: a deep learning approach for multi-source image fusion. *International Journal of Remote Sensing*, 45(19-20), 7605-7633. (Published online 17 Jul 2023.) DOI: 10.1080/01431161.2023.2232552
+**BibTeX key:** `liu2023enhanced`
 
 ## Objectives
 

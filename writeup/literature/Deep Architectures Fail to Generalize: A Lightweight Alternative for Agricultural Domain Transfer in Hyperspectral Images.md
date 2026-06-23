@@ -1,6 +1,7 @@
 # Deep Architectures Fail to Generalize: A Lightweight Alternative for Agricultural Domain Transfer in Hyperspectral Images
 
 **Citation:** Pankajakshan, P., Padmasanan, A., & Sundar, S. (2025). Deep Architectures Fail to Generalize: A Lightweight Alternative for Agricultural Domain Transfer in Hyperspectral Images. *Sensors*, 26(1), 174. DOI: 10.3390/s26010174
+**BibTeX key:** `pankajakshan2025deep`
 
 ## Objectives
 

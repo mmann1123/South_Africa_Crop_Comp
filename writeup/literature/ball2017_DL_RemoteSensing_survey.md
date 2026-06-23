@@ -1,6 +1,7 @@
 # A Comprehensive Survey of Deep Learning in Remote Sensing: Theories, Tools and Challenges for the Community
 
 **Citation:** Ball, J. E., Anderson, D. T., & Chan, C. S. (2017). A Comprehensive Survey of Deep Learning in Remote Sensing: Theories, Tools and Challenges for the Community. *Journal of Applied Remote Sensing*, 11(4), 042609. DOI: `10.1117/1.JRS.11.042609` (verified via Crossref title match). Note: this file was originally mislabeled `zhu2017_DL_RemoteSensing_review` — it has been renamed to `ball2017_DL_RemoteSensing_survey` to reflect its true authorship (Ball/Anderson/Chan 2017; arXiv:1709.00308). The manuscript's `zhu2017` cite key refers to a *different* paper — Zhu et al. (2017), "Deep Learning in Remote Sensing: A Comprehensive Review and List of Resources," *IEEE Geosci. Remote Sens. Mag.* 5(4):8–36, `10.1109/MGRS.2017.2762307` — which is correctly cited in `sn-article.tex` but is not represented by a PDF in this corpus.
+**BibTeX key:** `ball2017comprehensive`
 
 This is a survey/theory paper, so it is briefed under rule 7: no evaluation-protocol critique applies; the focus is on methodological and conceptual implications — inductive bias, transfer learning, interpretability, and data scarcity in remote-sensing deep learning.
 

@@ -1,6 +1,7 @@
 # Multi-Temporal Land Cover Classification with Sequential Recurrent Encoders
 
 **Citation:** Rußwurm, M., & Körner, M. (2018). Multi-Temporal Land Cover Classification with Sequential Recurrent Encoders. *ISPRS International Journal of Geo-Information*, 7(4), Article 129. DOI: 10.3390/ijgi7040129 (verified via Crossref).
+**BibTeX key:** `ruwurm2018multi`
 
 ## Objectives
 

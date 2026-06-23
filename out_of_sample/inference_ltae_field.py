@@ -176,6 +176,14 @@ def main():
     print(f"\nSaved: {OUTPUT_CSV}")
     print(f"\n{df_out['crop_name'].value_counts()}")
 
+    # Per-seed field predictions (for seed-variability / uncertainty analysis).
+    # Field-level model predicts one row per field; per-seed = that seed's argmax.
+    for si, seed in enumerate(SEEDS):
+        s_pred = logits_all[si].squeeze(0).float().argmax(dim=1).tolist()
+        s_out = pd.DataFrame({"fid": fids, "crop_name": le.inverse_transform(s_pred)})
+        s_out.to_csv(OUTPUT_CSV.replace(".csv", f"_seed{seed}.csv"), index=False)
+    print(f"Saved per-seed predictions: {OUTPUT_CSV.replace('.csv', '_seed*.csv')}")
+
 
 if __name__ == "__main__":
     main()

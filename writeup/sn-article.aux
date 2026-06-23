@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -54,6 +57,8 @@
 \citation{pankajakshan2025,jin2019,rustowicz2019}
 \citation{cropformer2023}
 \citation{begue2020}
+\citation{ma2024}
+\citation{mai2025}
 \citation{mann2025}
 \citation{sa_comp}
 \citation{mann2023}
@@ -61,12 +66,12 @@
 \citation{mann2023}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Data Description}{8}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Study Area}{8}{subsection.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Remote Sensing Data}{8}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Remote Sensing Data}{9}{subsection.2.2}\protected@file@percent }
 \citation{sar2022,liu2024}
 \citation{mlhub}
 \citation{mlhub}
+\citation{mai2025}
 \citation{campbell2011introduction}
-\citation{wardlow2007towards}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Field Boundary Data}{10}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Crop Types and Distribution}{10}{subsection.2.4}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Number of fields per crop type.\relax }}{11}{figure.caption.3}\protected@file@percent }
@@ -74,40 +79,41 @@
 \newlabel{fig:EDA-1}{{1}{11}{Number of fields per crop type.\relax }{figure.caption.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Average field area by crop type (hectares).\relax }}{11}{figure.caption.4}\protected@file@percent }
 \newlabel{fig:EDA-2}{{2}{11}{Average field area by crop type (hectares).\relax }{figure.caption.4}{}}
+\citation{wardlow2007towards}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Spectral band intensities by crop type.\relax }}{12}{figure.caption.5}\protected@file@percent }
 \newlabel{fig:EDA-3}{{3}{12}{Spectral band intensities by crop type.\relax }{figure.caption.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Wheat versus barley spectral band intensities.\relax }}{12}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:wheat-barley-boxplot}{{4}{12}{Wheat versus barley spectral band intensities.\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{12}{section.3}\protected@file@percent }
 \citation{ieee2017}
 \citation{mann2025}
 \citation{acm2020}
 \citation{cropformer2023}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{13}{section.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Wheat versus barley spectral band intensities.\relax }}{13}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:wheat-barley-boxplot}{{4}{13}{Wheat versus barley spectral band intensities.\relax }{figure.caption.6}{}}
 \citation{mann2023,mann2025}
 \citation{mann2023}
 \citation{mann2025}
-\citation{james2013}
-\citation{breiman2001}
-\citation{ke2017}
-\citation{chen2016,friedman2001}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Classical Machine Learning}{14}{subsection.3.1}\protected@file@percent }
 \newlabel{sec:pixelfield}{{3.1}{14}{Classical Machine Learning}{subsection.3.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Extraction of statistical and temporal features from the 10-month spectral time series.\relax }}{14}{figure.caption.7}\protected@file@percent }
 \newlabel{fig:ts_features}{{5}{14}{Extraction of statistical and temporal features from the 10-month spectral time series.\relax }{figure.caption.7}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Pixel-Level Analysis}{14}{subsubsection.3.1.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Extracted time-series features.\relax }}{15}{table.caption.9}\protected@file@percent }
 \newlabel{tab:features}{{1}{15}{Extracted time-series features.\relax }{table.caption.9}{}}
-\citation{penabarragan2011}
+\citation{james2013}
+\citation{breiman2001}
+\citation{ke2017}
+\citation{chen2016,friedman2001}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Pixel-Level Analysis}{16}{subsubsection.3.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Baseline Classical Models.}{16}{section*.10}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Pixel-Level Ensemble with Hybrid Voting.}{16}{section*.11}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Field-Level Aggregation.}{16}{section*.12}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Final Hybrid Rule.}{16}{section*.13}\protected@file@percent }
+\citation{penabarragan2011}
+\@writefile{toc}{\contentsline {paragraph}{Final Hybrid Rule.}{17}{section*.13}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Field-Level Analysis}{17}{subsubsection.3.1.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Field-level aggregation of pixel features.\relax }}{17}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:field_aggregation}{{6}{17}{Field-level aggregation of pixel features.\relax }{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {paragraph}{SMOTETomek Resampling.}{17}{section*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Stacked Ensemble Classifier.}{17}{section*.16}\protected@file@percent }
 \citation{zhu2017,tempcnn2019,russwurm2018,cnn_multitemp}
-\@writefile{toc}{\contentsline {paragraph}{SMOTETomek Resampling.}{18}{section*.15}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Stacked Ensemble Classifier.}{18}{section*.16}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Field-level aggregation of pixel features.\relax }}{18}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:field_aggregation}{{6}{18}{Field-level aggregation of pixel features.\relax }{figure.caption.14}{}}
 \@writefile{toc}{\contentsline {paragraph}{Field-Based Aggregation and XGBoost Optimization.}{18}{section*.17}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Deep Learning Architectures}{18}{subsection.3.2}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces XGBoost hyperparameter search results.\relax }}{19}{table.caption.19}\protected@file@percent }
@@ -126,81 +132,101 @@
 \citation{sparsemax2016}
 \citation{tabnet_orig}
 \citation{ltae2020}
-\citation{entmax2019}
 \@writefile{toc}{\contentsline {paragraph}{Pixel-Level Transformer Encoder.}{22}{section*.24}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Sparse-Attention L-TAE (L-TAE-S).}{22}{section*.25}\protected@file@percent }
+\citation{entmax2019}
 \citation{tempcnn2019}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Architecture of the sparse-attention L-TAE-S.\relax }}{23}{figure.caption.26}\protected@file@percent }
 \newlabel{fig:ltae_s}{{8}{23}{Architecture of the sparse-attention L-TAE-S.\relax }{figure.caption.26}{}}
-\@writefile{toc}{\contentsline {paragraph}{Temporal Convolutional Network (TempCNN).}{23}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Temporal Convolutional Network (TempCNN).}{24}{section*.27}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Patch-Level Architectures}{24}{subsubsection.3.2.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Illustration of patch generation per field.\relax }}{25}{figure.caption.28}\protected@file@percent }
 \newlabel{fig:example_patches}{{9}{25}{Illustration of patch generation per field.\relax }{figure.caption.28}{}}
 \@writefile{toc}{\contentsline {paragraph}{Multi-Channel 2D CNN.}{25}{section*.29}\protected@file@percent }
 \citation{ai4foodsecurity}
-\@writefile{toc}{\contentsline {paragraph}{Ensemble of Class-Specific 3D CNNs.}{26}{section*.30}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces 3D CNN ensemble architecture for patch-level crop classification.\relax }}{26}{figure.caption.31}\protected@file@percent }
-\newlabel{fig:patch_model}{{10}{26}{3D CNN ensemble architecture for patch-level crop classification.\relax }{figure.caption.31}{}}
+\@writefile{toc}{\contentsline {paragraph}{3D CNN.}{26}{section*.30}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Performance Metrics}{26}{subsection.3.3}\protected@file@percent }
 \newlabel{subsec:performance_metrics}{{3.3}{26}{Performance Metrics}{subsection.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Quantifying uncertainty}{26}{subsection.3.4}\protected@file@percent }
+\newlabel{subsec:uncertainty}{{3.4}{26}{Quantifying uncertainty}{subsection.3.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Patch-level 3D CNN pipeline. Each field is tiled into 100\,m patches and resampled to $128\times 128$; a single multiclass 3D CNN is trained as a five-seed ensemble whose softmax outputs are averaged, and per-patch predictions are aggregated to a field label by majority vote.\relax }}{27}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:patch_model}{{10}{27}{Patch-level 3D CNN pipeline. Each field is tiled into 100\,m patches and resampled to $128\times 128$; a single multiclass 3D CNN is trained as a five-seed ensemble whose softmax outputs are averaged, and per-patch predictions are aggregated to a field label by majority vote.\relax }{figure.caption.31}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{27}{section.4}\protected@file@percent }
+\newlabel{sec:results}{{4}{27}{Results}{section.4}{}}
 \citation{ai4foodsecurity}
 \citation{capstone_repo}
 \citation{capstone_repo}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{27}{section.4}\protected@file@percent }
-\newlabel{sec:results}{{4}{27}{Results}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}In-region validation overstates performance and misranks models}{27}{subsection.4.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces In-region versus spatial-transfer performance of all models.\relax }}{28}{table.caption.33}\protected@file@percent }
-\newlabel{tab:gap}{{3}{28}{In-region versus spatial-transfer performance of all models.\relax }{table.caption.33}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces In-region versus spatial-transfer macro-F1 by model, sorted by gap.\relax }}{29}{figure.caption.34}\protected@file@percent }
-\newlabel{fig:gap}{{11}{29}{In-region versus spatial-transfer macro-F1 by model, sorted by gap.\relax }{figure.caption.34}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}In-region validation overstates performance and misranks models}{28}{subsection.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces In-region versus spatial-transfer performance of all models.\relax }}{29}{table.caption.33}\protected@file@percent }
+\newlabel{tab:gap}{{3}{29}{In-region versus spatial-transfer performance of all models.\relax }{table.caption.33}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces In-region versus spatial-transfer macro-F1 by model, sorted by gap.\relax }}{30}{figure.caption.34}\protected@file@percent }
+\newlabel{fig:gap}{{11}{30}{In-region versus spatial-transfer macro-F1 by model, sorted by gap.\relax }{figure.caption.34}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Pixel versus field level: aggregation as variance reduction}{30}{subsection.4.2}\protected@file@percent }
 \newlabel{subsec:pixel_field}{{4.2}{30}{Pixel versus field level: aggregation as variance reduction}{subsection.4.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Data efficiency under spatial transfer}{30}{subsection.4.3}\protected@file@percent }
-\newlabel{subsec:reduction}{{4.3}{30}{Data efficiency under spatial transfer}{subsection.4.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Pixel- versus field-level spatial transfer.\relax }}{31}{table.caption.36}\protected@file@percent }
-\newlabel{tab:pixfield}{{4}{31}{Pixel- versus field-level spatial transfer.\relax }{table.caption.36}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Spatial-transfer macro-F1 at pixel versus field level.\relax }}{31}{figure.caption.37}\protected@file@percent }
-\newlabel{fig:pixfield}{{12}{31}{Spatial-transfer macro-F1 at pixel versus field level.\relax }{figure.caption.37}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Spatial-transfer macro-F1 versus fraction of training fields.\relax }}{32}{figure.caption.38}\protected@file@percent }
-\newlabel{fig:reduction}{{13}{32}{Spatial-transfer macro-F1 versus fraction of training fields.\relax }{figure.caption.38}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Feature dimensionality and redundancy}{32}{subsection.4.4}\protected@file@percent }
-\newlabel{subsec:featdim}{{4.4}{32}{Feature dimensionality and redundancy}{subsection.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Data efficiency under spatial transfer}{31}{subsection.4.3}\protected@file@percent }
+\newlabel{subsec:reduction}{{4.3}{31}{Data efficiency under spatial transfer}{subsection.4.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Pixel- versus field-level spatial transfer.\relax }}{32}{table.caption.36}\protected@file@percent }
+\newlabel{tab:pixfield}{{4}{32}{Pixel- versus field-level spatial transfer.\relax }{table.caption.36}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}The \texttt  {xr\_fresh} representation: value and redundancy}{32}{subsection.4.4}\protected@file@percent }
+\newlabel{subsec:featdim}{{4.4}{32}{The \texttt {xr\_fresh} representation: value and redundancy}{subsection.4.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Spatial-transfer macro-F1 at pixel versus field level.\relax }}{33}{figure.caption.37}\protected@file@percent }
+\newlabel{fig:pixfield}{{12}{33}{Spatial-transfer macro-F1 at pixel versus field level.\relax }{figure.caption.37}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Spatial-transfer macro-F1 versus fraction of training fields.\relax }}{34}{figure.caption.38}\protected@file@percent }
+\newlabel{fig:reduction}{{13}{34}{Spatial-transfer macro-F1 versus fraction of training fields.\relax }{figure.caption.38}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Per-class performance and persistent confusions}{34}{subsection.4.5}\protected@file@percent }
+\newlabel{subsec:perclass}{{4.5}{34}{Per-class performance and persistent confusions}{subsection.4.5}{}}
 \citation{belgiu2016}
 \citation{maxwell2019}
 \citation{pankajakshan2025}
 \citation{rustowicz2019}
 \citation{jin2019}
+\citation{mai2025}
 \citation{tabnet_orig}
 \citation{obadic2022}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Per-class performance and persistent confusions}{33}{subsection.4.5}\protected@file@percent }
-\newlabel{subsec:perclass}{{4.5}{33}{Per-class performance and persistent confusions}{subsection.4.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{33}{section.5}\protected@file@percent }
-\newlabel{sec:discussion}{{5}{33}{Discussion}{section.5}{}}
-\@writefile{toc}{\contentsline {paragraph}{Why tree-like inductive bias transfers.}{33}{section*.40}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Per-class accuracy (F1) on the holdout region for four representative models.\relax }}{34}{figure.caption.39}\protected@file@percent }
-\newlabel{fig:perclass}{{14}{34}{Per-class accuracy (F1) on the holdout region for four representative models.\relax }{figure.caption.39}{}}
-\@writefile{toc}{\contentsline {paragraph}{Two robustness levers.}{35}{section*.42}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Spatial-transfer gap by inductive-bias family.\relax }}{36}{figure.caption.41}\protected@file@percent }
-\newlabel{fig:bias}{{15}{36}{Spatial-transfer gap by inductive-bias family.\relax }{figure.caption.41}{}}
-\@writefile{toc}{\contentsline {paragraph}{Automated feature extraction and computational cost.}{37}{section*.43}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Patch-level spatial modeling.}{37}{section*.44}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Persistent difficulty with small-grain grazing and barley.}{37}{section*.45}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Limitations.}{37}{section*.46}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{38}{section.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Raw reflectance versus \texttt  {xr\_fresh} for a fixed tree learner.\relax }}{35}{table.caption.40}\protected@file@percent }
+\newlabel{tab:repr}{{5}{35}{Raw reflectance versus \texttt {xr\_fresh} for a fixed tree learner.\relax }{table.caption.40}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{35}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{5}{35}{Discussion}{section.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Why tree-like inductive bias transfers.}{35}{section*.42}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Per-class accuracy (F1) on the holdout region for four representative models.\relax }}{36}{figure.caption.41}\protected@file@percent }
+\newlabel{fig:perclass}{{14}{36}{Per-class accuracy (F1) on the holdout region for four representative models.\relax }{figure.caption.41}{}}
+\@writefile{toc}{\contentsline {paragraph}{Two robustness levers.}{37}{section*.44}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Spatial-transfer gap by inductive-bias family.\relax }}{38}{figure.caption.43}\protected@file@percent }
+\newlabel{fig:bias}{{15}{38}{Spatial-transfer gap by inductive-bias family.\relax }{figure.caption.43}{}}
+\@writefile{toc}{\contentsline {paragraph}{Automated feature extraction and computational cost.}{39}{section*.45}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Patch-level spatial modeling.}{39}{section*.46}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Persistent difficulty with small-grain grazing and barley.}{39}{section*.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limitations.}{39}{section*.48}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{40}{section.6}\protected@file@percent }
 \citation{mlhub}
 \citation{primary_repo}
 \citation{james2013}
 \citation{breiman2001}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Baseline classical model definitions}{41}{appendix.A}\protected@file@percent }
+\newlabel{app:models}{{A}{41}{Baseline classical model definitions}{appendix.A}{}}
 \citation{ke2017}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Baseline classical model definitions}{39}{appendix.A}\protected@file@percent }
-\newlabel{app:models}{{A}{39}{Baseline classical model definitions}{appendix.A}{}}
 \citation{chen2016,friedman2001}
 \citation{ai4foodsecurity}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Performance metric definitions}{42}{appendix.B}\protected@file@percent }
+\newlabel{app:metrics}{{B}{42}{Performance metric definitions}{appendix.B}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C}Training cost}{43}{appendix.C}\protected@file@percent }
+\newlabel{app:training_times}{{C}{43}{Training cost}{appendix.C}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Training time for a single run (one seed) of each model.\relax }}{44}{table.caption.53}\protected@file@percent }
+\newlabel{tab:training_times}{{6}{44}{Training time for a single run (one seed) of each model.\relax }{table.caption.53}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {D}Ablation studies}{45}{appendix.D}\protected@file@percent }
+\newlabel{app:ablations}{{D}{45}{Ablation studies}{appendix.D}{}}
+\@writefile{toc}{\contentsline {paragraph}{(i) Field-level aggregation.}{45}{section*.54}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{(ii) Sparse feature selection versus attention capacity.}{45}{section*.55}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{(iii) Resampling.}{45}{section*.56}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{(iv) Ensemble size.}{45}{section*.57}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{(v) Imbalance-handling objective and resampling.}{45}{section*.58}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size, by re-inference of the saved per-seed checkpoints. The single-seed row reports the mean$\pm $standard deviation across the five individual seeds; the 3-seed row uses seeds $\{42,101,202\}$ and the 5-seed row the full set. The 5-seed rows reproduce the main-text configuration.\relax }}{46}{table.caption.60}\protected@file@percent }
+\newlabel{tab:abl_ensemble}{{7}{46}{Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size, by re-inference of the saved per-seed checkpoints. The single-seed row reports the mean$\pm $standard deviation across the five individual seeds; the 3-seed row uses seeds $\{42,101,202\}$ and the 5-seed row the full set. The 5-seed rows reproduce the main-text configuration.\relax }{table.caption.60}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer holdout performance (field-level retrains, 5-seed ensembles). The baseline (weighted focal, $\gamma {=}2$, no resampling) is the main-text configuration. ``Resample'' denotes class-balanced oversampling of the training set: a \texttt  {WeightedRandomSampler} with inverse-frequency weights for the neural models, and a one-shot balanced oversample for TabNet, whose library exposes no equivalent sampler hook.\relax }}{47}{table.caption.62}\protected@file@percent }
+\newlabel{tab:abl_loss}{{8}{47}{Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer holdout performance (field-level retrains, 5-seed ensembles). The baseline (weighted focal, $\gamma {=}2$, no resampling) is the main-text configuration. ``Resample'' denotes class-balanced oversampling of the training set: a \texttt {WeightedRandomSampler} with inverse-frequency weights for the neural models, and a one-shot balanced oversample for TabNet, whose library exposes no equivalent sampler hook.\relax }{table.caption.62}{}}
 \bibstyle{sn-mathphys}
 \bibcite{ieee2017}{{1}{}{{}}{{}}}
 \bibcite{mlhub}{{2}{}{{}}{{}}}
-\@writefile{toc}{\contentsline {section}{\numberline {B}Performance metric definitions}{40}{appendix.B}\protected@file@percent }
-\newlabel{app:metrics}{{B}{40}{Performance metric definitions}{appendix.B}{}}
 \bibcite{ai4foodsecurity}{{3}{}{{}}{{}}}
 \bibcite{primary_repo}{{4}{}{{}}{{}}}
 \bibcite{capstone_repo}{{5}{}{{}}{{}}}
@@ -238,19 +264,21 @@
 \bibcite{tempcnn2019}{{37}{}{{}}{{}}}
 \bibcite{rustowicz2019}{{38}{}{{}}{{}}}
 \bibcite{cropformer2023}{{39}{}{{}}{{}}}
-\bibcite{mahlayeye2024}{{40}{}{{}}{{}}}
-\bibcite{mann2017}{{41}{}{{}}{{}}}
-\bibcite{mann2019}{{42}{}{{}}{{}}}
-\bibcite{mann2025}{{43}{}{{}}{{}}}
-\bibcite{teixeira2023}{{44}{}{{}}{{}}}
-\bibcite{hohl2024}{{45}{}{{}}{{}}}
-\bibcite{buttar2024}{{46}{}{{}}{{}}}
-\bibcite{liu2024}{{47}{}{{}}{{}}}
-\bibcite{pankajakshan2025}{{48}{}{{}}{{}}}
-\bibcite{espejo2020}{{49}{}{{}}{{}}}
-\bibcite{koklu2022}{{50}{}{{}}{{}}}
-\bibcite{yang2020}{{51}{}{{}}{{}}}
-\bibcite{nowakowski2021}{{52}{}{{}}{{}}}
-\bibcite{begue2020}{{53}{}{{}}{{}}}
+\bibcite{mai2025}{{40}{}{{}}{{}}}
+\bibcite{ma2024}{{41}{}{{}}{{}}}
+\bibcite{mahlayeye2024}{{42}{}{{}}{{}}}
+\bibcite{mann2017}{{43}{}{{}}{{}}}
+\bibcite{mann2019}{{44}{}{{}}{{}}}
+\bibcite{mann2025}{{45}{}{{}}{{}}}
+\bibcite{teixeira2023}{{46}{}{{}}{{}}}
+\bibcite{hohl2024}{{47}{}{{}}{{}}}
+\bibcite{buttar2024}{{48}{}{{}}{{}}}
+\bibcite{liu2024}{{49}{}{{}}{{}}}
+\bibcite{pankajakshan2025}{{50}{}{{}}{{}}}
+\bibcite{espejo2020}{{51}{}{{}}{{}}}
+\bibcite{koklu2022}{{52}{}{{}}{{}}}
+\bibcite{yang2020}{{53}{}{{}}{{}}}
+\bibcite{nowakowski2021}{{54}{}{{}}{{}}}
+\bibcite{begue2020}{{55}{}{{}}{{}}}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers
-\gdef \@abspage@last{44}
+\gdef \@abspage@last{51}

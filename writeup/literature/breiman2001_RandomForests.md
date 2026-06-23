@@ -1,6 +1,7 @@
 # Random Forests
 
 **Citation:** Breiman, L. (2001). Random Forests. *Machine Learning*, 45(1), 5–32. DOI: 10.1023/A:1010933404324 (verified via Crossref). (PDF reviewed is the author's technical-report/preprint version, Statistics Dept., UC Berkeley, January 2001; no DOI printed on the preprint, canonical journal DOI used.)
+**BibTeX key:** `breiman2001random`
 
 ## Objectives
 

@@ -1,6 +1,7 @@
 # Crop identification and disease classification using traditional machine learning and deep learning approaches
 
 **Citation:** Aravind Krishnaswamy Rangarajan, Raja Purushothaman, Maheswari Prabhakar, and Cezary Szczepański (2023). *Journal of Engineering Research*, 11(1B), 228-252. DOI: 10.36909/jer.11941
+**BibTeX key:** `rangarajan2023identification`
 
 ## Objectives
 

@@ -1,6 +1,7 @@
 # Lightweight Temporal Self-Attention for Classifying Satellite Images Time Series
 
 **Citation:** Vivien Sainte Fare Garnot, Loic Landrieu (2020). "Lightweight Temporal Self-Attention for Classifying Satellite Image Time Series." In *Advanced Analytics and Learning on Temporal Data (AALTD 2020)*, Lecture Notes in Computer Science, Springer, pp. 171–181. DOI: `10.1007/978-3-030-65742-0_12` (verified via Crossref title match). The PDF is the arXiv preprint `2007.00586`.
+**BibTeX key:** `garnot2020lightweight`
 
 ## Objectives
 

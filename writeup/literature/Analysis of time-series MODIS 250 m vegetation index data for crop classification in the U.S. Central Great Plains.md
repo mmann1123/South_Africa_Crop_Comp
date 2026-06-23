@@ -1,6 +1,7 @@
 # Analysis of Time-Series MODIS 250 m Vegetation Index Data for Crop Classification in the U.S. Central Great Plains
 
 **Citation:** Wardlow, B. D., Egbert, S. L., & Kastens, J. H. (2007). Analysis of time-series MODIS 250 m vegetation index data for crop classification in the U.S. Central Great Plains. *Remote Sensing of Environment*, 108(3), 290–310. DOI: 10.1016/j.rse.2006.11.021 (verified via Crossref).
+**BibTeX key:** `wardlow2007analysis`
 
 ## Objectives
 

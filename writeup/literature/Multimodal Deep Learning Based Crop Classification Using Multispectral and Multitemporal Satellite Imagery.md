@@ -1,6 +1,7 @@
 # Multimodal Deep Learning Based Crop Classification Using Multispectral and Multitemporal Satellite Imagery
 
 **Citation:** Krishna Karthik Gadiraju, Bharathkumar Ramachandra, Zexi Chen, Ranga Raju Vatsavai (2020). "Multimodal Deep Learning Based Crop Classification Using Multispectral and Multitemporal Satellite Imagery." In *Proceedings of the 26th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '20)*, pp. 3234–3242. DOI: `10.1145/3394486.3403375` (verified via Crossref).
+**BibTeX key:** `gadiraju2020multimodal`
 
 ## Objectives
 

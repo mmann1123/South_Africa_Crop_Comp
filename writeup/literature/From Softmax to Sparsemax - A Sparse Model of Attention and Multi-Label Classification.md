@@ -1,6 +1,7 @@
 # From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification
 
 **Citation:** Martins, A. F. T. & Astudillo, R. F. (2016). *From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification.* Proceedings of the 33rd International Conference on Machine Learning (ICML 2016), PMLR v48, pp. 1614–1623. arXiv:1602.02068. DOI: not found in PDF (PMLR proceedings paper; no Crossref DOI assigned — identify by PMLR v48 / arXiv:1602.02068).
+**BibTeX key:** `martins2016softmax`
 
 > **Note:** this is the foundational **sparsemax** paper — *not* the Lightweight Temporal Attention Encoder (Garnot et al.; see `ltae2020_Garnot_LTAE.pdf`), under which name it had originally been misfiled. It is relevant to the L-TAE line of work only because L-TAE-style temporal attention is built on softmax, and sparsemax/entmax are the sparse-attention alternatives.
 

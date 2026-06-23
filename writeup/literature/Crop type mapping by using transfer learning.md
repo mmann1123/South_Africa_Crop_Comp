@@ -1,6 +1,7 @@
 # Crop type mapping by using transfer learning
 
 **Citation:** Nowakowski, A., Mrziglod, J., Spiller, D., Bonifacio, R., Ferrari, I., Mathieu, P. P., Garcia-Herranz, M., & Kim, D.-H. (2021). Crop type mapping by using transfer learning. *International Journal of Applied Earth Observation and Geoinformation*, 98, 102313. DOI: 10.1016/j.jag.2021.102313
+**BibTeX key:** `nowakowski2021type`
 
 ## Objectives
 
