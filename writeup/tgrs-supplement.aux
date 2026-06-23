@@ -1,0 +1,104 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{mann2023}
+\citation{mann2025}
+\citation{james2013}
+\citation{breiman2001}
+\citation{ke2017}
+\citation{chen2016}
+\citation{friedman2001}
+\@writefile{lof}{\contentsline {figure}{\numberline {S1}{\ignorespaces Number of fields per crop type in the training and holdout regions.}}{1}{figure.1}\protected@file@percent }
+\newlabel{sfig:fields}{{S1}{1}{Number of fields per crop type in the training and holdout regions}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {S-A}Dataset Details, Feature Set, and Model Definitions}{1}{section.1}\protected@file@percent }
+\newlabel{sec:models}{{S-A}{1}{Dataset Details, Feature Set, and Model Definitions}{section.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {S-A-A}}Exploratory Data Analysis}{1}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {S-A-B}}\texttt  {xr\_fresh} Feature Set}{1}{subsection.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {S2}{\ignorespaces Average field area by crop type (hectares).}}{1}{figure.2}\protected@file@percent }
+\newlabel{sfig:area}{{S2}{1}{Average field area by crop type (hectares)}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S3}{\ignorespaces Spectral band intensities by crop type. The substantial overlap shows that classification from a limited set of spectral bands alone is challenging.}}{1}{figure.3}\protected@file@percent }
+\newlabel{sfig:box}{{S3}{1}{Spectral band intensities by crop type. The substantial overlap shows that classification from a limited set of spectral bands alone is challenging}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {S-A-C}}Baseline Classical Model Definitions}{1}{subsection.1.3}\protected@file@percent }
+\citation{tabnet_orig}
+\citation{tabnet2024}
+\@writefile{lof}{\contentsline {figure}{\numberline {S4}{\ignorespaces Wheat versus barley spectral band intensities. The high similarity motivates their persistent classification confusion across all models.}}{2}{figure.4}\protected@file@percent }
+\newlabel{sfig:wb}{{S4}{2}{Wheat versus barley spectral band intensities. The high similarity motivates their persistent classification confusion across all models}{figure.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S1}{\ignorespaces Time-series features extracted from each pixel's spectral profile with \texttt  {xr\_fresh}.}}{2}{table.1}\protected@file@percent }
+\newlabel{stab:features}{{S1}{2}{Time-series features extracted from each pixel's spectral profile with \texttt {xr\_fresh}}{table.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S5}{\ignorespaces Extraction of statistical and temporal features from the 10-month spectral time series.}}{2}{figure.5}\protected@file@percent }
+\newlabel{sfig:tsfeat}{{S5}{2}{Extraction of statistical and temporal features from the 10-month spectral time series}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S6}{\ignorespaces Field-level aggregation of pixel features: pixel values are grouped by field polygon and summarized into a single feature vector per field.}}{2}{figure.6}\protected@file@percent }
+\newlabel{sfig:fieldagg}{{S6}{2}{Field-level aggregation of pixel features: pixel values are grouped by field polygon and summarized into a single feature vector per field}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {S-A-D}}Deep Model Definitions}{2}{subsection.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0a}CNN-BiLSTM}{2}{paragraph.1.4.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0b}TabNet}{2}{paragraph.1.4.0.2}\protected@file@percent }
+\citation{ltae2020}
+\citation{vaswani2017}
+\citation{russwurm2020}
+\citation{tempcnn2019}
+\citation{ai4foodsecurity}
+\@writefile{lot}{\contentsline {table}{\numberline {S2}{\ignorespaces XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy.}}{3}{table.2}\protected@file@percent }
+\newlabel{stab:trials}{{S2}{3}{XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy}{table.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S7}{\ignorespaces Architecture of the CNN + BiLSTM model: 1D convolutional temporal feature extraction followed by a bidirectional LSTM.}}{3}{figure.7}\protected@file@percent }
+\newlabel{sfig:bilstm}{{S7}{3}{Architecture of the CNN + BiLSTM model: 1D convolutional temporal feature extraction followed by a bidirectional LSTM}{figure.7}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0c}L-TAE}{3}{paragraph.1.4.0.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0d}Transformer encoder}{3}{paragraph.1.4.0.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0e}TempCNN}{3}{paragraph.1.4.0.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0f}Patch models}{3}{paragraph.1.4.0.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {S8}{\ignorespaces Illustration of patch generation per field.}}{3}{figure.8}\protected@file@percent }
+\newlabel{sfig:patches}{{S8}{3}{Illustration of patch generation per field}{figure.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {S-B}Performance Metric Definitions}{3}{section.2}\protected@file@percent }
+\newlabel{sec:metrics}{{S-B}{3}{Performance Metric Definitions}{section.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S9}{\ignorespaces Patch-level 3D CNN pipeline: each field is tiled into 100\nobreakspace  {}m patches resampled to $128\times 128$; a five-seed ensemble averages softmax outputs, and per-patch predictions are aggregated to a field label by majority vote.}}{4}{figure.9}\protected@file@percent }
+\newlabel{sfig:patchmodel}{{S9}{4}{Patch-level 3D CNN pipeline: each field is tiled into 100~m patches resampled to $128\times 128$; a five-seed ensemble averages softmax outputs, and per-patch predictions are aggregated to a field label by majority vote}{figure.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {S-C}Training Cost}{4}{section.3}\protected@file@percent }
+\newlabel{sec:cost}{{S-C}{4}{Training Cost}{section.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {S-D}Ablation Studies}{4}{section.4}\protected@file@percent }
+\newlabel{sec:ablation}{{S-D}{4}{Ablation Studies}{section.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S3}{\ignorespaces Training time for a single run (one seed) of each model. Trees timed as a single best-configuration fit, excluding the one-time Optuna search. $\dagger $Mean per seed for a 5-seed ensemble. $\ddagger $Measured on the 75\% training fraction, the best-transferring TabNet pixel configuration.}}{4}{table.3}\protected@file@percent }
+\newlabel{stab:cost}{{S3}{4}{Training time for a single run (one seed) of each model. Trees timed as a single best-configuration fit, excluding the one-time Optuna search. $\dagger $Mean per seed for a 5-seed ensemble. $\ddagger $Measured on the 75\% training fraction, the best-transferring TabNet pixel configuration}{table.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S4}{\ignorespaces Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size, by re-inference of saved per-seed checkpoints. Single-seed rows report mean$\pm $s.d.\ across five seeds.}}{4}{table.4}\protected@file@percent }
+\newlabel{stab:ens}{{S4}{4}{Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size, by re-inference of saved per-seed checkpoints. Single-seed rows report mean$\pm $s.d.\ across five seeds}{table.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {S-E}Data Efficiency Under Spatial Transfer}{4}{section.5}\protected@file@percent }
+\newlabel{sec:efficiency}{{S-E}{4}{Data Efficiency Under Spatial Transfer}{section.5}{}}
+\bibcite{mann2023}{1}
+\bibcite{mann2025}{2}
+\bibcite{james2013}{3}
+\bibcite{breiman2001}{4}
+\bibcite{ke2017}{5}
+\bibcite{chen2016}{6}
+\bibcite{friedman2001}{7}
+\bibcite{tabnet_orig}{8}
+\bibcite{tabnet2024}{9}
+\bibcite{ltae2020}{10}
+\@writefile{lot}{\contentsline {table}{\numberline {S5}{\ignorespaces Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer holdout performance (field-level, 5-seed ensembles). ``Resample'' denotes class-balanced oversampling.}}{5}{table.5}\protected@file@percent }
+\newlabel{stab:loss}{{S5}{5}{Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer holdout performance (field-level, 5-seed ensembles). ``Resample'' denotes class-balanced oversampling}{table.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S10}{\ignorespaces Spatial-transfer macro-F1 versus fraction of training fields. Robust models (TabNet, logistic regression, L-TAE-S) are nearly flat.}}{5}{figure.10}\protected@file@percent }
+\newlabel{sfig:reduction}{{S10}{5}{Spatial-transfer macro-F1 versus fraction of training fields. Robust models (TabNet, logistic regression, L-TAE-S) are nearly flat}{figure.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {S-F}Raw Reflectance Versus \texttt  {xr\_fresh}}{5}{section.6}\protected@file@percent }
+\newlabel{sec:repr}{{S-F}{5}{Raw Reflectance Versus \texttt {xr\_fresh}}{section.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S6}{\ignorespaces Raw reflectance versus \texttt  {xr\_fresh} for a single fixed XGBoost learner, identical splits and pooling; only the input representation differs.}}{5}{table.6}\protected@file@percent }
+\newlabel{stab:repr}{{S6}{5}{Raw reflectance versus \texttt {xr\_fresh} for a single fixed XGBoost learner, identical splits and pooling; only the input representation differs}{table.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S11}{\ignorespaces Spatial-transfer macro-F1 at pixel versus field level. Field-level aggregation recovers transfer for dense temporal models (L-TAE, CNN-BiLSTM) but collapses the sparsity-reliant TabNet. Error bars are 95\% bootstrap CIs over holdout fields.}}{5}{figure.11}\protected@file@percent }
+\newlabel{sfig:pixfield}{{S11}{5}{Spatial-transfer macro-F1 at pixel versus field level. Field-level aggregation recovers transfer for dense temporal models (L-TAE, CNN-BiLSTM) but collapses the sparsity-reliant TabNet. Error bars are 95\% bootstrap CIs over holdout fields}{figure.11}{}}
+\@writefile{toc}{\contentsline {section}{References}{5}{section*.1}\protected@file@percent }
+\bibcite{vaswani2017}{11}
+\bibcite{russwurm2020}{12}
+\bibcite{tempcnn2019}{13}
+\bibcite{ai4foodsecurity}{14}
+\gdef \@abspage@last{6}
