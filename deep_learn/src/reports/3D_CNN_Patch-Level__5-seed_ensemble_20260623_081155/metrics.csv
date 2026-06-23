@@ -1,0 +1,2 @@
+model_name,accuracy,cohen_kappa,f1_weighted,f1_macro,level
+3D CNN Patch-Level (5-seed ensemble),0.7506024096385542,0.6542300021533898,0.7474249819215376,0.6997049137372509,test

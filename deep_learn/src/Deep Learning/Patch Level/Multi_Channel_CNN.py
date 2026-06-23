@@ -4,6 +4,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'
 from config import PATCH_DATA_PATH, MODEL_DIR, REPORTS_DIR
 
 import math
+import time as _time
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -141,27 +142,59 @@ def main():
     n_channels = len(channel_cols)
     n_classes = len(le.classes_)
 
-    train_seq = PatchSequence(store_tr, labels_tr, ids_tr, n_channels, TARGET_SIZE, BATCH_SIZE, shuffle=True)
+    # val_seq has shuffle=False, so its row order is fixed (== ids_te order) and
+    # identical across seeds — required to average probabilities positionally.
     val_seq = PatchSequence(store_te, labels_te, ids_te, n_channels, TARGET_SIZE, BATCH_SIZE, shuffle=False)
 
-    model = models.Sequential([
-        layers.Input(shape=(TARGET_SIZE[0], TARGET_SIZE[1], n_channels)),
-        layers.Conv2D(32, (3, 3), activation='relu'),
-        layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(64, (3, 3), activation='relu'),
-        layers.MaxPooling2D((2, 2)),
-        layers.Flatten(),
-        layers.Dense(64, activation='relu'),
-        layers.Dense(n_classes, activation='softmax')
-    ])
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    model.summary()
+    # 5-seed ensemble: train one model per seed, average softmax probabilities.
+    SEEDS = [42, 101, 202, 303, 404]
+    t_train_start = _time.time()
+    prob_sum = None          # accumulates per-seed patch-level probabilities
+    first_history = None     # training curve from the first seed (for the report)
+    per_seed_seconds = {}
 
-    model.fit(train_seq, epochs=EPOCHS, validation_data=val_seq)
+    for si, seed in enumerate(SEEDS):
+        print(f"\n===== Seed {seed} ({si + 1}/{len(SEEDS)}) =====")
+        seed_start = _time.time()
+        tf.random.set_seed(seed)
+        np.random.seed(seed)
 
-    # ---- Patch-level predictions on the held-out (in-region) test split ----
-    y_pred_patch = np.argmax(model.predict(val_seq), axis=1)
+        # Rebuild train_seq after seeding so the initial shuffle is seed-dependent.
+        train_seq = PatchSequence(store_tr, labels_tr, ids_tr, n_channels, TARGET_SIZE, BATCH_SIZE, shuffle=True)
+
+        model = models.Sequential([
+            layers.Input(shape=(TARGET_SIZE[0], TARGET_SIZE[1], n_channels)),
+            layers.Conv2D(32, (3, 3), activation='relu'),
+            layers.MaxPooling2D((2, 2)),
+            layers.Conv2D(64, (3, 3), activation='relu'),
+            layers.MaxPooling2D((2, 2)),
+            layers.Flatten(),
+            layers.Dense(64, activation='relu'),
+            layers.Dense(n_classes, activation='softmax')
+        ])
+        model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+        if si == 0:
+            model.summary()
+
+        history = model.fit(train_seq, epochs=EPOCHS, validation_data=val_seq)
+        if first_history is None:
+            first_history = history.history
+
+        probs = model.predict(val_seq)
+        prob_sum = probs if prob_sum is None else prob_sum + probs
+
+        os.makedirs(MODEL_DIR, exist_ok=True)
+        model.save(os.path.join(MODEL_DIR, f"patch_level_cnn_seed{seed}.h5"))
+
+        seed_elapsed = _time.time() - seed_start
+        per_seed_seconds[str(seed)] = round(seed_elapsed, 1)
+        print(f"Seed {seed} done in {seed_elapsed / 60:.1f} min")
+
+    # ---- Ensemble patch-level predictions (mean softmax over seeds) ----
+    ensemble_probs = prob_sum / len(SEEDS)
+    y_pred_patch = np.argmax(ensemble_probs, axis=1)
     y_true_patch = np.array([labels_te[pid] for pid in ids_te], dtype=np.int64)
+    print("Per-seed training time (s):", per_seed_seconds)
 
     acc_patch = accuracy_score(y_true_patch, y_pred_patch)
     print(f"\n--- PATCH-LEVEL TEST ---  acc={acc_patch:.4f}  "
@@ -186,16 +219,12 @@ def main():
     print(f"--- FIELD-LEVEL TEST ---  fields={len(common_fields)}  "
           f"F1_macro={f1m:.4f}  kappa={cohen_kappa_score(y_field_true, y_field_pred):.4f}")
 
-    os.makedirs(MODEL_DIR, exist_ok=True)
-    model.save(os.path.join(MODEL_DIR, "patch_level_cnn.h5"))
-    print("CNN model saved to", os.path.join(MODEL_DIR, "patch_level_cnn.h5"))
-
     import joblib
     joblib.dump(le, os.path.join(MODEL_DIR, "multi_channel_cnn_label_encoder.joblib"))
 
     # Report field-level metrics (matches the field-based convention used for the
     # 3D CNN patch model and the spatial-transfer table).
-    report = ModelReport("Multi-Channel CNN Patch-Level", os.path.abspath(__file__))
+    report = ModelReport("Multi-Channel CNN Patch-Level (5-seed ensemble)", os.path.abspath(__file__))
     report.set_hyperparameters({
         "target_size": list(TARGET_SIZE),
         "batch_size": BATCH_SIZE,
@@ -203,10 +232,17 @@ def main():
         "optimizer": "Adam",
         "loss": "sparse_categorical_crossentropy",
         "channels": n_channels,
+        "n_models": len(SEEDS),
+        "seeds": SEEDS,
+        "aggregation": "mean softmax over 5 seeds (patch-level), then majority vote by FID",
+        "per_seed_seconds": per_seed_seconds,
     })
     report.set_split_info(train=len(ids_tr), test=len(common_fields),
                           seed=42, split_method="field-based (patch-level)")
     report.set_metrics(y_field_true, y_field_pred, le.classes_)
+    report.set_training_history(first_history)
+    report.set_training_time(_time.time() - t_train_start)
+    report.add_notes(f"Per-seed training time (s): {per_seed_seconds}")
     report.generate()
 
 

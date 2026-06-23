@@ -1,0 +1,207 @@
+{
+  "model_name": "3D CNN Patch-Level (5-seed ensemble)",
+  "timestamp": "2026-06-23T08:11:55.107950",
+  "script_path": "/tmp/eval_3dcnn_field.py",
+  "hyperparameters": {
+    "target_size": [
+      128,
+      128
+    ],
+    "batch_size": 8,
+    "epochs": 30,
+    "optimizer": "Adam(lr=1e-4)",
+    "loss": "WeightedSparseFocalLoss(gamma=2.0, alpha=1/class_counts)",
+    "model_selection": "val F1 macro (maximize)",
+    "early_stopping_patience": 6,
+    "data_pipeline": "numpy patch store + vectorized reconstruct + tf.data parallel map/prefetch",
+    "conv3d_filters": [
+      32,
+      64,
+      128
+    ],
+    "bands": [
+      "SA_B11",
+      "SA_B12",
+      "SA_B2",
+      "SA_B6",
+      "SA_EVI",
+      "SA_hue"
+    ],
+    "time_steps": 10,
+    "n_models": 5,
+    "seeds": [
+      42,
+      101,
+      202,
+      303,
+      404
+    ],
+    "reporting_level": "field-level (majority vote by FID)",
+    "aggregation": "mean softmax over 5 seeds (patch-level) -> argmax -> majority vote by FID",
+    "patch_level_accuracy": 0.7679,
+    "patch_level_kappa": 0.6977,
+    "per_seed_seconds": {
+      "42": 1597.4,
+      "101": 1821.5,
+      "202": 1095.9,
+      "303": 880.7,
+      "404": 1098.4
+    }
+  },
+  "split_info": {
+    "train_count": 21741,
+    "val_count": 0,
+    "test_count": 830,
+    "random_seed": 42,
+    "split_method": "field-based (patch-level); metrics aggregated to FID"
+  },
+  "metrics": {
+    "level": "test",
+    "accuracy": 0.7506024096385542,
+    "cohen_kappa": 0.6542300021533898,
+    "f1_weighted": 0.7474249819215376,
+    "f1_macro": 0.6997049137372509,
+    "macro_avg": {
+      "precision": 0.7104444934186207,
+      "recall": 0.6951944481163251,
+      "f1-score": 0.6997049137372509,
+      "support": 830.0
+    },
+    "weighted_avg": {
+      "precision": 0.7501331287025884,
+      "recall": 0.7506024096385542,
+      "f1-score": 0.7474249819215376,
+      "support": 830.0
+    }
+  },
+  "class_names": [
+    "Barley",
+    "Canola",
+    "Lucerne/Medics",
+    "Small grain grazing",
+    "Wheat"
+  ],
+  "confusion_matrix": [
+    [
+      84,
+      0,
+      6,
+      9,
+      26
+    ],
+    [
+      2,
+      76,
+      3,
+      3,
+      5
+    ],
+    [
+      2,
+      2,
+      329,
+      15,
+      8
+    ],
+    [
+      6,
+      1,
+      26,
+      43,
+      9
+    ],
+    [
+      54,
+      1,
+      15,
+      14,
+      91
+    ]
+  ],
+  "per_class": {
+    "Barley": {
+      "precision": 0.5675675675675675,
+      "recall": 0.672,
+      "f1-score": 0.6153846153846154,
+      "support": 125.0
+    },
+    "Canola": {
+      "precision": 0.95,
+      "recall": 0.8539325842696629,
+      "f1-score": 0.8994082840236687,
+      "support": 89.0
+    },
+    "Lucerne/Medics": {
+      "precision": 0.8680738786279684,
+      "recall": 0.9241573033707865,
+      "f1-score": 0.8952380952380953,
+      "support": 356.0
+    },
+    "Small grain grazing": {
+      "precision": 0.5119047619047619,
+      "recall": 0.5058823529411764,
+      "f1-score": 0.5088757396449705,
+      "support": 85.0
+    },
+    "Wheat": {
+      "precision": 0.6546762589928058,
+      "recall": 0.52,
+      "f1-score": 0.5796178343949044,
+      "support": 175.0
+    }
+  },
+  "training_history": {
+    "accuracy": [
+      0.5854376554489136,
+      0.6768317818641663,
+      0.703095555305481,
+      0.7105469107627869,
+      0.7220458984375,
+      0.7317510843276978,
+      0.7369946241378784,
+      0.7454578876495361,
+      0.750655472278595,
+      0.753875195980072,
+      0.7587507367134094,
+      0.7645002603530884,
+      0.7710316777229309,
+      0.7767812013626099,
+      0.7799089550971985,
+      0.7858424186706543,
+      0.7913159728050232,
+      0.7935697436332703,
+      0.800469160079956,
+      0.8060346841812134,
+      0.811002254486084,
+      0.8180856704711914
+    ],
+    "loss": [
+      0.5363768935203552,
+      0.41489681601524353,
+      0.3814367949962616,
+      0.36371347308158875,
+      0.348885715007782,
+      0.3353870213031769,
+      0.32478076219558716,
+      0.3124223053455353,
+      0.30194881558418274,
+      0.29185113310813904,
+      0.2814488708972931,
+      0.2699788212776184,
+      0.2634745240211487,
+      0.25237804651260376,
+      0.24151986837387085,
+      0.23515771329402924,
+      0.2259628027677536,
+      0.2180435061454773,
+      0.21098439395427704,
+      0.2038811445236206,
+      0.195682555437088,
+      0.18794716894626617
+    ]
+  },
+  "feature_importance": null,
+  "training_time_seconds": 6507.737669706345,
+  "notes": "Field-level metrics (majority vote by FID; 830 fields). Patch-level acc=0.7679, kappa=0.6977. Per-seed training time (s): {'42': 1597.4, '101': 1821.5, '202': 1095.9, '303': 880.7, '404': 1098.4}",
+  "pdf_path": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/3D_CNN_Patch-Level__5-seed_ensemble_20260623_081155/report.pdf"
+}

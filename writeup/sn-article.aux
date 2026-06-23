@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -138,17 +141,17 @@
 \newlabel{fig:example_patches}{{9}{25}{Illustration of patch generation per field.\relax }{figure.caption.28}{}}
 \@writefile{toc}{\contentsline {paragraph}{Multi-Channel 2D CNN.}{25}{section*.29}\protected@file@percent }
 \citation{ai4foodsecurity}
-\@writefile{toc}{\contentsline {paragraph}{Ensemble of Class-Specific 3D CNNs.}{26}{section*.30}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces 3D CNN ensemble architecture for patch-level crop classification.\relax }}{26}{figure.caption.31}\protected@file@percent }
-\newlabel{fig:patch_model}{{10}{26}{3D CNN ensemble architecture for patch-level crop classification.\relax }{figure.caption.31}{}}
+\@writefile{toc}{\contentsline {paragraph}{3D CNN.}{26}{section*.30}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Performance Metrics}{26}{subsection.3.3}\protected@file@percent }
 \newlabel{subsec:performance_metrics}{{3.3}{26}{Performance Metrics}{subsection.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{26}{section.4}\protected@file@percent }
+\newlabel{sec:results}{{4}{26}{Results}{section.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Patch-level 3D CNN pipeline. Each field is tiled into 100\,m patches and resampled to $128\times 128$; a single multiclass 3D CNN is trained as a five-seed ensemble whose softmax outputs are averaged, and per-patch predictions are aggregated to a field label by majority vote.\relax }}{27}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:patch_model}{{10}{27}{Patch-level 3D CNN pipeline. Each field is tiled into 100\,m patches and resampled to $128\times 128$; a single multiclass 3D CNN is trained as a five-seed ensemble whose softmax outputs are averaged, and per-patch predictions are aggregated to a field label by majority vote.\relax }{figure.caption.31}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}In-region validation overstates performance and misranks models}{27}{subsection.4.1}\protected@file@percent }
 \citation{ai4foodsecurity}
 \citation{capstone_repo}
 \citation{capstone_repo}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{27}{section.4}\protected@file@percent }
-\newlabel{sec:results}{{4}{27}{Results}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}In-region validation overstates performance and misranks models}{27}{subsection.4.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces In-region versus spatial-transfer performance of all models.\relax }}{28}{table.caption.33}\protected@file@percent }
 \newlabel{tab:gap}{{3}{28}{In-region versus spatial-transfer performance of all models.\relax }{table.caption.33}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces In-region versus spatial-transfer macro-F1 by model, sorted by gap.\relax }}{29}{figure.caption.34}\protected@file@percent }

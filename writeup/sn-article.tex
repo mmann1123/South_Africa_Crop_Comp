@@ -655,26 +655,39 @@ classification head:
 \[
     \hat{\mathbf{p}} = \operatorname{softmax}\!\left(W_{\mathrm{fc}}\,\mathbf{z} + b_{\mathrm{fc}}\right)
 \]
+The model is trained as a five-seed ensemble (identical architecture, distinct
+random seeds); per-patch class probabilities are averaged across the five seeds,
+and patch-level predictions are aggregated to a field label by majority vote,
+consistent with the field-level evaluation used throughout.
 
-% --- 3b. Ensemble of Class-Specific 3D CNNs ---
-\paragraph{Ensemble of Class-Specific 3D CNNs.}
+% --- 3b. 3D CNN ---
+\paragraph{3D CNN.}
 
-Five class-specific 3D CNNs are trained, each producing a scalar score
-$p_i = f_i(\mathbf{X})$ for its target class. A logistic regression meta-learner
-combines these scores into a final prediction (Figure~\ref{fig:patch_model}):
+A single 3D CNN treats each patch as a spatiotemporal volume
+$\mathbf{X}\in\mathbb{R}^{T\times H\times W\times C}$ ($T=10$ months,
+$H=W=128$, $C=6$ bands) and applies three 3D-convolutional blocks (32, 64, and
+128 filters, $3\times3\times3$ kernels) with spatial max-pooling, followed by
+global average pooling and a 128-unit ReLU dense layer producing $\mathbf{z}$,
+then a softmax classification head over the five crops:
 \[
-    \hat{\mathbf{p}} = \operatorname{softmax}\!\left(
-        W_{\mathrm{meta}}[p_1,\dots,p_5]^\top + b_{\mathrm{meta}}
-    \right)
+    \hat{\mathbf{p}} = \operatorname{softmax}\!\left(W_{\mathrm{fc}}\,\mathbf{z} + b_{\mathrm{fc}}\right)
 \]
-By modelling volumetric relationships jointly across spectral bands, spatial
+Class imbalance is handled directly in the loss via a weighted focal loss
+($\gamma=2.0$, per-class weight $\alpha_t$ set to inverse class frequency). By
+modelling volumetric relationships jointly across spectral bands, spatial
 dimensions, and time, 3D convolutions capture crop-specific texture and
-phenological trajectories that 2D methods treat independently.
+phenological trajectories that 2D methods treat independently. As with the
+temporal networks, the model is trained as a five-seed ensemble whose softmax
+outputs are averaged across seeds, and patch predictions are aggregated to a
+field label by majority vote (Figure~\ref{fig:patch_model}).
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\linewidth]{patch_model.pdf}
-\caption{3D CNN ensemble architecture for patch-level crop classification.}
+\caption{Patch-level 3D CNN pipeline. Each field is tiled into 100\,m patches and
+resampled to $128\times128$; a single multiclass 3D CNN is trained as a five-seed
+ensemble whose softmax outputs are averaged, and per-patch predictions are
+aggregated to a field label by majority vote.}
 \label{fig:patch_model}
 \end{figure}
 
@@ -724,8 +737,8 @@ from this cluster. On the holdout tile the cluster fractures sharply: the two in
 leaders (L-TAE pixel and the Transformer encoder, $\Delta=-0.20$) drop to F1$_m=0.58$,
 TempCNN ($-0.21$) to 0.56, and CNN-BiLSTM ($-0.26$) to 0.46, this is among the lowest absolute
 scores of any model. Only L-TAE-S, the sparse-attention variant, holds its ground. The
-same in-region-to-holdout collapse befalls the 3D CNN patch ensemble ($-0.22$), the
-Multi-Channel 2D CNN ($-0.22$), and SMOTE-resampled stacking ($-0.21$).
+same in-region-to-holdout collapse befalls the 3D CNN patch ensemble ($-0.20$), the
+Multi-Channel 2D CNN ($-0.18$), and SMOTE-resampled stacking ($-0.21$).
 
 \begin{table}[htbp]
 \centering
@@ -757,11 +770,11 @@ Base XGBoost          & pixel & \texttt{xr\_fresh} & 0.64 & $-0.09$ & 0.54 & 0.4
 TempCNN               & field & raw & 0.67 & $-0.14$ & 0.54 & 0.43 & 0.64 & 6.07 \\
 Stacking              & field & \texttt{xr\_fresh} & 0.64 & $-0.11$ & 0.53 & 0.48 & 0.67 & 5.32 \\
 CNN-BiLSTM            & field & raw & 0.64 & $-0.14$ & 0.51 & 0.33 & 0.54 & 7.86 \\
+3D CNN                & patch & raw & 0.70 & $-0.20$ & 0.50 & 0.29 & 0.54 & 7.98 \\
 SMOTE Stacked         & field & \texttt{xr\_fresh} & 0.69 & $-0.21$ & 0.49 & 0.43 & 0.63 & 5.37 \\
-3D CNN                & patch & raw & 0.70 & $-0.22$ & 0.48 & 0.30 & 0.55 & 7.79 \\
 CNN-BiLSTM            & pixel & raw & 0.72 & $-0.26$ & 0.46 & 0.32 & 0.56 & 7.73 \\
+Multi-Channel CNN     & patch & raw & 0.63 & $-0.18$ & 0.45 & 0.30 & 0.54 & 7.62 \\
 TabNet Temporal       & field & raw & 0.62 & $-0.19$ & 0.43 & 0.31 & 0.56 & 7.35 \\
-Multi-Channel CNN     & patch & raw & 0.63 & $-0.22$ & 0.40 & 0.25 & 0.50 & 8.62 \\
 TabNet                & field & \texttt{xr\_fresh} & 0.51 & $-0.15$ & 0.37 & 0.25 & 0.53 & 6.13 \\
 \bottomrule
 \end{tabular}
@@ -1004,7 +1017,7 @@ groups every model by inductive bias and plots its spatial-transfer gap. The
 ordering is stark: linear models lose the least (mean $\Delta=-0.05$), tree-based
 models little (mean $-0.11$), the sparse-attention L-TAE-S sits essentially with
 the trees (mean $-0.11$ across its pixel and field-aggregated variants), while
-dense temporal/patch deep nets lose the most (mean $-0.22$) and SMOTE-augmented
+dense temporal/patch deep nets lose the most (mean $-0.21$) and SMOTE-augmented
 stacking is similarly fragile ($-0.21$).
 Random Forest and gradient-boosted trees have been the remote-sensing workhorse
 for two decades not because they always produce the highest in-region accuracy
@@ -1131,16 +1144,16 @@ resource-constrained deployment.
 \paragraph{Patch-level spatial modeling.}
 
 Patch-level convolutional models did not exceed pixel-level models in-region and
-transferred poorly: the 3D CNN reached F1$_m=0.48$ ($\Delta=-0.22$) and the
-Multi-Channel 2D CNN only F1$_m=0.40$ ($\Delta=-0.22$), the second-lowest transfer
-score of any model. This is partly structural. At
+transferred poorly: the 3D CNN reached F1$_m=0.50$ ($\Delta=-0.20$) and the
+Multi-Channel 2D CNN only F1$_m=0.45$ ($\Delta=-0.18$), placing both in the lower
+third of the spatial-transfer ranking. This is partly structural. At
 Sentinel-2's 10\,m resolution the native 100\,m patches are only $\sim$10$\times$10
 pixels, so the local spatial context they can encode is limited, and resampling them
 to the network's $128\times128$ input adds interpolated rather than genuine detail.
 Narrow or small fields yield few fully-contained interior patches, further limiting
 the spatial signal available. Combined with a dense convolutional representation that
 offers no transfer-protective sparsity, these factors leave the patch models with
-little to exploit and the weakest spatial-transfer performance of any paradigm.
+little to exploit and among the weakest spatial-transfer performance of any paradigm.
 
 \paragraph{Persistent difficulty with small-grain grazing and barley.}
 

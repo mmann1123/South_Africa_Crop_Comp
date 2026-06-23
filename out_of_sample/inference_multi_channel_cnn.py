@@ -26,7 +26,9 @@ sys.path.insert(0, os.path.join(SCRIPT_DIR, "..", "deep_learn", "src"))
 from config import TEST_PATCH_DATA_PATH, PATCH_DATA_PATH, MODEL_DIR
 
 TEST_PATCH_DATA = TEST_PATCH_DATA_PATH
-MODEL_PATH = os.path.join(MODEL_DIR, "patch_level_cnn.h5")
+# 5-seed ensemble (matches Multi_Channel_CNN.py training: softmax averaged across seeds)
+SEEDS = [42, 101, 202, 303, 404]
+MODEL_PATHS = [os.path.join(MODEL_DIR, f"patch_level_cnn_seed{s}.h5") for s in SEEDS]
 OUTPUT_CSV = os.path.join(SCRIPT_DIR, "predictions_multi_channel_cnn.csv")
 
 TARGET_SIZE = (128, 128)
@@ -65,9 +67,12 @@ def main():
         print("Error: TensorFlow is required")
         return
 
-    if not os.path.exists(MODEL_PATH):
-        print(f"\nError: Model not found: {MODEL_PATH}")
-        print("Run Multi_Channel_CNN.py first to train the model.")
+    missing = [p for p in MODEL_PATHS if not os.path.exists(p)]
+    if missing:
+        print(f"\nError: missing {len(missing)} seed model(s):")
+        for p in missing:
+            print("  ", p)
+        print("Run Multi_Channel_CNN.py first to train the 5-seed ensemble.")
         return
 
     if not os.path.exists(TEST_PATCH_DATA):
@@ -102,13 +107,15 @@ def main():
     print(f"Unique patches: {len(patch_ids)}")
     print(f"Unique fields: {df['field_id'].nunique()}")
 
-    # Load model
-    print(f"\nLoading model: {MODEL_PATH}")
-    model = models.load_model(MODEL_PATH)
-    print("Model loaded successfully")
+    # Load the 5 seed models (compile=False: inference only)
+    print(f"\nLoading {len(MODEL_PATHS)}-seed ensemble...")
+    ensemble = []
+    for p in MODEL_PATHS:
+        ensemble.append(models.load_model(p, compile=False))
+        print(f"  loaded {os.path.basename(p)}")
 
-    # Check input shape matches
-    expected_channels = model.input_shape[-1]
+    # Check input shape matches (all seeds share the architecture)
+    expected_channels = ensemble[0].input_shape[-1]
     if len(clean_cols) != expected_channels:
         print(f"Warning: Model expects {expected_channels} channels but data has {len(clean_cols)}")
         print("Adjusting to match model input...")
@@ -133,7 +140,8 @@ def main():
 
         if len(batch_tensors) == BATCH_SIZE or i == len(patch_ids) - 1:
             X_batch = np.stack(batch_tensors, axis=0)
-            probs = model.predict(X_batch, verbose=0)
+            # Ensemble: average softmax probabilities across the 5 seed models
+            probs = np.mean([m.predict(X_batch, verbose=0) for m in ensemble], axis=0)
             pred_labels = np.argmax(probs, axis=1)
 
             for pid, pred in zip(batch_patch_ids, pred_labels):

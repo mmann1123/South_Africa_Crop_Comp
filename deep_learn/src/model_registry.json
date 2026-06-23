@@ -125,59 +125,6 @@
       "notes": null
     },
     {
-      "run_id": "3d_cnn_patch-level_20260208_112816",
-      "name": "3D CNN Patch-Level",
-      "model_type": "pytorch",
-      "timestamp": "2026-02-08T11:28:16.709759",
-      "metrics": {
-        "level": "test",
-        "accuracy": 0.7427677873338546,
-        "cohen_kappa": 0.6631930034213696,
-        "f1_weighted": 0.7222428533587377,
-        "f1_macro": 0.6723906202253442,
-        "macro_avg": {
-          "precision": 0.73354554765742,
-          "recall": 0.6720190573526216,
-          "f1-score": 0.6723906202253442,
-          "support": 2558.0
-        },
-        "weighted_avg": {
-          "precision": 0.7501748616751114,
-          "recall": 0.7427677873338546,
-          "f1-score": 0.7222428533587377,
-          "support": 2558.0
-        }
-      },
-      "artifacts": {
-        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/3D_CNN_Patch-Level_20260208_112815"
-      },
-      "hyperparameters": {
-        "target_size": [
-          128,
-          128
-        ],
-        "batch_size": 8,
-        "epochs": 20,
-        "optimizer": "Adam(lr=1e-4)",
-        "loss": "sparse_categorical_crossentropy",
-        "conv3d_filters": [
-          32,
-          64,
-          128
-        ],
-        "bands": [
-          "SA_B11",
-          "SA_B12",
-          "SA_B2",
-          "SA_B6",
-          "SA_EVI",
-          "SA_hue"
-        ],
-        "time_steps": 10
-      },
-      "notes": null
-    },
-    {
       "run_id": "xgboost_field-level_20260208_142435",
       "name": "XGBoost Field-Level",
       "model_type": "xgboost",
@@ -986,59 +933,6 @@
       "notes": null
     },
     {
-      "run_id": "3d_cnn_patch-level_20260209_194128",
-      "name": "3D CNN Patch-Level",
-      "model_type": "pytorch",
-      "timestamp": "2026-02-09T19:41:28.723974",
-      "metrics": {
-        "level": "test",
-        "accuracy": 0.746677091477717,
-        "cohen_kappa": 0.6718513180713159,
-        "f1_weighted": 0.737694464018077,
-        "f1_macro": 0.6936129764617551,
-        "macro_avg": {
-          "precision": 0.7052662062732431,
-          "recall": 0.6939569095491344,
-          "f1-score": 0.6936129764617551,
-          "support": 2558.0
-        },
-        "weighted_avg": {
-          "precision": 0.7403890907039049,
-          "recall": 0.746677091477717,
-          "f1-score": 0.737694464018077,
-          "support": 2558.0
-        }
-      },
-      "artifacts": {
-        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/3D_CNN_Patch-Level_20260209_194127"
-      },
-      "hyperparameters": {
-        "target_size": [
-          128,
-          128
-        ],
-        "batch_size": 8,
-        "epochs": 20,
-        "optimizer": "Adam(lr=1e-4)",
-        "loss": "sparse_categorical_crossentropy",
-        "conv3d_filters": [
-          32,
-          64,
-          128
-        ],
-        "bands": [
-          "SA_B11",
-          "SA_B12",
-          "SA_B2",
-          "SA_B6",
-          "SA_EVI",
-          "SA_hue"
-        ],
-        "time_steps": 10
-      },
-      "notes": null
-    },
-    {
       "run_id": "xgboost_field-level_20260210_100404",
       "name": "XGBoost Field-Level",
       "model_type": "xgboost",
@@ -1152,59 +1046,6 @@
         "kernel_size": 5,
         "dropout": 0.3,
         "aggregation": "majority vote by FID"
-      },
-      "notes": null
-    },
-    {
-      "run_id": "3d_cnn_patch-level_20260210_202622",
-      "name": "3D CNN Patch-Level",
-      "model_type": "pytorch",
-      "timestamp": "2026-02-10T20:26:22.695833",
-      "metrics": {
-        "level": "test",
-        "accuracy": 0.7548085901027077,
-        "cohen_kappa": 0.6788591029349131,
-        "f1_weighted": 0.7484158306240506,
-        "f1_macro": 0.6994056529822654,
-        "macro_avg": {
-          "precision": 0.714894209789184,
-          "recall": 0.6927133129942697,
-          "f1-score": 0.6994056529822654,
-          "support": 5355.0
-        },
-        "weighted_avg": {
-          "precision": 0.7469803978675481,
-          "recall": 0.7548085901027077,
-          "f1-score": 0.7484158306240506,
-          "support": 5355.0
-        }
-      },
-      "artifacts": {
-        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/3D_CNN_Patch-Level_20260210_202621"
-      },
-      "hyperparameters": {
-        "target_size": [
-          128,
-          128
-        ],
-        "batch_size": 8,
-        "epochs": 20,
-        "optimizer": "Adam(lr=1e-4)",
-        "loss": "sparse_categorical_crossentropy",
-        "conv3d_filters": [
-          32,
-          64,
-          128
-        ],
-        "bands": [
-          "SA_B11",
-          "SA_B12",
-          "SA_B2",
-          "SA_B6",
-          "SA_EVI",
-          "SA_hue"
-        ],
-        "time_steps": 10
       },
       "notes": null
     },
@@ -3453,6 +3294,137 @@
         "positional_encoding": "sinusoidal (actual month positions)",
         "pooling": "temporal mean",
         "norm": "pre-norm (norm_first=True)"
+      },
+      "notes": null
+    },
+    {
+      "run_id": "multi-channel_cnn_patch-level_(5-seed_ensemble)_20260622_133128",
+      "name": "Multi-Channel CNN Patch-Level (5-seed ensemble)",
+      "model_type": "pytorch",
+      "timestamp": "2026-06-22T13:31:28.277036",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.7132530120481928,
+        "cohen_kappa": 0.5974478265565426,
+        "f1_weighted": 0.6961015397209128,
+        "f1_macro": 0.6260304497449891,
+        "macro_avg": {
+          "precision": 0.6481520816939332,
+          "recall": 0.6263904447172127,
+          "f1-score": 0.6260304497449891,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.6970564188609608,
+          "recall": 0.7132530120481928,
+          "f1-score": 0.6961015397209128,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/Multi-Channel_CNN_Patch-Level__5-seed_ensemble_20260622_133127"
+      },
+      "hyperparameters": {
+        "target_size": [
+          128,
+          128
+        ],
+        "batch_size": 64,
+        "epochs": 20,
+        "optimizer": "Adam",
+        "loss": "sparse_categorical_crossentropy",
+        "channels": 60,
+        "n_models": 5,
+        "seeds": [
+          42,
+          101,
+          202,
+          303,
+          404
+        ],
+        "aggregation": "mean softmax over 5 seeds (patch-level), then majority vote by FID",
+        "per_seed_seconds": {
+          "42": 2132.3,
+          "101": 2498.5,
+          "202": 2112.9,
+          "303": 2154.9,
+          "404": 2389.7
+        }
+      },
+      "notes": null
+    },
+    {
+      "run_id": "3d_cnn_patch-level_(5-seed_ensemble)_20260623_081155",
+      "name": "3D CNN Patch-Level (5-seed ensemble)",
+      "model_type": "pytorch",
+      "timestamp": "2026-06-23T08:11:55.866270",
+      "metrics": {
+        "level": "test",
+        "accuracy": 0.7506024096385542,
+        "cohen_kappa": 0.6542300021533898,
+        "f1_weighted": 0.7474249819215376,
+        "f1_macro": 0.6997049137372509,
+        "macro_avg": {
+          "precision": 0.7104444934186207,
+          "recall": 0.6951944481163251,
+          "f1-score": 0.6997049137372509,
+          "support": 830.0
+        },
+        "weighted_avg": {
+          "precision": 0.7501331287025884,
+          "recall": 0.7506024096385542,
+          "f1-score": 0.7474249819215376,
+          "support": 830.0
+        }
+      },
+      "artifacts": {
+        "report_dir": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/reports/3D_CNN_Patch-Level__5-seed_ensemble_20260623_081155"
+      },
+      "hyperparameters": {
+        "target_size": [
+          128,
+          128
+        ],
+        "batch_size": 8,
+        "epochs": 30,
+        "optimizer": "Adam(lr=1e-4)",
+        "loss": "WeightedSparseFocalLoss(gamma=2.0, alpha=1/class_counts)",
+        "model_selection": "val F1 macro (maximize)",
+        "early_stopping_patience": 6,
+        "data_pipeline": "numpy patch store + vectorized reconstruct + tf.data parallel map/prefetch",
+        "conv3d_filters": [
+          32,
+          64,
+          128
+        ],
+        "bands": [
+          "SA_B11",
+          "SA_B12",
+          "SA_B2",
+          "SA_B6",
+          "SA_EVI",
+          "SA_hue"
+        ],
+        "time_steps": 10,
+        "n_models": 5,
+        "seeds": [
+          42,
+          101,
+          202,
+          303,
+          404
+        ],
+        "reporting_level": "field-level (majority vote by FID)",
+        "aggregation": "mean softmax over 5 seeds (patch-level) -> argmax -> majority vote by FID",
+        "patch_level_accuracy": 0.7679,
+        "patch_level_kappa": 0.6977,
+        "per_seed_seconds": {
+          "42": 1597.4,
+          "101": 1821.5,
+          "202": 1095.9,
+          "303": 880.7,
+          "404": 1098.4
+        }
       },
       "notes": null
     }

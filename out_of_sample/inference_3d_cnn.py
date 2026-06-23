@@ -32,8 +32,9 @@ from config import TEST_PATCH_DATA_PATH, PATCH_DATA_PATH, MODEL_DIR
 # Input
 TEST_PATCH_DATA = TEST_PATCH_DATA_PATH
 
-# Model
-MODEL_PATH = os.path.join(MODEL_DIR, "conv3d_time_patch_level2.h5")
+# Models — 5-seed ensemble (matches 3D_CNN.py training: softmax averaged across seeds)
+SEEDS = [42, 101, 202, 303, 404]
+MODEL_PATHS = [os.path.join(MODEL_DIR, f"conv3d_time_patch_level_seed{s}.h5") for s in SEEDS]
 
 # Output
 OUTPUT_CSV = os.path.join(SCRIPT_DIR, "predictions_3d_cnn.csv")
@@ -112,10 +113,13 @@ def main():
         print("Error: TensorFlow is required for 3D CNN inference")
         return
 
-    # Check model exists
-    if not os.path.exists(MODEL_PATH):
-        print(f"\nError: Model not found: {MODEL_PATH}")
-        print("Run 3D_CNN.py first to train the model.")
+    # Check models exist
+    missing = [p for p in MODEL_PATHS if not os.path.exists(p)]
+    if missing:
+        print(f"\nError: missing {len(missing)} seed model(s):")
+        for p in missing:
+            print("  ", p)
+        print("Run 3D_CNN.py first to train the 5-seed ensemble.")
         return
 
     # Check patch data exists
@@ -167,10 +171,12 @@ def main():
     T = min(len(v) for v in band_mapping.values())
     print(f"Time steps: {T}")
 
-    # Load model
-    print(f"\nLoading model: {MODEL_PATH}")
-    model = models.load_model(MODEL_PATH)
-    print("Model loaded successfully")
+    # Load the 5 seed models (compile=False: skip the custom focal loss, inference only)
+    print(f"\nLoading {len(MODEL_PATHS)}-seed ensemble...")
+    ensemble = []
+    for p in MODEL_PATHS:
+        ensemble.append(models.load_model(p, compile=False))
+        print(f"  loaded {os.path.basename(p)}")
 
     # Pre-group dataframe by patch_id and extract field_id mapping
     print("\nPre-grouping patches...")
@@ -193,7 +199,8 @@ def main():
         # When batch is full or last patch, run prediction
         if len(batch_tensors) == BATCH_SIZE or i == len(patch_ids) - 1:
             X_batch = np.stack(batch_tensors, axis=0)
-            probs = model.predict(X_batch, verbose=0)
+            # Ensemble: average softmax probabilities across the 5 seed models
+            probs = np.mean([m.predict(X_batch, verbose=0) for m in ensemble], axis=0)
             pred_labels = np.argmax(probs, axis=1)
 
             for pid, pred in zip(batch_patch_ids, pred_labels):
