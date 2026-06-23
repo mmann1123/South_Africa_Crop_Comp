@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.2.2)  23 JUN 2026 13:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.2.2)  23 JUN 2026 13:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -636,22 +636,22 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9]
-<figures//fields_count.pdf, id=387, 553.8473pt x 385.71103pt>
+<figures//fields_count.pdf, id=389, 553.8473pt x 385.71103pt>
 File: figures//fields_count.pdf Graphic file (type pdf)
 <use figures//fields_count.pdf>
 Package pdftex.def Info: figures//fields_count.pdf  used on input line 159.
 (pdftex.def)             Requested size: 334.79773pt x 233.15872pt.
-<figures//avg_field_area.pdf, id=389, 549.37749pt x 385.71103pt>
+<figures//avg_field_area.pdf, id=391, 549.37749pt x 385.71103pt>
 File: figures//avg_field_area.pdf Graphic file (type pdf)
 <use figures//avg_field_area.pdf>
 Package pdftex.def Info: figures//avg_field_area.pdf  used on input line 169.
 (pdftex.def)             Requested size: 334.79773pt x 235.05383pt.
-<figures//all_crops_boxplot.pdf, id=391, 622.82063pt x 448.17827pt>
+<figures//all_crops_boxplot.pdf, id=393, 622.82063pt x 448.17827pt>
 File: figures//all_crops_boxplot.pdf Graphic file (type pdf)
 <use figures//all_crops_boxplot.pdf>
 Package pdftex.def Info: figures//all_crops_boxplot.pdf  used on input line 178.
 (pdftex.def)             Requested size: 334.79773pt x 240.91847pt.
-<figures//wheat_barley_boxplot.pdf, id=394, 622.82063pt x 427.55434pt>
+<figures//wheat_barley_boxplot.pdf, id=396, 622.82063pt x 427.55434pt>
 File: figures//wheat_barley_boxplot.pdf Graphic file (type pdf)
 <use figures//wheat_barley_boxplot.pdf>
 Package pdftex.def Info: figures//wheat_barley_boxplot.pdf  used on input line 189.
@@ -665,13 +665,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [11 <./figures//fields_count.pdf> <./figures//avg_field_area.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [12 <./figures//all_crops_boxplot.pdf> <./figures//wheat_barley_boxplot.pdf>]
+ [12 <./figures//all_crops_boxplot.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [13]
+ [13 <./figures//wheat_barley_boxplot.pdf>]
 
 pdfTeX warning: pdflatex (file ./figures//Time_Series_Feature_Generation.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<figures//Time_Series_Feature_Generation.pdf, id=600, 885.43108pt x 547.37108pt>
+<figures//Time_Series_Feature_Generation.pdf, id=603, 885.43108pt x 547.37108pt>
 File: figures//Time_Series_Feature_Generation.pdf Graphic file (type pdf)
 <use figures//Time_Series_Feature_Generation.pdf>
 Package pdftex.def Info: figures//Time_Series_Feature_Generation.pdf  used on input line 219.
@@ -691,7 +691,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 306--307
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [16]
-<figures//field_boundaries_by_crop.pdf, id=643, 512.44675pt x 482.96059pt>
+<figures//field_boundaries_by_crop.pdf, id=646, 512.44675pt x 482.96059pt>
 File: figures//field_boundaries_by_crop.pdf Graphic file (type pdf)
 <use figures//field_boundaries_by_crop.pdf>
 Package pdftex.def Info: figures//field_boundaries_by_crop.pdf  used on input line 330.
@@ -723,7 +723,7 @@ Overfull \hbox (16.84048pt too wide) in paragraph at lines 357--379
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [18 <./figures//field_boundaries_by_crop.pdf>]
-<figures//cnn_bilstm.pdf, id=708, 3898.1315pt x 3089.8819pt>
+<figures//cnn_bilstm.pdf, id=711, 3898.1315pt x 3089.8819pt>
 File: figures//cnn_bilstm.pdf Graphic file (type pdf)
 <use figures//cnn_bilstm.pdf>
 Package pdftex.def Info: figures//cnn_bilstm.pdf  used on input line 428.
@@ -751,7 +751,7 @@ Overfull \hbox (45.39043pt too wide) detected at line 570
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [22]
-<figures//ltae_s.pdf, id=784, 1340.00626pt x 852.18375pt>
+<figures//ltae_s.pdf, id=787, 1340.00626pt x 852.18375pt>
 File: figures//ltae_s.pdf Graphic file (type pdf)
 <use figures//ltae_s.pdf>
 Package pdftex.def Info: figures//ltae_s.pdf  used on input line 588.
@@ -760,7 +760,7 @@ Package pdftex.def Info: figures//ltae_s.pdf  used on input line 588.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [23 <./figures//ltae_s.pdf>]
-<figures//Example_patches.pdf, id=809, 614.13142pt x 636.80286pt>
+<figures//Example_patches.pdf, id=812, 614.13142pt x 636.80286pt>
 File: figures//Example_patches.pdf Graphic file (type pdf)
 <use figures//Example_patches.pdf>
 Package pdftex.def Info: figures//Example_patches.pdf  used on input line 634.
@@ -772,7 +772,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [25 <./figures//Example_patches.pdf>]
-<figures//patch_model.pdf, id=865, 1320.935pt x 863.225pt>
+<figures//patch_model.pdf, id=868, 1320.935pt x 863.225pt>
 File: figures//patch_model.pdf Graphic file (type pdf)
 <use figures//patch_model.pdf>
 Package pdftex.def Info: figures//patch_model.pdf  used on input line 689.
@@ -784,7 +784,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [27 <./figures//patch_model.pdf>]
-<figures//train_vs_oos_gap.pdf, id=907, 761.40771pt x 576.91328pt>
+<figures//train_vs_oos_gap.pdf, id=910, 761.40771pt x 576.91328pt>
 File: figures//train_vs_oos_gap.pdf Graphic file (type pdf)
 <use figures//train_vs_oos_gap.pdf>
 Package pdftex.def Info: figures//train_vs_oos_gap.pdf  used on input line 829.
@@ -800,12 +800,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [30 <./figures//train_vs_oos_gap.pdf>]
 LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 925.
-<figures//pixel_vs_field.pdf, id=997, 568.44241pt x 418.9601pt>
+<figures//pixel_vs_field.pdf, id=1000, 568.44241pt x 418.9601pt>
 File: figures//pixel_vs_field.pdf Graphic file (type pdf)
 <use figures//pixel_vs_field.pdf>
 Package pdftex.def Info: figures//pixel_vs_field.pdf  used on input line 961.
 (pdftex.def)             Requested size: 372.0pt x 274.17474pt.
-<figures//field_reduction.pdf, id=1000, 577.38206pt x 409.2408pt>
+<figures//field_reduction.pdf, id=1003, 577.38206pt x 409.2408pt>
 File: figures//field_reduction.pdf Graphic file (type pdf)
 <use figures//field_reduction.pdf>
 Package pdftex.def Info: figures//field_reduction.pdf  used on input line 986.
@@ -822,7 +822,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [33 <./figures//pixel_vs_field.pdf>]
-<figures//per_class_f1.pdf, id=1084, 624.45172pt x 412.44945pt>
+<figures//per_class_f1.pdf, id=1087, 624.45172pt x 412.44945pt>
 File: figures//per_class_f1.pdf Graphic file (type pdf)
 <use figures//per_class_f1.pdf>
 Package pdftex.def Info: figures//per_class_f1.pdf  used on input line 1093.
@@ -842,7 +842,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [36 <./figures//per_class_f1.pdf>]
-<figures//inductive_bias_gap.pdf, id=1211, 659.82417pt x 492.48108pt>
+<figures//inductive_bias_gap.pdf, id=1214, 659.82417pt x 492.48108pt>
 File: figures//inductive_bias_gap.pdf Graphic file (type pdf)
 <use figures//inductive_bias_gap.pdf>
 Package pdftex.def Info: figures//inductive_bias_gap.pdf  used on input line 1192.
@@ -1025,7 +1025,17 @@ Underfull \hbox (badness 1281) in paragraph at lines 1789--1790
  []
 
 
-Underfull \hbox (badness 1838) in paragraph at lines 1803--1804
+Underfull \hbox (badness 6078) in paragraph at lines 1793--1794
+[]\OT1/cmr/m/n/10 Ma Y, Chen S, Ermon S, Lobell DB (2024) Trans-fer learn-ing in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1793--1794
+\OT1/cmr/m/n/10 envi-ron-men-tal remote sens-ing. \OT1/cmr/m/it/10.03749 Remote Sens Env-i-ron \OT1/cmr/m/n/10 301:113924.
+ []
+
+
+Underfull \hbox (badness 1838) in paragraph at lines 1807--1808
 \OT1/cmr/m/n/10 Remote Sens-ing and Grid-ded Data. \OT1/cmr/m/it/10.03749 J Open Source Softw \OT1/cmr/m/n/10 10(115):9009.
  []
 
@@ -1033,27 +1043,27 @@ Underfull \hbox (badness 1838) in paragraph at lines 1803--1804
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [50]
-Underfull \hbox (badness 2384) in paragraph at lines 1812--1813
+Underfull \hbox (badness 2384) in paragraph at lines 1816--1817
 []\OT1/cmr/m/n/10 Buttar PK et al. (2024) Satel-lite imagery anal-y-sis for crop type seg-
  []
 
 
-Underfull \hbox (badness 1831) in paragraph at lines 1812--1813
+Underfull \hbox (badness 1831) in paragraph at lines 1816--1817
 \OT1/cmr/m/n/10 men-ta-tion using U-net archi-tec-ture. \OT1/cmr/m/it/10.03749 Pro-ce-dia Com-put Sci \OT1/cmr/m/n/10 235:3418--3427.
  []
 
 
-Underfull \hbox (badness 2753) in paragraph at lines 1815--1816
+Underfull \hbox (badness 2753) in paragraph at lines 1819--1820
 \OT1/cmr/m/n/10 for multi-source image fusion. \OT1/cmr/m/it/10.03749 Int J Remote Sens \OT1/cmr/m/n/10 45(19--20):7605--7633.
  []
 
 
-Underfull \hbox (badness 4981) in paragraph at lines 1827--1828
+Underfull \hbox (badness 4981) in paragraph at lines 1831--1832
 []\OT1/cmr/m/n/10 Yang S, Gu L, Li X, Jiang T, Ren R (2020) Crop Clas-si-fi-ca-tion
  []
 
 
-Underfull \hbox (badness 1584) in paragraph at lines 1827--1828
+Underfull \hbox (badness 1584) in paragraph at lines 1831--1832
 \OT1/cmr/m/n/10 Method Based on Opti-mal Fea-ture Selec-tion and Hybrid CNN-RF Net-
  []
 
@@ -1065,18 +1075,18 @@ Package rerunfilecheck Info: File `sn-article.out' has not changed.
 (rerunfilecheck)             Checksum: 256F3C183660AA3201F8ABB6D5B775F1;11151.
  ) 
 Here is how much of TeX's memory you used:
- 14132 strings out of 478287
- 227521 string characters out of 5849290
- 541840 words of memory out of 5000000
- 31884 multiletter control sequences out of 15000+600000
+ 14136 strings out of 478287
+ 227574 string characters out of 5849290
+ 541856 words of memory out of 5000000
+ 31887 multiletter control sequences out of 15000+600000
  497664 words of font info for 137 fonts, out of 8000000 for 9000
  1151 hyphenation exceptions out of 8191
  85i,17n,90p,3877b,611s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on sn-article.pdf (51 pages, 1402898 bytes).
+Output written on sn-article.pdf (51 pages, 1403960 bytes).
 PDF statistics:
- 1598 PDF objects out of 1728 (max. 8388607)
- 957 compressed objects within 10 object streams
- 197 named destinations out of 1000 (max. 500000)
+ 1602 PDF objects out of 1728 (max. 8388607)
+ 961 compressed objects within 10 object streams
+ 198 named destinations out of 1000 (max. 500000)
  508 words of extra memory for PDF output out of 10000 (max. 10000000)
 
