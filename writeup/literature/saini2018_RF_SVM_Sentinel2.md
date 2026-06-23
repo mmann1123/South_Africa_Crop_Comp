@@ -1,6 +1,7 @@
 # Crop Classification on Single Date Sentinel-2 Imagery Using Random Forest and Support Vector Machine
 
 **Citation:** Saini, R., & Ghosh, S. K. (2018). Crop Classification on Single Date Sentinel-2 Imagery Using Random Forest and Support Vector Machine. *The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences*, XLII-5, 683–688 (ISPRS TC V Mid-term Symposium, Dehradun, India). DOI: 10.5194/isprs-archives-XLII-5-683-2018 (verified via Crossref).
+**BibTeX key:** `saini2018single`
 
 ## Objectives
 

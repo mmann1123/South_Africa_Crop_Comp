@@ -1,6 +1,7 @@
 # Transfer learning in environmental remote sensing
 
 **Citation:** Ma, Y., Chen, S., Ermon, S., & Lobell, D. B. (2024). Transfer learning in environmental remote sensing. *Remote Sensing of Environment*, 301, 113924. DOI: `10.1016/j.rse.2023.113924` (verified against Crossref; title matches).
+**BibTeX key:** `ma2024transfer`
 
 > **Source note.** The ScienceDirect full text is paywalled (HTTP 403) and no PDF of this article exists in `writeup/literature/`. This briefer is grounded in the verified Crossref record plus the abstract and the article's structural breakdown (taxonomy, technique list, application areas) recovered from open mirrors (Semantic Scholar, ouci.dntb.gov.ua) and the publisher landing page. Treat the per-section technical detail below as the review's stated scope, not a line-by-line reading of the full text. This is a review/survey paper, so per the briefer template's rule 7 the "evaluation protocol" question is reframed as conceptual framing.
 

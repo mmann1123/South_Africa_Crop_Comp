@@ -1,6 +1,7 @@
 # Crop Classification Method Based on Optimal Feature Selection and Hybrid CNN-RF Networks for Multi-Temporal Remote Sensing Imagery
 
 **Citation:** Shuting Yang, Lingjia Gu, Xiaofeng Li, Tao Jiang, and Ruizhi Ren (2020). *Remote Sensing*, 12(19), 3119. DOI: 10.3390/rs12193119
+**BibTeX key:** `yang2020method`
 
 ## Objectives
 

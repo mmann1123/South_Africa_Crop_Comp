@@ -1,6 +1,7 @@
 # XGBoost: A Scalable Tree Boosting System
 
 **Citation:** Chen, T., & Guestrin, C. (2016). XGBoost: A Scalable Tree Boosting System. In *Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (KDD '16)*, 785–794. DOI: `10.1145/2939672.2939785` (verified via Crossref).
+**BibTeX key:** `chen2016xgboost`
 
 This is a method/systems paper, not an empirical evaluation study, so it is briefed under rule 7 (theory/method): no evaluation-protocol critique applies; the focus is on the inductive bias that makes gradient-boosted trees the transfer-robust learner family in our thesis.
 

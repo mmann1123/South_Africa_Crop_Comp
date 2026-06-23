@@ -1,6 +1,7 @@
 # Land Cover Classification via Multitemporal Spatial Data by Deep Recurrent Neural Networks
 
 **Citation:** Dino Ienco, Raffaele Gaetano, Claire Dupaquier, Pierre Maurel (2017). "Land Cover Classification via Multitemporal Spatial Data by Deep Recurrent Neural Networks." *IEEE Geoscience and Remote Sensing Letters*, 14(10), 1685–1689. DOI: `10.1109/lgrs.2017.2728698` (verified via Crossref; the PDF is the arXiv preprint `1704.04055`, whose title omits "Deep" but matches the same work).
+**BibTeX key:** `ienco2017land`
 
 ## Objectives
 

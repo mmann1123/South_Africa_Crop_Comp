@@ -1,6 +1,7 @@
 # Crop Classification with Attention Based BI-LSTM and Temporal Convolution Neural Network Combination for Remote Sensing Breizhcrop Time Series Data
 
 **Citation:** Bandar, A. N. A. A., & Coşkunçay, A. (2024). Crop Classification with Attention Based BI-LSTM and Temporal Convolution Neural Network Combination for Remote Sensing Breizhcrop Time Series Data. *Yüzüncü Yıl University Journal of the Institute of Natural & Applied Sciences*, 29(1), 173–188. DOI: 10.53433/yyufbed.1335866 (verified via Crossref).
+**BibTeX key:** `bandar2024attention`
 
 ## Objectives
 

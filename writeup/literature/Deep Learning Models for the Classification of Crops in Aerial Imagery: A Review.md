@@ -1,6 +1,7 @@
 # Deep Learning Models for the Classification of Crops in Aerial Imagery: A Review
 
 **Citation:** Teixeira, I.; Morais, R.; Sousa, J.J.; Cunha, A. (2023). Deep Learning Models for the Classification of Crops in Aerial Imagery: A Review. *Agriculture*, 13(5), 965. DOI: 10.3390/agriculture13050965
+**BibTeX key:** `teixeira2023deep`
 
 > Review/theory paper. Per authoring rule 7, the formal evaluation-protocol question is skipped; the Relevance section below focuses on methodological and conceptual implications for our study (inductive bias, training-data dependence, transfer, and what the corpus systematically does NOT measure).
 

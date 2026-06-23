@@ -1,6 +1,7 @@
 # Characterising maize and intercropped maize spectral signatures for cropping pattern classification
 
 **Citation:** Mbali Mahlayeye, Roshanak Darvishzadeh, and Andrew Nelson (2024). *International Journal of Applied Earth Observation and Geoinformation*, Vol. 128, Article 103699. DOI: 10.1016/j.jag.2024.103699
+**BibTeX key:** `mahlayeye2024characterising`
 
 ## Objectives
 

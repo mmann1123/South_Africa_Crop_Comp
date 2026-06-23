@@ -1,6 +1,7 @@
 # Enhancing Crop Type Mapping in Data-Scarce Regions Through Transfer Learning: A Case Study of the Hexi Corridor
 
 **Citation:** Mai, J., Feng, Q., Fu, S., Wang, R., Zhang, S., Zhang, R., & Liang, T. (2025). Enhancing Crop Type Mapping in Data-Scarce Regions Through Transfer Learning: A Case Study of the Hexi Corridor. *Remote Sensing*, 17(9), 1494. DOI: `10.3390/rs17091494` (verified against Crossref; title and authors match). Open access (MDPI, CC BY). Briefer written from the full PDF.
+**BibTeX key:** `mai2025enhancing`
 
 ## Objectives
 

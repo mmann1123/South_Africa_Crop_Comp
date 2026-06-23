@@ -3,7 +3,7 @@ INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT sn-article.tex
+INPUT /home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/sn-article.tex
 OUTPUT sn-article.log
 INPUT ./sn-jnl.cls
 INPUT ./sn-jnl.cls

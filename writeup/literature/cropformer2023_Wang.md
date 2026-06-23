@@ -1,6 +1,7 @@
 # Cropformer: A new generalized deep learning classification approach for multi-scenario crop classification
 
 **Citation:** Hengbin Wang, Wanqiu Chang, Yu Yao, Zhiying Yao, Yuanyuan Zhao, Shaoming Li, Zhe Liu, and Xiaodong Zhang (2023). *Frontiers in Plant Science*, 14:1130659. DOI: 10.3389/fpls.2023.1130659
+**BibTeX key:** `wang2023cropformer`
 
 ## Objectives
 

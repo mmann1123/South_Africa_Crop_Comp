@@ -1,6 +1,7 @@
 # A CNN-SVM Study Based on Selected Deep Features for Grapevine Leaves Classification
 
 **Citation:** Koklu, M., Unlersen, M. F., Ozkan, I. A., Aslan, M. F., & Sabanci, K. (2022). A CNN-SVM study based on selected deep features for grapevine leaves classification. *Measurement*, 188, 110425. DOI: 10.1016/j.measurement.2021.110425 (verified via Crossref).
+**BibTeX key:** `koklu2022cnn`
 
 ## Objectives
 

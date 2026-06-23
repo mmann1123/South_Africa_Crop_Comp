@@ -1,6 +1,7 @@
 # Deep Learning Classification of Land Cover and Crop Types Using Remote Sensing Data
 
 **Citation:** Kussul, N., Lavreniuk, M., Skakun, S., & Shelestov, A. (2017). Deep Learning Classification of Land Cover and Crop Types Using Remote Sensing Data. *IEEE Geoscience and Remote Sensing Letters*, 14(5), 778–782. DOI: 10.1109/LGRS.2017.2681128
+**BibTeX key:** `kussul2017deep`
 
 ## Objectives
 

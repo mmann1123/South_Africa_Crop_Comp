@@ -1,6 +1,7 @@
 # Deep learning based multi-temporal crop classification
 
 **Citation:** Zhong, L., Hu, L., & Zhou, H. (2019). Deep learning based multi-temporal crop classification. *Remote Sensing of Environment*, 221, 430–443. DOI: 10.1016/j.rse.2018.11.032
+**BibTeX key:** `zhong2019deep`
 
 *(Note: this briefer is based on the ScienceDirect article preview — abstract, highlights, introduction, section snippets, and conclusion — as the full results/methods body was not present in the supplied PDF. Quantitative claims below are drawn from the abstract and highlights, which are authoritative; finer protocol details are inferred from the snippets and flagged where uncertain.)*
 

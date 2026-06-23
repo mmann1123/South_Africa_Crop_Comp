@@ -1,6 +1,7 @@
 # Remote Sensing Products and Services in Support of Agricultural Public Policies in Africa: Overview and Challenges
 
 **Citation:** Bégué, A., Leroux, L., Soumaré, M., Faure, J.-F., Diouf, A. A., Augusseau, X., Touré, L., & Tonneau, J.-P. (2020). Remote Sensing Products and Services in Support of Agricultural Public Policies in Africa: Overview and Challenges. *Frontiers in Sustainable Food Systems*, 4, 58. DOI: 10.3389/fsufs.2020.00058 (verified via Crossref).
+**BibTeX key:** `bgu2020products`
 
 ## Objectives
 

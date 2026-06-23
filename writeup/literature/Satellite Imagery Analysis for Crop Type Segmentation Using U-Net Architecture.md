@@ -1,6 +1,7 @@
 # Satellite Imagery Analysis for Crop Type Segmentation Using U-Net Architecture
 
 **Citation:** Ayushi, & Buttar, P. K. (2024). Satellite Imagery Analysis for Crop Type Segmentation Using U-Net Architecture. *Procedia Computer Science*, 235, 3418–3427 (ICMLDE 2023). DOI: 10.1016/j.procs.2024.04.322 (verified via Crossref).
+**BibTeX key:** `ayushi2024satellite`
 
 ## Objectives
 

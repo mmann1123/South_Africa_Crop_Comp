@@ -1,6 +1,7 @@
 # TabNet: Attentive Interpretable Tabular Learning
 
 **Citation:** Arik, S. Ö., & Pfister, T. (2021). TabNet: Attentive Interpretable Tabular Learning. *Proceedings of the AAAI Conference on Artificial Intelligence*, 35(8), 6679–6687. DOI: 10.1609/aaai.v35i8.16826 (verified via Crossref). Preprint: arXiv:1908.07442.
+**BibTeX key:** `arik2021tabnet`
 
 > Method/theory paper. Per authoring rule 7, the spatial-evaluation-protocol question does not apply: this is a general machine-learning architecture paper with **no remote-sensing experiment**. The focus below is on the inductive bias TabNet encodes — sparse, attentive, instance-wise feature selection — which is the conceptual centerpiece of our manuscript's thesis about which models transfer out-of-region.
 

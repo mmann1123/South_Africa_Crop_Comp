@@ -1,6 +1,7 @@
 # Deep Learning Applications for Crop Mapping Using Multi-Temporal Sentinel-2 Data and Red-Edge Vegetation Indices: Integrating Convolutional and Recurrent Neural Networks
 
 **Citation:** Tufail, R., Tassinari, P., & Torreggiani, D. (2025). Deep Learning Applications for Crop Mapping Using Multi-Temporal Sentinel-2 Data and Red-Edge Vegetation Indices: Integrating Convolutional and Recurrent Neural Networks. *Remote Sensing*, 17(18), 3207. DOI: 10.3390/rs17183207
+**BibTeX key:** `tufail2025deep`
 
 ## Objectives
 

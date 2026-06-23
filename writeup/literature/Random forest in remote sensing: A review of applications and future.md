@@ -1,6 +1,7 @@
 # Random forest in remote sensing: A review of applications and future directions
 
 **Citation:** Belgiu, M. & Drăguț, L. (2016). *Random forest in remote sensing: A review of applications and future directions.* ISPRS Journal of Photogrammetry and Remote Sensing, 114, 24–31. DOI: `10.1016/j.isprsjprs.2016.01.011` (verified via Crossref).
+**BibTeX key:** `belgiu2016random`
 
 ## Objectives
 

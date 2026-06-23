@@ -1,6 +1,7 @@
 # Implementation of Machine-Learning Classification in Remote Sensing: An Applied Review
 
 **Citation:** Aaron E. Maxwell, Timothy A. Warner, Fang Fang (2018). "Implementation of machine-learning classification in remote sensing: an applied review." *International Journal of Remote Sensing*, 39(9), 2784–2817. DOI: `10.1080/01431161.2018.1433343` (verified via Crossref). Open access.
+**BibTeX key:** `maxwell2018implementation`
 
 This is a **review / applied-methods paper** — per the briefer rules, the strict evaluation-protocol question (pooled vs spatially-disjoint) is set aside in favor of the methodological and conceptual implications, which this review surveys directly.
 

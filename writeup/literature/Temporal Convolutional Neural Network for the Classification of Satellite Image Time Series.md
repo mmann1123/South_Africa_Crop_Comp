@@ -1,6 +1,7 @@
 # Temporal Convolutional Neural Network for the Classification of Satellite Image Time Series
 
 **Citation:** Pelletier, C., Webb, G. I., & Petitjean, F. (2019). Temporal Convolutional Neural Network for the Classification of Satellite Image Time Series. *Remote Sensing*, 11(5), 523. DOI: 10.3390/rs11050523 (verified via Crossref).
+**BibTeX key:** `pelletier2019temporal`
 
 ## Objectives
 

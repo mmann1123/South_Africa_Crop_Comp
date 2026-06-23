@@ -1,6 +1,7 @@
 # Towards weeds identification assistance through transfer learning
 
 **Citation:** Espejo-Garcia, B., Mylonas, N., Athanasakos, L., Fountas, S., & Vasilakoglou, I. (2020). Towards weeds identification assistance through transfer learning. *Computers and Electronics in Agriculture*, 177, 105306. DOI: `10.1016/j.compag.2020.105306` (verified via Crossref).
+**BibTeX key:** `espejogarcia2020towards`
 
 ## Objectives
 

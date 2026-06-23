@@ -1,6 +1,7 @@
 # Greedy Function Approximation: A Gradient Boosting Machine
 
 **Citation:** Friedman, J.H. (2001). Greedy Function Approximation: A Gradient Boosting Machine. *The Annals of Statistics*, 29(5), 1189-1232. (1999 Reitz Lecture.) DOI: 10.1214/aos/1013203451
+**BibTeX key:** `friedman2001greedy`
 
 > Foundational theory paper. Per authoring rule 7, the empirical evaluation-protocol question is not applicable; the Relevance section focuses on the methodological/conceptual implications — specifically the sparse, axis-aligned, robust inductive bias that underpins our manuscript's thesis about which models transfer.
 

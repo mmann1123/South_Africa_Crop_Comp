@@ -1,6 +1,7 @@
 # Smallholder Maize Area and Yield Mapping at National Scales with Google Earth Engine
 
 **Citation:** Jin, Z., Azzari, G., You, C., Di Tommaso, S., Aston, S., Burke, M., & Lobell, D. B. (2019). Smallholder maize area and yield mapping at national scales with Google Earth Engine. *Remote Sensing of Environment*, 228, 115–128. DOI: 10.1016/j.rse.2019.04.016 (verified via Crossref).
+**BibTeX key:** `jin2019smallholder`
 
 ## Objectives
 
