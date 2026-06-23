@@ -289,8 +289,8 @@ Stacking               & field & \texttt{xr\_fresh} & 109\,s \\
 SMOTE Stacked          & field & \texttt{xr\_fresh} & 99\,s \\
 \midrule
 \multicolumn{4}{l}{\emph{Classical, pixel-level}}\\
-Base XGBoost           & pixel & \texttt{xr\_fresh} & 31\,s \\
-Base LightGBM          & pixel & \texttt{xr\_fresh} & 31\,s \\
+XGBoost                & pixel & \texttt{xr\_fresh} & 31\,s \\
+LightGBM               & pixel & \texttt{xr\_fresh} & 31\,s \\
 Logistic Regression    & pixel & \texttt{xr\_fresh} & 8.0\,min \\
 Random Forest          & pixel & \texttt{xr\_fresh} & 73\,min \\
 \midrule
@@ -402,7 +402,7 @@ CNN-BiLSTM (field) & Weighted focal ($\gamma{=}2$) & no  & 0.51 & 0.34 \\
 
 \section{Data Efficiency Under Spatial Transfer}
 \label{sec:efficiency}
-\emph{Supports main paper Sec.~V (contribution 5).}
+\emph{Supports main paper contribution~5 (data efficiency), reported in Sec.~V.}
 Retraining a representative set on random subsets of $75\%$, $50\%$, and $25\%$ of the training
 fields and re-evaluating on the holdout (Fig.~\ref{sfig:reduction}) shows the most robust models are
 also the most data-efficient: TabNet retains essentially full holdout accuracy down to a quarter of
@@ -422,7 +422,7 @@ logistic regression, L-TAE-S) are nearly flat.}
 
 \section{Raw Reflectance Versus \texttt{xr\_fresh}}
 \label{sec:repr}
-\emph{Supports main paper Sec.~V (contribution 5).}
+\emph{Supports the raw-versus-\texttt{xr\_fresh} supporting experiment discussed in Sec.~V.}
 Because the best-transferring classical learners in main Table~I are exactly those fed
 \texttt{xr\_fresh} statistics, representation and model family are confounded there. To separate them
 we trained a single XGBoost learner once on raw monthly reflectance and once on per-pixel

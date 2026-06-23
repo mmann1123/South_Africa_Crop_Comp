@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.2.2)  23 JUN 2026 15:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.2.2)  23 JUN 2026 16:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -518,164 +518,164 @@ File: figures//ltae_s.pdf Graphic file (type pdf)
 Package pdftex.def Info: figures//ltae_s.pdf  used on input line 80.
 (pdftex.def)             Requested size: 252.0pt x 160.25217pt.
  [3 <./figures//ltae_s.pdf>]
-
-LaTeX Font Warning: Font shape `OT1/ptm/m/scit' undefined
-(Font)              using `OT1/ptm/m/it' instead on input line 103.
-
 <figures//per_class_f1.pdf, id=245, 624.45172pt x 412.44945pt>
 File: figures//per_class_f1.pdf Graphic file (type pdf)
 <use figures//per_class_f1.pdf>
-Package pdftex.def Info: figures//per_class_f1.pdf  used on input line 174.
+Package pdftex.def Info: figures//per_class_f1.pdf  used on input line 184.
 (pdftex.def)             Requested size: 252.0pt x 166.44322pt.
-[4 <./figures//per_class_f1.pdf>]
-<figures//inductive_bias_gap.pdf, id=310, 659.82417pt x 492.48108pt>
+ [4 <./figures//per_class_f1.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
+<figures//inductive_bias_gap.pdf, id=321, 659.82417pt x 492.48108pt>
 File: figures//inductive_bias_gap.pdf Graphic file (type pdf)
 <use figures//inductive_bias_gap.pdf>
-Package pdftex.def Info: figures//inductive_bias_gap.pdf  used on input line 19
+Package pdftex.def Info: figures//inductive_bias_gap.pdf  used on input line 20
 0.
 (pdftex.def)             Requested size: 252.0pt x 188.08408pt.
- [5] [6 <./figures//inductive_bias_gap.pdf>]
-Underfull \hbox (badness 1603) in paragraph at lines 208--209
+
+[6 <./figures//inductive_bias_gap.pdf>]
+Underfull \hbox (badness 1603) in paragraph at lines 218--219
 []\OT1/ptm/m/n/10 Ground-truth crop la-bels were ob-tained from Ra-di-ant
  []
 
 
-Underfull \hbox (badness 3229) in paragraph at lines 215--216
+Underfull \hbox (badness 3229) in paragraph at lines 225--226
 []\OT1/ptm/m/n/8 B[]egu[]e A, Ler-oux L, Soumar[]e M, Faure JF, Diouf AA, Au-
  []
 
 
-Underfull \hbox (badness 1661) in paragraph at lines 215--216
+Underfull \hbox (badness 1661) in paragraph at lines 225--226
 \OT1/ptm/m/n/8 gusseau X, Tour[]e L, Ton-neau JP (2020) Re-mote sens-ing prod-
  []
 
 
-Underfull \hbox (badness 2951) in paragraph at lines 215--216
+Underfull \hbox (badness 2951) in paragraph at lines 225--226
 \OT1/ptm/m/n/8 ucts and ser-vices in sup-port of agri-cul-tural pub-lic poli-ci
 es in
  []
 
 
-Underfull \hbox (badness 1910) in paragraph at lines 215--216
+Underfull \hbox (badness 1910) in paragraph at lines 225--226
 \OT1/ptm/m/n/8 Africa: overview and chal-lenges. \OT1/ptm/m/it/8 Front Sus-tain
  Food Syst \OT1/ptm/m/n/8 4:58.
  []
 
 
-Underfull \hbox (badness 1742) in paragraph at lines 221--222
+Underfull \hbox (badness 1742) in paragraph at lines 231--232
 []\OT1/ptm/m/n/8 Mahlayeye M, Darvishzadeh R, Nel-son A (2024) Char-ac-ter-is-i
 ng
  []
 
 
-Underfull \hbox (badness 4144) in paragraph at lines 221--222
+Underfull \hbox (badness 4144) in paragraph at lines 231--232
 \OT1/ptm/m/n/8 tern clas-si-fi-ca-tion. \OT1/ptm/m/it/8 Int J Appl Earth Obs Ge
 oinf \OT1/ptm/m/n/8 128:103699.
  []
 
 
-Underfull \hbox (badness 3780) in paragraph at lines 227--228
+Underfull \hbox (badness 3780) in paragraph at lines 237--238
 \OT1/ptm/m/n/8 low-frequency crop losses us-ing ma-chine learn-ing: an ap-pli-c
 a-
  []
 
 
-Underfull \hbox (badness 5374) in paragraph at lines 227--228
+Underfull \hbox (badness 5374) in paragraph at lines 237--238
 \OT1/ptm/m/n/8 tion to ce-real crops in Ethiopia. \OT1/ptm/m/it/8 Clim Change \
 OT1/ptm/m/n/8 154:211--227.
  []
 
 
-Underfull \hbox (badness 1430) in paragraph at lines 239--240
+Underfull \hbox (badness 1430) in paragraph at lines 249--250
 \OT1/ptm/m/n/8 tures Fail to Gen-er-al-ize: A Lightweight Al-ter-na-tive for Ag
 ri-cul-
  []
 
 
-Underfull \hbox (badness 1616) in paragraph at lines 247--248
+Underfull \hbox (badness 1616) in paragraph at lines 257--258
 []\OT1/ptm/m/n/8 Ma Y, Chen S, Er-mon S, Lo-bell DB (2024) Trans-fer learn-ing
  []
 
 
-Underfull \hbox (badness 2435) in paragraph at lines 266--267
+Underfull \hbox (badness 2435) in paragraph at lines 276--277
 []\OT1/ptm/m/n/8 Kussul N, Lavre-niuk M, Skakun S, She-lestov A (2017) Deep
  []
 
 
-Underfull \hbox (badness 3049) in paragraph at lines 270--271
+Underfull \hbox (badness 3049) in paragraph at lines 280--281
 []\OT1/ptm/m/n/8 Fan X, Chen L, Xu X, Yan C, Fan J, Li X (2023) Land
  []
 
-
-Underfull \hbox (badness 1466) in paragraph at lines 274--275
+[7]
+Underfull \hbox (badness 1466) in paragraph at lines 284--285
 []\OT1/ptm/m/n/8 Bandar A, Co[]kun[]ay A (2024) Crop Clas-si-fi-ca-tion with At
 -ten-
  []
 
 
-Underfull \hbox (badness 1831) in paragraph at lines 274--275
+Underfull \hbox (badness 1831) in paragraph at lines 284--285
 \OT1/ptm/m/n/8 Com-bi-na-tion for Re-mote Sens-ing BreizhCrop Time Se-ries Data
 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--277
+Underfull \hbox (badness 10000) in paragraph at lines 286--287
 []\OT1/ptm/m/n/8 Espejo-Garcia B, My-lonas N, Athanasakos L, Foun-tas S,
  []
 
 
-Underfull \hbox (badness 7151) in paragraph at lines 276--277
+Underfull \hbox (badness 7151) in paragraph at lines 286--287
 \OT1/ptm/m/n/8 Vasi-lakoglou I (2020) To-wards weeds iden-ti-fi-ca-tion as-sis-
 tance
  []
 
 
-Underfull \hbox (badness 6396) in paragraph at lines 276--277
+Underfull \hbox (badness 6396) in paragraph at lines 286--287
 \OT1/ptm/m/n/8 through trans-fer learn-ing. \OT1/ptm/m/it/8 Com-put Elec-tron A
 gric \OT1/ptm/m/n/8 171:105306.
  []
 
 
-Underfull \hbox (badness 6675) in paragraph at lines 278--279
+Underfull \hbox (badness 6675) in paragraph at lines 288--289
 []\OT1/ptm/m/n/8 Koklu M, Un-lersen MF, Ozkan IA, Aslan MF, Sa-banci K
  []
 
 
-Underfull \hbox (badness 5970) in paragraph at lines 278--279
+Underfull \hbox (badness 5970) in paragraph at lines 288--289
 \OT1/ptm/m/n/8 (2022) A CNN-SVM study based on se-lected deep fea-tures
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 278--279
+Underfull \hbox (badness 10000) in paragraph at lines 288--289
 \OT1/ptm/m/n/8 for grapevine leaves clas-si-fi-ca-tion. \OT1/ptm/m/it/8 Mea-sur
 e-ment \OT1/ptm/m/n/8 188:110425.
  []
 
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 288--289
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--299
 []\OT1/ptm/m/n/8 Friedman JH (2001) Greedy func-tion ap-prox-i-ma-tion: A
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 288--289
+Underfull \hbox (badness 10000) in paragraph at lines 298--299
 \OT1/ptm/m/n/8 gra-di-ent boost-ing ma-chine. \OT1/ptm/m/it/8 Ann Stat \OT1/ptm
 /m/n/8 29(5):1189--1232.
  []
 
 
-Underfull \hbox (badness 1400) in paragraph at lines 290--291
+Underfull \hbox (badness 1400) in paragraph at lines 300--301
 []\OT1/ptm/m/n/8 Pe[]na-Barrag[]an JM, Ngugi MK, Plant RE, Six J (2011) Object-
 
  []
 
 
-Underfull \hbox (badness 2310) in paragraph at lines 292--293
+Underfull \hbox (badness 2310) in paragraph at lines 302--303
 []\OT1/ptm/m/n/8 Arik S[]O, Pfis-ter T (2021) Tab-Net: At-ten-tive In-ter-preta
 ble Tab-
  []
 
 
-Underfull \hbox (badness 6364) in paragraph at lines 292--293
+Underfull \hbox (badness 6364) in paragraph at lines 302--303
 \OT1/ptm/m/n/8 u-lar Learn-ing. \OT1/ptm/m/it/8 Proc AAAI Conf Ar-tif In-tell \
 OT1/ptm/m/n/8 35(8):6679--6687.
  []
@@ -687,13 +687,13 @@ Package rerunfilecheck Info: File `tgrs-article.out' has not changed.
 (rerunfilecheck)             Checksum: 8C205B72FB563F2406F7C7F41160A19D;3689.
  ) 
 Here is how much of TeX's memory you used:
- 10975 strings out of 478287
- 171531 string characters out of 5849290
- 505116 words of memory out of 5000000
- 28939 multiletter control sequences out of 15000+600000
- 515331 words of font info for 118 fonts, out of 8000000 for 9000
+ 10972 strings out of 478287
+ 171504 string characters out of 5849290
+ 504727 words of memory out of 5000000
+ 28938 multiletter control sequences out of 15000+600000
+ 514815 words of font info for 116 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,10n,63p,2057b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,10n,63p,2431b,470s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/
@@ -714,10 +714,10 @@ urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utm
 b8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on tgrs-article.pdf (8 pages, 346943 bytes).
+Output written on tgrs-article.pdf (8 pages, 346609 bytes).
 PDF statistics:
- 540 PDF objects out of 1000 (max. 8388607)
- 383 compressed objects within 4 object streams
+ 541 PDF objects out of 1000 (max. 8388607)
+ 384 compressed objects within 4 object streams
  78 named destinations out of 1000 (max. 500000)
  176 words of extra memory for PDF output out of 10000 (max. 10000000)
 
