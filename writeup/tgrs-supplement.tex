@@ -28,8 +28,8 @@
 
 \noindent This document collects supporting material for the main paper. Section~S-A details the
 dataset, feature set, and model definitions; Section~S-B defines the metrics; Section~S-C reports
-training cost; Section~S-D presents the ablation studies; Section~S-E the data-efficiency experiment;
-and Section~S-F the raw-versus-\texttt{xr\_fresh} representation comparison. Equation, figure, table,
+training cost; Section~S-D presents the ablation studies;
+and Section~S-E the raw-versus-\texttt{xr\_fresh} representation comparison. Equation, figure, table,
 and section labels are prefixed ``S''.
 
 \section{Dataset Details, Feature Set, and Model Definitions}
@@ -49,8 +49,11 @@ the main paper.
 {\footnotesize (a)}\\[4pt]
 \includegraphics[width=\columnwidth]{avg_field_area.pdf}\\[1pt]
 {\footnotesize (b)}
-\caption{Crop-field composition of the training and holdout regions: (a) number of fields per crop
-type, showing the heavy class imbalance; (b) average field area by crop type (hectares).}
+\caption{Crop-field composition of the training and holdout regions. (a) Number of labeled fields per
+crop type: lucerne/medics dominates (43\% of training and 56\% of holdout fields), followed by wheat,
+barley, canola, and small-grain grazing. This heavy class imbalance motivates macro-F1 as the primary
+metric and the class-imbalance handling used during training. (b) Mean field area by crop type
+(hectares); lucerne/medics is the most frequent class despite having among the smallest fields.}
 \label{sfig:fields}
 \end{figure}
 
@@ -60,9 +63,11 @@ type, showing the heavy class imbalance; (b) average field area by crop type (he
 {\footnotesize (a)}\\[4pt]
 \includegraphics[width=\columnwidth]{wheat_barley_boxplot.pdf}\\[1pt]
 {\footnotesize (b)}
-\caption{Spectral separability of the crop classes: (a) band intensities for all five crops overlap
-substantially; (b) wheat versus barley are especially similar, the dominant source of persistent
-classification confusion across models.}
+\caption{Spectral separability of the crop classes, shown as box plots of standardized (z-score)
+intensity for each Sentinel-2 band and index (B2, B6, B11, B12, EVI, hue). (a) Distributions for all
+five crops overlap substantially across every band, so no single feature cleanly separates the
+classes. (b) Wheat versus barley are especially similar in every band---the dominant source of the
+persistent wheat--barley confusion seen across all models in the main paper.}
 \label{sfig:box}
 \end{figure}
 
@@ -102,12 +107,23 @@ Symmetry Looking & Similarity under series reversal. \\
 Time Series Complexity & Complexity-Invariant Distance metric of irregularity. \\
 \bottomrule
 \end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\columnwidth}
+\footnotesize
+Each descriptor is computed independently for every band and index from a pixel's 10-month series;
+stacked across the six bands/indices (B2, B6, B11, B12, EVI, hue) they form the 174-dimensional
+per-pixel vector fed to the classical learners. For the Ratio-Beyond features, $r$ is the threshold
+in standard deviations ($r=1,2,3$).
+\end{minipage}
 \end{table}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{Time_Series_Feature_Generation.pdf}
-\caption{Extraction of statistical and temporal features from the 10-month spectral time series.}
+\caption{Time-series feature generation with \texttt{xr\_fresh}. For each pixel, the 10-month profile
+of every band and index is summarized by the statistical and temporal descriptors of
+Table~\ref{stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the
+maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners.}
 \label{sfig:tsfeat}
 \end{figure}
 
@@ -150,13 +166,24 @@ the top two field-level class probabilities differ by less than $0.10$.
 18 & 76.29\% & 915  & 13 & 0.0121 & 0.6784 & 0.5958 & 0.1612 & 0.00491 & 0.1732 & 8 \\
 \bottomrule
 \end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\textwidth}
+\footnotesize
+Top five of 150 Optuna trials, ranked by in-region validation accuracy (Acc.); trial~32 (bold) was
+selected for the field-level XGBoost. Est.: number of estimators; Depth: maximum tree depth; LR:
+learning rate; SubS: row subsample; ByTree: column subsample per tree; Gamma: minimum split-loss
+reduction; Reg$\alpha$/Reg$\lambda$: L1/L2 regularization; MinCW: minimum child weight.
+\end{minipage}
 \end{table*}
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{field_boundaries_by_crop.pdf}
-\caption{Field-level aggregation of pixel features: pixel values are grouped by field polygon and
-summarized into a single feature vector per field.}
+\caption{Field-level aggregation of pixel features. Because each field polygon carries a single crop
+label, the per-pixel feature vectors falling inside a polygon are mean-pooled into one feature vector
+per field, which the field-level classifiers then label. This averaging is also the
+variance-reduction lever analyzed in the main paper, smoothing region-specific pixel noise before
+classification.}
 \label{sfig:fieldagg}
 \end{figure}
 
@@ -170,8 +197,11 @@ inverse class frequency. Five seeds are ensembled by averaging logits.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{cnn_bilstm.pdf}
-\caption{Architecture of the CNN + BiLSTM model: 1D convolutional temporal feature extraction
-followed by a bidirectional LSTM.}
+\caption{Architecture of the CNN-BiLSTM model. The $(B,6,T)$ input (six bands/indices over $T$
+months) passes a 1D convolution (64 filters, kernel 5) for temporal feature extraction, then a
+bidirectional LSTM (hidden size 64) whose final time step is classified by a softmax head. Training
+uses weighted focal loss to counter class imbalance, and five seeds are ensembled by averaging
+logits.}
 \label{sfig:bilstm}
 \end{figure}
 
@@ -217,7 +247,10 @@ majority vote.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{Example_patches.pdf}
-\caption{Illustration of patch generation per field.}
+\caption{Patch generation per field. Each field is tiled into 100~m patches---only
+${\sim}10\times10$ pixels at the 10~m Sentinel-2 resolution---and resampled to $128\times128$. These
+patches are the input to the patch-based 2D and 3D CNNs, whose per-patch predictions are later
+aggregated to a field label by majority vote.}
 \label{sfig:patches}
 \end{figure}
 
@@ -404,26 +437,6 @@ CNN-BiLSTM (field) & Weighted focal ($\gamma{=}2$) & no  & 0.51 & 0.34 \\
 Field-level, 5-seed ensembles. ``Resample'' denotes class-balanced oversampling.
 \end{minipage}
 \end{table}
-
-\section{Data Efficiency Under Spatial Transfer}
-\label{sec:efficiency}
-\emph{Supports main paper contribution~5 (data efficiency), reported in Sec.~V.}
-Retraining a representative set on random subsets of $75\%$, $50\%$, and $25\%$ of the training
-fields and re-evaluating on the holdout (Fig.~\ref{sfig:reduction}) shows the most robust models are
-also the most data-efficient: TabNet retains essentially full holdout accuracy down to a quarter of
-the fields (F1$_m=0.60, 0.62, 0.62, 0.59$ at $100/75/50/25\%$), logistic regression is similarly flat
-($0.56$--$0.60$), and L-TAE-S tracks them ($0.60, 0.61, 0.56, 0.58$), whereas the dense pixel L-TAE
-is noisier and stays below the best transferers throughout ($0.58, 0.57, 0.53, 0.57$). Holdout
-accuracy is therefore limited far more by spatial transfer than by training-set size for the robust
-models.
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{field_reduction.pdf}
-\caption{Spatial-transfer macro-F1 versus fraction of training fields. Robust models (TabNet,
-logistic regression, L-TAE-S) are nearly flat.}
-\label{sfig:reduction}
-\end{figure}
 
 \section{Raw Reflectance Versus \texttt{xr\_fresh}}
 \label{sec:repr}

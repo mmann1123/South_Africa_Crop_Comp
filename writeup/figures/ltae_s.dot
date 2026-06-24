@@ -1,66 +1,50 @@
 // L-TAE-S architecture diagram. Style matches cnn_bilstm.pdf / tabnet.pdf
-// (Graphviz dot, pastel rounded boxes, yellow architecture cluster, seed circles,
-//  rectangle for the ensemble-averaging process, parallelogram for the loss
-//  objective). Diamonds are reserved for genuine YES/NO decisions only.
+// (Graphviz dot, pastel rounded boxes, yellow architecture cluster, green = novel
+//  component, parallelogram for the loss objective).
+//  Single top-to-bottom spine so the figure stays narrow (portrait) and remains
+//  legible when scaled to one column. Equations/hyper-parameters live in the
+//  caption and text, not in the boxes.
 //  Render:  dot -Tpdf ltae_s.dot -o ltae_s.pdf
 digraph LTAES {
   rankdir=TB;
   compound=true;
-  graph [fontname="Helvetica", fontsize=15, splines=true, nodesep=0.45, ranksep=0.55];
-  node  [fontname="Helvetica", fontsize=12, style="rounded,filled", shape=box,
-         color=black, penwidth=1.2];
-  edge  [color=black, arrowsize=0.8];
+  graph [fontname="Helvetica", fontsize=13, splines=true, nodesep=0.28, ranksep=0.32];
+  node  [fontname="Helvetica", fontsize=13, style="rounded,filled", shape=box,
+         color=black, penwidth=1.2, margin="0.14,0.07"];
+  edge  [color=black, arrowsize=0.7];
 
   // ---- palette: blue #AED6F1  yellow #FCE883  pink #F5B7B1  green #ABEBC6 ----
 
-  RawData [label="Raw Data", fillcolor="#FCE883"];
+  RawData [label="Raw Sentinel-2\ntime series", fillcolor="#FCE883"];
 
-  subgraph cluster_prep {
-    label="Data Pre-processing";
-    style="rounded,filled"; fillcolor="#AED6F1"; color="#5DADE2"; fontsize=15;
-    prep1 [label="label encoding\ncrop_name -> label", fillcolor="#F5B7B1"];
-    prep2 [label="Feature Selection\n[B2_, B6_, B11_, B12_, hue_, EVI_]", fillcolor="#F5B7B1"];
-    prep3 [label="Field-ID split\n+ standardize", fillcolor="#F5B7B1"];
-  }
-
-  subgraph cluster_train {
-    label="Model Training (5-seed ensemble)";
-    style="rounded,filled"; fillcolor="#AED6F1"; color="#5DADE2"; fontsize=15;
-    m1 [label="Model 1\nSeed 42",  shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
-    m2 [label="Model 2\nSeed 101", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
-    m3 [label="Model 3\nSeed 202", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
-    m4 [label="Model 4\nSeed 303", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
-    m5 [label="Model 5\nSeed 404", shape=circle, fillcolor="#FCE883", width=0.95, fixedsize=true];
-    ens [label="Average\nEnsemble\nLogits", shape=box, fillcolor="#FCE883"];
-    m1 -> ens; m2 -> ens; m3 -> ens; m4 -> ens; m5 -> ens;
-  }
-
-  argmax [label="ArgMax Final Predictions\n(field-level majority vote)", fillcolor="#F5B7B1"];
+  prep [label="Pre-processing\n6 bands · field-ID split\nstandardize · label encode",
+        fillcolor="#AED6F1"];
 
   subgraph cluster_arch {
-    label="L-TAE-S Model Architecture";
-    style="rounded,filled"; fillcolor="#FCE883"; color="#F1C40F"; fontsize=15;
-    a_in   [label="Input Tensor (B x T x 6)\nTime-Series Features", fillcolor="#AED6F1"];
-    a_emb  [label="Linear Embedding + LayerNorm + ReLU\n(d_model = 128)", fillcolor="#AED6F1"];
-    a_pos  [label="+ Positional Encoding\n(month positions; May/June excluded)", fillcolor="#AED6F1"];
-    a_gate [label="Sparse Feature Gate  (per head, NOVEL)\nm = sparsemax(P o BN(W z));   z' = m o z\nTabNet relaxation prior, gamma = 1.5", fillcolor="#ABEBC6", penwidth=2.0];
-    a_attn [label="Multi-Head Temporal Attention\n(n_head = 16, d_k = 8; learned query over z')", fillcolor="#AED6F1"];
-    a_mlp  [label="Concatenate heads -> MLP\n(256 -> 128, BatchNorm, ReLU, Dropout)", fillcolor="#AED6F1"];
-    a_out  [label="Linear Classifier -> Logits\n(B x num_classes)", fillcolor="#AED6F1"];
-    a_in -> a_emb -> a_pos -> a_gate -> a_attn -> a_mlp -> a_out;
+    label="L-TAE-S network";
+    labelloc=t; fontsize=14;
+    style="rounded,filled"; fillcolor="#FCE883"; color="#F1C40F";
+    a_in   [label="Input tensor  (B × T × 6)", fillcolor="#AED6F1"];
+    a_emb  [label="Linear embedding + LayerNorm\n+ positional encoding (d = 128)", fillcolor="#AED6F1"];
+    a_gate [label="Sparse feature gate  (NOVEL)\nper-head sparsemax channel mask", fillcolor="#ABEBC6", penwidth=2.2];
+    a_attn [label="Multi-head temporal attention\n(16 heads, learned query)", fillcolor="#AED6F1"];
+    a_mlp  [label="MLP head → linear classifier\n→ logits", fillcolor="#AED6F1"];
+    a_in -> a_emb -> a_gate -> a_attn -> a_mlp;
   }
 
-  loss [label="Weighted Focal Loss\n+ lambda * mask\nsparsity (lambda=1e-3)",
-        shape=parallelogram, fillcolor="#AED6F1"];
+  ens    [label="5-seed ensemble\naverage logits", fillcolor="#FCE883"];
+  argmax [label="ArgMax → field-level\nmajority vote", fillcolor="#F5B7B1"];
 
-  // ---- pipeline edges ----
-  RawData -> prep1 [lhead=cluster_prep];
-  prep3 -> m1 [ltail=cluster_prep, lhead=cluster_train];
+  loss [label="Training objective\nweighted focal loss + sparsity penalty",
+        shape=box, style="rounded,filled,dashed", fillcolor="#AED6F1", fontsize=11];
+
+  // ---- main spine (inference path) ----
+  RawData -> prep;
+  prep -> a_in [lhead=cluster_arch];
+  a_mlp -> ens [ltail=cluster_arch];
   ens -> argmax;
 
-  // architecture detail of each ensemble member (placed to the right)
-  m3 -> a_in [ltail=cluster_train, lhead=cluster_arch, style=dashed,
-              label="each ensemble\nmember is an\nL-TAE-S network", fontsize=10,
-              constraint=false];
-  a_out -> loss [label="  training objective", fontsize=10];
+  // training objective: centered below the spine so it does not widen the figure
+  argmax -> loss [style=invis];
+  a_mlp -> loss [style=dashed, constraint=false];
 }
