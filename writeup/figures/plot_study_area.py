@@ -53,10 +53,10 @@ hold_hull.plot(ax=ax, facecolor="0.5", alpha=0.07, edgecolor="none", zorder=0)
 train_hull.boundary.plot(ax=ax, color="black", linewidth=1.6, zorder=6)
 hold_hull.boundary.plot(ax=ax, color="black", linewidth=1.8, linestyle=(0, (5, 3)), zorder=6)
 
-# --- divider between the two training tiles ---
+# --- thicker dashed divider between the two training tiles ---
 txmin, _, txmax, _ = train.total_bounds
-ax.plot([txmin, txmax], [TILE_Y, TILE_Y], color="black", linewidth=1.0,
-        linestyle=(0, (1, 2)), zorder=6)
+ax.plot([txmin, txmax], [TILE_Y, TILE_Y], color="black", linewidth=2.4,
+        linestyle=(0, (6, 4)), zorder=7)
 
 
 def label(df, text, **kw):
@@ -87,21 +87,23 @@ for (crop, color), ry in zip(CROP_COLORS.items(), rows):
     ax.text(bx0 + 1300 + sw + 700, ry, crop, ha="left", va="center",
             fontsize=11, zorder=10)
 
-# north arrow in the right white space (level with the "Wheat" row)
-nax, nay = 500_000, 6_205_900
-ax.add_patch(FancyArrow(nax, nay, 0, 2_600, width=260, head_width=1300,
-                        head_length=1300, length_includes_head=True,
+# north arrow in the right white space (level with the "Barley" row)
+nax, nay = 500_000, 6_203_200
+ax.add_patch(FancyArrow(nax, nay, 0, 2_900, width=280, head_width=1400,
+                        head_length=1400, length_includes_head=True,
                         color="black", zorder=10))
-ax.text(nax, nay + 3_100, "N", ha="center", va="bottom", fontsize=12,
+ax.text(nax, nay + 3_400, "N", ha="center", va="bottom", fontsize=12,
         fontweight="bold", zorder=10)
 
-# scale bar (5 km) in the right white space (level with the "Canola" row)
-sx0, sy, bar_m = 496_500, 6_201_600, 5_000
+# --- scale bar (5 km) in the lower-left white space, over a light backing ---
+sx0, sy, bar_m = 457_000, 6_196_500, 5_000
+ax.add_patch(Rectangle((sx0 - 1200, sy - 1600), bar_m + 2400, 4000,
+                       facecolor="white", edgecolor="none", alpha=0.85, zorder=7))
 ax.plot([sx0, sx0 + bar_m], [sy, sy], color="black", linewidth=2.5,
-        solid_capstyle="butt", zorder=10)
-ax.plot([sx0, sx0], [sy - 450, sy + 450], color="black", linewidth=1.2, zorder=10)
-ax.plot([sx0 + bar_m, sx0 + bar_m], [sy - 450, sy + 450], color="black", linewidth=1.2, zorder=10)
-ax.text(sx0 + bar_m / 2, sy + 800, "5 km", ha="center", va="bottom", fontsize=11, zorder=10)
+        solid_capstyle="butt", zorder=8)
+ax.plot([sx0, sx0], [sy - 450, sy + 450], color="black", linewidth=1.2, zorder=8)
+ax.plot([sx0 + bar_m, sx0 + bar_m], [sy - 450, sy + 450], color="black", linewidth=1.2, zorder=8)
+ax.text(sx0 + bar_m / 2, sy + 900, "5 km", ha="center", va="bottom", fontsize=11, zorder=8)
 
 ax.set_aspect("equal")
 ax.set_xticks([])
