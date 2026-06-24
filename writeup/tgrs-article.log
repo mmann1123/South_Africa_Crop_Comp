@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.5.8)  23 JUN 2026 22:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2026.5.8)  23 JUN 2026 23:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -484,229 +484,237 @@ Underfull \hbox (badness 1803) in paragraph at lines 49--50
 
  []
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 52.
+<figures//study_area_map.pdf, id=168, 440.12431pt x 440.59807pt>
+File: figures//study_area_map.pdf Graphic file (type pdf)
+<use figures//study_area_map.pdf>
+Package pdftex.def Info: figures//study_area_map.pdf  used on input line 54.
+(pdftex.def)             Requested size: 252.0pt x 252.27296pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 58.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 58.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 1496) in paragraph at lines 52--53
+Underfull \hbox (badness 1496) in paragraph at lines 58--59
 \OT1/ptm/m/n/10 mean field 15.0 ha); a third, im-me-di-ately ad-ja-cent tile
  []
 
 
-Underfull \hbox (badness 1642) in paragraph at lines 54--55
+Underfull \hbox (badness 1642) in paragraph at lines 60--61
 \OT1/ptm/m/n/10 and class-imbalance han-dling dur-ing train-ing. Spec-trally,
  []
 
-
-Underfull \hbox (badness 3623) in paragraph at lines 57--58
+[2 <./figures//study_area_map.pdf>]
+Underfull \hbox (badness 3623) in paragraph at lines 63--64
 []\OT1/ptm/m/n/10 We com-pare three paradigms: feature-based clas-si-cal
  []
 
 
-Underfull \hbox (badness 2772) in paragraph at lines 57--58
+Underfull \hbox (badness 2772) in paragraph at lines 63--64
 \OT1/ptm/m/n/10 ma-chine learn-ing, representation-learning deep net-works,
  []
 
-[2]
+
 
 pdfTeX warning: pdflatex (file ./figures//ltae_s.pdf): PDF inclusion: found PDF
  version <1.7>, but at most version <1.5> allowed
-<figures//ltae_s.pdf, id=214, 341.275pt x 687.56876pt>
+<figures//ltae_s.pdf, id=288, 341.275pt x 687.56876pt>
 File: figures//ltae_s.pdf Graphic file (type pdf)
 <use figures//ltae_s.pdf>
-Package pdftex.def Info: figures//ltae_s.pdf  used on input line 80.
+Package pdftex.def Info: figures//ltae_s.pdf  used on input line 86.
 (pdftex.def)             Requested size: 214.20154pt x 431.55493pt.
-[3 <./figures//ltae_s.pdf>]
-<figures//per_class_f1.pdf, id=254, 624.45172pt x 412.44945pt>
+[3]
+Underfull \vbox (badness 1845) has occurred while \output is active []
+
+ [4 <./figures//ltae_s.pdf>]
+<figures//per_class_f1.pdf, id=337, 624.45172pt x 412.44945pt>
 File: figures//per_class_f1.pdf Graphic file (type pdf)
 <use figures//per_class_f1.pdf>
-Package pdftex.def Info: figures//per_class_f1.pdf  used on input line 184.
+Package pdftex.def Info: figures//per_class_f1.pdf  used on input line 190.
 (pdftex.def)             Requested size: 252.0pt x 166.44322pt.
- [4]
-<figures//field_reduction.pdf, id=263, 577.38206pt x 409.2408pt>
-File: figures//field_reduction.pdf Graphic file (type pdf)
-<use figures//field_reduction.pdf>
-Package pdftex.def Info: figures//field_reduction.pdf  used on input line 195.
-(pdftex.def)             Requested size: 252.0pt x 178.61154pt.
-LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
-(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 200.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5 <./figures//per_class_f1.pdf>]
-<figures//inductive_bias_gap.pdf, id=336, 659.82417pt x 492.48108pt>
+<figures//field_reduction.pdf, id=396, 577.38206pt x 409.2408pt>
+File: figures//field_reduction.pdf Graphic file (type pdf)
+<use figures//field_reduction.pdf>
+Package pdftex.def Info: figures//field_reduction.pdf  used on input line 201.
+(pdftex.def)             Requested size: 252.0pt x 178.61154pt.
+LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
+(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 206.
+ [6 <./figures//field_reduction.pdf>]
+<figures//inductive_bias_gap.pdf, id=473, 659.82417pt x 492.48108pt>
 File: figures//inductive_bias_gap.pdf Graphic file (type pdf)
 <use figures//inductive_bias_gap.pdf>
 Package pdftex.def Info: figures//inductive_bias_gap.pdf  used on input line 24
-0.
+6.
 (pdftex.def)             Requested size: 252.0pt x 188.08408pt.
- [6 <./figures//field_reduction.pdf>] [7 <./figures//inductive_bias_gap.pdf>]
-Underfull \hbox (badness 1603) in paragraph at lines 258--259
+ [7 <./figures//inductive_bias_gap.pdf>]
+Underfull \hbox (badness 1603) in paragraph at lines 264--265
 []\OT1/ptm/m/n/10 Ground-truth crop la-bels were ob-tained from Ra-di-ant
  []
 
 
-Underfull \hbox (badness 3229) in paragraph at lines 265--266
+Underfull \hbox (badness 3229) in paragraph at lines 271--272
 []\OT1/ptm/m/n/8 B[]egu[]e A, Ler-oux L, Soumar[]e M, Faure JF, Diouf AA, Au-
  []
 
 
-Underfull \hbox (badness 1661) in paragraph at lines 265--266
+Underfull \hbox (badness 1661) in paragraph at lines 271--272
 \OT1/ptm/m/n/8 gusseau X, Tour[]e L, Ton-neau JP (2020) Re-mote sens-ing prod-
  []
 
 
-Underfull \hbox (badness 2951) in paragraph at lines 265--266
+Underfull \hbox (badness 2951) in paragraph at lines 271--272
 \OT1/ptm/m/n/8 ucts and ser-vices in sup-port of agri-cul-tural pub-lic poli-ci
 es in
  []
 
 
-Underfull \hbox (badness 1910) in paragraph at lines 265--266
+Underfull \hbox (badness 1910) in paragraph at lines 271--272
 \OT1/ptm/m/n/8 Africa: overview and chal-lenges. \OT1/ptm/m/it/8 Front Sus-tain
  Food Syst \OT1/ptm/m/n/8 4:58.
  []
 
 
-Underfull \hbox (badness 1742) in paragraph at lines 271--272
+Underfull \hbox (badness 1742) in paragraph at lines 277--278
 []\OT1/ptm/m/n/8 Mahlayeye M, Darvishzadeh R, Nel-son A (2024) Char-ac-ter-is-i
 ng
  []
 
 
-Underfull \hbox (badness 4144) in paragraph at lines 271--272
+Underfull \hbox (badness 4144) in paragraph at lines 277--278
 \OT1/ptm/m/n/8 tern clas-si-fi-ca-tion. \OT1/ptm/m/it/8 Int J Appl Earth Obs Ge
 oinf \OT1/ptm/m/n/8 128:103699.
  []
 
 
-Underfull \hbox (badness 3780) in paragraph at lines 277--278
+Underfull \hbox (badness 3780) in paragraph at lines 283--284
 \OT1/ptm/m/n/8 low-frequency crop losses us-ing ma-chine learn-ing: an ap-pli-c
 a-
  []
 
 
-Underfull \hbox (badness 5374) in paragraph at lines 277--278
+Underfull \hbox (badness 5374) in paragraph at lines 283--284
 \OT1/ptm/m/n/8 tion to ce-real crops in Ethiopia. \OT1/ptm/m/it/8 Clim Change \
 OT1/ptm/m/n/8 154:211--227.
  []
 
 
-Underfull \hbox (badness 1430) in paragraph at lines 289--290
+Underfull \hbox (badness 1430) in paragraph at lines 295--296
 \OT1/ptm/m/n/8 tures Fail to Gen-er-al-ize: A Lightweight Al-ter-na-tive for Ag
 ri-cul-
  []
 
 
-Underfull \hbox (badness 1616) in paragraph at lines 297--298
+Underfull \hbox (badness 1616) in paragraph at lines 303--304
 []\OT1/ptm/m/n/8 Ma Y, Chen S, Er-mon S, Lo-bell DB (2024) Trans-fer learn-ing
  []
 
 
-Underfull \hbox (badness 2435) in paragraph at lines 316--317
+Underfull \hbox (badness 2435) in paragraph at lines 322--323
 []\OT1/ptm/m/n/8 Kussul N, Lavre-niuk M, Skakun S, She-lestov A (2017) Deep
  []
 
 
-Underfull \hbox (badness 3049) in paragraph at lines 320--321
+Underfull \hbox (badness 3049) in paragraph at lines 326--327
 []\OT1/ptm/m/n/8 Fan X, Chen L, Xu X, Yan C, Fan J, Li X (2023) Land
  []
 
 
-Underfull \hbox (badness 1466) in paragraph at lines 324--325
+Underfull \hbox (badness 1466) in paragraph at lines 330--331
 []\OT1/ptm/m/n/8 Bandar A, Co[]kun[]ay A (2024) Crop Clas-si-fi-ca-tion with At
 -ten-
  []
 
 
-Underfull \hbox (badness 1831) in paragraph at lines 324--325
+Underfull \hbox (badness 1831) in paragraph at lines 330--331
 \OT1/ptm/m/n/8 Com-bi-na-tion for Re-mote Sens-ing BreizhCrop Time Se-ries Data
 .
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 326--327
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 332--333
 []\OT1/ptm/m/n/8 Espejo-Garcia B, My-lonas N, Athanasakos L, Foun-tas S,
  []
 
 
-Underfull \hbox (badness 7151) in paragraph at lines 326--327
+Underfull \hbox (badness 7151) in paragraph at lines 332--333
 \OT1/ptm/m/n/8 Vasi-lakoglou I (2020) To-wards weeds iden-ti-fi-ca-tion as-sis-
 tance
  []
 
 
-Underfull \hbox (badness 6396) in paragraph at lines 326--327
+Underfull \hbox (badness 6396) in paragraph at lines 332--333
 \OT1/ptm/m/n/8 through trans-fer learn-ing. \OT1/ptm/m/it/8 Com-put Elec-tron A
 gric \OT1/ptm/m/n/8 171:105306.
  []
 
 
-Underfull \hbox (badness 6675) in paragraph at lines 328--329
+Underfull \hbox (badness 6675) in paragraph at lines 334--335
 []\OT1/ptm/m/n/8 Koklu M, Un-lersen MF, Ozkan IA, Aslan MF, Sa-banci K
  []
 
 
-Underfull \hbox (badness 5970) in paragraph at lines 328--329
+Underfull \hbox (badness 5970) in paragraph at lines 334--335
 \OT1/ptm/m/n/8 (2022) A CNN-SVM study based on se-lected deep fea-tures
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--329
+Underfull \hbox (badness 10000) in paragraph at lines 334--335
 \OT1/ptm/m/n/8 for grapevine leaves clas-si-fi-ca-tion. \OT1/ptm/m/it/8 Mea-sur
 e-ment \OT1/ptm/m/n/8 188:110425.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
+Underfull \hbox (badness 10000) in paragraph at lines 344--345
 []\OT1/ptm/m/n/8 Friedman JH (2001) Greedy func-tion ap-prox-i-ma-tion: A
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
+Underfull \hbox (badness 10000) in paragraph at lines 344--345
 \OT1/ptm/m/n/8 gra-di-ent boost-ing ma-chine. \OT1/ptm/m/it/8 Ann Stat \OT1/ptm
 /m/n/8 29(5):1189--1232.
  []
 
 
-Underfull \hbox (badness 1400) in paragraph at lines 340--341
+Underfull \hbox (badness 1400) in paragraph at lines 346--347
 []\OT1/ptm/m/n/8 Pe[]na-Barrag[]an JM, Ngugi MK, Plant RE, Six J (2011) Object-
 
  []
 
 
-Underfull \hbox (badness 2310) in paragraph at lines 342--343
+Underfull \hbox (badness 2310) in paragraph at lines 348--349
 []\OT1/ptm/m/n/8 Arik S[]O, Pfis-ter T (2021) Tab-Net: At-ten-tive In-ter-preta
 ble Tab-
  []
 
 
-Underfull \hbox (badness 6364) in paragraph at lines 342--343
+Underfull \hbox (badness 6364) in paragraph at lines 348--349
 \OT1/ptm/m/n/8 u-lar Learn-ing. \OT1/ptm/m/it/8 Proc AAAI Conf Ar-tif In-tell \
 OT1/ptm/m/n/8 35(8):6679--6687.
  []
 
-[8] [9
+[9
 
 ] (./tgrs-article.aux)
 Package rerunfilecheck Info: File `tgrs-article.out' has not changed.
 (rerunfilecheck)             Checksum: F8E587D3956B22D3EE6D1B57BAB61D72;4174.
  ) 
 Here is how much of TeX's memory you used:
- 11043 strings out of 476041
- 173622 string characters out of 5793175
+ 11054 strings out of 476041
+ 173928 string characters out of 5793175
  1890388 words of memory out of 6000000
- 31254 multiletter control sequences out of 15000+600000
+ 31263 multiletter control sequences out of 15000+600000
  558976 words of font info for 124 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
- 75i,10n,76p,2431b,583s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,76p,2431b,581s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texliv
@@ -728,10 +736,10 @@ imes/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/nimbus15/zhv-Reg.pfb>
-Output written on tgrs-article.pdf (9 pages, 433979 bytes).
+Output written on tgrs-article.pdf (9 pages, 1827774 bytes).
 PDF statistics:
- 623 PDF objects out of 1000 (max. 8388607)
- 413 compressed objects within 5 object streams
- 83 named destinations out of 1000 (max. 500000)
- 197 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 700 PDF objects out of 1000 (max. 8388607)
+ 424 compressed objects within 5 object streams
+ 84 named destinations out of 1000 (max. 500000)
+ 202 words of extra memory for PDF output out of 10000 (max. 10000000)
 
