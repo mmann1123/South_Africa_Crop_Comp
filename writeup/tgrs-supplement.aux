@@ -29,26 +29,24 @@
 \newlabel{sfig:fields}{{S1}{1}{Crop-field composition of the training and holdout regions. (a) Number of labeled fields per crop type: lucerne/medics dominates (43\% of training and 56\% of holdout fields), followed by wheat, barley, canola, and small-grain grazing. This heavy class imbalance motivates macro-F1 as the primary metric and the class-imbalance handling used during training. (b) Mean field area by crop type (hectares); lucerne/medics is the most frequent class despite having among the smallest fields}{figure.1}{}}
 \citation{tabnet_orig}
 \citation{tabnet2024}
+\citation{ltae2020}
+\citation{vaswani2017}
+\citation{russwurm2020}
 \@writefile{lof}{\contentsline {figure}{\numberline {S2}{\ignorespaces Spectral separability of the crop classes, shown as box plots of standardized (z-score) intensity for each Sentinel-2 band and index (B2, B6, B11, B12, EVI, hue). (a) Distributions for all five crops overlap substantially across every band, so no single feature cleanly separates the classes. (b) Wheat versus barley are especially similar in every band---the dominant source of the persistent wheat--barley confusion seen across all models in the main paper.}}{2}{figure.2}\protected@file@percent }
 \newlabel{sfig:box}{{S2}{2}{Spectral separability of the crop classes, shown as box plots of standardized (z-score) intensity for each Sentinel-2 band and index (B2, B6, B11, B12, EVI, hue). (a) Distributions for all five crops overlap substantially across every band, so no single feature cleanly separates the classes. (b) Wheat versus barley are especially similar in every band---the dominant source of the persistent wheat--barley confusion seen across all models in the main paper}{figure.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {S-A-D}}Deep Model Definitions}{2}{subsection.1.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0a}CNN-BiLSTM}{2}{paragraph.1.4.0.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0b}TabNet}{2}{paragraph.1.4.0.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {S1}{\ignorespaces Time-series features extracted from each pixel's spectral profile with \texttt  {xr\_fresh}.}}{2}{table.1}\protected@file@percent }
-\newlabel{stab:features}{{S1}{2}{Time-series features extracted from each pixel's spectral profile with \texttt {xr\_fresh}}{table.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {S3}{\ignorespaces Time-series feature generation with \texttt  {xr\_fresh}. For each pixel, the 10-month profile of every band and index is summarized by the statistical and temporal descriptors of Table\nobreakspace  {}\ref {stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners.}}{2}{figure.3}\protected@file@percent }
-\newlabel{sfig:tsfeat}{{S3}{2}{Time-series feature generation with \texttt {xr\_fresh}. For each pixel, the 10-month profile of every band and index is summarized by the statistical and temporal descriptors of Table~\ref {stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners}{figure.3}{}}
-\citation{ltae2020}
-\citation{vaswani2017}
-\citation{russwurm2020}
+\@writefile{lof}{\contentsline {figure}{\numberline {S3}{\ignorespaces Spatial distribution of labeled crop fields across the out-of-sample holdout region (\texttt  {34S\_20E\_259N}). Each polygon is one field, colored by crop type. The five classes are finely interspersed rather than spatially clustered, so the holdout is a genuinely independent landscape on which models trained on the disjoint training tiles must generalize.}}{2}{figure.3}\protected@file@percent }
+\newlabel{sfig:holdoutfields}{{S3}{2}{Spatial distribution of labeled crop fields across the out-of-sample holdout region (\texttt {34S\_20E\_259N}). Each polygon is one field, colored by crop type. The five classes are finely interspersed rather than spatially clustered, so the holdout is a genuinely independent landscape on which models trained on the disjoint training tiles must generalize}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S4}{\ignorespaces Time-series feature generation with \texttt  {xr\_fresh}. For each pixel, the 10-month profile of every band and index is summarized by the statistical and temporal descriptors of Table\nobreakspace  {}\ref {stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners.}}{2}{figure.4}\protected@file@percent }
+\newlabel{sfig:tsfeat}{{S4}{2}{Time-series feature generation with \texttt {xr\_fresh}. For each pixel, the 10-month profile of every band and index is summarized by the statistical and temporal descriptors of Table~\ref {stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners}{figure.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0c}L-TAE}{2}{paragraph.1.4.0.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0d}Transformer encoder}{2}{paragraph.1.4.0.4}\protected@file@percent }
 \citation{tempcnn2019}
 \citation{ai4foodsecurity}
-\@writefile{lot}{\contentsline {table}{\numberline {S2}{\ignorespaces XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy.}}{3}{table.2}\protected@file@percent }
-\newlabel{stab:trials}{{S2}{3}{XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy}{table.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {S4}{\ignorespaces Field-level aggregation of pixel features. Because each field polygon carries a single crop label, the per-pixel feature vectors falling inside a polygon are mean-pooled into one feature vector per field, which the field-level classifiers then label. This averaging is also the variance-reduction lever analyzed in the main paper, smoothing region-specific pixel noise before classification.}}{3}{figure.4}\protected@file@percent }
-\newlabel{sfig:fieldagg}{{S4}{3}{Field-level aggregation of pixel features. Because each field polygon carries a single crop label, the per-pixel feature vectors falling inside a polygon are mean-pooled into one feature vector per field, which the field-level classifiers then label. This averaging is also the variance-reduction lever analyzed in the main paper, smoothing region-specific pixel noise before classification}{figure.4}{}}
-\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0c}L-TAE}{3}{paragraph.1.4.0.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0d}Transformer encoder}{3}{paragraph.1.4.0.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {S1}{\ignorespaces Time-series features extracted from each pixel's spectral profile with \texttt  {xr\_fresh}.}}{3}{table.1}\protected@file@percent }
+\newlabel{stab:features}{{S1}{3}{Time-series features extracted from each pixel's spectral profile with \texttt {xr\_fresh}}{table.1}{}}
 \@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0e}TempCNN}{3}{paragraph.1.4.0.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {S-A-D}0f}Patch models}{3}{paragraph.1.4.0.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {S-B}Performance Metric Definitions}{3}{section.2}\protected@file@percent }
@@ -57,31 +55,31 @@
 \newlabel{sec:cost}{{S-C}{3}{Training Cost}{section.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {S-D}Ablation Studies}{3}{section.4}\protected@file@percent }
 \newlabel{sec:ablation}{{S-D}{3}{Ablation Studies}{section.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {S-E}Pixel- versus Field-Level Aggregation}{3}{section.5}\protected@file@percent }
+\newlabel{sec:pixfieldfig}{{S-E}{3}{Pixel- versus Field-Level Aggregation}{section.5}{}}
 \bibcite{mann2023}{1}
 \bibcite{mann2025}{2}
 \bibcite{james2013}{3}
 \bibcite{breiman2001}{4}
 \bibcite{ke2017}{5}
-\@writefile{lot}{\contentsline {table}{\numberline {S3}{\ignorespaces Training time for a single run (one seed) of each model.}}{4}{table.3}\protected@file@percent }
-\newlabel{stab:cost}{{S3}{4}{Training time for a single run (one seed) of each model}{table.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {S-E}Raw Reflectance Versus \texttt  {xr\_fresh}}{4}{section.5}\protected@file@percent }
-\newlabel{sec:repr}{{S-E}{4}{Raw Reflectance Versus \texttt {xr\_fresh}}{section.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {S4}{\ignorespaces Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size.}}{4}{table.4}\protected@file@percent }
-\newlabel{stab:ens}{{S4}{4}{Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size}{table.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {S5}{\ignorespaces Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer holdout performance.}}{4}{table.5}\protected@file@percent }
-\newlabel{stab:loss}{{S5}{4}{Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer holdout performance}{table.5}{}}
-\@writefile{toc}{\contentsline {section}{References}{4}{section*.1}\protected@file@percent }
 \bibcite{chen2016}{6}
 \bibcite{friedman2001}{7}
 \bibcite{tabnet_orig}{8}
 \bibcite{tabnet2024}{9}
 \bibcite{ltae2020}{10}
+\@writefile{lot}{\contentsline {table}{\numberline {S2}{\ignorespaces XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy.}}{4}{table.2}\protected@file@percent }
+\newlabel{stab:trials}{{S2}{4}{XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S3}{\ignorespaces Training time for a single run (one seed) of each model.}}{4}{table.3}\protected@file@percent }
+\newlabel{stab:cost}{{S3}{4}{Training time for a single run (one seed) of each model}{table.3}{}}
+\@writefile{toc}{\contentsline {section}{References}{4}{section*.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {S4}{\ignorespaces Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size.}}{4}{table.4}\protected@file@percent }
+\newlabel{stab:ens}{{S4}{4}{Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size}{table.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S5}{\ignorespaces Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer holdout performance.}}{4}{table.5}\protected@file@percent }
+\newlabel{stab:loss}{{S5}{4}{Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer holdout performance}{table.5}{}}
 \bibcite{vaswani2017}{11}
 \bibcite{russwurm2020}{12}
 \bibcite{tempcnn2019}{13}
 \bibcite{ai4foodsecurity}{14}
-\@writefile{lot}{\contentsline {table}{\numberline {S6}{\ignorespaces Raw reflectance versus \texttt  {xr\_fresh} for a single fixed XGBoost learner.}}{5}{table.6}\protected@file@percent }
-\newlabel{stab:repr}{{S6}{5}{Raw reflectance versus \texttt {xr\_fresh} for a single fixed XGBoost learner}{table.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {S5}{\ignorespaces Architecture of the CNN-BiLSTM model. The $(B,6,T)$ input (six bands/indices over $T$ months) passes a 1D convolution (64 filters, kernel 5) for temporal feature extraction, then a bidirectional LSTM (hidden size 64) whose final time step is classified by a softmax head. Training uses weighted focal loss to counter class imbalance, and five seeds are ensembled by averaging logits.}}{5}{figure.5}\protected@file@percent }
 \newlabel{sfig:bilstm}{{S5}{5}{Architecture of the CNN-BiLSTM model. The $(B,6,T)$ input (six bands/indices over $T$ months) passes a 1D convolution (64 filters, kernel 5) for temporal feature extraction, then a bidirectional LSTM (hidden size 64) whose final time step is classified by a softmax head. Training uses weighted focal loss to counter class imbalance, and five seeds are ensembled by averaging logits}{figure.5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {S6}{\ignorespaces Patch generation per field. Each field is tiled into 100\nobreakspace  {}m patches---only ${\sim }10\times 10$ pixels at the 10\nobreakspace  {}m Sentinel-2 resolution---and resampled to $128\times 128$. These patches are the input to the patch-based 2D and 3D CNNs, whose per-patch predictions are later aggregated to a field label by majority vote.}}{6}{figure.6}\protected@file@percent }

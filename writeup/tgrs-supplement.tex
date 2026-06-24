@@ -29,7 +29,7 @@
 \noindent This document collects supporting material for the main paper. Section~S-A details the
 dataset, feature set, and model definitions; Section~S-B defines the metrics; Section~S-C reports
 training cost; Section~S-D presents the ablation studies;
-and Section~S-E the raw-versus-\texttt{xr\_fresh} representation comparison. Equation, figure, table,
+and Section~S-E visualizes pixel- versus field-level aggregation. Equation, figure, table,
 and section labels are prefixed ``S''.
 
 \section{Dataset Details, Feature Set, and Model Definitions}
@@ -41,7 +41,9 @@ The five crop classes are heavily imbalanced (Fig.~\ref{sfig:fields}(a)). Lucern
 both regions despite having the smallest mean field area (Fig.~\ref{sfig:fields}(b)). Spectral
 responses overlap substantially across crops (Fig.~\ref{sfig:box}(a)), and wheat and barley are
 especially similar (Fig.~\ref{sfig:box}(b)), the dominant source of persistent confusion noted in
-the main paper.
+the main paper. Within the holdout region, fields of different crops are finely interspersed rather
+than spatially clustered (Fig.~\ref{sfig:holdoutfields}), so spatial transfer cannot exploit any
+geographic separation between classes.
 
 \begin{figure}[!t]
 \centering
@@ -69,6 +71,16 @@ five crops overlap substantially across every band, so no single feature cleanly
 classes. (b) Wheat versus barley are especially similar in every band---the dominant source of the
 persistent wheat--barley confusion seen across all models in the main paper.}
 \label{sfig:box}
+\end{figure}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{field_boundaries_by_crop.pdf}
+\caption{Spatial distribution of labeled crop fields across the out-of-sample holdout region
+(\texttt{34S\_20E\_259N}). Each polygon is one field, colored by crop type. The five classes are
+finely interspersed rather than spatially clustered, so the holdout is a genuinely independent
+landscape on which models trained on the disjoint training tiles must generalize.}
+\label{sfig:holdoutfields}
 \end{figure}
 
 \subsection{\texttt{xr\_fresh} Feature Set}
@@ -142,8 +154,8 @@ XGBoost \cite{chen2016, friedman2001}: regularized boosting objective
 $\mathcal{L} = \sum_i l(y_i, \hat{y}_i) + \sum_k \Omega(f_k)$ with
 $\Omega(f_k) = \gamma T_k + \tfrac{1}{2}\lambda \sum_j w_j^2$.
 The field-level XGBoost was tuned with Optuna over 150 trials; the top configurations appear in
-Table~\ref{stab:trials}. Field-level pixel features are aggregated by the mean within each polygon
-(Fig.~\ref{sfig:fieldagg}). For the pixel ensemble, RF, XGBoost, and LightGBM probabilities are
+Table~\ref{stab:trials}. Field-level pixel features are aggregated by the mean within each polygon.
+For the pixel ensemble, RF, XGBoost, and LightGBM probabilities are
 soft-voted; the field-level stacked ensemble uses RF and XGBoost base learners with a
 logistic-regression meta-learner, and a confidence-margin rule falls back to pixel-mode voting when
 the top two field-level class probabilities differ by less than $0.10$.
@@ -175,17 +187,6 @@ learning rate; SubS: row subsample; ByTree: column subsample per tree; Gamma: mi
 reduction; Reg$\alpha$/Reg$\lambda$: L1/L2 regularization; MinCW: minimum child weight.
 \end{minipage}
 \end{table*}
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{field_boundaries_by_crop.pdf}
-\caption{Field-level aggregation of pixel features. Because each field polygon carries a single crop
-label, the per-pixel feature vectors falling inside a polygon are mean-pooled into one feature vector
-per field, which the field-level classifiers then label. This averaging is also the
-variance-reduction lever analyzed in the main paper, smoothing region-specific pixel noise before
-classification.}
-\label{sfig:fieldagg}
-\end{figure}
 
 \subsection{Deep Model Definitions}
 \paragraph{CNN-BiLSTM} An input tensor of shape $(B,6,T)$ passes a 1D convolution (64 filters,
@@ -438,46 +439,13 @@ Field-level, 5-seed ensembles. ``Resample'' denotes class-balanced oversampling.
 \end{minipage}
 \end{table}
 
-\section{Raw Reflectance Versus \texttt{xr\_fresh}}
-\label{sec:repr}
-\emph{Supports the raw-versus-\texttt{xr\_fresh} supporting experiment discussed in Sec.~V.}
-Because the best-transferring classical learners in main Table~I are exactly those fed
-\texttt{xr\_fresh} statistics, representation and model family are confounded there. To separate them
-we trained a single XGBoost learner once on raw monthly reflectance and once on per-pixel
-\texttt{xr\_fresh} statistics, holding the FID-wise splits, preprocessing, and field-level mean
-pooling fixed (Table~\ref{stab:repr}). The two representations are essentially indistinguishable
-under transfer (F1$_m=0.59$ raw vs.\ $0.56$ \texttt{xr\_fresh}; equal on weighted-F1 and $\kappa$;
-\texttt{xr\_fresh} marginally better on cross-entropy). The \texttt{xr\_fresh} representation
-therefore yields no measurable transfer-accuracy gain over raw reflectance for the trees; its value
-is operational---a compact, fast-to-fit, agronomically interpretable vector
-(Sec.~\ref{sec:cost})---rather than an accuracy advantage. Figure~\ref{sfig:pixfield} visualizes the
-pixel-versus-field aggregation effect summarized in main Table~II.
-
-\begin{table}[!t]
-\centering
-\caption{Raw reflectance versus \texttt{xr\_fresh} for a single fixed XGBoost learner.}
-\label{stab:repr}
-\renewcommand{\arraystretch}{1.1}
-\setlength{\tabcolsep}{6pt}
-\footnotesize
-\begin{tabular}{llcccc}
-\toprule
-\textbf{Representation} & \textbf{Split} & \textbf{F1$_m$} & \textbf{wF1} & \textbf{$\kappa$} & \textbf{Xent} \\
-\midrule
-Raw reflectance    & In-region        & 0.73 & 0.80 & 0.71 & 0.65 \\
-\texttt{xr\_fresh} & In-region        & 0.72 & 0.76 & 0.68 & 0.74 \\
-\midrule
-Raw reflectance    & Spatial transfer & 0.59 & 0.69 & 0.50 & 0.85 \\
-\texttt{xr\_fresh} & Spatial transfer & 0.56 & 0.69 & 0.50 & 0.82 \\
-\bottomrule
-\end{tabular}
-\par\vspace{3pt}
-\begin{minipage}{\columnwidth}
-\footnotesize
-Identical FID-wise splits, preprocessing, and field-level mean pooling; only the input representation
-differs.
-\end{minipage}
-\end{table}
+\section{Pixel- versus Field-Level Aggregation}
+\label{sec:pixfieldfig}
+\emph{Supports main paper Sec.~IV (``Pixel Versus Field Level'').}
+Figure~\ref{sfig:pixfield} visualizes the pixel-versus-field aggregation effect summarized in main
+Table~II: field-level aggregation recovers transfer for the dense temporal models (L-TAE,
+CNN-BiLSTM) but collapses the sparsity-reliant TabNet, whose robustness already derives from
+per-pixel sparse feature selection.
 
 \begin{figure}[!t]
 \centering

@@ -100,6 +100,16 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Pixel Versus Field Level: Aggregation as Variance Reduction}{4}{subsection.4.2}\protected@file@percent }
 \newlabel{sec:pixfield}{{\mbox  {IV-B}}{4}{Pixel Versus Field Level: Aggregation as Variance Reduction}{subsection.4.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Per-Class Performance and Persistent Confusions}{4}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Data Efficiency Under Spatial Transfer}{4}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:efficiency}{{\mbox  {IV-D}}{4}{Data Efficiency Under Spatial Transfer}{subsection.4.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces In-region versus spatial-transfer performance of all twenty-three models.}}{5}{table.1}\protected@file@percent }
+\newlabel{tab:gap}{{I}{5}{In-region versus spatial-transfer performance of all twenty-three models}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Pixel- versus field-level spatial transfer.}}{5}{table.2}\protected@file@percent }
+\newlabel{tab:pixfield}{{II}{5}{Pixel- versus field-level spatial transfer}{table.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Per-class F1 on the holdout region for four representative models (TabNet, L-TAE-S, L-TAE, and CNN-BiLSTM). TabNet, L-TAE-S, and L-TAE classify lucerne/medics and canola well; the cereals (barley, wheat) and small-grain grazing concentrate the errors. CNN-BiLSTM's accuracy drops on every class. Error bars are 95\% bootstrap CIs over holdout fields.}}{5}{figure.2}\protected@file@percent }
+\newlabel{fig:perclass}{{2}{5}{Per-class F1 on the holdout region for four representative models (TabNet, L-TAE-S, L-TAE, and CNN-BiLSTM). TabNet, L-TAE-S, and L-TAE classify lucerne/medics and canola well; the cereals (barley, wheat) and small-grain grazing concentrate the errors. CNN-BiLSTM's accuracy drops on every class. Error bars are 95\% bootstrap CIs over holdout fields}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}Raw Reflectance versus \texttt  {xr\_fresh}}{5}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:repr}{{\mbox  {IV-E}}{5}{Raw Reflectance versus \texttt {xr\_fresh}}{subsection.4.5}{}}
 \citation{belgiu2016}
 \citation{maxwell2019}
 \citation{pankajakshan2025}
@@ -108,32 +118,25 @@
 \citation{mai2025}
 \citation{tabnet_orig}
 \citation{obadic2022}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces In-region versus spatial-transfer performance of all twenty-three models.}}{5}{table.1}\protected@file@percent }
-\newlabel{tab:gap}{{I}{5}{In-region versus spatial-transfer performance of all twenty-three models}{table.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Pixel- versus field-level spatial transfer.}}{5}{table.2}\protected@file@percent }
-\newlabel{tab:pixfield}{{II}{5}{Pixel- versus field-level spatial transfer}{table.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Data Efficiency Under Spatial Transfer}{5}{subsection.4.4}\protected@file@percent }
-\newlabel{sec:efficiency}{{\mbox  {IV-D}}{5}{Data Efficiency Under Spatial Transfer}{subsection.4.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Per-class F1 on the holdout region for four representative models (TabNet, L-TAE-S, L-TAE, and CNN-BiLSTM). TabNet, L-TAE-S, and L-TAE classify lucerne/medics and canola well; the cereals (barley, wheat) and small-grain grazing concentrate the errors. CNN-BiLSTM's accuracy drops on every class. Error bars are 95\% bootstrap CIs over holdout fields.}}{5}{figure.2}\protected@file@percent }
-\newlabel{fig:perclass}{{2}{5}{Per-class F1 on the holdout region for four representative models (TabNet, L-TAE-S, L-TAE, and CNN-BiLSTM). TabNet, L-TAE-S, and L-TAE classify lucerne/medics and canola well; the cereals (barley, wheat) and small-grain grazing concentrate the errors. CNN-BiLSTM's accuracy drops on every class. Error bars are 95\% bootstrap CIs over holdout fields}{figure.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Discussion}{5}{section.5}\protected@file@percent }
-\newlabel{sec:discussion}{{V}{5}{Discussion}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Why Tree-Like Inductive Bias Transfers}{5}{subsection.5.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Spatial-transfer macro-F1 versus fraction of training fields retained. The robust models (TabNet, logistic regression, L-TAE-S) are nearly flat down to a quarter of the training fields, while the dense pixel L-TAE is noisier and lower throughout.}}{6}{figure.3}\protected@file@percent }
 \newlabel{fig:reduction}{{3}{6}{Spatial-transfer macro-F1 versus fraction of training fields retained. The robust models (TabNet, logistic regression, L-TAE-S) are nearly flat down to a quarter of the training fields, while the dense pixel L-TAE is noisier and lower throughout}{figure.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Spatial-transfer gap ($\Delta $ macro-F1) grouped by inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta |$); dense temporal/patch nets and synthetic augmentation overfit the training region. L-TAE-S, which adds sparse feature selection to a dense attention backbone, tracks the tree-based models. Bars are family means; points are individual models.}}{6}{figure.4}\protected@file@percent }
-\newlabel{fig:bias}{{4}{6}{Spatial-transfer gap ($\Delta $ macro-F1) grouped by inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta |$); dense temporal/patch nets and synthetic augmentation overfit the training region. L-TAE-S, which adds sparse feature selection to a dense attention backbone, tracks the tree-based models. Bars are family means; points are individual models}{figure.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Raw reflectance versus \texttt  {xr\_fresh} for a single fixed XGBoost learner.}}{6}{table.3}\protected@file@percent }
+\newlabel{tab:repr}{{III}{6}{Raw reflectance versus \texttt {xr\_fresh} for a single fixed XGBoost learner}{table.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Discussion}{6}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{V}{6}{Discussion}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Why Tree-Like Inductive Bias Transfers}{6}{subsection.5.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Two Robustness Levers}{6}{subsection.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Spatial-transfer gap ($\Delta $ macro-F1) grouped by inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta |$); dense temporal/patch nets and synthetic augmentation overfit the training region. L-TAE-S, which adds sparse feature selection to a dense attention backbone, tracks the tree-based models. Bars are family means; points are individual models.}}{7}{figure.4}\protected@file@percent }
+\newlabel{fig:bias}{{4}{7}{Spatial-transfer gap ($\Delta $ macro-F1) grouped by inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta |$); dense temporal/patch nets and synthetic augmentation overfit the training region. L-TAE-S, which adds sparse feature selection to a dense attention backbone, tracks the tree-based models. Bars are family means; points are individual models}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Automated Features, Patch Models, and Persistent Difficulty}{7}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}Limitations}{7}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{7}{section.6}\protected@file@percent }
 \citation{mlhub}
 \bibcite{begue2020}{1}
 \bibcite{ieee2017}{2}
 \bibcite{mahlayeye2024}{3}
 \bibcite{mann2023}{4}
 \bibcite{mann2017}{5}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Automated Features, Patch Models, and Persistent Difficulty}{7}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}Limitations}{7}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{7}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{References}{7}{section*.3}\protected@file@percent }
 \bibcite{mann2019}{6}
 \bibcite{maxwell2019}{7}
 \bibcite{belgiu2016}{8}
@@ -168,7 +171,8 @@
 \bibcite{penabarragan2011}{37}
 \bibcite{tabnet_orig}{38}
 \bibcite{tabnet2024}{39}
+\@writefile{toc}{\contentsline {section}{References}{8}{section*.3}\protected@file@percent }
 \bibcite{vaswani2017}{40}
 \bibcite{sparsemax2016}{41}
 \bibcite{obadic2022}{42}
-\gdef \@abspage@last{8}
+\gdef \@abspage@last{9}

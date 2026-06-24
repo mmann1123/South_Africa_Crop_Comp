@@ -1,6 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1782266726.10958 "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/tgrs-supplement.tex" "tgrs-supplement.pdf" "tgrs-supplement" 1782266726.89069 0
-  "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/tgrs-supplement.tex" 1782266063.81466 25737 52cb23def03045fe0dda1d3970bf31d0 ""
+["pdflatex"] 1782268704.88974 "tgrs-supplement.tex" "tgrs-supplement.pdf" "tgrs-supplement" 1782268705.7708 0
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1764115200 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -132,9 +131,9 @@
   "figures//patch_model.pdf" 1782266560.51962 12146 283585205ffad5577185b787edf48277 ""
   "figures//pixel_vs_field.pdf" 1782265470.91092 18271 3903596af89730335ea94d20736bd526 ""
   "figures//wheat_barley_boxplot.pdf" 1781910991.96063 15090 9ef1cc0310d960bf27021a404bb7a01f ""
-  "tgrs-supplement.aux" 1782266726.75333 9391 82fb2d9da2ef4d9b4e958fa573af61df "pdflatex"
-  "tgrs-supplement.out" 1782266726.75433 1830 22e02e8d4f47d581d34674904d4f6ece "pdflatex"
-  "tgrs-supplement.tex" 1782266063.81466 25737 52cb23def03045fe0dda1d3970bf31d0 ""
+  "tgrs-supplement.aux" 1782268705.63792 12612 2b01f6b7680d654fa14479327c69e785 "pdflatex"
+  "tgrs-supplement.out" 1782268705.63892 1830 22e02e8d4f47d581d34674904d4f6ece "pdflatex"
+  "tgrs-supplement.tex" 1782268693.67718 28376 b82183fa0b360badc3661146344be1f0 ""
   (generated)
   "tgrs-supplement.aux"
   "tgrs-supplement.log"
