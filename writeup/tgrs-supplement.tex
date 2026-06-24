@@ -21,15 +21,14 @@
 
 \begin{document}
 
-\title{Supplementary Material:\\Deep Architectures Can Generalize: Sparse Feature Selection Improves Spatial Transfer in Earth Observation}
+\title{Supplementary Material:\\Sparse Feature Selection, Not Capacity, Drives Spatial Transfer in Crop Classification}
 \author{Michael~L.~Mann, Sairam~Venkatachalam, Disha~Kacha, Devarsh~Sheth, Ryan~Engstrom, and Amir~Jafari}
 \markboth{IEEE Transactions on Geoscience and Remote Sensing --- Supplementary Material}{}
 \maketitle
 
 \noindent This document collects supporting material for the main paper. Section~S-A details the
 dataset, feature set, and model definitions; Section~S-B defines the metrics; Section~S-C reports
-training cost; Section~S-D presents the ablation studies;
-and Section~S-E visualizes pixel- versus field-level aggregation. Equation, figure, table,
+training cost; and Section~S-D presents the ablation studies. Equation, figure, table,
 and section labels are prefixed ``S''.
 
 \section{Dataset Details, Feature Set, and Model Definitions}
@@ -41,11 +40,9 @@ The five crop classes are heavily imbalanced (Fig.~\ref{sfig:fields}(a)). Lucern
 both regions despite having the smallest mean field area (Fig.~\ref{sfig:fields}(b)). Spectral
 responses overlap substantially across crops (Fig.~\ref{sfig:box}(a)), and wheat and barley are
 especially similar (Fig.~\ref{sfig:box}(b)), the dominant source of persistent confusion noted in
-the main paper. Within the holdout region, fields of different crops are finely interspersed rather
-than spatially clustered (Fig.~\ref{sfig:holdoutfields}), so spatial transfer cannot exploit any
-geographic separation between classes.
+the main paper.
 
-\begin{figure}[!t]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\columnwidth]{fields_count.pdf}\\[1pt]
 {\footnotesize (a)}\\[4pt]
@@ -59,7 +56,7 @@ metric and the class-imbalance handling used during training. (b) Mean field are
 \label{sfig:fields}
 \end{figure}
 
-\begin{figure}[!t]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\columnwidth]{all_crops_boxplot.pdf}\\[1pt]
 {\footnotesize (a)}\\[4pt]
@@ -71,16 +68,6 @@ five crops overlap substantially across every band, so no single feature cleanly
 classes. (b) Wheat versus barley are especially similar in every band---the dominant source of the
 persistent wheat--barley confusion seen across all models in the main paper.}
 \label{sfig:box}
-\end{figure}
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{field_boundaries_by_crop.pdf}
-\caption{Spatial distribution of labeled crop fields across the out-of-sample holdout region
-(\texttt{34S\_20E\_259N}). Each polygon is one field, colored by crop type. The five classes are
-finely interspersed rather than spatially clustered, so the holdout is a genuinely independent
-landscape on which models trained on the disjoint training tiles must generalize.}
-\label{sfig:holdoutfields}
 \end{figure}
 
 \subsection{\texttt{xr\_fresh} Feature Set}
@@ -129,7 +116,7 @@ in standard deviations ($r=1,2,3$).
 \end{minipage}
 \end{table}
 
-\begin{figure}[!t]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\columnwidth]{Time_Series_Feature_Generation.pdf}
 \caption{Time-series feature generation with \texttt{xr\_fresh}. For each pixel, the 10-month profile
@@ -195,7 +182,7 @@ softmax head (Fig.~\ref{sfig:bilstm}). Class imbalance is handled with focal los
 $\mathcal{L}_{\text{focal}} = -\alpha_t (1-p_t)^{\gamma}\log(p_t)$, $\gamma=2.0$, $\alpha_t$ the
 inverse class frequency. Five seeds are ensembled by averaging logits.
 
-\begin{figure}[!t]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\columnwidth]{cnn_bilstm.pdf}
 \caption{Architecture of the CNN-BiLSTM model. The $(B,6,T)$ input (six bands/indices over $T$
@@ -245,7 +232,7 @@ spatiotemporal volume ($T=10$, $C=6$) through three 3D-convolutional blocks with
 loss (Fig.~\ref{sfig:patchmodel}). Both are five-seed ensembles aggregated to a field label by
 majority vote.
 
-\begin{figure}[!t]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\columnwidth]{Example_patches.pdf}
 \caption{Patch generation per field. Each field is tiled into 100~m patches---only
@@ -255,7 +242,7 @@ aggregated to a field label by majority vote.}
 \label{sfig:patches}
 \end{figure}
 
-\begin{figure}[!t]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\columnwidth]{patch_model.pdf}
 \caption{Patch-level 3D CNN pipeline: each field is tiled into 100~m patches resampled to
@@ -438,23 +425,6 @@ CNN-BiLSTM (field) & Weighted focal ($\gamma{=}2$) & no  & 0.51 & 0.34 \\
 Field-level, 5-seed ensembles. ``Resample'' denotes class-balanced oversampling.
 \end{minipage}
 \end{table}
-
-\section{Pixel- versus Field-Level Aggregation}
-\label{sec:pixfieldfig}
-\emph{Supports main paper Sec.~IV (``Pixel Versus Field Level'').}
-Figure~\ref{sfig:pixfield} visualizes the pixel-versus-field aggregation effect summarized in main
-Table~II: field-level aggregation recovers transfer for the dense temporal models (L-TAE,
-CNN-BiLSTM) but collapses the sparsity-reliant TabNet, whose robustness already derives from
-per-pixel sparse feature selection.
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{pixel_vs_field.pdf}
-\caption{Spatial-transfer macro-F1 at pixel versus field level. Field-level aggregation recovers
-transfer for dense temporal models (L-TAE, CNN-BiLSTM) but collapses the sparsity-reliant TabNet.
-Error bars are 95\% bootstrap CIs over holdout fields.}
-\label{sfig:pixfield}
-\end{figure}
 
 \begin{thebibliography}{99}
 \bibitem{mann2023}
