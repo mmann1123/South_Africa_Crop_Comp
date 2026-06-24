@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1782248133 "tgrs-article.tex" "tgrs-article.pdf" "tgrs-article" 1782248134
+["pdflatex"] 1782248982 "tgrs-article.tex" "tgrs-article.pdf" "tgrs-article" 1782248982
   "/etc/texmf/web2c/texmf.cnf" 1673971414 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -123,9 +123,9 @@
   "figures//inductive_bias_gap.pdf" 1782237191 19631 ed9c6ef93d426b26da0fecc44253c350 ""
   "figures//ltae_s.pdf" 1782237191 42793 cc21893f4146371fd8c13de410b68bca ""
   "figures//per_class_f1.pdf" 1782237191 17050 39fa9d813cf7fe8671696a5324aaec0f ""
-  "tgrs-article.aux" 1782248134 9878 1476a79706fd15b14d680c71d4614a55 "pdflatex"
-  "tgrs-article.out" 1782248134 3689 8c205b72fb563f2406f7c7f41160a19d "pdflatex"
-  "tgrs-article.tex" 1782248046 53809 7148e863118699f11a7990330de956be ""
+  "tgrs-article.aux" 1782248982 9878 1476a79706fd15b14d680c71d4614a55 "pdflatex"
+  "tgrs-article.out" 1782248982 3689 8c205b72fb563f2406f7c7f41160a19d "pdflatex"
+  "tgrs-article.tex" 1782248981 53814 f7cdd5075784a5a84062efc9965bff55 ""
   (generated)
   "tgrs-article.aux"
   "tgrs-article.log"

@@ -37,40 +37,33 @@ and section labels are prefixed ``S''.
 \emph{Supports main paper Sec.~II--III.}
 
 \subsection{Exploratory Data Analysis}
-The five crop classes are heavily imbalanced (Fig.~\ref{sfig:fields}). Lucerne/medics dominates
-both regions despite having the smallest mean field area (Fig.~\ref{sfig:area}). Spectral responses
-overlap substantially across crops (Fig.~\ref{sfig:box}), and wheat and barley are especially
-similar (Fig.~\ref{sfig:wb}), which is the dominant source of persistent confusion noted in the main
-paper.
+The five crop classes are heavily imbalanced (Fig.~\ref{sfig:fields}(a)). Lucerne/medics dominates
+both regions despite having the smallest mean field area (Fig.~\ref{sfig:fields}(b)). Spectral
+responses overlap substantially across crops (Fig.~\ref{sfig:box}(a)), and wheat and barley are
+especially similar (Fig.~\ref{sfig:box}(b)), the dominant source of persistent confusion noted in
+the main paper.
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{fields_count.pdf}
-\caption{Number of fields per crop type in the training and holdout regions.}
+\includegraphics[width=\columnwidth]{fields_count.pdf}\\[1pt]
+{\footnotesize (a)}\\[4pt]
+\includegraphics[width=\columnwidth]{avg_field_area.pdf}\\[1pt]
+{\footnotesize (b)}
+\caption{Crop-field composition of the training and holdout regions: (a) number of fields per crop
+type, showing the heavy class imbalance; (b) average field area by crop type (hectares).}
 \label{sfig:fields}
 \end{figure}
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{avg_field_area.pdf}
-\caption{Average field area by crop type (hectares).}
-\label{sfig:area}
-\end{figure}
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{all_crops_boxplot.pdf}
-\caption{Spectral band intensities by crop type. The substantial overlap shows that classification
-from a limited set of spectral bands alone is challenging.}
+\includegraphics[width=\columnwidth]{all_crops_boxplot.pdf}\\[1pt]
+{\footnotesize (a)}\\[4pt]
+\includegraphics[width=\columnwidth]{wheat_barley_boxplot.pdf}\\[1pt]
+{\footnotesize (b)}
+\caption{Spectral separability of the crop classes: (a) band intensities for all five crops overlap
+substantially; (b) wheat versus barley are especially similar, the dominant source of persistent
+classification confusion across models.}
 \label{sfig:box}
-\end{figure}
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=\columnwidth]{wheat_barley_boxplot.pdf}
-\caption{Wheat versus barley spectral band intensities. The high similarity motivates their
-persistent classification confusion across all models.}
-\label{sfig:wb}
 \end{figure}
 
 \subsection{\texttt{xr\_fresh} Feature Set}
@@ -270,10 +263,7 @@ ensembles and the field-level L-TAE-S) are among the cheapest to train, while th
 \begin{table}[!t]
 \centering
 \scriptsize
-\caption{Training time for a single run (one seed) of each model. Trees timed as a single
-best-configuration fit, excluding the one-time Optuna search. $\dagger$Mean per seed for a 5-seed
-ensemble. $\ddagger$Measured on the 75\% training fraction, the best-transferring TabNet pixel
-configuration.}
+\caption{Training time for a single run (one seed) of each model.}
 \label{stab:cost}
 \renewcommand{\arraystretch}{1.12}
 \setlength{\tabcolsep}{6pt}
@@ -315,6 +305,13 @@ Transformer            & pixel & raw & 97\,min \\
 Multi-Channel 2D CNN   & patch & raw & 38\,min\textsuperscript{$\dagger$} \\
 \bottomrule
 \end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\columnwidth}
+\footnotesize
+Trees timed as a single best-configuration fit, excluding the one-time Optuna search.
+$\dagger$Mean per seed for a 5-seed ensemble. $\ddagger$Measured on the 75\% training fraction, the
+best-transferring TabNet pixel configuration.
+\end{minipage}
 \end{table}
 
 \section{Ablation Studies}
@@ -342,8 +339,7 @@ best setting ($0.56$) stays below L-TAE-S's worst ($0.59$), so the objective nev
 \begin{table}[!t]
 \centering
 \scriptsize
-\caption{Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size, by
-re-inference of saved per-seed checkpoints. Single-seed rows report mean$\pm$s.d.\ across five seeds.}
+\caption{Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size.}
 \label{stab:ens}
 \renewcommand{\arraystretch}{1.12}
 \setlength{\tabcolsep}{8pt}
@@ -364,14 +360,18 @@ CNN-BiLSTM (field) & 1 seed  & $0.48\pm0.02$ & $0.31\pm0.02$ \\
                    & 5 seeds & 0.51 & 0.33 \\
 \bottomrule
 \end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\columnwidth}
+\footnotesize
+By re-inference of saved per-seed checkpoints. Single-seed rows report mean$\pm$s.d.\ across five seeds.
+\end{minipage}
 \end{table}
 
 \begin{table}[!t]
 \centering
 \scriptsize
 \caption{Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer
-holdout performance (field-level, 5-seed ensembles). ``Resample'' denotes class-balanced
-oversampling.}
+holdout performance.}
 \label{stab:loss}
 \renewcommand{\arraystretch}{1.12}
 \setlength{\tabcolsep}{8pt}
@@ -398,6 +398,11 @@ CNN-BiLSTM (field) & Weighted focal ($\gamma{=}2$) & no  & 0.51 & 0.34 \\
                    & Plain CE                       & yes & 0.50 & 0.34 \\
 \bottomrule
 \end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\columnwidth}
+\footnotesize
+Field-level, 5-seed ensembles. ``Resample'' denotes class-balanced oversampling.
+\end{minipage}
 \end{table}
 
 \section{Data Efficiency Under Spatial Transfer}
@@ -437,8 +442,7 @@ pixel-versus-field aggregation effect summarized in main Table~II.
 
 \begin{table}[!t]
 \centering
-\caption{Raw reflectance versus \texttt{xr\_fresh} for a single fixed XGBoost learner, identical
-splits and pooling; only the input representation differs.}
+\caption{Raw reflectance versus \texttt{xr\_fresh} for a single fixed XGBoost learner.}
 \label{stab:repr}
 \renewcommand{\arraystretch}{1.1}
 \setlength{\tabcolsep}{6pt}
@@ -454,6 +458,12 @@ Raw reflectance    & Spatial transfer & 0.59 & 0.69 & 0.50 & 0.85 \\
 \texttt{xr\_fresh} & Spatial transfer & 0.56 & 0.69 & 0.50 & 0.82 \\
 \bottomrule
 \end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\columnwidth}
+\footnotesize
+Identical FID-wise splits, preprocessing, and field-level mean pooling; only the input representation
+differs.
+\end{minipage}
 \end{table}
 
 \begin{figure}[!t]

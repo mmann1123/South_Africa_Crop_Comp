@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.2.2)  23 JUN 2026 16:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.2.2)  23 JUN 2026 17:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -472,29 +472,29 @@ Package pdftex.def Info: figures//fields_count.pdf  used on input line 48.
 <figures//avg_field_area.pdf, id=53, 549.37749pt x 385.71103pt>
 File: figures//avg_field_area.pdf Graphic file (type pdf)
 <use figures//avg_field_area.pdf>
-Package pdftex.def Info: figures//avg_field_area.pdf  used on input line 55.
+Package pdftex.def Info: figures//avg_field_area.pdf  used on input line 50.
 (pdftex.def)             Requested size: 252.0pt x 176.92307pt.
 <figures//all_crops_boxplot.pdf, id=54, 622.82063pt x 448.17827pt>
 File: figures//all_crops_boxplot.pdf Graphic file (type pdf)
 <use figures//all_crops_boxplot.pdf>
-Package pdftex.def Info: figures//all_crops_boxplot.pdf  used on input line 62.
+Package pdftex.def Info: figures//all_crops_boxplot.pdf  used on input line 59.
 
 (pdftex.def)             Requested size: 252.0pt x 181.33339pt.
 <figures//wheat_barley_boxplot.pdf, id=55, 622.82063pt x 427.55434pt>
 File: figures//wheat_barley_boxplot.pdf Graphic file (type pdf)
 <use figures//wheat_barley_boxplot.pdf>
 Package pdftex.def Info: figures//wheat_barley_boxplot.pdf  used on input line 
-70.
+61.
 (pdftex.def)             Requested size: 252.0pt x 172.98892pt.
 LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
-(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 76.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 87.
+(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 69.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 80.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 87.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 80.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -508,72 +508,78 @@ PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: figures//Time_Series_Feature_Generation.pdf Graphic file (type pdf)
 <use figures//Time_Series_Feature_Generation.pdf>
 Package pdftex.def Info: figures//Time_Series_Feature_Generation.pdf  used on i
-nput line 116.
+nput line 109.
 (pdftex.def)             Requested size: 252.0pt x 155.78522pt.
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-
- <./figures//fields_count.pdf> <./figures//avg_field_area.pdf> <./figures//all_
-crops_boxplot.pdf>]
-<figures//field_boundaries_by_crop.pdf, id=223, 512.44675pt x 482.96059pt>
+<figures//field_boundaries_by_crop.pdf, id=68, 512.44675pt x 482.96059pt>
 File: figures//field_boundaries_by_crop.pdf Graphic file (type pdf)
 <use figures//field_boundaries_by_crop.pdf>
 Package pdftex.def Info: figures//field_boundaries_by_crop.pdf  used on input l
-ine 164.
+ine 157.
 (pdftex.def)             Requested size: 252.0pt x 237.50023pt.
-<figures//cnn_bilstm.pdf, id=225, 3898.1315pt x 3089.8819pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+ <./figures//fields_count.pdf> <./figures//avg_field_area.pdf>]
+<figures//cnn_bilstm.pdf, id=184, 3898.1315pt x 3089.8819pt>
 File: figures//cnn_bilstm.pdf Graphic file (type pdf)
 <use figures//cnn_bilstm.pdf>
-Package pdftex.def Info: figures//cnn_bilstm.pdf  used on input line 179.
+Package pdftex.def Info: figures//cnn_bilstm.pdf  used on input line 172.
 (pdftex.def)             Requested size: 252.0pt x 199.71782pt.
 
-[2 <./figures//wheat_barley_boxplot.pdf> <./figures//Time_Series_Feature_Genera
-tion.pdf> <./figures//field_boundaries_by_crop.pdf>]
-<figures//Example_patches.pdf, id=343, 614.13142pt x 636.80286pt>
+Underfull \vbox (badness 4686) has occurred while \output is active []
+
+ [2 <./figures//all_crops_boxplot.pdf> <./figures//wheat_barley_boxplot.pdf> <.
+/figures//Time_Series_Feature_Generation.pdf> <./figures//field_boundaries_by_c
+rop.pdf>]
+<figures//Example_patches.pdf, id=339, 614.13142pt x 636.80286pt>
 File: figures//Example_patches.pdf Graphic file (type pdf)
 <use figures//Example_patches.pdf>
-Package pdftex.def Info: figures//Example_patches.pdf  used on input line 226.
+Package pdftex.def Info: figures//Example_patches.pdf  used on input line 219.
 (pdftex.def)             Requested size: 252.0pt x 261.30463pt.
-<figures//patch_model.pdf, id=344, 1320.935pt x 863.225pt>
+<figures//patch_model.pdf, id=340, 1320.935pt x 863.225pt>
 File: figures//patch_model.pdf Graphic file (type pdf)
 <use figures//patch_model.pdf>
-Package pdftex.def Info: figures//patch_model.pdf  used on input line 233.
+Package pdftex.def Info: figures//patch_model.pdf  used on input line 226.
 (pdftex.def)             Requested size: 252.0pt x 164.67303pt.
- [3 <./figures//cnn_bilstm.pdf> <./figures//Example_patches.pdf>]
+
+[3 <./figures//cnn_bilstm.pdf> <./figures//Example_patches.pdf>]
 Overfull \hbox (10.74492pt too wide) in paragraph at lines 378--401
  [][] 
  []
 
 [4 <./figures//patch_model.pdf>]
-<figures//field_reduction.pdf, id=465, 577.38206pt x 409.2408pt>
+<figures//field_reduction.pdf, id=463, 577.38206pt x 409.2408pt>
 File: figures//field_reduction.pdf Graphic file (type pdf)
 <use figures//field_reduction.pdf>
-Package pdftex.def Info: figures//field_reduction.pdf  used on input line 417.
+Package pdftex.def Info: figures//field_reduction.pdf  used on input line 422.
 (pdftex.def)             Requested size: 252.0pt x 178.61154pt.
-<figures//pixel_vs_field.pdf, id=469, 568.44241pt x 418.9601pt>
+<figures//pixel_vs_field.pdf, id=467, 568.44241pt x 418.9601pt>
 File: figures//pixel_vs_field.pdf Graphic file (type pdf)
 <use figures//pixel_vs_field.pdf>
-Package pdftex.def Info: figures//pixel_vs_field.pdf  used on input line 461.
+Package pdftex.def Info: figures//pixel_vs_field.pdf  used on input line 471.
 (pdftex.def)             Requested size: 252.0pt x 185.73024pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 482--483
+Underfull \hbox (badness 10000) in paragraph at lines 492--493
 []\OT1/ptm/m/n/8 Friedman JH (2001) Greedy func-tion ap-prox-i-ma-tion: A
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 482--483
+Underfull \hbox (badness 10000) in paragraph at lines 492--493
 \OT1/ptm/m/n/8 gra-di-ent boost-ing ma-chine. \OT1/ptm/m/it/8 Ann Stat \OT1/ptm
 /m/n/8 29(5):1189--1232.
  []
 
 
-Underfull \hbox (badness 2310) in paragraph at lines 484--485
+Underfull \hbox (badness 2310) in paragraph at lines 494--495
 []\OT1/ptm/m/n/8 Arik S[]O, Pfis-ter T (2021) Tab-Net: At-ten-tive In-ter-preta
 ble Tab-
  []
 
 
-Underfull \hbox (badness 6364) in paragraph at lines 484--485
+Underfull \hbox (badness 6364) in paragraph at lines 494--495
 \OT1/ptm/m/n/8 u-lar Learn-ing. \OT1/ptm/m/it/8 Proc AAAI Conf Ar-tif In-tell \
 OT1/ptm/m/n/8 35(8):6679--6687.
  []
@@ -586,13 +592,13 @@ Package rerunfilecheck Info: File `tgrs-supplement.out' has not changed.
 (rerunfilecheck)             Checksum: 6C2EDECB339624EB439DF8BB740364E5;2076.
  ) 
 Here is how much of TeX's memory you used:
- 10994 strings out of 478287
- 173276 string characters out of 5849290
- 492514 words of memory out of 5000000
- 28968 multiletter control sequences out of 15000+600000
+ 10990 strings out of 478287
+ 173238 string characters out of 5849290
+ 495005 words of memory out of 5000000
+ 28966 multiletter control sequences out of 15000+600000
  512953 words of font info for 117 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,14n,63p,443b,470s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,14n,63p,395b,470s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist
@@ -612,10 +618,10 @@ s/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts
 urier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on tgrs-supplement.pdf (6 pages, 977123 bytes).
+Output written on tgrs-supplement.pdf (6 pages, 976655 bytes).
 PDF statistics:
- 698 PDF objects out of 1000 (max. 8388607)
- 296 compressed objects within 3 object streams
- 60 named destinations out of 1000 (max. 500000)
+ 696 PDF objects out of 1000 (max. 8388607)
+ 294 compressed objects within 3 object streams
+ 58 named destinations out of 1000 (max. 500000)
  144 words of extra memory for PDF output out of 10000 (max. 10000000)
 
