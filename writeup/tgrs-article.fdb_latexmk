@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1782270740.96872 "tgrs-article.tex" "tgrs-article.pdf" "tgrs-article" 1782270741.83334 0
+["pdflatex"] 1782271069.86659 "tgrs-article.tex" "tgrs-article.pdf" "tgrs-article" 1782271070.7141 0
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1764115200 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -130,9 +130,9 @@
   "figures//ltae_s.pdf" 1782266238.31004 11561 152fd27360b35a09534d5e48e0210425 ""
   "figures//per_class_f1.pdf" 1782265470.91077 17050 39fa9d813cf7fe8671696a5324aaec0f ""
   "figures//study_area_map.pdf" 1782270544.23909 1397691 cf414eacf0ed1c54e5e7a40815e3d39f ""
-  "tgrs-article.aux" 1782270741.68882 12168 56b3b0d8272fef55b3b56aaff4f80a4c "pdflatex"
-  "tgrs-article.out" 1782270741.68928 4174 f8e587d3956b22d3ee6d1b57bab61d72 "pdflatex"
-  "tgrs-article.tex" 1782270730.18731 57115 4096391dbe3e2f05c9191f477fc8faa7 ""
+  "tgrs-article.aux" 1782271070.57365 12168 95d124e6248e0e17d74e5efea9446dbc "pdflatex"
+  "tgrs-article.out" 1782271070.57438 4174 f8e587d3956b22d3ee6d1b57bab61d72 "pdflatex"
+  "tgrs-article.tex" 1782271058.76401 57095 b16890a8449b734616ff4353c3f4e9a5 ""
   (generated)
   "tgrs-article.aux"
   "tgrs-article.log"
