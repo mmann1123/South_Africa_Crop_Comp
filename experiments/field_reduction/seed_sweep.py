@@ -40,17 +40,22 @@ LAMBDA_SPARSE, GAMMA, TIME_VARYING_GATE = 1e-3, 1.5, True
 
 
 class GPULoader:
-    """Drop-in iterable yielding GPU (X, y) batches by slicing GPU-resident tensors."""
-    def __init__(self, X, y, batch_size, shuffle, device):
+    """Drop-in iterable yielding GPU (X, y) batches by slicing GPU-resident tensors.
+
+    drop_last keeps every training batch the same size, which avoids torch.compile
+    recompiling for a smaller final batch."""
+    def __init__(self, X, y, batch_size, shuffle, device, drop_last=False):
         self.X = torch.as_tensor(X.reshape(-1, T_SEQ, N_BANDS), dtype=torch.float32, device=device)
         self.y = torch.as_tensor(np.asarray(y), dtype=torch.long, device=device)
-        self.bs, self.shuffle, self.device = batch_size, shuffle, device
+        self.bs, self.shuffle, self.device, self.drop_last = batch_size, shuffle, device, drop_last
     def __len__(self):
-        return (len(self.y) + self.bs - 1) // self.bs
+        n = len(self.y)
+        return n // self.bs if self.drop_last else (n + self.bs - 1) // self.bs
     def __iter__(self):
         n = len(self.y)
         idx = torch.randperm(n, device=self.device) if self.shuffle else torch.arange(n, device=self.device)
-        for i in range(0, n, self.bs):
+        last = (n // self.bs) * self.bs if self.drop_last else n
+        for i in range(0, last, self.bs):
             j = idx[i:i + self.bs]
             yield self.X[j], self.y[j]
 
@@ -64,9 +69,14 @@ def build_model(model_key, num_classes, device):
     raise ValueError(model_key)
 
 
-def train_one_seed(model_key, seed, train_loader, val_loader, criterion, num_classes, device):
+def train_one_seed(model_key, seed, train_loader, val_loader, criterion, num_classes, device, compile_model=False):
     torch.manual_seed(seed); np.random.seed(seed); random.seed(seed)
     model = build_model(model_key, num_classes, device)
+    if compile_model:
+        try:
+            model = torch.compile(model)
+        except Exception as e:
+            print(f"  torch.compile failed ({e}); running eager")
     opt = torch.optim.AdamW(model.parameters(), lr=LR, weight_decay=1e-4)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=N_EPOCHS, eta_min=1e-6)
     amp = torch.amp.GradScaler("cuda")
@@ -112,7 +122,12 @@ def main():
     ap.add_argument("--fractions", nargs="+", type=float, default=[0.50])
     ap.add_argument("--subsample-seeds", nargs="+", type=int, default=[42])
     ap.add_argument("--out", default="results/seed_sweep.csv")
+    ap.add_argument("--batch-size", type=int, default=BATCH_SIZE)
+    ap.add_argument("--n-seeds", type=int, default=len(SEEDS_ENSEMBLE), help="ensemble size (use 1 for timing tests)")
+    ap.add_argument("--compile", action="store_true", help="torch.compile the model (fuses the per-head sparsemax ops)")
     args = ap.parse_args()
+    seeds = SEEDS_ENSEMBLE[:args.n_seeds]
+    print(f"batch_size={args.batch_size}, n_seeds={len(seeds)}, compile={args.compile}")
 
     device = get_device()
     torch.backends.cudnn.benchmark = True
@@ -158,8 +173,8 @@ def main():
                 Xtr = np.nan_to_num(scaler.fit_transform(df.loc[tmask, feature_cols].values).astype(np.float32))
                 ytr = df.loc[tmask, "label"].values
                 Xvv = np.nan_to_num(scaler.transform(Xv_raw).astype(np.float32))
-                train_loader = GPULoader(Xtr, ytr, BATCH_SIZE, True, device)
-                val_loader = GPULoader(Xvv, yv, BATCH_SIZE, False, device)
+                train_loader = GPULoader(Xtr, ytr, args.batch_size, True, device, drop_last=args.compile)
+                val_loader = GPULoader(Xvv, yv, args.batch_size, False, device)
                 criterion = WeightedFocalLoss(compute_focal_loss_weights(ytr, num_classes), gamma=2.0).to(device)
                 # holdout scaled with THIS cell's scaler, GPU-resident
                 Xt_gpu = torch.as_tensor(
@@ -168,14 +183,14 @@ def main():
 
                 print(f"\n=== {model_key} frac={frac} sseed={sseed} | train fids {tmask.sum()} px ===")
                 ens = None
-                for k, seed in enumerate(SEEDS_ENSEMBLE):
+                for k, seed in enumerate(seeds):
                     model, mean_ep, n_ep = train_one_seed(model_key, seed, train_loader, val_loader,
-                                                          criterion, num_classes, device)
+                                                          criterion, num_classes, device, compile_model=args.compile)
                     lg = oos_logits(model_key, model, Xt_gpu, device)
                     ens = lg if ens is None else ens + lg
                     if k == 0:
                         print(f"    seed {seed}: {mean_ep:.2f}s/epoch x {n_ep} epochs")
-                ens /= len(SEEDS_ENSEMBLE)
+                ens /= len(seeds)
                 px_pred = ens.argmax(dim=1).cpu().numpy()
                 pred_df = pd.DataFrame({"fid": test_fids_arr, "pred": px_pred})
                 field_pred = pred_df.groupby("fid")["pred"].agg(lambda x: Counter(x).most_common(1)[0][0])
@@ -187,7 +202,7 @@ def main():
                 dt = time.time() - t0
                 print(f"    -> OOS macro-F1={f1m:.4f}, kappa={kap:.4f}  ({dt/60:.1f} min for the 5-seed cell)")
                 with open(args.out, "a") as f:
-                    f.write(f"{model_key},{frac},{sseed},{f1m:.4f},{kap:.4f},{len(SEEDS_ENSEMBLE)},{mean_ep:.2f},{n_ep}\n")
+                    f.write(f"{model_key},{frac},{sseed},{f1m:.4f},{kap:.4f},{len(seeds)},{mean_ep:.2f},{n_ep}\n")
                 del Xt_gpu; torch.cuda.empty_cache()
 
 
