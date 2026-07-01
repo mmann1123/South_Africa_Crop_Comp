@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1782400460 "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/tgrs-article.tex" "tgrs-article.pdf" "tgrs-article" 1782400460
+["pdflatex"] 1782767476 "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/tgrs-article.tex" "tgrs-article.pdf" "tgrs-article" 1782767477
   "/etc/texmf/web2c/texmf.cnf" 1673971414 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/tgrs-article.tex" 1782399586 57181 3a50a5f3a63fffd88cb5ff0ed02b2390 ""
+  "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/tgrs-article.tex" 1782767476 57994 037b489f4be03a69a710df50ec0b0d81 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -128,14 +128,14 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1707754773 4379155 98693266ff65f58d9f98aff394de12d2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1770087664 2798973 3419ef02ddb418aae545861b3d88034d ""
-  "figures//field_reduction.pdf" 1782135783 18087 f657dc8ae4c752d84a8a49e35ab39e64 ""
+  "figures//field_reduction_multidraw.pdf" 1782766929 19093 9bcf73a4c9fa24581de6895c6bfab375 ""
   "figures//inductive_bias_gap.pdf" 1782237191 19631 ed9c6ef93d426b26da0fecc44253c350 ""
   "figures//ltae_s.pdf" 1782267389 11561 152fd27360b35a09534d5e48e0210425 ""
   "figures//per_class_f1.pdf" 1782237191 17050 39fa9d813cf7fe8671696a5324aaec0f ""
   "figures//study_area_map.pdf" 1782270335 1397691 cf414eacf0ed1c54e5e7a40815e3d39f ""
-  "tgrs-article.aux" 1782400460 12300 ad6374177e2e5a164f61388cde9dd800 "pdflatex"
-  "tgrs-article.out" 1782400460 4174 f8e587d3956b22d3ee6d1b57bab61d72 "pdflatex"
-  "tgrs-article.tex" 1782399586 57181 3a50a5f3a63fffd88cb5ff0ed02b2390 ""
+  "tgrs-article.aux" 1782767477 13071 e3bd69c10e4857e11b60e89d3f9c024d "pdflatex"
+  "tgrs-article.out" 1782767477 4174 f8e587d3956b22d3ee6d1b57bab61d72 "pdflatex"
+  "tgrs-article.tex" 1782767476 57994 037b489f4be03a69a710df50ec0b0d81 ""
   (generated)
   "tgrs-article.aux"
   "tgrs-article.log"

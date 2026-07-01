@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.2.2)  25 JUN 2026 11:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.2.2)  29 JUN 2026 17:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -467,15 +467,15 @@ Package pdftex.def Info: figures//per_class_f1.pdf  used on input line 190.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5 <./figures//per_class_f1.pdf>]
-<figures//field_reduction.pdf, id=396, 577.38206pt x 409.2408pt>
-File: figures//field_reduction.pdf Graphic file (type pdf)
-<use figures//field_reduction.pdf>
-Package pdftex.def Info: figures//field_reduction.pdf  used on input line 201.
+<figures//field_reduction_multidraw.pdf, id=396, 577.38206pt x 409.2408pt>
+File: figures//field_reduction_multidraw.pdf Graphic file (type pdf)
+<use figures//field_reduction_multidraw.pdf>
+Package pdftex.def Info: figures//field_reduction_multidraw.pdf  used on input line 201.
 (pdftex.def)             Requested size: 252.0pt x 178.61154pt.
 LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
 (Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 206.
- [6 <./figures//field_reduction.pdf>]
-<figures//inductive_bias_gap.pdf, id=473, 659.82417pt x 492.48108pt>
+ [6 <./figures//field_reduction_multidraw.pdf>]
+<figures//inductive_bias_gap.pdf, id=474, 659.82417pt x 492.48108pt>
 File: figures//inductive_bias_gap.pdf Graphic file (type pdf)
 <use figures//inductive_bias_gap.pdf>
 Package pdftex.def Info: figures//inductive_bias_gap.pdf  used on input line 246.
@@ -540,7 +540,7 @@ Underfull \hbox (badness 2435) in paragraph at lines 322--323
 []\OT1/ptm/m/n/8 Kussul N, Lavre-niuk M, Skakun S, She-lestov A (2017) Deep
  []
 
-
+[8]
 Underfull \hbox (badness 3049) in paragraph at lines 326--327
 []\OT1/ptm/m/n/8 Fan X, Chen L, Xu X, Yan C, Fan J, Li X (2023) Land
  []
@@ -555,7 +555,7 @@ Underfull \hbox (badness 1831) in paragraph at lines 330--331
 \OT1/ptm/m/n/8 Com-bi-na-tion for Re-mote Sens-ing BreizhCrop Time Se-ries Data.
  []
 
-[8]
+
 Underfull \hbox (badness 10000) in paragraph at lines 332--333
 []\OT1/ptm/m/n/8 Espejo-Garcia B, My-lonas N, Athanasakos L, Foun-tas S,
  []
@@ -618,17 +618,17 @@ Package rerunfilecheck Info: File `tgrs-article.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  11009 strings out of 478287
- 172458 string characters out of 5849290
- 503910 words of memory out of 5000000
+ 172538 string characters out of 5849290
+ 503944 words of memory out of 5000000
  28962 multiletter control sequences out of 15000+600000
  515948 words of font info for 120 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,10n,63p,2495b,474s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,10n,63p,2495b,470s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/nimbus15/zhv-Reg.pfb>
-Output written on tgrs-article.pdf (9 pages, 1827301 bytes).
+Output written on tgrs-article.pdf (9 pages, 1829879 bytes).
 PDF statistics:
- 700 PDF objects out of 1000 (max. 8388607)
- 424 compressed objects within 5 object streams
+ 702 PDF objects out of 1000 (max. 8388607)
+ 425 compressed objects within 5 object streams
  84 named destinations out of 1000 (max. 500000)
  202 words of extra memory for PDF output out of 10000 (max. 10000000)
 
