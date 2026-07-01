@@ -284,7 +284,7 @@ ensembles and the field-level L-TAE-S) are among the cheapest to train, while th
 \begin{table}[!t]
 \centering
 \scriptsize
-\caption{Training time for a single run (one seed) of each model.}
+\caption{Per-seed training time for each model.}
 \label{stab:cost}
 \renewcommand{\arraystretch}{1.12}
 \setlength{\tabcolsep}{6pt}
@@ -311,27 +311,27 @@ TabNet (raw, field-avg) & field & raw & 39\,s \\
 CNN-BiLSTM             & field & raw & 53\,s \\
 L-TAE                  & field & raw & 61\,s \\
 TempCNN                & field & raw & 64\,s \\
-L-TAE-S                & field & raw & 18\,s\textsuperscript{$\dagger$} \\
+L-TAE-S                & field & raw & 18\,s \\
 \midrule
 \multicolumn{4}{l}{\emph{Deep, pixel-level (raw sequences)}}\\
-CNN-BiLSTM             & pixel & raw & 10\,min\textsuperscript{$\dagger$} \\
-L-TAE-S                & pixel & raw & 24\,min\textsuperscript{$\dagger$} \\
+CNN-BiLSTM             & pixel & raw & 10\,min \\
+L-TAE-S                & pixel & raw & 24\,min \\
 TempCNN                & pixel & raw & 29\,min \\
 L-TAE                  & pixel & raw & 38\,min \\
-TabNet (raw)           & pixel & raw & 61\,min\textsuperscript{$\dagger\ddagger$} \\
+TabNet (raw)           & pixel & raw & 61\,min\textsuperscript{$\ddagger$} \\
 Transformer            & pixel & raw & 97\,min \\
 \midrule
 \multicolumn{4}{l}{\emph{Deep, patch-level (raw sequences)}}\\
-3D CNN                 & patch & raw & 22\,min\textsuperscript{$\dagger$} \\
-Multi-Channel 2D CNN   & patch & raw & 38\,min\textsuperscript{$\dagger$} \\
+3D CNN                 & patch & raw & 22\,min \\
+Multi-Channel 2D CNN   & patch & raw & 38\,min \\
 \bottomrule
 \end{tabular}
 \par\vspace{3pt}
 \begin{minipage}{\columnwidth}
 \footnotesize
-Trees timed as a single best-configuration fit, excluding the one-time Optuna search.
-$\dagger$Mean per seed for a 5-seed ensemble. $\ddagger$Measured on the 75\% training fraction, the
-best-transferring TabNet pixel configuration.
+Deep-model times are the mean per seed of a 5-seed ensemble (total wall-clock divided by five);
+classical models are a single best-configuration fit, excluding the one-time Optuna search.
+$\ddagger$Measured on the 75\% training fraction, the best-transferring TabNet pixel configuration.
 \end{minipage}
 \end{table}
 
