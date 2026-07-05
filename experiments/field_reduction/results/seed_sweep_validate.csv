@@ -1,0 +1,2 @@
+model,fraction,subsample_seed,oos_f1_macro,oos_kappa,n_seeds,mean_epoch_s,epochs_run
+ltae_sparse_pixel,0.5,42,0.5479,0.4813,5,55.31,66

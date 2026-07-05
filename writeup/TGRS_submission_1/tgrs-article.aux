@@ -1,0 +1,180 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{begue2020}
+\citation{ieee2017}
+\citation{begue2020}
+\citation{mahlayeye2024}
+\citation{mahlayeye2024}
+\citation{mann2023}
+\citation{mann2017}
+\citation{mann2019}
+\citation{maxwell2019}
+\citation{belgiu2016}
+\citation{zhu2017}
+\citation{russwurm2018}
+\citation{tempcnn2019}
+\citation{pankajakshan2025}
+\citation{belgiu2016}
+\citation{ltae2020}
+\citation{tempcnn2019}
+\citation{russwurm2018}
+\citation{ieee2017}
+\citation{pankajakshan2025}
+\citation{jin2019}
+\citation{rustowicz2019}
+\citation{ma2024}
+\citation{cropformer2023}
+\citation{mai2025}
+\citation{mlhub}
+\citation{primary_repo}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\citation{maxwell2019}
+\citation{belgiu2016}
+\citation{breiman2001}
+\citation{chen2016}
+\citation{ke2017}
+\citation{wardlow2007towards}
+\citation{mahlayeye2024}
+\citation{cnn_multitemp}
+\citation{ieee2017}
+\citation{russwurm2018}
+\citation{ltae2020}
+\citation{russwurm2020}
+\citation{fan2023hcrnn}
+\citation{tufail2025cnnrnn}
+\citation{bandar2024bilstm}
+\citation{espejo2020}
+\citation{koklu2022}
+\citation{yang2020}
+\citation{cropformer2023}
+\citation{mann2025}
+\citation{mlhub}
+\citation{ai4foodsecurity}
+\citation{mann2023}
+\citation{tufail2025cnnrnn}
+\citation{mlhub}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-A}}Related Work}{2}{subsection.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Study area in the Western Cape, South Africa. Two adjacent Sentinel-2 tiles (\texttt  {34S\_19E\_258N}, \texttt  {34S\_19E\_259N}) form the training region; the immediately adjacent \texttt  {34S\_20E\_259N} tile (dashed) is held out for spatial-transfer evaluation. Fields are colored by crop type; the tiles are spatially disjoint, so no pixel or field is shared between training and holdout.}}{2}{figure.1}\protected@file@percent }
+\newlabel{fig:studyarea}{{1}{2}{Study area in the Western Cape, South Africa. Two adjacent Sentinel-2 tiles (\texttt {34S\_19E\_258N}, \texttt {34S\_19E\_259N}) form the training region; the immediately adjacent \texttt {34S\_20E\_259N} tile (dashed) is held out for spatial-transfer evaluation. Fields are colored by crop type; the tiles are spatially disjoint, so no pixel or field is shared between training and holdout}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Data}{2}{section.2}\protected@file@percent }
+\citation{mann2023}
+\citation{mann2025}
+\citation{james2013}
+\citation{breiman2001}
+\citation{ke2017}
+\citation{chen2016}
+\citation{friedman2001}
+\citation{penabarragan2011}
+\citation{tabnet_orig}
+\citation{tabnet2024}
+\citation{ltae2020}
+\citation{vaswani2017}
+\citation{russwurm2020}
+\citation{tempcnn2019}
+\citation{sparsemax2016}
+\citation{tabnet_orig}
+\citation{ai4foodsecurity}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Methodology}{3}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Classical Machine Learning}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Deep Learning Architectures}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-B}1}Sparse-Attention L-TAE (L-TAE-S)}{3}{subsubsection.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Performance Metrics}{3}{subsection.3.3}\protected@file@percent }
+\newlabel{sec:metrics}{{\mbox  {III-C}}{3}{Performance Metrics}{subsection.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Quantifying Uncertainty}{3}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Architecture of the sparse-attention L-TAE-S. Before the multi-head temporal attention, a TabNet-style sparse feature gate (highlighted) applies a per-head \texttt  {sparsemax} mask that selects a small subset of embedding channels, with a relaxation prior ($\gamma =1.5$) discouraging heads from re-selecting the same channels. This block is the only architectural difference from the L-TAE; five seeds are ensembled and aggregated to field level.}}{4}{figure.2}\protected@file@percent }
+\newlabel{fig:ltae_s}{{2}{4}{Architecture of the sparse-attention L-TAE-S. Before the multi-head temporal attention, a TabNet-style sparse feature gate (highlighted) applies a per-head \texttt {sparsemax} mask that selects a small subset of embedding channels, with a relaxation prior ($\gamma =1.5$) discouraging heads from re-selecting the same channels. This block is the only architectural difference from the L-TAE; five seeds are ensembled and aggregated to field level}{figure.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Results}{4}{section.4}\protected@file@percent }
+\newlabel{sec:results}{{IV}{4}{Results}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}In-Region Validation Overstates Performance and Misranks Models}{4}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Pixel Versus Field Level: Aggregation as Variance Reduction}{4}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:pixfield}{{\mbox  {IV-B}}{4}{Pixel Versus Field Level: Aggregation as Variance Reduction}{subsection.4.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces In-region versus spatial-transfer performance of all twenty-three models.}}{5}{table.1}\protected@file@percent }
+\newlabel{tab:gap}{{I}{5}{In-region versus spatial-transfer performance of all twenty-three models}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Pixel- versus field-level spatial transfer.}}{5}{table.2}\protected@file@percent }
+\newlabel{tab:pixfield}{{II}{5}{Pixel- versus field-level spatial transfer}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Per-Class Performance and Persistent Confusions}{5}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Data Efficiency Under Spatial Transfer}{5}{subsection.4.4}\protected@file@percent }
+\newlabel{sec:efficiency}{{\mbox  {IV-D}}{5}{Data Efficiency Under Spatial Transfer}{subsection.4.4}{}}
+\citation{belgiu2016}
+\citation{maxwell2019}
+\citation{pankajakshan2025}
+\citation{rustowicz2019}
+\citation{jin2019}
+\citation{mai2025}
+\citation{tabnet_orig}
+\citation{obadic2022}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Per-class F1 on the holdout region for four representative models (TabNet, L-TAE-S, L-TAE, and CNN-BiLSTM). TabNet, L-TAE-S, and L-TAE classify lucerne/medics and canola well; the cereals (barley, wheat) and small-grain grazing concentrate the errors. CNN-BiLSTM's accuracy drops on every class. Error bars are 95\% bootstrap CIs over holdout fields.}}{6}{figure.3}\protected@file@percent }
+\newlabel{fig:perclass}{{3}{6}{Per-class F1 on the holdout region for four representative models (TabNet, L-TAE-S, L-TAE, and CNN-BiLSTM). TabNet, L-TAE-S, and L-TAE classify lucerne/medics and canola well; the cereals (barley, wheat) and small-grain grazing concentrate the errors. CNN-BiLSTM's accuracy drops on every class. Error bars are 95\% bootstrap CIs over holdout fields}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Data efficiency under spatial transfer: macro-F1 versus fraction of training fields retained, single training seed, each point the mean over five independent subsample draws (error bars $\pm 1$ s.d.). The deep temporal models (L-TAE, L-TAE-S) are nearly flat to a quarter of the fields; the tree, linear, and TabNet baselines decline modestly. Per-fraction variation is within draw-to-draw sampling noise---largest for L-TAE-S ($\pm 0.06$ at $50\%$)---so single-split ``dips'' are not real. Absolute values run ${\sim }0.02$--$0.05$ below the five-seed levels of Table\nobreakspace  {}\ref {tab:gap} because a single training seed is used.}}{6}{figure.4}\protected@file@percent }
+\newlabel{fig:reduction}{{4}{6}{Data efficiency under spatial transfer: macro-F1 versus fraction of training fields retained, single training seed, each point the mean over five independent subsample draws (error bars $\pm 1$ s.d.). The deep temporal models (L-TAE, L-TAE-S) are nearly flat to a quarter of the fields; the tree, linear, and TabNet baselines decline modestly. Per-fraction variation is within draw-to-draw sampling noise---largest for L-TAE-S ($\pm 0.06$ at $50\%$)---so single-split ``dips'' are not real. Absolute values run ${\sim }0.02$--$0.05$ below the five-seed levels of Table~\ref {tab:gap} because a single training seed is used}{figure.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Raw reflectance versus \texttt  {xr\_fresh} for a single fixed XGBoost learner.}}{6}{table.3}\protected@file@percent }
+\newlabel{tab:repr}{{III}{6}{Raw reflectance versus \texttt {xr\_fresh} for a single fixed XGBoost learner}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}Raw Reflectance versus \texttt  {xr\_fresh}}{6}{subsection.4.5}\protected@file@percent }
+\newlabel{sec:repr}{{\mbox  {IV-E}}{6}{Raw Reflectance versus \texttt {xr\_fresh}}{subsection.4.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Discussion}{6}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{V}{6}{Discussion}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Why Tree-Like Inductive Bias Transfers}{6}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Two Robustness Levers}{7}{subsection.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Spatial-transfer gap ($\Delta $ macro-F1) grouped by inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta |$); dense temporal/patch nets and synthetic augmentation overfit the training region. L-TAE-S, which adds sparse feature selection to a dense attention backbone, tracks the tree-based models. Bars are family means; points are individual models.}}{7}{figure.5}\protected@file@percent }
+\newlabel{fig:bias}{{5}{7}{Spatial-transfer gap ($\Delta $ macro-F1) grouped by inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta |$); dense temporal/patch nets and synthetic augmentation overfit the training region. L-TAE-S, which adds sparse feature selection to a dense attention backbone, tracks the tree-based models. Bars are family means; points are individual models}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Automated Features, Patch Models, and Persistent Difficulty}{7}{subsection.5.3}\protected@file@percent }
+\citation{mlhub}
+\bibcite{begue2020}{1}
+\bibcite{ieee2017}{2}
+\bibcite{mahlayeye2024}{3}
+\bibcite{mann2023}{4}
+\bibcite{mann2017}{5}
+\bibcite{mann2019}{6}
+\bibcite{maxwell2019}{7}
+\bibcite{belgiu2016}{8}
+\bibcite{zhu2017}{9}
+\bibcite{russwurm2018}{10}
+\bibcite{tempcnn2019}{11}
+\bibcite{pankajakshan2025}{12}
+\bibcite{ltae2020}{13}
+\bibcite{jin2019}{14}
+\bibcite{rustowicz2019}{15}
+\bibcite{ma2024}{16}
+\bibcite{cropformer2023}{17}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}Limitations}{8}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{8}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{8}{section*.3}\protected@file@percent }
+\bibcite{mai2025}{18}
+\bibcite{mlhub}{19}
+\bibcite{primary_repo}{20}
+\bibcite{breiman2001}{21}
+\bibcite{chen2016}{22}
+\bibcite{ke2017}{23}
+\bibcite{wardlow2007towards}{24}
+\bibcite{cnn_multitemp}{25}
+\bibcite{russwurm2020}{26}
+\bibcite{fan2023hcrnn}{27}
+\bibcite{tufail2025cnnrnn}{28}
+\bibcite{bandar2024bilstm}{29}
+\bibcite{espejo2020}{30}
+\bibcite{koklu2022}{31}
+\bibcite{yang2020}{32}
+\bibcite{mann2025}{33}
+\bibcite{ai4foodsecurity}{34}
+\bibcite{james2013}{35}
+\bibcite{friedman2001}{36}
+\bibcite{penabarragan2011}{37}
+\bibcite{tabnet_orig}{38}
+\bibcite{tabnet2024}{39}
+\bibcite{vaswani2017}{40}
+\bibcite{sparsemax2016}{41}
+\bibcite{obadic2022}{42}
+\gdef \@abspage@last{9}
