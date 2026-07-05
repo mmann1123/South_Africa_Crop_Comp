@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1782272065.7867 "tgrs-supplement.tex" "tgrs-supplement.pdf" "tgrs-supplement" 1782272066.5967 0
+["pdflatex"] 1783241140.40531 "tgrs-supplement.tex" "tgrs-supplement.pdf" "tgrs-supplement" 1783241140.93404 0
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1764115200 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -128,9 +128,9 @@
   "figures//fields_count.pdf" 1781910991.95963 13759 6d0c3bf7bbe7f757209c8990b57819ee ""
   "figures//patch_model.pdf" 1782266560.51962 12146 283585205ffad5577185b787edf48277 ""
   "figures//wheat_barley_boxplot.pdf" 1781910991.96063 15090 9ef1cc0310d960bf27021a404bb7a01f ""
-  "tgrs-supplement.aux" 1782272066.45486 10554 3c75f8ca61620eaab33970d8c084023c "pdflatex"
-  "tgrs-supplement.out" 1782272066.45586 1619 adbe2962663d78fee580f9f8c9cb5ddf "pdflatex"
-  "tgrs-supplement.tex" 1782272054.53052 25145 4bebc9901d5588a20234ae371e246910 ""
+  "tgrs-supplement.aux" 1783241140.83747 10518 d4071970b0b15e08b66343b3ae65a7df "pdflatex"
+  "tgrs-supplement.out" 1783241140.8377 1619 adbe2962663d78fee580f9f8c9cb5ddf "pdflatex"
+  "tgrs-supplement.tex" 1783239886.88485 25091 2ef8f5d865bb7a2ec4a3c34176c3d6ce ""
   (generated)
   "tgrs-supplement.aux"
   "tgrs-supplement.log"

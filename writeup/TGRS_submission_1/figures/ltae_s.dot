@@ -1,0 +1,50 @@
+// L-TAE-S architecture diagram. Style matches cnn_bilstm.pdf / tabnet.pdf
+// (Graphviz dot, pastel rounded boxes, yellow architecture cluster, green = novel
+//  component, parallelogram for the loss objective).
+//  Single top-to-bottom spine so the figure stays narrow (portrait) and remains
+//  legible when scaled to one column. Equations/hyper-parameters live in the
+//  caption and text, not in the boxes.
+//  Render:  dot -Tpdf ltae_s.dot -o ltae_s.pdf
+digraph LTAES {
+  rankdir=TB;
+  compound=true;
+  graph [fontname="Helvetica", fontsize=13, splines=true, nodesep=0.28, ranksep=0.32];
+  node  [fontname="Helvetica", fontsize=13, style="rounded,filled", shape=box,
+         color=black, penwidth=1.2, margin="0.14,0.07"];
+  edge  [color=black, arrowsize=0.7];
+
+  // ---- palette: blue #AED6F1  yellow #FCE883  pink #F5B7B1  green #ABEBC6 ----
+
+  RawData [label="Raw Sentinel-2\ntime series", fillcolor="#FCE883"];
+
+  prep [label="Pre-processing\n6 bands · field-ID split\nstandardize · label encode",
+        fillcolor="#AED6F1"];
+
+  subgraph cluster_arch {
+    label="L-TAE-S network";
+    labelloc=t; fontsize=14;
+    style="rounded,filled"; fillcolor="#FCE883"; color="#F1C40F";
+    a_in   [label="Input tensor  (B × T × 6)", fillcolor="#AED6F1"];
+    a_emb  [label="Linear embedding + LayerNorm\n+ positional encoding (d = 128)", fillcolor="#AED6F1"];
+    a_gate [label="Sparse feature gate  (NOVEL)\nper-head sparsemax channel mask", fillcolor="#ABEBC6", penwidth=2.2];
+    a_attn [label="Multi-head temporal attention\n(16 heads, learned query)", fillcolor="#AED6F1"];
+    a_mlp  [label="MLP head → linear classifier\n→ logits", fillcolor="#AED6F1"];
+    a_in -> a_emb -> a_gate -> a_attn -> a_mlp;
+  }
+
+  ens    [label="5-seed ensemble\naverage logits", fillcolor="#FCE883"];
+  argmax [label="ArgMax → field-level\nmajority vote", fillcolor="#F5B7B1"];
+
+  loss [label="Training objective\nweighted focal loss + sparsity penalty",
+        shape=box, style="rounded,filled,dashed", fillcolor="#AED6F1", fontsize=11];
+
+  // ---- main spine (inference path) ----
+  RawData -> prep;
+  prep -> a_in [lhead=cluster_arch];
+  a_mlp -> ens [ltail=cluster_arch];
+  ens -> argmax;
+
+  // training objective: centered below the spine so it does not widen the figure
+  argmax -> loss [style=invis];
+  a_mlp -> loss [style=dashed, constraint=false];
+}

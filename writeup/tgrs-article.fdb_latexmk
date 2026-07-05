@@ -1,6 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1782907124.17011 "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/tgrs-article.tex" "tgrs-article.pdf" "tgrs-article" 1782907125.07065 0
-  "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/tgrs-article.tex" 1782907097.59921 58387 4e2cfd4c010bd85ccf615a3d2acdfdb9 ""
+["pdflatex"] 1783241139.02297 "tgrs-article.tex" "tgrs-article.pdf" "tgrs-article" 1783241139.74055 0
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1764115200 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -131,9 +130,9 @@
   "figures//ltae_s.pdf" 1782266238.31004 11561 152fd27360b35a09534d5e48e0210425 ""
   "figures//per_class_f1.pdf" 1782265470.91077 17050 39fa9d813cf7fe8671696a5324aaec0f ""
   "figures//study_area_map.pdf" 1782270544.23909 1397691 cf414eacf0ed1c54e5e7a40815e3d39f ""
-  "tgrs-article.aux" 1782907124.91901 12938 3cb5de1d72df411946b081d1a0715d27 "pdflatex"
-  "tgrs-article.out" 1782907124.92101 4174 f8e587d3956b22d3ee6d1b57bab61d72 "pdflatex"
-  "tgrs-article.tex" 1782907097.59921 58387 4e2cfd4c010bd85ccf615a3d2acdfdb9 ""
+  "tgrs-article.aux" 1783241139.62715 12938 e189686af6f8baebb33abd7a75897450 "pdflatex"
+  "tgrs-article.out" 1783241139.62775 4174 f8e587d3956b22d3ee6d1b57bab61d72 "pdflatex"
+  "tgrs-article.tex" 1783241018.98412 58710 0619c32460c126e9ed1cbc1c15b75756 ""
   (generated)
   "tgrs-article.aux"
   "tgrs-article.log"

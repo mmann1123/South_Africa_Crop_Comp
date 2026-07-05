@@ -1,0 +1,51 @@
+// 3D CNN (patch-level) architecture diagram. Style matches ltae_s.dot /
+// cnn_bilstm.pdf / tabnet.pdf (Graphviz dot, pastel rounded boxes, yellow
+// architecture cluster, dashed box for the training objective).
+//  Single top-to-bottom spine so the figure stays narrow (portrait) and remains
+//  legible when scaled to one column. Hyper-parameters that already appear in the
+//  caption/text are kept out of the boxes.
+//  Render:  dot -Tpdf patch_model.dot -o patch_model.pdf
+digraph Patch3DCNN {
+  rankdir=TB;
+  compound=true;
+  graph [fontname="Helvetica", fontsize=13, splines=true, nodesep=0.28, ranksep=0.32];
+  node  [fontname="Helvetica", fontsize=13, style="rounded,filled", shape=box,
+         color=black, penwidth=1.2, margin="0.14,0.07"];
+  edge  [color=black, arrowsize=0.7];
+
+  // ---- palette: blue #AED6F1  yellow #FCE883  pink #F5B7B1  green #ABEBC6 ----
+
+  RawData [label="Raw Sentinel-2\n10 months × 6 bands", fillcolor="#FCE883"];
+
+  prep [label="Pre-processing\ntile fields into 100 m patches\n(discard mixed-boundary)\nfield-ID split · resample to 128×128",
+        fillcolor="#AED6F1"];
+
+  subgraph cluster_arch {
+    label="3D CNN network";
+    labelloc=t; fontsize=14;
+    style="rounded,filled"; fillcolor="#FCE883"; color="#F1C40F";
+    a_in  [label="Input patch volume\n(10 × 128 × 128 × 6)", fillcolor="#AED6F1"];
+    a_c1  [label="Conv3D 32 (3³) + ReLU → MaxPool", fillcolor="#AED6F1"];
+    a_c2  [label="Conv3D 64 (3³) + ReLU → MaxPool", fillcolor="#AED6F1"];
+    a_c3  [label="Conv3D 128 (3³) + ReLU", fillcolor="#AED6F1"];
+    a_gap [label="Global average pooling\n→ Dense 128 + ReLU", fillcolor="#AED6F1"];
+    a_out [label="Softmax classifier\n(5 classes)", fillcolor="#AED6F1"];
+    a_in -> a_c1 -> a_c2 -> a_c3 -> a_gap -> a_out;
+  }
+
+  ens    [label="5-seed ensemble\naverage softmax", fillcolor="#FCE883"];
+  argmax [label="ArgMax per patch → field-level\nmajority vote", fillcolor="#F5B7B1"];
+
+  loss [label="Training objective\nweighted focal loss (γ = 2, α = 1/freq)",
+        shape=box, style="rounded,filled,dashed", fillcolor="#AED6F1", fontsize=11];
+
+  // ---- main spine (inference path) ----
+  RawData -> prep;
+  prep -> a_in [lhead=cluster_arch];
+  a_out -> ens [ltail=cluster_arch];
+  ens -> argmax;
+
+  // training objective: centered below the spine so it does not widen the figure
+  argmax -> loss [style=invis];
+  a_out -> loss [style=dashed, constraint=false];
+}

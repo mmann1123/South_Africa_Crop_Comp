@@ -1,0 +1,51 @@
+// CNN + BiLSTM (pixel/field-level) architecture diagram. Style matches
+// ltae_s.dot / patch_model.dot (Graphviz dot, pastel rounded boxes, yellow
+// architecture cluster, dashed box for the training objective).
+//  Single top-to-bottom spine so the figure stays narrow (portrait) and remains
+//  legible when scaled to one column. Hyper-parameters that already appear in the
+//  caption/text are kept out of the boxes.
+//  Render:  dot -Tpdf cnn_bilstm.dot -o cnn_bilstm.pdf
+digraph CNNBiLSTM {
+  rankdir=TB;
+  compound=true;
+  graph [fontname="Helvetica", fontsize=13, splines=true, nodesep=0.28, ranksep=0.32];
+  node  [fontname="Helvetica", fontsize=13, style="rounded,filled", shape=box,
+         color=black, penwidth=1.2, margin="0.14,0.07"];
+  edge  [color=black, arrowsize=0.7];
+
+  // ---- palette: blue #AED6F1  yellow #FCE883  pink #F5B7B1  green #ABEBC6 ----
+
+  RawData [label="Raw Sentinel-2\ntime series", fillcolor="#FCE883"];
+
+  prep [label="Pre-processing\n6 bands · field-ID split\nstandardize · label encode\nweighted sampler (class balance)",
+        fillcolor="#AED6F1"];
+
+  subgraph cluster_arch {
+    label="CNN + BiLSTM network";
+    labelloc=t; fontsize=14;
+    style="rounded,filled"; fillcolor="#FCE883"; color="#F1C40F";
+    a_in   [label="Input tensor  (B × 6 × T)", fillcolor="#AED6F1"];
+    a_conv [label="Conv1D (64, kernel 5) + ReLU", fillcolor="#AED6F1"];
+    a_lstm [label="BiLSTM (hidden 64)\n→ B × T × 128", fillcolor="#AED6F1"];
+    a_last [label="Take final timestep\n→ 128-d", fillcolor="#AED6F1"];
+    a_fc   [label="Dropout → Linear", fillcolor="#AED6F1"];
+    a_out  [label="Softmax classifier\n→ logits", fillcolor="#AED6F1"];
+    a_in -> a_conv -> a_lstm -> a_last -> a_fc -> a_out;
+  }
+
+  ens    [label="5-seed ensemble\naverage logits", fillcolor="#FCE883"];
+  argmax [label="ArgMax final\npredictions", fillcolor="#F5B7B1"];
+
+  loss [label="Training objective\nweighted focal loss (γ = 2, α = 1/freq)",
+        shape=box, style="rounded,filled,dashed", fillcolor="#AED6F1", fontsize=11];
+
+  // ---- main spine (inference path) ----
+  RawData -> prep;
+  prep -> a_in [lhead=cluster_arch];
+  a_out -> ens [ltail=cluster_arch];
+  ens -> argmax;
+
+  // training objective: centered below the spine so it does not widen the figure
+  argmax -> loss [style=invis];
+  a_out -> loss [style=dashed, constraint=false];
+}
