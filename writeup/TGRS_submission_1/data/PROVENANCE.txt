@@ -1,0 +1,77 @@
+================================================================================
+PROVENANCE AND LICENSE
+South Africa Crop Classification — processed dataset (IEEE TGRS companion)
+================================================================================
+
+These files are DERIVED products built from three upstream sources. They are not
+the original challenge data; they are the processed, model-ready form used in the
+paper. Please cite all upstream sources (CITATION.txt) and review the terms below
+before reuse or redistribution.
+
+--------------------------------------------------------------------------------
+1. UPSTREAM SOURCES
+--------------------------------------------------------------------------------
+(a) GROUND-TRUTH LABELS / FIELD BOUNDARIES
+    Western Cape Department of Agriculture & Radiant Earth Foundation (2021),
+    "Crop Type Classification Dataset for Western Cape, South Africa," Version 1.0,
+    Radiant MLHub.  DOI: https://doi.org/10.34911/rdnt.j0co8q  License: CC-BY-4.0.
+    This dataset underlies both the Radiant Earth "Spot the Crop" challenge and the
+    AI4FoodSecurity (South Africa) challenge (ESA, with Planet, TUM, DLR, Radiant
+    Earth). Field polygons were digitized from sub-meter aerial photography and
+    carry a single seasonal crop label per field.
+    -> Source of: crop_id, crop_name, field geometries, fid, SHAPE_AREA/SHAPE_LEN.
+
+(b) SATELLITE IMAGERY
+    Copernicus Sentinel-2 Level-2A surface reflectance, extracted via Google Earth
+    Engine for the Jan-Dec 2017 season, cloud-masked with s2cloudless plus a shadow
+    mask, and composited monthly (6 features/month: bands B2, B6, B11, B12, plus
+    EVI and Hue). June had no usable imagery; May was discarded for cloud.
+    -> Source of: the raw band-month values in merged_dl_*.parquet and the patch
+       parquets.
+
+(c) TIME-SERIES FEATURES
+    xr_fresh (open source, MIT) — automated time-series feature extraction.
+    https://github.com/mmann1123/xr_fresh
+    -> Source of: the 174 xr_fresh statistics in final_data.parquet and
+       combined_test_features.parquet.
+
+--------------------------------------------------------------------------------
+2. HOW THESE FILES WERE PRODUCED (summary; full pipeline in the code repo)
+--------------------------------------------------------------------------------
+Google Earth Engine extraction + monthly compositing  ->  per-band rasters
+  -> zonal/pixel sampling within field polygons        ->  merged_dl_*.parquet
+  -> xr_fresh feature extraction per pixel/field        ->  final_data.parquet,
+                                                            combined_test_features.parquet
+  -> 100 m patch tiling + resampling                    ->  patch_level_data.parquet,
+                                                            test_patch_data.parquet
+Reproduce from raw inputs with the numbered scripts (0_create_training_data.py,
+3_create_test_data.py) in https://github.com/mmann1123/South_Africa_Crop_Comp.
+
+--------------------------------------------------------------------------------
+3. LICENSE
+--------------------------------------------------------------------------------
+Upstream terms (all permit redistribution of data and derivatives with attribution):
+  - Ground-truth labels / field boundaries: CC-BY-4.0, confirmed via the Source
+    Cooperative record and the Euro Data Cube collection page
+    (DOI https://doi.org/10.34911/rdnt.j0co8q). NOTE: the associated challenge CODE
+    repository is Apache-2.0, but that governs the code, not the data — the data is
+    CC-BY-4.0.
+  - Copernicus Sentinel-2 imagery: free and open (Copernicus/ESA terms); derived
+    reflectance products may be redistributed with attribution.
+  - xr_fresh: MIT.
+
+Because every upstream source permits redistribution with attribution, this derived
+dataset — INCLUDING the crop labels and field geometries — may be published in full.
+
+RECOMMENDED: release this dataset under CC-BY-4.0, with the attribution/citation
+requirements in CITATION.txt. Required attribution for the labels:
+  Western Cape Department of Agriculture, Radiant Earth Foundation (2021). "Crop
+  Type Classification Dataset for Western Cape, South Africa," Version 1.0, Radiant
+  MLHub. [Date Accessed]. https://doi.org/10.34911/rdnt.j0co8q
+
+--------------------------------------------------------------------------------
+4. DISCLAIMER
+--------------------------------------------------------------------------------
+Provided "as is" for research reproducibility. Cloud/shadow gaps remain as NaN in
+the raw files; see DATA_DICTIONARY.txt and the code for the imputation and
+standardization used in the paper.

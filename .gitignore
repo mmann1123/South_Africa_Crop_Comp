@@ -2,6 +2,10 @@
 data/*.parquet
 data/*.geojson
 
+# IEEE DataPort staging bundle (symlinks + large archive; upload via DataPort, not git)
+writeup/TGRS_submission_1/dataport_upload/
+writeup/TGRS_submission_1/dataport_upload.tar.gz
+
 # Model artifacts
 deep_learn/src/models/
 deep_learn/src/xgb_tuner/

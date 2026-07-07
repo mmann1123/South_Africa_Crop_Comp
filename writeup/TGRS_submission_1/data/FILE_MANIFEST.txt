@@ -1,0 +1,90 @@
+================================================================================
+FILE MANIFEST
+South Africa Crop Classification — processed dataset (IEEE TGRS companion)
+================================================================================
+Sizes are the on-disk bytes of the files provided. Verify integrity after
+download with:  sha256sum -c SHA256SUMS.txt   (checksums reproduced at bottom).
+Total package: ~7.6 GB across 10 files.
+
+--------------------------------------------------------------------------------
+PARQUET DATA FILES (Apache Parquet; read with pandas/pyarrow/polars)
+--------------------------------------------------------------------------------
+
+final_data.parquet
+  Size    : 3.62 GB (3,618,499,161 bytes)
+  Shape   : 7,543,106 rows x 181 columns
+  Level   : pixel-level, TRAINING region
+  Content : per-pixel xr_fresh time-series features (174 features = 6 bands x 29
+            statistics) + labels. Used by the classical learners (XGBoost, LR,
+            LightGBM, RF) and the field-level ensembles (aggregated to field in code).
+
+merged_dl_train.parquet
+  Size    : 2.05 GB (2,053,936,893 bytes)
+  Shape   : 7,540,362 rows x 73 columns
+  Level   : pixel-level, TRAINING region
+  Content : raw monthly Sentinel-2 reflectance/index time series (66 features =
+            6 bands x 11 months) + labels. Used by all pixel deep nets
+            (L-TAE, L-TAE-S, TabNet, CNN-BiLSTM, TempCNN, Transformer).
+
+merged_dl_test.parquet
+  Size    : 0.90 GB (895,908,965 bytes)
+  Shape   : 3,409,489 rows x 71 columns
+  Level   : pixel-level, HOLDOUT tile (34S_20E_259N)
+  Content : same features as merged_dl_train, NO label columns. Deep-model
+            spatial-transfer inference. Ground-truth labels: test_fields.geojson.
+
+patch_level_data.parquet
+  Size    : 1.04 GB (1,035,236,499 bytes)
+  Shape   : 5,155,870 rows x 65 columns
+  Level   : patch pixels, TRAINING region
+  Content : per-pixel band-month values within 100 m patches (6 bands x 10 months)
+            + patch_id/field_id/row/col + label. Used by the patch 2D/3D CNNs.
+
+test_patch_data.parquet
+  Size    : 0.50 GB (500,043,895 bytes)
+  Shape   : 2,524,227 rows x 65 columns
+  Level   : patch pixels, HOLDOUT tile
+  Content : patch-CNN spatial-transfer inference.
+
+combined_test_features.parquet
+  Size    : 3.4 MB (3,406,757 bytes)
+  Shape   : 2,415 rows x 176 columns
+  Level   : FIELD-level, HOLDOUT tile
+  Content : field-aggregated xr_fresh features (174) + fid + crop_name. Holdout
+            inference for the classical/field-level learners.
+
+--------------------------------------------------------------------------------
+VECTOR / GROUND-TRUTH FILES (GeoJSON, EPSG:4326; read with geopandas)
+--------------------------------------------------------------------------------
+
+combined_training_fields.geojson
+  Size    : 6.0 MB (6,030,552 bytes)   Features: 4,150 MultiPolygon fields
+  Content : training field polygons with fid, crop_id, crop_name, SHAPE_AREA,
+            SHAPE_LEN.
+
+test_fields.geojson
+  Size    : 3.6 MB (3,602,835 bytes)   Features: 2,417 MultiPolygon fields
+  Content : HOLDOUT field polygons + labels. **This is the ground truth used for
+            spatial-transfer scoring** (fid -> crop_name).
+
+patch_level.geojson
+  Size    : 12.0 MB (11,996,817 bytes)
+  Content : training patch tiling geometry (100 m patches per field).
+
+test_patches.geojson
+  Size    : 5.6 MB (5,600,195 bytes)
+  Content : holdout patch tiling geometry.
+
+--------------------------------------------------------------------------------
+SHA256SUMS  (also provide as a separate SHA256SUMS.txt for `sha256sum -c`)
+--------------------------------------------------------------------------------
+4db35a9a0b847c0665fbb4a9d5e9f1d88d2c0048ce94a775c20abe85a373e362  final_data.parquet
+259088d725aab1ed1d7f5584f104a57cf9ccaff251c40aad87939e1d80b5ecd5  merged_dl_train.parquet
+be71306614936410480c142db50736f6e30db030bac97521fafe17ecedf64346  patch_level_data.parquet
+cb15a3cbc529a38fb304a685ffc90c9cf55d0fbc9c0087fa89ceec9fe568bda7  merged_dl_test.parquet
+db802546e84ed1047a2d5aa329f998b382c7a4e09a4fc1768af79278d454acbc  test_patch_data.parquet
+a5be3d8b747e5f8d607bb0d4f78e1d6857e79fd2698b6efc82ac7cfb4e969194  combined_test_features.parquet
+f274b645e24811bb15cdb343e989b4c9337fd80c35854e59ff23aebd486138af  combined_training_fields.geojson
+45d64743a1a4935134e8acdd3173a2dba194bd98cac50b2d80b29e78178cdeb4  test_fields.geojson
+fe4fa2bd1124dc20633b55167a060fbbab80849de9ef0811f7d30442f793e6c8  patch_level.geojson
+33c0add5c592b7ced24946dadd203742df1545608f687b7e42ca4d4301f7e961  test_patches.geojson

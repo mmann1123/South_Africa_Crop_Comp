@@ -1,0 +1,61 @@
+================================================================================
+HOW TO CITE
+South Africa Crop Classification — processed dataset (IEEE TGRS companion)
+================================================================================
+If you use this dataset, please cite (1) the dataset, (2) the paper, and (3) the
+upstream data sources.
+
+--------------------------------------------------------------------------------
+1. THIS DATASET  (fill in the DOI/year IEEE DataPort mints on publication)
+--------------------------------------------------------------------------------
+Mann, M. L., Venkatachalam, S., Kacha, D., Sheth, D., Engstrom, R., and Jafari, A.
+"South Africa Crop Classification — Processed Sentinel-2 Dataset." IEEE DataPort,
+YEAR. doi:10.21227/XXXX-XXXX
+
+@dataset{mann_sa_crop_dataport,
+  author    = {Mann, Michael L. and Venkatachalam, Sairam and Kacha, Disha and
+               Sheth, Devarsh and Engstrom, Ryan and Jafari, Amir},
+  title     = {South Africa Crop Classification --- Processed Sentinel-2 Dataset},
+  publisher = {IEEE DataPort},
+  year      = {YEAR},
+  doi       = {10.21227/XXXX-XXXX}
+}
+
+--------------------------------------------------------------------------------
+2. THE PAPER
+--------------------------------------------------------------------------------
+@article{mann_sparse_transfer,
+  author  = {Mann, Michael L. and Venkatachalam, Sairam and Kacha, Disha and
+             Sheth, Devarsh and Engstrom, Ryan and Jafari, Amir},
+  title   = {Sparse Feature Selection, Not Deep Learning Capacity, Drives Spatial
+             Transfer in Crop Classification},
+  journal = {IEEE Transactions on Geoscience and Remote Sensing},
+  year    = {2026},
+  note    = {under review}
+}
+
+--------------------------------------------------------------------------------
+3. UPSTREAM SOURCES (required attribution)
+--------------------------------------------------------------------------------
+Labels / field boundaries (CC-BY-4.0):
+  Western Cape Department of Agriculture, Radiant Earth Foundation (2021). "Crop
+  Type Classification Dataset for Western Cape, South Africa," Version 1.0, Radiant
+  MLHub. [Date Accessed]. https://doi.org/10.34911/rdnt.j0co8q
+  (This dataset underlies the AI4FoodSecurity (South Africa) challenge: AI4EO
+   (2021), European Space Agency, with Planet, TUM, DLR, and Radiant Earth,
+   https://platform.ai4eo.eu/ai4food-security-south-africa)
+
+Imagery:
+  Copernicus Sentinel-2 (ESA), Level-2A surface reflectance, 2017; accessed via
+  Google Earth Engine.
+
+Feature extraction:
+  Mann, M. L. (2025). xr_fresh: Automated Time Series Feature Extraction for Remote
+  Sensing and Gridded Data. Journal of Open Source Software, 10(115), 9009.
+  doi:10.21105/joss.09009
+
+--------------------------------------------------------------------------------
+CONTACT
+--------------------------------------------------------------------------------
+Michael L. Mann, Dept. of Geography & Environment, The George Washington University
+mmann1123@email.gwu.edu

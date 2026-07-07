@@ -1,0 +1,70 @@
+================================================================================
+REPRODUCIBILITY
+South Africa Crop Classification — processed dataset (IEEE TGRS companion)
+================================================================================
+With these files plus the public code, all models, tables, and figures in the
+paper can be reproduced. This dataset is the OUTPUT of the data-preparation stage,
+so you can skip straight to training/inference.
+
+CODE: https://github.com/mmann1123/South_Africa_Crop_Comp
+
+--------------------------------------------------------------------------------
+1. SETUP
+--------------------------------------------------------------------------------
+1. Clone the code repository.
+2. Copy every file in this package into the repo's  data/  directory. The paths in
+   deep_learn/src/config.py expect exactly these filenames (e.g. MERGED_DL_PATH ->
+   data/merged_dl_train.parquet, FINAL_DATA_PATH -> data/final_data.parquet, etc.).
+3. Create the two conda environments (the orchestrators dispatch to each):
+     deep_field  — PyTorch/TensorFlow/TabNet  (bash deep_learn/install.sh)
+     ml_field    — XGBoost(GPU)/LightGBM/sklearn (bash deep_learn/install_ml.sh)
+   A CUDA GPU is recommended (the paper used an RTX 3080 Ti).
+
+--------------------------------------------------------------------------------
+2. WHICH FILE FEEDS WHICH MODEL
+--------------------------------------------------------------------------------
+Classical (XGBoost, LightGBM, RF, LogReg; voting/stacking ensembles):
+    TRAIN  final_data.parquet            (pixel xr_fresh, aggregated to field in code)
+    OOS    combined_test_features.parquet (field xr_fresh)
+Deep pixel/field nets (L-TAE, L-TAE-S, TabNet, CNN-BiLSTM, TempCNN, Transformer):
+    TRAIN  merged_dl_train.parquet       (raw monthly S2 time series)
+    OOS    merged_dl_test.parquet
+Patch CNNs (multi-channel 2D CNN, 3D CNN):
+    TRAIN  patch_level_data.parquet
+    OOS    test_patch_data.parquet
+Ground truth for SPATIAL-TRANSFER scoring (all models):
+    test_fields.geojson   (fid -> crop_name over the 2,417 holdout fields)
+
+--------------------------------------------------------------------------------
+3. STEPS
+--------------------------------------------------------------------------------
+The numbered root scripts run the full workflow (each supports --dry-run; training
+skips work if artifacts exist, use --force to retrain):
+
+    python 1_train_all_models.py        # trains classical + deep (in-region)
+    python 2_compare_training_results.py
+    python 3_create_test_data.py        # (already provided here as the OOS parquets)
+    python 4_run_inference.py           # spatial-transfer predictions on the holdout
+    python 5_compare_and_submit.py      # ensemble vote; writes submissions/prediction.csv
+
+(Step 0_create_training_data.py rebuilds these parquets FROM the raw upstream data;
+it is not needed when using this package.)
+
+Out-of-sample scoring / confusion matrices are produced under out_of_sample/;
+they compare 4_run_inference.py predictions against test_fields.geojson.
+
+--------------------------------------------------------------------------------
+4. SUBSAMPLE-DRAW / DATA-EFFICIENCY EXPERIMENT
+--------------------------------------------------------------------------------
+The paper's data-efficiency figure (single training seed, mean over 5 independent
+subsample draws at 100/75/50/25% of the training fields) is produced by
+experiments/field_reduction/ (seed_sweep*.py, plot_field_reduction_multidraw.py),
+which read the same merged_dl_*/final_data/combined_test_features files and
+test_fields.geojson provided here.
+
+--------------------------------------------------------------------------------
+5. FID-WISE SPLITTING
+--------------------------------------------------------------------------------
+All train/validation/test splits are on unique field ids (fid) with
+random_state=42, so no field's pixels straddle partitions. This is applied
+identically across every script; you do not need to construct splits manually.

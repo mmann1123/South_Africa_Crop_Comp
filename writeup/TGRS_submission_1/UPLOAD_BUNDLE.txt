@@ -1,0 +1,53 @@
+================================================================================
+IEEE DataPort UPLOAD BUNDLE — checklist
+(Depositor aid. This file and assemble_upload.sh are NOT part of the dataset.)
+================================================================================
+
+DataPort submission-form settings
+---------------------------------
+  Title    : South Africa Crop Classification — Processed Sentinel-2 Dataset
+  Access   : Open Access
+  License  : Creative Commons Attribution 4.0 International (CC BY 4.0)
+  Related  : link the paper (Mann et al., IEEE TGRS) and code repo
+             https://github.com/mmann1123/South_Africa_Crop_Comp
+  Keywords : crop classification, Sentinel-2, spatial transfer, domain
+             generalization, time-series, South Africa, remote sensing
+
+The complete bundle = 10 data files + 8 documentation files  (~7.6 GB total).
+
+DATA FILES  (source: repo  data/  directory)
+--------------------------------------------
+  3.62 GB  final_data.parquet
+  2.05 GB  merged_dl_train.parquet
+  1.04 GB  patch_level_data.parquet
+  0.90 GB  merged_dl_test.parquet
+  0.50 GB  test_patch_data.parquet
+  3.4 MB   combined_test_features.parquet
+  12.0 MB  patch_level.geojson
+  6.0 MB   combined_training_fields.geojson
+  5.6 MB   test_patches.geojson
+  3.6 MB   test_fields.geojson
+
+DOCUMENTATION FILES  (source: writeup/TGRS_submission_1/data/)
+-------------------------------------------------------------
+  README.txt            FILE_MANIFEST.txt      DATA_DICTIONARY.txt
+  PROVENANCE_AND_LICENSE.txt   REPRODUCIBILITY.txt   CITATION.txt
+  SHA256SUMS.txt        LICENSE.txt
+
+ASSEMBLE (optional, no disk duplication)
+----------------------------------------
+  bash writeup/TGRS_submission_1/assemble_upload.sh
+    -> stages everything into  writeup/TGRS_submission_1/dataport_upload/
+       (data files as symlinks -> repo data/, docs copied).
+  Upload that folder's contents, or make a self-contained archive:
+    tar -czhf dataport_upload.tar.gz -C writeup/TGRS_submission_1/dataport_upload .
+
+UPLOAD NOTES
+------------
+  - ~7.6 GB: use DataPort's AWS/S3 bulk upload or the desktop uploader; the
+    browser uploader is unreliable above a few GB.
+  - Keep files individual (parquet is already compressed) so users can fetch
+    just the subset they need.
+  - After upload, verify integrity: sha256sum -c SHA256SUMS.txt
+  - Before publishing, fill the DOI/date placeholders in CITATION.txt and
+    LICENSE.txt, and update the paper's Data Availability statement.

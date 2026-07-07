@@ -1,0 +1,102 @@
+================================================================================
+DATA DICTIONARY
+South Africa Crop Classification — processed dataset (IEEE TGRS companion)
+================================================================================
+Coordinate reference system for all vector data: EPSG:4326 (WGS84 lon/lat).
+All labels are at the FIELD level; the join key between pixel/patch rows and the
+field polygons is `fid` (field id).
+
+--------------------------------------------------------------------------------
+1. CROP LABEL ENCODING
+--------------------------------------------------------------------------------
+crop_id  crop_name
+  1      Wheat
+  2      Barley
+  3      Canola
+  4      Lucerne/Medics
+  5      Small grain grazing
+The classes are imbalanced (Lucerne/Medics ~43% of training fields, ~56% of the
+holdout); the paper's primary metric is macro-F1.
+
+--------------------------------------------------------------------------------
+2. COMMON IDENTIFIER / LABEL COLUMNS
+--------------------------------------------------------------------------------
+id          int    per-pixel observation id (pixel-level parquets only)
+point       str    pixel location identifier
+fid         int    FIELD id; join key to *_fields.geojson and for field aggregation
+SHAPE_AREA  float  field area (map units of the source vector)
+SHAPE_LEN   float  field perimeter
+crop_id     int    integer crop code (see section 1); TRAIN files only
+crop_name   str    crop label; present in TRAIN files and holdout FIELD files
+NOTE: the HOLDOUT pixel/patch parquets (merged_dl_test, test_patch_data) contain
+NO crop_id/crop_name — obtain holdout ground truth from test_fields.geojson.
+
+--------------------------------------------------------------------------------
+3. RAW MONTHLY TIME SERIES  (merged_dl_train.parquet, merged_dl_test.parquet)
+--------------------------------------------------------------------------------
+Feature columns: 66 = 6 bands/indices x 11 months, named  <BAND>_<Month>
+  BANDS/INDICES : B2, B6, B11, B12, EVI, hue
+  MONTHS (11)   : January, February, March, April, May, July, August, September,
+                  October, November, December
+                  (June 2017 has NO usable imagery, so it is absent.)
+Values: Sentinel-2 L2A monthly-composite surface reflectance (bands) and the
+per-scene EVI and Hue indices (computed before compositing).
+MODELING NOTE: the paper's deep models use 10 months (6x10 = 60-dim); the *_May
+columns are dropped in code (May discarded for cloud). May is retained in these
+raw files so users can reproduce or revisit that choice.
+
+--------------------------------------------------------------------------------
+4. XR_FRESH TIME-SERIES FEATURES  (final_data.parquet [pixel, TRAIN];
+                                   combined_test_features.parquet [field, HOLDOUT])
+--------------------------------------------------------------------------------
+Feature columns: 174 = 6 bands x 29 statistics, named  <BAND>_<statistic>
+  BANDS: B2, B6, B11, B12, EVI, hue
+  29 STATISTICS (computed from each band's 10-month profile with xr_fresh):
+    abs_energy, absolute_sum_of_changes, autocorr_lag_1, autocorr_lag_2,
+    autocorr_lag_3, count_above_mean, count_below_mean, doy_of_maximum_dates,
+    doy_of_minimum_dates, kurtosis, large_standard_deviation, maximum, mean,
+    mean_abs_change, mean_change, mean_second_derivative_central, median,
+    minimum, quantile_q_0.05, quantile_q_0.95, ratio_beyond_r_sigma_r_1,
+    ratio_beyond_r_sigma_r_2, skewness, standard_deviation, sum,
+    symmetry_looking, ts_complexity_cid_ce, variance,
+    variance_larger_than_standard_deviation
+Definitions of each statistic: see the paper's Supplementary Material (Table S1)
+and the xr_fresh documentation (https://github.com/mmann1123/xr_fresh).
+LEVEL DIFFERENCE: final_data.parquet is PER-PIXEL (features aggregated to fields
+in code during training); combined_test_features.parquet is already aggregated to
+one row PER FIELD (mean pooling within each holdout polygon).
+
+--------------------------------------------------------------------------------
+5. PATCH TENSORS  (patch_level_data.parquet, test_patch_data.parquet)
+--------------------------------------------------------------------------------
+Each field is tiled into ~100 m patches (~10x10 native pixels) for the 2D/3D CNNs;
+one row per patch pixel.
+  patch_id   int   unique patch identifier
+  field_id   int   field the patch belongs to (== fid)
+  row, col   int   pixel position within the patch grid
+  crop_name  str   field label (patch_level_data only carries the label column)
+  60 band-month features named  SA_<BAND>_1C_2017_<MM>
+    BANDS : B2, B6, B11, B12, EVI, hue
+    MONTHS: 01,02,03,04,07,08,09,10,11,12  (10 months; 05 and 06 excluded)
+Reshape to (T=10, C=6) per pixel, or to (H,W,T,C) per patch, for the CNNs.
+
+--------------------------------------------------------------------------------
+6. VECTOR FILES (GeoJSON)
+--------------------------------------------------------------------------------
+combined_training_fields.geojson  4,150 MultiPolygon features
+test_fields.geojson               2,417 MultiPolygon features (HOLDOUT ground truth)
+  properties: fid, SHAPE_AREA, SHAPE_LEN, crop_id, crop_name
+patch_level.geojson / test_patches.geojson
+  patch tiling geometries (training / holdout); carry patch_id and field_id links.
+
+--------------------------------------------------------------------------------
+7. GENERAL NOTES
+--------------------------------------------------------------------------------
+- Study tiles: TRAIN = 34S_19E_258N + 34S_19E_259N; HOLDOUT = 34S_20E_259N
+  (adjacent, non-overlapping; no pixel or field is shared).
+- Missing values: cloud/shadow gaps appear as NaN; the code imputes (median or 0)
+  and standardizes before modeling — see deep_learn/src and the paper's Methods.
+- Split protocol: all train/val/test splitting is FID-wise (random_state=42) so no
+  field's pixels straddle partitions.
+- Parquet engine: files were written with pyarrow; read with
+  pandas.read_parquet(path) or pyarrow.parquet.
