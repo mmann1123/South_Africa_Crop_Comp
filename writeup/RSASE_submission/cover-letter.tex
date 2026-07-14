@@ -1,0 +1,39 @@
+\documentclass[11pt]{letter}
+\usepackage[top=0.5in,bottom=0.4in,left=1in,right=1in]{geometry}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\setlength{\parskip}{3pt}
+
+\address{Department of Geography \& Environment \\ The George Washington University \\ Washington, DC 20052, USA}
+
+\begin{document}
+
+% Update the date and, if a named editor is known, the addressee below.
+\begin{letter}{The Editor-in-Chief \\ \textit{Remote Sensing Applications: Society and Environment} }
+
+\opening{Dear Editor-in-Chief,}
+
+On behalf of my co-authors, I am pleased to submit our manuscript, ``Sparse Feature Selection, Not Deep Learning Capacity, Drives Spatial Transfer in Crop Classification,'' for consideration as a research article in \textit{Remote Sensing Applications: Society and Environment}.
+
+Accurate crop maps underpin food-security monitoring and agricultural land-use planning across the Global South, yet operational deployment there almost always means applying a model to regions where no training labels were collected. This is where remote sensing must deliver societal value, and also where the field's standard evaluation is weakest: most studies validate within a single region, measuring in-distribution fit rather than the spatial transfer that real monitoring demands. We confront this gap in a rain-fed, smallholder-relevant landscape of the Western Cape of South Africa, a regional case study whose implications generalize across data-scarce agricultural regions worldwide.
+
+Using an openly available South African Sentinel-2 dataset (optical only, to maximize applicability where only optical data exist), we benchmark twenty-three classical and deep models both in-region and on a spatially disjoint holdout tile, and find that the two rankings \emph{invert}: dense temporal deep networks that lead under conventional validation degrade sharply under transfer, while simpler, sparser models stay robust. Our contribution is mechanistic rather than merely empirical: we show that sparse, axis-aligned feature selection (not model capacity) governs whether a model survives spatial transfer, confirming it with a controlled capacity-versus-sparsity comparison and by grafting the bias onto a deep network (L-TAE-S) that achieves the best transfer performance at a fraction of the training cost.
+
+We believe this work fits the aims of \textit{Remote Sensing Applications: Society and Environment}: an application-driven, interdisciplinary study of agricultural land use and food-security monitoring that offers readers both a practical caution about how crop-classification models are evaluated before deployment and a concrete, transferable design principle for models that generalize to unlabeled terrain. The processed dataset is openly deposited on IEEE DataPort (DOI: 10.21227/n69k-r458) and all code is public. The manuscript is original, has not been published previously, and is not under consideration elsewhere; all authors approve the submission and declare no competing interests. Thank you for considering our work; we look forward to the reviewers' feedback.
+
+\vspace{10pt}
+\noindent Sincerely,
+
+\vspace{2pt}
+\noindent\includegraphics[width=1.1in]{signature.jpg}
+
+\vspace{1pt}
+\noindent Michael L. Mann \\
+Department of Geography \& Environment \\
+The George Washington University \\
+\href{mailto:mmann1123@email.gwu.edu}{mmann1123@email.gwu.edu}
+
+\end{letter}
+\end{document}
