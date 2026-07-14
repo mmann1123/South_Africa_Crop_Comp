@@ -1,0 +1,82 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{mann2023,mann2025}
+\citation{james2013}
+\citation{breiman2001}
+\citation{ke2017}
+\citation{chen2016,friedman2001}
+\@writefile{toc}{\contentsline {section}{\numberline {S-A}Dataset Details, Feature Set, and Model Definitions}{1}{section.1}\protected@file@percent }
+\newlabel{sec:models}{{S-A}{1}{Dataset Details, Feature Set, and Model Definitions}{section.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {S-A.1}Exploratory Data Analysis}{1}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {S-A.2}\texttt  {xr\_fresh} Feature Set}{1}{subsection.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {S-A.3}Baseline Classical Model Definitions}{1}{subsection.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {S-A.4}Deep Model Definitions}{1}{subsection.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{CNN-BiLSTM}{1}{section*.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {S1}{\ignorespaces Crop-field composition of the training and holdout regions. (a) Number of labeled fields per crop type: lucerne/medics dominates (43\% of training and 56\% of holdout fields), followed by wheat, barley, canola, and small-grain grazing. This heavy class imbalance motivates macro-F1 as the primary metric and the class-imbalance handling used during training. (b) Mean field area by crop type (hectares); lucerne/medics is the most frequent class despite having among the smallest fields.}}{2}{figure.1}\protected@file@percent }
+\newlabel{sfig:fields}{{S1}{2}{Crop-field composition of the training and holdout regions. (a) Number of labeled fields per crop type: lucerne/medics dominates (43\% of training and 56\% of holdout fields), followed by wheat, barley, canola, and small-grain grazing. This heavy class imbalance motivates macro-F1 as the primary metric and the class-imbalance handling used during training. (b) Mean field area by crop type (hectares); lucerne/medics is the most frequent class despite having among the smallest fields}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S2}{\ignorespaces Spectral separability of the crop classes, shown as box plots of standardized (z-score) intensity for each Sentinel-2 band and index (B2, B6, B11, B12, EVI, hue). (a) Distributions for all five crops overlap substantially across every band, so no single feature cleanly separates the classes. (b) Wheat versus barley are especially similar in every band---the dominant source of the persistent wheat--barley confusion seen across all models in the main paper.}}{3}{figure.2}\protected@file@percent }
+\newlabel{sfig:box}{{S2}{3}{Spectral separability of the crop classes, shown as box plots of standardized (z-score) intensity for each Sentinel-2 band and index (B2, B6, B11, B12, EVI, hue). (a) Distributions for all five crops overlap substantially across every band, so no single feature cleanly separates the classes. (b) Wheat versus barley are especially similar in every band---the dominant source of the persistent wheat--barley confusion seen across all models in the main paper}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S3}{\ignorespaces Time-series feature generation with \texttt  {xr\_fresh}. For each pixel, the 10-month profile of every band and index is summarized by the statistical and temporal descriptors of Table\nobreakspace  {}\ref {stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners.}}{4}{figure.3}\protected@file@percent }
+\newlabel{sfig:tsfeat}{{S3}{4}{Time-series feature generation with \texttt {xr\_fresh}. For each pixel, the 10-month profile of every band and index is summarized by the statistical and temporal descriptors of Table~\ref {stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S4}{\ignorespaces Architecture of the CNN-BiLSTM model. The $(B,6,T)$ input (six bands/indices over $T$ months) passes a 1D convolution (64 filters, kernel 5) for temporal feature extraction, then a bidirectional LSTM (hidden size 64) whose final time step is classified by a softmax head. Training uses weighted focal loss to counter class imbalance, and five seeds are ensembled by averaging logits.}}{5}{figure.4}\protected@file@percent }
+\newlabel{sfig:bilstm}{{S4}{5}{Architecture of the CNN-BiLSTM model. The $(B,6,T)$ input (six bands/indices over $T$ months) passes a 1D convolution (64 filters, kernel 5) for temporal feature extraction, then a bidirectional LSTM (hidden size 64) whose final time step is classified by a softmax head. Training uses weighted focal loss to counter class imbalance, and five seeds are ensembled by averaging logits}{figure.4}{}}
+\citation{tabnet_orig,tabnet2024}
+\citation{ltae2020}
+\citation{vaswani2017,russwurm2020}
+\@writefile{lot}{\contentsline {table}{\numberline {S1}{\ignorespaces Time-series features extracted from each pixel's spectral profile with \texttt  {xr\_fresh}.}}{6}{table.1}\protected@file@percent }
+\newlabel{stab:features}{{S1}{6}{Time-series features extracted from each pixel's spectral profile with \texttt {xr\_fresh}}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S2}{\ignorespaces XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy.}}{6}{table.2}\protected@file@percent }
+\newlabel{stab:trials}{{S2}{6}{XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy}{table.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{TabNet}{6}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{L-TAE}{6}{section*.3}\protected@file@percent }
+\citation{tempcnn2019}
+\citation{ai4foodsecurity}
+\@writefile{toc}{\contentsline {paragraph}{Transformer encoder}{7}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TempCNN}{7}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Patch models}{7}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {S-B}Performance Metric Definitions}{7}{section.2}\protected@file@percent }
+\newlabel{sec:smetrics}{{S-B}{7}{Performance Metric Definitions}{section.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {S-C}Training Cost}{7}{section.3}\protected@file@percent }
+\newlabel{sec:cost}{{S-C}{7}{Training Cost}{section.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {S-D}Ablation Studies}{7}{section.4}\protected@file@percent }
+\newlabel{sec:ablation}{{S-D}{7}{Ablation Studies}{section.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S5}{\ignorespaces Patch generation per field. Each field is tiled into 100\nobreakspace  {}m patches---only ${\sim }10\times 10$ pixels at the 10\nobreakspace  {}m Sentinel-2 resolution---and resampled to $128\times 128$. These patches are the input to the patch-based 2D and 3D CNNs, whose per-patch predictions are later aggregated to a field label by majority vote.}}{8}{figure.5}\protected@file@percent }
+\newlabel{sfig:patches}{{S5}{8}{Patch generation per field. Each field is tiled into 100~m patches---only ${\sim }10\times 10$ pixels at the 10~m Sentinel-2 resolution---and resampled to $128\times 128$. These patches are the input to the patch-based 2D and 3D CNNs, whose per-patch predictions are later aggregated to a field label by majority vote}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {S6}{\ignorespaces Patch-level 3D CNN pipeline: each field is tiled into 100\nobreakspace  {}m patches resampled to $128\times 128$; a five-seed ensemble averages softmax outputs, and per-patch predictions are aggregated to a field label by majority vote.}}{9}{figure.6}\protected@file@percent }
+\newlabel{sfig:patchmodel}{{S6}{9}{Patch-level 3D CNN pipeline: each field is tiled into 100~m patches resampled to $128\times 128$; a five-seed ensemble averages softmax outputs, and per-patch predictions are aggregated to a field label by majority vote}{figure.6}{}}
+\bibstyle{elsarticle-harv}
+\bibdata{rsase}
+\bibcite{ai4foodsecurity}{{1}{2021}{{AI4EO}}{{}}}
+\@writefile{lot}{\contentsline {table}{\numberline {S3}{\ignorespaces Per-seed training time for each model.}}{10}{table.3}\protected@file@percent }
+\newlabel{stab:cost}{{S3}{10}{Per-seed training time for each model}{table.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S4}{\ignorespaces Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size.}}{10}{table.4}\protected@file@percent }
+\newlabel{stab:ens}{{S4}{10}{Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size}{table.4}{}}
+\bibcite{tabnet_orig}{{2}{2021}{{Arik and Pfister}}{{}}}
+\bibcite{breiman2001}{{3}{2001}{{Breiman}}{{}}}
+\bibcite{chen2016}{{4}{2016}{{Chen and Guestrin}}{{}}}
+\bibcite{friedman2001}{{5}{2001}{{Friedman}}{{}}}
+\bibcite{ltae2020}{{6}{2020}{{Garnot and Landrieu}}{{}}}
+\bibcite{james2013}{{7}{2013}{{James et~al.}}{{James, Witten, Hastie and Tibshirani}}}
+\bibcite{ke2017}{{8}{2017}{{Ke et~al.}}{{Ke, Meng, Finley, Wang, Chen, Ma, Ye and Liu}}}
+\bibcite{mann2025}{{9}{2025}{{Mann}}{{}}}
+\bibcite{mann2023}{{10}{2026}{{Mann et~al.}}{{Mann, Colson, Nealon, Engstrom and Nakacwa}}}
+\bibcite{tabnet2024}{{11}{2024}{{Muruganantham et~al.}}{{Muruganantham, Wibowo, Grandhi and Islam}}}
+\bibcite{tempcnn2019}{{12}{2019}{{Pelletier et~al.}}{{Pelletier, Webb and Petitjean}}}
+\bibcite{russwurm2020}{{13}{2020}{{Ru{\ss }wurm and K{\"o}rner}}{{}}}
+\bibcite{vaswani2017}{{14}{2017}{{Vaswani et~al.}}{{Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser and Polosukhin}}}
+\@writefile{lot}{\contentsline {table}{\numberline {S5}{\ignorespaces Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer holdout performance.}}{11}{table.5}\protected@file@percent }
+\newlabel{stab:loss}{{S5}{11}{Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer holdout performance}{table.5}{}}
+\gdef \@abspage@last{11}

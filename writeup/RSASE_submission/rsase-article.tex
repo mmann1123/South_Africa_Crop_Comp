@@ -1,0 +1,297 @@
+%% Remote Sensing Applications: Society and Environment (Elsevier)
+%% Converted from the IEEE TGRS submission (tgrs-article.tex).
+\documentclass[preprint,authoryear]{elsarticle}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lineno}
+\linenumbers
+
+\journal{Remote Sensing Applications: Society and Environment}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Sparse Feature Selection, Not Deep Learning Capacity, Drives Spatial Transfer in Crop Classification}
+
+\author[gwgeo]{Michael L. Mann\corref{cor1}}
+\ead{mmann1123@email.gwu.edu}
+\author[gwds]{Sairam Venkatachalam}
+\author[gwds]{Disha Kacha}
+\author[gwds]{Devarsh Sheth}
+\author[gwgeo]{Ryan Engstrom}
+\author[gwds]{Amir Jafari}
+
+\affiliation[gwgeo]{organization={Department of Geography \& Environment, The George Washington University},
+  city={Washington}, state={DC}, postcode={20052}, country={USA}}
+\affiliation[gwds]{organization={Data Science Program, The George Washington University},
+  city={Washington}, state={DC}, postcode={20052}, country={USA}}
+
+\cortext[cor1]{Corresponding author.}
+
+\begin{abstract}
+Accurate crop maps underpin food-security monitoring and agricultural land-use planning across the Global South, yet operational mapping there means applying a model to regions where no labels were collected. Most studies instead validate within a single region (random or field-wise cross-validation), which measures in-distribution fit rather than spatial transfer. On a South African Sentinel-2 dataset (optical only), we benchmark twenty-three classical and deep models twice: in-region and on a spatial holdout tile. The rankings invert. In-region the dense temporal deep nets lead (macro-F1 0.72--0.78); under transfer this cluster fractures, as pixel-level L-TAE and a Transformer encoder drop from 0.78 to 0.58 and CNN-BiLSTM falls the most (0.72 to 0.46), while a TabNet ensemble becomes the best model (0.60) and simple trees and logistic regression (0.56) prove robust. The results suggest a mechanistic explanation: models with sparse, axis-aligned feature selection are more stable under transfer. TabNet inherits it through sparsemax masks, while dense nets discard it. A control isolates it: a Transformer with far greater attention capacity transfers no better than L-TAE, so capacity is not the lever; sparsity is. We graft that bias onto a deep network, L-TAE-S, which ties TabNet for the best spatial-transfer macro-F1, and its field-level variant has the smallest in-region-to-holdout gap of any model. Field-level aggregation is a second, substitutable lever, and robust models hold near-full accuracy on a quarter of the fields. For agencies mapping unlabeled terrain, the message is twofold: model selection in crop mapping is an artifact of the validation protocol, and the property deciding whether a model survives transfer is sparse, axis-aligned feature selection.
+\end{abstract}
+
+\begin{keyword}
+Crop classification \sep deep learning \sep domain generalization \sep feature selection \sep remote sensing \sep Sentinel-2 \sep spatial transfer \sep time-series classification
+\end{keyword}
+
+\end{frontmatter}
+
+\section{Introduction}
+Accurate and timely crop classification is foundational to precision agriculture and to the agencies that monitor food security and agricultural land use, enabling yield forecasting, resource optimization, and food-security assessment \citep{begue2020, ieee2017}. The Sentinel-2 constellation, with its multispectral richness and roughly five-day revisit, has made dense multi-temporal optical imagery widely available. Yet reliable crop classification remains hard throughout Africa and the Global South: spectral similarity between crops, irregular planting and phenological cycles, persistent cloud cover, and rain-fed dryland management all degrade accuracy \citep{begue2020, mahlayeye2024}. Classical methods such as Random Forest (RF) and XGBoost have proven effective and efficient on engineered features \citep{mahlayeye2024, mann2023, mann2017, mann2019}, but their performance hinges on hand-crafted feature engineering \citep{maxwell2019, belgiu2016}. Deep learning---recurrent and convolutional temporal models---reduces reliance on hand-crafted predictors and captures phenological structure that summary statistics miss \citep{zhu2017, russwurm2018, tempcnn2019}, but its generalizability in complex, low-label settings remains uncertain \citep{pankajakshan2025}.
+
+A second, and for our purposes critical, gap concerns \emph{how generalization is measured}. Much of the crop-classification literature reports accuracy under random or field-wise cross-validation drawn from a single region \citep{belgiu2016, ltae2020, tempcnn2019, russwurm2018, ieee2017}. Such protocols hold out individual pixels or fields but not \emph{space}: training and test observations share the same atmosphere, soils, management calendars, and acquisition geometry, so the reported numbers reflect in-distribution fit rather than transfer to new terrain. Because operational maps are produced by applying a model to regions where no labels were collected, this distinction matters, yet studies that re-rank models under a spatially disjoint holdout remain rare \citep{pankajakshan2025, jin2019, rustowicz2019}. This differs from the bulk of the transfer-learning literature, which adapts a model using target-domain data---labels, unlabeled imagery, or self-supervised pre-training \citep{ma2024, cropformer2023, mai2025}. Our setting is the no-target-access case (domain generalization): models are trained on source tiles and applied to the holdout directly, with no adaptation, so what determines transfer is a property intrinsic to the model rather than a target-specific tuning step.
+
+The Western Cape of South Africa concentrates the operational challenges---smaller fields, rain-fed dryland systems, heterogeneous planting rotations, and persistent winter cloud cover---while offering an unusually rich, high-quality labeled dataset \citep{mlhub}. This makes it a realistic test bed: rich enough to train and compare modern architectures fairly, yet hard enough to expose the failure modes that matter in practice. We evaluate CNN-BiLSTM hybrids, TabNet ensembles, lightweight temporal attention (L-TAE) and full Transformer-encoder networks, temporal-convolution (TempCNN) networks, and patch-based 2D/3D CNNs, benchmarked against XGBoost, LightGBM, and RF. Critically, we evaluate every model twice: under field-wise cross-validation \emph{within} the training region, and on a spatially disjoint holdout tile that no training pixel touches. We restrict inputs to multi-temporal Sentinel-2 optical imagery alone, to isolate the spectral-time-series signal and maximize applicability where only optical data are available. All code is public \citep{primary_repo}.
+
+This study makes five contributions. First, a multi-architecture benchmark (twenty-three classical, deep, and patch-based models) showing that in-region versus spatial-transfer evaluation produce \emph{inverted} rankings on the same data. Second, empirical evidence that models with sparse, axis-aligned feature-selection, the property behind two decades of RF and gradient-boosted-tree dominance, are more stable when moved to a holdout tile, and TabNet inherits it via sparsemax masks. Third, a controlled architectural comparison isolating sparse feature selection rather than attention capacity as the lever, including L-TAE-S, a sparse-attention encoder we introduce that ties TabNet for the best ST macro-F1 and achieves the smallest transfer gap in its field-level variant. Fourth, identification of field-level aggregation as a second, substitutable robustness lever that recovers transfer for dense models but is redundant for sparse ones. Fifth, a data-efficiency analysis under spatial transfer showing the most transferable models are also the most data-efficient, holding near-full holdout accuracy on a quarter of the training fields; as a supporting experiment, a controlled comparison of \texttt{xr\_fresh} time-series features against raw reflectance under spatial transfer. This leads to our central question: across machine-learning, deep-learning, and hybrid architectures, which most reliably classifies crops from multi-temporal Sentinel-2 optical imagery \emph{when evaluated on a spatially disjoint region}, and what model properties determine whether in-distribution accuracy survives the transfer?
+
+\subsection{Related Work}
+Early crop classification relied on classical learners (RF, SVM, logistic regression, gradient-boosted trees) operating on engineered descriptors---spectral indices, temporal summaries---valued for efficiency, interpretability, and robustness on structured data \citep{maxwell2019, belgiu2016, breiman2001, chen2016, ke2017}, though their performance depends on feature engineering that can limit transferability across agroecological regions \citep{wardlow2007towards, mahlayeye2024}. Deep models learn representations directly from reflectance sequences: CNNs capture local spectral-spatial pattern \citep{cnn_multitemp}, and recurrent and attention architectures model seasonal phenology \citep{ieee2017, russwurm2018, ltae2020, russwurm2020}. Hybrid designs combine convolutional feature extraction with temporal modeling \citep{fan2023hcrnn, tufail2025cnnrnn, bandar2024bilstm}, or use deep backbones as feature extractors feeding classical classifiers \citep{espejo2020, koklu2022, yang2020}. A recurring assumption is that richer learned representations generalize better than compact engineered ones; whether this holds under genuine spatial transfer, rather than within-region validation, is less established and is a central question here. Architectures that explicitly target cross-scenario generalization (e.g., Cropformer \citep{cropformer2023}) remain the exception and are rarely benchmarked against classical and deep baselines on a common spatially disjoint holdout. We fill this gap with a systematic comparison under \emph{both} protocols, and additionally evaluate \texttt{xr\_fresh} as an automated time-series feature-extraction framework in a crop-classification setting \citep{mann2025}.
+
+\section{Data}
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{study_area_map.pdf}
+\caption{Study area in the Western Cape, South Africa. Two adjacent Sentinel-2 tiles (\texttt{34S\_19E\_258N}, \texttt{34S\_19E\_259N}) form the training region; the immediately adjacent \texttt{34S\_20E\_259N} tile (dashed) is held out for spatial-transfer evaluation. Fields are colored by crop type; the tiles are spatially disjoint, so no pixel or field is shared between training and holdout.}
+\label{fig:studyarea}
+\end{figure}
+The study uses a labeled field dataset distributed through Radiant Earth's MLHub \citep{mlhub} and used as the basis of the AI4FoodSecurity (South Africa) challenge \citep{ai4foodsecurity}, in an agriculturally productive part of the Western Cape (Fig.~\ref{fig:studyarea}). Two adjacent Sentinel-2 tiles (\texttt{34S\_19E\_258N}, \texttt{34S\_19E\_259N}) form the training region (4{,}150 labeled fields over 622~km\textsuperscript{2}; mean field 15.0~ha); a third, immediately adjacent tile (\texttt{34S\_20E\_259N}) is reserved as a holdout for spatial-transfer evaluation (2{,}417 fields over 282~km\textsuperscript{2}). The tiles do not overlap, so no pixel or field is shared, and transfer must contend with different soils, geometries, and acquisition conditions. Because the holdout lies within the same agroecological zone and growing calendar, this is a relatively \emph{local} spatial shift, and the gaps we report are best read as a conservative lower bound on degradation under broader transfer. Throughout, ``in-region'' denotes a field-wise train/validation/test split within the training region; ``spatial-transfer'' (ST) or ``holdout'' denotes predictions on the disjoint tile.
+
+We classified five crop types: wheat, canola, lucerne/medics (alfalfa), barley, and small-grain grazing. The classes are heavily imbalanced---lucerne/medics is 43\% of training fields and 56\% of the holdout (Supplementary Material, Fig.~S1(a))---which motivates macro-F1 as the primary metric (Sec.~\ref{sec:metrics}) and class-imbalance handling during training. Spectrally, wheat and barley overlap strongly, the dominant source of persistent confusion (Supplementary Material, Fig.~S2(b)). Sentinel-2 Level-2A surface reflectance was acquired for the January--December 2017 growing season, cloud-masked with \texttt{s2cloudless} plus a shadow mask, and composited monthly. Six features per month are used---bands B2, B6, B11, B12, plus EVI and Hue, with EVI and Hue computed per scene before compositing---chosen to span the most informative spectral regions while limiting redundancy among correlated bands \citep{mann2023, tufail2025cnnrnn}. June 2017 yielded no usable imagery and May was discarded for cloud, leaving 10 monthly observations, so each pixel is a 60-dimensional time series (6 features $\times$ 10 months). Field polygons were digitized from sub-meter aerial photography and carry a single seasonal crop label \citep{mlhub}; all predictions are made at the field level.
+
+\section{Methodology}
+We compare three paradigms: feature-based classical machine learning, representation-learning deep networks, and patch-based spatial models. To prevent leakage, all train/validation/test splitting is performed at the field level with a fixed random seed, so no field's pixels straddle partitions; pixel- and patch-level predictions are aggregated to a field label by majority vote (or, for probabilistic models, mean pooling). Computational cost across paradigms is reported in the Supplementary Material (Sec.~S-C).
+
+\subsection{Classical Machine Learning}
+We automate feature extraction with the \texttt{xr\_fresh} toolkit, computing a set of statistical and temporal descriptors (e.g., autocorrelation, linear trend, day-of-year of the seasonal maximum, quantiles, complexity) from each pixel's 10-month profile, yielding a 174-dimensional per-pixel vector \citep{mann2023, mann2025}; the full feature list is in the Supplementary Material (Sec.~S-A, Table~S1). Four baselines---logistic regression, RF (300 trees), LightGBM, and XGBoost \citep{james2013, breiman2001, ke2017, chen2016, friedman2001}---are trained on this representation, all of them tree- or margin-based with built-in feature selection or shrinkage; standard formulations are reproduced in the Supplementary Material (Sec.~S-A). We also report soft-voting and stacked ensembles (RF/XGBoost/LightGBM, with logistic-regression meta-learner), an Optuna-tuned field-level XGBoost, and a SMOTETomek-resampled variant; the \emph{Stacking} and \emph{SMOTE Stacked} pair differs only in resampling, isolating the effect of class rebalancing. At the field level, pixel features are mean-pooled within each polygon before classification \citep{penabarragan2011}.
+
+\subsection{Deep Learning Architectures}
+At the pixel level each observation is a 60-feature temporal sequence. Although the pixel models train on millions of pixels, pixels within a field are highly autocorrelated and share one label, so the number of statistically independent units is closer to the number of fields; field-wise splitting keeps evaluation honest at the field scale. We evaluate, as five-seed ensembles, a CNN-BiLSTM hybrid trained with weighted focal loss; TabNet \citep{tabnet_orig, tabnet2024}, which treats the observations as tabular input and, at each decision step, uses an attentive transformer to produce a \emph{sparse} feature mask via sparsemax, selecting a handful of features and ignoring the rest; the L-TAE \citep{ltae2020}, which applies a single learned query over the temporal sequence; a standard multi-head Transformer encoder \citep{vaswani2017, russwurm2020}; and TempCNN \citep{tempcnn2019}. Detailed equations for these standard models, and the field-level hybrid-voting rule, are in the Supplementary Material (Sec.~S-A). The Transformer is included as an informative dense-attention comparison: it increases attention capacity relative to L-TAE while retaining no explicit sparse feature-selection mechanism. Patch-based models (a multi-channel 2D CNN and a 3D CNN) tile each field into 100~m patches resampled to $128\times128$ and are likewise trained as five-seed ensembles; details in the Supplementary Material (Sec.~S-A).
+
+\subsubsection{Sparse-Attention L-TAE (L-TAE-S)}
+To test whether a tree-like, sparse inductive bias can be grafted onto a temporal-attention encoder, we introduce L-TAE-S, which inserts a TabNet-inspired channel-selection gate before the attention heads (Fig.~\ref{fig:ltae_s}). For each of the $n_{\text{head}}=16$ heads, a per-head linear projection of the embedded, positionally-encoded sequence ($d_{\text{model}}=128$, key dimension $d_k=8$) is passed through \emph{sparsemax} \citep{sparsemax2016} to produce a sparse, instance-dependent mask over embedding channels. Formally, for head $h$ and time step $\mathbf{z}_t\in\mathbb{R}^{E}$,
+\[
+  \mathbf{m}_{h,t}=\operatorname{sparsemax}\!\big(\mathbf{P}_{h,t}\odot
+    \operatorname{BN}(W_h\mathbf{z}_t)\big),\quad
+  \tilde{\mathbf{z}}_{h,t}=\mathbf{m}_{h,t}\odot\mathbf{z}_t,
+\]
+\[
+  \mathbf{P}_{h+1,t}=\mathbf{P}_{h,t}\odot\max(\gamma-\mathbf{m}_{h,t},\,0),
+  \qquad \mathbf{P}_{1,t}=\mathbf{1};
+\]
+head $h$ then forms its keys and values from $\tilde{\mathbf{z}}_{h,t}$ before applying L-TAE attention. Because \emph{sparsemax} projects onto the probability simplex, most channels of $\mathbf{m}_{h,t}$ are exactly zero, and the relaxation prior $\mathbf{P}_{h,t}$ (coefficient $\gamma=1.5$) discourages successive heads from re-selecting the same channels; a penalty $\lambda\sum_{h,t}\lVert\mathbf{m}_{h,t}\rVert_{1}$ ($\lambda=10^{-3}$) adds mild additional pressure. This single block---the only architectural difference from the L-TAE---grafts a tree-like sparse feature-selection bias onto the attention backbone while keeping its temporal modeling, mirroring TabNet's sparsemax masks \citep{tabnet_orig}. We evaluate L-TAE-S at both the pixel and field level as a five-seed ensemble under the same weighted-focal objective and field-aggregation protocol as the other temporal networks.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.72\columnwidth,height=0.8\textheight,keepaspectratio]{ltae_s.pdf}
+\caption{Architecture of the sparse-attention L-TAE-S. Before the multi-head temporal attention, a TabNet-style sparse feature gate (highlighted) applies a per-head \texttt{sparsemax} mask that selects a small subset of embedding channels, with a relaxation prior ($\gamma=1.5$) discouraging heads from re-selecting the same channels. This block is the only architectural difference from the L-TAE; five seeds are ensembled and aggregated to field level.}
+\label{fig:ltae_s}
+\end{figure}
+
+\subsection{Performance Metrics}
+\label{sec:metrics}
+Because the classes are severely imbalanced, plain accuracy is misleading. We adopt macro-F1 (F1$_m$, the unweighted mean of per-class F1) as the primary metric, since it weights every crop equally and penalizes failure on the minority cereals where models differ most. We report three further metrics: Cohen's Kappa; weighted F1 (wF1, the support-weighted mean of per-class F1); and cross-entropy (Xent), the field-level scoring metric of the AI4FoodSecurity challenge \citep{ai4foodsecurity} from which the dataset is drawn (lower is better, computed on hard label predictions). Formal definitions are in the Supplementary Material (Sec.~S-B).
+
+\subsection{Quantifying Uncertainty}
+We quantify two sources of variability. For sampling uncertainty in the finite holdout, we apply a nonparametric bootstrap over the 2{,}417 holdout fields: for each model we resample its per-field predictions with replacement $B=10{,}000$ times and recompute macro-F1, reporting the $2.5$th--$97.5$th percentile interval as a 95\% confidence interval (CI); For between-model gaps, we compute paired bootstrap differences by resampling holdout fields and subtracting model scores within each bootstrap replicate. If independent resampling is retained, remove the claim that it is conservative and state it as an approximation. For optimization noise, the per-seed standard deviation of ST macro-F1 across the five ensemble members is $0.015$--$0.037$ for the headline temporal models, which is why we report five-seed ensembles throughout. Both sources are small relative to the ranking effects below: every field-bootstrap CI spans only ${\approx}{\pm}0.02$--$0.03$ macro-F1, so we treat ST macro-F1 differences below ${\approx}0.05$ as not statistically distinguishable.
+
+\section{Results}
+\label{sec:results}
+We evaluate every model under two protocols: 1) in-region field-wise validation and 2) spatial transfer (ST) to the disjoint holdout tile---all reported metrics are field-level. Pixel- and patch-level models are aggregated to field labels, whereas field-level models are trained and evaluated on field-aggregated inputs
+
+\subsection{In-Region Validation Overstates Performance and Misranks Models}
+Table~\ref{tab:gap} reports both protocols for all models, ranked by ST macro-F1, with the gap $\Delta=\text{F1}_m^{\text{ST}}-\text{F1}_m^{\text{in-region}}$. Two facts stand out. First, \emph{every} model loses accuracy under transfer, but unevenly: from $-0.04$ (field-level L-TAE-S) to $-0.26$ (CNN-BiLSTM at the pixel level). Second, this unevenness reorders the models. In-region the dense temporal pixel nets cluster at the top (L-TAE 0.78, Transformer 0.78, L-TAE-S 0.77, TempCNN 0.77, CNN-BiLSTM 0.72); a practitioner choosing by in-region F1 would pick from this cluster. On the holdout the cluster fractures: the two in-region leaders (L-TAE pixel and the Transformer, $\Delta=-0.20$) drop to $0.58$, TempCNN to $0.56$, and CNN-BiLSTM ($\Delta=-0.26$) to $0.46$, among the lowest absolute scores of any model.
+
+The winners under transfer are a different group. The best single model is the TabNet pixel ensemble (F1$_m=0.60$, $\kappa=0.54$), which also posts the lowest holdout cross-entropy ($4.42$) of any model, tied on macro-F1 by both sparse-attention L-TAE-S variants ($0.60$). The most \emph{robust} models, those with the smallest gaps, are the sparse learners: field-level L-TAE-S posts the single smallest gap ($\Delta=-0.04$), just ahead of logistic regression ($-0.05$) and the pixel-level tree learners. That L-TAE-S---a deep temporal attention network whose only twist is a learned gate restricting each head to a small channel subset---sits atop the robustness ranking is itself evidence for our thesis. The field bootstrap confirms which differences are real: the best transferers beat CNN-BiLSTM by a wide, significant margin (TabNet over CNN-BiLSTM pixel, $\Delta=0.14$, 95\% CI $[0.11,0.18]$, $p<0.001$), so the inversion is not holdout noise; at the very top the leaders (TabNet and both L-TAE-S variants) are statistically indistinguishable (all $0.60$; TabNet vs.\ L-TAE-S, $p=0.80$). We therefore do not claim a single best model; we claim that a sparse-feature-selection group occupies the top of the ST ranking while the dense temporal nets prized by in-region validation fall significantly below it.
+
+\begingroup
+\scriptsize
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{lllccccccc}
+\caption{In-region versus spatial-transfer performance of all twenty-three models.}
+\label{tab:gap}\\
+\toprule
+ & & & \textbf{In-reg} & & \multicolumn{5}{c}{\textbf{Spatial transfer (ST)}} \\
+\cmidrule(lr){4-4}\cmidrule(lr){6-10}
+\textbf{Model} & \textbf{Level} & \textbf{Features} & \textbf{F1$_m$} & \textbf{$\Delta$} & \textbf{F1$_m$} & \textbf{95\% CI} & \textbf{$\kappa$} & \textbf{wF1} & \textbf{Xent} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Model} & \textbf{Level} & \textbf{Features} & \textbf{F1$_m$} & \textbf{$\Delta$} & \textbf{F1$_m$} & \textbf{95\% CI} & \textbf{$\kappa$} & \textbf{wF1} & \textbf{Xent} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+TabNet (raw)          & pixel & raw & 0.73 & $-0.13$ & \textbf{0.60} & .58--.63 & \textbf{0.54} & 0.70 & \textbf{4.42} \\
+L-TAE-S               & field & raw & 0.64 & $\mathbf{-0.04}$ & 0.60 & .58--.62 & 0.52 & 0.69 & 4.77 \\
+L-TAE-S               & pixel & raw & 0.77 & $-0.17$ & 0.60 & .57--.62 & 0.53 & \textbf{0.70} & 4.63 \\
+L-TAE                 & field & raw & 0.67 & $-0.07$ & 0.59 & .57--.62 & 0.47 & 0.67 & 5.51 \\
+L-TAE                 & pixel & raw & \textbf{0.78} & $-0.20$ & 0.58 & .55--.60 & 0.49 & 0.68 & 5.20 \\
+Transformer           & pixel & raw & \textbf{0.78} & $-0.20$ & 0.58 & .55--.60 & 0.50 & 0.69 & 4.94 \\
+XGBoost               & field & \texttt{xr\_fresh} & 0.70 & $-0.13$ & 0.56 & .54--.59 & 0.47 & 0.68 & 4.89 \\
+TempCNN               & pixel & raw & 0.77 & $-0.21$ & 0.56 & .54--.59 & 0.49 & 0.68 & 5.09 \\
+LightGBM              & pixel & \texttt{xr\_fresh} & 0.62 & $-0.06$ & 0.56 & .54--.59 & 0.47 & 0.66 & 4.85 \\
+Logistic Regression   & pixel & \texttt{xr\_fresh} & 0.61 & $-0.05$ & 0.56 & .54--.59 & 0.47 & 0.67 & 4.93 \\
+LightGBM              & field & \texttt{xr\_fresh} & 0.68 & $-0.12$ & 0.56 & .53--.58 & 0.45 & 0.66 & 4.99 \\
+Voting                & pixel & \texttt{xr\_fresh} & 0.69 & $-0.13$ & 0.56 & .53--.58 & 0.48 & 0.66 & 4.85 \\
+Random Forest         & pixel & \texttt{xr\_fresh} & 0.65 & $-0.10$ & 0.55 & .52--.57 & 0.45 & 0.65 & 5.07 \\
+XGBoost               & pixel & \texttt{xr\_fresh} & 0.64 & $-0.09$ & 0.54 & .52--.57 & 0.47 & 0.66 & 5.01 \\
+TempCNN               & field & raw & 0.67 & $-0.14$ & 0.54 & .51--.56 & 0.43 & 0.64 & 6.07 \\
+Stacking              & field & \texttt{xr\_fresh} & 0.64 & $-0.11$ & 0.53 & .51--.56 & 0.48 & 0.67 & 5.32 \\
+CNN-BiLSTM            & field & raw & 0.64 & $-0.14$ & 0.51 & .48--.53 & 0.33 & 0.54 & 7.86 \\
+3D CNN                & patch & raw & 0.70 & $-0.20$ & 0.50 & .48--.53 & 0.29 & 0.54 & 7.98 \\
+SMOTE Stacked         & field & \texttt{xr\_fresh} & 0.69 & $-0.21$ & 0.49 & .46--.51 & 0.43 & 0.63 & 5.37 \\
+CNN-BiLSTM            & pixel & raw & 0.72 & $-0.26$ & 0.46 & .44--.48 & 0.32 & 0.56 & 7.73 \\
+Multi-Channel 2D CNN  & patch & raw & 0.63 & $-0.18$ & 0.45 & .42--.47 & 0.30 & 0.54 & 7.62 \\
+TabNet (raw, field-avg) & field & raw & 0.62 & $-0.19$ & 0.43 & .41--.46 & 0.31 & 0.56 & 7.35 \\
+TabNet (\texttt{xr\_fresh}) & field & \texttt{xr\_fresh} & 0.51 & $-0.15$ & 0.37 & .34--.40 & 0.25 & 0.53 & 6.13 \\
+\end{longtable}
+\vspace{-6pt}
+\noindent{\footnotesize
+Ranked by ST macro-F1. In-region uses field-wise validation; ST uses the disjoint holdout tile (\texttt{34S\_20E\_259N}). $\Delta$ is the gap; the 95\% CI is the percentile bootstrap on ST macro-F1 from $10{,}000$ resamples of the 2{,}417 holdout fields. Xent is the AI4FoodSecurity field-level scoring metric (lower is better). \emph{Features} marks the automated \texttt{xr\_fresh} statistics (174 features) versus raw reflectance. Bold marks the best value per column.\par}
+\endgroup
+
+\subsection{Pixel Versus Field Level: Aggregation as Variance Reduction}
+\label{sec:pixfield}
+Several architectures were run at both the pixel and the field level (averaging per-pixel sequences within a field before classification). Table~\ref{tab:pixfield} shows that field-level aggregation acts as a variance-reduction regularizer for the \emph{dense} temporal networks: L-TAE's gap shrinks from $-0.20$ to $-0.07$, and CNN-BiLSTM, the worst pixel-level transferer, recovers most, its gap nearly halving from $-0.26$ to $-0.14$ (F1$_m$ $0.46\rightarrow0.51$). The sparse-attention L-TAE-S follows the same dense-backbone pattern despite its channel gating: its gap shrinks from $-0.17$ to $-0.04$ while ST F1$_m$ holds at $0.60$, so the response to aggregation appears to depend on both the temporal backbone and the input granularity; the sparse gate does not eliminate the benefit of field-level aggregation. TabNet is the informative exception: aggregating its raw inputs to the field level \emph{hurts} (F1$_m$ $0.60\rightarrow0.43$), because its robustness already derives from sparse feature selection and field-level training starves it of the per-pixel observation volume it exploits. The tree learners transfer well at either level, and their pixel$\rightarrow$field change is essentially neutral under transfer (XGBoost $0.54\rightarrow0.56$). In short, dense models need aggregation to generalize; sparse, tree-like models do not.
+
+\begin{table}[!t]
+\centering
+\caption{Pixel- versus field-level spatial transfer.}
+\label{tab:pixfield}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{3.5pt}
+\footnotesize
+\begin{tabular}{lccccl}
+\toprule
+ & \multicolumn{2}{c}{\textbf{Pixel}} & \multicolumn{2}{c}{\textbf{Field}} & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+\textbf{Architecture} & \textbf{F1$_m$} & \textbf{$\Delta$} & \textbf{F1$_m$} & \textbf{$\Delta$} & \textbf{Field input} \\
+\midrule
+L-TAE-S    & \textbf{0.60} & $-0.17$         & \textbf{0.60} & $\mathbf{-0.04}$ & raw-avg \\
+L-TAE      & 0.58          & $-0.20$         & 0.59          & $-0.07$         & raw-avg \\
+XGBoost    & 0.54          & $-0.09$         & 0.56          & $-0.13$         & \texttt{xr\_fresh} \\
+LightGBM   & 0.56          & $\mathbf{-0.06}$ & 0.56          & $-0.12$         & \texttt{xr\_fresh} \\
+TempCNN    & 0.56          & $-0.21$         & 0.54          & $-0.14$         & raw-avg \\
+CNN-BiLSTM & 0.46          & $-0.26$         & 0.51          & $-0.14$         & raw-avg \\
+TabNet     & \textbf{0.60} & $-0.13$         & 0.43          & $-0.19$         & raw-avg \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+Architectures run at both granularities, ranked by field-level ST F1$_m$. The \emph{Field input} column gives the field-level input (\texttt{xr\_fresh} statistics for the trees, field-averaged raw sequence for the deep models). Field aggregation helps the dense temporal nets, is roughly neutral for the tree learners, and degrades TabNet. Bold marks the best value per column.
+\end{minipage}
+\end{table}
+
+\subsection{Per-Class Performance and Persistent Confusions}
+Figure~\ref{fig:perclass} breaks accuracy down crop by crop on the holdout for four representative models: the best transferer (TabNet), our sparse-attention L-TAE-S, its dense counterpart L-TAE, and CNN-BiLSTM (the largest drop under transfer). The errors are highly uneven. All three robust models classify the dominant lucerne/medics and the distinctive canola well (TabNet F1 0.88 and 0.81; L-TAE-S 0.87 and 0.76; L-TAE 0.84 and 0.66), but every model struggles with the cereals and small-grain grazing: even TabNet reaches only 0.55 on barley, 0.48 on wheat, and 0.30 on small-grain grazing. Adding the sparsity gate (L-TAE $\rightarrow$ L-TAE-S) on the same backbone improves the easier classes (canola $0.66\rightarrow0.76$) while leaving the hard cereals essentially unchanged (barley $0.50\rightarrow0.50$, wheat $0.48\rightarrow0.47$). CNN-BiLSTM, by contrast, loses accuracy on the easy classes too (lucerne/medics $0.71$, canola $0.65$), showing its failure is a general inability to transfer, not a minority-class problem alone. The wheat--barley confusion is consistent with their spectral overlap and appears across every model.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{per_class_f1.pdf}
+\caption{Per-class F1 on the holdout region for four representative models (TabNet, L-TAE-S, L-TAE, and CNN-BiLSTM). TabNet, L-TAE-S, and L-TAE classify lucerne/medics and canola well; the cereals (barley, wheat) and small-grain grazing concentrate the errors. CNN-BiLSTM's accuracy drops on every class. Error bars are 95\% bootstrap CIs over holdout fields.}
+\label{fig:perclass}
+\end{figure}
+
+\subsection{Data Efficiency Under Spatial Transfer}
+\label{sec:efficiency}
+The most transferable models are also the most data-efficient. We retrain a representative set on random $75\%$, $50\%$, and $25\%$ subsets of the training fields and re-evaluate on the holdout; because a single subsample can be unrepresentative, we repeat each fraction over five independent draws and plot the mean (Fig.~\ref{fig:reduction}). Averaged this way, the deep temporal models are essentially flat from full data down to a quarter of the fields (L-TAE and L-TAE-S vary by under $0.02$ macro-F1 across fractions), while the tree, linear, and TabNet baselines lose only ${\sim}0.03$--$0.05$---modest given a four-fold cut in training data. The per-fraction wiggles seen in any single split are within draw-to-draw sampling variance: L-TAE-S, whose sparse channel gate makes it the most sensitive to \emph{which} fields are sampled, swings $\pm0.06$ macro-F1 at the $50\%$ fraction (versus $\le0.02$ for the robust learners), so the apparent $50\%$ ``dip'' of any one draw is sampling noise rather than a data-efficiency effect. Holdout accuracy is therefore limited far more by spatial transfer than by training-set size, reinforcing that what governs holdout accuracy is the model's inductive bias rather than the volume of training data.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{field_reduction_multidraw.pdf}
+\caption{Data efficiency under spatial transfer: macro-F1 versus fraction of training fields retained, single training seed, each point the mean over five independent subsample draws (error bars $\pm1$ s.d.). The deep temporal models (L-TAE, L-TAE-S) are nearly flat to a quarter of the fields; the tree, linear, and TabNet baselines decline modestly. Per-fraction variation is within draw-to-draw sampling noise---largest for L-TAE-S ($\pm0.06$ at $50\%$)---so single-split ``dips'' are not real. Absolute values run ${\sim}0.02$--$0.05$ below the five-seed levels of Table~\ref{tab:gap} because a single training seed is used.}
+\label{fig:reduction}
+\end{figure}
+
+\subsection{Raw Reflectance versus \texttt{xr\_fresh}}
+\label{sec:repr}
+The best-transferring classical learners in Table~\ref{tab:gap} are exactly those fed \texttt{xr\_fresh} statistics, so representation and model family are confounded there. To separate them, we trained a single XGBoost learner once on raw monthly reflectance and once on the per-pixel \texttt{xr\_fresh} statistics, holding the FID-wise splits, preprocessing, and field-level mean pooling fixed (Table~\ref{tab:repr}). The two representations are essentially indistinguishable under transfer (F1$_m=0.59$ raw vs.\ $0.56$ \texttt{xr\_fresh}, a difference within the holdout bootstrap interval of Table~\ref{tab:gap}; equal weighted-F1 and $\kappa$), and raw reflectance is, if anything, marginally ahead in-region as well. The \texttt{xr\_fresh} representation therefore yields no measurable transfer-accuracy gain over raw reflectance for the trees; its value is operational---a compact, fast-to-fit, agronomically interpretable vector that trains in seconds (Supplementary Material, Sec.~S-C)---rather than an accuracy edge. This is, to our knowledge, the first controlled comparison of \texttt{xr\_fresh} against raw reflectance under spatial transfer.
+
+\begin{table}[!t]
+\centering
+\caption{Raw reflectance versus \texttt{xr\_fresh} for a single fixed XGBoost learner.}
+\label{tab:repr}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{6pt}
+\footnotesize
+\begin{tabular}{llccc}
+\toprule
+\textbf{Representation} & \textbf{Split} & \textbf{F1$_m$} & \textbf{wF1} & \textbf{$\kappa$} \\
+\midrule
+Raw reflectance    & In-region        & 0.73 & 0.80 & 0.71 \\
+\texttt{xr\_fresh} & In-region        & 0.72 & 0.76 & 0.68 \\
+\midrule
+Raw reflectance    & Spatial transfer & 0.59 & 0.69 & 0.50 \\
+\texttt{xr\_fresh} & Spatial transfer & 0.56 & 0.69 & 0.50 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+Identical FID-wise splits, preprocessing, and field-level mean pooling; only the input representation differs. Metrics are field-level macro-F1 (F1$_m$), weighted F1 (wF1), and Cohen's $\kappa$.
+\end{minipage}
+\end{table}
+
+\section{Discussion}
+\label{sec:discussion}
+The conclusion about which model is ``best'' depends almost entirely on whether evaluation is in-region or under spatial transfer, and a model's transfer behavior is predictable from its inductive bias.
+
+\subsection{Why Tree-Like Inductive Bias Transfers}
+The clearest pattern is that transfer is strongly associated with inductive bias, and not simply with model family or attention capacity. Figure~\ref{fig:bias} groups every model by inductive bias and plots its ST gap: linear models lose the least (mean $\Delta=-0.05$), tree-based models little (mean $-0.11$), the sparse-attention L-TAE-S sits essentially with the trees (mean $-0.11$ across its variants), while dense temporal/patch nets lose the most (mean $-0.21$) and SMOTE-augmented stacking is similarly fragile ($-0.21$). RF and gradient-boosted trees have been the remote-sensing workhorse for two decades not because they top in-region accuracy (dense nets often do) but because they survive when a model is applied to an unseen region \citep{belgiu2016, maxwell2019}---the operational case. A tree decides one feature at a time, choosing the few features that matter for each split and ignoring the rest; this sparsity may reduce reliance on region-specific quirks of phenology, soil, and atmosphere that pull richer models off course. Independent corroboration spans settings: a 3D-CNN collapses under cross-sensor hyperspectral transfer while a sparse SVM holds \citep{pankajakshan2025}; RF matches or exceeds a dense CNN-LSTM on label-scarce Ghana fields \citep{rustowicz2019}; a maize model drops 16 points moving across East Africa \citep{jin2019}; and bagged/boosted trees out-transfer an elaborate instance-reweighting scheme from the U.S.\ to northwest China \citep{mai2025}. TabNet, the best transferer here, is a neural network built to behave like a tree: a small learned gate picks a handful of features at each step \citep{tabnet_orig}, so it clusters with the trees and inherits their transferability. By contrast, CNN-BiLSTM, TempCNN, L-TAE, and the Transformer consume the whole temporal sequence at once with no feature selection. At the pixel level this leaves them fitting the training region tightly: they post the largest in-region-to-holdout gaps in the benchmark, with CNN-BiLSTM dropping furthest---consistent with evidence that the dates such models attend to are themselves contingent on the training region \citep{obadic2022}. Dense attention is not intrinsically poor under spatial transfer: the pixel-level L-TAE loses 0.20 macro-F1, but the field-level L-TAE reduces this gap to 0.07 and the other temporal nets (Sec.~\ref{sec:pixfield}), so it is the pixel-level dense models specifically that transfer worst.
+
+The Transformer is a particularly clean control: although it deploys the most expressive attention of any model we test, far richer than L-TAE's single query, at the pixel level it transfers no better than the pixel-level L-TAE (both F1$_m=0.58$, $\Delta=-0.20$). Within the architectures evaluated, increasing attention capacity alone did not improve transfer, whereas adding feature \emph{selection} does: L-TAE-S and TabNet, the two models that explicitly select features before computing with them, are the best transferers. This isolates feature selection---not the attention mechanism, the temporal backbone, or model size---as the property governing transfer. The L-TAE-S experiment adds that this is \emph{not} a tree-versus-deep tradeoff: the same selection step that drives tree splits can be grafted onto a dense architecture at the cost of a single block, and the payoff is large---L-TAE-S ties TabNet for the best holdout accuracy. That parity is not accuracy alone: at the pixel level L-TAE-S reaches TabNet's best-in-class holdout accuracy in roughly $40\%$ of the per-seed training time ($24$ vs.\ $61$~min), and its field-level variant is both faster and more accurate than any field-aggregated TabNet (Supplementary Material, Sec.~S-C). The next generation of operational crop classifiers need not choose between the expressivity of deep learning and the transfer-robustness of trees.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{inductive_bias_gap.pdf}
+\caption{Spatial-transfer gap ($\Delta$ macro-F1) grouped by inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta|$); dense temporal/patch nets and synthetic augmentation overfit the training region. L-TAE-S, which adds sparse feature selection to a dense attention backbone, tracks the tree-based models. Bars are family means; points are individual models.}
+\label{fig:bias}
+\end{figure}
+
+\subsection{Two Robustness Levers}
+Two caveats sharpen rather than weaken the story, and together they point to how we can choose the best models. First, it is \emph{pixel-level} TabNet that wins; the field-aggregated TabNet variants are among the worst transferers (Table~\ref{tab:gap}), because aggregation removes the per-pixel observation volume the sparse model exploits. Second, dense temporal attention transfers well \emph{when} applied at the field level: L-TAE's pixel-level gap shrinks substantially under aggregation, and L-TAE-S ends with an even smaller gap (Table~\ref{tab:pixfield}). These point to two distinct, partly substitutable pathways. The first lever is built-in feature selection---the model itself picking a few features at a time (trees, TabNet, and now L-TAE-S); this is \emph{intrinsic} robustness paid for at design time. The second is variance reduction imposed from outside via field-level aggregation, which averages away region-specific pixel noise before the classifier sees it---\emph{external} robustness available even when the architecture is fixed. A model with the first lever gains nothing, and may lose observation volume, from the second; this is exactly why TabNet prefers pixels. These two properties can be combined. L-TAE-S adds a sparse gate to a temporal-attention backbone and then benefits from field aggregation, ending with the smallest transfer gap in the benchmark. Practitioners can read this as a flowchart: if free to choose or modify the model, build feature selection in (lever 1); if constrained to an off-the-shelf dense architecture, aggregate predictions to the field level (lever 2). Two further controlled comparisons confirm the ranking is not an artifact of ensembling or imbalance handling; both shift absolute scores but never reorder the robust and fragile groups, with the full tables in the Supplementary Material (Sec.~S-D). Seed-ensembling gives only a small, monotone lift that leaves the ordering intact---a single-seed L-TAE-S (F1$_m=0.56$) already exceeds the five-seed CNN-BiLSTM and TabNet field ensembles (Table~S4). And the imbalance-handling objective moves absolute scores but not the ranking: the robust L-TAE-S is almost invariant across five loss and sampler settings (F1$_m=0.59$--$0.60$), whereas the fragile CNN-BiLSTM swings widely ($0.41$--$0.56$) and even at its best stays below L-TAE-S's worst (Table~S5).
+
+\subsection{Automated Features, Patch Models, and Persistent Difficulty}
+The classical pipelines paired with \texttt{xr\_fresh} were not only robust but cheap, transferring as well as the best deep models (ST F1$_m$ 0.55--0.56) while training in minutes rather than hours (Supplementary Material, Sec.~S-C); the controlled comparison in Sec.~\ref{sec:repr} confirms that this value is operational rather than an accuracy edge over raw reflectance. Patch-based convolutional models did not exceed pixel-level models and transferred poorly (3D CNN F1$_m=0.50$; multi-channel 2D CNN $0.45$): at 10~m resolution the native 100~m patches are only ${\sim}10\times10$ pixels, so the spatial context is limited and resampling adds interpolation rather than detail, and a dense convolutional representation offers no transfer-protective sparsity. Finally, small-grain grazing, barley, and wheat are the hardest classes for every model (Fig.~\ref{fig:perclass}) and account for most accuracy lost under transfer; that even robust models struggle here, and that CNN-BiLSTM loses accuracy on every class, indicates the limitation is partly intrinsic spectral similarity and partly the transfer problem itself, not class imbalance alone.
+
+\subsection{Limitations}
+The study uses a single growing season (2017) and a single holdout tile that is spatially \emph{adjacent} to the training tiles within the same agroecological zone. This is a relatively local shift, so the gaps we report most likely \emph{understate} the degradation that fully cross-regional or cross-year transfer would produce; our numbers are best read as a conservative lower bound, and multi-region, multi-year holdouts are needed to confirm the inductive-bias ordering is stable under larger shifts. The labels derive from a public dataset rather than our own campaign, and we use Sentinel-2 optical data only---a deliberate scoping choice that nonetheless limits the achievable ceiling for optically similar cereals, making SAR fusion a clear next step.
+
+\section{Conclusion}
+In-region validation, the protocol the crop-classification literature reports almost universally, misranks twenty-three Sentinel-2 classifiers when they are applied to a spatially disjoint holdout. Dense temporal networks that lead under conventional evaluation fall sharply under transfer, the worst of them (CNN-BiLSTM) landing near the bottom, while parsimonious models such as tree ensembles, logistic regression, and a TabNet ensemble retain rank and accuracy. The mechanism is the same property that made tree ensembles the remote-sensing default for two decades: a sparse, axis-aligned feature-selection bias that commits to a few robust signals and ignores the rest. TabNet inherits it through sparsemax masks; a Transformer with far greater attention capacity does not, and transfers no better than the lightweight L-TAE, pointing at sparsity, not capacity, as the lever. Grafting that lever onto an attention model (L-TAE-S) ties TabNet for the best transfer at a fraction of its training cost and, at the field level, posts the smallest in-region-to-holdout gap of any model. Field-level aggregation is a second, partly substitutable lever that helps with sparsity in L-TAE-S but hurts TabNet. We therefore recommend the following: evaluate on a spatially disjoint holdout before declaring one architecture better than another; prefer models with a built-in feature-selection bias when mapping unseen terrain; and, if dense temporal models are required, aggregate their predictions to the field level. The conditions that make the Western Cape difficult are the conditions under which agricultural remote sensing must operate across much of the Global South, and evaluating models the way they are actually deployed, applied to regions where no labels were collected, is what will make remote sensing deliver where it matters most.
+
+\section*{CRediT authorship contribution statement}
+\textbf{Michael L. Mann:} Conceptualization, Methodology, Software, Formal analysis, Writing -- original draft, Writing -- review \& editing, Supervision, Project administration.
+\textbf{Sairam Venkatachalam:} Software, Formal analysis, Writing -- original draft, Investigation.
+\textbf{Disha Kacha:} Software, Formal analysis, Investigation, Writing -- original draft.
+\textbf{Devarsh Sheth:} Software, Formal analysis, Investigation, Writing -- original draft.
+\textbf{Ryan Engstrom:} Supervision, Methodology, Writing -- review \& editing.
+\textbf{Amir Jafari:} Methodology, Methodology, Supervision, Writing -- review \& editing.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Data availability}
+The processed dataset supporting this study is openly available on IEEE DataPort at \url{https://dx.doi.org/10.21227/n69k-r458} (DOI: 10.21227/n69k-r458). The source code is available at \url{https://github.com/mmann1123/South_Africa_Crop_Comp} \citep{primary_repo}. The study builds on the ground-reference crop labels of the Western Cape Department of Agriculture and Radiant Earth Foundation, ``Crop Type Classification Dataset for Western Cape, South Africa'', v1.0, Radiant MLHub (DOI: 10.34911/rdnt.j0co8q), used under the CC-BY-4.0 license; Sentinel-2 imagery was extracted via Google Earth Engine.
+
+\section*{Acknowledgements}
+This research received no external funding. We thank the Western Cape Department of Agriculture and the Radiant Earth Foundation for collecting and openly distributing the labeled field dataset.
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{rsase}
+
+\end{document}

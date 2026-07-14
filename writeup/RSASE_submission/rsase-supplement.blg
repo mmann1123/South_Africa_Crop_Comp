@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: rsase-supplement.aux
+The style file: elsarticle-harv.bst
+Database file #1: rsase.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty pages in ke2017
+You've used 14 entries,
+            2990 wiz_defined-function locations,
+            723 strings with 8049 characters,
+and the built_in function-call counts, 9938 in all, are:
+= -- 787
+> -- 380
+< -- 12
++ -- 150
+- -- 132
+* -- 1047
+:= -- 1423
+add.period$ -- 46
+call.type$ -- 14
+change.case$ -- 114
+chr.to.int$ -- 14
+cite$ -- 15
+duplicate$ -- 738
+empty$ -- 718
+format.name$ -- 174
+if$ -- 1892
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 137
+newline$ -- 89
+num.names$ -- 56
+pop$ -- 257
+preamble$ -- 1
+purify$ -- 100
+quote$ -- 0
+skip$ -- 266
+stack$ -- 0
+substring$ -- 428
+swap$ -- 533
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 123
+warning$ -- 1
+while$ -- 64
+width$ -- 0
+write$ -- 221
+(There was 1 warning)
