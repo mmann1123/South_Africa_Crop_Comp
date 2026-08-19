@@ -1,0 +1,39 @@
+\documentclass[11pt]{letter}
+\usepackage[top=0.5in,bottom=0.4in,left=1in,right=1in]{geometry}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\setlength{\parskip}{3pt}
+
+\address{Department of Geography \& Environment \\ The George Washington University \\ Washington, DC 20052, USA}
+
+\begin{document}
+
+% Update the date and, if a named editor is known, the addressee below.
+\begin{letter}{\textit{Computers and Electronics in Agriculture}}
+
+\opening{Dear Editor-in-Chief,}
+
+On behalf of my co-authors, I am pleased to submit our manuscript, ``Sparse Feature Selection, Not Deep Learning Capacity, Drives Spatial Transfer in Crop Classification,'' for consideration as a research article in \textit{Computers and Electronics in Agriculture}.
+
+Crop-type mapping from satellite image time series is a core task of agricultural monitoring, and machine learning, increasingly deep learning, now drives the state of the art. Yet these models are almost always trained and evaluated within a single region, so it is unknown which of them remain reliable once deployed to new farmland where no labels were collected, the setting operational mapping actually requires. Our central contribution addresses this directly: across a benchmark of twenty-three classical and deep models, we identify the model property that governs successful transfer to an unseen region, namely sparse, axis-aligned feature selection. Models that commit to a few features at a time (gradient-boosted trees, logistic regression, and the attentive TabNet) transfer robustly, while high-capacity dense temporal networks degrade sharply.
+
+We turn this insight into a usable method. We introduce L-TAE-S, a sparse-attention temporal encoder that grafts a learned feature-selection gate onto a lightweight attention backbone; it attains the best out-of-region accuracy in the benchmark at a fraction of the training cost, and its field-level variant has the smallest train-to-holdout gap of any model. A controlled comparison isolates feature selection, rather than attention capacity or model size, as the operative lever, and we show that field-level aggregation offers a second, substitutable route to robustness. As supporting evidence, we document that conventional in-region validation inverts the model ranking, which is precisely why models intended for operational deployment should be evaluated across regions.
+
+We believe this work fits the scope of \textit{Computers and Electronics in Agriculture}: it is a machine-learning methodology study for a central agricultural application, and it offers practitioners a concrete, transferable design principle for building crop classifiers that generalize to unlabeled farmland, together with a lightweight architecture that realizes it. The processed dataset is publicly available, and all code is public. The manuscript is original, has not been published previously, and is not under consideration elsewhere; all authors approve the submission and declare no competing interests. Thank you for considering our work; we look forward to the reviewers' feedback.
+
+\vspace{10pt}
+\noindent Sincerely,
+
+\vspace{2pt}
+\noindent\includegraphics[width=1.1in]{signature.jpg}
+
+\vspace{1pt}
+\noindent Michael L. Mann \\
+Department of Geography \& Environment \\
+The George Washington University \\
+\href{mailto:mmann1123@email.gwu.edu}{mmann1123@email.gwu.edu}
+
+\end{letter}
+\end{document}

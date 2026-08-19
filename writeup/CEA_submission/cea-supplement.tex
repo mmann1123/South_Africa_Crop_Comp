@@ -1,0 +1,434 @@
+%% Online Supplementary Material for the CEA submission (cea-article.tex).
+%% Holds non-essential content relocated from the main paper. Floats are
+%% numbered S1, S2, ... and referenced from the main text as Sec./Table/Fig. S#.
+\documentclass[preprint,authoryear,3p]{elsarticle}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+% S-prefixed float and equation numbering
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\theequation}{S\arabic{equation}}
+\renewcommand{\thesection}{S-\Alph{section}}
+
+\journal{Computers and Electronics in Agriculture}
+
+\begin{document}
+
+\begin{frontmatter}
+\title{Supplementary Material:\\Sparse Feature Selection, Not Capacity, Drives Spatial Transfer in Crop Classification}
+\author{Michael L. Mann, Sairam Venkatachalam, Disha Kacha, Devarsh Sheth, Ryan Engstrom, Amir Jafari}
+\end{frontmatter}
+
+\noindent This document collects supporting material for the main paper. Section~S-A details the
+dataset, feature set, and model definitions; Section~S-B defines the metrics; Section~S-C reports
+training cost; and Section~S-D presents the ablation studies. Equation, figure, table,
+and section labels are prefixed ``S''.
+
+\section{Dataset Details, Feature Set, and Model Definitions}
+\label{sec:models}
+\emph{Supports main paper Sec.~2--3.}
+
+\subsection{Exploratory Data Analysis}
+The five crop classes are heavily imbalanced (Fig.~\ref{sfig:fields}(a)). Lucerne/medics dominates
+both regions despite having the smallest mean field area (Fig.~\ref{sfig:fields}(b)). Spectral
+responses overlap substantially across crops (Fig.~\ref{sfig:box}(a)), and wheat and barley are
+especially similar (Fig.~\ref{sfig:box}(b)), the dominant source of persistent confusion noted in
+the main paper.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\columnwidth,height=0.36\textheight,keepaspectratio]{fields_count.pdf}\\[1pt]
+{\footnotesize (a)}\\[4pt]
+\includegraphics[width=0.8\columnwidth,height=0.36\textheight,keepaspectratio]{avg_field_area.pdf}\\[1pt]
+{\footnotesize (b)}
+\caption{Crop-field composition of the training and holdout regions. (a) Number of labeled fields per
+crop type: lucerne/medics dominates (43\% of training and 56\% of holdout fields), followed by wheat,
+barley, canola, and small-grain grazing. This heavy class imbalance motivates macro-F1 as the primary
+metric and the class-imbalance handling used during training. (b) Mean field area by crop type
+(hectares); lucerne/medics is the most frequent class despite having among the smallest fields.}
+\label{sfig:fields}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\columnwidth,height=0.36\textheight,keepaspectratio]{all_crops_boxplot.pdf}\\[1pt]
+{\footnotesize (a)}\\[4pt]
+\includegraphics[width=0.8\columnwidth,height=0.36\textheight,keepaspectratio]{wheat_barley_boxplot.pdf}\\[1pt]
+{\footnotesize (b)}
+\caption{Spectral separability of the crop classes, shown as box plots of standardized (z-score)
+intensity for each Sentinel-2 band and index (B2, B6, B11, B12, EVI, hue). (a) Distributions for all
+five crops overlap substantially across every band, so no single feature cleanly separates the
+classes. (b) Wheat versus barley are especially similar in every band---the dominant source of the
+persistent wheat--barley confusion seen across all models in the main paper.}
+\label{sfig:box}
+\end{figure}
+
+\subsection{\texttt{xr\_fresh} Feature Set}
+Table~\ref{stab:features} lists the time-series features extracted from each pixel's 10-month
+spectral profile with \texttt{xr\_fresh} \citep{mann2023, mann2025}, forming the 174-dimensional
+per-pixel vector used by the classical learners (Fig.~\ref{sfig:tsfeat} illustrates the extraction).
+
+\begin{table}[!t]
+\centering
+\footnotesize
+\caption{Time-series features extracted from each pixel's spectral profile with \texttt{xr\_fresh}.}
+\label{stab:features}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.32\columnwidth}p{0.60\columnwidth}@{}}
+\toprule
+\textbf{Feature} & \textbf{Description} \\
+\midrule
+Absolute Energy & Sum of squared values. \\
+Absolute Sum of Changes & Total absolute difference between consecutive measurements. \\
+Autocorrelation (1, 2-month lag) & Correlation with one- and two-month lagged versions. \\
+Count Above Mean & Number of points above the series mean. \\
+Day of Year of Max/Min & Julian day of the maximum and minimum. \\
+Kurtosis & Tail heaviness of the distribution. \\
+Linear Trend & Slope of a least-squares fit. \\
+Longest Strike Above/Below Mean & Longest consecutive run above or below the mean. \\
+Max/Min & Absolute extreme values. \\
+Mean/Median & Measures of central tendency. \\
+Mean Absolute Change/Mean Change & Average magnitude and signed change between points. \\
+Mean Second Derivative & Mean of the series' second differences. \\
+Quantiles (0.05, 0.95) & 5th and 95th percentiles. \\
+Ratio Beyond $r\sigma$ & Proportion of points more than $r$ s.d.\ ($r=1,2,3$) from the mean. \\
+Skewness & Asymmetry around the mean. \\
+Standard Deviation/Variance & Spread measures. \\
+Sum of Values & Total sum of observations. \\
+Symmetry Looking & Similarity under series reversal. \\
+Time Series Complexity & Complexity-Invariant Distance metric of irregularity. \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+Each descriptor is computed independently for every band and index from a pixel's 10-month series;
+stacked across the six bands/indices (B2, B6, B11, B12, EVI, hue) they form the 174-dimensional
+per-pixel vector fed to the classical learners. For the Ratio-Beyond features, $r$ is the threshold
+in standard deviations ($r=1,2,3$).
+\end{minipage}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{Time_Series_Feature_Generation.pdf}
+\caption{Time-series feature generation with \texttt{xr\_fresh}. For each pixel, the 10-month profile
+of every band and index is summarized by the statistical and temporal descriptors of
+Table~\ref{stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the
+maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners.}
+\label{sfig:tsfeat}
+\end{figure}
+
+\subsection{Baseline Classical Model Definitions}
+For a feature vector $\mathbf{x}_i$ and class $c\in\{1,\dots,C\}$, the four baselines are as follows.
+Logistic regression \citep{james2013} (multinomial):
+\begin{equation}
+P(y_i = c \mid \mathbf{x}_i) =
+\frac{\exp(\mathbf{w}_c^\top \mathbf{x}_i + b_c)}{\sum_{c'=1}^{C} \exp(\mathbf{w}_{c'}^\top \mathbf{x}_i + b_{c'})}.
+\end{equation}
+Random Forest \citep{breiman2001}: majority vote over $K$ trees,
+$\hat{y}_i = \operatorname{mode}\{T_1(\mathbf{x}_i),\dots,T_K(\mathbf{x}_i)\}$.
+LightGBM \citep{ke2017}: additive boosting with rate $\eta$,
+$\hat{y}_i^{(t)} = \hat{y}_i^{(t-1)} + \eta\, f_t(\mathbf{x}_i)$.
+XGBoost \citep{chen2016, friedman2001}: regularized boosting objective
+$\mathcal{L} = \sum_i l(y_i, \hat{y}_i) + \sum_k \Omega(f_k)$ with
+$\Omega(f_k) = \gamma T_k + \tfrac{1}{2}\lambda \sum_j w_j^2$.
+The field-level XGBoost was tuned with Optuna over 150 trials; the top configurations appear in
+Table~\ref{stab:trials}. Field-level pixel features are aggregated by the mean within each polygon.
+For the pixel ensemble, RF, XGBoost, and LightGBM probabilities are
+soft-voted; the field-level stacked ensemble uses RF and XGBoost base learners with a
+logistic-regression meta-learner, and a confidence-margin rule falls back to pixel-mode voting when
+the top two field-level class probabilities differ by less than $0.10$.
+
+\begin{table}[!t]
+\centering
+\scriptsize
+\caption{XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy.}
+\label{stab:trials}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{6pt}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{ccccccccccc}
+\toprule
+\textbf{Trial} & \textbf{Acc.} & \textbf{Est.} & \textbf{Depth} & \textbf{LR} & \textbf{SubS} & \textbf{ByTree} & \textbf{Gamma} & \textbf{Reg$\alpha$} & \textbf{Reg$\lambda$} & \textbf{MinCW} \\
+\midrule
+32 & \textbf{76.61\%} & 1141 & 13 & 0.0215 & 0.5749 & 0.6986 & 0.5589 & 0.00184 & 0.00259 & 5 \\
+12 & 76.46\% & 984  & 12 & 0.0145 & 0.6675 & 0.6946 & 0.0799 & 0.00503 & 0.00455 & 7 \\
+24 & 76.40\% & 1165 & 11 & 0.0162 & 0.7831 & 0.6403 & 0.00413 & 0.00481 & 0.00478 & 9 \\
+13 & 76.29\% & 995  & 12 & 0.0277 & 0.6345 & 0.6829 & 0.3999 & 0.00011 & 0.00567 & 6 \\
+18 & 76.29\% & 915  & 13 & 0.0121 & 0.6784 & 0.5958 & 0.1612 & 0.00491 & 0.1732 & 8 \\
+\bottomrule
+\end{tabular}}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+Top five of 150 Optuna trials, ranked by in-region validation accuracy (Acc.); trial~32 (bold) was
+selected for the field-level XGBoost. Est.: number of estimators; Depth: maximum tree depth; LR:
+learning rate; SubS: row subsample; ByTree: column subsample per tree; Gamma: minimum split-loss
+reduction; Reg$\alpha$/Reg$\lambda$: L1/L2 regularization; MinCW: minimum child weight.
+\end{minipage}
+\end{table}
+
+\subsection{Deep Model Definitions}
+\paragraph{CNN-BiLSTM} An input tensor of shape $(B,6,T)$ passes a 1D convolution (64 filters,
+kernel 5) and a bidirectional LSTM (hidden size 64), with the final timestep classified via a
+softmax head (Fig.~\ref{sfig:bilstm}). Class imbalance is handled with focal loss
+$\mathcal{L}_{\text{focal}} = -\alpha_t (1-p_t)^{\gamma}\log(p_t)$, $\gamma=2.0$, $\alpha_t$ the
+inverse class frequency. Five seeds are ensembled by averaging logits.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth,height=0.82\textheight,keepaspectratio]{cnn_bilstm.pdf}
+\caption{Architecture of the CNN-BiLSTM model. The $(B,6,T)$ input (six bands/indices over $T$
+months) passes a 1D convolution (64 filters, kernel 5) for temporal feature extraction, then a
+bidirectional LSTM (hidden size 64) whose final time step is classified by a softmax head. Training
+uses weighted focal loss to counter class imbalance, and five seeds are ensembled by averaging
+logits.}
+\label{sfig:bilstm}
+\end{figure}
+
+\paragraph{TabNet} At each of $n_{\text{steps}}$ decision steps, an attentive transformer produces a
+sparse feature mask via \emph{sparsemax},
+\begin{equation}
+\begin{aligned}
+\mathbf{M}[i]&=\operatorname{sparsemax}\!\big(\mathbf{P}[i-1]\odot h_i(\mathbf{a}[i-1])\big),\\
+\mathbf{P}[i]&=\textstyle\prod_{j=1}^{i}\big(\gamma-\mathbf{M}[j]\big),
+\end{aligned}
+\end{equation}
+with relaxation $\gamma=1.5$; the masked features are handled by a feature transformer. We use
+$n_d=n_a=64$, 5 decision steps, batch size 1024, and ensemble five seeds by averaging softmax
+outputs. The sparsemax masks are the mechanism the main paper's L-TAE-S grafts onto a
+temporal-attention backbone \citep{tabnet_orig, tabnet2024}.
+
+\paragraph{L-TAE} Given an embedded sequence $\{\mathbf{z}_t\}_{t=1}^{T}$, a learned master query
+attends over time; for a single head
+\begin{equation}
+\mathbf{o} = \sum_{t=1}^{T}\alpha_t\,\mathbf{v}_t,
+\qquad
+\alpha_t = \frac{\exp(\mathbf{q}^\top\mathbf{k}_t/\sqrt{d})}{\sum_{t'}\exp(\mathbf{q}^\top\mathbf{k}_{t'}/\sqrt{d})},
+\end{equation}
+with channel grouping keeping the encoder lightweight \citep{ltae2020}. Evaluated at pixel and field
+level as a five-seed ensemble.
+
+\paragraph{Transformer encoder} After the same band embedding and month-aware positional encoding as
+L-TAE, the sequence passes three pre-norm multi-head self-attention layers
+($d_{\text{model}}=128$, 8 heads, feed-forward width 256), is mean-pooled, and classified
+\citep{vaswani2017, russwurm2020}. Unlike L-TAE-S it has no feature-sparsity mechanism, serving as
+the capacity-versus-sparsity control. Five-seed ensemble under the same weighted-focal objective.
+
+\paragraph{TempCNN} Stacked 1D convolutions along the temporal axis with batch normalization and
+dropout, followed by a softmax head \citep{tempcnn2019}; pixel and field variants, five seeds.
+
+\paragraph{Patch models} Each field is tiled into 100~m patches (${\sim}10\times10$ pixels) resampled
+to $128\times128$ (Fig.~\ref{sfig:patches}). The multi-channel 2D CNN treats each band$\times$month
+as a channel ($C=60$) through two convolutional blocks; the 3D CNN treats each patch as a
+spatiotemporal volume ($T=10$, $C=6$) through three 3D-convolutional blocks with a weighted focal
+loss (Fig.~\ref{sfig:patchmodel}). Both are five-seed ensembles aggregated to a field label by
+majority vote.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{Example_patches.pdf}
+\caption{Patch generation per field. Each field is tiled into 100~m patches---only
+${\sim}10\times10$ pixels at the 10~m Sentinel-2 resolution---and resampled to $128\times128$. These
+patches are the input to the patch-based 2D and 3D CNNs, whose per-patch predictions are later
+aggregated to a field label by majority vote.}
+\label{sfig:patches}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth,height=0.82\textheight,keepaspectratio]{patch_model.pdf}
+\caption{Patch-level 3D CNN pipeline: each field is tiled into 100~m patches resampled to
+$128\times128$; a five-seed ensemble averages softmax outputs, and per-patch predictions are
+aggregated to a field label by majority vote.}
+\label{sfig:patchmodel}
+\end{figure}
+
+\section{Performance Metric Definitions}
+\label{sec:smetrics}
+\emph{Supports main paper Sec.~3.}
+Let $N$ be the number of samples, $C$ the classes, and $n_c$ the support of class $c$. Cohen's Kappa
+is $\kappa = (p_o - p_e)/(1 - p_e)$ with $p_o$ the observed agreement and
+$p_e=\sum_c (n_{c,\text{true}}/N)(n_{c,\text{pred}}/N)$. Macro-F1 (primary) and weighted F1 are
+\begin{equation}
+\mathrm{F1}_{m} = \frac{1}{C}\sum_{c=1}^{C}\mathrm{F1}_c,
+\quad
+\mathrm{F1}_{\text{w}} = \sum_{c=1}^{C}\frac{n_c}{N}\,\mathrm{F1}_c,
+\end{equation}
+with $\mathrm{F1}_c = 2\,\mathrm{Prec}_c\,\mathrm{Rec}_c/(\mathrm{Prec}_c+\mathrm{Rec}_c)$.
+Cross-entropy (Xent) is the AI4FoodSecurity field-level scoring metric \citep{ai4foodsecurity};
+because submissions are hard labels, it is evaluated on the one-hot predicted label clipped to
+$[\epsilon,1-\epsilon]$, $\epsilon=10^{-7}$:
+\begin{equation}
+\begin{aligned}
+\mathrm{Xent} &= -\frac{1}{N}\sum_{i=1}^N \sum_{c=1}^{C} y_{i,c}\,\ln\hat{q}_{i,c},\\
+\hat{q}_{i,c} &= \operatorname{clip}\!\big(\mathbb{1}[\hat{y}_i = c],\,\epsilon,\,1-\epsilon\big).
+\end{aligned}
+\end{equation}
+
+\section{Training Cost}
+\label{sec:cost}
+\emph{Supports main paper Sec.~3 and the Discussion.}
+Table~\ref{stab:cost} reports wall-clock training time for a single run of each model on one
+workstation (RTX 3080~Ti). The robust models that transfer best (the \texttt{xr\_fresh} tree
+ensembles and the field-level L-TAE-S) are among the cheapest to train, while the most expensive
+(the patch CNNs and the pixel-level Transformer) do not lead the holdout ranking.
+
+\begin{table}[!t]
+\centering
+\scriptsize
+\caption{Per-seed training time for each model.}
+\label{stab:cost}
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lllr}
+\toprule
+\textbf{Model} & \textbf{Level} & \textbf{Features} & \textbf{Time / run} \\
+\midrule
+\multicolumn{4}{l}{\emph{Classical, field-level}}\\
+XGBoost                & field & \texttt{xr\_fresh} & 12\,s \\
+LightGBM               & field & \texttt{xr\_fresh} & 31\,s \\
+Voting                 & field & \texttt{xr\_fresh} & 109\,s \\
+Stacking               & field & \texttt{xr\_fresh} & 109\,s \\
+SMOTE Stacked          & field & \texttt{xr\_fresh} & 99\,s \\
+\midrule
+\multicolumn{4}{l}{\emph{Classical, pixel-level}}\\
+XGBoost                & pixel & \texttt{xr\_fresh} & 31\,s \\
+LightGBM               & pixel & \texttt{xr\_fresh} & 31\,s \\
+Logistic Regression    & pixel & \texttt{xr\_fresh} & 8.0\,min \\
+Random Forest          & pixel & \texttt{xr\_fresh} & 73\,min \\
+\midrule
+\multicolumn{4}{l}{\emph{Deep, field-level (raw sequences)}}\\
+TabNet (\texttt{xr\_fresh}) & field & \texttt{xr\_fresh} & 34\,s \\
+TabNet (raw, field-avg) & field & raw & 39\,s \\
+CNN-BiLSTM             & field & raw & 53\,s \\
+L-TAE                  & field & raw & 61\,s \\
+TempCNN                & field & raw & 64\,s \\
+L-TAE-S                & field & raw & 18\,s \\
+\midrule
+\multicolumn{4}{l}{\emph{Deep, pixel-level (raw sequences)}}\\
+CNN-BiLSTM             & pixel & raw & 10\,min \\
+L-TAE-S                & pixel & raw & 24\,min \\
+TempCNN                & pixel & raw & 29\,min \\
+L-TAE                  & pixel & raw & 38\,min \\
+TabNet (raw)           & pixel & raw & 61\,min\textsuperscript{$\ddagger$} \\
+Transformer            & pixel & raw & 97\,min \\
+\midrule
+\multicolumn{4}{l}{\emph{Deep, patch-level (raw sequences)}}\\
+3D CNN                 & patch & raw & 22\,min \\
+Multi-Channel 2D CNN   & patch & raw & 38\,min \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+Deep-model times are the mean per seed of a 5-seed ensemble (total wall-clock divided by five);
+classical models are a single best-configuration fit, excluding the one-time Optuna search.
+$\ddagger$Measured on the 75\% training fraction, the best-transferring TabNet pixel configuration.
+\end{minipage}
+\end{table}
+
+\section{Ablation Studies}
+\label{sec:ablation}
+\emph{Supports main paper Sec.~5 (``Two Robustness Levers'').}
+We attribute the holdout ranking primarily to two levers---built-in sparse feature selection and
+field-level aggregation---and show that ensemble size and the imbalance-handling objective are
+second-order: they shift absolute scores but never reorder the robust and fragile model groups.
+
+\emph{(i) Field-level aggregation} (main Table~2) recovers most of the transfer gap for dense
+temporal nets (L-TAE $-0.20\rightarrow-0.07$; L-TAE-S $-0.17\rightarrow-0.04$) but harms TabNet
+($0.60\rightarrow0.43$). \emph{(ii) Sparse selection versus attention capacity}: a plain Transformer
+with far greater capacity transfers no better than L-TAE (both ST F1$_m=0.58$), whereas grafting a
+sparse channel gate (L-TAE-S) lifts transfer to $0.60$. \emph{(iii) Resampling}: the \emph{Stacking}
+and \emph{SMOTE Stacked} ensembles differ only in SMOTETomek resampling; resampling widens the gap
+($-0.11\rightarrow-0.21$) and lowers holdout F1$_m$ ($0.53\rightarrow0.49$).
+
+\emph{(iv) Ensemble size} (Table~\ref{stab:ens}): seed-ensembling gives a small, monotone lift but
+does not change the ordering---a single-seed L-TAE-S (F1$_m=0.56$) already exceeds the five-seed
+CNN-BiLSTM and TabNet field ensembles. \emph{(v) Imbalance-handling objective}
+(Table~\ref{stab:loss}): the robust L-TAE-S is almost invariant across five loss/sampler settings
+($0.59$--$0.60$), whereas the fragile CNN-BiLSTM is sensitive ($0.41$--$0.56$); even CNN-BiLSTM's
+best setting ($0.56$) stays below L-TAE-S's worst ($0.59$), so the objective never reorders the two.
+
+\begin{table}[!t]
+\centering
+\scriptsize
+\caption{Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size.}
+\label{stab:ens}
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Model} & \textbf{Ensemble} & \textbf{F1$_m$} & \textbf{$\kappa$} \\
+\midrule
+TabNet (field)     & 1 seed  & $0.31\pm0.02$ & $0.18\pm0.03$ \\
+                   & 3 seeds & 0.39 & 0.29 \\
+                   & 5 seeds & 0.43 & 0.34 \\
+\midrule
+L-TAE-S (field)    & 1 seed  & $0.56\pm0.02$ & $0.47\pm0.02$ \\
+                   & 3 seeds & 0.58 & 0.50 \\
+                   & 5 seeds & 0.60 & 0.52 \\
+\midrule
+CNN-BiLSTM (field) & 1 seed  & $0.48\pm0.02$ & $0.31\pm0.02$ \\
+                   & 3 seeds & 0.52 & 0.34 \\
+                   & 5 seeds & 0.51 & 0.33 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+By re-inference of saved per-seed checkpoints. Single-seed rows report mean$\pm$s.d.\ across five seeds.
+\end{minipage}
+\end{table}
+
+\begin{table}[!t]
+\centering
+\scriptsize
+\caption{Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer
+holdout performance.}
+\label{stab:loss}
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{lllcc}
+\toprule
+\textbf{Model} & \textbf{Loss} & \textbf{Resample} & \textbf{F1$_m$} & \textbf{$\kappa$} \\
+\midrule
+TabNet (field)     & Weighted focal ($\gamma{=}2$) & no  & 0.43 & 0.34 \\
+                   & Weighted CE ($\gamma{=}0$)    & no  & 0.42 & 0.33 \\
+                   & Plain CE                       & no  & 0.35 & 0.25 \\
+                   & Weighted focal ($\gamma{=}2$) & yes & 0.40 & 0.23 \\
+                   & Plain CE                       & yes & 0.46 & 0.37 \\
+\midrule
+L-TAE-S (field)    & Weighted focal ($\gamma{=}2$) & no  & 0.60 & 0.52 \\
+                   & Weighted CE ($\gamma{=}0$)    & no  & 0.60 & 0.50 \\
+                   & Plain CE                       & no  & 0.59 & 0.50 \\
+                   & Weighted focal ($\gamma{=}2$) & yes & 0.60 & 0.49 \\
+                   & Plain CE                       & yes & 0.60 & 0.50 \\
+\midrule
+CNN-BiLSTM (field) & Weighted focal ($\gamma{=}2$) & no  & 0.51 & 0.34 \\
+                   & Weighted CE ($\gamma{=}0$)    & no  & 0.49 & 0.34 \\
+                   & Plain CE                       & no  & 0.41 & 0.30 \\
+                   & Weighted focal ($\gamma{=}2$) & yes & 0.56 & 0.39 \\
+                   & Plain CE                       & yes & 0.50 & 0.34 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+Field-level, 5-seed ensembles. ``Resample'' denotes class-balanced oversampling.
+\end{minipage}
+\end{table}
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{cea}
+
+\end{document}

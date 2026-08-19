@@ -1,0 +1,12 @@
+Formal analysis
+Methodology
+Software
+Visualization
+Writing – original draft
+Writing – review & editing
+
+
+\author[gwds]{Devarsh Sheth}
+\author[gwgeo]{Ryan Engstrom} rengstro@gwu.edu  
+\author[gwds]{Amir Jafari}ajafari@email.gwu.edu;  0000-0002-1730-4807
+
