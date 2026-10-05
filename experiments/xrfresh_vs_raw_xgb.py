@@ -9,7 +9,7 @@ against raw reflectance for the trees." This script isolates it.
 ONE learner (XGBoost, the paper's pixel-level configuration), held fixed, is
 trained twice -- once on raw monthly reflectance and once on xr_fresh time-series
 features -- with identical FID-wise splits, identical preprocessing, and identical
-field-level majority-vote aggregation. Only the input representation changes.
+field-level mean-probability pooling. Only the input representation changes.
 
 Both representations are scored on:
   - IN-REGION   : held-out FIDs from the two training tiles (34S_19E_258N/259N)
@@ -193,7 +193,7 @@ def main():
     res.to_csv(OUT_CSV, index=False)
 
     print("\n" + "=" * 64)
-    print("CONTROLLED COMPARISON  (XGBoost, field-level majority pooling)")
+    print("CONTROLLED COMPARISON  (XGBoost, field-level mean pooling)")
     print("=" * 64)
     print(f"{'representation':<16}{'split':<18}{'F1m':>7}{'wF1':>7}"
           f"{'kappa':>7}{'Xent':>8}")

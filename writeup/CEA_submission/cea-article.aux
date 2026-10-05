@@ -94,6 +94,10 @@
 \newlabel{fig:perclass}{{3}{13}{Per-class F1 on the holdout region for four representative models (TabNet, L-TAE-S, L-TAE, and CNN-BiLSTM). TabNet, L-TAE-S, and L-TAE classify lucerne/medics and canola well; the cereals (barley, wheat) and small-grain grazing concentrate the errors. CNN-BiLSTM's accuracy drops on every class. Error bars are 95\% bootstrap CIs over holdout fields}{figure.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Raw Reflectance versus \texttt  {xr\_fresh}}{13}{subsection.4.5}\protected@file@percent }
 \newlabel{sec:repr}{{4.5}{13}{Raw Reflectance versus \texttt {xr\_fresh}}{subsection.4.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Data efficiency under out-of-region transfer: macro-F1 versus fraction of training fields retained, single training seed, each point the mean over five independent subsample draws (error bars $\pm 1$ s.d.). The deep temporal models (L-TAE, L-TAE-S) are nearly flat to a quarter of the fields; the tree, linear, and TabNet baselines decline modestly. Per-fraction variation is within draw-to-draw sampling noise, largest for L-TAE-S ($\pm 0.06$ at $50\%$), so single-split ``dips'' are not real. Absolute values run ${\sim }0.02$--$0.05$ below the five-seed levels of Table\nobreakspace  {}\ref  {tab:gap} because a single training seed is used.}}{14}{figure.4}\protected@file@percent }
+\newlabel{fig:reduction}{{4}{14}{Data efficiency under out-of-region transfer: macro-F1 versus fraction of training fields retained, single training seed, each point the mean over five independent subsample draws (error bars $\pm 1$ s.d.). The deep temporal models (L-TAE, L-TAE-S) are nearly flat to a quarter of the fields; the tree, linear, and TabNet baselines decline modestly. Per-fraction variation is within draw-to-draw sampling noise, largest for L-TAE-S ($\pm 0.06$ at $50\%$), so single-split ``dips'' are not real. Absolute values run ${\sim }0.02$--$0.05$ below the five-seed levels of Table~\ref {tab:gap} because a single training seed is used}{figure.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Raw reflectance versus \texttt  {xr\_fresh} for a single fixed XGBoost learner.}}{14}{table.3}\protected@file@percent }
+\newlabel{tab:repr}{{3}{14}{Raw reflectance versus \texttt {xr\_fresh} for a single fixed XGBoost learner}{table.3}{}}
 \citation{belgiu2016,maxwell2019}
 \citation{pankajakshan2025}
 \citation{rustowicz2019}
@@ -101,18 +105,14 @@
 \citation{mai2025}
 \citation{tabnet_orig}
 \citation{obadic2022}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Data efficiency under out-of-region transfer: macro-F1 versus fraction of training fields retained, single training seed, each point the mean over five independent subsample draws (error bars $\pm 1$ s.d.). The deep temporal models (L-TAE, L-TAE-S) are nearly flat to a quarter of the fields; the tree, linear, and TabNet baselines decline modestly. Per-fraction variation is within draw-to-draw sampling noise, largest for L-TAE-S ($\pm 0.06$ at $50\%$), so single-split ``dips'' are not real. Absolute values run ${\sim }0.02$--$0.05$ below the five-seed levels of Table\nobreakspace  {}\ref  {tab:gap} because a single training seed is used.}}{14}{figure.4}\protected@file@percent }
-\newlabel{fig:reduction}{{4}{14}{Data efficiency under out-of-region transfer: macro-F1 versus fraction of training fields retained, single training seed, each point the mean over five independent subsample draws (error bars $\pm 1$ s.d.). The deep temporal models (L-TAE, L-TAE-S) are nearly flat to a quarter of the fields; the tree, linear, and TabNet baselines decline modestly. Per-fraction variation is within draw-to-draw sampling noise, largest for L-TAE-S ($\pm 0.06$ at $50\%$), so single-split ``dips'' are not real. Absolute values run ${\sim }0.02$--$0.05$ below the five-seed levels of Table~\ref {tab:gap} because a single training seed is used}{figure.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Raw reflectance versus \texttt  {xr\_fresh} for a single fixed XGBoost learner.}}{14}{table.3}\protected@file@percent }
-\newlabel{tab:repr}{{3}{14}{Raw reflectance versus \texttt {xr\_fresh} for a single fixed XGBoost learner}{table.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{14}{section.5}\protected@file@percent }
-\newlabel{sec:discussion}{{5}{14}{Discussion}{section.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{15}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{5}{15}{Discussion}{section.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Why Tree-Like Inductive Bias Transfers}{15}{subsection.5.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Out-of-region transfer gap ($\Delta $ macro-F1) grouped by inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta |$); dense temporal/patch nets and synthetic augmentation overfit the training region. L-TAE-S, which adds sparse feature selection to a dense attention backbone, tracks the tree-based models. Bars are family means; points are individual models.}}{16}{figure.5}\protected@file@percent }
 \newlabel{fig:bias}{{5}{16}{Out-of-region transfer gap ($\Delta $ macro-F1) grouped by inductive-bias family. Sparse/tree-like and linear models transfer (small $|\Delta |$); dense temporal/patch nets and synthetic augmentation overfit the training region. L-TAE-S, which adds sparse feature selection to a dense attention backbone, tracks the tree-based models. Bars are family means; points are individual models}{figure.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Two Robustness Levers}{16}{subsection.5.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Automated Features, Patch Models, and Persistent Difficulty}{17}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Limitations}{17}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Limitations}{18}{subsection.5.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{18}{section.6}\protected@file@percent }
 \citation{primary_repo}
 \bibstyle{elsarticle-harv}
