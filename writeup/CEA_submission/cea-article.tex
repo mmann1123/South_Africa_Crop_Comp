@@ -38,24 +38,7 @@
 \cortext[cor1]{Corresponding author.}
 
 \begin{abstract}
-Reported skill numbers for California wildfire models span an implausibly wide range that is driven
-mostly by evaluation protocol rather than by genuine predictive ability, and the absolute metrics in
-common use hide the failure that matters most operationally: systematic mis-prediction of how much
-will burn when a year departs from the calibration-period norm. We make two contributions. First, we adopt a true forward temporal holdout spanning three distinct fire
-regimes (water years 2020--2025) on two independent hydrology tracks, and we argue for metrics suited
-to fire's severe class imbalance and heavy-tailed burned area: average precision, intersection-over-
-union, and burned-area calibration in place of accuracy and F1. To help observe low-fire-year over-prediction that absolute scores conceal, we suggest the use of logarithmic skill
-score (LSS), which measures performance \emph{above a climatological baseline}. We develop a per-pixel Explainable Boosting Machine
-(EBM) ranker that is competitive with the strongest temporal-holdout statistical benchmarks in the literature
-and reproduces, at native resolution, the published FSim LSS verification it is compared against.
-Second, we show that every fire-probability surface, statistical or
-process-based, ranks fire years well but predicts a near-constant magnitude, and that a
-second-stage Tweedie burned-area regressor conditioned on water-year climate supplies the missing
-magnitude as a \emph{model-agnostic} calibration layer. The same per-year burned-area budget raises year-to-year amplitude (coefficient-of-variation ratio 0.05--0.09 to 0.67) and lifts the calibration-aware LSS for
-both our EBM and the operationally deployed FSim, including FSim's negative low-fire-year skill -
-which no single FSim threshold recovers. The result is an operational two-stage forecast (interannual
-Pearson $+0.96$, burned-area ratio 0.89, mean per-water-year $|\log_{10}\text{BA}|$ of 0.13) and a
-general recipe for calibrating fire-magnitude forecasts on top of any ranking surface.
+Crop-type maps from satellite image time series are a backbone of agricultural monitoring, yet the machine-learning models that produce them are almost always trained and tested within a single region, leaving open how they behave when deployed to new areas where no labels were collected. Using a South African Sentinel-2 dataset (optical only), we benchmark twenty-three classical and deep models under spatial transfer to a disjoint holdout tile and identify the model property that decides success: sparse, axis-aligned feature selection. Models that commit to a few features at a time, gradient-boosted trees, logistic regression, and the attentive TabNet, transfer robustly (macro-F1 0.56--0.60), whereas high-capacity dense temporal networks (CNN-BiLSTM, a Transformer encoder, L-TAE) degrade sharply; a controlled comparison shows that attention capacity is not the lever, sparsity is. We turn this insight into a method: L-TAE-S, a sparse-attention temporal encoder that ties the best model for out-of-region macro-F1 (0.60) at a fraction of the training cost, and whose field-level variant has the smallest train-to-holdout gap of any model. We further show that conventional in-region validation inverts these rankings, the dense networks that lead in-region (macro-F1 0.72--0.78) fall furthest under transfer, which is why models intended for operational crop mapping must be evaluated across regions rather than within one. Field-level aggregation is a second, substitutable robustness lever, and the most transferable models retain near-full accuracy using only a quarter of the training fields. Together these results give practitioners a concrete design principle for crop classifiers that must generalize to unlabeled farmland.
 \end{abstract}
 
 
