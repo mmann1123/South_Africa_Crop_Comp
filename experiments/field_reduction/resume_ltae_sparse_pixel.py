@@ -48,7 +48,6 @@ N_EPOCHS = 100
 BATCH_SIZE = 2048
 LR = 1e-3
 PATIENCE = 15
-LAMBDA_SPARSE = 1e-3
 GAMMA = 1.5
 TIME_VARYING_GATE = True
 FRACTION = 1.0
@@ -83,7 +82,6 @@ def train_one_seed(seed, train_ds, val_ds, criterion, num_classes, output_dir, d
         t_ep = time.time()
         train_loss, sparse_loss = train_epoch_sparse(
             model, optimizer, criterion, train_loader, scaler_amp, device,
-            lambda_sparse=LAMBDA_SPARSE,
         )
         val_logits, val_labels = evaluate_sparse(model, val_loader, device)
         val_preds = val_logits.argmax(dim=1).tolist()
@@ -212,7 +210,6 @@ def main():
             "test_fields": int(len(test_fids)),
             "seeds": SEEDS_ENSEMBLE,
             "gamma": GAMMA,
-            "lambda_sparse": LAMBDA_SPARSE,
             "time_varying_gate": TIME_VARYING_GATE,
             "training_time_sec": round(train_time, 1),
             "resumed": True,

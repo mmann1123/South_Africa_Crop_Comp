@@ -36,7 +36,7 @@ from subsample import get_fid_split_dl, subsample_train_fids
 sys.stdout.reconfigure(line_buffering=True)
 
 N_EPOCHS, BATCH_SIZE, LR, PATIENCE = 100, 2048, 1e-3, 15
-LAMBDA_SPARSE, GAMMA, TIME_VARYING_GATE = 1e-3, 1.5, True
+GAMMA, TIME_VARYING_GATE = 1.5, True
 
 
 class GPULoader:
@@ -86,7 +86,7 @@ def train_one_seed(model_key, seed, train_loader, val_loader, criterion, num_cla
     for epoch in range(N_EPOCHS):
         t = time.time()
         if is_sparse:
-            train_epoch_sparse(model, opt, criterion, train_loader, amp, device, lambda_sparse=LAMBDA_SPARSE)
+            train_epoch_sparse(model, opt, criterion, train_loader, amp, device)
             vl, vy = evaluate_sparse(model, val_loader, device)
         else:
             train_epoch(model, opt, criterion, train_loader, amp, device)

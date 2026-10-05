@@ -23,7 +23,7 @@
 \begin{document}
 
 \begin{frontmatter}
-\title{Supplementary Material:\\Sparse Feature Selection, Not Capacity, Drives Spatial Transfer in Crop Classification}
+\title{Supplementary Material:\\Sparse Feature Selection, Not Capacity, Drives Out-of-Region Transfer in Crop Classification}
 \author{Michael L. Mann, Sairam Venkatachalam, Disha Kacha, Devarsh Sheth, Ryan Engstrom, Amir Jafari}
 \end{frontmatter}
 
@@ -203,7 +203,7 @@ sparse feature mask via \emph{sparsemax},
 \mathbf{P}[i]&=\textstyle\prod_{j=1}^{i}\big(\gamma-\mathbf{M}[j]\big),
 \end{aligned}
 \end{equation}
-with relaxation $\gamma=1.5$; the masked features are handled by a feature transformer. We use
+with relaxation $\gamma=1.5$; the masked features are handled by a feature transformer. Unlike an $\ell_1$ norm, which is fixed at 1 on the simplex, TabNet's mask-entropy penalty $\lambda_{\text{sparse}}\sum_i\sum_j -M_{j}[i]\log M_{j}[i]$ ($\lambda_{\text{sparse}}=10^{-3}$, library default) varies with mask concentration and so adds genuine sparsity pressure. We use
 $n_d=n_a=64$, 5 decision steps, batch size 1024, and ensemble five seeds by averaging softmax
 outputs. The sparsemax masks are the mechanism the main paper's L-TAE-S grafts onto a
 temporal-attention backbone \citep{tabnet_orig, tabnet2024}.
@@ -307,7 +307,7 @@ LightGBM               & pixel & \texttt{xr\_fresh} & 31\,s \\
 Logistic Regression    & pixel & \texttt{xr\_fresh} & 8.0\,min \\
 Random Forest          & pixel & \texttt{xr\_fresh} & 73\,min \\
 \midrule
-\multicolumn{4}{l}{\emph{Deep, field-level (raw sequences)}}\\
+\multicolumn{4}{l}{\emph{Deep temporal, field-level (raw sequences)}}\\
 TabNet (\texttt{xr\_fresh}) & field & \texttt{xr\_fresh} & 34\,s \\
 TabNet (raw, field-avg) & field & raw & 39\,s \\
 CNN-BiLSTM             & field & raw & 53\,s \\
@@ -315,7 +315,7 @@ L-TAE                  & field & raw & 61\,s \\
 TempCNN                & field & raw & 64\,s \\
 L-TAE-S                & field & raw & 18\,s \\
 \midrule
-\multicolumn{4}{l}{\emph{Deep, pixel-level (raw sequences)}}\\
+\multicolumn{4}{l}{\emph{Deep temporal, pixel-level (raw sequences)}}\\
 CNN-BiLSTM             & pixel & raw & 10\,min \\
 L-TAE-S                & pixel & raw & 24\,min \\
 TempCNN                & pixel & raw & 29\,min \\
@@ -323,7 +323,7 @@ L-TAE                  & pixel & raw & 38\,min \\
 TabNet (raw)           & pixel & raw & 61\,min\textsuperscript{$\ddagger$} \\
 Transformer            & pixel & raw & 97\,min \\
 \midrule
-\multicolumn{4}{l}{\emph{Deep, patch-level (raw sequences)}}\\
+\multicolumn{4}{l}{\emph{Deep patch-based (raw sequences)}}\\
 3D CNN                 & patch & raw & 22\,min \\
 Multi-Channel 2D CNN   & patch & raw & 38\,min \\
 \bottomrule
@@ -347,7 +347,7 @@ second-order: they shift absolute scores but never reorder the robust and fragil
 \emph{(i) Field-level aggregation} (main Table~2) recovers most of the transfer gap for dense
 temporal nets (L-TAE $-0.20\rightarrow-0.07$; L-TAE-S $-0.17\rightarrow-0.04$) but harms TabNet
 ($0.60\rightarrow0.43$). \emph{(ii) Sparse selection versus attention capacity}: a plain Transformer
-with far greater capacity transfers no better than L-TAE (both ST F1$_m=0.58$), whereas grafting a
+with far greater capacity transfers no better than L-TAE (both OOR F1$_m=0.58$), whereas grafting a
 sparse channel gate (L-TAE-S) lifts transfer to $0.60$. \emph{(iii) Resampling}: the \emph{Stacking}
 and \emph{SMOTE Stacked} ensembles differ only in SMOTETomek resampling; resampling widens the gap
 ($-0.11\rightarrow-0.21$) and lowers holdout F1$_m$ ($0.53\rightarrow0.49$).
@@ -362,7 +362,7 @@ best setting ($0.56$) stays below L-TAE-S's worst ($0.59$), so the objective nev
 \begin{table}[!t]
 \centering
 \scriptsize
-\caption{Ablation (iv): spatial-transfer holdout performance versus seed-ensemble size.}
+\caption{Ablation (iv): out-of-region transfer holdout performance versus seed-ensemble size.}
 \label{stab:ens}
 \renewcommand{\arraystretch}{1.12}
 \setlength{\tabcolsep}{8pt}
@@ -393,7 +393,7 @@ By re-inference of saved per-seed checkpoints. Single-seed rows report mean$\pm$
 \begin{table}[!t]
 \centering
 \scriptsize
-\caption{Ablation (v): effect of the imbalance-handling objective and resampling on spatial-transfer
+\caption{Ablation (v): effect of the imbalance-handling objective and resampling on out-of-region transfer
 holdout performance.}
 \label{stab:loss}
 \renewcommand{\arraystretch}{1.12}

@@ -39,7 +39,6 @@ LR = 1e-3
 PATIENCE = 15
 
 # L-TAE-S hyperparameters
-LAMBDA_SPARSE = 1e-3
 GAMMA = 1.5
 TIME_VARYING_GATE = True
 
@@ -56,7 +55,7 @@ def main():
     t0 = time.time()
     fraction = args.fraction
     print(f"=== L-TAE-S Pixel Training === Fraction: {fraction}, Device: {device}")
-    print(f"  gamma={GAMMA}, lambda_sparse={LAMBDA_SPARSE}, time_varying={TIME_VARYING_GATE}")
+    print(f"  gamma={GAMMA}, time_varying={TIME_VARYING_GATE}")
 
     # Load pixel-level data
     print("Loading data...")
@@ -145,7 +144,6 @@ def main():
             t_ep = time.time()
             train_loss, sparse_loss = train_epoch_sparse(
                 model, optimizer, criterion, train_loader, scaler_amp, device,
-                lambda_sparse=LAMBDA_SPARSE,
             )
 
             val_logits, val_labels = evaluate_sparse(model, val_loader, device)
@@ -205,7 +203,6 @@ def main():
             "test_fields": int(len(test_fids)),
             "seeds": SEEDS_ENSEMBLE,
             "gamma": GAMMA,
-            "lambda_sparse": LAMBDA_SPARSE,
             "time_varying_gate": TIME_VARYING_GATE,
             "training_time_sec": round(train_time, 1),
             "metrics": {

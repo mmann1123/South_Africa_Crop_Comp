@@ -252,7 +252,9 @@ class LTAESparse(nn.Module):
 
         Returns:
             logits: (B, num_classes)
-            aux: dict with 'sparsity_loss' (scalar) and 'masks' (B, H, T, E)
+            aux: dict with 'masks' (B, H, T, E). No sparsity loss is returned:
+                sparsemax masks sum to 1, so an L1 penalty on them is constant
+                (zero gradient). Sparsity comes from sparsemax and the gamma prior.
         """
         B, T, C = x.shape
         x = self.embedding(x)       # (B, T, E)
@@ -285,8 +287,7 @@ class LTAESparse(nn.Module):
         out = self.mlp(out)
         logits = self.classifier(out)
 
-        sparsity_loss = masks.mean()
-        aux = {"sparsity_loss": sparsity_loss, "masks": masks}
+        aux = {"masks": masks}
 
         return logits, aux
 
@@ -487,7 +488,11 @@ def aggregate_field_preds(fids, y_true, y_pred):
 
 def train_epoch_sparse(model, optimizer, criterion, dataloader, scaler_amp, device,
                        lambda_sparse=1e-3):
-    """Run one training epoch for L-TAE-S with sparsity regularization."""
+    """Run one training epoch for a model returning (logits, aux).
+
+    If aux contains 'sparsity_loss' (FastTabNet's mask entropy), it is added
+    with weight lambda_sparse; L-TAE-S returns none, so only the task loss is used.
+    """
     model.train()
     total_loss = 0
     total_sparse = 0
@@ -497,15 +502,16 @@ def train_epoch_sparse(model, optimizer, criterion, dataloader, scaler_amp, devi
         with torch.amp.autocast("cuda"):
             logits, aux = model(X)
             task_loss = criterion(logits, y)
-            sparse_loss = aux["sparsity_loss"]
-            loss = task_loss + lambda_sparse * sparse_loss
+            sparse_loss = aux.get("sparsity_loss")
+            loss = task_loss if sparse_loss is None else task_loss + lambda_sparse * sparse_loss
         scaler_amp.scale(loss).backward()
         scaler_amp.unscale_(optimizer)
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         scaler_amp.step(optimizer)
         scaler_amp.update()
         total_loss += loss.item()
-        total_sparse += sparse_loss.item()
+        if sparse_loss is not None:
+            total_sparse += sparse_loss.item()
     n = len(dataloader)
     return total_loss / n, total_sparse / n
 
