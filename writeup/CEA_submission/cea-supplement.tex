@@ -231,7 +231,7 @@ dropout, followed by a softmax head \citep{tempcnn2019}; pixel and field variant
 to $128\times128$ (Fig.~\ref{sfig:patches}). The multi-channel 2D CNN treats each band$\times$month
 as a channel ($C=60$) through two convolutional blocks; the 3D CNN treats each patch as a
 spatiotemporal volume ($T=10$, $C=6$) through three 3D-convolutional blocks with a weighted focal
-loss (Fig.~\ref{sfig:patchmodel}). Both are five-seed ensembles aggregated to a field label by
+loss and early stopping on validation macro-F1 (Fig.~\ref{sfig:patchmodel}); the 2D CNN uses unweighted cross-entropy for a fixed 20 epochs, with no dropout. After upsampling, the receptive field of the final convolution spans ${\sim}10$ (2D) and ${\sim}18$ (3D) upsampled pixels, about one to two native 10~m pixels. Both are five-seed ensembles aggregated to a field label by
 majority vote.
 
 \begin{figure}[htbp]
