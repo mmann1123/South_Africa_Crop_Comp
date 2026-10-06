@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Study-area map: the two training tiles and the spatially disjoint holdout tile,
+"""Study-area map: the two training tiles and the adjacent, non-overlapping holdout tile,
 with every field colored by crop type (color-blind-safe Okabe & Ito palette).
 
 Reads the combined training fields (tiles 34S_19E_258N + 34S_19E_259N) and the
@@ -68,7 +68,7 @@ def label(df, text, **kw):
 
 label(train_n, "Training\n34S_19E_259N")
 label(train_s, "Training\n34S_19E_258N")
-label(hold, "Holdout\n34S_20E_259N\n(spatial transfer)")
+label(hold, "Holdout\n34S_20E_259N\n(out-of-region)")
 
 # --- one framed map-legend box in the empty bottom-right (SE) corner:
 #     crop swatches on the left, scale bar + north arrow in the white space

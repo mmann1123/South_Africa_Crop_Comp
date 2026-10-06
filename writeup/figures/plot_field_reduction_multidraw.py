@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Data efficiency under spatial transfer -- multi-draw version of field_reduction.pdf.
+"""Data efficiency under out-of-region transfer -- multi-draw version of field_reduction.pdf.
 
 Same five models and styling as plot_field_reduction.py, but each point is the MEAN over 5
 independent subsample draws (single training seed) instead of the single seed-42 draw used in
@@ -49,8 +49,8 @@ for key, label, marker in MODELS:
         ax.plot(g["fraction"], g["mean"], color=color_for_model(label), marker=marker, ls=ls, label=label)
 
 ax.set_xlabel("Fraction of training fields retained")
-ax.set_ylabel("Spatial-transfer F1 (macro)")
-ax.set_title("Data efficiency under spatial transfer")
+ax.set_ylabel("Out-of-region F1 (macro)")
+ax.set_title("Data efficiency under out-of-region transfer")
 ax.set_xticks([0.25, 0.50, 0.75, 1.00])
 ax.invert_xaxis()
 ax.grid(True)

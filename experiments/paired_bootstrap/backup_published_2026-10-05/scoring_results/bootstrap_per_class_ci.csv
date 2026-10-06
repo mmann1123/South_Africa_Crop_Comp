@@ -1,0 +1,146 @@
+Model,class,f1_point,f1_lo,f1_hi
+Ensemble (all),Barley,0.5097,0.4404,0.575
+Ensemble (all),Canola,0.8583,0.8095,0.9023
+Ensemble (all),Lucerne/Medics,0.8713,0.8585,0.8839
+Ensemble (all),Small grain grazing,0.3596,0.3134,0.4053
+Ensemble (all),Wheat,0.5097,0.4599,0.5574
+TabNet (pixel),Barley,0.5507,0.4923,0.6066
+TabNet (pixel),Canola,0.8127,0.7592,0.8595
+TabNet (pixel),Lucerne/Medics,0.878,0.8654,0.8901
+TabNet (pixel),Small grain grazing,0.2958,0.2474,0.3427
+TabNet (pixel),Wheat,0.4778,0.4273,0.5263
+L-TAE Field (field),Barley,0.5263,0.4582,0.5906
+L-TAE Field (field),Canola,0.7863,0.7273,0.839
+L-TAE Field (field),Lucerne/Medics,0.8154,0.799,0.8309
+L-TAE Field (field),Small grain grazing,0.3508,0.3103,0.3904
+L-TAE Field (field),Wheat,0.4907,0.4447,0.5335
+Ensemble (DL),Barley,0.5105,0.449,0.5699
+Ensemble (DL),Canola,0.7918,0.7328,0.8449
+Ensemble (DL),Lucerne/Medics,0.8365,0.8211,0.8511
+Ensemble (DL),Small grain grazing,0.3826,0.3372,0.4269
+Ensemble (DL),Wheat,0.4165,0.3728,0.4585
+Ensemble (ML),Barley,0.4536,0.3799,0.522
+Ensemble (ML),Canola,0.83,0.7764,0.8776
+Ensemble (ML),Lucerne/Medics,0.8545,0.8406,0.8676
+Ensemble (ML),Small grain grazing,0.3141,0.2683,0.3584
+Ensemble (ML),Wheat,0.457,0.4038,0.5076
+L-TAE (pixel),Barley,0.5014,0.4355,0.5619
+L-TAE (pixel),Canola,0.6637,0.5888,0.7313
+L-TAE (pixel),Lucerne/Medics,0.8413,0.8261,0.8558
+L-TAE (pixel),Small grain grazing,0.4122,0.3726,0.4503
+L-TAE (pixel),Wheat,0.4785,0.4288,0.5258
+Ensemble (ML field),Barley,0.4642,0.392,0.5342
+Ensemble (ML field),Canola,0.8033,0.7442,0.8551
+Ensemble (ML field),Lucerne/Medics,0.8548,0.8407,0.868
+Ensemble (ML field),Small grain grazing,0.332,0.2881,0.3753
+Ensemble (ML field),Wheat,0.4344,0.3801,0.4877
+Ensemble (ML pixel),Barley,0.4494,0.3793,0.5153
+Ensemble (ML pixel),Canola,0.8,0.7429,0.8505
+Ensemble (ML pixel),Lucerne/Medics,0.8546,0.841,0.8677
+Ensemble (ML pixel),Small grain grazing,0.3038,0.2557,0.3499
+Ensemble (ML pixel),Wheat,0.4696,0.4189,0.517
+XGBoost (field),Barley,0.471,0.3971,0.5398
+XGBoost (field),Canola,0.7336,0.6667,0.794
+XGBoost (field),Lucerne/Medics,0.8598,0.8465,0.8727
+XGBoost (field),Small grain grazing,0.3587,0.3164,0.3986
+XGBoost (field),Wheat,0.4008,0.3451,0.4544
+TempCNN (pixel),Barley,0.5207,0.4533,0.584
+TempCNN (pixel),Canola,0.6667,0.59,0.7341
+TempCNN (pixel),Lucerne/Medics,0.8668,0.8531,0.8801
+TempCNN (pixel),Small grain grazing,0.3468,0.3035,0.3899
+TempCNN (pixel),Wheat,0.4184,0.3728,0.4622
+Base LightGBM (pixel),Barley,0.4211,0.3492,0.4898
+Base LightGBM (pixel),Canola,0.7937,0.7343,0.8464
+Base LightGBM (pixel),Lucerne/Medics,0.8476,0.8339,0.8612
+Base LightGBM (pixel),Small grain grazing,0.297,0.2504,0.3426
+Base LightGBM (pixel),Wheat,0.4571,0.4071,0.5058
+Base LR (pixel),Barley,0.4661,0.3987,0.5303
+Base LR (pixel),Canola,0.7184,0.6491,0.7805
+Base LR (pixel),Lucerne/Medics,0.8435,0.8293,0.8573
+Base LR (pixel),Small grain grazing,0.3112,0.2653,0.3568
+Base LR (pixel),Wheat,0.4755,0.4237,0.5233
+LightGBM (field),Barley,0.4865,0.412,0.5541
+LightGBM (field),Canola,0.7368,0.6667,0.7982
+LightGBM (field),Lucerne/Medics,0.8479,0.8339,0.8612
+LightGBM (field),Small grain grazing,0.2973,0.2547,0.3392
+LightGBM (field),Wheat,0.4254,0.3691,0.4798
+Voting (pixel),Barley,0.3498,0.2731,0.4235
+Voting (pixel),Canola,0.8429,0.7918,0.8865
+Voting (pixel),Lucerne/Medics,0.8543,0.8403,0.8673
+Voting (pixel),Small grain grazing,0.2645,0.2182,0.3107
+Voting (pixel),Wheat,0.4748,0.4261,0.5204
+Base RF (pixel),Barley,0.4489,0.3813,0.511
+Base RF (pixel),Canola,0.8162,0.7626,0.8638
+Base RF (pixel),Lucerne/Medics,0.8459,0.8319,0.8594
+Base RF (pixel),Small grain grazing,0.2523,0.208,0.2969
+Base RF (pixel),Wheat,0.3762,0.3219,0.428
+Base XGBoost (pixel),Barley,0.3789,0.3039,0.4498
+Base XGBoost (pixel),Canola,0.7259,0.664,0.7823
+Base XGBoost (pixel),Lucerne/Medics,0.8567,0.8428,0.87
+Base XGBoost (pixel),Small grain grazing,0.2989,0.252,0.3448
+Base XGBoost (pixel),Wheat,0.4598,0.4122,0.5062
+TempCNN Field (field),Barley,0.4605,0.3885,0.5284
+TempCNN Field (field),Canola,0.6463,0.5688,0.7148
+TempCNN Field (field),Lucerne/Medics,0.808,0.791,0.8244
+TempCNN Field (field),Small grain grazing,0.4061,0.3602,0.4518
+TempCNN Field (field),Wheat,0.3565,0.318,0.3941
+Stacking (field),Barley,0.4689,0.4035,0.5304
+Stacking (field),Canola,0.6129,0.5521,0.6684
+Stacking (field),Lucerne/Medics,0.853,0.8385,0.8672
+Stacking (field),Small grain grazing,0.429,0.3887,0.4687
+Stacking (field),Wheat,0.3002,0.2455,0.3529
+CNN-BiLSTM Field (field),Barley,0.3869,0.3151,0.4554
+CNN-BiLSTM Field (field),Canola,0.7649,0.7046,0.8169
+CNN-BiLSTM Field (field),Lucerne/Medics,0.6433,0.6195,0.6661
+CNN-BiLSTM Field (field),Small grain grazing,0.3268,0.2915,0.3609
+CNN-BiLSTM Field (field),Wheat,0.4079,0.3671,0.4471
+3D CNN (patch),Barley,0.4438,0.3778,0.5056
+3D CNN (patch),Canola,0.7296,0.6612,0.7902
+3D CNN (patch),Lucerne/Medics,0.645,0.6222,0.667
+3D CNN (patch),Small grain grazing,0.2804,0.2487,0.3116
+3D CNN (patch),Wheat,0.4185,0.3713,0.4657
+SMOTE Stacked (field),Barley,0.4041,0.3298,0.4752
+SMOTE Stacked (field),Canola,0.5479,0.4834,0.6093
+SMOTE Stacked (field),Lucerne/Medics,0.8424,0.8282,0.8561
+SMOTE Stacked (field),Small grain grazing,0.2559,0.2103,0.3
+SMOTE Stacked (field),Wheat,0.3933,0.3415,0.4449
+CNN-BiLSTM (pixel),Barley,0.2799,0.2382,0.3204
+CNN-BiLSTM (pixel),Canola,0.6547,0.578,0.7234
+CNN-BiLSTM (pixel),Lucerne/Medics,0.7091,0.6878,0.7297
+CNN-BiLSTM (pixel),Small grain grazing,0.3596,0.3162,0.4025
+CNN-BiLSTM (pixel),Wheat,0.2882,0.2453,0.3311
+Ensemble 3D CNN (patch),Barley,0.3682,0.3185,0.4168
+Ensemble 3D CNN (patch),Canola,0.6781,0.6047,0.7429
+Ensemble 3D CNN (patch),Lucerne/Medics,0.7085,0.6881,0.7286
+Ensemble 3D CNN (patch),Small grain grazing,0.2607,0.2134,0.3085
+Ensemble 3D CNN (patch),Wheat,0.2717,0.2353,0.3086
+Multi-Ch CNN (patch),Barley,0.3642,0.3146,0.413
+Multi-Ch CNN (patch),Canola,0.6938,0.634,0.7491
+Multi-Ch CNN (patch),Lucerne/Medics,0.7101,0.6897,0.7297
+Multi-Ch CNN (patch),Small grain grazing,0.2487,0.2018,0.294
+Multi-Ch CNN (patch),Wheat,0.2153,0.1771,0.2531
+TabNet Temporal Field (field),Barley,0.3429,0.2857,0.3982
+TabNet Temporal Field (field),Canola,0.5138,0.4348,0.5866
+TabNet Temporal Field (field),Lucerne/Medics,0.7462,0.7268,0.7654
+TabNet Temporal Field (field),Small grain grazing,0.3177,0.2831,0.3524
+TabNet Temporal Field (field),Wheat,0.2458,0.1953,0.2963
+TabNet Field (field),Barley,0.3689,0.2993,0.4356
+TabNet Field (field),Canola,0.3736,0.2791,0.4607
+TabNet Field (field),Lucerne/Medics,0.7802,0.7644,0.7953
+TabNet Field (field),Small grain grazing,0.0316,0.0095,0.0563
+TabNet Field (field),Wheat,0.2938,0.2407,0.3455
+Transformer (pixel),Barley,0.4965,0.4354,0.5533
+Transformer (pixel),Canola,0.6726,0.5973,0.7398
+Transformer (pixel),Lucerne/Medics,0.8635,0.8495,0.8772
+Transformer (pixel),Small grain grazing,0.3928,0.3492,0.434
+Transformer (pixel),Wheat,0.4605,0.4087,0.5107
+L-TAE-S (pixel),Barley,0.4963,0.4343,0.5529
+L-TAE-S (pixel),Canola,0.7552,0.6914,0.8123
+L-TAE-S (pixel),Lucerne/Medics,0.8747,0.8616,0.8873
+L-TAE-S (pixel),Small grain grazing,0.3995,0.3544,0.4427
+L-TAE-S (pixel),Wheat,0.4677,0.4178,0.5161
+L-TAE-S Field (field),Barley,0.4768,0.4089,0.5419
+L-TAE-S Field (field),Canola,0.8413,0.7903,0.8864
+L-TAE-S Field (field),Lucerne/Medics,0.8643,0.8506,0.8778
+L-TAE-S Field (field),Small grain grazing,0.371,0.3261,0.4151
+L-TAE-S Field (field),Wheat,0.4523,0.4056,0.4972

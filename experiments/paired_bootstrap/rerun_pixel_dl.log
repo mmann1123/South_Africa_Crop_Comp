@@ -1,0 +1,67 @@
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+=== CNN-BiLSTM Ensemble Inference ===
+Device: cuda
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/data/merged_dl_test.parquet
+Shape: (3409489, 71)
+Unique fields: 2415
+Feature columns: 60
+
+Loading models...
+Loaded: new_model_seed_0_25epochs.pt
+Loaded: new_model_seed_1_25epochs.pt
+Loaded: new_model_seed_2_25epochs.pt
+Loaded: new_model_seed_3_25epochs.pt
+Loaded: new_model_seed_4_25epochs.pt
+Loaded 5 models
+
+Running inference...
+Total pixel predictions: 3409489
+
+Aggregating to field level...
+Total fields: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/paired_bootstrap/rerun/predictions_cnn_bilstm_rerun.csv
+
+Generating per-seed predictions...
+Saved per-seed predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/paired_bootstrap/rerun/predictions_cnn_bilstm_rerun_seed*.csv
+
+=== Prediction Distribution ===
+crop_name
+Lucerne/Medics         1105
+Barley                  502
+Small grain grazing     410
+Wheat                   315
+Canola                   83
+Name: count, dtype: int64
+=== TempCNN Ensemble Inference === Device: cuda
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat'], Features: 60
+
+Loading: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/data/merged_dl_test.parquet
+Shape: (3409489, 71), Fields: 2415
+
+Loading models...
+  Loaded tempcnn_seed_42.pt
+  Loaded tempcnn_seed_101.pt
+  Loaded tempcnn_seed_202.pt
+  Loaded tempcnn_seed_303.pt
+  Loaded tempcnn_seed_404.pt
+Total pixel predictions: 3409489
+
+Aggregating to field level...
+Total fields: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/paired_bootstrap/rerun/predictions_tempcnn_rerun.csv
+
+crop_name
+Lucerne/Medics         1493
+Small grain grazing     376
+Wheat                   321
+Barley                  142
+Canola                   83
+Name: count, dtype: int64
+Saved per-seed predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/paired_bootstrap/rerun/predictions_tempcnn_rerun_seed*.csv

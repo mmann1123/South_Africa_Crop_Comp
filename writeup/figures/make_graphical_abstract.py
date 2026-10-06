@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 Graphical abstract for the TGRS manuscript: a bump chart showing the
-in-region -> spatial-transfer ranking inversion.
+in-region -> out-of-region ranking inversion.
 
 Dense temporal nets lead in-region and collapse under transfer; sparse,
 axis-aligned feature-selection models (TabNet, L-TAE-S) climb to the top,
@@ -21,16 +21,16 @@ from matplotlib.lines import Line2D
 
 from figstyle import apply_style, FAMILY_COLORS
 
-# ---- data: (name, in-region F1, spatial-transfer F1, family) -----------------
+# ---- data: (name, in-region F1, out-of-region F1, family) -----------------
 # family keys match figstyle.FAMILY_COLORS so colors stay consistent with the
 # paper: dense=vermillion (falls), sparse=skyblue (rises), linear=orange.
 MODELS = [
-    ("L-TAE",         0.78, 0.58, "dense"),
+    ("L-TAE",         0.78, 0.54, "dense"),   # reproducible run (2026-10 audit)
     ("Transformer",   0.78, 0.58, "dense"),
     ("L-TAE-S",       0.77, 0.60, "sparse"),   # our contribution -> starred
-    ("TempCNN",       0.77, 0.56, "dense"),
+    ("TempCNN",       0.77, 0.57, "dense"),   # reproducible run (2026-10 audit)
     ("TabNet",        0.73, 0.60, "sparse"),
-    ("CNN-BiLSTM",    0.72, 0.46, "dense"),
+    ("CNN-BiLSTM",    0.72, 0.51, "dense"),   # reproducible run (2026-10 audit)
     ("Logistic Reg.", 0.61, 0.56, "linear"),
 ]
 OURS = "L-TAE-S"   # highlighted with a star marker
@@ -96,9 +96,9 @@ ax.text(hdr_left, 0.18, "IN-REGION", ha="center", va="bottom",
         fontsize=15, fontweight="bold", color="#333")
 ax.text(hdr_left, 0.46, "(field-wise CV)", ha="center", va="bottom",
         fontsize=10.5, style="italic", color="#777")
-ax.text(hdr_right, 0.18, "SPATIAL TRANSFER", ha="center", va="bottom",
+ax.text(hdr_right, 0.18, "OUT-OF-REGION", ha="center", va="bottom",
         fontsize=15, fontweight="bold", color="#333")
-ax.text(hdr_right, 0.46, "(disjoint holdout tile)", ha="center", va="bottom",
+ax.text(hdr_right, 0.46, "(adjacent holdout tile)", ha="center", va="bottom",
         fontsize=10.5, style="italic", color="#777")
 
 # rank markers on the far left
@@ -120,7 +120,7 @@ panel = FancyBboxPatch((-0.72, n + 0.78), 2.50, 2.55,
 ax.add_patch(panel)
 
 # takeaway banner (inside the panel)
-ax.text(0.5, n + 1.20, "The ranking inverts under spatial transfer",
+ax.text(0.5, n + 1.20, "The ranking inverts out of region",
         ha="center", va="center", fontsize=15, fontweight="bold", color="#1a1a1a")
 ax.text(0.5, n + 1.72,
         "Dense temporal nets lead in-region, then collapse;\n"

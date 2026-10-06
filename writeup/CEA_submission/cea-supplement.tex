@@ -23,7 +23,7 @@
 \begin{document}
 
 \begin{frontmatter}
-\title{Supplementary Material:\\Sparse Feature Selection, Not Capacity, Drives Out-of-Region Transfer in Crop Classification}
+\title{Supplementary Material:\\Sparse Feature Selection Outweighs Deep Learning Capacity for Out-of-Region Transfer in Crop Classification}
 \author{Michael L. Mann, Sairam Venkatachalam, Disha Kacha, Devarsh Sheth, Ryan Engstrom, Amir Jafari}
 \end{frontmatter}
 
@@ -344,11 +344,12 @@ We attribute the holdout ranking primarily to two levers---built-in sparse featu
 field-level aggregation---and show that ensemble size and the imbalance-handling objective are
 second-order: they shift absolute scores but never reorder the robust and fragile model groups.
 
-\emph{(i) Field-level aggregation} (main Table~2) recovers most of the transfer gap for dense
-temporal nets (L-TAE $-0.20\rightarrow-0.07$; L-TAE-S $-0.17\rightarrow-0.04$) but harms TabNet
+\emph{(i) Field-level aggregation} (main Table~2) narrows the transfer gap for dense temporal nets
+(L-TAE $-0.24\rightarrow-0.07$; L-TAE-S $-0.17\rightarrow-0.04$), raising holdout macro-F1 for L-TAE but
+not for TempCNN or CNN-BiLSTM, and harms TabNet
 ($0.60\rightarrow0.43$). \emph{(ii) Sparse selection versus attention capacity}: a plain Transformer
-with far greater capacity transfers no better than L-TAE (both OOR F1$_m=0.58$), whereas grafting a
-sparse channel gate (L-TAE-S) lifts transfer to $0.60$. \emph{(iii) Resampling}: the \emph{Stacking}
+with far greater capacity improves on L-TAE (OOR F1$_m$ $0.58$ vs.\ $0.54$), but grafting a sparse
+channel gate onto L-TAE (L-TAE-S) lifts transfer further, to $0.60$. \emph{(iii) Resampling}: the \emph{Stacking}
 and \emph{SMOTE Stacked} ensembles differ only in SMOTETomek resampling; resampling widens the gap
 ($-0.11\rightarrow-0.21$) and lowers holdout F1$_m$ ($0.53\rightarrow0.49$).
 

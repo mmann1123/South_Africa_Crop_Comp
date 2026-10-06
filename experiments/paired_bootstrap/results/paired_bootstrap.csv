@@ -1,0 +1,25 @@
+A,B,question,metric,n_fields,A_point,B_point,delta,ci_lo,ci_hi,p_boot,sig_95,mcnemar_A_only_correct,mcnemar_B_only_correct,mcnemar_p
+L-TAE-S (pixel),L-TAE (pixel),"sparse gate, pixel level",macro_f1,2415,0.5987,0.5395,0.0592,0.038,0.081,0.0,True,384,116,0.0
+L-TAE-S (pixel),L-TAE (pixel),"sparse gate, pixel level",kappa,2415,0.5274,0.3988,0.1286,0.104,0.1525,0.0,True,384,116,0.0
+L-TAE-S (pixel),L-TAE (pixel),"sparse gate, pixel level",accuracy,2415,0.7126,0.6017,0.111,0.0936,0.1284,0.0,True,384,116,0.0
+L-TAE-S (field),L-TAE (field),"sparse gate, field level",macro_f1,2415,0.6012,0.5939,0.0073,-0.0129,0.0272,0.4858,False,234,123,0.0
+L-TAE-S (field),L-TAE (field),"sparse gate, field level",kappa,2415,0.5155,0.4707,0.0448,0.0221,0.067,0.0002,True,234,123,0.0
+L-TAE-S (field),L-TAE (field),"sparse gate, field level",accuracy,2415,0.7039,0.658,0.046,0.0306,0.0609,0.0,True,234,123,0.0
+Transformer (pixel),L-TAE (pixel),"attention capacity, pixel level",macro_f1,2415,0.5772,0.5395,0.0377,0.0182,0.0575,0.0,True,338,116,0.0
+Transformer (pixel),L-TAE (pixel),"attention capacity, pixel level",kappa,2415,0.5029,0.3988,0.104,0.0801,0.1272,0.0,True,338,116,0.0
+Transformer (pixel),L-TAE (pixel),"attention capacity, pixel level",accuracy,2415,0.6936,0.6017,0.0919,0.0745,0.1089,0.0,True,338,116,0.0
+TabNet (pixel),L-TAE-S (pixel),TabNet vs. L-TAE-S parity,macro_f1,2415,0.603,0.5987,0.0044,-0.0205,0.0296,0.7558,False,186,154,0.0926
+TabNet (pixel),L-TAE-S (pixel),TabNet vs. L-TAE-S parity,kappa,2415,0.5363,0.5274,0.0088,-0.0164,0.0335,0.4948,False,186,154,0.0926
+TabNet (pixel),L-TAE-S (pixel),TabNet vs. L-TAE-S parity,accuracy,2415,0.7259,0.7126,0.0133,-0.0017,0.0282,0.0852,False,186,154,0.0926
+L-TAE-S (pixel),Transformer (pixel),"sparsity vs. attention capacity, pixel level",macro_f1,2415,0.5987,0.5772,0.0215,-0.0,0.0439,0.0506,False,172,126,0.009
+L-TAE-S (pixel),Transformer (pixel),"sparsity vs. attention capacity, pixel level",kappa,2415,0.5274,0.5029,0.0246,0.0026,0.0469,0.0262,True,172,126,0.009
+L-TAE-S (pixel),Transformer (pixel),"sparsity vs. attention capacity, pixel level",accuracy,2415,0.7126,0.6936,0.019,0.005,0.0327,0.008,True,172,126,0.009
+L-TAE-S (pixel),L-TAE retrain (pixel),"sparse gate, pixel level (retrained L-TAE)",macro_f1,2415,0.5987,0.5395,0.0592,0.0382,0.0807,0.0,True,384,116,0.0
+L-TAE-S (pixel),L-TAE retrain (pixel),"sparse gate, pixel level (retrained L-TAE)",kappa,2415,0.5274,0.3988,0.1286,0.1044,0.1531,0.0,True,384,116,0.0
+L-TAE-S (pixel),L-TAE retrain (pixel),"sparse gate, pixel level (retrained L-TAE)",accuracy,2415,0.7126,0.6017,0.111,0.0936,0.1284,0.0,True,384,116,0.0
+Transformer (pixel),L-TAE retrain (pixel),"attention capacity, pixel level (retrained L-TAE)",macro_f1,2415,0.5772,0.5395,0.0377,0.0189,0.0569,0.0,True,338,116,0.0
+Transformer (pixel),L-TAE retrain (pixel),"attention capacity, pixel level (retrained L-TAE)",kappa,2415,0.5029,0.3988,0.104,0.0806,0.1277,0.0,True,338,116,0.0
+Transformer (pixel),L-TAE retrain (pixel),"attention capacity, pixel level (retrained L-TAE)",accuracy,2415,0.6936,0.6017,0.0919,0.0749,0.1089,0.0,True,338,116,0.0
+TabNet (pixel),L-TAE retrain (pixel),TabNet vs. retrained L-TAE,macro_f1,2415,0.603,0.5395,0.0636,0.0373,0.0908,0.0,True,494,194,0.0
+TabNet (pixel),L-TAE retrain (pixel),TabNet vs. retrained L-TAE,kappa,2415,0.5363,0.3988,0.1374,0.1078,0.167,0.0,True,494,194,0.0
+TabNet (pixel),L-TAE retrain (pixel),TabNet vs. retrained L-TAE,accuracy,2415,0.7259,0.6017,0.1242,0.1035,0.1449,0.0,True,494,194,0.0

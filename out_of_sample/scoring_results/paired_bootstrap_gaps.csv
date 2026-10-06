@@ -1,0 +1,40 @@
+Model A,Model B,metric,A,B,Delta,Delta_lo,Delta_hi,p_two_sided,significant_95,A_only_correct,B_only_correct,mcnemar_p
+L-TAE-S (pixel),L-TAE (pixel),macro_f1,0.5987,0.5395,0.0592,0.038,0.081,0.0,True,384,116,0.0
+L-TAE-S (pixel),L-TAE (pixel),kappa,0.5274,0.3988,0.1286,0.104,0.1525,0.0,True,384,116,0.0
+L-TAE-S (pixel),L-TAE (pixel),accuracy,0.7126,0.6017,0.111,0.0936,0.1284,0.0,True,384,116,0.0
+L-TAE-S Field (field),L-TAE Field (field),macro_f1,0.6012,0.5939,0.0073,-0.0129,0.0272,0.4858,False,234,123,0.0
+L-TAE-S Field (field),L-TAE Field (field),kappa,0.5155,0.4707,0.0448,0.0221,0.067,0.0002,True,234,123,0.0
+L-TAE-S Field (field),L-TAE Field (field),accuracy,0.7039,0.658,0.046,0.0306,0.0609,0.0,True,234,123,0.0
+Transformer (pixel),L-TAE (pixel),macro_f1,0.5772,0.5395,0.0377,0.0182,0.0575,0.0,True,338,116,0.0
+Transformer (pixel),L-TAE (pixel),kappa,0.5029,0.3988,0.104,0.0801,0.1272,0.0,True,338,116,0.0
+Transformer (pixel),L-TAE (pixel),accuracy,0.6936,0.6017,0.0919,0.0745,0.1089,0.0,True,338,116,0.0
+L-TAE-S (pixel),Transformer (pixel),macro_f1,0.5987,0.5772,0.0215,-0.0003,0.0437,0.0564,False,172,126,0.009
+L-TAE-S (pixel),Transformer (pixel),kappa,0.5274,0.5029,0.0246,0.0021,0.0466,0.0332,True,172,126,0.009
+L-TAE-S (pixel),Transformer (pixel),accuracy,0.7126,0.6936,0.019,0.005,0.0331,0.0074,True,172,126,0.009
+TabNet (pixel),L-TAE-S (pixel),macro_f1,0.603,0.5987,0.0044,-0.0206,0.0294,0.7348,False,186,154,0.0926
+TabNet (pixel),L-TAE-S (pixel),kappa,0.5363,0.5274,0.0088,-0.0156,0.0335,0.5006,False,186,154,0.0926
+TabNet (pixel),L-TAE-S (pixel),accuracy,0.7259,0.7126,0.0133,-0.0017,0.0282,0.088,False,186,154,0.0926
+TabNet (pixel),L-TAE (pixel),macro_f1,0.603,0.5395,0.0636,0.0372,0.0906,0.0,True,494,194,0.0
+TabNet (pixel),L-TAE (pixel),kappa,0.5363,0.3988,0.1374,0.1086,0.1668,0.0,True,494,194,0.0
+TabNet (pixel),L-TAE (pixel),accuracy,0.7259,0.6017,0.1242,0.1039,0.1445,0.0,True,494,194,0.0
+TabNet (pixel),CNN-BiLSTM (pixel),macro_f1,0.603,0.5134,0.0896,0.065,0.114,0.0,True,484,143,0.0
+TabNet (pixel),CNN-BiLSTM (pixel),kappa,0.5363,0.3874,0.1488,0.121,0.1756,0.0,True,484,143,0.0
+TabNet (pixel),CNN-BiLSTM (pixel),accuracy,0.7259,0.5847,0.1412,0.1213,0.1607,0.0,True,484,143,0.0
+L-TAE-S (pixel),CNN-BiLSTM (pixel),macro_f1,0.5987,0.5134,0.0853,0.0627,0.1081,0.0,True,437,128,0.0
+L-TAE-S (pixel),CNN-BiLSTM (pixel),kappa,0.5274,0.3874,0.14,0.114,0.166,0.0,True,437,128,0.0
+L-TAE-S (pixel),CNN-BiLSTM (pixel),accuracy,0.7126,0.5847,0.128,0.1089,0.147,0.0,True,437,128,0.0
+L-TAE Field (field),L-TAE (pixel),macro_f1,0.5939,0.5395,0.0544,0.0319,0.0772,0.0,True,292,156,0.0
+L-TAE Field (field),L-TAE (pixel),kappa,0.4707,0.3988,0.0718,0.0481,0.0959,0.0,True,292,156,0.0
+L-TAE Field (field),L-TAE (pixel),accuracy,0.658,0.6017,0.0563,0.0393,0.0733,0.0,True,292,156,0.0
+CNN-BiLSTM Field (field),CNN-BiLSTM (pixel),macro_f1,0.506,0.5134,-0.0074,-0.0344,0.02,0.586,False,235,410,0.0
+CNN-BiLSTM Field (field),CNN-BiLSTM (pixel),kappa,0.3256,0.3874,-0.0618,-0.0879,-0.0355,0.0,True,235,410,0.0
+CNN-BiLSTM Field (field),CNN-BiLSTM (pixel),accuracy,0.5122,0.5847,-0.0725,-0.0928,-0.0526,0.0,True,235,410,0.0
+TempCNN Field (field),TempCNN (pixel),macro_f1,0.5355,0.5737,-0.0382,-0.06,-0.0169,0.0002,True,148,315,0.0
+TempCNN Field (field),TempCNN (pixel),kappa,0.426,0.4887,-0.0626,-0.0884,-0.0371,0.0,True,148,315,0.0
+TempCNN Field (field),TempCNN (pixel),accuracy,0.6232,0.6923,-0.0692,-0.087,-0.0518,0.0,True,148,315,0.0
+TabNet (pixel),TabNet Temporal Field (field),macro_f1,0.603,0.4333,0.1697,0.1391,0.2005,0.0,True,638,199,0.0
+TabNet (pixel),TabNet Temporal Field (field),kappa,0.5363,0.3121,0.2242,0.1912,0.2572,0.0,True,638,199,0.0
+TabNet (pixel),TabNet Temporal Field (field),accuracy,0.7259,0.5441,0.1818,0.1594,0.2041,0.0,True,638,199,0.0
+XGBoost (field),Base XGBoost (pixel),macro_f1,0.5648,0.544,0.0207,-0.0039,0.045,0.0976,False,173,154,0.3195
+XGBoost (field),Base XGBoost (pixel),kappa,0.4743,0.474,0.0003,-0.0253,0.0253,0.9828,False,173,154,0.3195
+XGBoost (field),Base XGBoost (pixel),accuracy,0.6969,0.689,0.0079,-0.007,0.0228,0.304,False,173,154,0.3195

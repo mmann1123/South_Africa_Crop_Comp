@@ -1,0 +1,10 @@
+Model A,Model B,Delta,Delta_lo,Delta_hi,p_two_sided,significant_95
+TabNet (pixel),CNN-BiLSTM (pixel),0.1447,0.1122,0.1768,0.0,True
+TabNet (pixel),L-TAE-S (pixel),0.0044,-0.0293,0.0384,0.803,False
+TabNet (pixel),L-TAE (pixel),0.0236,-0.0108,0.058,0.185,False
+L-TAE-S Field (field),L-TAE (pixel),0.0217,-0.0136,0.0569,0.2174,False
+L-TAE-S (pixel),CNN-BiLSTM (pixel),0.1404,0.1062,0.174,0.0,True
+L-TAE Field (field),L-TAE (pixel),0.0145,-0.0195,0.0488,0.4008,False
+CNN-BiLSTM Field (field),CNN-BiLSTM (pixel),0.0477,0.0155,0.0799,0.0048,True
+TabNet (pixel),TabNet Temporal Field (field),0.1697,0.1365,0.2032,0.0,True
+XGBoost (field),Base XGBoost (pixel),0.0207,-0.0156,0.0564,0.255,False
