@@ -32,16 +32,16 @@
 \newlabel{sfig:box}{{S2}{3}{Spectral separability of the crop classes, shown as box plots of standardized (z-score) intensity for each Sentinel-2 band and index (B2, B6, B11, B12, EVI, hue). (a) Distributions for all five crops overlap substantially across every band, so no single feature cleanly separates the classes. (b) Wheat versus barley are especially similar in every band---the dominant source of the persistent wheat--barley confusion seen across all models in the main paper}{figure.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {S3}{\ignorespaces Time-series feature generation with \texttt  {xr\_fresh}. For each pixel, the 10-month profile of every band and index is summarized by the statistical and temporal descriptors of Table\nobreakspace  {}\ref  {stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners.}}{4}{figure.3}\protected@file@percent }
 \newlabel{sfig:tsfeat}{{S3}{4}{Time-series feature generation with \texttt {xr\_fresh}. For each pixel, the 10-month profile of every band and index is summarized by the statistical and temporal descriptors of Table~\ref {stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners}{figure.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {S4}{\ignorespaces Architecture of the CNN-BiLSTM model. The $(B,6,T)$ input (six bands/indices over $T$ months) passes a 1D convolution (64 filters, kernel 5) for temporal feature extraction, then a bidirectional LSTM (hidden size 64) whose final time step is classified by a softmax head. Training uses weighted focal loss to counter class imbalance, and five seeds are ensembled by averaging logits.}}{5}{figure.4}\protected@file@percent }
-\newlabel{sfig:bilstm}{{S4}{5}{Architecture of the CNN-BiLSTM model. The $(B,6,T)$ input (six bands/indices over $T$ months) passes a 1D convolution (64 filters, kernel 5) for temporal feature extraction, then a bidirectional LSTM (hidden size 64) whose final time step is classified by a softmax head. Training uses weighted focal loss to counter class imbalance, and five seeds are ensembled by averaging logits}{figure.4}{}}
 \citation{tabnet_orig,tabnet2024}
-\@writefile{lot}{\contentsline {table}{\numberline {S1}{\ignorespaces Time-series features extracted from each pixel's spectral profile with \texttt  {xr\_fresh}.}}{6}{table.1}\protected@file@percent }
-\newlabel{stab:features}{{S1}{6}{Time-series features extracted from each pixel's spectral profile with \texttt {xr\_fresh}}{table.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {S2}{\ignorespaces XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy.}}{6}{table.2}\protected@file@percent }
-\newlabel{stab:trials}{{S2}{6}{XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy}{table.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {S-A.4}Deep Model Definitions}{6}{subsection.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{CNN-BiLSTM}{6}{section*.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{TabNet}{6}{section*.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {S1}{\ignorespaces Time-series features extracted from each pixel's spectral profile with \texttt  {xr\_fresh}.}}{5}{table.1}\protected@file@percent }
+\newlabel{stab:features}{{S1}{5}{Time-series features extracted from each pixel's spectral profile with \texttt {xr\_fresh}}{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S2}{\ignorespaces XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy.}}{5}{table.2}\protected@file@percent }
+\newlabel{stab:trials}{{S2}{5}{XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {S-A.4}Deep Model Definitions}{5}{subsection.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{CNN-BiLSTM}{5}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{TabNet}{5}{section*.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {S4}{\ignorespaces Architecture of the CNN-BiLSTM model. The $(B,6,T)$ input (six bands/indices over $T$ months) passes a 1D convolution (64 filters, kernel 5) for temporal feature extraction, then a bidirectional LSTM (hidden size 64) whose final time step is classified by a softmax head. Training uses weighted focal loss to counter class imbalance, and five seeds are ensembled by averaging logits.}}{6}{figure.4}\protected@file@percent }
+\newlabel{sfig:bilstm}{{S4}{6}{Architecture of the CNN-BiLSTM model. The $(B,6,T)$ input (six bands/indices over $T$ months) passes a 1D convolution (64 filters, kernel 5) for temporal feature extraction, then a bidirectional LSTM (hidden size 64) whose final time step is classified by a softmax head. Training uses weighted focal loss to counter class imbalance, and five seeds are ensembled by averaging logits}{figure.4}{}}
 \citation{ltae2020}
 \citation{vaswani2017,russwurm2020}
 \citation{tempcnn2019}
@@ -66,18 +66,22 @@
 \bibdata{cea}
 \bibcite{ai4foodsecurity}{{1}{2021}{{AI4EO}}{{}}}
 \bibcite{tabnet_orig}{{2}{2021}{{Arik and Pfister}}{{}}}
-\bibcite{breiman2001}{{3}{2001}{{Breiman}}{{}}}
-\bibcite{chen2016}{{4}{2016}{{Chen and Guestrin}}{{}}}
-\bibcite{friedman2001}{{5}{2001}{{Friedman}}{{}}}
-\bibcite{ltae2020}{{6}{2020}{{Garnot and Landrieu}}{{}}}
 \@writefile{lot}{\contentsline {table}{\numberline {S4}{\ignorespaces Ablation (iv): out-of-region transfer holdout performance versus seed-ensemble size.}}{11}{table.4}\protected@file@percent }
 \newlabel{stab:ens}{{S4}{11}{Ablation (iv): out-of-region transfer holdout performance versus seed-ensemble size}{table.4}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {S5}{\ignorespaces Ablation (v): effect of the imbalance-handling objective and resampling on out-of-region transfer holdout performance.}}{11}{table.5}\protected@file@percent }
 \newlabel{stab:loss}{{S5}{11}{Ablation (v): effect of the imbalance-handling objective and resampling on out-of-region transfer holdout performance}{table.5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {S-E}Spatial Distribution of Holdout Errors}{11}{section.5}\protected@file@percent }
 \newlabel{sec:spatial}{{S-E}{11}{Spatial Distribution of Holdout Errors}{section.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {S-F}Merged Cereal Classes}{11}{section.6}\protected@file@percent }
+\newlabel{sec:cereal}{{S-F}{11}{Merged Cereal Classes}{section.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {S7}{\ignorespaces Spatial distribution of holdout errors. (a) Ground-truth crop types. (b)--(f) Correct (grey) and incorrect (orange) fields for TabNet, L-TAE-S, field-level XGBoost, L-TAE, and CNN-BiLSTM; panel titles give the share of fields classified correctly. Light blue shows the edge of the training region; dotted, dashed, and dash-dot lines mark 5, 10, and 15\nobreakspace  {}km from the nearest training field.}}{12}{figure.7}\protected@file@percent }
 \newlabel{sfig:errmaps}{{S7}{12}{Spatial distribution of holdout errors. (a) Ground-truth crop types. (b)--(f) Correct (grey) and incorrect (orange) fields for TabNet, L-TAE-S, field-level XGBoost, L-TAE, and CNN-BiLSTM; panel titles give the share of fields classified correctly. Light blue shows the edge of the training region; dotted, dashed, and dash-dot lines mark 5, 10, and 15~km from the nearest training field}{figure.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S6}{\ignorespaces Out-of-region performance with the cereals merged into one class.}}{13}{table.6}\protected@file@percent }
+\newlabel{stab:cereal}{{S6}{13}{Out-of-region performance with the cereals merged into one class}{table.6}{}}
+\bibcite{breiman2001}{{3}{2001}{{Breiman}}{{}}}
+\bibcite{chen2016}{{4}{2016}{{Chen and Guestrin}}{{}}}
+\bibcite{friedman2001}{{5}{2001}{{Friedman}}{{}}}
+\bibcite{ltae2020}{{6}{2020}{{Garnot and Landrieu}}{{}}}
 \bibcite{james2013}{{7}{2013}{{James et~al.}}{{James, Witten, Hastie and Tibshirani}}}
 \bibcite{ke2017}{{8}{2017}{{Ke et~al.}}{{Ke, Meng, Finley, Wang, Chen, Ma, Ye and Liu}}}
 \bibcite{mann2025}{{9}{2025}{{Mann}}{{}}}
@@ -86,4 +90,4 @@
 \bibcite{tempcnn2019}{{12}{2019}{{Pelletier et~al.}}{{Pelletier, Webb and Petitjean}}}
 \bibcite{russwurm2020}{{13}{2020}{{Ru{\ss }wurm and K{\"o}rner}}{{}}}
 \bibcite{vaswani2017}{{14}{2017}{{Vaswani et~al.}}{{Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser and Polosukhin}}}
-\gdef \@abspage@last{13}
+\gdef \@abspage@last{14}

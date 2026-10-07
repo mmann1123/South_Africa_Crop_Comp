@@ -29,7 +29,7 @@
 
 \noindent This document collects supporting material for the main paper. Section~S-A details the
 dataset, feature set, and model definitions; Section~S-B defines the metrics; Section~S-C reports
-training cost; Section~S-D presents the ablation studies; and Section~S-E maps the spatial distribution of holdout errors. Equation, figure, table,
+training cost; Section~S-D presents the ablation studies; Section~S-E maps the spatial distribution of holdout errors; and Section~S-F reports performance with the cereal classes merged. Equation, figure, table,
 and section labels are prefixed ``S''.
 
 \section{Dataset Details, Feature Set, and Model Definitions}
@@ -440,6 +440,56 @@ Figure~\ref{sfig:errmaps} shows the correct and incorrectly classified holdout f
 \caption{Spatial distribution of holdout errors. (a) Ground-truth crop types. (b)--(f) Correct (grey) and incorrect (orange) fields for TabNet, L-TAE-S, field-level XGBoost, L-TAE, and CNN-BiLSTM; panel titles give the share of fields classified correctly. Light blue shows the edge of the training region; dotted, dashed, and dash-dot lines mark 5, 10, and 15~km from the nearest training field.}
 \label{sfig:errmaps}
 \end{figure*}
+
+\section{Merged Cereal Classes}
+\label{sec:cereal}
+\emph{Supports main paper Sec.~5.3.}
+Table~\ref{stab:cereal} re-scores every model's holdout predictions after merging barley, wheat, and small-grain grazing into a single cereal class. Accuracy rises by 0.06 to 0.16 for every model, and the sparse models remain at the top while the dense pixel networks stay at the bottom.
+
+\begin{table}[htbp]
+\centering
+\caption{Out-of-region performance with the cereals merged into one class.}
+\label{stab:cereal}
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{5pt}
+\footnotesize
+\begin{tabular}{llccccc}
+\toprule
+ & & \multicolumn{2}{c}{\textbf{Macro-F1}} & \multicolumn{2}{c}{\textbf{Accuracy}} & \textbf{Cereal} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+\textbf{Model} & \textbf{Level} & \textbf{5 cl.} & \textbf{3 cl.} & \textbf{5 cl.} & \textbf{3 cl.} & \textbf{F1} \\
+\midrule
+TabNet & pixel & \textbf{0.60} & 0.82 & \textbf{0.73} & \textbf{0.84} & 0.76 \\
+L-TAE-S & field & \textbf{0.60} & \textbf{0.83} & 0.70 & 0.83 & 0.77 \\
+L-TAE-S & pixel & \textbf{0.60} & 0.80 & 0.71 & 0.83 & \textbf{0.78} \\
+L-TAE & field & 0.59 & 0.78 & 0.66 & 0.78 & 0.74 \\
+Transformer & pixel & 0.58 & 0.77 & 0.69 & 0.82 & 0.76 \\
+TempCNN & pixel & 0.57 & 0.76 & 0.69 & 0.81 & 0.75 \\
+XGBoost & field & 0.56 & 0.77 & 0.70 & 0.81 & 0.73 \\
+LightGBM & pixel & 0.56 & 0.78 & 0.70 & 0.80 & 0.69 \\
+Logistic Regression & pixel & 0.56 & 0.76 & 0.69 & 0.80 & 0.72 \\
+LightGBM & field & 0.56 & 0.76 & 0.69 & 0.79 & 0.69 \\
+Voting & pixel & 0.56 & 0.80 & 0.70 & 0.81 & 0.71 \\
+Random Forest & pixel & 0.55 & 0.78 & 0.69 & 0.79 & 0.69 \\
+XGBoost & pixel & 0.54 & 0.77 & 0.69 & 0.81 & 0.74 \\
+L-TAE & pixel & 0.54 & 0.71 & 0.60 & 0.73 & 0.70 \\
+TempCNN & field & 0.54 & 0.73 & 0.62 & 0.77 & 0.73 \\
+Stacking & field & 0.53 & 0.74 & 0.67 & 0.80 & 0.76 \\
+CNN-BiLSTM & pixel & 0.51 & 0.71 & 0.58 & 0.73 & 0.70 \\
+CNN-BiLSTM & field & 0.51 & 0.69 & 0.51 & 0.67 & 0.67 \\
+3D CNN & patch & 0.50 & 0.67 & 0.51 & 0.64 & 0.63 \\
+SMOTE Stacked & field & 0.49 & 0.68 & 0.67 & 0.76 & 0.65 \\
+Multi-Channel 2D CNN & patch & 0.45 & 0.68 & 0.53 & 0.68 & 0.64 \\
+TabNet (raw, field-avg) & field & 0.43 & 0.64 & 0.54 & 0.70 & 0.67 \\
+TabNet (\texttt{xr\_fresh}) & field & 0.37 & 0.54 & 0.62 & 0.68 & 0.46 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+Models in the order of main Table~1. 5 cl.: the five published classes; 3 cl.: barley, wheat, and small-grain grazing merged into one cereal class, giving cereal, canola, and lucerne/medics. Classes are merged in each model's existing holdout confusion matrix, without retraining. Cereal F1 is the F1 of the merged class. Part of the macro-F1 increase is mechanical, because there are fewer classes and the hardest ones are combined, so accuracy and cereal F1 are the more comparable measures. Bold marks the best value per column.
+\end{minipage}
+\end{table}
 
 \bibliographystyle{elsarticle-harv}
 \bibliography{cea}
