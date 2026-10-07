@@ -726,6 +726,11 @@ INPUT ./figures//patch_model.pdf
 INPUT ./figures//patch_model.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
+INPUT ./figures//holdout_error_maps.pdf
+INPUT ./figures//holdout_error_maps.pdf
+INPUT figures//holdout_error_maps.pdf
+INPUT ./figures//holdout_error_maps.pdf
+INPUT ./figures//holdout_error_maps.pdf
 INPUT ./cea-supplement.bbl
 INPUT cea-supplement.bbl
 INPUT ./cea-supplement.bbl

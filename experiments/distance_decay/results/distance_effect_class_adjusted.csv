@@ -1,0 +1,6 @@
+model,logodds_per_10km,ci_lo,ci_hi,p,odds_ratio_per_10km
+TabNet (pixel),1.247,0.712,1.782,0.0,3.48
+L-TAE-S (pixel),0.609,0.154,1.064,0.0087,1.839
+L-TAE (pixel),0.585,0.139,1.031,0.0101,1.796
+XGBoost (field),1.087,0.63,1.543,0.0,2.964
+CNN-BiLSTM (pixel),-0.153,-0.599,0.293,0.5005,0.858

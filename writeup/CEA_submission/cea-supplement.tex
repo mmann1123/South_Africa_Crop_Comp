@@ -29,7 +29,7 @@
 
 \noindent This document collects supporting material for the main paper. Section~S-A details the
 dataset, feature set, and model definitions; Section~S-B defines the metrics; Section~S-C reports
-training cost; and Section~S-D presents the ablation studies. Equation, figure, table,
+training cost; Section~S-D presents the ablation studies; and Section~S-E maps the spatial distribution of holdout errors. Equation, figure, table,
 and section labels are prefixed ``S''.
 
 \section{Dataset Details, Feature Set, and Model Definitions}
@@ -428,6 +428,18 @@ CNN-BiLSTM (field) & Weighted focal ($\gamma{=}2$) & no  & 0.51 & 0.34 \\
 Field-level, 5-seed ensembles. ``Resample'' denotes class-balanced oversampling.
 \end{minipage}
 \end{table}
+
+\section{Spatial Distribution of Holdout Errors}
+\label{sec:spatial}
+\emph{Supports main paper Sec.~4.3.}
+Figure~\ref{sfig:errmaps} shows the correct and incorrectly classified holdout fields for the five representative models, with contours at 5, 10, and 15~km from the nearest training field. The errors are spatially clustered rather than changing uniformly. Nearer the training tiles ($<5$~km, 521 fields) all five models classify about 70\% of fields correctly (69 to 72\%). In a south-central zone 8 to 16~km from the training tiles (398 fields), L-TAE and CNN-BiLSTM fall to 36\% and 30\%, whereas TabNet (70\%), L-TAE-S (67\%), and field-level XGBoost (63\%) remain close to their tile-wide accuracy. The zone is contiguous, and accuracy does not decline steadily with distance, so the pattern reflects local conditions within the tile rather than distance from the training region. Hence, the dense temporal networks are the models most affected by these local conditions.
+
+\begin{figure*}[htbp]
+\centering
+\includegraphics[width=\textwidth]{holdout_error_maps.pdf}
+\caption{Spatial distribution of holdout errors. (a) Ground-truth crop types. (b)--(f) Correct (grey) and incorrect (orange) fields for TabNet, L-TAE-S, field-level XGBoost, L-TAE, and CNN-BiLSTM; panel titles give the share of fields classified correctly. Light blue shows the edge of the training region; dotted, dashed, and dash-dot lines mark 5, 10, and 15~km from the nearest training field.}
+\label{sfig:errmaps}
+\end{figure*}
 
 \bibliographystyle{elsarticle-harv}
 \bibliography{cea}

@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex cea-supplement"] 1791222317 "cea-supplement.aux" "cea-supplement.bbl" "cea-supplement" 1791222317
+["bibtex cea-supplement"] 1791386452 "cea-supplement.aux" "cea-supplement.bbl" "cea-supplement" 1791386566
   "/usr/share/texlive/texmf-dist/bibtex/bst/elsarticle/elsarticle-harv.bst" 1606256092 30002 8c0c5833f37bea3ec214cf315a72975d ""
-  "cea-supplement.aux" 1791222317 11001 77440e6439935c1b6af60e6276d91e6c "pdflatex"
+  "cea-supplement.aux" 1791386566 12178 4d32297179f532b8dc10b3dc080a98f5 "pdflatex"
   "cea.bib" 1787148054 15643 a3b5b1ef14069650018c647f24cf8cbc ""
   (generated)
   "cea-supplement.bbl"
   "cea-supplement.blg"
-["pdflatex"] 1791222317 "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/CEA_submission/cea-supplement.tex" "cea-supplement.pdf" "cea-supplement" 1791222317
+["pdflatex"] 1791386565 "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/CEA_submission/cea-supplement.tex" "cea-supplement.pdf" "cea-supplement" 1791386566
   "/etc/texmf/web2c/texmf.cnf" 1673971414 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/CEA_submission/cea-supplement.tex" 1791221993 22367 fd4a244e627442d6b75a3167c7ff6c73 ""
+  "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/CEA_submission/cea-supplement.tex" 1791386565 24026 a502dd4d270126ff0b688b43674b324e ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -126,17 +126,18 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1707754773 4379155 98693266ff65f58d9f98aff394de12d2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1770087664 2798973 3419ef02ddb418aae545861b3d88034d ""
-  "cea-supplement.aux" 1791222317 11001 77440e6439935c1b6af60e6276d91e6c "pdflatex"
-  "cea-supplement.bbl" 1791222317 6885 a5d28a760bbb09baeeabca9fd8856885 "bibtex cea-supplement"
-  "cea-supplement.out" 1791222317 1525 e8c02fcdb1169ce50ec0ecd0acae847c "pdflatex"
-  "cea-supplement.spl" 1791222317 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "cea-supplement.tex" 1791221993 22367 fd4a244e627442d6b75a3167c7ff6c73 ""
+  "cea-supplement.aux" 1791386566 12178 4d32297179f532b8dc10b3dc080a98f5 "pdflatex"
+  "cea-supplement.bbl" 1791386452 6885 a5d28a760bbb09baeeabca9fd8856885 "bibtex cea-supplement"
+  "cea-supplement.out" 1791386566 1770 b2c089ff00ea74fa806825c18ba47399 "pdflatex"
+  "cea-supplement.spl" 1791386566 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "cea-supplement.tex" 1791386565 24026 a502dd4d270126ff0b688b43674b324e ""
   "figures//Example_patches.pdf" 1787147392 20650 5e3f32b5144c17522d08870e33b724fa ""
   "figures//Time_Series_Feature_Generation.pdf" 1787147392 33027 aa2a4de41d5e0d679e059d785fea6822 ""
   "figures//all_crops_boxplot.pdf" 1787147392 18907 2a3dedf8e68556d99106f6f92677c154 ""
   "figures//avg_field_area.pdf" 1787147392 14719 040ece122668ce055f50a7e1380b386b ""
   "figures//cnn_bilstm.pdf" 1787147392 11818 dfbcde28cbd59e130af146c495c9cdf2 ""
   "figures//fields_count.pdf" 1787147392 13759 6d0c3bf7bbe7f757209c8990b57819ee ""
+  "figures//holdout_error_maps.pdf" 1791385240 8119168 43617ea8b00ebbb72890c76ff42d7e34 ""
   "figures//patch_model.pdf" 1787147392 12146 283585205ffad5577185b787edf48277 ""
   "figures//wheat_barley_boxplot.pdf" 1787147392 15090 9ef1cc0310d960bf27021a404bb7a01f ""
   (generated)
