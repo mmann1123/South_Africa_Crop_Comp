@@ -1,0 +1,56 @@
+=== L-TAE-S Field Training === Fraction: 1.0, Device: cuda
+  gamma=1.5, n_head=4, entropy_lambda=0.0, time_varying=True
+Loading data...
+Feature cols: 60 (expected 60)
+Aggregating to field level...
+Field-level shape: (4147, 62)
+Train FIDs: 2653 -> 2653 (100%)
+Split: train=2653, val=664, test=830
+  loss=focal, sampler=off
+
+=== Seed 42 ===
+  Epoch 1/100 - loss=0.6440, sparse=0.0078, val_f1=0.5213, 0.8s
+  Epoch 10/100 - loss=0.2767, sparse=0.0078, val_f1=0.6594, 0.3s
+  Epoch 20/100 - loss=0.2120, sparse=0.0078, val_f1=0.6723, 0.3s
+  Epoch 30/100 - loss=0.1630, sparse=0.0078, val_f1=0.6627, 0.3s
+  Epoch 40/100 - loss=0.1343, sparse=0.0078, val_f1=0.6709, 0.3s
+  Epoch 50/100 - loss=0.1047, sparse=0.0078, val_f1=0.6709, 0.3s
+  Early stopping at epoch 58
+  Seed 42: test_acc=0.7253
+
+=== Seed 101 ===
+  Epoch 1/100 - loss=0.6551, sparse=0.0078, val_f1=0.5310, 0.3s
+  Epoch 10/100 - loss=0.2865, sparse=0.0078, val_f1=0.6609, 0.4s
+  Epoch 20/100 - loss=0.2115, sparse=0.0078, val_f1=0.6605, 0.3s
+  Epoch 30/100 - loss=0.1711, sparse=0.0078, val_f1=0.6618, 0.4s
+  Early stopping at epoch 36
+  Seed 101: test_acc=0.7157
+
+=== Seed 202 ===
+  Epoch 1/100 - loss=0.6426, sparse=0.0078, val_f1=0.4914, 0.3s
+  Epoch 10/100 - loss=0.2948, sparse=0.0078, val_f1=0.6459, 0.3s
+  Epoch 20/100 - loss=0.2166, sparse=0.0078, val_f1=0.6581, 0.3s
+  Epoch 30/100 - loss=0.1734, sparse=0.0078, val_f1=0.6578, 0.3s
+  Epoch 40/100 - loss=0.1424, sparse=0.0078, val_f1=0.6755, 0.3s
+  Early stopping at epoch 41
+  Seed 202: test_acc=0.7301
+
+=== Seed 303 ===
+  Epoch 1/100 - loss=0.6248, sparse=0.0078, val_f1=0.5297, 0.3s
+  Epoch 10/100 - loss=0.2820, sparse=0.0078, val_f1=0.6605, 0.3s
+  Epoch 20/100 - loss=0.2082, sparse=0.0078, val_f1=0.6437, 0.3s
+  Epoch 30/100 - loss=0.1688, sparse=0.0078, val_f1=0.6331, 0.3s
+  Early stopping at epoch 33
+  Seed 303: test_acc=0.7120
+
+=== Seed 404 ===
+  Epoch 1/100 - loss=0.6384, sparse=0.0078, val_f1=0.5445, 0.3s
+  Epoch 10/100 - loss=0.2829, sparse=0.0078, val_f1=0.6450, 0.3s
+  Epoch 20/100 - loss=0.2154, sparse=0.0078, val_f1=0.6339, 0.3s
+  Early stopping at epoch 23
+  Seed 404: test_acc=0.7072
+
+--- Ensemble Results ---
+  acc=0.7325, f1_macro=0.6421, f1_weighted=0.7330, kappa=0.6223
+Artifacts saved to /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ltae_s_sensitivity/models/g1.5_h4_lam0
+Total time: 68.4s

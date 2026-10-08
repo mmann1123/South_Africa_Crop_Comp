@@ -39,6 +39,10 @@ LR = 1e-3
 PATIENCE = 15
 
 # L-TAE-S hyperparameters
+# Legacy L1 term on sparsemax masks: constant (masks sum to 1), zero gradient in exact
+# arithmetic, so it adds no sparsity (reviewer R1-4). Kept because removing it changes
+# float16 rounding under AMP, and the published L-TAE-S runs are bit-reproducible only with it.
+LAMBDA_SPARSE = 1e-3
 GAMMA = 1.5
 TIME_VARYING_GATE = True
 
@@ -47,6 +51,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--fraction', type=float, required=True)
     parser.add_argument('--output-dir', type=str, required=True)
+    # Sensitivity-sweep options (R1-2). Defaults reproduce the published L-TAE-S.
+    parser.add_argument('--gamma', type=float, default=GAMMA)
+    parser.add_argument('--n-head', type=int, default=16)
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -55,7 +62,7 @@ def main():
     t0 = time.time()
     fraction = args.fraction
     print(f"=== L-TAE-S Pixel Training === Fraction: {fraction}, Device: {device}")
-    print(f"  gamma={GAMMA}, time_varying={TIME_VARYING_GATE}")
+    print(f"  gamma={args.gamma}, n_head={args.n_head}, lambda_sparse={LAMBDA_SPARSE}, time_varying={TIME_VARYING_GATE}")
 
     # Load pixel-level data
     print("Loading data...")
@@ -124,9 +131,9 @@ def main():
         random.seed(seed)
 
         model = LTAESparse(
-            in_channels=N_BANDS, d_model=128, n_head=16, d_k=8,
+            in_channels=N_BANDS, d_model=128, n_head=args.n_head, d_k=8,
             dropout=0.3, num_classes=num_classes,
-            gamma=GAMMA, time_varying_gate=TIME_VARYING_GATE,
+            gamma=args.gamma, time_varying_gate=TIME_VARYING_GATE,
         ).to(device)
         optimizer = torch.optim.AdamW(model.parameters(), lr=LR, weight_decay=1e-4)
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=N_EPOCHS, eta_min=1e-6)
@@ -144,6 +151,7 @@ def main():
             t_ep = time.time()
             train_loss, sparse_loss = train_epoch_sparse(
                 model, optimizer, criterion, train_loader, scaler_amp, device,
+                lambda_sparse=LAMBDA_SPARSE,
             )
 
             val_logits, val_labels = evaluate_sparse(model, val_loader, device)
@@ -202,7 +210,9 @@ def main():
             "test_pixels": int(test_mask.sum()),
             "test_fields": int(len(test_fids)),
             "seeds": SEEDS_ENSEMBLE,
-            "gamma": GAMMA,
+            "gamma": args.gamma,
+            "n_head": args.n_head,
+            "lambda_sparse": LAMBDA_SPARSE,
             "time_varying_gate": TIME_VARYING_GATE,
             "training_time_sec": round(train_time, 1),
             "metrics": {

@@ -199,11 +199,15 @@ class LTAESparse(nn.Module):
     """
 
     def __init__(self, in_channels=6, d_model=128, n_head=16, d_k=8,
-                 dropout=0.3, num_classes=5, gamma=1.5, time_varying_gate=True):
+                 dropout=0.3, num_classes=5, gamma=1.5, time_varying_gate=True,
+                 mask_entropy=False):
         super().__init__()
         self.d_model = d_model
         self.n_head = n_head
         self.d_k = d_k
+        # Optional TabNet-style mask-entropy penalty (off by default; used only in
+        # the R1-2 sensitivity sweep). The published L-TAE-S uses no penalty.
+        self.mask_entropy = mask_entropy
 
         # Same embedding as LTAE
         self.embedding = nn.Sequential(
@@ -252,9 +256,13 @@ class LTAESparse(nn.Module):
 
         Returns:
             logits: (B, num_classes)
-            aux: dict with 'masks' (B, H, T, E). No sparsity loss is returned:
-                sparsemax masks sum to 1, so an L1 penalty on them is constant
-                (zero gradient). Sparsity comes from sparsemax and the gamma prior.
+            aux: dict with 'masks' (B, H, T, E) and 'sparsity_loss'. The default
+                sparsity_loss is the mean of the sparsemax masks, which is constant
+                (1/E, masks sum to 1) and has zero gradient in exact arithmetic, so
+                sparsity comes from sparsemax and the gamma prior. It is kept because
+                removing it changes float16 rounding under AMP and the published
+                runs are bit-reproducible only with it (reviewer R1-4). With
+                mask_entropy=True it is replaced by the mask entropy (R1-2 sweep).
         """
         B, T, C = x.shape
         x = self.embedding(x)       # (B, T, E)
@@ -287,7 +295,10 @@ class LTAESparse(nn.Module):
         out = self.mlp(out)
         logits = self.classifier(out)
 
-        aux = {"masks": masks}
+        # Legacy constant term, see docstring (kept for bit-exact reproducibility).
+        aux = {"masks": masks, "sparsity_loss": masks.mean()}
+        if self.mask_entropy:
+            aux["sparsity_loss"] = (-masks * torch.log(masks + 1e-15)).sum(dim=-1).mean()
 
         return logits, aux
 

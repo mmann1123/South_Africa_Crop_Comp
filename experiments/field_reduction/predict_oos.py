@@ -277,6 +277,14 @@ def predict_ltae_pixel(model_dir, output_csv):
     return len(df_out)
 
 
+def _ltae_s_arch(model_dir):
+    """gamma / n_head recorded in metadata.json (sensitivity sweep); published defaults otherwise."""
+    import json
+    meta = os.path.join(model_dir, "metadata.json")
+    m = json.load(open(meta)) if os.path.exists(meta) else {}
+    return {"gamma": m.get("gamma", 1.5), "n_head": m.get("n_head", 16)}
+
+
 def predict_ltae_sparse_pixel(model_dir, output_csv):
     """L-TAE-S pixel: 5-seed ensemble → avg logits → majority vote per field."""
     import torch
@@ -313,7 +321,8 @@ def predict_ltae_sparse_pixel(model_dir, output_csv):
         model_path = os.path.join(model_dir, f"ltae_sparse_seed_{seed}.pt")
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"L-TAE-S model not found: {model_path}")
-        model = LTAESparse(in_channels=N_BANDS, num_classes=len(le.classes_)).to(device)
+        model = LTAESparse(in_channels=N_BANDS, num_classes=len(le.classes_),
+                           **_ltae_s_arch(model_dir)).to(device)
         model.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
         model.eval()
 
@@ -380,7 +389,8 @@ def predict_ltae_sparse_field(model_dir, output_csv, seeds=None):
         model_path = os.path.join(model_dir, f"ltae_sparse_field_seed_{seed}.pt")
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"L-TAE-S field model not found: {model_path}")
-        model = LTAESparse(in_channels=N_BANDS, num_classes=len(le.classes_)).to(device)
+        model = LTAESparse(in_channels=N_BANDS, num_classes=len(le.classes_),
+                           **_ltae_s_arch(model_dir)).to(device)
         model.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
         model.eval()
 

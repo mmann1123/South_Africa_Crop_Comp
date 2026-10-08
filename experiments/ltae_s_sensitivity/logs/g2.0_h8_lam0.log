@@ -1,0 +1,52 @@
+=== L-TAE-S Field Training === Fraction: 1.0, Device: cuda
+  gamma=2.0, n_head=8, entropy_lambda=0.0, time_varying=True
+Loading data...
+Feature cols: 60 (expected 60)
+Aggregating to field level...
+Field-level shape: (4147, 62)
+Train FIDs: 2653 -> 2653 (100%)
+Split: train=2653, val=664, test=830
+  loss=focal, sampler=off
+
+=== Seed 42 ===
+  Epoch 1/100 - loss=0.7014, sparse=0.0078, val_f1=0.4996, 0.9s
+  Epoch 10/100 - loss=0.3104, sparse=0.0078, val_f1=0.6366, 0.4s
+  Epoch 20/100 - loss=0.2352, sparse=0.0078, val_f1=0.6761, 0.3s
+  Epoch 30/100 - loss=0.2060, sparse=0.0078, val_f1=0.6462, 0.3s
+  Early stopping at epoch 35
+  Seed 42: test_acc=0.7060
+
+=== Seed 101 ===
+  Epoch 1/100 - loss=0.7078, sparse=0.0078, val_f1=0.5480, 0.3s
+  Epoch 10/100 - loss=0.3117, sparse=0.0078, val_f1=0.6466, 0.3s
+  Epoch 20/100 - loss=0.2396, sparse=0.0078, val_f1=0.6393, 0.4s
+  Early stopping at epoch 27
+  Seed 101: test_acc=0.7012
+
+=== Seed 202 ===
+  Epoch 1/100 - loss=0.6775, sparse=0.0078, val_f1=0.4835, 0.3s
+  Epoch 10/100 - loss=0.3188, sparse=0.0078, val_f1=0.6523, 0.3s
+  Epoch 20/100 - loss=0.2555, sparse=0.0078, val_f1=0.6663, 0.3s
+  Early stopping at epoch 26
+  Seed 202: test_acc=0.6723
+
+=== Seed 303 ===
+  Epoch 1/100 - loss=0.7241, sparse=0.0078, val_f1=0.5057, 0.3s
+  Epoch 10/100 - loss=0.3056, sparse=0.0078, val_f1=0.6350, 0.4s
+  Epoch 20/100 - loss=0.2539, sparse=0.0078, val_f1=0.6513, 0.4s
+  Early stopping at epoch 23
+  Seed 303: test_acc=0.7096
+
+=== Seed 404 ===
+  Epoch 1/100 - loss=0.6696, sparse=0.0078, val_f1=0.5137, 0.3s
+  Epoch 10/100 - loss=0.3092, sparse=0.0078, val_f1=0.6302, 0.3s
+  Epoch 20/100 - loss=0.2474, sparse=0.0078, val_f1=0.6227, 0.3s
+  Epoch 30/100 - loss=0.2092, sparse=0.0078, val_f1=0.6778, 0.3s
+  Epoch 40/100 - loss=0.1573, sparse=0.0078, val_f1=0.6378, 0.4s
+  Early stopping at epoch 45
+  Seed 404: test_acc=0.7253
+
+--- Ensemble Results ---
+  acc=0.7241, f1_macro=0.6343, f1_weighted=0.7251, kappa=0.6117
+Artifacts saved to /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ltae_s_sensitivity/models/g2.0_h8_lam0
+Total time: 61.0s

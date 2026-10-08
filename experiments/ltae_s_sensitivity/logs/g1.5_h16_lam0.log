@@ -1,0 +1,51 @@
+=== L-TAE-S Field Training === Fraction: 1.0, Device: cuda
+  gamma=1.5, n_head=16, entropy_lambda=0.0, time_varying=True
+Loading data...
+Feature cols: 60 (expected 60)
+Aggregating to field level...
+Field-level shape: (4147, 62)
+Train FIDs: 2653 -> 2653 (100%)
+Split: train=2653, val=664, test=830
+  loss=focal, sampler=off
+
+=== Seed 42 ===
+  Epoch 1/100 - loss=0.7001, sparse=0.0078, val_f1=0.5286, 1.0s
+  Epoch 10/100 - loss=0.3114, sparse=0.0078, val_f1=0.6601, 0.5s
+  Epoch 20/100 - loss=0.2321, sparse=0.0078, val_f1=0.6404, 0.5s
+  Early stopping at epoch 24
+  Seed 42: test_acc=0.7024
+
+=== Seed 101 ===
+  Epoch 1/100 - loss=0.7059, sparse=0.0078, val_f1=0.5220, 0.5s
+  Epoch 10/100 - loss=0.2979, sparse=0.0078, val_f1=0.6551, 0.5s
+  Epoch 20/100 - loss=0.2261, sparse=0.0078, val_f1=0.6531, 0.6s
+  Early stopping at epoch 27
+  Seed 101: test_acc=0.7084
+
+=== Seed 202 ===
+  Epoch 1/100 - loss=0.6879, sparse=0.0078, val_f1=0.5470, 0.6s
+  Epoch 10/100 - loss=0.3276, sparse=0.0078, val_f1=0.6321, 0.5s
+  Epoch 20/100 - loss=0.2393, sparse=0.0078, val_f1=0.6696, 0.5s
+  Epoch 30/100 - loss=0.1820, sparse=0.0078, val_f1=0.6467, 0.5s
+  Early stopping at epoch 35
+  Seed 202: test_acc=0.7133
+
+=== Seed 303 ===
+  Epoch 1/100 - loss=0.7077, sparse=0.0078, val_f1=0.5222, 0.5s
+  Epoch 10/100 - loss=0.3091, sparse=0.0078, val_f1=0.6314, 0.5s
+  Epoch 20/100 - loss=0.2217, sparse=0.0078, val_f1=0.6295, 0.5s
+  Early stopping at epoch 21
+  Seed 303: test_acc=0.6892
+
+=== Seed 404 ===
+  Epoch 1/100 - loss=0.7059, sparse=0.0078, val_f1=0.4779, 0.5s
+  Epoch 10/100 - loss=0.2934, sparse=0.0078, val_f1=0.6334, 0.5s
+  Epoch 20/100 - loss=0.2367, sparse=0.0078, val_f1=0.6361, 0.5s
+  Epoch 30/100 - loss=0.1923, sparse=0.0078, val_f1=0.6641, 0.5s
+  Early stopping at epoch 39
+  Seed 404: test_acc=0.7337
+
+--- Ensemble Results ---
+  acc=0.7289, f1_macro=0.6431, f1_weighted=0.7292, kappa=0.6179
+Artifacts saved to /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ltae_s_sensitivity/models/g1.5_h16_lam0
+Total time: 82.6s

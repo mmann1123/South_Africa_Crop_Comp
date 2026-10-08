@@ -1,0 +1,53 @@
+=== L-TAE-S Field Training === Fraction: 1.0, Device: cuda
+  gamma=1.5, n_head=32, entropy_lambda=0.0, time_varying=True
+Loading data...
+Feature cols: 60 (expected 60)
+Aggregating to field level...
+Field-level shape: (4147, 62)
+Train FIDs: 2653 -> 2653 (100%)
+Split: train=2653, val=664, test=830
+  loss=focal, sampler=off
+
+=== Seed 42 ===
+  Epoch 1/100 - loss=0.8349, sparse=0.0078, val_f1=0.4115, 1.2s
+  Epoch 10/100 - loss=0.3380, sparse=0.0078, val_f1=0.6309, 0.8s
+  Epoch 20/100 - loss=0.2786, sparse=0.0078, val_f1=0.6154, 0.7s
+  Epoch 30/100 - loss=0.2563, sparse=0.0078, val_f1=0.6188, 0.8s
+  Epoch 40/100 - loss=0.2372, sparse=0.0078, val_f1=0.6333, 0.7s
+  Early stopping at epoch 47
+  Seed 42: test_acc=0.6940
+
+=== Seed 101 ===
+  Epoch 1/100 - loss=0.8538, sparse=0.0078, val_f1=0.4240, 0.7s
+  Epoch 10/100 - loss=0.3449, sparse=0.0078, val_f1=0.6371, 0.7s
+  Epoch 20/100 - loss=0.2894, sparse=0.0078, val_f1=0.5992, 0.7s
+  Early stopping at epoch 27
+  Seed 101: test_acc=0.7108
+
+=== Seed 202 ===
+  Epoch 1/100 - loss=0.8571, sparse=0.0078, val_f1=0.3975, 0.7s
+  Epoch 10/100 - loss=0.3359, sparse=0.0078, val_f1=0.6183, 0.8s
+  Epoch 20/100 - loss=0.2941, sparse=0.0078, val_f1=0.6386, 0.8s
+  Epoch 30/100 - loss=0.2569, sparse=0.0078, val_f1=0.6452, 0.8s
+  Early stopping at epoch 32
+  Seed 202: test_acc=0.6952
+
+=== Seed 303 ===
+  Epoch 1/100 - loss=0.8060, sparse=0.0078, val_f1=0.4552, 0.8s
+  Epoch 10/100 - loss=0.3348, sparse=0.0078, val_f1=0.6362, 0.8s
+  Epoch 20/100 - loss=0.2971, sparse=0.0078, val_f1=0.6171, 0.7s
+  Epoch 30/100 - loss=0.2662, sparse=0.0078, val_f1=0.6523, 0.8s
+  Early stopping at epoch 36
+  Seed 303: test_acc=0.7301
+
+=== Seed 404 ===
+  Epoch 1/100 - loss=0.8273, sparse=0.0078, val_f1=0.4412, 0.8s
+  Epoch 10/100 - loss=0.3403, sparse=0.0078, val_f1=0.6438, 0.8s
+  Epoch 20/100 - loss=0.2846, sparse=0.0078, val_f1=0.6295, 0.8s
+  Early stopping at epoch 28
+  Seed 404: test_acc=0.6747
+
+--- Ensemble Results ---
+  acc=0.7289, f1_macro=0.6464, f1_weighted=0.7320, kappa=0.6188
+Artifacts saved to /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ltae_s_sensitivity/models/g1.5_h32_lam0
+Total time: 136.6s

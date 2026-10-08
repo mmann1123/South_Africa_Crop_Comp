@@ -42,6 +42,10 @@ PATIENCE = 15
 
 # L-TAE-S hyperparameters (match train_ltae_sparse_pixel.py)
 GAMMA = 1.5
+# Legacy L1 term on sparsemax masks: constant (masks sum to 1), zero gradient in exact
+# arithmetic, so it adds no sparsity (reviewer R1-4). Kept because removing it changes
+# float16 rounding under AMP, and the published L-TAE-S runs are bit-reproducible only with it.
+LAMBDA_SPARSE = 1e-3
 TIME_VARYING_GATE = True
 
 
@@ -49,6 +53,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--fraction', type=float, required=True)
     parser.add_argument('--output-dir', type=str, required=True)
+    # Sensitivity-sweep options (R1-2). Defaults reproduce the published L-TAE-S.
+    parser.add_argument('--gamma', type=float, default=GAMMA)
+    parser.add_argument('--n-head', type=int, default=16)
+    parser.add_argument('--entropy-lambda', type=float, default=0.0,
+                        help='weight of the optional mask-entropy penalty (0 = off, as published)')
     parser.add_argument('--loss', choices=['focal', 'weighted_ce', 'plain_ce'],
                         default='focal',
                         help="Imbalance objective ablation (3.4): focal=WeightedFocal(gamma=2), "
@@ -63,7 +72,8 @@ def main():
     t0 = time.time()
     fraction = args.fraction
     print(f"=== L-TAE-S Field Training === Fraction: {fraction}, Device: {device}")
-    print(f"  gamma={GAMMA}, time_varying={TIME_VARYING_GATE}")
+    print(f"  gamma={args.gamma}, n_head={args.n_head}, entropy_lambda={args.entropy_lambda}, "
+          f"time_varying={TIME_VARYING_GATE}")
 
     # Load pixel-level data
     print("Loading data...")
@@ -152,9 +162,10 @@ def main():
         random.seed(seed)
 
         model = LTAESparse(
-            in_channels=N_BANDS, d_model=128, n_head=16, d_k=8,
+            in_channels=N_BANDS, d_model=128, n_head=args.n_head, d_k=8,
             dropout=0.3, num_classes=num_classes,
-            gamma=GAMMA, time_varying_gate=TIME_VARYING_GATE,
+            gamma=args.gamma, time_varying_gate=TIME_VARYING_GATE,
+            mask_entropy=args.entropy_lambda > 0,
         ).to(device)
         optimizer = torch.optim.AdamW(model.parameters(), lr=LR, weight_decay=1e-4)
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=N_EPOCHS, eta_min=1e-6)
@@ -177,6 +188,7 @@ def main():
             t_ep = time.time()
             train_loss, sparse_loss = train_epoch_sparse(
                 model, optimizer, criterion, train_loader, scaler_amp, device,
+                lambda_sparse=args.entropy_lambda if args.entropy_lambda > 0 else LAMBDA_SPARSE,
             )
 
             val_logits, val_labels = evaluate_sparse(model, val_loader, device)
@@ -236,7 +248,10 @@ def main():
             "val_fields": int(val_mask.sum()),
             "test_fields": int(test_mask.sum()),
             "seeds": SEEDS_ENSEMBLE,
-            "gamma": GAMMA,
+            "gamma": args.gamma,
+            "n_head": args.n_head,
+            "entropy_lambda": args.entropy_lambda,
+            "lambda_sparse": args.entropy_lambda if args.entropy_lambda > 0 else LAMBDA_SPARSE,
             "time_varying_gate": TIME_VARYING_GATE,
             "training_time_sec": round(train_time, 1),
             "metrics": {

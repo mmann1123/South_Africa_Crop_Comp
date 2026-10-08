@@ -29,7 +29,7 @@
 
 \noindent This document collects supporting material for the main paper. Section~S-A details the
 dataset, feature set, and model definitions; Section~S-B defines the metrics; Section~S-C reports
-training cost; Section~S-D presents the ablation studies; Section~S-E maps the spatial distribution of holdout errors; and Section~S-F reports performance with the cereal classes merged. Equation, figure, table,
+training cost; Section~S-D presents the ablation studies; Section~S-E maps the spatial distribution of holdout errors; Section~S-F reports performance with the cereal classes merged; and Section~S-G reports the L-TAE-S hyperparameter sensitivity. Equation, figure, table,
 and section labels are prefixed ``S''.
 
 \section{Dataset Details, Feature Set, and Model Definitions}
@@ -429,24 +429,26 @@ Field-level, 5-seed ensembles. ``Resample'' denotes class-balanced oversampling.
 \end{minipage}
 \end{table}
 
+\clearpage
 \section{Spatial Distribution of Holdout Errors}
 \label{sec:spatial}
 \emph{Supports main paper Sec.~4.3.}
 Figure~\ref{sfig:errmaps} shows the correct and incorrectly classified holdout fields for the five representative models, with contours at 5, 10, and 15~km from the nearest training field. The errors are spatially clustered rather than changing uniformly. Nearer the training tiles ($<5$~km, 521 fields) all five models classify about 70\% of fields correctly (69 to 72\%). In a south-central zone 8 to 16~km from the training tiles (398 fields), L-TAE and CNN-BiLSTM fall to 36\% and 30\%, whereas TabNet (70\%), L-TAE-S (67\%), and field-level XGBoost (63\%) remain close to their tile-wide accuracy. The zone is contiguous, and accuracy does not decline steadily with distance, so the pattern reflects local conditions within the tile rather than distance from the training region. Hence, the dense temporal networks are the models most affected by these local conditions.
 
-\begin{figure*}[htbp]
+\begin{figure*}[!ht]
 \centering
 \includegraphics[width=\textwidth]{holdout_error_maps.pdf}
 \caption{Spatial distribution of holdout errors. (a) Ground-truth crop types. (b)--(f) Correct (grey) and incorrect (orange) fields for TabNet, L-TAE-S, field-level XGBoost, L-TAE, and CNN-BiLSTM; panel titles give the share of fields classified correctly. Light blue shows the edge of the training region; dotted, dashed, and dash-dot lines mark 5, 10, and 15~km from the nearest training field.}
 \label{sfig:errmaps}
 \end{figure*}
 
+\clearpage
 \section{Merged Cereal Classes}
 \label{sec:cereal}
 \emph{Supports main paper Sec.~5.3.}
 Table~\ref{stab:cereal} re-scores every model's holdout predictions after merging barley, wheat, and small-grain grazing into a single cereal class. Accuracy rises by 0.06 to 0.16 for every model, and the sparse models remain at the top while the dense pixel networks stay at the bottom.
 
-\begin{table}[htbp]
+\begin{table}[!ht]
 \centering
 \caption{Out-of-region performance with the cereals merged into one class.}
 \label{stab:cereal}
@@ -491,6 +493,47 @@ Models in the order of main Table~1. 5 cl.: the five published classes; 3 cl.: b
 \end{minipage}
 \end{table}
 
+\clearpage
+\section{L-TAE-S Hyperparameter Sensitivity}
+\label{sec:sens}
+\emph{Supports main paper Secs.~3.2.1 and 5.1.}
+Table~\ref{stab:sens} reports out-of-region macro-F1 for field-level L-TAE-S over a grid of the relaxation coefficient $\gamma$ and the number of attention heads (key dimension fixed at 8), each trained as a five-seed ensemble with the same splits and protocol as the published model, together with an explicit mask-entropy sparsity penalty and two pixel-level settings. Retraining the published configuration reproduces the published predictions exactly. Twenty-two of the 23 field-level settings fall between 0.58 and 0.62, a range comparable to the seed-to-seed variation (single-seed standard deviation 0.004 to 0.028), and the published setting lies mid-range. Fewer heads transfer slightly better (mean 0.61 with 4 heads, 0.59 with 32), $\gamma$ has no consistent effect, and the entropy penalty leaves accuracy unchanged, so sparsemax and the relaxation prior already provide the sparsity. The two pixel-level settings bracket the published pixel model (0.60): 4 heads with $\gamma=2.0$ reaches 0.61 and 32 heads with $\gamma=1.0$ reaches 0.57. In paired bootstrap tests both still improve on the dense L-TAE ($\Delta$ macro-F1 $+0.07$ and $+0.03$; $\Delta\kappa$ $+0.15$ and $+0.11$, all significant), so the gain from the sparse gate does not depend on the chosen hyperparameters, although its size does.
+
+\begin{table}[!ht]
+\centering
+\caption{L-TAE-S out-of-region macro-F1 across hyperparameter settings.}
+\label{stab:sens}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{8pt}
+\footnotesize
+\begin{tabular}{lcccc}
+\toprule
+\multicolumn{5}{l}{\emph{(a) Field level, attention heads}} \\
+ & \textbf{4} & \textbf{8} & \textbf{16} & \textbf{32} \\
+\midrule
+$\gamma=1.0$ & 0.61 & 0.61 & 0.59 & 0.58 \\
+$\gamma=1.2$ & 0.60 & 0.61 & 0.59 & 0.60 \\
+$\gamma=1.5$ & 0.61 & 0.60 & \textbf{0.60} & 0.58 \\
+$\gamma=2.0$ & 0.61 & 0.61 & 0.60 & 0.59 \\
+$\gamma=3.0$ & 0.61 & 0.59 & 0.58 & 0.16$^{\dagger}$ \\
+\midrule
+\multicolumn{5}{l}{\emph{(b) Field level, explicit sparsity penalty}} \\
+Entropy penalty, $\lambda=10^{-3}, 10^{-2}, 10^{-1}$ ($\gamma=1.5$, 16 heads) & \multicolumn{4}{c}{0.60, 0.59, 0.61} \\
+\midrule
+\multicolumn{5}{l}{\emph{(c) Pixel level}} \\
+$\gamma=2.0$, 4 heads & \multicolumn{4}{c}{0.61 (in-region 0.76)} \\
+$\gamma=1.5$, 16 heads (published) & \multicolumn{4}{c}{\textbf{0.60} (in-region 0.77)} \\
+$\gamma=1.0$, 32 heads & \multicolumn{4}{c}{0.57 (in-region 0.78)} \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+Five-seed ensembles, full training set, same splits and protocol as main Table~1; bold marks the published configuration. Field-level dense L-TAE scores 0.59 and pixel-level L-TAE 0.54. $^{\dagger}$Training failed on all five seeds (validation macro-F1 stayed near 0.2): the relaxation prior is multiplied by up to $\gamma$ at each head and reaches ${\approx}3^{31}$, overwhelming the learned gate.
+\end{minipage}
+\end{table}
+
+\clearpage
 \bibliographystyle{elsarticle-harv}
 \bibliography{cea}
 

@@ -1,0 +1,48 @@
+
+Ground truth loaded: 2417 fields
+[g1.0_h4_lam0] trained in 56s
+[g1.0_h4_lam0] OOR F1m 0.607  kappa 0.503  in-region 0.643  seed sd 0.028
+[g1.0_h8_lam0] trained in 85s
+[g1.0_h8_lam0] OOR F1m 0.608  kappa 0.514  in-region 0.669  seed sd 0.009
+[g1.0_h16_lam0] trained in 110s
+[g1.0_h16_lam0] OOR F1m 0.586  kappa 0.503  in-region 0.680  seed sd 0.022
+[g1.0_h32_lam0] trained in 174s
+[g1.0_h32_lam0] OOR F1m 0.578  kappa 0.474  in-region 0.681  seed sd 0.011
+[g1.2_h4_lam0] trained in 91s
+[g1.2_h4_lam0] OOR F1m 0.601  kappa 0.505  in-region 0.684  seed sd 0.020
+[g1.2_h8_lam0] trained in 78s
+[g1.2_h8_lam0] OOR F1m 0.612  kappa 0.525  in-region 0.673  seed sd 0.012
+[g1.2_h16_lam0] trained in 135s
+[g1.2_h16_lam0] OOR F1m 0.595  kappa 0.495  in-region 0.662  seed sd 0.020
+[g1.2_h32_lam0] trained in 150s
+[g1.2_h32_lam0] OOR F1m 0.597  kappa 0.492  in-region 0.654  seed sd 0.012
+[g1.5_h4_lam0] trained in 71s
+[g1.5_h4_lam0] OOR F1m 0.608  kappa 0.509  in-region 0.642  seed sd 0.014
+[g1.5_h8_lam0] trained in 71s
+[g1.5_h8_lam0] OOR F1m 0.598  kappa 0.510  in-region 0.651  seed sd 0.027
+[g1.5_h16_lam0] OOR F1m 0.601  kappa 0.516  in-region 0.643  seed sd 0.024
+[g1.5_h32_lam0] trained in 139s
+[g1.5_h32_lam0] OOR F1m 0.584  kappa 0.505  in-region 0.646  seed sd 0.004
+[g2.0_h4_lam0] trained in 54s
+[g2.0_h4_lam0] OOR F1m 0.615  kappa 0.528  in-region 0.635  seed sd 0.007
+[g2.0_h8_lam0] trained in 63s
+[g2.0_h8_lam0] OOR F1m 0.611  kappa 0.536  in-region 0.634  seed sd 0.021
+[g2.0_h16_lam0] trained in 102s
+[g2.0_h16_lam0] OOR F1m 0.597  kappa 0.522  in-region 0.635  seed sd 0.028
+[g2.0_h32_lam0] trained in 167s
+[g2.0_h32_lam0] OOR F1m 0.590  kappa 0.508  in-region 0.621  seed sd 0.023
+[g3.0_h4_lam0] trained in 63s
+[g3.0_h4_lam0] OOR F1m 0.615  kappa 0.533  in-region 0.655  seed sd 0.010
+[g3.0_h8_lam0] trained in 81s
+[g3.0_h8_lam0] OOR F1m 0.587  kappa 0.505  in-region 0.657  seed sd 0.024
+[g3.0_h16_lam0] trained in 103s
+[g3.0_h16_lam0] OOR F1m 0.581  kappa 0.499  in-region 0.630  seed sd 0.007
+[g3.0_h32_lam0] trained in 112s
+[g3.0_h32_lam0] OOR F1m 0.161  kappa 0.062  in-region 0.272  seed sd 0.120
+[g1.5_h16_lam0.001] trained in 110s
+[g1.5_h16_lam0.001] OOR F1m 0.601  kappa 0.513  in-region 0.660  seed sd 0.019
+[g1.5_h16_lam0.01] trained in 88s
+[g1.5_h16_lam0.01] OOR F1m 0.594  kappa 0.509  in-region 0.642  seed sd 0.020
+[g1.5_h16_lam0.1] trained in 88s
+[g1.5_h16_lam0.1] OOR F1m 0.606  kappa 0.517  in-region 0.654  seed sd 0.015
+Published-config retrain agrees with published predictions on 100.0% of fields

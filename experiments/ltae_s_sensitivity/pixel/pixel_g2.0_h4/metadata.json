@@ -1,0 +1,27 @@
+{
+  "model": "ltae_sparse_pixel",
+  "fraction": 1.0,
+  "train_fields": 2653,
+  "train_pixels": 4802658,
+  "val_pixels": 1205790,
+  "test_pixels": 1531914,
+  "test_fields": 830,
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "gamma": 2.0,
+  "n_head": 4,
+  "lambda_sparse": 0.001,
+  "time_varying_gate": true,
+  "training_time_sec": 7833.1,
+  "metrics": {
+    "accuracy": 0.818072,
+    "f1_macro": 0.755404,
+    "f1_weighted": 0.814852,
+    "cohen_kappa": 0.742422
+  }
+}

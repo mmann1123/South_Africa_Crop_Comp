@@ -1,0 +1,28 @@
+{
+  "model": "ltae_sparse_field",
+  "fraction": 1.0,
+  "loss": "focal",
+  "sampler": "off",
+  "train_fields": 2653,
+  "val_fields": 664,
+  "test_fields": 830,
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "gamma": 3.0,
+  "n_head": 4,
+  "entropy_lambda": 0.0,
+  "lambda_sparse": 0.001,
+  "time_varying_gate": true,
+  "training_time_sec": 55.7,
+  "metrics": {
+    "accuracy": 0.744578,
+    "f1_macro": 0.654705,
+    "f1_weighted": 0.74414,
+    "cohen_kappa": 0.638112
+  }
+}

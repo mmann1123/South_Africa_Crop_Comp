@@ -1,0 +1,49 @@
+=== L-TAE-S Pixel Training === Fraction: 1.0, Device: cuda
+  gamma=1.0, n_head=32, lambda_sparse=0.001, time_varying=True
+Loading data...
+Shape: (7540362, 73)
+Feature cols: 60
+Train FIDs: 2653 -> 2653 (100%)
+Pixels: train=4802658, val=1205790, test=1531914
+
+=== Seed 42 ===
+  Epoch 1/100 - loss=0.1572, sparse=0.0078, val_f1=0.7014, 204.6s
+  Epoch 10/100 - loss=0.0553, sparse=0.0078, val_f1=0.7218, 202.5s
+  Epoch 20/100 - loss=0.0456, sparse=0.0078, val_f1=0.7217, 208.2s
+  Early stopping at epoch 29
+
+=== Seed 101 ===
+  Epoch 1/100 - loss=0.1557, sparse=0.0078, val_f1=0.7111, 206.9s
+  Epoch 10/100 - loss=0.0556, sparse=0.0078, val_f1=0.7195, 206.1s
+  Epoch 20/100 - loss=0.0455, sparse=0.0078, val_f1=0.7276, 209.0s
+  Epoch 30/100 - loss=0.0402, sparse=0.0078, val_f1=0.7285, 204.9s
+  Early stopping at epoch 36
+
+=== Seed 202 ===
+  Epoch 1/100 - loss=0.1551, sparse=0.0078, val_f1=0.7089, 205.0s
+  Epoch 10/100 - loss=0.0552, sparse=0.0078, val_f1=0.7204, 207.6s
+  Epoch 20/100 - loss=0.0453, sparse=0.0078, val_f1=0.7227, 203.5s
+  Epoch 30/100 - loss=0.0402, sparse=0.0078, val_f1=0.7275, 204.1s
+  Early stopping at epoch 33
+
+=== Seed 303 ===
+  Epoch 1/100 - loss=0.1552, sparse=0.0078, val_f1=0.7139, 204.7s
+  Epoch 10/100 - loss=0.0551, sparse=0.0078, val_f1=0.7233, 205.0s
+  Epoch 20/100 - loss=0.0454, sparse=0.0078, val_f1=0.7235, 206.4s
+  Epoch 30/100 - loss=0.0401, sparse=0.0078, val_f1=0.7188, 205.9s
+  Epoch 40/100 - loss=0.0362, sparse=0.0078, val_f1=0.7278, 205.6s
+  Epoch 50/100 - loss=0.0332, sparse=0.0078, val_f1=0.7272, 204.4s
+  Early stopping at epoch 56
+
+=== Seed 404 ===
+  Epoch 1/100 - loss=0.1557, sparse=0.0078, val_f1=0.7090, 205.8s
+  Epoch 10/100 - loss=0.0553, sparse=0.0078, val_f1=0.7247, 204.9s
+  Epoch 20/100 - loss=0.0454, sparse=0.0078, val_f1=0.7244, 204.2s
+  Epoch 30/100 - loss=0.0401, sparse=0.0078, val_f1=0.7259, 205.0s
+  Epoch 40/100 - loss=0.0362, sparse=0.0078, val_f1=0.7217, 203.8s
+  Early stopping at epoch 47
+
+--- Ensemble Field-Level Results ---
+  acc=0.8373, f1_macro=0.7817, f1_weighted=0.8347, kappa=0.7700
+Artifacts saved to /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ltae_s_sensitivity/pixel/pixel_g1.0_h32
+Total time: 41386.8s

@@ -1,0 +1,2 @@
+gamma,n_head,entropy_lambda,tag,oor_f1m,oor_kappa,oor_acc,seed_f1m_mean,seed_f1m_sd,inregion_f1m,train_sec
+1.5,16,0.0,g1.5_h16_lam0,0.6038,0.5103,0.7043,0.5773,0.0126,0.6528,122.7

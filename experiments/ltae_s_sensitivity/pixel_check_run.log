@@ -1,0 +1,6 @@
+
+Ground truth loaded: 2417 fields
+[pixel_g2.0_h4] trained in 131 min
+[pixel_g2.0_h4] OOR F1m 0.614 kappa 0.547 in-region 0.755
+[pixel_g1.0_h32] trained in 690 min
+[pixel_g1.0_h32] OOR F1m 0.570 kappa 0.510 in-region 0.782

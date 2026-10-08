@@ -1,0 +1,1 @@
+Runs made 2026-10-07 after the R1-4 code change removed the constant L1 term (masks.mean()). Deterministic but not bit-identical to the published L-TAE-S (field OOR F1m 0.604 vs 0.601; 88.7% field agreement). Superseded once the term was restored.
