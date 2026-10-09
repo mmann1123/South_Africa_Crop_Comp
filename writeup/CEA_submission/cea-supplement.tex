@@ -29,7 +29,7 @@
 
 \noindent This document collects supporting material for the main paper. Section~S-A details the
 dataset, feature set, and model definitions; Section~S-B defines the metrics; Section~S-C reports
-training cost; Section~S-D presents the ablation studies; Section~S-E maps the spatial distribution of holdout errors; Section~S-F reports performance with the cereal classes merged; and Section~S-G reports the L-TAE-S hyperparameter sensitivity. Equation, figure, table,
+training cost; Section~S-D presents the ablation studies; Section~S-E maps the spatial distribution of holdout errors; Section~S-F reports performance with the cereal classes merged; Section~S-G reports the L-TAE-S hyperparameter sensitivity; and Section~S-H shows the phenological profiles of the crops. Equation, figure, table,
 and section labels are prefixed ``S''.
 
 \section{Dataset Details, Feature Set, and Model Definitions}
@@ -532,6 +532,21 @@ $\gamma=1.0$, 32 heads & \multicolumn{4}{c}{0.57 (in-region 0.78)} \\
 Five-seed ensembles, full training set, same splits and protocol as main Table~1; bold marks the published configuration. Field-level dense L-TAE scores 0.59 and pixel-level L-TAE 0.54. $^{\dagger}$Training failed on all five seeds (validation macro-F1 stayed near 0.2): the relaxation prior is multiplied by up to $\gamma$ at each head and reaches ${\approx}3^{31}$, overwhelming the learned gate.
 \end{minipage}
 \end{table}
+
+\clearpage
+\section{Crop Phenology}
+\label{sec:pheno}
+\emph{Supports main paper Secs.~2 and 5.3.}
+Figure~\ref{sfig:pheno} shows field-level monthly profiles of EVI, SWIR (B11, B12), and hue for each crop over the ten months used by the models. Lucerne/medics, a pasture class, has the most distinct profile: a weak winter peak (median EVI about 0.32, against 0.45 to 0.51 for the annual crops) and higher SWIR reflectance in August and September. Canola greens up earliest (median EVI near 0.50 already in July) and has the lowest mid-season SWIR. The three cereals follow nearly the same curve in every band; small-grain grazing is a cereal such as oats sown as winter fodder for livestock rather than harvested for grain, so it is often the same kind of plant as wheat or barley. The largest standardized difference (Cohen's $d$) between two cereals in any band and month is 0.73 (barley versus small-grain grazing) and only 0.50 for wheat versus barley, against 1.1 to 2.3 for every pair involving lucerne/medics or canola. Time-series features alone therefore separate lucerne/medics and canola well but not the cereals, consistent with the per-class results (main Sec.~4.3) and the merged-cereal analysis (Sec.~S-F).
+
+The holdout season is also later. July EVI of the annual crops is 0.11 to 0.21 lower on the holdout tile than in the training region, and October EVI is slightly higher, whereas lucerne/medics changes little. This shift is larger than the differences among the cereals, so it adds to their confusion under transfer. May and June, when the winter crops are sown and emerge, are excluded because of cloud cover, which removes early-season information that could help separate them.
+
+\begin{figure*}[!ht]
+\centering
+\includegraphics[width=\textwidth]{crop_phenology.pdf}
+\caption{Field-level monthly profiles of EVI, SWIR 1 (B11), SWIR 2 (B12), and hue for the five crops. Solid lines and shading show the median and interquartile range across training-region fields; dashed lines show the holdout-tile median. The grey band marks May and June, excluded because of cloud cover.}
+\label{sfig:pheno}
+\end{figure*}
 
 \clearpage
 \bibliographystyle{elsarticle-harv}

@@ -1,0 +1,11 @@
+pair,band,max_abs_d,month
+Lucerne/Medics vs Canola,B11,2.265,9
+Lucerne/Medics vs Barley,B11,2.04,9
+Lucerne/Medics vs Wheat,B11,1.549,9
+Canola vs Wheat,EVI,1.442,11
+Canola vs Barley,EVI,1.281,11
+Lucerne/Medics vs Small grain grazing,B11,1.26,9
+Canola vs Small grain grazing,EVI,1.063,7
+Barley vs Small grain grazing,B11,0.734,12
+Wheat vs Small grain grazing,EVI,0.649,11
+Wheat vs Barley,EVI,0.501,8

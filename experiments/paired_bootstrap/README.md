@@ -14,7 +14,7 @@ Nothing here has been moved into the manuscript or `out_of_sample/` yet.
 
 1. L-TAE-S (pixel), L-TAE-S (field), L-TAE (field), Transformer (pixel), and TabNet (pixel) prediction files reproduce Table 2. Where a canonical confusion matrix exists, the match is exact.
 2. **L-TAE (pixel) does not.** `out_of_sample/predictions_ltae.csv` gives F1m 0.54 / κ 0.40, against 0.58 / 0.49 published. Fresh inference from the current checkpoints reproduces 0.54 exactly. None of the 5 aggregation variants, and none of 128 prediction CSVs in the repo, reproduce the published confusion matrix. The published row most likely came from earlier checkpoints that were later overwritten.
-3. Table 2 "Xent" is computed from hard labels clipped at 1e-7 (`compare_predictions.py:379-386`), so it equals 16.1 × error rate. It is not the official probability-based cross-entropy.
+3. Table 2 "Xent" is computed from hard labels clipped at 1e-7 (`compare_predictions.py:379-386`), so it equals 16.1 × error rate. **Correction (2026-10-09):** this is the official AI4FoodSecurity metric as the challenge defined it ("Cross Entropy with binary outcome for each crop (field level)", scored on hard-label submissions; `AI4EO_scoring.pdf`), so it is not an error.
 4. The Methods describe a *paired* bootstrap, but `out_of_sample/bootstrap_ci.py` runs an unpaired one.
 
 ## Option (c): retrain L-TAE pixel (started 2026-10-05)

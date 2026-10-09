@@ -1,0 +1,41 @@
+pair,band,max_abs_d,month
+Lucerne/Medics vs Canola,EVI,1.743,8
+Lucerne/Medics vs Canola,B11,2.265,9
+Lucerne/Medics vs Canola,B12,1.881,8
+Lucerne/Medics vs Canola,hue,1.507,8
+Lucerne/Medics vs Wheat,EVI,1.146,8
+Lucerne/Medics vs Wheat,B11,1.549,9
+Lucerne/Medics vs Wheat,B12,1.319,9
+Lucerne/Medics vs Wheat,hue,1.175,8
+Lucerne/Medics vs Barley,EVI,1.65,8
+Lucerne/Medics vs Barley,B11,2.04,9
+Lucerne/Medics vs Barley,B12,1.737,9
+Lucerne/Medics vs Barley,hue,1.69,8
+Lucerne/Medics vs Small grain grazing,EVI,0.912,8
+Lucerne/Medics vs Small grain grazing,B11,1.26,9
+Lucerne/Medics vs Small grain grazing,B12,1.133,9
+Lucerne/Medics vs Small grain grazing,hue,0.918,9
+Canola vs Wheat,EVI,1.442,11
+Canola vs Wheat,B11,1.071,11
+Canola vs Wheat,B12,1.042,11
+Canola vs Wheat,hue,1.157,11
+Canola vs Barley,EVI,1.281,11
+Canola vs Barley,B11,1.186,11
+Canola vs Barley,B12,0.922,11
+Canola vs Barley,hue,1.038,11
+Canola vs Small grain grazing,EVI,1.063,7
+Canola vs Small grain grazing,B11,0.983,8
+Canola vs Small grain grazing,B12,0.894,7
+Canola vs Small grain grazing,hue,0.885,7
+Wheat vs Barley,EVI,0.501,8
+Wheat vs Barley,B11,0.444,9
+Wheat vs Barley,B12,0.427,9
+Wheat vs Barley,hue,0.493,8
+Wheat vs Small grain grazing,EVI,0.649,11
+Wheat vs Small grain grazing,B11,0.647,12
+Wheat vs Small grain grazing,B12,0.436,12
+Wheat vs Small grain grazing,hue,0.529,12
+Barley vs Small grain grazing,EVI,0.619,8
+Barley vs Small grain grazing,B11,0.734,12
+Barley vs Small grain grazing,B12,0.682,8
+Barley vs Small grain grazing,hue,0.702,8
