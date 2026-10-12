@@ -1,0 +1,86 @@
+{
+  "model": "minirocket_ridge",
+  "level": "field",
+  "name": "minirocket_ridge_ext_field_repro",
+  "protocol": "frozen MiniRocket features (reference seeds) -> RidgeClassifierCV(alphas=logspace(-3,3,10), class_weight='balanced'), alpha by built-in LOO CV on training rows; 5-seed mean decision score",
+  "grid": "extended",
+  "alphas": [
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0,
+    10000.0,
+    100000.0,
+    1000000.0,
+    10000000.0,
+    100000000.0
+  ],
+  "blas_threads": 16,
+  "seeds": [
+    42
+  ],
+  "n_fields": {
+    "train": 2653,
+    "val": 664,
+    "test": 830
+  },
+  "n_rows": {
+    "train": 2653,
+    "val": 664,
+    "test": 830
+  },
+  "input_checks": {
+    "feature_columns": true,
+    "label_classes": true,
+    "train_fields": true,
+    "test_fields": true,
+    "scaler_mean": true,
+    "scaler_scale": true,
+    "val_fields": true
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "train_seconds": 1.3,
+      "predict_seconds": 0.2,
+      "n_train_rows": 2653,
+      "alpha": 10000.0,
+      "alpha_at_grid_edge": false,
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_42.joblib",
+        "sha256": "4b2d7f18b4d83de9dac58c519af5b238d825b487fc975e0058023455bd61a0cd"
+      },
+      "feature_identity_max_dp": 0.0
+    }
+  ],
+  "per_seed_seconds_mean": 1.3,
+  "training_time_sec_total": 1.3,
+  "metrics": {
+    "accuracy": 0.731325,
+    "f1_macro": 0.645906,
+    "f1_weighted": 0.730542,
+    "cohen_kappa": 0.621444
+  },
+  "holdout_predictions": "experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_ridge_ext_field_repro.csv",
+  "provenance": {
+    "git_commit": "704f9d7645761ec39ae8ad555806105430f37635",
+    "git_dirty": true,
+    "python_executable": "/home/mmann1123/miniconda3/envs/ts_baselines/bin/python",
+    "versions": {
+      "python": "3.12.12",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "sklearn": "1.8.0",
+      "torch": "2.10.0+cu126",
+      "aeon": "1.6.0"
+    },
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "data_sha256": {
+      "data/merged_dl_train.parquet": "259088d725aab1ed1d7f5584f104a57cf9ccaff251c40aad87939e1d80b5ecd5",
+      "data/merged_dl_test.parquet": "cb15a3cbc529a38fb304a685ffc90c9cf55d0fbc9c0087fa89ceec9fe568bda7"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "seed": 42,
+  "train_seconds": 604.7,
+  "predict_seconds": 264.7,
+  "n_train_rows": 131559,
+  "alpha": 10000.0,
+  "alpha_at_grid_edge": false,
+  "feature_source": {
+    "source": "experiments/recent_baselines/models/minirocket_pixel/minirocket_pixel_seed_42.joblib",
+    "sha256": "381e4aafdae0aaf84ed980c14e5324159e042b65703c666d3c6f67aaa32e4f04"
+  },
+  "feature_identity_max_dp": 0.0
+}

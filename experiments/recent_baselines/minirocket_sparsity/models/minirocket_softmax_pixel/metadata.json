@@ -1,0 +1,174 @@
+{
+  "model": "minirocket_softmax",
+  "gate": "softmax",
+  "level": "pixel",
+  "name": "minirocket_softmax_pixel",
+  "head_config": {
+    "n_head": 16,
+    "d_k": 8,
+    "bottleneck": 64,
+    "gamma": 1.5,
+    "dropout": 0.3
+  },
+  "batch_size": 2048,
+  "max_epochs": 100,
+  "pixel_val_cap_per_field": 50,
+  "protocol": "frozen MiniRocket features (reference seeds) -> GatedHead; L-TAE-S harness; 5-seed mean logits",
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "n_fields": {
+    "train": 2653,
+    "val": 664,
+    "test": 830
+  },
+  "n_rows": {
+    "train": 4802658,
+    "val": 1205790,
+    "test": 1531914
+  },
+  "input_checks": {
+    "feature_columns": true,
+    "label_classes": true,
+    "train_fields": true,
+    "test_fields": true,
+    "scaler_mean": true,
+    "scaler_scale": true,
+    "train_pixels": true,
+    "val_pixels": true,
+    "test_pixels": true
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "train_seconds": 563.7,
+      "predict_seconds": 452.7,
+      "epochs_run": 62,
+      "best_epoch": 47,
+      "best_val_f1_macro": 0.674501,
+      "n_train_rows": 131559,
+      "n_val_rows": 32809,
+      "mask_stats_val": {
+        "mean_nonzero_per_head": 5591.594971875,
+        "mean_effective_features_per_head": 672.7578773090363,
+        "union_features_selected": 9996
+      },
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_pixel/minirocket_pixel_seed_42.joblib",
+        "sha256": "381e4aafdae0aaf84ed980c14e5324159e042b65703c666d3c6f67aaa32e4f04"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 101,
+      "train_seconds": 600.0,
+      "predict_seconds": 448.2,
+      "epochs_run": 64,
+      "best_epoch": 49,
+      "best_val_f1_macro": 0.676241,
+      "n_train_rows": 131559,
+      "n_val_rows": 32809,
+      "mask_stats_val": {
+        "mean_nonzero_per_head": 5567.99300625,
+        "mean_effective_features_per_head": 656.1799696933747,
+        "union_features_selected": 9996
+      },
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_pixel/minirocket_pixel_seed_101.joblib",
+        "sha256": "c07ab23ade1a8113c88d346b91db8bf4e4ad9c225109ee77a7e6c5ca4520a4d4"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 202,
+      "train_seconds": 336.0,
+      "predict_seconds": 447.4,
+      "epochs_run": 36,
+      "best_epoch": 21,
+      "best_val_f1_macro": 0.677954,
+      "n_train_rows": 131559,
+      "n_val_rows": 32809,
+      "mask_stats_val": {
+        "mean_nonzero_per_head": 5592.8114625,
+        "mean_effective_features_per_head": 679.5029977638245,
+        "union_features_selected": 9996
+      },
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_pixel/minirocket_pixel_seed_202.joblib",
+        "sha256": "02e33cb55ea927ec4b59cb1a92708bf0b6b0fe300785f029d54160e7ec2e7123"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 303,
+      "train_seconds": 265.1,
+      "predict_seconds": 462.9,
+      "epochs_run": 30,
+      "best_epoch": 15,
+      "best_val_f1_macro": 0.666994,
+      "n_train_rows": 131559,
+      "n_val_rows": 32809,
+      "mask_stats_val": {
+        "mean_nonzero_per_head": 5613.61784375,
+        "mean_effective_features_per_head": 686.9482845607757,
+        "union_features_selected": 9996
+      },
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_pixel/minirocket_pixel_seed_303.joblib",
+        "sha256": "871c29a109270e195f598d915c27415af282c86ac5b1c46dac7d3e900b7213c3"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 404,
+      "train_seconds": 529.6,
+      "predict_seconds": 448.9,
+      "epochs_run": 58,
+      "best_epoch": 43,
+      "best_val_f1_macro": 0.672586,
+      "n_train_rows": 131559,
+      "n_val_rows": 32809,
+      "mask_stats_val": {
+        "mean_nonzero_per_head": 5586.54015625,
+        "mean_effective_features_per_head": 663.7235588130951,
+        "union_features_selected": 9996
+      },
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_pixel/minirocket_pixel_seed_404.joblib",
+        "sha256": "9a6f49f784e085e39c7cb17f1d77bb7101aea5ee8ddae3075f8e1a6e675fa1cb"
+      },
+      "feature_identity_max_dp": 0.0
+    }
+  ],
+  "per_seed_seconds_mean": 458.9,
+  "training_time_sec_total": 2294.4,
+  "metrics": {
+    "accuracy": 0.812048,
+    "f1_macro": 0.749617,
+    "f1_weighted": 0.809706,
+    "cohen_kappa": 0.73423
+  },
+  "holdout_predictions": "experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_softmax_pixel.csv",
+  "provenance": {
+    "git_commit": "704f9d7645761ec39ae8ad555806105430f37635",
+    "git_dirty": true,
+    "python_executable": "/home/mmann1123/miniconda3/envs/ts_baselines/bin/python",
+    "versions": {
+      "python": "3.12.12",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "sklearn": "1.8.0",
+      "torch": "2.10.0+cu126",
+      "aeon": "1.6.0"
+    },
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "data_sha256": {
+      "data/merged_dl_train.parquet": "259088d725aab1ed1d7f5584f104a57cf9ccaff251c40aad87939e1d80b5ecd5",
+      "data/merged_dl_test.parquet": "cb15a3cbc529a38fb304a685ffc90c9cf55d0fbc9c0087fa89ceec9fe568bda7"
+    }
+  }
+}

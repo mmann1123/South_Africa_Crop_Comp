@@ -1,0 +1,41 @@
+=== MiniRocket (field) -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/models/minirocket_field
+Input check vs published L-TAE-S (field): all 7 checks passed
+--- seed 42: exists, skipping
+--- seed 101
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+  C=0.0001: val_f1=0.6462  lbfgs_iter=32
+  C=0.001: val_f1=0.6582  lbfgs_iter=126
+  C=0.01: val_f1=0.6596  lbfgs_iter=333
+  C=0.1: val_f1=0.6412  lbfgs_iter=557
+  C=1: val_f1=0.6428  lbfgs_iter=645
+  C=10: val_f1=0.6438  lbfgs_iter=594
+  seed 101: C=0.01, train 28s, predict 0s
+--- seed 202
+  C=0.0001: val_f1=0.6664  lbfgs_iter=29
+  C=0.001: val_f1=0.6576  lbfgs_iter=130
+  C=0.01: val_f1=0.6491  lbfgs_iter=284
+  C=0.1: val_f1=0.6373  lbfgs_iter=504
+  C=1: val_f1=0.6363  lbfgs_iter=525
+  C=10: val_f1=0.6366  lbfgs_iter=455
+  C=1e-05: val_f1=0.5477  lbfgs_iter=2
+  seed 202: C=0.0001, train 24s, predict 0s
+--- seed 303
+  C=0.0001: val_f1=0.6727  lbfgs_iter=31
+  C=0.001: val_f1=0.6624  lbfgs_iter=131
+  C=0.01: val_f1=0.6548  lbfgs_iter=364
+  C=0.1: val_f1=0.6331  lbfgs_iter=440
+  C=1: val_f1=0.6279  lbfgs_iter=590
+  C=10: val_f1=0.6233  lbfgs_iter=648
+  C=1e-05: val_f1=0.5516  lbfgs_iter=2
+  seed 303: C=0.0001, train 39s, predict 0s
+--- seed 404
+  C=0.0001: val_f1=0.6590  lbfgs_iter=31
+  C=0.001: val_f1=0.6777  lbfgs_iter=126
+  C=0.01: val_f1=0.6472  lbfgs_iter=355
+  C=0.1: val_f1=0.6327  lbfgs_iter=549
+  C=1: val_f1=0.6263  lbfgs_iter=580
+  C=10: val_f1=0.6269  lbfgs_iter=596
+  seed 404: C=0.001, train 26s, predict 0s
+In-region (field level): {'accuracy': 0.746988, 'f1_macro': 0.669836, 'f1_weighted': 0.746584, 'cohen_kappa': 0.642721}
+Holdout predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/results/predictions/minirocket_field.csv

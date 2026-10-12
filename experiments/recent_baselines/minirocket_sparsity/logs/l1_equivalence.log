@@ -1,0 +1,16 @@
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/linear_model/_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+{'C': 0.01, 'ours_iter': 154, 'ours_converged': True, 'ours_nonzero_features': 134, 'sk_nonzero_features': 116, 'ours_objective': 0.012494529597461224, 'sk_objective': 0.01249496266245842, 'sk_iter': 20000, 'val_pred_agreement': 0.9954819277108434, 'max_abs_proba_diff': 0.01335558295249939, 'ours_s': 3.8, 'sk_s': 11295.0}
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1160: UserWarning: Inconsistent values: penalty=l1 with l1_ratio=0.0. penalty is deprecated. Please use l1_ratio only.
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/linear_model/_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+{'C': 0.1, 'ours_iter': 487, 'ours_converged': True, 'ours_nonzero_features': 1171, 'sk_nonzero_features': 1280, 'ours_objective': 0.06872782856225967, 'sk_objective': 0.06879699975252151, 'sk_iter': 20000, 'val_pred_agreement': 0.9924698795180723, 'max_abs_proba_diff': 0.06805220246315002, 'ours_s': 7.7, 'sk_s': 8321.4}

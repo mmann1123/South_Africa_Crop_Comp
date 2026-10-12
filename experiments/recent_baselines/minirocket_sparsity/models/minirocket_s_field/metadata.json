@@ -1,0 +1,172 @@
+{
+  "model": "minirocket_s",
+  "gate": "sparsemax",
+  "level": "field",
+  "name": "minirocket_s_field",
+  "head_config": {
+    "n_head": 16,
+    "d_k": 8,
+    "bottleneck": 64,
+    "gamma": 1.5,
+    "dropout": 0.3
+  },
+  "batch_size": 128,
+  "max_epochs": 100,
+  "pixel_val_cap_per_field": null,
+  "protocol": "frozen MiniRocket features (reference seeds) -> GatedHead; L-TAE-S harness; 5-seed mean logits",
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "n_fields": {
+    "train": 2653,
+    "val": 664,
+    "test": 830
+  },
+  "n_rows": {
+    "train": 2653,
+    "val": 664,
+    "test": 830
+  },
+  "input_checks": {
+    "feature_columns": true,
+    "label_classes": true,
+    "train_fields": true,
+    "test_fields": true,
+    "scaler_mean": true,
+    "scaler_scale": true,
+    "val_fields": true
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "train_seconds": 76.6,
+      "predict_seconds": 0.8,
+      "epochs_run": 63,
+      "best_epoch": 48,
+      "best_val_f1_macro": 0.659824,
+      "n_train_rows": 2653,
+      "n_val_rows": 664,
+      "mask_stats_val": {
+        "mean_nonzero_per_head": 1.8918486445783131,
+        "mean_effective_features_per_head": 1.6003078866794884,
+        "union_features_selected": 6697
+      },
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_42.joblib",
+        "sha256": "4b2d7f18b4d83de9dac58c519af5b238d825b487fc975e0058023455bd61a0cd"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 101,
+      "train_seconds": 101.3,
+      "predict_seconds": 0.9,
+      "epochs_run": 84,
+      "best_epoch": 69,
+      "best_val_f1_macro": 0.682496,
+      "n_train_rows": 2653,
+      "n_val_rows": 664,
+      "mask_stats_val": {
+        "mean_nonzero_per_head": 1.8490210843373494,
+        "mean_effective_features_per_head": 1.5710975157927318,
+        "union_features_selected": 6673
+      },
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_101.joblib",
+        "sha256": "0409536544b8dd18974902f0eb375b873d32c5d9274cae26cec5739f90ad45c9"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 202,
+      "train_seconds": 75.7,
+      "predict_seconds": 0.9,
+      "epochs_run": 63,
+      "best_epoch": 48,
+      "best_val_f1_macro": 0.662634,
+      "n_train_rows": 2653,
+      "n_val_rows": 664,
+      "mask_stats_val": {
+        "mean_nonzero_per_head": 1.8520331325301205,
+        "mean_effective_features_per_head": 1.575646098658263,
+        "union_features_selected": 6731
+      },
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_202.joblib",
+        "sha256": "8a74a38a45a8a471bff270d5eca4b9fa53b7730efa130e28430d8e2d08181c9c"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 303,
+      "train_seconds": 51.6,
+      "predict_seconds": 1.5,
+      "epochs_run": 43,
+      "best_epoch": 28,
+      "best_val_f1_macro": 0.697874,
+      "n_train_rows": 2653,
+      "n_val_rows": 664,
+      "mask_stats_val": {
+        "mean_nonzero_per_head": 1.9134977409638554,
+        "mean_effective_features_per_head": 1.6162171376397811,
+        "union_features_selected": 6837
+      },
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_303.joblib",
+        "sha256": "9972466fe611a69f1bdbe5647e1498fde8ac11ad92460dfb0d680de252046120"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 404,
+      "train_seconds": 47.8,
+      "predict_seconds": 1.0,
+      "epochs_run": 40,
+      "best_epoch": 25,
+      "best_val_f1_macro": 0.650193,
+      "n_train_rows": 2653,
+      "n_val_rows": 664,
+      "mask_stats_val": {
+        "mean_nonzero_per_head": 1.9253576807228916,
+        "mean_effective_features_per_head": 1.6234454751373775,
+        "union_features_selected": 6778
+      },
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_404.joblib",
+        "sha256": "22a40652c13216d2d9a5cf8039f20c06114cfc83b37007b7d026eac5602f58ec"
+      },
+      "feature_identity_max_dp": 0.0
+    }
+  ],
+  "per_seed_seconds_mean": 70.6,
+  "training_time_sec_total": 353.0,
+  "metrics": {
+    "accuracy": 0.745783,
+    "f1_macro": 0.661528,
+    "f1_weighted": 0.742239,
+    "cohen_kappa": 0.636211
+  },
+  "holdout_predictions": "experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_s_field.csv",
+  "provenance": {
+    "git_commit": "704f9d7645761ec39ae8ad555806105430f37635",
+    "git_dirty": true,
+    "python_executable": "/home/mmann1123/miniconda3/envs/ts_baselines/bin/python",
+    "versions": {
+      "python": "3.12.12",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "sklearn": "1.8.0",
+      "torch": "2.10.0+cu126",
+      "aeon": "1.6.0"
+    },
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "data_sha256": {
+      "data/merged_dl_train.parquet": "259088d725aab1ed1d7f5584f104a57cf9ccaff251c40aad87939e1d80b5ecd5",
+      "data/merged_dl_test.parquet": "cb15a3cbc529a38fb304a685ffc90c9cf55d0fbc9c0087fa89ceec9fe568bda7"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+=== minirocket_s (field) -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/models/minirocket_s_field_repro
+Input check vs published L-TAE-S (field): all 7 checks passed
+--- seed 42
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+Feature identity check (field, seed 42): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.8774 val_f1=0.2613 (1.6s/epoch)
+  epoch 10: loss=0.1397 val_f1=0.5645 (1.3s/epoch)
+  epoch 20: loss=0.0534 val_f1=0.6239 (1.3s/epoch)
+  epoch 30: loss=0.0368 val_f1=0.5925 (1.2s/epoch)
+  epoch 40: loss=0.0135 val_f1=0.6394 (1.2s/epoch)
+  epoch 50: loss=0.0074 val_f1=0.6438 (1.2s/epoch)
+  epoch 60: loss=0.0027 val_f1=0.6369 (1.2s/epoch)
+  early stop at epoch 63
+  seed 42: best epoch 48, val_f1 0.6598, 76s; masks {'mean_nonzero_per_head': 1.8918486445783131, 'mean_effective_features_per_head': 1.6003078866794884, 'union_features_selected': 6697}
+In-region (field level): {'accuracy': 0.716867, 'f1_macro': 0.626852, 'f1_weighted': 0.714521, 'cohen_kappa': 0.599663}
+Holdout predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_s_field_repro.csv

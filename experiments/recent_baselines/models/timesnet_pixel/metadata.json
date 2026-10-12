@@ -1,0 +1,121 @@
+{
+  "model": "timesnet",
+  "level": "pixel",
+  "name": "timesnet_pixel",
+  "protocol": "L-TAE-S harness: focal loss (gamma=2, alpha=1/count), AdamW lr=1e-3 wd=1e-4, cosine T_max=100, early stop patience 15 on val macro-F1, AMP, grad clip 1.0, 5-seed mean logits",
+  "tslib_commit": "4e938a1767106324dd753b2a44832bf870a0252e",
+  "timesnet_config": {
+    "task_name": "classification",
+    "seq_len": 10,
+    "label_len": 0,
+    "pred_len": 0,
+    "enc_in": 6,
+    "d_model": 32,
+    "d_ff": 64,
+    "e_layers": 2,
+    "top_k": 2,
+    "num_kernels": 6,
+    "embed": "fixed",
+    "freq": "h",
+    "dropout": 0.1
+  },
+  "batch_size": 2048,
+  "max_epochs": 100,
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "n_fields": {
+    "train": 2653,
+    "val": 664,
+    "test": 830
+  },
+  "n_rows": {
+    "train": 4802658,
+    "val": 1205790,
+    "test": 1531914
+  },
+  "input_checks": {
+    "feature_columns": true,
+    "label_classes": true,
+    "train_fields": true,
+    "test_fields": true,
+    "scaler_mean": true,
+    "scaler_scale": true,
+    "train_pixels": true,
+    "val_pixels": true,
+    "test_pixels": true
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "train_seconds": 2106.1,
+      "epochs_run": 17,
+      "best_epoch": 2,
+      "best_val_f1_macro": 0.701684,
+      "mean_epoch_seconds": 123.89
+    },
+    {
+      "seed": 101,
+      "train_seconds": 1652.2,
+      "epochs_run": 16,
+      "best_epoch": 1,
+      "best_val_f1_macro": 0.682378,
+      "mean_epoch_seconds": 103.26
+    },
+    {
+      "seed": 202,
+      "train_seconds": 1784.7,
+      "epochs_run": 16,
+      "best_epoch": 1,
+      "best_val_f1_macro": 0.675379,
+      "mean_epoch_seconds": 111.54
+    },
+    {
+      "seed": 303,
+      "train_seconds": 1685.4,
+      "epochs_run": 16,
+      "best_epoch": 1,
+      "best_val_f1_macro": 0.680113,
+      "mean_epoch_seconds": 105.34
+    },
+    {
+      "seed": 404,
+      "train_seconds": 1694.9,
+      "epochs_run": 16,
+      "best_epoch": 1,
+      "best_val_f1_macro": 0.665583,
+      "mean_epoch_seconds": 105.93
+    }
+  ],
+  "per_seed_seconds_mean": 1784.7,
+  "training_time_sec_total": 8923.3,
+  "metrics": {
+    "accuracy": 0.816867,
+    "f1_macro": 0.762778,
+    "f1_weighted": 0.816823,
+    "cohen_kappa": 0.742644
+  },
+  "holdout_predictions": "experiments/recent_baselines/results/predictions/timesnet_pixel.csv",
+  "provenance": {
+    "git_commit": "704f9d7645761ec39ae8ad555806105430f37635",
+    "git_dirty": true,
+    "python_executable": "/home/mmann1123/miniconda3/envs/ts_baselines/bin/python",
+    "versions": {
+      "python": "3.12.12",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "sklearn": "1.8.0",
+      "torch": "2.10.0+cu126",
+      "aeon": "1.6.0"
+    },
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "data_sha256": {
+      "data/merged_dl_train.parquet": "259088d725aab1ed1d7f5584f104a57cf9ccaff251c40aad87939e1d80b5ecd5",
+      "data/merged_dl_test.parquet": "cb15a3cbc529a38fb304a685ffc90c9cf55d0fbc9c0087fa89ceec9fe568bda7"
+    }
+  }
+}

@@ -1,0 +1,335 @@
+{
+  "model": "minirocket_l1",
+  "level": "field",
+  "name": "minirocket_l1_field_verify",
+  "c_grid": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "fista_device": "cuda",
+  "protocol": "frozen MiniRocket features (reference seeds) -> L1 multinomial logistic (FISTA, balanced class weights), C on validation macro-F1 with lower-edge extension; 5-seed mean probabilities",
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "n_fields": {
+    "train": 2653,
+    "val": 664,
+    "test": 830
+  },
+  "n_rows": {
+    "train": 2653,
+    "val": 664,
+    "test": 830
+  },
+  "input_checks": {
+    "feature_columns": true,
+    "label_classes": true,
+    "train_fields": true,
+    "test_fields": true,
+    "scaler_mean": true,
+    "scaler_scale": true,
+    "val_fields": true
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "train_seconds": 3.2,
+      "predict_seconds": 0.2,
+      "n_train_rows": 2653,
+      "C_grid": [
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ],
+      "val_f1_by_C": [
+        0.054616,
+        0.054616,
+        0.598316,
+        0.661912,
+        0.636648,
+        0.63614
+      ],
+      "chosen_C": 0.1,
+      "nonzero_features_by_C": [
+        0,
+        0,
+        118,
+        1199,
+        2053,
+        2100
+      ],
+      "fista_iter": [
+        2,
+        2,
+        159,
+        438,
+        931,
+        1100
+      ],
+      "fista_converged": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "nonzero_features_chosen": 1199,
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_42.joblib",
+        "sha256": "4b2d7f18b4d83de9dac58c519af5b238d825b487fc975e0058023455bd61a0cd"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 101,
+      "train_seconds": 3.5,
+      "predict_seconds": 0.2,
+      "n_train_rows": 2653,
+      "C_grid": [
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ],
+      "val_f1_by_C": [
+        0.054616,
+        0.054616,
+        0.590379,
+        0.645687,
+        0.609553,
+        0.599898
+      ],
+      "chosen_C": 0.1,
+      "nonzero_features_by_C": [
+        0,
+        0,
+        137,
+        1201,
+        1895,
+        2144
+      ],
+      "fista_iter": [
+        2,
+        2,
+        132,
+        500,
+        1255,
+        1229
+      ],
+      "fista_converged": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "nonzero_features_chosen": 1201,
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_101.joblib",
+        "sha256": "0409536544b8dd18974902f0eb375b873d32c5d9274cae26cec5739f90ad45c9"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 202,
+      "train_seconds": 3.0,
+      "predict_seconds": 0.2,
+      "n_train_rows": 2653,
+      "C_grid": [
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ],
+      "val_f1_by_C": [
+        0.054616,
+        0.054616,
+        0.594403,
+        0.634956,
+        0.617678,
+        0.619713
+      ],
+      "chosen_C": 0.1,
+      "nonzero_features_by_C": [
+        0,
+        0,
+        107,
+        1174,
+        2055,
+        2041
+      ],
+      "fista_iter": [
+        2,
+        2,
+        149,
+        427,
+        936,
+        1171
+      ],
+      "fista_converged": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "nonzero_features_chosen": 1174,
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_202.joblib",
+        "sha256": "8a74a38a45a8a471bff270d5eca4b9fa53b7730efa130e28430d8e2d08181c9c"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 303,
+      "train_seconds": 2.9,
+      "predict_seconds": 0.2,
+      "n_train_rows": 2653,
+      "C_grid": [
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ],
+      "val_f1_by_C": [
+        0.054616,
+        0.054616,
+        0.587153,
+        0.657094,
+        0.611325,
+        0.597899
+      ],
+      "chosen_C": 0.1,
+      "nonzero_features_by_C": [
+        0,
+        0,
+        121,
+        1161,
+        1978,
+        2078
+      ],
+      "fista_iter": [
+        2,
+        2,
+        125,
+        440,
+        1049,
+        1000
+      ],
+      "fista_converged": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "nonzero_features_chosen": 1161,
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_303.joblib",
+        "sha256": "9972466fe611a69f1bdbe5647e1498fde8ac11ad92460dfb0d680de252046120"
+      },
+      "feature_identity_max_dp": 0.0
+    },
+    {
+      "seed": 404,
+      "train_seconds": 3.4,
+      "predict_seconds": 0.2,
+      "n_train_rows": 2653,
+      "C_grid": [
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ],
+      "val_f1_by_C": [
+        0.054616,
+        0.054616,
+        0.5765,
+        0.657611,
+        0.638458,
+        0.622301
+      ],
+      "chosen_C": 0.1,
+      "nonzero_features_by_C": [
+        0,
+        0,
+        121,
+        1141,
+        1931,
+        2192
+      ],
+      "fista_iter": [
+        2,
+        2,
+        175,
+        435,
+        1230,
+        1185
+      ],
+      "fista_converged": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "nonzero_features_chosen": 1141,
+      "feature_source": {
+        "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_404.joblib",
+        "sha256": "22a40652c13216d2d9a5cf8039f20c06114cfc83b37007b7d026eac5602f58ec"
+      },
+      "feature_identity_max_dp": 0.0
+    }
+  ],
+  "per_seed_seconds_mean": 3.2,
+  "training_time_sec_total": 16.0,
+  "metrics": {
+    "accuracy": 0.743373,
+    "f1_macro": 0.661992,
+    "f1_weighted": 0.743265,
+    "cohen_kappa": 0.637049
+  },
+  "holdout_predictions": "experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_l1_field_verify.csv",
+  "provenance": {
+    "git_commit": "704f9d7645761ec39ae8ad555806105430f37635",
+    "git_dirty": true,
+    "python_executable": "/home/mmann1123/miniconda3/envs/ts_baselines/bin/python",
+    "versions": {
+      "python": "3.12.12",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "sklearn": "1.8.0",
+      "torch": "2.10.0+cu126",
+      "aeon": "1.6.0"
+    },
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "data_sha256": {
+      "data/merged_dl_train.parquet": "259088d725aab1ed1d7f5584f104a57cf9ccaff251c40aad87939e1d80b5ecd5",
+      "data/merged_dl_test.parquet": "cb15a3cbc529a38fb304a685ffc90c9cf55d0fbc9c0087fa89ceec9fe568bda7"
+    }
+  }
+}

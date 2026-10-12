@@ -1,0 +1,20 @@
+{
+  "seed": 101,
+  "train_seconds": 663.1,
+  "predict_seconds": 529.8,
+  "epochs_run": 64,
+  "best_epoch": 49,
+  "best_val_f1_macro": 0.676241,
+  "n_train_rows": 131559,
+  "n_val_rows": 32809,
+  "mask_stats_val": {
+    "mean_nonzero_per_head": 5567.99300625,
+    "mean_effective_features_per_head": 656.1799696933747,
+    "union_features_selected": 9996
+  },
+  "feature_source": {
+    "source": "experiments/recent_baselines/models/minirocket_pixel/minirocket_pixel_seed_101.joblib",
+    "sha256": "c07ab23ade1a8113c88d346b91db8bf4e4ad9c225109ee77a7e6c5ca4520a4d4"
+  },
+  "feature_identity_max_dp": 0.0
+}

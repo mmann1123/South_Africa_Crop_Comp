@@ -1,0 +1,9 @@
+=== MiniRocket + RidgeClassifierCV (field) -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/models/minirocket_ridge_field_repro
+Input check vs published L-TAE-S (field): all 7 checks passed
+--- seed 42
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+Feature identity check (field, seed 42): max |dp| = 0.0e+00  OK
+  seed 42: alpha=1000 (GRID EDGE), train 1s
+In-region (field level): {'accuracy': 0.718072, 'f1_macro': 0.621075, 'f1_weighted': 0.714147, 'cohen_kappa': 0.598808}
+Holdout predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_ridge_field_repro.csv

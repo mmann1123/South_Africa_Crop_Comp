@@ -1,0 +1,24 @@
+=== TimesNet (pixel) -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/models/timesnet_pixel | device cuda | TSLib 4e938a1
+Input check vs published L-TAE-S (pixel): all 9 checks passed
+--- seed 42
+  epoch 1: loss=0.1023 val_f1=0.6892 (121.0s/epoch)
+  epoch 10: loss=0.0130 val_f1=0.6571 (121.8s/epoch)
+  early stop at epoch 17
+--- seed 101
+  epoch 1: loss=0.1007 val_f1=0.6824 (123.8s/epoch)
+  epoch 10: loss=0.0129 val_f1=0.6597 (111.6s/epoch)
+  early stop at epoch 16
+--- seed 202
+  epoch 1: loss=0.0992 val_f1=0.6754 (104.5s/epoch)
+  epoch 10: loss=0.0130 val_f1=0.6611 (113.4s/epoch)
+  early stop at epoch 16
+--- seed 303
+  epoch 1: loss=0.1025 val_f1=0.6801 (88.3s/epoch)
+  epoch 10: loss=0.0131 val_f1=0.6179 (101.8s/epoch)
+  early stop at epoch 16
+--- seed 404
+  epoch 1: loss=0.1005 val_f1=0.6656 (113.3s/epoch)
+  epoch 10: loss=0.0131 val_f1=0.6280 (102.2s/epoch)
+  early stop at epoch 16
+In-region (field level): {'accuracy': 0.816867, 'f1_macro': 0.762778, 'f1_weighted': 0.816823, 'cohen_kappa': 0.742644}
+Holdout predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/results/predictions/timesnet_pixel.csv

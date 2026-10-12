@@ -1,0 +1,291 @@
+{
+  "model": "minirocket",
+  "level": "pixel",
+  "name": "minirocket_pixel",
+  "protocol": "aeon MiniRocket (10,000 kernels, random_state=seed) -> StandardScaler -> multinomial logistic regression (balanced class weights, L2, C chosen on validation macro-F1); 5-seed mean probabilities",
+  "n_kernels": 10000,
+  "c_grid": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "pixel_cap_per_field": 50,
+  "lbfgs_max_iter": 1000,
+  "torch_threads": 16,
+  "aeon_n_jobs": 16,
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "n_fields": {
+    "train": 2653,
+    "val": 664,
+    "test": 830
+  },
+  "n_rows": {
+    "train": 4802658,
+    "val": 1205790,
+    "test": 1531914
+  },
+  "input_checks": {
+    "feature_columns": true,
+    "label_classes": true,
+    "train_fields": true,
+    "test_fields": true,
+    "scaler_mean": true,
+    "scaler_scale": true,
+    "train_pixels": true,
+    "val_pixels": true,
+    "test_pixels": true
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "train_seconds": 1933.4,
+      "predict_seconds": 142.7,
+      "n_train_rows": 131559,
+      "C_grid": [
+        1e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ],
+      "val_f1_by_C": [
+        0.531676,
+        0.645032,
+        0.630711,
+        0.6084,
+        0.58426,
+        0.573606,
+        0.570725
+      ],
+      "chosen_C": 0.0001,
+      "lbfgs_iter": [
+        2,
+        74,
+        192,
+        739,
+        1000,
+        1000,
+        1000
+      ],
+      "lbfgs_converged": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "seed": 101,
+      "train_seconds": 1905.5,
+      "predict_seconds": 144.8,
+      "n_train_rows": 131559,
+      "C_grid": [
+        1e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ],
+      "val_f1_by_C": [
+        0.540745,
+        0.649953,
+        0.635976,
+        0.612858,
+        0.586457,
+        0.578337,
+        0.575283
+      ],
+      "chosen_C": 0.0001,
+      "lbfgs_iter": [
+        2,
+        68,
+        196,
+        754,
+        1000,
+        1000,
+        1000
+      ],
+      "lbfgs_converged": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "seed": 202,
+      "train_seconds": 1818.5,
+      "predict_seconds": 126.8,
+      "n_train_rows": 131559,
+      "C_grid": [
+        1e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ],
+      "val_f1_by_C": [
+        0.557989,
+        0.646525,
+        0.631348,
+        0.608438,
+        0.58384,
+        0.57398,
+        0.572358
+      ],
+      "chosen_C": 0.0001,
+      "lbfgs_iter": [
+        2,
+        67,
+        168,
+        752,
+        1000,
+        1000,
+        1000
+      ],
+      "lbfgs_converged": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "seed": 303,
+      "train_seconds": 1471.5,
+      "predict_seconds": 129.4,
+      "n_train_rows": 131559,
+      "C_grid": [
+        1e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ],
+      "val_f1_by_C": [
+        0.530329,
+        0.638493,
+        0.627379,
+        0.606893,
+        0.583199,
+        0.572089,
+        0.572539
+      ],
+      "chosen_C": 0.0001,
+      "lbfgs_iter": [
+        2,
+        67,
+        167,
+        722,
+        1000,
+        1000,
+        1000
+      ],
+      "lbfgs_converged": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "seed": 404,
+      "train_seconds": 1479.7,
+      "predict_seconds": 125.2,
+      "n_train_rows": 131559,
+      "C_grid": [
+        1e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0,
+        10.0
+      ],
+      "val_f1_by_C": [
+        0.534077,
+        0.65827,
+        0.64298,
+        0.621196,
+        0.594341,
+        0.585675,
+        0.583657
+      ],
+      "chosen_C": 0.0001,
+      "lbfgs_iter": [
+        2,
+        69,
+        177,
+        748,
+        1000,
+        1000,
+        1000
+      ],
+      "lbfgs_converged": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    }
+  ],
+  "per_seed_seconds_mean": 1721.7,
+  "training_time_sec_total": 8608.6,
+  "metrics": {
+    "accuracy": 0.785542,
+    "f1_macro": 0.722402,
+    "f1_weighted": 0.787184,
+    "cohen_kappa": 0.6999
+  },
+  "holdout_predictions": "experiments/recent_baselines/results/predictions/minirocket_pixel.csv",
+  "provenance": {
+    "git_commit": "704f9d7645761ec39ae8ad555806105430f37635",
+    "git_dirty": true,
+    "python_executable": "/home/mmann1123/miniconda3/envs/ts_baselines/bin/python",
+    "versions": {
+      "python": "3.12.12",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "sklearn": "1.8.0",
+      "torch": "2.10.0+cu126",
+      "aeon": "1.6.0"
+    },
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "data_sha256": {
+      "data/merged_dl_train.parquet": "259088d725aab1ed1d7f5584f104a57cf9ccaff251c40aad87939e1d80b5ecd5",
+      "data/merged_dl_test.parquet": "cb15a3cbc529a38fb304a685ffc90c9cf55d0fbc9c0087fa89ceec9fe568bda7"
+    }
+  }
+}

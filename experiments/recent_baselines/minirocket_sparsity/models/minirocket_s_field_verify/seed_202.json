@@ -1,0 +1,20 @@
+{
+  "seed": 202,
+  "train_seconds": 34.1,
+  "predict_seconds": 0.5,
+  "epochs_run": 63,
+  "best_epoch": 48,
+  "best_val_f1_macro": 0.662634,
+  "n_train_rows": 2653,
+  "n_val_rows": 664,
+  "mask_stats_val": {
+    "mean_nonzero_per_head": 1.8520331325301205,
+    "mean_effective_features_per_head": 1.575646098658263,
+    "union_features_selected": 6731
+  },
+  "feature_source": {
+    "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_202.joblib",
+    "sha256": "8a74a38a45a8a471bff270d5eca4b9fa53b7730efa130e28430d8e2d08181c9c"
+  },
+  "feature_identity_max_dp": 0.0
+}

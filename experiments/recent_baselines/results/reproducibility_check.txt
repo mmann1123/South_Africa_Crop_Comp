@@ -1,0 +1,4 @@
+Reproducibility check 2026-10-09T14:45:29-04:00, git 704f9d7
+Seed 42 of each field model retrained from scratch (--force) into *_repro; holdout CSVs compared byte for byte.
+minirocket field seed 42: IDENTICAL
+timesnet field seed 42: IDENTICAL

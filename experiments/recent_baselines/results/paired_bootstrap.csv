@@ -1,0 +1,49 @@
+A,B,question,metric,n_fields,A_point,B_point,delta,ci_lo,ci_hi,p_boot,sig_95,mcnemar_A_only_correct,mcnemar_B_only_correct,mcnemar_p
+MiniRocket (pixel),L-TAE-S (pixel),dense random features vs. learned sparse selection,macro_f1,2415,0.5003,0.5987,-0.0983,-0.124,-0.0726,0.0,True,186,645,5.08e-60
+MiniRocket (pixel),L-TAE-S (pixel),dense random features vs. learned sparse selection,kappa,2415,0.3273,0.5274,-0.2002,-0.2288,-0.1714,0.0,True,186,645,5.08e-60
+MiniRocket (pixel),L-TAE-S (pixel),dense random features vs. learned sparse selection,accuracy,2415,0.5226,0.7126,-0.1901,-0.212,-0.1677,0.0,True,186,645,5.08e-60
+MiniRocket (pixel),TabNet (pixel),dense random features vs. learned sparse selection,macro_f1,2415,0.5003,0.603,-0.1027,-0.131,-0.0755,0.0,True,224,715,2.14e-60
+MiniRocket (pixel),TabNet (pixel),dense random features vs. learned sparse selection,kappa,2415,0.3273,0.5363,-0.209,-0.2399,-0.1783,0.0,True,224,715,2.14e-60
+MiniRocket (pixel),TabNet (pixel),dense random features vs. learned sparse selection,accuracy,2415,0.5226,0.7259,-0.2033,-0.2269,-0.1801,0.0,True,224,715,2.14e-60
+MiniRocket (pixel),L-TAE (pixel),random convolutions vs. dense attention,macro_f1,2415,0.5003,0.5395,-0.0391,-0.0586,-0.0198,0.0,True,136,327,3.23e-19
+MiniRocket (pixel),L-TAE (pixel),random convolutions vs. dense attention,kappa,2415,0.3273,0.3988,-0.0716,-0.0946,-0.0489,0.0,True,136,327,3.23e-19
+MiniRocket (pixel),L-TAE (pixel),random convolutions vs. dense attention,accuracy,2415,0.5226,0.6017,-0.0791,-0.0969,-0.0617,0.0,True,136,327,3.23e-19
+MiniRocket (pixel),Logistic Regression (pixel),"random-convolution features vs. raw features, linear head",macro_f1,2415,0.5003,0.563,-0.0626,-0.0886,-0.0366,0.0,True,246,660,2.15e-44
+MiniRocket (pixel),Logistic Regression (pixel),"random-convolution features vs. raw features, linear head",kappa,2415,0.3273,0.4706,-0.1434,-0.174,-0.1128,0.0,True,246,660,2.15e-44
+MiniRocket (pixel),Logistic Regression (pixel),"random-convolution features vs. raw features, linear head",accuracy,2415,0.5226,0.694,-0.1714,-0.1946,-0.1482,0.0,True,246,660,2.15e-44
+MiniRocket (field),L-TAE-S (field),dense random features vs. learned sparse selection,macro_f1,2415,0.4822,0.6012,-0.119,-0.1443,-0.0934,0.0,True,156,626,1.89e-67
+MiniRocket (field),L-TAE-S (field),dense random features vs. learned sparse selection,kappa,2415,0.3024,0.5155,-0.2131,-0.2412,-0.1848,0.0,True,156,626,1.89e-67
+MiniRocket (field),L-TAE-S (field),dense random features vs. learned sparse selection,accuracy,2415,0.5093,0.7039,-0.1946,-0.2157,-0.1735,0.0,True,156,626,1.89e-67
+MiniRocket (field),L-TAE (field),random convolutions vs. dense attention,macro_f1,2415,0.4822,0.5939,-0.1117,-0.1366,-0.0876,0.0,True,135,494,5.42e-49
+MiniRocket (field),L-TAE (field),random convolutions vs. dense attention,kappa,2415,0.3024,0.4707,-0.1683,-0.1945,-0.1425,0.0,True,135,494,5.42e-49
+MiniRocket (field),L-TAE (field),random convolutions vs. dense attention,accuracy,2415,0.5093,0.658,-0.1487,-0.1681,-0.1292,0.0,True,135,494,5.42e-49
+MiniRocket (field),XGBoost (field),random convolutions vs. tree ensemble on xr_fresh,macro_f1,2415,0.4822,0.5648,-0.0826,-0.1075,-0.0575,0.0,True,203,656,2.35e-56
+MiniRocket (field),XGBoost (field),random convolutions vs. tree ensemble on xr_fresh,kappa,2415,0.3024,0.4743,-0.1719,-0.2021,-0.1415,0.0,True,203,656,2.35e-56
+MiniRocket (field),XGBoost (field),random convolutions vs. tree ensemble on xr_fresh,accuracy,2415,0.5093,0.6969,-0.1876,-0.2099,-0.1648,0.0,True,203,656,2.35e-56
+TimesNet (pixel),L-TAE-S (pixel),modern capacity vs. sparse selection,macro_f1,2415,0.5651,0.5987,-0.0335,-0.059,-0.0089,0.007,True,179,287,6.43e-07
+TimesNet (pixel),L-TAE-S (pixel),modern capacity vs. sparse selection,kappa,2415,0.4718,0.5274,-0.0556,-0.0825,-0.0288,0.0,True,179,287,6.43e-07
+TimesNet (pixel),L-TAE-S (pixel),modern capacity vs. sparse selection,accuracy,2415,0.6679,0.7126,-0.0447,-0.0617,-0.0273,0.0,True,179,287,6.43e-07
+TimesNet (pixel),L-TAE (pixel),modern capacity vs. dense attention,macro_f1,2415,0.5651,0.5395,0.0257,0.0066,0.0448,0.0094,True,334,174,1.14e-12
+TimesNet (pixel),L-TAE (pixel),modern capacity vs. dense attention,kappa,2415,0.4718,0.3988,0.073,0.0472,0.0983,0.0,True,334,174,1.14e-12
+TimesNet (pixel),L-TAE (pixel),modern capacity vs. dense attention,accuracy,2415,0.6679,0.6017,0.0663,0.0484,0.0841,0.0,True,334,174,1.14e-12
+TimesNet (pixel),Transformer (pixel),modern capacity vs. attention capacity,macro_f1,2415,0.5651,0.5772,-0.0121,-0.0333,0.0089,0.2616,False,175,237,0.00261
+TimesNet (pixel),Transformer (pixel),modern capacity vs. attention capacity,kappa,2415,0.4718,0.5029,-0.031,-0.0557,-0.0059,0.0158,True,175,237,0.00261
+TimesNet (pixel),Transformer (pixel),modern capacity vs. attention capacity,accuracy,2415,0.6679,0.6936,-0.0257,-0.0418,-0.0091,0.0034,True,175,237,0.00261
+TimesNet (pixel),TempCNN (pixel),2D temporal convolution vs. 1D temporal convolution,macro_f1,2415,0.5651,0.5737,-0.0086,-0.0273,0.0097,0.3464,False,157,216,0.00262
+TimesNet (pixel),TempCNN (pixel),2D temporal convolution vs. 1D temporal convolution,kappa,2415,0.4718,0.4887,-0.0168,-0.0417,0.0073,0.1788,False,157,216,0.00262
+TimesNet (pixel),TempCNN (pixel),2D temporal convolution vs. 1D temporal convolution,accuracy,2415,0.6679,0.6923,-0.0244,-0.0406,-0.0091,0.0014,True,157,216,0.00262
+TimesNet (field),L-TAE-S (field),modern capacity vs. sparse selection,macro_f1,2415,0.5163,0.6012,-0.0849,-0.1129,-0.0564,0.0,True,203,515,3.9e-32
+TimesNet (field),L-TAE-S (field),modern capacity vs. sparse selection,kappa,2415,0.3621,0.5155,-0.1534,-0.1837,-0.1225,0.0,True,203,515,3.9e-32
+TimesNet (field),L-TAE-S (field),modern capacity vs. sparse selection,accuracy,2415,0.5747,0.7039,-0.1292,-0.1499,-0.1077,0.0,True,203,515,3.9e-32
+TimesNet (field),L-TAE (field),modern capacity vs. dense attention,macro_f1,2415,0.5163,0.5939,-0.0776,-0.1035,-0.0514,0.0,True,178,379,1.05e-17
+TimesNet (field),L-TAE (field),modern capacity vs. dense attention,kappa,2415,0.3621,0.4707,-0.1086,-0.135,-0.0811,0.0,True,178,379,1.05e-17
+TimesNet (field),L-TAE (field),modern capacity vs. dense attention,accuracy,2415,0.5747,0.658,-0.0832,-0.1019,-0.0638,0.0,True,178,379,1.05e-17
+TimesNet (field),TempCNN (field),2D temporal convolution vs. 1D temporal convolution,macro_f1,2415,0.5163,0.5355,-0.0192,-0.0439,0.005,0.1258,False,236,353,1.63e-06
+TimesNet (field),TempCNN (field),2D temporal convolution vs. 1D temporal convolution,kappa,2415,0.3621,0.426,-0.064,-0.0913,-0.036,0.0,True,236,353,1.63e-06
+TimesNet (field),TempCNN (field),2D temporal convolution vs. 1D temporal convolution,accuracy,2415,0.5747,0.6232,-0.0484,-0.0679,-0.0286,0.0,True,236,353,1.63e-06
+MiniRocket (pixel),TimesNet (pixel),random features vs. learned capacity,macro_f1,2415,0.5003,0.5651,-0.0648,-0.0854,-0.0435,0.0,True,179,530,3.69e-41
+MiniRocket (pixel),TimesNet (pixel),random features vs. learned capacity,kappa,2415,0.3273,0.4718,-0.1446,-0.1714,-0.1174,0.0,True,179,530,3.69e-41
+MiniRocket (pixel),TimesNet (pixel),random features vs. learned capacity,accuracy,2415,0.5226,0.6679,-0.1453,-0.1665,-0.1246,0.0,True,179,530,3.69e-41
+MiniRocket (field),TimesNet (field),random features vs. learned capacity,macro_f1,2415,0.4822,0.5163,-0.0341,-0.0579,-0.0105,0.005,True,178,336,2.96e-12
+MiniRocket (field),TimesNet (field),random features vs. learned capacity,kappa,2415,0.3024,0.3621,-0.0597,-0.0848,-0.0351,0.0,True,178,336,2.96e-12
+MiniRocket (field),TimesNet (field),random features vs. learned capacity,accuracy,2415,0.5093,0.5747,-0.0654,-0.0836,-0.0472,0.0,True,178,336,2.96e-12

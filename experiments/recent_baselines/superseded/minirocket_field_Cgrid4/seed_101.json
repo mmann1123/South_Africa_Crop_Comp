@@ -1,0 +1,31 @@
+{
+  "seed": 101,
+  "train_seconds": 25.3,
+  "predict_seconds": 0.1,
+  "n_train_rows": 2653,
+  "C_grid": [
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "val_f1_by_C": [
+    0.659578,
+    0.641215,
+    0.642805,
+    0.64381
+  ],
+  "chosen_C": 0.01,
+  "lbfgs_iter": [
+    333,
+    557,
+    645,
+    594
+  ],
+  "lbfgs_converged": [
+    true,
+    true,
+    true,
+    true
+  ]
+}

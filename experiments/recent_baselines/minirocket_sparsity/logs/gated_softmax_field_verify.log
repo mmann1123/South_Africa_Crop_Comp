@@ -1,0 +1,48 @@
+[20:00] train_gated.py --level field --gate softmax --out-tag verify --force
+=== minirocket_softmax (field) -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/models/minirocket_softmax_field_verify
+Input check vs published L-TAE-S (field): all 7 checks passed
+--- seed 42
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+Feature identity check (field, seed 42): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.7643 val_f1=0.4865 (0.5s/epoch)
+  epoch 10: loss=0.0495 val_f1=0.6364 (0.4s/epoch)
+  epoch 20: loss=0.0132 val_f1=0.6938 (0.3s/epoch)
+  epoch 30: loss=0.0011 val_f1=0.7127 (0.3s/epoch)
+  early stop at epoch 37
+  seed 42: best epoch 22, val_f1 0.7136, 11s; masks {'mean_nonzero_per_head': 5770.166603915663, 'mean_effective_features_per_head': 789.6829318650157, 'union_features_selected': 9996}
+--- seed 101
+Feature identity check (field, seed 101): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.7760 val_f1=0.5204 (0.3s/epoch)
+  epoch 10: loss=0.0533 val_f1=0.6404 (0.3s/epoch)
+  epoch 20: loss=0.0095 val_f1=0.6944 (0.3s/epoch)
+  epoch 30: loss=0.0058 val_f1=0.6900 (0.3s/epoch)
+  early stop at epoch 33
+  seed 101: best epoch 18, val_f1 0.7083, 10s; masks {'mean_nonzero_per_head': 5768.130082831325, 'mean_effective_features_per_head': 804.8374278647713, 'union_features_selected': 9996}
+--- seed 202
+Feature identity check (field, seed 202): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.7601 val_f1=0.5316 (0.3s/epoch)
+  epoch 10: loss=0.0453 val_f1=0.6668 (0.3s/epoch)
+  epoch 20: loss=0.0110 val_f1=0.6678 (0.3s/epoch)
+  early stop at epoch 28
+  seed 202: best epoch 13, val_f1 0.6913, 8s; masks {'mean_nonzero_per_head': 5802.49171686747, 'mean_effective_features_per_head': 831.786563102919, 'union_features_selected': 9996}
+--- seed 303
+Feature identity check (field, seed 303): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.7566 val_f1=0.4858 (0.3s/epoch)
+  epoch 10: loss=0.0351 val_f1=0.6666 (0.3s/epoch)
+  epoch 20: loss=0.0027 val_f1=0.6918 (0.3s/epoch)
+  epoch 30: loss=0.0015 val_f1=0.6880 (0.3s/epoch)
+  early stop at epoch 38
+  seed 303: best epoch 23, val_f1 0.7118, 11s; masks {'mean_nonzero_per_head': 5751.977315512048, 'mean_effective_features_per_head': 778.985545451203, 'union_features_selected': 9996}
+--- seed 404
+Feature identity check (field, seed 404): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.7655 val_f1=0.5367 (0.3s/epoch)
+  epoch 10: loss=0.0487 val_f1=0.6429 (0.3s/epoch)
+  epoch 20: loss=0.0144 val_f1=0.6768 (0.3s/epoch)
+  epoch 30: loss=0.0065 val_f1=0.6953 (0.3s/epoch)
+  epoch 40: loss=0.0008 val_f1=0.6951 (0.3s/epoch)
+  epoch 50: loss=0.0002 val_f1=0.6954 (0.3s/epoch)
+  early stop at epoch 56
+  seed 404: best epoch 41, val_f1 0.7122, 16s; masks {'mean_nonzero_per_head': 5754.32078313253, 'mean_effective_features_per_head': 784.604310111109, 'union_features_selected': 9996}
+In-region (field level): {'accuracy': 0.762651, 'f1_macro': 0.680685, 'f1_weighted': 0.758398, 'cohen_kappa': 0.659763}
+Holdout predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_softmax_field_verify.csv

@@ -1,0 +1,11 @@
+model,csv,f1m_here,f1m_published,match
+L-TAE-S (pixel),predictions_ltae_s.csv,0.5987,0.5987,True
+L-TAE-S (field),predictions_ltae_s_field.csv,0.6012,0.6012,True
+L-TAE (pixel),predictions_ltae.csv,0.5395,0.5395,True
+L-TAE (field),predictions_ltae_field.csv,0.5939,0.5939,True
+Transformer (pixel),predictions_transformer.csv,0.5772,0.5772,True
+TempCNN (pixel),predictions_tempcnn.csv,0.5737,0.5737,True
+TempCNN (field),predictions_tempcnn_field.csv,0.5355,0.5355,True
+TabNet (pixel),predictions_tabnet.csv,0.603,0.603,True
+Logistic Regression (pixel),predictions_base_lr.csv,0.563,0.563,True
+XGBoost (field),predictions_xgboost.csv,0.5648,0.5648,True

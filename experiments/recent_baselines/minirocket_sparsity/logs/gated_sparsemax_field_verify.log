@@ -1,0 +1,60 @@
+[19:57] train_gated.py --level field --gate sparsemax --out-tag verify --force
+=== minirocket_s (field) -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/models/minirocket_s_field_verify
+Input check vs published L-TAE-S (field): all 7 checks passed
+--- seed 42
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+Feature identity check (field, seed 42): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.8774 val_f1=0.2613 (0.9s/epoch)
+  epoch 10: loss=0.1397 val_f1=0.5645 (0.6s/epoch)
+  epoch 20: loss=0.0534 val_f1=0.6239 (0.6s/epoch)
+  epoch 30: loss=0.0368 val_f1=0.5925 (0.6s/epoch)
+  epoch 40: loss=0.0135 val_f1=0.6394 (0.6s/epoch)
+  epoch 50: loss=0.0074 val_f1=0.6438 (0.6s/epoch)
+  epoch 60: loss=0.0027 val_f1=0.6369 (0.6s/epoch)
+  early stop at epoch 63
+  seed 42: best epoch 48, val_f1 0.6598, 35s; masks {'mean_nonzero_per_head': 1.8918486445783131, 'mean_effective_features_per_head': 1.6003078866794884, 'union_features_selected': 6697}
+--- seed 101
+Feature identity check (field, seed 101): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.8702 val_f1=0.2177 (0.6s/epoch)
+  epoch 10: loss=0.1335 val_f1=0.6014 (0.6s/epoch)
+  epoch 20: loss=0.0501 val_f1=0.6166 (0.5s/epoch)
+  epoch 30: loss=0.0294 val_f1=0.6449 (0.5s/epoch)
+  epoch 40: loss=0.0136 val_f1=0.6595 (0.5s/epoch)
+  epoch 50: loss=0.0058 val_f1=0.6701 (0.5s/epoch)
+  epoch 60: loss=0.0017 val_f1=0.6522 (0.5s/epoch)
+  epoch 70: loss=0.0010 val_f1=0.6718 (0.5s/epoch)
+  epoch 80: loss=0.0002 val_f1=0.6616 (0.5s/epoch)
+  early stop at epoch 84
+  seed 101: best epoch 69, val_f1 0.6825, 44s; masks {'mean_nonzero_per_head': 1.8490210843373494, 'mean_effective_features_per_head': 1.5710975157927318, 'union_features_selected': 6673}
+--- seed 202
+Feature identity check (field, seed 202): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.8562 val_f1=0.3288 (0.6s/epoch)
+  epoch 10: loss=0.1145 val_f1=0.5894 (0.6s/epoch)
+  epoch 20: loss=0.0575 val_f1=0.6089 (0.5s/epoch)
+  epoch 30: loss=0.0218 val_f1=0.6150 (0.6s/epoch)
+  epoch 40: loss=0.0176 val_f1=0.6400 (0.5s/epoch)
+  epoch 50: loss=0.0072 val_f1=0.6480 (0.5s/epoch)
+  epoch 60: loss=0.0028 val_f1=0.6354 (0.5s/epoch)
+  early stop at epoch 63
+  seed 202: best epoch 48, val_f1 0.6626, 34s; masks {'mean_nonzero_per_head': 1.8520331325301205, 'mean_effective_features_per_head': 1.575646098658263, 'union_features_selected': 6731}
+--- seed 303
+Feature identity check (field, seed 303): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.8733 val_f1=0.2238 (0.5s/epoch)
+  epoch 10: loss=0.1186 val_f1=0.5980 (0.6s/epoch)
+  epoch 20: loss=0.0511 val_f1=0.6539 (0.5s/epoch)
+  epoch 30: loss=0.0266 val_f1=0.6628 (0.5s/epoch)
+  epoch 40: loss=0.0099 val_f1=0.6637 (0.5s/epoch)
+  early stop at epoch 43
+  seed 303: best epoch 28, val_f1 0.6979, 23s; masks {'mean_nonzero_per_head': 1.9134977409638554, 'mean_effective_features_per_head': 1.6162171376397811, 'union_features_selected': 6837}
+--- seed 404
+Feature identity check (field, seed 404): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.8699 val_f1=0.2073 (0.5s/epoch)
+  epoch 10: loss=0.1617 val_f1=0.5795 (0.6s/epoch)
+  epoch 20: loss=0.0618 val_f1=0.6203 (0.5s/epoch)
+  epoch 30: loss=0.0243 val_f1=0.6383 (0.5s/epoch)
+  epoch 40: loss=0.0142 val_f1=0.6287 (0.5s/epoch)
+  early stop at epoch 40
+  seed 404: best epoch 25, val_f1 0.6502, 21s; masks {'mean_nonzero_per_head': 1.9253576807228916, 'mean_effective_features_per_head': 1.6234454751373775, 'union_features_selected': 6778}
+In-region (field level): {'accuracy': 0.745783, 'f1_macro': 0.661528, 'f1_weighted': 0.742239, 'cohen_kappa': 0.636211}
+Holdout predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_s_field_verify.csv

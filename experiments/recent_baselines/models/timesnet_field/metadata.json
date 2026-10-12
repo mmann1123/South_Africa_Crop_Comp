@@ -1,0 +1,119 @@
+{
+  "model": "timesnet",
+  "level": "field",
+  "name": "timesnet_field",
+  "protocol": "L-TAE-S harness: focal loss (gamma=2, alpha=1/count), AdamW lr=1e-3 wd=1e-4, cosine T_max=100, early stop patience 15 on val macro-F1, AMP, grad clip 1.0, 5-seed mean logits",
+  "tslib_commit": "4e938a1767106324dd753b2a44832bf870a0252e",
+  "timesnet_config": {
+    "task_name": "classification",
+    "seq_len": 10,
+    "label_len": 0,
+    "pred_len": 0,
+    "enc_in": 6,
+    "d_model": 32,
+    "d_ff": 64,
+    "e_layers": 2,
+    "top_k": 2,
+    "num_kernels": 6,
+    "embed": "fixed",
+    "freq": "h",
+    "dropout": 0.1
+  },
+  "batch_size": 128,
+  "max_epochs": 100,
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "n_fields": {
+    "train": 2653,
+    "val": 664,
+    "test": 830
+  },
+  "n_rows": {
+    "train": 2653,
+    "val": 664,
+    "test": 830
+  },
+  "input_checks": {
+    "feature_columns": true,
+    "label_classes": true,
+    "train_fields": true,
+    "test_fields": true,
+    "scaler_mean": true,
+    "scaler_scale": true,
+    "val_fields": true
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "train_seconds": 18.1,
+      "epochs_run": 51,
+      "best_epoch": 36,
+      "best_val_f1_macro": 0.743923,
+      "mean_epoch_seconds": 0.35
+    },
+    {
+      "seed": 101,
+      "train_seconds": 23.0,
+      "epochs_run": 67,
+      "best_epoch": 52,
+      "best_val_f1_macro": 0.740252,
+      "mean_epoch_seconds": 0.34
+    },
+    {
+      "seed": 202,
+      "train_seconds": 19.4,
+      "epochs_run": 56,
+      "best_epoch": 41,
+      "best_val_f1_macro": 0.747545,
+      "mean_epoch_seconds": 0.35
+    },
+    {
+      "seed": 303,
+      "train_seconds": 30.8,
+      "epochs_run": 85,
+      "best_epoch": 70,
+      "best_val_f1_macro": 0.750875,
+      "mean_epoch_seconds": 0.36
+    },
+    {
+      "seed": 404,
+      "train_seconds": 39.1,
+      "epochs_run": 65,
+      "best_epoch": 50,
+      "best_val_f1_macro": 0.753618,
+      "mean_epoch_seconds": 0.6
+    }
+  ],
+  "per_seed_seconds_mean": 26.1,
+  "training_time_sec_total": 130.4,
+  "metrics": {
+    "accuracy": 0.773494,
+    "f1_macro": 0.700278,
+    "f1_weighted": 0.771251,
+    "cohen_kappa": 0.678055
+  },
+  "holdout_predictions": "experiments/recent_baselines/results/predictions/timesnet_field.csv",
+  "provenance": {
+    "git_commit": "704f9d7645761ec39ae8ad555806105430f37635",
+    "git_dirty": true,
+    "python_executable": "/home/mmann1123/miniconda3/envs/ts_baselines/bin/python",
+    "versions": {
+      "python": "3.12.12",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "sklearn": "1.8.0",
+      "torch": "2.10.0+cu126",
+      "aeon": "1.6.0"
+    },
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "data_sha256": {
+      "data/merged_dl_train.parquet": "259088d725aab1ed1d7f5584f104a57cf9ccaff251c40aad87939e1d80b5ecd5",
+      "data/merged_dl_test.parquet": "cb15a3cbc529a38fb304a685ffc90c9cf55d0fbc9c0087fa89ceec9fe568bda7"
+    }
+  }
+}

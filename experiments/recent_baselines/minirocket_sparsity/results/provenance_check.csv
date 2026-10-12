@@ -1,0 +1,8 @@
+model,f1m_here,f1m_expected,source,match
+L-TAE-S (pixel),0.5987,0.5987,Table 1,True
+L-TAE-S (field),0.6012,0.6012,Table 1,True
+L-TAE (pixel),0.5395,0.5395,Table 1,True
+L-TAE (field),0.5939,0.5939,Table 1,True
+Logistic Regression (pixel),0.563,0.563,Table 1,True
+MiniRocket (pixel),0.5003,0.5003,../results/summary.csv,True
+MiniRocket (field),0.4822,0.4822,../results/summary.csv,True

@@ -1,0 +1,17 @@
+2026-10-09T21:03:25 pid=3035470 rows=200000 rows_differing=1 a==c=False b==c=True
+2026-10-09T21:17:51 pid=3035470 rows=131914 rows_differing=1 a==c=True b==c=False
+2026-10-09T21:39:42 pid=3035605 rows=200000 rows_differing=1 a==c=True b==c=False
+2026-10-09T21:41:33 pid=3035605 rows=200000 rows_differing=1 a==c=True b==c=False
+2026-10-09T22:14:44 pid=3035605 rows=200000 rows_differing=1 a==c=True b==c=False
+--- chain start 2026-10-11T17:14:45-04:00, kernel 7.1.1-76070101-generic; stressapptest 45 min PASS beforehand
+2026-10-11T17:16:17 pid=971901 rows=200000 rows_differing=1 a==c=False b==c=True
+2026-10-11T17:29:29 pid=971901 rows=200000 rows_differing=1 a==c=False b==c=True
+2026-10-11T17:35:03 pid=971901 rows=131559 rows_differing=1 a==c=True b==c=False
+2026-10-11T18:08:05 pid=971901 rows=200000 rows_differing=1 a==c=False b==c=True
+2026-10-11T18:19:59 pid=971901 rows=200000 rows_differing=1 a==c=False b==c=True
+2026-10-11T18:20:43 pid=971901 rows=200000 rows_differing=1 a==c=True b==c=False
+2026-10-11T18:57:55 pid=1157167 rows=200000 rows_differing=1 a==c=False b==c=True
+2026-10-11T19:42:44 pid=1157167 rows=200000 rows_differing=1 a==c=True b==c=False
+2026-10-11T19:45:10 pid=1157167 rows=200000 rows_differing=1 a==c=True b==c=False
+2026-10-11T20:02:03 pid=1336362 rows=200000 rows_differing=1 a==c=False b==c=True
+2026-10-11T21:20:40 pid=1336362 rows=131914 rows_differing=1 a==c=True b==c=False

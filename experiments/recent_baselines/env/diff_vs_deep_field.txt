@@ -1,0 +1,18 @@
+2a3
+> aeon==1.6.0
+40a42
+> Deprecated==3.0.0
+42a45
+> einops==0.8.2
+95c98
+< llvmlite==0.47.0
+---
+> llvmlite==0.46.0
+117c120
+< numba==0.65.0
+---
+> numba==0.63.1
+119c122
+< numpy @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_1770098484/work/dist/numpy-2.4.2-cp312-cp312-linux_x86_64.whl#sha256=b7bef5ec2cd1cc474384a65c015869d8df9b26ffcb0de8674705011d77d42046
+---
+> numpy==2.3.5

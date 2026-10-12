@@ -1,0 +1,23 @@
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+{'level': 'field', 'seed': 42, 'split': 'test', 'rows': 830, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'field', 'seed': 42, 'split': 'holdout', 'rows': 2415, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'field', 'seed': 101, 'split': 'test', 'rows': 830, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'field', 'seed': 101, 'split': 'holdout', 'rows': 2415, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'field', 'seed': 202, 'split': 'test', 'rows': 830, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'field', 'seed': 202, 'split': 'holdout', 'rows': 2415, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'field', 'seed': 303, 'split': 'test', 'rows': 830, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'field', 'seed': 303, 'split': 'holdout', 'rows': 2415, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'field', 'seed': 404, 'split': 'test', 'rows': 830, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'field', 'seed': 404, 'split': 'holdout', 'rows': 2415, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'pixel', 'seed': 42, 'split': 'test', 'rows': 1531914, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'pixel', 'seed': 42, 'split': 'holdout', 'rows': 3409489, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'pixel', 'seed': 101, 'split': 'test', 'rows': 1531914, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'pixel', 'seed': 101, 'split': 'holdout', 'rows': 3409489, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'pixel', 'seed': 202, 'split': 'test', 'rows': 1531914, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'pixel', 'seed': 202, 'split': 'holdout', 'rows': 3409489, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'pixel', 'seed': 303, 'split': 'test', 'rows': 1531914, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'pixel', 'seed': 303, 'split': 'holdout', 'rows': 3409489, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'pixel', 'seed': 404, 'split': 'test', 'rows': 1531914, 'max_abs_diff': 0.0, 'identical': True}
+{'level': 'pixel', 'seed': 404, 'split': 'holdout', 'rows': 3409489, 'max_abs_diff': 0.0, 'identical': True}
+all identical: True -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/verify_reference.csv

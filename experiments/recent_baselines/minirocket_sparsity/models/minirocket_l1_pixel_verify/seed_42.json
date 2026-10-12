@@ -1,0 +1,48 @@
+{
+  "seed": 42,
+  "train_seconds": 630.9,
+  "predict_seconds": 248.9,
+  "n_train_rows": 131559,
+  "C_grid": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0
+  ],
+  "val_f1_by_C": [
+    0.492678,
+    0.623773,
+    0.642927,
+    0.615684,
+    0.576389
+  ],
+  "chosen_C": 0.01,
+  "nonzero_features_by_C": [
+    221,
+    863,
+    4172,
+    9647,
+    9996
+  ],
+  "fista_iter": [
+    73,
+    272,
+    664,
+    2074,
+    6526
+  ],
+  "fista_converged": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "nonzero_features_chosen": 4172,
+  "feature_source": {
+    "source": "experiments/recent_baselines/models/minirocket_pixel/minirocket_pixel_seed_42.joblib",
+    "sha256": "381e4aafdae0aaf84ed980c14e5324159e042b65703c666d3c6f67aaa32e4f04"
+  },
+  "feature_identity_max_dp": 0.0
+}

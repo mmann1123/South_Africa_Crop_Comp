@@ -1,0 +1,51 @@
+=== MiniRocket (pixel) -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/models/minirocket_pixel
+Input check vs published L-TAE-S (pixel): all 9 checks passed
+--- seed 42
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+  C=0.0001: val_f1=0.6450  lbfgs_iter=74
+  C=0.001: val_f1=0.6307  lbfgs_iter=192
+  C=0.01: val_f1=0.6084  lbfgs_iter=739
+  C=0.1: val_f1=0.5843  lbfgs_iter=1000
+  C=1: val_f1=0.5736  lbfgs_iter=1000
+  C=10: val_f1=0.5707  lbfgs_iter=1000
+  C=1e-05: val_f1=0.5317  lbfgs_iter=2
+  seed 42: C=0.0001, train 1933s, predict 143s
+--- seed 101
+  C=0.0001: val_f1=0.6500  lbfgs_iter=68
+  C=0.001: val_f1=0.6360  lbfgs_iter=196
+  C=0.01: val_f1=0.6129  lbfgs_iter=754
+  C=0.1: val_f1=0.5865  lbfgs_iter=1000
+  C=1: val_f1=0.5783  lbfgs_iter=1000
+  C=10: val_f1=0.5753  lbfgs_iter=1000
+  C=1e-05: val_f1=0.5407  lbfgs_iter=2
+  seed 101: C=0.0001, train 1906s, predict 145s
+--- seed 202
+  C=0.0001: val_f1=0.6465  lbfgs_iter=67
+  C=0.001: val_f1=0.6313  lbfgs_iter=168
+  C=0.01: val_f1=0.6084  lbfgs_iter=752
+  C=0.1: val_f1=0.5838  lbfgs_iter=1000
+  C=1: val_f1=0.5740  lbfgs_iter=1000
+  C=10: val_f1=0.5724  lbfgs_iter=1000
+  C=1e-05: val_f1=0.5580  lbfgs_iter=2
+  seed 202: C=0.0001, train 1818s, predict 127s
+--- seed 303
+  C=0.0001: val_f1=0.6385  lbfgs_iter=67
+  C=0.001: val_f1=0.6274  lbfgs_iter=167
+  C=0.01: val_f1=0.6069  lbfgs_iter=722
+  C=0.1: val_f1=0.5832  lbfgs_iter=1000
+  C=1: val_f1=0.5721  lbfgs_iter=1000
+  C=10: val_f1=0.5725  lbfgs_iter=1000
+  C=1e-05: val_f1=0.5303  lbfgs_iter=2
+  seed 303: C=0.0001, train 1471s, predict 129s
+--- seed 404
+  C=0.0001: val_f1=0.6583  lbfgs_iter=69
+  C=0.001: val_f1=0.6430  lbfgs_iter=177
+  C=0.01: val_f1=0.6212  lbfgs_iter=748
+  C=0.1: val_f1=0.5943  lbfgs_iter=1000
+  C=1: val_f1=0.5857  lbfgs_iter=1000
+  C=10: val_f1=0.5837  lbfgs_iter=1000
+  C=1e-05: val_f1=0.5341  lbfgs_iter=2
+  seed 404: C=0.0001, train 1480s, predict 125s
+In-region (field level): {'accuracy': 0.785542, 'f1_macro': 0.722402, 'f1_weighted': 0.787184, 'cohen_kappa': 0.6999}
+Holdout predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/results/predictions/minirocket_pixel.csv

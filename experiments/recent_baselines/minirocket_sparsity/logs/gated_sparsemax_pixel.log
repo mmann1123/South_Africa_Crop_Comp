@@ -1,0 +1,33 @@
+=== minirocket_s (pixel) -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/models/minirocket_s_pixel
+Input check vs published L-TAE-S (pixel): all 9 checks passed
+--- seed 42: exists, skipping
+--- seed 101: exists, skipping
+--- seed 202: exists, skipping
+--- seed 303
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+Feature identity check (pixel, seed 303): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.4997 val_f1=0.5688 (21.2s/epoch)
+  epoch 10: loss=0.0267 val_f1=0.6288 (21.2s/epoch)
+  epoch 20: loss=0.0082 val_f1=0.6360 (21.2s/epoch)
+  epoch 30: loss=0.0041 val_f1=0.6372 (21.2s/epoch)
+  epoch 40: loss=0.0021 val_f1=0.6438 (21.2s/epoch)
+  epoch 50: loss=0.0006 val_f1=0.6439 (21.2s/epoch)
+  early stop at epoch 58
+  seed 303: best epoch 43, val_f1 0.6483, 1229s; masks {'mean_nonzero_per_head': 1.812521875, 'mean_effective_features_per_head': 1.5497801383972167, 'union_features_selected': 9982}
+--- seed 404
+Feature identity check (pixel, seed 404): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.4920 val_f1=0.5637 (20.7s/epoch)
+  epoch 10: loss=0.0252 val_f1=0.6287 (20.5s/epoch)
+  epoch 20: loss=0.0076 val_f1=0.6369 (20.5s/epoch)
+  epoch 30: loss=0.0043 val_f1=0.6395 (20.5s/epoch)
+  epoch 40: loss=0.0026 val_f1=0.6448 (20.5s/epoch)
+  epoch 50: loss=0.0005 val_f1=0.6464 (20.5s/epoch)
+  epoch 60: loss=0.0002 val_f1=0.6492 (20.5s/epoch)
+  epoch 70: loss=0.0001 val_f1=0.6502 (20.5s/epoch)
+  epoch 80: loss=0.0000 val_f1=0.6505 (20.5s/epoch)
+  epoch 90: loss=0.0000 val_f1=0.6498 (20.5s/epoch)
+  epoch 100: loss=0.0001 val_f1=0.6511 (20.5s/epoch)
+  seed 404: best epoch 99, val_f1 0.6520, 2048s; masks {'mean_nonzero_per_head': 1.839828125, 'mean_effective_features_per_head': 1.5674669940948487, 'union_features_selected': 9974}
+In-region (field level): {'accuracy': 0.814458, 'f1_macro': 0.757799, 'f1_weighted': 0.812614, 'cohen_kappa': 0.737723}
+Holdout predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_s_pixel.csv

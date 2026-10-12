@@ -1,0 +1,45 @@
+=== minirocket_s (pixel) -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/models/minirocket_s_pixel
+Input check vs published L-TAE-S (pixel): all 9 checks passed
+--- seed 42
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+Feature identity check (pixel, seed 42): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.5015 val_f1=0.5300 (26.4s/epoch)
+  epoch 10: loss=0.0223 val_f1=0.6489 (25.2s/epoch)
+  epoch 20: loss=0.0064 val_f1=0.6525 (24.8s/epoch)
+  epoch 30: loss=0.0034 val_f1=0.6529 (24.8s/epoch)
+  early stop at epoch 37
+  seed 42: best epoch 22, val_f1 0.6598, 915s; masks {'mean_nonzero_per_head': 1.84715, 'mean_effective_features_per_head': 1.5732699508666992, 'union_features_selected': 9980}
+--- seed 101
+Feature identity check (pixel, seed 101): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.5124 val_f1=0.5386 (24.1s/epoch)
+  epoch 10: loss=0.0273 val_f1=0.6304 (24.2s/epoch)
+  epoch 20: loss=0.0078 val_f1=0.6476 (24.2s/epoch)
+  epoch 30: loss=0.0036 val_f1=0.6428 (24.1s/epoch)
+  early stop at epoch 35
+  seed 101: best epoch 20, val_f1 0.6476, 842s; masks {'mean_nonzero_per_head': 1.83360625, 'mean_effective_features_per_head': 1.5627462703704833, 'union_features_selected': 9956}
+--- seed 202
+Feature identity check (pixel, seed 202): max |dp| = 0.0e+00  OK
+  epoch 1: loss=0.5116 val_f1=0.5693 (23.9s/epoch)
+  epoch 10: loss=0.0275 val_f1=0.6270 (24.2s/epoch)
+  epoch 20: loss=0.0084 val_f1=0.6390 (23.9s/epoch)
+  epoch 30: loss=0.0032 val_f1=0.6473 (23.5s/epoch)
+  epoch 40: loss=0.0041 val_f1=0.6457 (23.4s/epoch)
+  epoch 50: loss=0.0015 val_f1=0.6515 (23.4s/epoch)
+  epoch 60: loss=0.0001 val_f1=0.6570 (23.4s/epoch)
+  epoch 70: loss=0.0002 val_f1=0.6550 (23.5s/epoch)
+  early stop at epoch 75
+  seed 202: best epoch 60, val_f1 0.6570, 1759s; masks {'mean_nonzero_per_head': 1.82474375, 'mean_effective_features_per_head': 1.5577645359039307, 'union_features_selected': 9975}
+--- seed 303
+Traceback (most recent call last):
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/train_gated.py", line 192, in <module>
+    main()
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/train_gated.py", line 167, in main
+    seed_info.append(run_seed(seed, data, X_hold, args.level, args.gate, out_dir, device, args.max_epochs))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/train_gated.py", line 79, in run_seed
+    max_dp = fx.identity_check(m, data, level, seed)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/features.py", line 71, in identity_check
+    raise AssertionError(f"MiniRocket features differ from reference ({level}, seed {seed}): "
+AssertionError: MiniRocket features differ from reference (pixel, seed 303): max |dp| = 9.92e-01

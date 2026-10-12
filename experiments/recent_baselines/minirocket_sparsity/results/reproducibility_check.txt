@@ -1,0 +1,7 @@
+Reproducibility check 2026-10-09T19:09:57-04:00, git 704f9d7
+Field seed 42 of each variant retrained from scratch (--force) into *_repro; holdout CSVs compared byte for byte.
+minirocket_s field seed 42: IDENTICAL
+minirocket_softmax field seed 42: IDENTICAL
+minirocket_l1 field seed 42: IDENTICAL
+minirocket_ridge field seed 42: IDENTICAL
+minirocket_ridge_ext field seed 42: IDENTICAL

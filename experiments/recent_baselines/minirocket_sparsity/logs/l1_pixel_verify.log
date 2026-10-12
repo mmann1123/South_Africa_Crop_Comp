@@ -1,0 +1,77 @@
+[18:39] train_l1.py --level pixel --out-tag verify --force
+=== MiniRocket-L1 (pixel) -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/models/minirocket_l1_pixel_verify
+Input check vs published L-TAE-S (pixel): all 9 checks passed
+--- seed 42
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+Feature identity check (pixel, seed 42): max |dp| = 0.0e+00  OK
+  C=0.0001: iter=73 converged=True nonzero=221
+  C=0.001: iter=272 converged=True nonzero=863
+  C=0.01: iter=664 converged=True nonzero=4172
+  C=0.1: iter=2074 converged=True nonzero=9647
+  C=1: iter=6526 converged=True nonzero=9996
+  validation F1 fell twice in a row; path stopped at C=1
+  C=0.0001: val_f1=0.4927
+  C=0.001: val_f1=0.6238
+  C=0.01: val_f1=0.6429
+  C=0.1: val_f1=0.6157
+  C=1: val_f1=0.5764
+  seed 42: C=0.01, 4172 features, train 631s
+--- seed 101
+Feature identity check (pixel, seed 101): max |dp| = 0.0e+00  OK
+  C=0.0001: iter=41 converged=True nonzero=253
+  C=0.001: iter=289 converged=True nonzero=865
+  C=0.01: iter=755 converged=True nonzero=4000
+  C=0.1: iter=2154 converged=True nonzero=9727
+  C=1: iter=5109 converged=True nonzero=9996
+  validation F1 fell twice in a row; path stopped at C=1
+  C=0.0001: val_f1=0.4965
+  C=0.001: val_f1=0.6241
+  C=0.01: val_f1=0.6481
+  C=0.1: val_f1=0.6196
+  C=1: val_f1=0.5805
+  seed 101: C=0.01, 4000 features, train 590s
+--- seed 202
+Feature identity check (pixel, seed 202): max |dp| = 0.0e+00  OK
+  C=0.0001: iter=100 converged=True nonzero=160
+  C=0.001: iter=296 converged=True nonzero=1074
+  C=0.01: iter=744 converged=True nonzero=3832
+  C=0.1: iter=1912 converged=True nonzero=9568
+  C=1: iter=4403 converged=True nonzero=9990
+  validation F1 fell twice in a row; path stopped at C=1
+  C=0.0001: val_f1=0.4974
+  C=0.001: val_f1=0.6299
+  C=0.01: val_f1=0.6472
+  C=0.1: val_f1=0.6160
+  C=1: val_f1=0.5776
+  seed 202: C=0.01, 3832 features, train 550s
+--- seed 303
+Feature identity check (pixel, seed 303): max |dp| = 0.0e+00  OK
+  C=0.0001: iter=70 converged=True nonzero=195
+  C=0.001: iter=251 converged=True nonzero=878
+  C=0.01: iter=573 converged=True nonzero=4664
+  C=0.1: iter=2097 converged=True nonzero=9351
+  C=1: iter=6240 converged=True nonzero=9982
+  validation F1 fell twice in a row; path stopped at C=1
+  C=0.0001: val_f1=0.4400
+  C=0.001: val_f1=0.6320
+  C=0.01: val_f1=0.6389
+  C=0.1: val_f1=0.6129
+  C=1: val_f1=0.5755
+  seed 303: C=0.01, 4664 features, train 613s
+--- seed 404
+Feature identity check (pixel, seed 404): max |dp| = 0.0e+00  OK
+  C=0.0001: iter=67 converged=True nonzero=189
+  C=0.001: iter=301 converged=True nonzero=913
+  C=0.01: iter=751 converged=True nonzero=3958
+  C=0.1: iter=2129 converged=True nonzero=9367
+  C=1: iter=5570 converged=True nonzero=9973
+  validation F1 fell twice in a row; path stopped at C=1
+  C=0.0001: val_f1=0.4770
+  C=0.001: val_f1=0.6335
+  C=0.01: val_f1=0.6565
+  C=0.1: val_f1=0.6280
+  C=1: val_f1=0.5875
+  seed 404: C=0.01, 3958 features, train 606s
+In-region (field level): {'accuracy': 0.783133, 'f1_macro': 0.718937, 'f1_weighted': 0.785731, 'cohen_kappa': 0.697013}
+Holdout predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_l1_pixel_verify.csv

@@ -1,0 +1,14 @@
+=== MiniRocket (field) -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/models/minirocket_field_repro
+Input check vs published L-TAE-S (field): all 7 checks passed
+--- seed 42
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+  C=0.0001: val_f1=0.6519  lbfgs_iter=31
+  C=0.001: val_f1=0.6799  lbfgs_iter=125
+  C=0.01: val_f1=0.6673  lbfgs_iter=343
+  C=0.1: val_f1=0.6537  lbfgs_iter=544
+  C=1: val_f1=0.6504  lbfgs_iter=562
+  C=10: val_f1=0.6477  lbfgs_iter=588
+  seed 42: C=0.001, train 21s, predict 0s
+In-region (field level): {'accuracy': 0.718072, 'f1_macro': 0.634101, 'f1_weighted': 0.718513, 'cohen_kappa': 0.602699}
+Holdout predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/results/predictions/minirocket_field_repro.csv

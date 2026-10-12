@@ -1,0 +1,8 @@
+{
+  "seed": 404,
+  "train_seconds": 1694.9,
+  "epochs_run": 16,
+  "best_epoch": 1,
+  "best_val_f1_macro": 0.665583,
+  "mean_epoch_seconds": 105.93
+}

@@ -1,0 +1,13 @@
+{
+  "seed": 202,
+  "train_seconds": 1.1,
+  "predict_seconds": 0.2,
+  "n_train_rows": 2653,
+  "alpha": 1000.0,
+  "alpha_at_grid_edge": true,
+  "feature_source": {
+    "source": "experiments/recent_baselines/models/minirocket_field/minirocket_field_seed_202.joblib",
+    "sha256": "8a74a38a45a8a471bff270d5eca4b9fa53b7730efa130e28430d8e2d08181c9c"
+  },
+  "feature_identity_max_dp": 0.0
+}

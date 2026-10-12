@@ -1,0 +1,8 @@
+# Large, regenerable artifacts (see README "Reproducibility"):
+# per-seed logit / probability arrays (up to 68 MB each); rerunning the training scripts
+# regenerates them deterministically
+*.npy
+# gated-head checkpoints (~50 MB each); retrains were verified byte-identical
+# (minirocket_sparsity/results/verification.txt)
+minirocket_sparsity/models/**/*.pt
+minirocket_sparsity/superseded/**/*.pt
