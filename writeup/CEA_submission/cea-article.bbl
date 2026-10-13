@@ -1,4 +1,4 @@
-\begin{thebibliography}{42}
+\begin{thebibliography}{44}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -75,6 +75,15 @@
   Conference on Knowledge Discovery and Data Mining}, pp.
   \bibinfo{pages}{785--794}.
 \newblock \DOIprefix\doi{10.1145/2939672.2939785}.
+%Type = Inproceedings
+\bibitem[{Dempster et~al.(2021)Dempster, Schmidt and Webb}]{minirocket2021}
+\bibinfo{author}{Dempster, A.}, \bibinfo{author}{Schmidt, D.F.},
+  \bibinfo{author}{Webb, G.I.}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{{MiniRocket}: A very fast (almost) deterministic
+  transform for time series classification}, in:
+  \bibinfo{booktitle}{Proceedings of the 27th ACM SIGKDD Conference on
+  Knowledge Discovery and Data Mining}, pp. \bibinfo{pages}{248--257}.
+\newblock \DOIprefix\doi{10.1145/3447548.3467231}.
 %Type = Article
 \bibitem[{Espejo-Garcia et~al.(2020)Espejo-Garcia, Mylonas, Athanasakos,
   Fountas and Vasilakoglou}]{espejo2020}
@@ -389,6 +398,15 @@
 \newblock \bibinfo{journal}{Remote Sensing of Environment}
   \bibinfo{volume}{108}, \bibinfo{pages}{290--310}.
 \newblock \DOIprefix\doi{10.1016/j.rse.2006.11.021}.
+%Type = Inproceedings
+\bibitem[{Wu et~al.(2023)Wu, Hu, Liu, Zhou, Wang and Long}]{timesnet2023}
+\bibinfo{author}{Wu, H.}, \bibinfo{author}{Hu, T.}, \bibinfo{author}{Liu, Y.},
+  \bibinfo{author}{Zhou, H.}, \bibinfo{author}{Wang, J.},
+  \bibinfo{author}{Long, M.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{{TimesNet}: Temporal 2d-variation modeling for
+  general time series analysis}, in: \bibinfo{booktitle}{International
+  Conference on Learning Representations (ICLR)}.
+\newblock \URLprefix \url{https://openreview.net/forum?id=ju_Uqw384Oq}.
 %Type = Article
 \bibitem[{Yang et~al.(2020)Yang, Gu, Li, Jiang and Ren}]{yang2020}
 \bibinfo{author}{Yang, S.}, \bibinfo{author}{Gu, L.}, \bibinfo{author}{Li, X.},

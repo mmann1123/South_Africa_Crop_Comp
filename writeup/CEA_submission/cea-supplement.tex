@@ -549,6 +549,71 @@ The holdout season is also later. July EVI of the annual crops is 0.11 to 0.21 l
 \end{figure*}
 
 \clearpage
+\section{Recent Time-Series Baselines and Sparse Selection on MiniRocket}
+\label{sec:recent}
+\emph{Supports main paper Secs.~4.2, 5.1, and 5.2.}
+We added two recent time-series classifiers. TimesNet \citep{timesnet2023} is a high-capacity network that reshapes a series into two dimensions by its dominant periods. MiniRocket \citep{minirocket2021} passes about 10{,}000 random convolution features to a linear classifier and ranks among the most accurate general time-series classifiers. To test we use the same 60 inputs, field-wise split, scaler, five seeds, field aggregation, and holdout scoring as the published models, and we checked that their inputs are identical. TimesNet uses the L-TAE-S training settings. MiniRocket uses a logistic-regression head with the penalty chosen on the validation split; its standard ridge head performs no better (holdout F1$_m$ $0.49$ pixel, $0.45$ field). At the pixel level, MiniRocket trains on at most 50 pixels per field because of memory limitations. We did not run a pretrained encoder such as Presto, because it needs Sentinel-2 bands that are not in the processed benchmark.
+
+We find that neither model transfers as well as the sparse learners (Table~\ref{stab:recent}). TimesNet behaves like the other dense temporal networks: high in-region accuracy with a large performance drop on the holdout. MiniRocket falls below logistic regression on the raw inputs. For both, field aggregation lowers holdout accuracy.
+
+To test whether sparse feature selection helps a second backbone, we kept each seed's MiniRocket features fixed and changed only the classifier (Table~\ref{stab:mrsparse}). The sparse head is the L-TAE-S gate: 16 heads that each keep about two features per sample. The dense control is the identical network with softmax in place of sparsemax. At the pixel level the sparse gate improves holdout F1$_m$ by $0.058$ over the dense control (paired 95\% CI $[0.040, 0.075]$; $\Delta\kappa=0.10$), close to the $0.06$ gain the gate gives L-TAE, while the dense gate adds nothing over the linear head ($-0.013$, $[-0.034, 0.007]$). Removing features globally with an L1 penalty does not help ($+0.008$), so the gain comes from choosing different features for each sample. At the field level the sparse and dense gates do not differ ($-0.005$, $[-0.027, 0.016]$), matching the non-significant field-level gain of L-TAE-S over L-TAE. Even with the gate, MiniRocket stays below L-TAE-S ($-0.054$ pixel, $[-0.080, -0.028]$).
+
+\begin{table}[!ht]
+\centering
+\caption{Recent time-series baselines under out-of-region transfer.}
+\label{stab:recent}
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{4pt}
+\footnotesize
+\begin{tabular}{llccccc}
+\toprule
+\textbf{Model} & \textbf{Level} & \textbf{In-reg F1$_m$} & \textbf{OOR F1$_m$} & \textbf{95\% CI} & \textbf{$\kappa$} & \textbf{$\Delta$ vs.\ L-TAE-S} \\
+\midrule
+TimesNet & pixel & 0.76 & 0.57 & $[0.54, 0.59]$ & 0.47 & $-0.03$ $[-0.06, -0.01]$ \\
+TimesNet & field & 0.70 & 0.52 & $[0.49, 0.54]$ & 0.36 & $-0.08$ $[-0.11, -0.06]$ \\
+MiniRocket & pixel & 0.72 & 0.50 & $[0.48, 0.52]$ & 0.33 & $-0.10$ $[-0.12, -0.07]$ \\
+MiniRocket & field & 0.67 & 0.48 & $[0.46, 0.51]$ & 0.30 & $-0.12$ $[-0.14, -0.09]$ \\
+\midrule
+L-TAE-S & pixel & 0.77 & 0.60 & $[0.57, 0.62]$ & 0.53 & --- \\
+L-TAE-S & field & 0.64 & 0.60 & $[0.58, 0.62]$ & 0.52 & --- \\
+Logistic Regression & pixel & 0.61 & 0.56 & $[0.54, 0.59]$ & 0.47 & --- \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+Five-seed ensembles. In-reg: internal 20\% field split; OOR: holdout tile; 95\% CI from the field bootstrap. $\Delta$ vs.\ L-TAE-S: paired field-bootstrap difference in OOR F1$_m$ against L-TAE-S at the same level, with its 95\% CI. Reference rows are from main Table~1.
+\end{minipage}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{Out-of-region macro-F1 of different classifiers on the same MiniRocket features.}
+\label{stab:mrsparse}
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{5pt}
+\footnotesize
+\begin{tabular}{lcc}
+\toprule
+\textbf{Classifier on MiniRocket features} & \textbf{Pixel} & \textbf{Field} \\
+\midrule
+Linear, L2 logistic (Table~\ref{stab:recent}) & 0.50 & 0.48 \\
+Linear, ridge (standard MiniRocket head) & 0.49 & 0.45 \\
+Linear, L1 logistic (global selection) & 0.51 & 0.49 \\
+Dense gate (softmax) & 0.49 & 0.50 \\
+Sparse gate (sparsemax, as in L-TAE-S) & \textbf{0.55} & \textbf{0.50} \\
+\midrule
+L-TAE-S (reference) & 0.60 & 0.60 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize
+All rows use the same per-seed MiniRocket features and training rows; only the classifier differs. The two gated networks are identical except for sparsemax versus softmax in the gate and are trained with the L-TAE-S settings. The L1 head keeps on average 4{,}125 (pixel) and 1{,}175 (field) of the 9{,}996 features. Paired comparisons are given in the text. Bold marks the best MiniRocket value per column.
+\end{minipage}
+\end{table}
+
+\clearpage
 \bibliographystyle{elsarticle-harv}
 \bibliography{cea}
 
