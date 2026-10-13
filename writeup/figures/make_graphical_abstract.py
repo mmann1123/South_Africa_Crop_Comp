@@ -3,7 +3,7 @@
 Graphical abstract for the TGRS manuscript: a bump chart showing the
 in-region -> out-of-region ranking inversion.
 
-Dense temporal nets lead in-region and collapse under transfer; sparse,
+Dense temporal nets lead in-region and fall furthest under transfer; sparse,
 axis-aligned feature-selection models (TabNet, L-TAE-S) climb to the top,
 and the linear baseline is robust. Numbers are from Table I of tgrs-article.tex.
 
@@ -29,6 +29,7 @@ MODELS = [
     ("Transformer",   0.78, 0.58, "dense"),
     ("L-TAE-S",       0.77, 0.60, "sparse"),   # our contribution -> starred
     ("TempCNN",       0.77, 0.57, "dense"),   # reproducible run (2026-10 audit)
+    ("TimesNet",      0.76, 0.57, "dense"),   # R2-Q3a recent baseline (pixel)
     ("TabNet",        0.73, 0.60, "sparse"),
     ("CNN-BiLSTM",    0.72, 0.51, "dense"),   # reproducible run (2026-10 audit)
     ("Logistic Reg.", 0.61, 0.56, "linear"),
@@ -50,7 +51,7 @@ right_rank = ranks(right_f1)
 apply_style()
 plt.rcParams.update({"axes.spines.left": False, "axes.spines.bottom": False})
 
-fig, ax = plt.subplots(figsize=(7.6, 6.4))
+fig, ax = plt.subplots(figsize=(7.6, 6.9))
 x_left, x_right = 0.0, 1.0
 n = len(MODELS)
 
@@ -94,7 +95,7 @@ for i, (name, lf, rf, fam) in enumerate(MODELS):
 hdr_left, hdr_right = -0.30, 1.30
 ax.text(hdr_left, 0.18, "IN-REGION", ha="center", va="bottom",
         fontsize=15, fontweight="bold", color="#333")
-ax.text(hdr_left, 0.46, "(field-wise CV)", ha="center", va="bottom",
+ax.text(hdr_left, 0.46, "(field-wise validation)", ha="center", va="bottom",
         fontsize=10.5, style="italic", color="#777")
 ax.text(hdr_right, 0.18, "OUT-OF-REGION", ha="center", va="bottom",
         fontsize=15, fontweight="bold", color="#333")
@@ -123,7 +124,7 @@ ax.add_patch(panel)
 ax.text(0.5, n + 1.20, "The ranking inverts out of region",
         ha="center", va="center", fontsize=15, fontweight="bold", color="#1a1a1a")
 ax.text(0.5, n + 1.72,
-        "Dense temporal nets lead in-region, then collapse;\n"
+        "Dense temporal nets lead in-region, then fall furthest;\n"
         "sparse feature-selection models rise to the top.",
         ha="center", va="center", fontsize=11.5, color="#555")
 

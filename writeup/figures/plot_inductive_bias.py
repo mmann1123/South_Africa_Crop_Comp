@@ -21,8 +21,10 @@ FAMILIES = {
         ["Base RF (pixel)", "Base XGBoost (pixel)", "Base LightGBM (pixel)",
          "XGBoost (field)", "LightGBM (field)", "TabNet (pixel)"], FAMILY_COLORS["tree"]),
     "Linear": (["Base LR (pixel)"], FAMILY_COLORS["linear"]),
+    "Random features,\nlinear head": (["MiniRocket (pixel)"], FAMILY_COLORS["random"]),
     "Dense temporal / patch DL": (
         ["CNN-BiLSTM (pixel)", "TempCNN (pixel)", "L-TAE (pixel)", "Transformer (pixel)",
+         "TimesNet (pixel)",
          "3D CNN (patch)", "Multi-Ch CNN (patch)"],
         FAMILY_COLORS["dense"]),
     "Sparse-attention": (["L-TAE-S (pixel)", "L-TAE-S Field (field)"],
@@ -47,6 +49,8 @@ SHORT_NAMES = {
     "L-TAE-S (pixel)": "L-TAE-S (px)",
     "L-TAE-S Field (field)": "L-TAE-S (fd)",
     "SMOTE Stacked (field)": "SMOTE Stacked",
+    "TimesNet (pixel)": "TimesNet",
+    "MiniRocket (pixel)": "MiniRocket",
 }
 
 fig, ax = plt.subplots(figsize=(9.5, 6.2))

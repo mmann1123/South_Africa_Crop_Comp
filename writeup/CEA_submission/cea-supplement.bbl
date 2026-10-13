@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{14}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -68,13 +68,6 @@
   Learning on Temporal Data (AALTD 2020), ECML PKDD Workshops},
   \bibinfo{publisher}{Springer}. pp. \bibinfo{pages}{171--181}.
 \newblock \DOIprefix\doi{10.1007/978-3-030-65742-0_12}.
-%Type = Book
-\bibitem[{James et~al.(2013)James, Witten, Hastie and Tibshirani}]{james2013}
-\bibinfo{author}{James, G.}, \bibinfo{author}{Witten, D.},
-  \bibinfo{author}{Hastie, T.}, \bibinfo{author}{Tibshirani, R.},
-  \bibinfo{year}{2013}.
-\newblock \bibinfo{title}{An Introduction to Statistical Learning}.
-\newblock \bibinfo{publisher}{Springer}.
 %Type = Inproceedings
 \bibitem[{Ke et~al.(2017)Ke, Meng, Finley, Wang, Chen, Ma, Ye and Liu}]{ke2017}
 \bibinfo{author}{Ke, G.}, \bibinfo{author}{Meng, Q.}, \bibinfo{author}{Finley,
@@ -99,21 +92,12 @@
   \bibinfo{author}{Nealon, R.}, \bibinfo{author}{Engstrom, R.},
   \bibinfo{author}{Nakacwa, S.}, \bibinfo{year}{2026}.
 \newblock \bibinfo{title}{Lite learning: Efficient crop classification in
-  {T}anzania using feature extraction with machine learning and crowd
+  {Tanzania} using feature extraction with machine learning and crowd
   sourcing}.
 \newblock \bibinfo{journal}{IEEE Journal of Selected Topics in Applied Earth
-  Observations and Remote Sensing} \bibinfo{note}{In press}.
-%Type = Inproceedings
-\bibitem[{Muruganantham et~al.(2024)Muruganantham, Wibowo, Grandhi and
-  Islam}]{tabnet2024}
-\bibinfo{author}{Muruganantham, P.}, \bibinfo{author}{Wibowo, S.},
-  \bibinfo{author}{Grandhi, S.}, \bibinfo{author}{Islam, N.},
-  \bibinfo{year}{2024}.
-\newblock \bibinfo{title}{A deep learning approach for dealing with tabular
-  data in crop classification}, in: \bibinfo{booktitle}{Proceedings of the IEEE
-  International Conference on ICT Convergence (ICTC)}, pp.
-  \bibinfo{pages}{2054--2059}.
-\newblock \DOIprefix\doi{10.1109/ICTC62082.2024.10826760}.
+  Observations and Remote Sensing} \bibinfo{volume}{19},
+  \bibinfo{pages}{24506--24519}.
+\newblock \DOIprefix\doi{10.1109/jstars.2026.3708028}.
 %Type = Article
 \bibitem[{Pelletier et~al.(2019)Pelletier, Webb and Petitjean}]{tempcnn2019}
 \bibinfo{author}{Pelletier, C.}, \bibinfo{author}{Webb, G.I.},

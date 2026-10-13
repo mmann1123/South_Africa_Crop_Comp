@@ -17,7 +17,6 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{mann2023,mann2025}
-\citation{james2013}
 \citation{breiman2001}
 \citation{ke2017}
 \citation{chen2016,friedman2001}
@@ -32,7 +31,7 @@
 \newlabel{sfig:box}{{S2}{3}{Spectral separability of the crop classes, shown as box plots of standardized (z-score) intensity for each Sentinel-2 band and index (B2, B6, B11, B12, EVI, hue). (a) Distributions for all five crops overlap substantially across every band, so no single feature cleanly separates the classes. (b) Wheat versus barley are especially similar in every band---the dominant source of the persistent wheat--barley confusion seen across all models in the main paper}{figure.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {S3}{\ignorespaces Time-series feature generation with \texttt  {xr\_fresh}. For each pixel, the 10-month profile of every band and index is summarized by the statistical and temporal descriptors of Table\nobreakspace  {}\ref  {stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners.}}{4}{figure.3}\protected@file@percent }
 \newlabel{sfig:tsfeat}{{S3}{4}{Time-series feature generation with \texttt {xr\_fresh}. For each pixel, the 10-month profile of every band and index is summarized by the statistical and temporal descriptors of Table~\ref {stab:features} (e.g., linear trend, autocorrelation, quantiles, day-of-year of the maximum), producing the 174-dimensional per-pixel feature vector used by the classical learners}{figure.3}{}}
-\citation{tabnet_orig,tabnet2024}
+\citation{tabnet_orig}
 \@writefile{lot}{\contentsline {table}{\numberline {S1}{\ignorespaces Time-series features extracted from each pixel's spectral profile with \texttt  {xr\_fresh}.}}{5}{table.1}\protected@file@percent }
 \newlabel{stab:features}{{S1}{5}{Time-series features extracted from each pixel's spectral profile with \texttt {xr\_fresh}}{table.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {S2}{\ignorespaces XGBoost hyperparameter search: top 5 Optuna trials with validation accuracy.}}{5}{table.2}\protected@file@percent }
@@ -86,10 +85,8 @@
 \citation{minirocket2021}
 \@writefile{toc}{\contentsline {section}{\numberline {S-I}Recent Time-Series Baselines and Sparse Selection on MiniRocket}{16}{section.9}\protected@file@percent }
 \newlabel{sec:recent}{{S-I}{16}{Recent Time-Series Baselines and Sparse Selection on MiniRocket}{section.9}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {S8}{\ignorespaces Recent time-series baselines under out-of-region transfer.}}{16}{table.8}\protected@file@percent }
-\newlabel{stab:recent}{{S8}{16}{Recent time-series baselines under out-of-region transfer}{table.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {S9}{\ignorespaces Out-of-region macro-F1 of different classifiers on the same MiniRocket features.}}{17}{table.9}\protected@file@percent }
-\newlabel{stab:mrsparse}{{S9}{17}{Out-of-region macro-F1 of different classifiers on the same MiniRocket features}{table.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S8}{\ignorespaces Out-of-region macro-F1 of different classifiers on the same MiniRocket features.}}{16}{table.8}\protected@file@percent }
+\newlabel{stab:mrsparse}{{S8}{16}{Out-of-region macro-F1 of different classifiers on the same MiniRocket features}{table.8}{}}
 \bibstyle{elsarticle-harv}
 \bibdata{cea}
 \bibcite{ai4foodsecurity}{{1}{2021}{{AI4EO}}{{}}}
@@ -99,13 +96,11 @@
 \bibcite{minirocket2021}{{5}{2021}{{Dempster et~al.}}{{Dempster, Schmidt and Webb}}}
 \bibcite{friedman2001}{{6}{2001}{{Friedman}}{{}}}
 \bibcite{ltae2020}{{7}{2020}{{Garnot and Landrieu}}{{}}}
-\bibcite{james2013}{{8}{2013}{{James et~al.}}{{James, Witten, Hastie and Tibshirani}}}
-\bibcite{ke2017}{{9}{2017}{{Ke et~al.}}{{Ke, Meng, Finley, Wang, Chen, Ma, Ye and Liu}}}
-\bibcite{mann2025}{{10}{2025}{{Mann}}{{}}}
-\bibcite{mann2023}{{11}{2026}{{Mann et~al.}}{{Mann, Colson, Nealon, Engstrom and Nakacwa}}}
-\bibcite{tabnet2024}{{12}{2024}{{Muruganantham et~al.}}{{Muruganantham, Wibowo, Grandhi and Islam}}}
-\bibcite{tempcnn2019}{{13}{2019}{{Pelletier et~al.}}{{Pelletier, Webb and Petitjean}}}
-\bibcite{russwurm2020}{{14}{2020}{{Ru{\ss }wurm and K{\"o}rner}}{{}}}
-\bibcite{vaswani2017}{{15}{2017}{{Vaswani et~al.}}{{Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser and Polosukhin}}}
-\bibcite{timesnet2023}{{16}{2023}{{Wu et~al.}}{{Wu, Hu, Liu, Zhou, Wang and Long}}}
-\gdef \@abspage@last{18}
+\bibcite{ke2017}{{8}{2017}{{Ke et~al.}}{{Ke, Meng, Finley, Wang, Chen, Ma, Ye and Liu}}}
+\bibcite{mann2025}{{9}{2025}{{Mann}}{{}}}
+\bibcite{mann2023}{{10}{2026}{{Mann et~al.}}{{Mann, Colson, Nealon, Engstrom and Nakacwa}}}
+\bibcite{tempcnn2019}{{11}{2019}{{Pelletier et~al.}}{{Pelletier, Webb and Petitjean}}}
+\bibcite{russwurm2020}{{12}{2020}{{Ru{\ss }wurm and K{\"o}rner}}{{}}}
+\bibcite{vaswani2017}{{13}{2017}{{Vaswani et~al.}}{{Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser and Polosukhin}}}
+\bibcite{timesnet2023}{{14}{2023}{{Wu et~al.}}{{Wu, Hu, Liu, Zhou, Wang and Long}}}
+\gdef \@abspage@last{17}

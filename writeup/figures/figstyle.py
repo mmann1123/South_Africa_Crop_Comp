@@ -41,6 +41,7 @@ FAMILY_COLORS = {
     "dense":  OKABE["vermillion"],
     "sparse": OKABE["skyblue"],
     "aug":    OKABE["purple"],
+    "random": OKABE["blue"],
 }
 
 # Fixed colors per crop class — used across the EDA figures.

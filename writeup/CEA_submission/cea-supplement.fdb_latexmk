@@ -1,14 +1,13 @@
 # Fdb version 3
-["bibtex cea-supplement"] 1791904024 "cea-supplement.aux" "cea-supplement.bbl" "cea-supplement" 1791904148
+["bibtex cea-supplement"] 1791924405 "cea-supplement.aux" "cea-supplement.bbl" "cea-supplement" 1791924406
   "/usr/share/texlive/texmf-dist/bibtex/bst/elsarticle/elsarticle-harv.bst" 1606256092 30002 8c0c5833f37bea3ec214cf315a72975d ""
-  "cea-supplement.aux" 1791904148 15157 398752b8ddf268829a8ffd737388416e "pdflatex"
-  "cea.bib" 1791899815 16445 9da93d5187d3c05969971f37a656bade ""
+  "cea-supplement.aux" 1791924405 14664 b178f131a6adfcdb9e3140c68c1b8199 "pdflatex"
+  "cea.bib" 1791906183 18871 6d0aeac3af1fd80d43c546d6c1b3de62 ""
   (generated)
   "cea-supplement.bbl"
   "cea-supplement.blg"
-["pdflatex"] 1791904148 "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/CEA_submission/cea-supplement.tex" "cea-supplement.pdf" "cea-supplement" 1791904148
+["pdflatex"] 1791924405 "cea-supplement.tex" "cea-supplement.pdf" "cea-supplement" 1791924406
   "/etc/texmf/web2c/texmf.cnf" 1673971414 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/CEA_submission/cea-supplement.tex" 1791904147 37340 017428f04396f721f4e16a38805c5963 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -43,7 +42,6 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb" 1248133631 26057 fad158094905eaf20f4ae3782af0c45c ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb" 1248133631 37912 77d683123f92148345f3fc36a38d9ab1 ""
-  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb" 1248133631 37166 8ab3487cbe3ab49ebce74c29ea2418db ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1248133631 36281 c355509802a035cadc5f15869451dcee ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
@@ -129,11 +127,11 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1707754773 4379155 98693266ff65f58d9f98aff394de12d2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1770087664 2798973 3419ef02ddb418aae545861b3d88034d ""
-  "cea-supplement.aux" 1791904148 15157 398752b8ddf268829a8ffd737388416e "pdflatex"
-  "cea-supplement.bbl" 1791904024 7970 0ecac12ae2197cfc2875713cb2147f12 "bibtex cea-supplement"
-  "cea-supplement.out" 1791904148 2642 354a2bff310b2636c6c3df4feb737dc1 "pdflatex"
-  "cea-supplement.spl" 1791904148 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "cea-supplement.tex" 1791904147 37340 017428f04396f721f4e16a38805c5963 ""
+  "cea-supplement.aux" 1791924405 14664 b178f131a6adfcdb9e3140c68c1b8199 "pdflatex"
+  "cea-supplement.bbl" 1791924405 7132 f0c601105e781d7820b570bed3a4ff1b "bibtex cea-supplement"
+  "cea-supplement.out" 1791924405 2642 354a2bff310b2636c6c3df4feb737dc1 "pdflatex"
+  "cea-supplement.spl" 1791924405 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "cea-supplement.tex" 1791924399 36984 309ef04fb46232cce30ec01d1cb81624 ""
   "figures//Example_patches.pdf" 1787147392 20650 5e3f32b5144c17522d08870e33b724fa ""
   "figures//Time_Series_Feature_Generation.pdf" 1787147392 33027 aa2a4de41d5e0d679e059d785fea6822 ""
   "figures//all_crops_boxplot.pdf" 1787147392 18907 2a3dedf8e68556d99106f6f92677c154 ""

@@ -6,45 +6,45 @@ Database file #1: cea.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Warning--empty pages in ke2017
 Warning--empty pages in timesnet2023
-You've used 44 entries,
+You've used 47 entries,
             2990 wiz_defined-function locations,
-            909 strings with 15382 characters,
-and the built_in function-call counts, 32172 in all, are:
-= -- 2448
-> -- 1424
-< -- 22
-+ -- 552
-- -- 501
-* -- 3631
-:= -- 4661
-add.period$ -- 157
-call.type$ -- 44
-change.case$ -- 388
-chr.to.int$ -- 43
-cite$ -- 46
-duplicate$ -- 2333
-empty$ -- 2216
-format.name$ -- 639
-if$ -- 5976
-int.to.chr$ -- 2
+            927 strings with 16709 characters,
+and the built_in function-call counts, 36014 in all, are:
+= -- 2700
+> -- 1702
+< -- 21
++ -- 662
+- -- 603
+* -- 4163
+:= -- 5221
+add.period$ -- 171
+call.type$ -- 47
+change.case$ -- 436
+chr.to.int$ -- 45
+cite$ -- 49
+duplicate$ -- 2555
+empty$ -- 2412
+format.name$ -- 750
+if$ -- 6658
+int.to.chr$ -- 3
 int.to.str$ -- 1
-missing$ -- 460
-newline$ -- 260
-num.names$ -- 176
-pop$ -- 800
+missing$ -- 517
+newline$ -- 280
+num.names$ -- 188
+pop$ -- 863
 preamble$ -- 1
-purify$ -- 343
+purify$ -- 389
 quote$ -- 0
-skip$ -- 727
+skip$ -- 780
 stack$ -- 0
-substring$ -- 1264
-swap$ -- 1778
-text.length$ -- 7
+substring$ -- 1397
+swap$ -- 2020
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 393
+type$ -- 423
 warning$ -- 2
-while$ -- 195
+while$ -- 210
 width$ -- 0
-write$ -- 682
+write$ -- 737
 (There were 2 warnings)

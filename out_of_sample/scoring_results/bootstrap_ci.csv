@@ -28,3 +28,7 @@ Ensemble 3D CNN (patch),0.4575,0.4572,0.4343,0.4795,0.0116
 Multi-Ch CNN (patch),0.4464,0.4462,0.4246,0.467,0.0108
 TabNet Temporal Field (field),0.4333,0.433,0.4085,0.4573,0.0124
 TabNet Field (field),0.3696,0.3692,0.3424,0.3954,0.0135
+TimesNet (pixel),0.5651,0.5646,0.539,0.5901,0.013
+TimesNet Field (field),0.5163,0.516,0.4912,0.5409,0.0129
+MiniRocket (pixel),0.5003,0.4999,0.4751,0.5245,0.0125
+MiniRocket Field (field),0.4822,0.4817,0.4566,0.5059,0.0126

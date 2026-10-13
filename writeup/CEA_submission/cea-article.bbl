@@ -1,4 +1,4 @@
-\begin{thebibliography}{44}
+\begin{thebibliography}{47}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -18,6 +18,17 @@
 \newblock \bibinfo{howpublished}{European Space Agency (ESA), in partnership
   with Planet, TUM, DLR and Radiant Earth,
   \url{https://platform.ai4eo.eu/ai4food-security-south-africa}}.
+%Type = Inproceedings
+\bibitem[{Ant{\'o}nio et~al.(2024)Ant{\'o}nio, Kimani, Umohoza and
+  Busogi}]{antonio2024}
+\bibinfo{author}{Ant{\'o}nio, V.}, \bibinfo{author}{Kimani, G.},
+  \bibinfo{author}{Umohoza, E.}, \bibinfo{author}{Busogi, M.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{{Cross-Regional} transferability of {AI} {Crop-Type}
+  mapping: Insights and challenges}, in: \bibinfo{booktitle}{Proceedings of the
+  2024 International Conference on Information Technology for Social Good}, pp.
+  \bibinfo{pages}{453--461}.
+\newblock \DOIprefix\doi{10.1145/3677525.3678696}.
 %Type = Article
 \bibitem[{Arik and Pfister(2021)}]{tabnet_orig}
 \bibinfo{author}{Arik, S.{\"O}.}, \bibinfo{author}{Pfister, T.},
@@ -26,17 +37,6 @@
 \newblock \bibinfo{journal}{Proceedings of the AAAI Conference on Artificial
   Intelligence} \bibinfo{volume}{35}, \bibinfo{pages}{6679--6687}.
 \newblock \DOIprefix\doi{10.1609/aaai.v35i8.16826}.
-%Type = Article
-\bibitem[{Bandar and Co{\c s}kun{\c c}ay(2024)}]{bandar2024bilstm}
-\bibinfo{author}{Bandar, A.}, \bibinfo{author}{Co{\c s}kun{\c c}ay, A.},
-  \bibinfo{year}{2024}.
-\newblock \bibinfo{title}{Crop classification with attention based {BI-LSTM}
-  and temporal convolution neural network combination for remote sensing
-  {B}reizh{C}rop time series data}.
-\newblock \bibinfo{journal}{Y{\"u}z{\"u}nc{\"u} Y{\i}l {\"U}niversitesi Fen
-  Bilimleri Enstit{\"u}s{\"u} Dergisi} \bibinfo{volume}{29},
-  \bibinfo{pages}{173--188}.
-\newblock \DOIprefix\doi{10.53433/yyufbed.1335866}.
 %Type = Article
 \bibitem[{B{\'e}gu{\'e} et~al.(2020)B{\'e}gu{\'e}, Leroux, Soumar{\'e}, Faure,
   Diouf, Augusseau, Tour{\'e} and Tonneau}]{begue2020}
@@ -85,27 +85,6 @@
   Knowledge Discovery and Data Mining}, pp. \bibinfo{pages}{248--257}.
 \newblock \DOIprefix\doi{10.1145/3447548.3467231}.
 %Type = Article
-\bibitem[{Espejo-Garcia et~al.(2020)Espejo-Garcia, Mylonas, Athanasakos,
-  Fountas and Vasilakoglou}]{espejo2020}
-\bibinfo{author}{Espejo-Garcia, B.}, \bibinfo{author}{Mylonas, N.},
-  \bibinfo{author}{Athanasakos, L.}, \bibinfo{author}{Fountas, S.},
-  \bibinfo{author}{Vasilakoglou, I.}, \bibinfo{year}{2020}.
-\newblock \bibinfo{title}{Towards weeds identification assistance through
-  transfer learning}.
-\newblock \bibinfo{journal}{Computers and Electronics in Agriculture}
-  \bibinfo{volume}{171}, \bibinfo{pages}{105306}.
-\newblock \DOIprefix\doi{10.1016/j.compag.2020.105306}.
-%Type = Article
-\bibitem[{Fan et~al.(2023)Fan, Chen, Xu, Yan, Fan and Li}]{fan2023hcrnn}
-\bibinfo{author}{Fan, X.}, \bibinfo{author}{Chen, L.}, \bibinfo{author}{Xu,
-  X.}, \bibinfo{author}{Yan, C.}, \bibinfo{author}{Fan, J.},
-  \bibinfo{author}{Li, X.}, \bibinfo{year}{2023}.
-\newblock \bibinfo{title}{Land cover classification of remote sensing images
-  based on hierarchical convolutional recurrent neural network}.
-\newblock \bibinfo{journal}{Forests} \bibinfo{volume}{14},
-  \bibinfo{pages}{1881}.
-\newblock \DOIprefix\doi{10.3390/f14091881}.
-%Type = Article
 \bibitem[{Friedman(2001)}]{friedman2001}
 \bibinfo{author}{Friedman, J.H.}, \bibinfo{year}{2001}.
 \newblock \bibinfo{title}{Greedy function approximation: A gradient boosting
@@ -123,20 +102,29 @@
   \bibinfo{publisher}{Springer}. pp. \bibinfo{pages}{171--181}.
 \newblock \DOIprefix\doi{10.1007/978-3-030-65742-0_12}.
 %Type = Article
+\bibitem[{Hoppe et~al.(2024)Hoppe, Dietrich, Marzahn, Wei{\ss}, Nitzsche,
+  Freiherr~von Lukas, Wengerek and Borg}]{hoppe2024}
+\bibinfo{author}{Hoppe, H.}, \bibinfo{author}{Dietrich, P.},
+  \bibinfo{author}{Marzahn, P.}, \bibinfo{author}{Wei{\ss}, T.},
+  \bibinfo{author}{Nitzsche, C.}, \bibinfo{author}{Freiherr~von Lukas, U.},
+  \bibinfo{author}{Wengerek, T.}, \bibinfo{author}{Borg, E.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Transferability of machine learning models for crop
+  classification in remote sensing imagery using a new test methodology: A
+  study on phenological, temporal, and spatial influences}.
+\newblock \bibinfo{journal}{Remote Sensing} \bibinfo{volume}{16},
+  \bibinfo{pages}{1493}.
+\newblock \DOIprefix\doi{10.3390/rs16091493}.
+%Type = Article
 \bibitem[{Ienco et~al.(2017)Ienco, Gaetano, Dupaquier and Maurel}]{ieee2017}
 \bibinfo{author}{Ienco, D.}, \bibinfo{author}{Gaetano, R.},
   \bibinfo{author}{Dupaquier, C.}, \bibinfo{author}{Maurel, P.},
   \bibinfo{year}{2017}.
 \newblock \bibinfo{title}{Land cover classification via multitemporal spatial
-  data by recurrent neural networks}.
-\newblock \bibinfo{journal}{arXiv preprint arXiv:1704.04055} .
-%Type = Book
-\bibitem[{James et~al.(2013)James, Witten, Hastie and Tibshirani}]{james2013}
-\bibinfo{author}{James, G.}, \bibinfo{author}{Witten, D.},
-  \bibinfo{author}{Hastie, T.}, \bibinfo{author}{Tibshirani, R.},
-  \bibinfo{year}{2013}.
-\newblock \bibinfo{title}{An Introduction to Statistical Learning}.
-\newblock \bibinfo{publisher}{Springer}.
+  data by deep recurrent neural networks}.
+\newblock \bibinfo{journal}{IEEE Geoscience and Remote Sensing Letters}
+  \bibinfo{volume}{14}, \bibinfo{pages}{1685--1689}.
+\newblock \DOIprefix\doi{10.1109/lgrs.2017.2728698}.
 %Type = Article
 \bibitem[{Jin et~al.(2019)Jin, Azzari, You, Di~Tommaso, Aston, Burke and
   Lobell}]{jin2019}
@@ -145,7 +133,7 @@
   \bibinfo{author}{Burke, M.}, \bibinfo{author}{Lobell, D.B.},
   \bibinfo{year}{2019}.
 \newblock \bibinfo{title}{Smallholder maize area and yield mapping at national
-  scales with {G}oogle {E}arth {E}ngine}.
+  scales with {Google} {Earth} {Engine}}.
 \newblock \bibinfo{journal}{Remote Sensing of Environment}
   \bibinfo{volume}{228}, \bibinfo{pages}{115--128}.
 \newblock \DOIprefix\doi{10.1016/j.rse.2019.04.016}.
@@ -159,16 +147,17 @@
   decision tree}, in: \bibinfo{booktitle}{Advances in Neural Information
   Processing Systems (NeurIPS)}.
 %Type = Article
-\bibitem[{Koklu et~al.(2022)Koklu, Unlersen, Ozkan, Aslan and
-  Sabanci}]{koklu2022}
-\bibinfo{author}{Koklu, M.}, \bibinfo{author}{Unlersen, M.F.},
-  \bibinfo{author}{Ozkan, I.A.}, \bibinfo{author}{Aslan, M.F.},
-  \bibinfo{author}{Sabanci, K.}, \bibinfo{year}{2022}.
-\newblock \bibinfo{title}{A {CNN}-{SVM} study based on selected deep features
-  for grapevine leaves classification}.
-\newblock \bibinfo{journal}{Measurement} \bibinfo{volume}{188},
-  \bibinfo{pages}{110425}.
-\newblock \DOIprefix\doi{10.1016/j.measurement.2021.110425}.
+\bibitem[{Kerner et~al.(2024)Kerner, Nakalembe, Yang, Zvonkov, McWeeny, Tseng
+  and Becker-Reshef}]{kerner2024}
+\bibinfo{author}{Kerner, H.}, \bibinfo{author}{Nakalembe, C.},
+  \bibinfo{author}{Yang, A.}, \bibinfo{author}{Zvonkov, I.},
+  \bibinfo{author}{McWeeny, R.}, \bibinfo{author}{Tseng, G.},
+  \bibinfo{author}{Becker-Reshef, I.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{How accurate are existing land cover maps for
+  agriculture in {Sub-Saharan} {Africa}?}
+\newblock \bibinfo{journal}{Scientific Data} \bibinfo{volume}{11},
+  \bibinfo{pages}{486}.
+\newblock \DOIprefix\doi{10.1038/s41597-024-03306-z}.
 %Type = Article
 \bibitem[{Kussul et~al.(2017)Kussul, Lavreniuk, Skakun and
   Shelestov}]{cnn_multitemp}
@@ -180,6 +169,17 @@
 \newblock \bibinfo{journal}{IEEE Geoscience and Remote Sensing Letters}
   \bibinfo{volume}{14}, \bibinfo{pages}{778--782}.
 \newblock \DOIprefix\doi{10.1109/LGRS.2017.2681128}.
+%Type = Article
+\bibitem[{Li et~al.(2025)Li, Liu, Huo, Li, Yin and Ma}]{li2025classaware}
+\bibinfo{author}{Li, S.}, \bibinfo{author}{Liu, L.}, \bibinfo{author}{Huo, J.},
+  \bibinfo{author}{Li, S.}, \bibinfo{author}{Yin, Y.}, \bibinfo{author}{Ma,
+  Y.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{A {Class-Aware} unsupervised domain adaptation
+  framework for {Cross-Continental} crop classification with {Sentinel-2} time
+  series}.
+\newblock \bibinfo{journal}{Remote Sensing} \bibinfo{volume}{17},
+  \bibinfo{pages}{3762}.
+\newblock \DOIprefix\doi{10.3390/rs17223762}.
 %Type = Article
 \bibitem[{Ma et~al.(2024)Ma, Chen, Ermon and Lobell}]{ma2024}
 \bibinfo{author}{Ma, Y.}, \bibinfo{author}{Chen, S.}, \bibinfo{author}{Ermon,
@@ -205,8 +205,8 @@
   S.}, \bibinfo{author}{Wang, R.}, \bibinfo{author}{Zhang, S.},
   \bibinfo{author}{Zhang, R.}, \bibinfo{author}{Liang, T.},
   \bibinfo{year}{2025}.
-\newblock \bibinfo{title}{Enhancing crop type mapping in data-scarce regions
-  through transfer learning: A case study of the {H}exi {C}orridor}.
+\newblock \bibinfo{title}{Enhancing crop type mapping in {Data-Scarce} regions
+  through transfer learning: A case study of the {Hexi} {Corridor}}.
 \newblock \bibinfo{journal}{Remote Sensing} \bibinfo{volume}{17},
   \bibinfo{pages}{1494}.
 \newblock \DOIprefix\doi{10.3390/rs17091494}.
@@ -232,28 +232,12 @@
   \bibinfo{author}{Nealon, R.}, \bibinfo{author}{Engstrom, R.},
   \bibinfo{author}{Nakacwa, S.}, \bibinfo{year}{2026}.
 \newblock \bibinfo{title}{Lite learning: Efficient crop classification in
-  {T}anzania using feature extraction with machine learning and crowd
+  {Tanzania} using feature extraction with machine learning and crowd
   sourcing}.
 \newblock \bibinfo{journal}{IEEE Journal of Selected Topics in Applied Earth
-  Observations and Remote Sensing} \bibinfo{note}{In press}.
-%Type = Article
-\bibitem[{Mann and Warner(2017)}]{mann2017}
-\bibinfo{author}{Mann, M.L.}, \bibinfo{author}{Warner, J.M.},
-  \bibinfo{year}{2017}.
-\newblock \bibinfo{title}{{E}thiopian wheat yield and yield gap estimation: A
-  spatially explicit small area integrated data approach}.
-\newblock \bibinfo{journal}{Field Crops Research} \bibinfo{volume}{201},
-  \bibinfo{pages}{60--74}.
-\newblock \DOIprefix\doi{10.1016/j.fcr.2016.10.014}.
-%Type = Article
-\bibitem[{Mann et~al.(2019)Mann, Warner and Malik}]{mann2019}
-\bibinfo{author}{Mann, M.L.}, \bibinfo{author}{Warner, J.M.},
-  \bibinfo{author}{Malik, A.S.}, \bibinfo{year}{2019}.
-\newblock \bibinfo{title}{Predicting high-magnitude, low-frequency crop losses
-  using machine learning: an application to cereal crops in {E}thiopia}.
-\newblock \bibinfo{journal}{Climatic Change} \bibinfo{volume}{154},
-  \bibinfo{pages}{211--227}.
-\newblock \DOIprefix\doi{10.1007/s10584-019-02432-7}.
+  Observations and Remote Sensing} \bibinfo{volume}{19},
+  \bibinfo{pages}{24506--24519}.
+\newblock \DOIprefix\doi{10.1109/jstars.2026.3708028}.
 %Type = Inproceedings
 \bibitem[{Martins and Astudillo(2016)}]{sparsemax2016}
 \bibinfo{author}{Martins, A.F.T.}, \bibinfo{author}{Astudillo, R.F.},
@@ -271,6 +255,16 @@
 \newblock \bibinfo{journal}{International Journal of Remote Sensing}
   \bibinfo{volume}{39}, \bibinfo{pages}{2784--2817}.
 \newblock \DOIprefix\doi{10.1080/01431161.2018.1433343}.
+%Type = Article
+\bibitem[{Mohammadi et~al.(2024)Mohammadi, Belgiu and Stein}]{mohammadi2024}
+\bibinfo{author}{Mohammadi, S.}, \bibinfo{author}{Belgiu, M.},
+  \bibinfo{author}{Stein, A.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{A source-free unsupervised domain adaptation method
+  for cross-regional and cross-time crop mapping from satellite image time
+  series}.
+\newblock \bibinfo{journal}{Remote Sensing of Environment}
+  \bibinfo{volume}{314}, \bibinfo{pages}{114385}.
+\newblock \DOIprefix\doi{10.1016/j.rse.2024.114385}.
 %Type = Inproceedings
 \bibitem[{Muruganantham et~al.(2024)Muruganantham, Wibowo, Grandhi and
   Islam}]{tabnet2024}
@@ -278,10 +272,21 @@
   \bibinfo{author}{Grandhi, S.}, \bibinfo{author}{Islam, N.},
   \bibinfo{year}{2024}.
 \newblock \bibinfo{title}{A deep learning approach for dealing with tabular
-  data in crop classification}, in: \bibinfo{booktitle}{Proceedings of the IEEE
-  International Conference on ICT Convergence (ICTC)}, pp.
-  \bibinfo{pages}{2054--2059}.
-\newblock \DOIprefix\doi{10.1109/ICTC62082.2024.10826760}.
+  data in crop classification}, in: \bibinfo{booktitle}{2024 15th International
+  Conference on Information and Communication Technology Convergence (ICTC)},
+  pp. \bibinfo{pages}{2054--2059}.
+\newblock \DOIprefix\doi{10.1109/ictc62082.2024.10826760}.
+%Type = Article
+\bibitem[{Nyborg et~al.(2022)Nyborg, Pelletier, Lef{\`e}vre and
+  Assent}]{nyborg2022timematch}
+\bibinfo{author}{Nyborg, J.}, \bibinfo{author}{Pelletier, C.},
+  \bibinfo{author}{Lef{\`e}vre, S.}, \bibinfo{author}{Assent, I.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{{TimeMatch}: Unsupervised cross-region adaptation by
+  temporal shift estimation}.
+\newblock \bibinfo{journal}{ISPRS Journal of Photogrammetry and Remote Sensing}
+  \bibinfo{volume}{188}, \bibinfo{pages}{301--313}.
+\newblock \DOIprefix\doi{10.1016/j.isprsjprs.2022.04.018}.
 %Type = Article
 \bibitem[{Obadic et~al.(2022)Obadic, Roscher, Oliveira and Zhu}]{obadic2022}
 \bibinfo{author}{Obadic, I.}, \bibinfo{author}{Roscher, R.},
@@ -320,12 +325,17 @@
 \newblock \bibinfo{journal}{Remote Sensing of Environment}
   \bibinfo{volume}{115}, \bibinfo{pages}{1301--1316}.
 \newblock \DOIprefix\doi{10.1016/j.rse.2011.01.009}.
-%Type = Misc
-\bibitem[{{Radiant Earth Foundation}(2024)}]{mlhub}
-\bibinfo{author}{{Radiant Earth Foundation}}, \bibinfo{year}{2024}.
-\newblock \bibinfo{title}{{S}outh {A}frica crop type competition}.
-\newblock \bibinfo{howpublished}{Source Cooperative repository}.
-\newblock \bibinfo{note}{Data DOI: 10.34911/rdnt.j0co8q}.
+%Type = Article
+\bibitem[{Reuss et~al.(2025)Reuss, Macdonald, Becker, Richter and
+  K{\"o}rner}]{reuss2025eurocropsml}
+\bibinfo{author}{Reuss, J.}, \bibinfo{author}{Macdonald, J.},
+  \bibinfo{author}{Becker, S.}, \bibinfo{author}{Richter, L.},
+  \bibinfo{author}{K{\"o}rner, M.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{The {EuroCropsML} time series benchmark dataset for
+  few-shot crop type classification in {Europe}}.
+\newblock \bibinfo{journal}{Scientific Data} \bibinfo{volume}{12},
+  \bibinfo{pages}{664}.
+\newblock \DOIprefix\doi{10.1038/s41597-025-04952-7}.
 %Type = Article
 \bibitem[{Ru{\ss}wurm and K{\"o}rner(2018)}]{russwurm2018}
 \bibinfo{author}{Ru{\ss}wurm, M.}, \bibinfo{author}{K{\"o}rner, M.},
@@ -378,26 +388,47 @@
   \bibinfo{booktitle}{Advances in Neural Information Processing Systems
   (NeurIPS)}, pp. \bibinfo{pages}{5998--6008}.
 %Type = Article
-\bibitem[{Wang et~al.(2023)Wang, Chang, Yao, Yao, Zhao, Li, Liu and
+\bibitem[{Wang et~al.(2023a)Wang, Chang, Yao, Yao, Zhao, Li, Liu and
   Zhang}]{cropformer2023}
 \bibinfo{author}{Wang, H.}, \bibinfo{author}{Chang, W.}, \bibinfo{author}{Yao,
   Y.}, \bibinfo{author}{Yao, Z.}, \bibinfo{author}{Zhao, Y.},
   \bibinfo{author}{Li, S.}, \bibinfo{author}{Liu, Z.}, \bibinfo{author}{Zhang,
-  X.}, \bibinfo{year}{2023}.
+  X.}, \bibinfo{year}{2023}a.
 \newblock \bibinfo{title}{Cropformer: A new generalized deep learning
   classification approach for multi-scenario crop classification}.
-\newblock \bibinfo{journal}{Frontiers in Plant Science} \bibinfo{volume}{14},
-  \bibinfo{pages}{1130659}.
+\newblock \bibinfo{journal}{Frontiers in Plant Science} \bibinfo{volume}{14}.
 \newblock \DOIprefix\doi{10.3389/fpls.2023.1130659}.
 %Type = Article
-\bibitem[{Wardlow et~al.(2007)Wardlow, Egbert and Kastens}]{wardlow2007towards}
-\bibinfo{author}{Wardlow, B.D.}, \bibinfo{author}{Egbert, S.L.},
-  \bibinfo{author}{Kastens, J.H.}, \bibinfo{year}{2007}.
-\newblock \bibinfo{title}{Analysis of time-series {MODIS} 250 m vegetation
-  index data for crop classification in the {U.S.} {C}entral {G}reat {P}lains}.
-\newblock \bibinfo{journal}{Remote Sensing of Environment}
-  \bibinfo{volume}{108}, \bibinfo{pages}{290--310}.
-\newblock \DOIprefix\doi{10.1016/j.rse.2006.11.021}.
+\bibitem[{Wang et~al.(2025)Wang, Yao, Liu, Zhang, Zhao, Li, Liu, Zhang and
+  Zeng}]{wang2025climate}
+\bibinfo{author}{Wang, H.}, \bibinfo{author}{Yao, Y.}, \bibinfo{author}{Liu,
+  J.}, \bibinfo{author}{Zhang, X.}, \bibinfo{author}{Zhao, Y.},
+  \bibinfo{author}{Li, S.}, \bibinfo{author}{Liu, Z.}, \bibinfo{author}{Zhang,
+  X.}, \bibinfo{author}{Zeng, Y.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Unsupervised {Cross-Regional} and {Cross-Year}
+  adaptation by climate indicator discrepancy for crop classification}.
+\newblock \bibinfo{journal}{Journal of Remote Sensing} \bibinfo{volume}{5},
+  \bibinfo{pages}{0439}.
+\newblock \DOIprefix\doi{10.34133/remotesensing.0439}.
+%Type = Article
+\bibitem[{Wang et~al.(2023b)Wang, Feng, Zhang and Tian}]{wang2023uda}
+\bibinfo{author}{Wang, Y.}, \bibinfo{author}{Feng, L.}, \bibinfo{author}{Zhang,
+  Z.}, \bibinfo{author}{Tian, F.}, \bibinfo{year}{2023}b.
+\newblock \bibinfo{title}{An unsupervised domain adaptation deep learning
+  method for spatial and temporal transferable crop type mapping using
+  {Sentinel-2} imagery}.
+\newblock \bibinfo{journal}{ISPRS Journal of Photogrammetry and Remote Sensing}
+  \bibinfo{volume}{199}, \bibinfo{pages}{102--117}.
+\newblock \DOIprefix\doi{10.1016/j.isprsjprs.2023.04.002}.
+%Type = Misc
+\bibitem[{{Western Cape Department of Agriculture} and {Radiant Earth
+  Foundation}(2021)}]{mlhub}
+\bibinfo{author}{{Western Cape Department of Agriculture}},
+  \bibinfo{author}{{Radiant Earth Foundation}}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Crop type classification dataset for {Western}
+  {Cape}, {South} {Africa}}.
+\newblock \bibinfo{howpublished}{Radiant MLHub}.
+\newblock \DOIprefix\doi{10.34911/rdnt.j0co8q}.
 %Type = Inproceedings
 \bibitem[{Wu et~al.(2023)Wu, Hu, Liu, Zhou, Wang and Long}]{timesnet2023}
 \bibinfo{author}{Wu, H.}, \bibinfo{author}{Hu, T.}, \bibinfo{author}{Liu, Y.},
@@ -407,6 +438,28 @@
   general time series analysis}, in: \bibinfo{booktitle}{International
   Conference on Learning Representations (ICLR)}.
 \newblock \URLprefix \url{https://openreview.net/forum?id=ju_Uqw384Oq}.
+%Type = Article
+\bibitem[{Xie et~al.(2025)Xie, Zhang, Liu and Sun}]{xie2025}
+\bibinfo{author}{Xie, S.}, \bibinfo{author}{Zhang, N.}, \bibinfo{author}{Liu,
+  L.}, \bibinfo{author}{Sun, L.}, \bibinfo{year}{2025}.
+\newblock \bibinfo{title}{Investigation of the spatio-temporal transferability
+  of large-scale random forest crop classification models and potential
+  influencing factors}.
+\newblock \bibinfo{journal}{International Journal of Digital Earth}
+  \bibinfo{volume}{18}, \bibinfo{pages}{2563211}.
+\newblock \DOIprefix\doi{10.1080/17538947.2025.2563211}.
+%Type = Article
+\bibitem[{Yang et~al.(2024)Yang, Li, Xiong, He, Wang, Yao, Zhu, Cao and
+  Cheng}]{yang2024wheat}
+\bibinfo{author}{Yang, G.}, \bibinfo{author}{Li, X.}, \bibinfo{author}{Xiong,
+  Y.}, \bibinfo{author}{He, M.}, \bibinfo{author}{Wang, X.},
+  \bibinfo{author}{Yao, X.}, \bibinfo{author}{Zhu, Y.}, \bibinfo{author}{Cao,
+  W.}, \bibinfo{author}{Cheng, T.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Winter wheat mapping without ground labels via
+  automated knowledge transfer across regions and years}.
+\newblock \bibinfo{journal}{Computers and Electronics in Agriculture}
+  \bibinfo{volume}{227}, \bibinfo{pages}{109536}.
+\newblock \DOIprefix\doi{10.1016/j.compag.2024.109536}.
 %Type = Article
 \bibitem[{Yang et~al.(2020)Yang, Gu, Li, Jiang and Ren}]{yang2020}
 \bibinfo{author}{Yang, S.}, \bibinfo{author}{Gu, L.}, \bibinfo{author}{Li, X.},
@@ -418,16 +471,15 @@
   \bibinfo{pages}{3119}.
 \newblock \DOIprefix\doi{10.3390/rs12193119}.
 %Type = Article
-\bibitem[{Zhu et~al.(2017)Zhu, Tuia, Mou, Xia, Zhang, Xu and
-  Fraundorfer}]{zhu2017}
-\bibinfo{author}{Zhu, X.X.}, \bibinfo{author}{Tuia, D.}, \bibinfo{author}{Mou,
-  L.}, \bibinfo{author}{Xia, G.S.}, \bibinfo{author}{Zhang, L.},
-  \bibinfo{author}{Xu, F.}, \bibinfo{author}{Fraundorfer, F.},
-  \bibinfo{year}{2017}.
-\newblock \bibinfo{title}{Deep learning in remote sensing: A comprehensive
-  review and list of resources}.
-\newblock \bibinfo{journal}{IEEE Geoscience and Remote Sensing Magazine}
-  \bibinfo{volume}{5}, \bibinfo{pages}{8--36}.
-\newblock \DOIprefix\doi{10.1109/MGRS.2017.2762307}.
+\bibitem[{Zhang et~al.(2026)Zhang, Huang, Li, Liu, Xue, Ye and
+  Sun}]{zhang2026transfer}
+\bibinfo{author}{Zhang, J.}, \bibinfo{author}{Huang, C.}, \bibinfo{author}{Li,
+  H.}, \bibinfo{author}{Liu, Q.}, \bibinfo{author}{Xue, Q.},
+  \bibinfo{author}{Ye, S.}, \bibinfo{author}{Sun, L.}, \bibinfo{year}{2026}.
+\newblock \bibinfo{title}{Crop multiclass classification for large-scale crop
+  mapping using instance- and feature-domain integrated transfer learning}.
+\newblock \bibinfo{journal}{Science of Remote Sensing} \bibinfo{volume}{13},
+  \bibinfo{pages}{100442}.
+\newblock \DOIprefix\doi{10.1016/j.srs.2026.100442}.
 
 \end{thebibliography}

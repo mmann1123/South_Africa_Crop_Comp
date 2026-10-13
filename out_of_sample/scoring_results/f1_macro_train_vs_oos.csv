@@ -28,3 +28,7 @@ TabNet Field (field),field,xr_fresh time-series,0.5147737686654602,0.36963063519
 Transformer (pixel),pixel,raw pixel (temporal sequence),0.7809921749814286,0.5771830547858026,-0.203809120195626
 L-TAE-S (pixel),pixel,raw pixel (temporal sequence),0.772221,0.5986635713906258,-0.1735574286093743
 L-TAE-S Field (field),field,raw temporal (field-averaged),0.643062,0.6011585021953586,-0.0419034978046414
+TimesNet (pixel),pixel,raw pixel (temporal sequence),0.762778,0.5651169235863226,-0.19766107641367736
+TimesNet Field (field),field,raw temporal (field-averaged),0.700278,0.5162770580251537,-0.1840009419748463
+MiniRocket (pixel),pixel,raw pixel (temporal sequence),0.722402,0.5003177753348169,-0.22208422466518307
+MiniRocket Field (field),field,raw temporal (field-averaged),0.669836,0.48219263202059653,-0.18764336797940345
