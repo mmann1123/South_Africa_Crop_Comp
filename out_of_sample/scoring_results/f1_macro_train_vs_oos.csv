@@ -9,12 +9,12 @@ Ensemble (ML field),majority vote (all models),majority vote,,0.5777361222466817
 Ensemble (ML pixel),majority vote (all models),majority vote,,0.575472882942903,
 XGBoost (field),field,xr_fresh time-series,0.6956891171013388,0.564787223127966,-0.1309018939733728
 TempCNN (pixel),pixel,raw pixel (temporal sequence),0.7749194490387156,0.5736837045124663,-0.20123574452624926
-Base LightGBM (pixel),pixel,raw pixel (band x month),0.6247739686270255,0.5632958573213636,-0.0614781113056619
-Base LR (pixel),pixel,raw pixel (band x month),0.6094622545535615,0.5629564243693472,-0.0465058301842142
+Base LightGBM (pixel),pixel,xr_fresh time-series,0.6247739686270255,0.5632958573213636,-0.0614781113056619
+Base LR (pixel),pixel,xr_fresh time-series,0.6094622545535615,0.5629564243693472,-0.0465058301842142
 LightGBM (field),field,xr_fresh time-series,0.679438682772855,0.5587634754786438,-0.1206752072942112
 Voting (pixel),pixel,xr_fresh time-series,0.6853908785036593,0.5572546441043805,-0.1281362343992788
-Base RF (pixel),pixel,raw pixel (band x month),0.6453111997274846,0.5478903904305266,-0.097420809296958
-Base XGBoost (pixel),pixel,raw pixel (band x month),0.6369401670421632,0.5440440233914763,-0.0928961436506868
+Base RF (pixel),pixel,xr_fresh time-series,0.6453111997274846,0.5478903904305266,-0.097420809296958
+Base XGBoost (pixel),pixel,xr_fresh time-series,0.6369401670421632,0.5440440233914763,-0.0928961436506868
 TempCNN Field (field),field,raw temporal (field-averaged),0.6749455410787389,0.5354850915265806,-0.1394604495521583
 Stacking (field),field,xr_fresh time-series,0.6427586792320146,0.5328153385703854,-0.1099433406616291
 CNN-BiLSTM Field (field),field,raw temporal (field-averaged),0.642909423284715,0.505962974554701,-0.136946448730014

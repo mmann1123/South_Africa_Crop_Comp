@@ -66,7 +66,7 @@ metric and the class-imbalance handling used during training. (b) Mean field are
 \caption{Spectral separability of the crop classes, shown as box plots of standardized (z-score)
 intensity for each Sentinel-2 band and index (B2, B6, B11, B12, EVI, hue). (a) Distributions for all
 five crops overlap substantially across every band, so no single feature cleanly separates the
-classes. (b) Wheat versus barley are especially similar in every band---the dominant source of the
+classes. (b) Wheat versus barley are especially similar in every band, the dominant source of the
 persistent wheat--barley confusion seen across all models in the main paper.}
 \label{sfig:box}
 \end{figure}
@@ -237,8 +237,8 @@ majority vote.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\columnwidth]{Example_patches.pdf}
-\caption{Patch generation per field. Each field is tiled into 100~m patches---only
-${\sim}10\times10$ pixels at the 10~m Sentinel-2 resolution---and resampled to $128\times128$. These
+\caption{Patch generation per field. Each field is tiled into 100~m patches (only
+${\sim}10\times10$ pixels at the 10~m Sentinel-2 resolution) and resampled to $128\times128$. These
 patches are the input to the patch-based 2D and 3D CNNs, whose per-patch predictions are later
 aggregated to a field label by majority vote.}
 \label{sfig:patches}
@@ -345,14 +345,14 @@ $\ddagger$Measured on the 75\% training fraction, the best-transferring TabNet p
 
 \section{Ablation Studies}
 \label{sec:ablation}
-\emph{Supports main paper Sec.~5 (``Two Robustness Levers'').}
-We attribute the holdout ranking primarily to two levers---built-in sparse feature selection and
-field-level aggregation---and show that ensemble size and the imbalance-handling objective are
+\emph{Supports main paper Sec.~5.2 (``Two Robustness Levers'').}
+We attribute the holdout ranking primarily to two levers, built-in sparse feature selection and
+field-level aggregation, and show that ensemble size and the imbalance-handling objective are
 second-order: they shift absolute scores but never reorder the robust and fragile model groups.
 
 \emph{(i) Field-level aggregation} (main Table~2) narrows the transfer gap for dense temporal nets
 (L-TAE $-0.24\rightarrow-0.07$; L-TAE-S $-0.17\rightarrow-0.04$), raising holdout macro-F1 for L-TAE but
-not for TempCNN or CNN-BiLSTM, and harms TabNet
+not for TempCNN, CNN-BiLSTM, TimesNet, or MiniRocket, and harms TabNet
 ($0.60\rightarrow0.43$). \emph{(ii) Sparse selection versus attention capacity}: a plain Transformer
 with far greater capacity improves on L-TAE (OOR F1$_m$ $0.58$ vs.\ $0.54$), but grafting a sparse
 channel gate onto L-TAE (L-TAE-S) lifts transfer further, to $0.60$. \emph{(iii) Resampling}: the \emph{Stacking}
@@ -360,7 +360,7 @@ and \emph{SMOTE Stacked} ensembles differ only in SMOTETomek resampling; resampl
 ($-0.11\rightarrow-0.21$) and lowers holdout F1$_m$ ($0.53\rightarrow0.49$).
 
 \emph{(iv) Ensemble size} (Table~\ref{stab:ens}): seed-ensembling gives a small, monotone lift but
-does not change the ordering---a single-seed L-TAE-S (F1$_m=0.56$) already exceeds the five-seed
+does not change the ordering: a single-seed L-TAE-S (F1$_m=0.56$) already exceeds the five-seed
 CNN-BiLSTM and TabNet field ensembles. \emph{(v) Imbalance-handling objective}
 (Table~\ref{stab:loss}): the robust L-TAE-S is almost invariant across five loss/sampler settings
 ($0.59$--$0.60$), whereas the fragile CNN-BiLSTM is sensitive ($0.41$--$0.56$); even CNN-BiLSTM's
@@ -561,8 +561,8 @@ The holdout season is also later. July EVI of the annual crops is 0.11 to 0.21 l
 \clearpage
 \section{Recent Time-Series Baselines and Sparse Selection on MiniRocket}
 \label{sec:recent}
-\emph{Supports main paper Secs.~4.2, 5.1, and 5.2.}
-This section describes the two recent time-series classifiers included in main Tables~1 and~2 and a follow-up experiment on MiniRocket. TimesNet \citep{timesnet2023} is a high-capacity network that reshapes a series into two dimensions by its dominant periods. MiniRocket \citep{minirocket2021} passes about 10{,}000 random convolution features to a linear classifier and ranks among the most accurate general time-series classifiers. To test we use the same 60 inputs, field-wise split, scaler, five seeds, field aggregation, and holdout scoring as the published models, and we checked that their inputs are identical. TimesNet uses the L-TAE-S training settings. MiniRocket uses a logistic-regression head with the penalty chosen on the validation split; its standard ridge head performs no better (holdout F1$_m$ $0.49$ pixel, $0.45$ field). At the pixel level, MiniRocket trains on at most 50 pixels per field because of memory limitations. We did not run a pretrained encoder such as Presto, because it needs Sentinel-2 bands that are not in the processed benchmark.
+\emph{Supports main paper Secs.~3, 4.1, 4.2, 5.1, and 5.2.}
+This section describes the two recent time-series classifiers included in main Tables~1 and~2 and a follow-up experiment on MiniRocket. TimesNet \citep{timesnet2023} is a high-capacity network that reshapes a series into two dimensions by its dominant periods. MiniRocket \citep{minirocket2021} passes about 10{,}000 random convolution features to a linear classifier and ranks among the most accurate general time-series classifiers. For a fair comparison we use the same 60 inputs, field-wise split, scaler, five seeds, field aggregation, and holdout scoring as the other models, and we checked that their inputs are identical. TimesNet uses the L-TAE-S training settings. MiniRocket uses a logistic-regression head with the penalty chosen on the validation split; its standard ridge head performs no better (holdout F1$_m$ $0.49$ pixel, $0.45$ field). At the pixel level, MiniRocket trains on at most 50 pixels per field because of memory limitations. We did not run a pretrained encoder such as Presto, because it needs Sentinel-2 bands that are not in the processed benchmark.
 
 We find that neither model transfers as well as the sparse learners (main Table~1). On the same holdout fields, TimesNet trails L-TAE-S by $0.03$ at pixel level (paired 95\% CI $[0.01, 0.06]$) and $0.08$ at field level ($[0.06, 0.11]$), and MiniRocket trails it by $0.10$ and $0.12$. TimesNet behaves like the other dense temporal networks: high in-region accuracy with a large performance drop on the holdout. MiniRocket falls below logistic regression on the raw inputs. For both, field aggregation lowers holdout accuracy.
 
