@@ -1,0 +1,140 @@
+[sweep] seed_sweep_classical variant=orig args=['--models', 'xgboost_field', '--fractions', '0.10', '0.15', '--subsample-seeds', '42', '101', '202', '303', '404', '505', '606', '707', '808', '909', '--out', '/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/results/sweep_classical_orig.csv']
+Loading FINAL_DATA + holdout...
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/xgboost/core.py:158: UserWarning: [17:19:46] WARNING: /workspace/src/common/error_msg.cc:58: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  warnings.warn(smsg, UserWarning)
+xgboost_field frac=0.1 sseed=42 -> F1m=0.4562 kappa=0.3940 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=101 -> F1m=0.4709 kappa=0.4331 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=202 -> F1m=0.5417 kappa=0.4722 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=303 -> F1m=0.5392 kappa=0.4559 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=404 -> F1m=0.5022 kappa=0.4479 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=505 -> F1m=0.5284 kappa=0.4364 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=606 -> F1m=0.5107 kappa=0.4365 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=707 -> F1m=0.5114 kappa=0.4297 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=808 -> F1m=0.4846 kappa=0.4300 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=909 -> F1m=0.5148 kappa=0.4377 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=42 -> F1m=0.4925 kappa=0.4333 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=101 -> F1m=0.4723 kappa=0.4248 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=202 -> F1m=0.5218 kappa=0.4531 (9s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=303 -> F1m=0.5213 kappa=0.4519 (8s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=404 -> F1m=0.5088 kappa=0.4551 (9s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=505 -> F1m=0.5583 kappa=0.4781 (8s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=606 -> F1m=0.5374 kappa=0.4557 (8s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=707 -> F1m=0.5274 kappa=0.4505 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=808 -> F1m=0.4950 kappa=0.4428 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=909 -> F1m=0.5282 kappa=0.4637 (7s)
+[sweep] seed_sweep_classical variant=trainmed args=['--models', 'xgboost_field', '--fractions', '0.10', '0.15', '--subsample-seeds', '42', '101', '202', '303', '404', '505', '606', '707', '808', '909', '--out', '/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/results/sweep_classical_trainmed.csv']
+Loading FINAL_DATA + holdout...
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/xgboost/core.py:158: UserWarning: [17:22:13] WARNING: /workspace/src/common/error_msg.cc:58: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  warnings.warn(smsg, UserWarning)
+xgboost_field frac=0.1 sseed=42 -> F1m=0.4632 kappa=0.3430 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=101 -> F1m=0.4961 kappa=0.4324 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=202 -> F1m=0.5250 kappa=0.4072 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=303 -> F1m=0.5369 kappa=0.3986 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=404 -> F1m=0.5167 kappa=0.4225 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=505 -> F1m=0.5157 kappa=0.3739 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=606 -> F1m=0.5194 kappa=0.4326 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=707 -> F1m=0.5228 kappa=0.3872 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=808 -> F1m=0.4933 kappa=0.3832 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.1 sseed=909 -> F1m=0.5371 kappa=0.4529 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=42 -> F1m=0.4934 kappa=0.3576 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=101 -> F1m=0.4932 kappa=0.4159 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=202 -> F1m=0.5188 kappa=0.4341 (9s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=303 -> F1m=0.5178 kappa=0.4045 (8s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=404 -> F1m=0.5194 kappa=0.4418 (8s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=505 -> F1m=0.5540 kappa=0.4229 (8s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=606 -> F1m=0.5436 kappa=0.4529 (8s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=707 -> F1m=0.5383 kappa=0.4141 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=808 -> F1m=0.5139 kappa=0.4155 (7s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.15 sseed=909 -> F1m=0.5462 kappa=0.4459 (7s)

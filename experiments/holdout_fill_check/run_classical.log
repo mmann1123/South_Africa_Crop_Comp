@@ -1,0 +1,328 @@
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/xgboost/core.py:158: UserWarning: [13:11:13] WARNING: /workspace/src/common/error_msg.cc:58: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  warnings.warn(smsg, UserWarning)
+=== XGBoost (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_orig.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running XGBoost prediction...
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/xgboost_orig.csv
+
+crop_name
+Lucerne/Medics         1584
+Small grain grazing     438
+Wheat                   194
+Canola                  100
+Barley                   99
+Name: count, dtype: int64
+[done] xgboost orig
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+=== XGBoost (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_trainmed.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running XGBoost prediction...
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/xgboost_trainmed.csv
+
+crop_name
+Lucerne/Medics         1439
+Small grain grazing     475
+Wheat                   274
+Barley                  120
+Canola                  107
+Name: count, dtype: int64
+[done] xgboost trainmed
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+=== LightGBM (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_orig.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running LightGBM prediction...
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/lgbm_orig.csv
+
+crop_name
+Lucerne/Medics         1692
+Small grain grazing     340
+Wheat                   189
+Barley                  104
+Canola                   90
+Name: count, dtype: int64
+[done] lgbm orig
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+=== LightGBM (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_trainmed.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running LightGBM prediction...
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/lgbm_trainmed.csv
+
+crop_name
+Lucerne/Medics         1573
+Small grain grazing     347
+Wheat                   263
+Barley                  129
+Canola                  103
+Name: count, dtype: int64
+[done] lgbm trainmed
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
+  warnings.warn(
+=== SMOTE Stacked Ensemble Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_orig.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running SMOTE Stacked prediction...
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/smote_stacked_orig.csv
+
+crop_name
+Lucerne/Medics         1643
+Wheat                   239
+Small grain grazing     228
+Canola                  201
+Barley                  104
+Name: count, dtype: int64
+[done] smote_stacked orig
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
+  warnings.warn(
+=== SMOTE Stacked Ensemble Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_trainmed.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running SMOTE Stacked prediction...
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/smote_stacked_trainmed.csv
+
+crop_name
+Lucerne/Medics         1613
+Wheat                   318
+Small grain grazing     207
+Barley                  147
+Canola                  130
+Name: count, dtype: int64
+[done] smote_stacked trainmed
+=== Base ML Models (Pixel-Level) Inference ===
+Using model run: 20260218_164605
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+Features: 168
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_orig.parquet
+Shape: (2415, 176), Fields: 2415
+
+--- base_lr ---
+  Predicting (field-level)...
+  Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/_base_ml_orig/predictions_base_lr.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1370
+Small grain grazing     552
+Wheat                   219
+Barley                  161
+Canola                  113
+
+--- base_rf ---
+  Predicting (field-level)...
+  Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/_base_ml_orig/predictions_base_rf.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1690
+Wheat                   266
+Small grain grazing     230
+Canola                  118
+Barley                  111
+
+--- base_lgbm ---
+  Predicting (field-level)...
+  Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/_base_ml_orig/predictions_base_lgbm.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1661
+Wheat                   294
+Small grain grazing     269
+Canola                  109
+Barley                   82
+
+--- base_xgb ---
+  Predicting (field-level)...
+  Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/_base_ml_orig/predictions_base_xgb.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1392
+Small grain grazing     543
+Wheat                   243
+Canola                  125
+Barley                  112
+[done] base_ml orig
+=== Base ML Models (Pixel-Level) Inference ===
+Using model run: 20260218_164605
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+Features: 168
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_trainmed.parquet
+Shape: (2415, 176), Fields: 2415
+
+--- base_lr ---
+  Predicting (field-level)...
+  Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/_base_ml_trainmed/predictions_base_lr.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1232
+Small grain grazing     682
+Wheat                   214
+Barley                  168
+Canola                  119
+
+--- base_rf ---
+  Predicting (field-level)...
+  Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/_base_ml_trainmed/predictions_base_rf.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1572
+Wheat                   356
+Small grain grazing     199
+Barley                  159
+Canola                  129
+
+--- base_lgbm ---
+  Predicting (field-level)...
+  Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/_base_ml_trainmed/predictions_base_lgbm.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1508
+Wheat                   408
+Small grain grazing     268
+Barley                  121
+Canola                  110
+
+--- base_xgb ---
+  Predicting (field-level)...
+  Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/_base_ml_trainmed/predictions_base_xgb.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1199
+Small grain grazing     646
+Wheat                   286
+Barley                  169
+Canola                  115
+[done] base_ml trainmed
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  field-level feature cols: 170; train fields=2653, test fields=830
+  using Optuna-tuned XGB params
+Training stacked ensemble (no SMOTE)...
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6408 wF1=0.6945 kappa=0.5784 acc=0.6892 Xent=5.0102 n=830
+Loading holdout field features...
+  saved 2415 field predictions -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/stacking_orig.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5328 wF1=0.6651 kappa=0.4777 acc=0.6700 Xent=5.3193 n=2415
+
+==== SUMMARY (Stacking, RF+XGB+LR-meta, no SMOTE) ====
+In-region  F1m=0.6408 kappa=0.5784 wF1=0.6945 Xent=5.0102
+Spatial    F1m=0.5328 kappa=0.4777 wF1=0.6651 Xent=5.3193
+Delta (ST - in-region) F1m = -0.1079
+[done] stacking orig
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  field-level feature cols: 170; train fields=2653, test fields=830
+  using Optuna-tuned XGB params
+Training stacked ensemble (no SMOTE)...
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6408 wF1=0.6945 kappa=0.5784 acc=0.6892 Xent=5.0102 n=830
+Loading holdout field features...
+  saved 2415 field predictions -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/stacking_trainmed.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5548 wF1=0.6749 kappa=0.4910 acc=0.6725 Xent=5.2793 n=2415
+
+==== SUMMARY (Stacking, RF+XGB+LR-meta, no SMOTE) ====
+In-region  F1m=0.6408 kappa=0.5784 wF1=0.6945 Xent=5.0102
+Spatial    F1m=0.5548 kappa=0.4910 wF1=0.6749 Xent=5.2793
+Delta (ST - in-region) F1m = -0.0860
+[done] stacking trainmed
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  feature cols: 168
+Training RF/XGB/LGBM...
+  RF done
+  XGB done
+  LGBM done
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6501 wF1=0.7193 kappa=0.6273 acc=0.7349 Xent=4.2723 n=830
+Assembling holdout pixel features...
+  holdout shape: (3409489, 171), fields: 2415
+  saved 2415 field predictions -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/voting_orig.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5573 wF1=0.6621 kappa=0.4761 acc=0.6994 Xent=4.8454 n=2415
+
+==== SUMMARY (Voting hybrid) ====
+In-region  F1m=0.6501 kappa=0.6273 wF1=0.7193 Xent=4.2723
+Spatial    F1m=0.5573 kappa=0.4761 wF1=0.6621 Xent=4.8454
+Delta (ST - in-region) F1m = -0.0928
+[done] voting orig
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  feature cols: 168
+Training RF/XGB/LGBM...
+  RF done
+  XGB done
+  LGBM done
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6501 wF1=0.7193 kappa=0.6273 acc=0.7349 Xent=4.2723 n=830
+Assembling holdout pixel features...
+  holdout shape: (3409489, 171), fields: 2415
+  saved 2415 field predictions -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/voting_trainmed.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5709 wF1=0.6722 kappa=0.5042 acc=0.7072 Xent=4.7186 n=2415
+
+==== SUMMARY (Voting hybrid) ====
+In-region  F1m=0.6501 kappa=0.6273 wF1=0.7193 Xent=4.2723
+Spatial    F1m=0.5709 kappa=0.5042 wF1=0.6722 Xent=4.7186
+Delta (ST - in-region) F1m = -0.0792
+[done] voting trainmed

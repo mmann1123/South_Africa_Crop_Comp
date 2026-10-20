@@ -1,0 +1,6 @@
+skip tempcnn sparsemax (done)
+FAILED tempcnn softmax attempt 1 (exit 0)
+done tempcnn softmax
+done cnn_bilstm sparsemax
+done cnn_bilstm softmax
+ALL GATE RUNS DONE

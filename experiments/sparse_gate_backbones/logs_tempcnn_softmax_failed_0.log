@@ -1,0 +1,5 @@
+=== tempcnn_softmax: train 4802658, val 1205790, test 1531914 pixels
+  seed 42 epoch 1: val F1m 0.6834 (55s)
+  seed 42 epoch 2: val F1m 0.7045 (110s)
+  seed 42 epoch 3: val F1m 0.7081 (165s)
+  seed 42 epoch 4: val F1m 0.7153 (220s)

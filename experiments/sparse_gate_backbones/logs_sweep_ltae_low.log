@@ -1,0 +1,166 @@
+[sweep] seed_sweep variant=trainmed args=['--models', 'ltae_pixel', 'ltae_sparse_pixel', '--fractions', '0.10', '0.15', '--subsample-seeds', '42', '101', '202', '303', '404', '505', '606', '707', '808', '909', '--n-seeds', '1', '--out', '/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/results/sweep_deep_trainmed.csv']
+batch_size=2048, n_seeds=1, compile=False
+Device: cuda
+Loading train pixels...
+  7540362 pixels, 60 feats, 5 classes
+Loading holdout pixels...
+
+=== ltae_pixel frac=0.1 sseed=42 | train fids 465835 px ===
+    seed 42: 1.12s/epoch x 18 epochs
+    -> OOS macro-F1=0.5752, kappa=0.5096  (0.4 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.1 sseed=101 | train fids 451018 px ===
+    seed 42: 1.08s/epoch x 18 epochs
+    -> OOS macro-F1=0.5248, kappa=0.4742  (0.4 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.1 sseed=202 | train fids 483986 px ===
+    seed 42: 1.12s/epoch x 41 epochs
+    -> OOS macro-F1=0.5509, kappa=0.4961  (0.8 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.1 sseed=303 | train fids 435108 px ===
+    seed 42: 1.07s/epoch x 30 epochs
+    -> OOS macro-F1=0.5622, kappa=0.4945  (0.6 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.1 sseed=404 | train fids 456864 px ===
+    seed 42: 1.08s/epoch x 34 epochs
+    -> OOS macro-F1=0.5039, kappa=0.4647  (0.7 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.1 sseed=505 | train fids 466691 px ===
+    seed 42: 1.09s/epoch x 18 epochs
+    -> OOS macro-F1=0.5815, kappa=0.4989  (0.4 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.1 sseed=606 | train fids 477222 px ===
+    seed 42: 1.10s/epoch x 23 epochs
+    -> OOS macro-F1=0.5311, kappa=0.4720  (0.5 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.1 sseed=707 | train fids 449038 px ===
+    seed 42: 1.07s/epoch x 38 epochs
+    -> OOS macro-F1=0.5736, kappa=0.5017  (0.8 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.1 sseed=808 | train fids 525745 px ===
+    seed 42: 1.14s/epoch x 31 epochs
+    -> OOS macro-F1=0.5894, kappa=0.5183  (0.7 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.1 sseed=909 | train fids 490637 px ===
+    seed 42: 1.11s/epoch x 37 epochs
+    -> OOS macro-F1=0.5425, kappa=0.4665  (0.8 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.15 sseed=42 | train fids 728059 px ===
+    seed 42: 1.34s/epoch x 41 epochs
+    -> OOS macro-F1=0.6106, kappa=0.5424  (1.0 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.15 sseed=101 | train fids 686864 px ===
+    seed 42: 1.29s/epoch x 42 epochs
+    -> OOS macro-F1=0.5631, kappa=0.4904  (1.0 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.15 sseed=202 | train fids 712478 px ===
+    seed 42: 1.33s/epoch x 25 epochs
+    -> OOS macro-F1=0.5797, kappa=0.5205  (0.6 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.15 sseed=303 | train fids 686361 px ===
+    seed 42: 1.30s/epoch x 24 epochs
+    -> OOS macro-F1=0.5634, kappa=0.4742  (0.6 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.15 sseed=404 | train fids 699246 px ===
+    seed 42: 1.32s/epoch x 40 epochs
+    -> OOS macro-F1=0.5561, kappa=0.5036  (1.0 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.15 sseed=505 | train fids 711410 px ===
+    seed 42: 1.32s/epoch x 26 epochs
+    -> OOS macro-F1=0.5818, kappa=0.4964  (0.7 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.15 sseed=606 | train fids 751376 px ===
+    seed 42: 1.37s/epoch x 36 epochs
+    -> OOS macro-F1=0.5685, kappa=0.5067  (0.9 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.15 sseed=707 | train fids 677865 px ===
+    seed 42: 1.28s/epoch x 40 epochs
+    -> OOS macro-F1=0.5639, kappa=0.4987  (0.9 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.15 sseed=808 | train fids 778143 px ===
+    seed 42: 1.38s/epoch x 30 epochs
+    -> OOS macro-F1=0.5756, kappa=0.5126  (0.8 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.15 sseed=909 | train fids 742885 px ===
+    seed 42: 1.35s/epoch x 20 epochs
+    -> OOS macro-F1=0.5153, kappa=0.4377  (0.5 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.1 sseed=42 | train fids 465835 px ===
+    seed 42: 18.32s/epoch x 58 epochs
+    -> OOS macro-F1=0.5693, kappa=0.4888  (18.3 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.1 sseed=101 | train fids 451018 px ===
+    seed 42: 18.08s/epoch x 31 epochs
+    -> OOS macro-F1=0.5506, kappa=0.4830  (9.9 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.1 sseed=202 | train fids 483986 px ===
+    seed 42: 18.81s/epoch x 33 epochs
+    -> OOS macro-F1=0.5451, kappa=0.4630  (10.9 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.1 sseed=303 | train fids 435108 px ===
+    seed 42: 17.89s/epoch x 21 epochs
+    -> OOS macro-F1=0.5953, kappa=0.5131  (6.8 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.1 sseed=404 | train fids 456864 px ===
+    seed 42: 18.31s/epoch x 27 epochs
+    -> OOS macro-F1=0.5116, kappa=0.4608  (8.8 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.1 sseed=505 | train fids 466691 px ===
+    seed 42: 18.46s/epoch x 25 epochs
+    -> OOS macro-F1=0.5798, kappa=0.5062  (8.3 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.1 sseed=606 | train fids 477222 px ===
+    seed 42: 18.67s/epoch x 20 epochs
+    -> OOS macro-F1=0.5484, kappa=0.4514  (6.8 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.1 sseed=707 | train fids 449038 px ===
+    seed 42: 18.15s/epoch x 38 epochs
+    -> OOS macro-F1=0.5658, kappa=0.4852  (12.1 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.1 sseed=808 | train fids 525745 px ===
+    seed 42: 19.58s/epoch x 74 epochs
+    -> OOS macro-F1=0.5679, kappa=0.5200  (24.7 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.1 sseed=909 | train fids 490637 px ===
+    seed 42: 18.92s/epoch x 27 epochs
+    -> OOS macro-F1=0.5338, kappa=0.4717  (9.1 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.15 sseed=42 | train fids 728059 px ===
+    seed 42: 23.48s/epoch x 49 epochs
+    -> OOS macro-F1=0.5765, kappa=0.4935  (19.7 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.15 sseed=101 | train fids 686864 px ===
+    seed 42: 22.71s/epoch x 39 epochs
+    -> OOS macro-F1=0.5478, kappa=0.4841  (15.3 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.15 sseed=202 | train fids 712478 px ===
+    seed 42: 23.16s/epoch x 29 epochs
+    -> OOS macro-F1=0.5937, kappa=0.5304  (11.8 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.15 sseed=303 | train fids 686361 px ===
+    seed 42: 22.70s/epoch x 35 epochs
+    -> OOS macro-F1=0.6043, kappa=0.5119  (13.8 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.15 sseed=404 | train fids 699246 px ===
+    seed 42: 22.90s/epoch x 21 epochs
+    -> OOS macro-F1=0.5489, kappa=0.5135  (8.6 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.15 sseed=505 | train fids 711410 px ===
+    seed 42: 23.13s/epoch x 61 epochs
+    -> OOS macro-F1=0.5491, kappa=0.4801  (24.1 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.15 sseed=606 | train fids 751376 px ===
+    seed 42: 23.89s/epoch x 46 epochs
+    -> OOS macro-F1=0.5411, kappa=0.4838  (18.9 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.15 sseed=707 | train fids 677865 px ===
+    seed 42: 22.52s/epoch x 71 epochs
+    -> OOS macro-F1=0.5645, kappa=0.4956  (27.2 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.15 sseed=808 | train fids 778143 px ===
+    seed 42: 24.38s/epoch x 56 epochs
+    -> OOS macro-F1=0.5808, kappa=0.5201  (23.3 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.15 sseed=909 | train fids 742885 px ===
+    seed 42: 23.73s/epoch x 32 epochs
+    -> OOS macro-F1=0.5474, kappa=0.4827  (13.2 min for the 5-seed cell)

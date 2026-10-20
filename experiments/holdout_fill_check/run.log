@@ -1,0 +1,20 @@
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+Loaded tabnet_seed_42.zip (missing only: ['embedder.embedding_group_matrix', 'tabnet.encoder.group_attention_matrix'])
+Loaded tabnet_seed_101.zip (missing only: ['embedder.embedding_group_matrix', 'tabnet.encoder.group_attention_matrix'])
+Loaded tabnet_seed_202.zip (missing only: ['embedder.embedding_group_matrix', 'tabnet.encoder.group_attention_matrix'])
+Loaded tabnet_seed_303.zip (missing only: ['embedder.embedding_group_matrix', 'tabnet.encoder.group_attention_matrix'])
+Loaded tabnet_seed_404.zip (missing only: ['embedder.embedding_group_matrix', 'tabnet.encoder.group_attention_matrix'])
+median fill: 2415 fields
+zero fill: 2415 fields
+Median-fill reproduction of published predictions: 221 fields differ (2415 fields)
+Published predictions not reproduced; comparison stopped.

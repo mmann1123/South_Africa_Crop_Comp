@@ -15,3 +15,4 @@
 2026-10-11T19:45:10 pid=1157167 rows=200000 rows_differing=1 a==c=True b==c=False
 2026-10-11T20:02:03 pid=1336362 rows=200000 rows_differing=1 a==c=False b==c=True
 2026-10-11T21:20:40 pid=1336362 rows=131914 rows_differing=1 a==c=True b==c=False
+2026-10-14T15:52:07 pid=499614 rows=200000 rows_differing=1 a==c=False b==c=True

@@ -1,0 +1,423 @@
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+=== L-TAE Ensemble Inference === Device: cuda
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat'], Features: 60
+
+Loading: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/data/merged_dl_test.parquet
+Shape: (3409489, 71), Fields: 2415
+
+Loading models...
+  Loaded ltae_seed_42.pt
+  Loaded ltae_seed_101.pt
+  Loaded ltae_seed_202.pt
+  Loaded ltae_seed_303.pt
+  Loaded ltae_seed_404.pt
+Total pixel predictions: 3409489
+
+Aggregating to field level...
+Total fields: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_orig.csv
+
+crop_name
+Lucerne/Medics         1123
+Small grain grazing     673
+Wheat                   380
+Barley                  152
+Canola                   87
+Name: count, dtype: int64
+Saved per-seed predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_orig_seed*.csv
+[done] ltae orig -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_orig.csv
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+=== L-TAE Ensemble Inference === Device: cuda
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat'], Features: 60
+
+Loading: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/merged_dl_test_trainmedian.parquet
+Shape: (3409489, 71), Fields: 2415
+
+Loading models...
+  Loaded ltae_seed_42.pt
+  Loaded ltae_seed_101.pt
+  Loaded ltae_seed_202.pt
+  Loaded ltae_seed_303.pt
+  Loaded ltae_seed_404.pt
+Total pixel predictions: 3409489
+
+Aggregating to field level...
+Total fields: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_trainmed.csv
+
+crop_name
+Lucerne/Medics         1456
+Small grain grazing     415
+Wheat                   241
+Barley                  169
+Canola                  134
+Name: count, dtype: int64
+Saved per-seed predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_trainmed_seed*.csv
+[done] ltae trainmed -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_trainmed.csv
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+=== L-TAE Field-Level Ensemble Inference === Device: cuda
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat'], Features: 60
+
+Loading: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/data/merged_dl_test.parquet
+Pixel-level shape: (3409489, 71), Fields: 2415
+Aggregating to field level...
+Field-level shape: (2415, 61)
+
+Loading models...
+  Loaded ltae_field_seed_42.pt
+  Loaded ltae_field_seed_101.pt
+  Loaded ltae_field_seed_202.pt
+  Loaded ltae_field_seed_303.pt
+  Loaded ltae_field_seed_404.pt
+Total field predictions: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_field_orig.csv
+
+crop_name
+Lucerne/Medics         1242
+Small grain grazing     468
+Wheat                   450
+Barley                  131
+Canola                  124
+Name: count, dtype: int64
+Saved per-seed predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_field_orig_seed*.csv
+[done] ltae_field orig -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_field_orig.csv
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+=== L-TAE Field-Level Ensemble Inference === Device: cuda
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat'], Features: 60
+
+Loading: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/merged_dl_test_trainmedian.parquet
+Pixel-level shape: (3409489, 71), Fields: 2415
+Aggregating to field level...
+Field-level shape: (2415, 61)
+
+Loading models...
+  Loaded ltae_field_seed_42.pt
+  Loaded ltae_field_seed_101.pt
+  Loaded ltae_field_seed_202.pt
+  Loaded ltae_field_seed_303.pt
+  Loaded ltae_field_seed_404.pt
+Total field predictions: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_field_trainmed.csv
+
+crop_name
+Lucerne/Medics         1307
+Wheat                   444
+Small grain grazing     343
+Barley                  164
+Canola                  157
+Name: count, dtype: int64
+Saved per-seed predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_field_trainmed_seed*.csv
+[done] ltae_field trainmed -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/ltae_field_trainmed.csv
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+=== TempCNN Ensemble Inference === Device: cuda
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat'], Features: 60
+
+Loading: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/data/merged_dl_test.parquet
+Shape: (3409489, 71), Fields: 2415
+
+Loading models...
+  Loaded tempcnn_seed_42.pt
+  Loaded tempcnn_seed_101.pt
+  Loaded tempcnn_seed_202.pt
+  Loaded tempcnn_seed_303.pt
+  Loaded tempcnn_seed_404.pt
+Total pixel predictions: 3409489
+
+Aggregating to field level...
+Total fields: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tempcnn_orig.csv
+
+crop_name
+Lucerne/Medics         1493
+Small grain grazing     376
+Wheat                   321
+Barley                  142
+Canola                   83
+Name: count, dtype: int64
+Saved per-seed predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tempcnn_orig_seed*.csv
+[done] tempcnn orig -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tempcnn_orig.csv
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+=== TempCNN Ensemble Inference === Device: cuda
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat'], Features: 60
+
+Loading: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/merged_dl_test_trainmedian.parquet
+Shape: (3409489, 71), Fields: 2415
+
+Loading models...
+  Loaded tempcnn_seed_42.pt
+  Loaded tempcnn_seed_101.pt
+  Loaded tempcnn_seed_202.pt
+  Loaded tempcnn_seed_303.pt
+  Loaded tempcnn_seed_404.pt
+Total pixel predictions: 3409489
+
+Aggregating to field level...
+Total fields: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tempcnn_trainmed.csv
+
+crop_name
+Lucerne/Medics         1454
+Small grain grazing     421
+Wheat                   240
+Barley                  174
+Canola                  126
+Name: count, dtype: int64
+Saved per-seed predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tempcnn_trainmed_seed*.csv
+[done] tempcnn trainmed -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tempcnn_trainmed.csv
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+=== TempCNN Field-Level Ensemble Inference === Device: cuda
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat'], Features: 60
+
+Loading: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/data/merged_dl_test.parquet
+Pixel-level shape: (3409489, 71), Fields: 2415
+Aggregating to field level...
+Field-level shape: (2415, 61)
+
+Loading models...
+  Loaded tempcnn_field_seed_42.pt
+  Loaded tempcnn_field_seed_101.pt
+  Loaded tempcnn_field_seed_202.pt
+  Loaded tempcnn_field_seed_303.pt
+  Loaded tempcnn_field_seed_404.pt
+Total field predictions: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tempcnn_field_orig.csv
+
+crop_name
+Lucerne/Medics         1199
+Wheat                   721
+Small grain grazing     292
+Barley                  112
+Canola                   91
+Name: count, dtype: int64
+[done] tempcnn_field orig -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tempcnn_field_orig.csv
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+=== TempCNN Field-Level Ensemble Inference === Device: cuda
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat'], Features: 60
+
+Loading: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/merged_dl_test_trainmedian.parquet
+Pixel-level shape: (3409489, 71), Fields: 2415
+Aggregating to field level...
+Field-level shape: (2415, 61)
+
+Loading models...
+  Loaded tempcnn_field_seed_42.pt
+  Loaded tempcnn_field_seed_101.pt
+  Loaded tempcnn_field_seed_202.pt
+  Loaded tempcnn_field_seed_303.pt
+  Loaded tempcnn_field_seed_404.pt
+Total field predictions: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tempcnn_field_trainmed.csv
+
+crop_name
+Lucerne/Medics         1289
+Small grain grazing     569
+Wheat                   284
+Canola                  148
+Barley                  125
+Name: count, dtype: int64
+[done] tempcnn_field trainmed -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tempcnn_field_trainmed.csv
+=== Transformer Encoder Ensemble Inference === Device: cuda
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat'], Features: 60
+
+Loading: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/data/merged_dl_test.parquet
+Shape: (3409489, 71), Fields: 2415
+
+Loading models...
+  Loaded transformer_seed_42.pt
+  Loaded transformer_seed_101.pt
+  Loaded transformer_seed_202.pt
+  Loaded transformer_seed_303.pt
+  Loaded transformer_seed_404.pt
+Total pixel predictions: 3409489
+
+Aggregating to field level...
+Total fields: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/transformer_orig.csv
+
+crop_name
+Lucerne/Medics         1419
+Small grain grazing     403
+Wheat                   269
+Barley                  239
+Canola                   85
+Name: count, dtype: int64
+[done] transformer orig -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/transformer_orig.csv
+=== Transformer Encoder Ensemble Inference === Device: cuda
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat'], Features: 60
+
+Loading: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/merged_dl_test_trainmedian.parquet
+Shape: (3409489, 71), Fields: 2415
+
+Loading models...
+  Loaded transformer_seed_42.pt
+  Loaded transformer_seed_101.pt
+  Loaded transformer_seed_202.pt
+  Loaded transformer_seed_303.pt
+  Loaded transformer_seed_404.pt
+Total pixel predictions: 3409489
+
+Aggregating to field level...
+Total fields: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/transformer_trainmed.csv
+
+crop_name
+Lucerne/Medics         1502
+Small grain grazing     322
+Wheat                   292
+Barley                  172
+Canola                  127
+Name: count, dtype: int64
+[done] transformer trainmed -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/transformer_trainmed.csv
+=== CNN-BiLSTM Ensemble Inference ===
+Device: cuda
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/data/merged_dl_test.parquet
+Shape: (3409489, 71)
+Unique fields: 2415
+Feature columns: 60
+
+Loading models...
+Loaded: new_model_seed_0_25epochs.pt
+Loaded: new_model_seed_1_25epochs.pt
+Loaded: new_model_seed_2_25epochs.pt
+Loaded: new_model_seed_3_25epochs.pt
+Loaded: new_model_seed_4_25epochs.pt
+Loaded 5 models
+
+Running inference...
+Total pixel predictions: 3409489
+
+Aggregating to field level...
+Total fields: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/cnn_bilstm_orig.csv
+
+Generating per-seed predictions...
+Saved per-seed predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/cnn_bilstm_orig_seed*.csv
+
+=== Prediction Distribution ===
+crop_name
+Lucerne/Medics         1105
+Barley                  502
+Small grain grazing     410
+Wheat                   315
+Canola                   83
+Name: count, dtype: int64
+[done] cnn_bilstm orig -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/cnn_bilstm_orig.csv
+=== CNN-BiLSTM Ensemble Inference ===
+Device: cuda
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/merged_dl_test_trainmedian.parquet
+Shape: (3409489, 71)
+Unique fields: 2415
+Feature columns: 60
+
+Loading models...
+Loaded: new_model_seed_0_25epochs.pt
+Loaded: new_model_seed_1_25epochs.pt
+Loaded: new_model_seed_2_25epochs.pt
+Loaded: new_model_seed_3_25epochs.pt
+Loaded: new_model_seed_4_25epochs.pt
+Loaded 5 models
+
+Running inference...
+Total pixel predictions: 3409489
+
+Aggregating to field level...
+Total fields: 2415
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/cnn_bilstm_trainmed.csv
+
+Generating per-seed predictions...
+Saved per-seed predictions: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/cnn_bilstm_trainmed_seed*.csv
+
+=== Prediction Distribution ===
+crop_name
+Lucerne/Medics         1455
+Small grain grazing     358
+Wheat                   270
+Barley                  203
+Canola                  129
+Name: count, dtype: int64
+[done] cnn_bilstm trainmed -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/cnn_bilstm_trainmed.csv
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+=== TabNet Field-Level (temporal) Inference ===
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+Feature columns: 60
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/data/merged_dl_test.parquet
+Pixel-level shape: (3409489, 71), Fields: 2415
+Aggregating to field level...
+Field-level shape: (2415, 61)
+
+Loading models...
+Traceback (most recent call last):
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/out_of_sample/inference_tabnet_temporal_field.py", line 83, in main
+    from pytorch_tabnet.tab_model import TabNetClassifier
+ModuleNotFoundError: No module named 'pytorch_tabnet.tab_model'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/run_deep_field.py", line 70, in <module>
+    run(k, v)
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/run_deep_field.py", line 53, in run
+    mod.main()
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/out_of_sample/inference_tabnet_temporal_field.py", line 85, in main
+    raise ImportError("pytorch-tabnet not installed. Run: pip install pytorch-tabnet")
+ImportError: pytorch-tabnet not installed. Run: pip install pytorch-tabnet
