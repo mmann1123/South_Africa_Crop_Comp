@@ -85,6 +85,42 @@ class FillMethods(unittest.TestCase):
         self.assertAlmostEqual(out.loc[0, "B2_September"], 0.3)
         self.assertAlmostEqual(out.loc[0, "EVI_September"], 20.0)
 
+    def test_interp_matches_rowwise_reference(self):
+        # Random gap patterns (interior runs, edges, all-missing rows) against np.interp per row.
+        rng = np.random.default_rng(0)
+        months = ["January", "February", "March", "April", "July", "August", "September",
+                  "October", "November", "December"]
+        pos = np.array([missing.MONTHS.index(m) for m in months], dtype=float)
+        cols = [f"B2_{m}" for m in months] + [f"EVI_{m}" for m in months]
+        v = rng.normal(size=(500, len(cols)))
+        v[rng.random(v.shape) < 0.35] = NAN
+        v[0, :10] = NAN  # whole band missing in one row
+        df = pd.DataFrame(v, columns=cols)
+        stats = pd.Series(-99.0, index=cols)
+        out = missing.fill_missing(df, cols, published="zero", method="interp", stats=stats)
+        ref = v.copy()
+        for b in range(2):
+            sl = slice(10 * b, 10 * b + 10)
+            for r in range(len(v)):
+                row = v[r, sl]
+                obs = ~np.isnan(row)
+                if obs.sum() >= 2:
+                    inside = (pos > pos[obs].min()) & (pos < pos[obs].max()) & ~obs
+                    ref[r, sl][inside] = np.interp(pos[inside], pos[obs], row[obs])
+        ref = np.where(np.isnan(ref), -99.0, ref)
+        np.testing.assert_allclose(out.to_numpy(), ref, rtol=0, atol=1e-12)
+
+    def test_interp_skips_months_never_observed_in_training(self):
+        # May is missing in every training pixel; it must get the training value (0), not a
+        # value interpolated between April and July.
+        df = pd.DataFrame({"B2_April": [0.2], "B2_May": [NAN], "B2_July": [0.8], "B2_June": [NAN]})
+        cols = ["B2_April", "B2_May", "B2_June", "B2_July"]
+        out = missing.fill_missing(df, cols, published="zero", method="interp",
+                                   stats=pd.Series({"B2_May": 0.0, "B2_June": 0.0}),
+                                   observed={"B2_April", "B2_July", "B2_June"})
+        self.assertEqual(out.loc[0, "B2_May"], 0.0)
+        self.assertAlmostEqual(out.loc[0, "B2_June"], 0.2 + 0.6 * (5 - 3) / (6 - 3))
+
     def test_interp_non_band_month_columns_use_stats(self):
         df = self.df.assign(SHAPE_AREA=[NAN, 1.0, 2.0])
         out = missing.fill_missing(df, self.cols + ["SHAPE_AREA"], published="zero", method="interp",
@@ -143,6 +179,7 @@ class TrainStats(unittest.TestCase):
             self.assertNotIn("fid", missing.train_stats("median", path=p, cache_dir=d).index)
             # never observed in training -> 0, the value training pipelines fed the models
             self.assertEqual(missing.train_stats("median", ["B2_May"], path=p, cache_dir=d)["B2_May"], 0.0)
+            self.assertEqual(missing.train_observed(path=p, cache_dir=d), {"B2_September"})
             # the cached values are bit-identical to a fresh computation
             pd.DataFrame({"B2_September": [0.1 + 0.2, 1 / 3, 2 / 3, 0.7]}).to_parquet(p)
             for f in ("train_medians.csv", "train_means.csv"):

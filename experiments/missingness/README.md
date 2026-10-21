@@ -39,8 +39,8 @@ L-TAE-S inference under both settings must equal the saved re-analysis predictio
 
 ## Planned (see `reports/Missing data robustness novelty check.md`, "Ways to push this forward")
 
-1. Fill-value sweep: re-score existing checkpoints under each `HOLDOUT_FILL` method, plus step
-   deletion for L-TAE and the Transformer.
+1. Fill-value sweep: done, see `fill_sweep/README.md`. Step deletion for L-TAE and the
+   Transformer still to do.
 2. Month-dropout control for the sparsemax gate (retraining; 2 x 2 dropout by gate).
 3. Per-model fill-operator table for the supplement.
 4. Per-month missing-data table (training tiles vs holdout) and the September gap overlaid on the

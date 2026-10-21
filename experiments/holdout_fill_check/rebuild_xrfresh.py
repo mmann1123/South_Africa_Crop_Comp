@@ -35,6 +35,10 @@ FEAT = "/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_Comp/featur
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 INPUTS = {"orig": os.path.join(REPO, "data", "merged_dl_test.parquet"),
           "trainmed": os.path.join(HERE, "data", "merged_dl_test_trainmedian.parquet")}
+# Fill-value sweep variants (experiments/missingness/make_filled_variants.py); opt in with --variants.
+for _m in ["zero", "self_median", "train_mean", "train_median", "interp"]:
+    INPUTS[f"fill_{_m}"] = os.path.join(HERE, "data", f"merged_dl_test_fill_{_m}.parquet")
+DEFAULT_VARIANTS = ["orig", "trainmed"]
 BANDS = ["B12", "B11", "B2", "B6", "EVI", "hue"]
 MONTHS = ["January", "February", "March", "April", "May", "July", "August", "September",
           "October", "November", "December"]
@@ -85,14 +89,15 @@ def features(series):
     return out
 
 
-def main():
+def main(variants=DEFAULT_VARIANTS):
     os.makedirs(os.path.join(HERE, "data"), exist_ok=True)
     report = []
     for band in BANDS:
         pub = pq.read_table(os.path.join(FEAT, f"X_testing_{band}_34S_20E_259N.parquet")).to_pandas()
         cols = [f"{band}_{k}" for k in SPEC]
         assert list(pub.columns) == META + cols, f"{band}: unexpected published columns"
-        for variant, path in INPUTS.items():
+        for variant in variants:
+            path = INPUTS[variant]
             src = pq.read_table(path, columns=META + [f"{band}_{m}" for m in MONTHS]).to_pandas()
             assert (src["id"].values == pub["id"].values).all() and (src["point"].values == pub["point"].values).all()
             feats = features(src[[f"{band}_{m}" for m in MONTHS]].to_numpy(np.float32))  # rasters were float32
@@ -123,4 +128,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--variants", nargs="+", default=DEFAULT_VARIANTS, choices=list(INPUTS))
+    main(ap.parse_args().variants)

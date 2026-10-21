@@ -64,8 +64,11 @@ def run(key, v):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", nargs="+", default=["xgboost", "lgbm", "smote_stacked", "base_ml", "stacking", "voting"])
+    ap.add_argument("--variants", nargs="+", default=VARIANTS)
+    ap.add_argument("--pred-dir", default=PRED, help="output folder (default: this experiment's predictions/)")
     args = ap.parse_args()
+    PRED = args.pred_dir
     os.makedirs(PRED, exist_ok=True)
     for k in args.models:
-        for v in VARIANTS:
+        for v in args.variants:
             run(k, v)

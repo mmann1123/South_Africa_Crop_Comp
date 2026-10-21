@@ -1,0 +1,27 @@
+model,interp,published,self_median,train_mean,train_median,zero
+"CNN-BiLSTM, field",12.0,,15.0,15.0,17.0,12.0
+"CNN-BiLSTM, pixel",1.0,,1.0,2.0,1.0,10.0
+"L-TAE, field",7.0,,8.0,12.0,13.0,3.0
+"L-TAE, pixel",2.0,,3.0,3.0,3.0,7.0
+"L-TAE-S, field",13.0,,14.0,14.0,14.0,1.0
+"L-TAE-S, pixel",6.0,,5.0,5.0,4.0,2.0
+"LightGBM, field",15.0,4.0,13.0,9.0,10.0,15.0
+"LightGBM, pixel",19.0,3.0,18.0,17.0,16.0,21.0
+"Logistic Regression, pixel",8.0,1.0,10.0,8.0,12.0,17.0
+"MiniRocket, field",16.0,,17.0,18.0,18.0,19.0
+"MiniRocket, pixel",5.0,,7.0,10.0,11.0,14.0
+"Random Forest, pixel",20.0,6.0,16.0,16.0,15.0,13.0
+"SMOTE Stacked, field",23.0,9.0,23.0,23.0,23.0,20.0
+"Stacking, field",21.0,7.0,22.0,21.0,22.0,22.0
+"TabNet (raw), pixel",14.0,,12.0,13.0,7.0,11.0
+"TabNet (raw, field-avg), field",24.0,,24.0,24.0,24.0,24.0
+"TabNet (xr_fresh), field",25.0,10.0,25.0,25.0,25.0,25.0
+"TempCNN, field",11.0,,11.0,11.0,8.0,8.0
+"TempCNN, pixel",4.0,,2.0,1.0,2.0,5.0
+"TimesNet, field",18.0,,19.0,19.0,19.0,9.0
+"TimesNet, pixel",9.0,,9.0,6.0,6.0,6.0
+"Transformer, pixel",3.0,,4.0,4.0,5.0,4.0
+"Voting, pixel",22.0,5.0,21.0,20.0,20.0,18.0
+"XGBoost, field",10.0,2.0,6.0,7.0,9.0,16.0
+"XGBoost, pixel",17.0,8.0,20.0,22.0,21.0,23.0
+Spearman vs train_median,0.892,0.879,0.954,0.969,1.0,0.74

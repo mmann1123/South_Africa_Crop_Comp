@@ -1,0 +1,136 @@
+model,family,fill,f1m_all,f1m_sept_observed,f1m_sept_missing
+"CNN-BiLSTM, pixel",raw,zero,0.5134,0.6587,0.2965
+"CNN-BiLSTM, pixel",raw,self_median,0.6549,0.6587,0.6494
+"CNN-BiLSTM, pixel",raw,train_mean,0.6521,0.6587,0.6449
+"CNN-BiLSTM, pixel",raw,train_median,0.6562,0.6587,0.6553
+"CNN-BiLSTM, pixel",raw,interp,0.6605,0.6587,0.6696
+"TempCNN, pixel",raw,zero,0.5737,0.6541,0.3438
+"TempCNN, pixel",raw,self_median,0.6473,0.6541,0.6365
+"TempCNN, pixel",raw,train_mean,0.6534,0.6541,0.6549
+"TempCNN, pixel",raw,train_median,0.6546,0.6541,0.6556
+"TempCNN, pixel",raw,interp,0.6464,0.6541,0.6239
+"L-TAE, pixel",raw,zero,0.5395,0.6388,0.3075
+"L-TAE, pixel",raw,self_median,0.6471,0.6388,0.6676
+"L-TAE, pixel",raw,train_mean,0.6491,0.6388,0.6759
+"L-TAE, pixel",raw,train_median,0.6523,0.6388,0.6837
+"L-TAE, pixel",raw,interp,0.6528,0.6388,0.6835
+"L-TAE-S, pixel",raw,zero,0.5987,0.6305,0.5353
+"L-TAE-S, pixel",raw,self_median,0.637,0.6305,0.6524
+"L-TAE-S, pixel",raw,train_mean,0.6394,0.6305,0.658
+"L-TAE-S, pixel",raw,train_median,0.6427,0.6305,0.6683
+"L-TAE-S, pixel",raw,interp,0.6381,0.6305,0.6504
+"Transformer, pixel",raw,zero,0.5772,0.6345,0.4438
+"Transformer, pixel",raw,self_median,0.6441,0.6345,0.6719
+"Transformer, pixel",raw,train_mean,0.6453,0.6345,0.675
+"Transformer, pixel",raw,train_median,0.6406,0.6345,0.6589
+"Transformer, pixel",raw,interp,0.6491,0.6345,0.685
+"TimesNet, pixel",raw,zero,0.5651,0.6414,0.3594
+"TimesNet, pixel",raw,self_median,0.6171,0.6436,0.5404
+"TimesNet, pixel",raw,train_mean,0.6258,0.6436,0.5828
+"TimesNet, pixel",raw,train_median,0.6328,0.6436,0.6094
+"TimesNet, pixel",raw,interp,0.6282,0.6436,0.575
+"TabNet (raw), pixel",raw,zero,0.5088,0.6259,0.2854
+"TabNet (raw), pixel",raw,self_median,0.6093,0.6259,0.5775
+"TabNet (raw), pixel",raw,train_mean,0.6107,0.6259,0.5836
+"TabNet (raw), pixel",raw,train_median,0.6161,0.6259,0.5943
+"TabNet (raw), pixel",raw,interp,0.6089,0.6259,0.572
+"MiniRocket, pixel",raw,zero,0.5003,0.6534,0.2097
+"MiniRocket, pixel",raw,self_median,0.619,0.6534,0.5378
+"MiniRocket, pixel",raw,train_mean,0.6121,0.6534,0.5322
+"MiniRocket, pixel",raw,train_median,0.6054,0.6534,0.5337
+"MiniRocket, pixel",raw,interp,0.6385,0.6534,0.5826
+"TempCNN, field",raw,zero,0.5355,0.6491,0.2614
+"TempCNN, field",raw,self_median,0.6093,0.6491,0.496
+"TempCNN, field",raw,train_mean,0.612,0.6491,0.5244
+"TempCNN, field",raw,train_median,0.6142,0.6491,0.5488
+"TempCNN, field",raw,interp,0.6197,0.6491,0.5238
+"L-TAE, field",raw,zero,0.5939,0.6416,0.5075
+"L-TAE, field",raw,self_median,0.6172,0.6416,0.5809
+"L-TAE, field",raw,train_mean,0.6109,0.6416,0.5712
+"L-TAE, field",raw,train_median,0.6002,0.6416,0.5445
+"L-TAE, field",raw,interp,0.6315,0.6416,0.6007
+"L-TAE-S, field",raw,zero,0.6012,0.6269,0.5476
+"L-TAE-S, field",raw,self_median,0.6032,0.6269,0.5545
+"L-TAE-S, field",raw,train_mean,0.6015,0.6269,0.5472
+"L-TAE-S, field",raw,train_median,0.5988,0.6269,0.5494
+"L-TAE-S, field",raw,interp,0.6093,0.6269,0.5556
+"CNN-BiLSTM, field",raw,zero,0.506,0.636,0.2944
+"CNN-BiLSTM, field",raw,self_median,0.6017,0.636,0.5381
+"CNN-BiLSTM, field",raw,train_mean,0.5995,0.636,0.5468
+"CNN-BiLSTM, field",raw,train_median,0.5913,0.636,0.5381
+"CNN-BiLSTM, field",raw,interp,0.6155,0.636,0.5595
+"TimesNet, field",raw,zero,0.5163,0.6012,0.317
+"TimesNet, field",raw,self_median,0.5787,0.5979,0.5372
+"TimesNet, field",raw,train_mean,0.5797,0.5964,0.5519
+"TimesNet, field",raw,train_median,0.5855,0.5991,0.5572
+"TimesNet, field",raw,interp,0.5937,0.5969,0.5818
+"MiniRocket, field",raw,zero,0.4822,0.6356,0.188
+"MiniRocket, field",raw,self_median,0.5857,0.6356,0.4788
+"MiniRocket, field",raw,train_mean,0.586,0.6356,0.4838
+"MiniRocket, field",raw,train_median,0.5855,0.6356,0.4916
+"MiniRocket, field",raw,interp,0.6019,0.6356,0.5177
+"TabNet (raw, field-avg), field",raw,zero,0.4333,0.5206,0.2761
+"TabNet (raw, field-avg), field",raw,self_median,0.5151,0.5206,0.5035
+"TabNet (raw, field-avg), field",raw,train_mean,0.5058,0.5206,0.4807
+"TabNet (raw, field-avg), field",raw,train_median,0.4891,0.5206,0.4355
+"TabNet (raw, field-avg), field",raw,interp,0.5173,0.5206,0.507
+"XGBoost, field",xr,zero,0.4955,0.6336,0.1476
+"XGBoost, field",xr,self_median,0.6206,0.6336,0.5756
+"XGBoost, field",xr,train_mean,0.619,0.6336,0.5687
+"XGBoost, field",xr,train_median,0.6124,0.6336,0.5608
+"XGBoost, field",xr,interp,0.6269,0.6336,0.6011
+"XGBoost, field",xr,published,0.5824,0.6336,0.4028
+"LightGBM, field",xr,zero,0.4957,0.6155,0.1704
+"LightGBM, field",xr,self_median,0.6051,0.6155,0.5611
+"LightGBM, field",xr,train_mean,0.6125,0.6155,0.5768
+"LightGBM, field",xr,train_median,0.6061,0.6155,0.5557
+"LightGBM, field",xr,interp,0.6049,0.6155,0.5629
+"LightGBM, field",xr,published,0.5588,0.6155,0.3576
+"LightGBM, pixel",xr,zero,0.4785,0.6002,0.2346
+"LightGBM, pixel",xr,self_median,0.5799,0.6002,0.5271
+"LightGBM, pixel",xr,train_mean,0.5891,0.6002,0.5528
+"LightGBM, pixel",xr,train_median,0.5935,0.6002,0.5674
+"LightGBM, pixel",xr,interp,0.5928,0.6002,0.5686
+"LightGBM, pixel",xr,published,0.563,0.6002,0.4232
+"Logistic Regression, pixel",xr,zero,0.4935,0.6354,0.1615
+"Logistic Regression, pixel",xr,self_median,0.6159,0.6354,0.5655
+"Logistic Regression, pixel",xr,train_mean,0.613,0.6354,0.58
+"Logistic Regression, pixel",xr,train_median,0.6054,0.6354,0.5612
+"Logistic Regression, pixel",xr,interp,0.6306,0.6354,0.6187
+"Logistic Regression, pixel",xr,published,0.5837,0.6354,0.4528
+"Random Forest, pixel",xr,zero,0.5017,0.5914,0.3273
+"Random Forest, pixel",xr,self_median,0.5877,0.5914,0.5686
+"Random Forest, pixel",xr,train_mean,0.5924,0.5914,0.5836
+"Random Forest, pixel",xr,train_median,0.5969,0.5914,0.5992
+"Random Forest, pixel",xr,interp,0.5848,0.5914,0.5654
+"Random Forest, pixel",xr,published,0.555,0.5914,0.426
+"XGBoost, pixel",xr,zero,0.441,0.5898,0.1734
+"XGBoost, pixel",xr,self_median,0.5761,0.5898,0.5492
+"XGBoost, pixel",xr,train_mean,0.5667,0.5898,0.529
+"XGBoost, pixel",xr,train_median,0.5581,0.5898,0.5073
+"XGBoost, pixel",xr,interp,0.5944,0.5898,0.5965
+"XGBoost, pixel",xr,published,0.5204,0.5898,0.3441
+"Voting, pixel",xr,zero,0.4881,0.5782,0.2893
+"Voting, pixel",xr,self_median,0.5687,0.5782,0.5197
+"Voting, pixel",xr,train_mean,0.5686,0.5782,0.5195
+"Voting, pixel",xr,train_median,0.5709,0.5782,0.5294
+"Voting, pixel",xr,interp,0.5704,0.5782,0.5282
+"Voting, pixel",xr,published,0.5573,0.5782,0.4571
+"Stacking, field",xr,zero,0.4491,0.5663,0.156
+"Stacking, field",xr,self_median,0.5658,0.5663,0.5632
+"Stacking, field",xr,train_mean,0.5677,0.5663,0.5693
+"Stacking, field",xr,train_median,0.5548,0.5663,0.5388
+"Stacking, field",xr,interp,0.573,0.5663,0.5833
+"Stacking, field",xr,published,0.5328,0.5663,0.409
+"SMOTE Stacked, field",xr,zero,0.4814,0.5434,0.2358
+"SMOTE Stacked, field",xr,self_median,0.5391,0.5434,0.514
+"SMOTE Stacked, field",xr,train_mean,0.541,0.5434,0.5188
+"SMOTE Stacked, field",xr,train_median,0.5435,0.5434,0.5232
+"SMOTE Stacked, field",xr,interp,0.5534,0.5434,0.5536
+"SMOTE Stacked, field",xr,published,0.4925,0.5434,0.3429
+"TabNet (xr_fresh), field",xr,zero,0.3618,0.4524,0.2267
+"TabNet (xr_fresh), field",xr,self_median,0.4122,0.4524,0.3509
+"TabNet (xr_fresh), field",xr,train_mean,0.4086,0.4524,0.3451
+"TabNet (xr_fresh), field",xr,train_median,0.4048,0.4524,0.3359
+"TabNet (xr_fresh), field",xr,interp,0.4372,0.4524,0.4087
+"TabNet (xr_fresh), field",xr,published,0.428,0.4524,0.3476

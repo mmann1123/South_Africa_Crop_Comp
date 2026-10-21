@@ -16,8 +16,11 @@ from config import COMBINED_TEST_FEATURES_PATH  # noqa: E402
 
 BANDS = ["B12", "B11", "B2", "B6", "EVI", "hue"]
 META = ["id", "point", "fid", "SHAPE_AREA", "SHAPE_LEN"]
+import argparse  # noqa: E402
+_ap = argparse.ArgumentParser()
+_ap.add_argument("--variants", nargs="+", default=["orig", "trainmed"])
 pub = pd.read_parquet(COMBINED_TEST_FEATURES_PATH)
-for variant in ["orig", "trainmed"]:
+for variant in _ap.parse_args().variants:
     pixdir = os.path.join(HERE, "data", f"xtest_{variant}")
     os.makedirs(pixdir, exist_ok=True)
     field = None

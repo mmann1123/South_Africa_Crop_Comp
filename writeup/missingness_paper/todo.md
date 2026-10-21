@@ -36,10 +36,14 @@ with the date and the files or commits that close them.
   - [ ] Overlay the September gap on the holdout error map (the old Sec. 4.3 "south-central
     error zone" is probably its footprint); error maps in `out_of_sample/scoring_results/` and
     `experiments/distance_decay/`.
-- [ ] **Fill-value sweep** (inference only, under 1 GPU hour). Re-score existing checkpoints with
-  `HOLDOUT_FILL` = `zero`, `train_mean`, `train_median`, `self_median`, `interp`, plus deletion
-  of the step for L-TAE and the Transformer (needs a padding-mask path). Answers "you picked the
-  fill that favours deep models".
+- [x] **Fill-value sweep** (2026-10-21; `experiments/missingness/fill_sweep/`, README there).
+  25 models x 5 fills, no retraining (about 4 h, not the 1 h first estimated). In-range fills are
+  interchangeable (median per-model spread 0.014; ranking Spearman 0.89 to 0.97 with training
+  median); zero fill hurts every family including the classical models (mean −0.075 raw, −0.096
+  xr_fresh); the published ranking flip came from the mixed treatment (Spearman 0.56 vs 0.74 when
+  everyone is zero-filled). Also fixed `interp` to skip months never observed in training.
+- [ ] **Step deletion** for L-TAE and the Transformer (attention mask over the missing month), as
+  a "no imputation" row next to the fill sweep.
 
 ## Would strengthen it
 

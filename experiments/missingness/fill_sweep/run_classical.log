@@ -1,0 +1,853 @@
+  wrote fill_zero B12
+  wrote fill_self_median B12
+  wrote fill_train_mean B12
+  wrote fill_interp B12
+  wrote fill_zero B11
+  wrote fill_self_median B11
+  wrote fill_train_mean B11
+  wrote fill_interp B11
+  wrote fill_zero B2
+  wrote fill_self_median B2
+  wrote fill_train_mean B2
+  wrote fill_interp B2
+  wrote fill_zero B6
+  wrote fill_self_median B6
+  wrote fill_train_mean B6
+  wrote fill_interp B6
+  wrote fill_zero EVI
+  wrote fill_self_median EVI
+  wrote fill_train_mean EVI
+  wrote fill_interp EVI
+  wrote fill_zero hue
+  wrote fill_self_median hue
+  wrote fill_train_mean hue
+  wrote fill_interp hue
+wrote fill_zero (2415, 176)
+wrote fill_self_median (2415, 176)
+wrote fill_train_mean (2415, 176)
+wrote fill_interp (2415, 176)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/xgboost/core.py:158: UserWarning: [13:46:16] WARNING: /workspace/src/common/error_msg.cc:58: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  warnings.warn(smsg, UserWarning)
+=== XGBoost (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_zero.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running XGBoost prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/xgboost_fill_zero.csv
+
+crop_name
+Small grain grazing    1145
+Lucerne/Medics          904
+Wheat                   192
+Barley                  100
+Canola                   74
+Name: count, dtype: int64
+[done] xgboost fill_zero
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+=== XGBoost (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_self_median.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running XGBoost prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/xgboost_fill_self_median.csv
+
+crop_name
+Lucerne/Medics         1541
+Small grain grazing     359
+Wheat                   289
+Barley                  115
+Canola                  111
+Name: count, dtype: int64
+[done] xgboost fill_self_median
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+=== XGBoost (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_train_mean.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running XGBoost prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/xgboost_fill_train_mean.csv
+
+crop_name
+Lucerne/Medics         1502
+Small grain grazing     402
+Wheat                   286
+Barley                  115
+Canola                  110
+Name: count, dtype: int64
+[done] xgboost fill_train_mean
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+=== XGBoost (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_interp.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running XGBoost prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/xgboost_fill_interp.csv
+
+crop_name
+Lucerne/Medics         1559
+Small grain grazing     341
+Wheat                   280
+Barley                  120
+Canola                  115
+Name: count, dtype: int64
+[done] xgboost fill_interp
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+=== LightGBM (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_zero.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running LightGBM prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/lgbm_fill_zero.csv
+
+crop_name
+Small grain grazing    1059
+Lucerne/Medics          985
+Wheat                   188
+Barley                  112
+Canola                   71
+Name: count, dtype: int64
+[done] lgbm fill_zero
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+=== LightGBM (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_self_median.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running LightGBM prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/lgbm_fill_self_median.csv
+
+crop_name
+Lucerne/Medics         1639
+Wheat                   288
+Small grain grazing     260
+Barley                  125
+Canola                  103
+Name: count, dtype: int64
+[done] lgbm fill_self_median
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+=== LightGBM (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_train_mean.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running LightGBM prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/lgbm_fill_train_mean.csv
+
+crop_name
+Lucerne/Medics         1617
+Small grain grazing     291
+Wheat                   283
+Barley                  121
+Canola                  103
+Name: count, dtype: int64
+[done] lgbm fill_train_mean
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+=== LightGBM (Optuna) Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_interp.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running LightGBM prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/lgbm_fill_interp.csv
+
+crop_name
+Lucerne/Medics         1643
+Wheat                   282
+Small grain grazing     252
+Barley                  128
+Canola                  110
+Name: count, dtype: int64
+[done] lgbm fill_interp
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
+  warnings.warn(
+=== SMOTE Stacked Ensemble Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_zero.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running SMOTE Stacked prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/smote_stacked_fill_zero.csv
+
+crop_name
+Lucerne/Medics         1204
+Small grain grazing     780
+Wheat                   242
+Barley                  104
+Canola                   85
+Name: count, dtype: int64
+[done] smote_stacked fill_zero
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
+  warnings.warn(
+=== SMOTE Stacked Ensemble Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_self_median.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running SMOTE Stacked prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/smote_stacked_fill_self_median.csv
+
+crop_name
+Lucerne/Medics         1641
+Wheat                   345
+Small grain grazing     160
+Barley                  147
+Canola                  122
+Name: count, dtype: int64
+[done] smote_stacked fill_self_median
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
+  warnings.warn(
+=== SMOTE Stacked Ensemble Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_train_mean.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running SMOTE Stacked prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/smote_stacked_fill_train_mean.csv
+
+crop_name
+Lucerne/Medics         1643
+Wheat                   331
+Small grain grazing     171
+Barley                  142
+Canola                  128
+Name: count, dtype: int64
+[done] smote_stacked fill_train_mean
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but RandomForestClassifier was fitted with feature names
+  warnings.warn(
+=== SMOTE Stacked Ensemble Inference ===
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_interp.parquet
+Shape: (2415, 176), Fields: 2415
+Loading model artifacts...
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+Feature columns: 170
+Running SMOTE Stacked prediction...
+
+Saved: experiments/missingness/fill_sweep/predictions/smote_stacked_fill_interp.csv
+
+crop_name
+Lucerne/Medics         1656
+Wheat                   325
+Small grain grazing     162
+Barley                  146
+Canola                  126
+Name: count, dtype: int64
+[done] smote_stacked fill_interp
+=== Base ML Models (Pixel-Level) Inference ===
+Using model run: 20260218_164605
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+Features: 168
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_zero.parquet
+Shape: (2415, 176), Fields: 2415
+
+--- base_lr ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_zero/predictions_base_lr.csv (2415 fields)
+  crop_name
+Small grain grazing    1214
+Lucerne/Medics          792
+Wheat                   179
+Barley                  148
+Canola                   82
+
+--- base_rf ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_zero/predictions_base_rf.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1395
+Wheat                   360
+Barley                  293
+Small grain grazing     285
+Canola                   82
+
+--- base_lgbm ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_zero/predictions_base_lgbm.csv (2415 fields)
+  crop_name
+Lucerne/Medics         908
+Small grain grazing    799
+Wheat                  493
+Barley                 140
+Canola                  75
+
+--- base_xgb ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_zero/predictions_base_xgb.csv (2415 fields)
+  crop_name
+Small grain grazing    1027
+Lucerne/Medics          783
+Wheat                   268
+Barley                  245
+Canola                   92
+[done] base_ml fill_zero
+=== Base ML Models (Pixel-Level) Inference ===
+Using model run: 20260218_164605
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+Features: 168
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_self_median.parquet
+Shape: (2415, 176), Fields: 2415
+
+--- base_lr ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_self_median/predictions_base_lr.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1348
+Small grain grazing     539
+Wheat                   236
+Barley                  171
+Canola                  121
+
+--- base_rf ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_self_median/predictions_base_rf.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1610
+Wheat                   368
+Small grain grazing     161
+Barley                  152
+Canola                  124
+
+--- base_lgbm ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_self_median/predictions_base_lgbm.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1570
+Wheat                   426
+Small grain grazing     190
+Barley                  116
+Canola                  113
+
+--- base_xgb ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_self_median/predictions_base_xgb.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1308
+Small grain grazing     530
+Wheat                   315
+Barley                  145
+Canola                  117
+[done] base_ml fill_self_median
+=== Base ML Models (Pixel-Level) Inference ===
+Using model run: 20260218_164605
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+Features: 168
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_train_mean.parquet
+Shape: (2415, 176), Fields: 2415
+
+--- base_lr ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_train_mean/predictions_base_lr.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1320
+Small grain grazing     579
+Wheat                   219
+Barley                  170
+Canola                  127
+
+--- base_rf ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_train_mean/predictions_base_rf.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1602
+Wheat                   366
+Small grain grazing     165
+Barley                  154
+Canola                  128
+
+--- base_lgbm ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_train_mean/predictions_base_lgbm.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1555
+Wheat                   413
+Small grain grazing     218
+Barley                  116
+Canola                  113
+
+--- base_xgb ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_train_mean/predictions_base_xgb.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1253
+Small grain grazing     587
+Wheat                   303
+Barley                  152
+Canola                  120
+[done] base_ml fill_train_mean
+=== Base ML Models (Pixel-Level) Inference ===
+Using model run: 20260218_164605
+Classes: ['Barley' 'Canola' 'Lucerne/Medics' 'Small grain grazing' 'Wheat']
+Features: 168
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_interp.parquet
+Shape: (2415, 176), Fields: 2415
+
+--- base_lr ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_interp/predictions_base_lr.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1395
+Small grain grazing     480
+Wheat                   241
+Barley                  176
+Canola                  123
+
+--- base_rf ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_interp/predictions_base_rf.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1608
+Wheat                   367
+Small grain grazing     157
+Barley                  154
+Canola                  129
+
+--- base_lgbm ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_interp/predictions_base_lgbm.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1584
+Wheat                   431
+Small grain grazing     168
+Canola                  117
+Barley                  115
+
+--- base_xgb ---
+  Predicting (field-level)...
+  Saved: experiments/missingness/fill_sweep/predictions/_base_ml_fill_interp/predictions_base_xgb.csv (2415 fields)
+  crop_name
+Lucerne/Medics         1379
+Small grain grazing     418
+Wheat                   346
+Barley                  152
+Canola                  120
+[done] base_ml fill_interp
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  field-level feature cols: 170; train fields=2653, test fields=830
+  using Optuna-tuned XGB params
+Training stacked ensemble (no SMOTE)...
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6408 wF1=0.6945 kappa=0.5784 acc=0.6892 Xent=5.0102 n=830
+Loading holdout field features...
+  saved 2415 field predictions -> experiments/missingness/fill_sweep/predictions/stacking_fill_zero.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.4491 wF1=0.5165 kappa=0.2776 acc=0.4836 Xent=8.3227 n=2415
+
+==== SUMMARY (Stacking, RF+XGB+LR-meta, no SMOTE) ====
+In-region  F1m=0.6408 kappa=0.5784 wF1=0.6945 Xent=5.0102
+Spatial    F1m=0.4491 kappa=0.2776 wF1=0.5165 Xent=8.3227
+Delta (ST - in-region) F1m = -0.1916
+[done] stacking fill_zero
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  field-level feature cols: 170; train fields=2653, test fields=830
+  using Optuna-tuned XGB params
+Training stacked ensemble (no SMOTE)...
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6408 wF1=0.6945 kappa=0.5784 acc=0.6892 Xent=5.0102 n=830
+Loading holdout field features...
+  saved 2415 field predictions -> experiments/missingness/fill_sweep/predictions/stacking_fill_self_median.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5658 wF1=0.6818 kappa=0.5004 acc=0.6816 Xent=5.1324 n=2415
+
+==== SUMMARY (Stacking, RF+XGB+LR-meta, no SMOTE) ====
+In-region  F1m=0.6408 kappa=0.5784 wF1=0.6945 Xent=5.0102
+Spatial    F1m=0.5658 kappa=0.5004 wF1=0.6818 Xent=5.1324
+Delta (ST - in-region) F1m = -0.0749
+[done] stacking fill_self_median
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  field-level feature cols: 170; train fields=2653, test fields=830
+  using Optuna-tuned XGB params
+Training stacked ensemble (no SMOTE)...
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6408 wF1=0.6945 kappa=0.5784 acc=0.6892 Xent=5.0102 n=830
+Loading holdout field features...
+  saved 2415 field predictions -> experiments/missingness/fill_sweep/predictions/stacking_fill_train_mean.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5677 wF1=0.6824 kappa=0.5015 acc=0.6820 Xent=5.1258 n=2415
+
+==== SUMMARY (Stacking, RF+XGB+LR-meta, no SMOTE) ====
+In-region  F1m=0.6408 kappa=0.5784 wF1=0.6945 Xent=5.0102
+Spatial    F1m=0.5677 kappa=0.5015 wF1=0.6824 Xent=5.1258
+Delta (ST - in-region) F1m = -0.0731
+[done] stacking fill_train_mean
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  field-level feature cols: 170; train fields=2653, test fields=830
+  using Optuna-tuned XGB params
+Training stacked ensemble (no SMOTE)...
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6408 wF1=0.6945 kappa=0.5784 acc=0.6892 Xent=5.0102 n=830
+Loading holdout field features...
+  saved 2415 field predictions -> experiments/missingness/fill_sweep/predictions/stacking_fill_interp.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5730 wF1=0.6857 kappa=0.5070 acc=0.6857 Xent=5.0657 n=2415
+
+==== SUMMARY (Stacking, RF+XGB+LR-meta, no SMOTE) ====
+In-region  F1m=0.6408 kappa=0.5784 wF1=0.6945 Xent=5.0102
+Spatial    F1m=0.5730 kappa=0.5070 wF1=0.6857 Xent=5.0657
+Delta (ST - in-region) F1m = -0.0677
+[done] stacking fill_interp
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  feature cols: 168
+Training RF/XGB/LGBM...
+  RF done
+  XGB done
+  LGBM done
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6501 wF1=0.7193 kappa=0.6273 acc=0.7349 Xent=4.2723 n=830
+Assembling holdout pixel features...
+  holdout shape: (3409489, 171), fields: 2415
+  saved 2415 field predictions -> experiments/missingness/fill_sweep/predictions/voting_fill_zero.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.4881 wF1=0.5315 kappa=0.2737 acc=0.5014 Xent=8.0357 n=2415
+
+==== SUMMARY (Voting hybrid) ====
+In-region  F1m=0.6501 kappa=0.6273 wF1=0.7193 Xent=4.2723
+Spatial    F1m=0.4881 kappa=0.2737 wF1=0.5315 Xent=8.0357
+Delta (ST - in-region) F1m = -0.1620
+[done] voting fill_zero
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  feature cols: 168
+Training RF/XGB/LGBM...
+  RF done
+  XGB done
+  LGBM done
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6501 wF1=0.7193 kappa=0.6273 acc=0.7349 Xent=4.2723 n=830
+Assembling holdout pixel features...
+  holdout shape: (3409489, 171), fields: 2415
+  saved 2415 field predictions -> experiments/missingness/fill_sweep/predictions/voting_fill_self_median.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5687 wF1=0.6723 kappa=0.5079 acc=0.7135 Xent=4.6185 n=2415
+
+==== SUMMARY (Voting hybrid) ====
+In-region  F1m=0.6501 kappa=0.6273 wF1=0.7193 Xent=4.2723
+Spatial    F1m=0.5687 kappa=0.5079 wF1=0.6723 Xent=4.6185
+Delta (ST - in-region) F1m = -0.0814
+[done] voting fill_self_median
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  feature cols: 168
+Training RF/XGB/LGBM...
+  RF done
+  XGB done
+  LGBM done
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6501 wF1=0.7193 kappa=0.6273 acc=0.7349 Xent=4.2723 n=830
+Assembling holdout pixel features...
+  holdout shape: (3409489, 171), fields: 2415
+  saved 2415 field predictions -> experiments/missingness/fill_sweep/predictions/voting_fill_train_mean.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5686 wF1=0.6719 kappa=0.5067 acc=0.7118 Xent=4.6452 n=2415
+
+==== SUMMARY (Voting hybrid) ====
+In-region  F1m=0.6501 kappa=0.6273 wF1=0.7193 Xent=4.2723
+Spatial    F1m=0.5686 kappa=0.5067 wF1=0.6719 Xent=4.6452
+Delta (ST - in-region) F1m = -0.0815
+[done] voting fill_train_mean
+Loading training data...
+  classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+  feature cols: 168
+Training RF/XGB/LGBM...
+  RF done
+  XGB done
+  LGBM done
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[IN-REGION] F1m=0.6501 wF1=0.7193 kappa=0.6273 acc=0.7349 Xent=4.2723 n=830
+Assembling holdout pixel features...
+  holdout shape: (3409489, 171), fields: 2415
+  saved 2415 field predictions -> experiments/missingness/fill_sweep/predictions/voting_fill_interp.csv
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/metrics/_classification.py:2956: UserWarning: The y_pred values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+[SPATIAL-TRANSFER] F1m=0.5704 wF1=0.6716 kappa=0.5076 acc=0.7135 Xent=4.6185 n=2415
+
+==== SUMMARY (Voting hybrid) ====
+In-region  F1m=0.6501 kappa=0.6273 wF1=0.7193 Xent=4.2723
+Spatial    F1m=0.5704 kappa=0.5076 wF1=0.6716 Xent=4.6185
+Delta (ST - in-region) F1m = -0.0797
+[done] voting fill_interp
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator SimpleImputer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+=== TabNet Field-Level (xr_fresh) Inference ===
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+Feature columns: 170
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_zero.parquet
+Shape: (2415, 176), Fields: 2415
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+
+Loading models...
+  Loaded: tabnet_field_seed_42.zip
+  Loaded: tabnet_field_seed_101.zip
+  Loaded: tabnet_field_seed_202.zip
+  Loaded: tabnet_field_seed_303.zip
+  Loaded: tabnet_field_seed_404.zip
+
+Running inference...
+  Model 1/5 complete
+  Model 2/5 complete
+  Model 3/5 complete
+  Model 4/5 complete
+  Model 5/5 complete
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tabnet_field_fill_zero.csv
+
+crop_name
+Lucerne/Medics         1194
+Small grain grazing     425
+Wheat                   364
+Barley                  266
+Canola                  166
+Name: count, dtype: int64
+[done] tabnet_field fill_zero -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tabnet_field_fill_zero.csv
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator SimpleImputer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+=== TabNet Field-Level (xr_fresh) Inference ===
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+Feature columns: 170
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_self_median.parquet
+Shape: (2415, 176), Fields: 2415
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+
+Loading models...
+  Loaded: tabnet_field_seed_42.zip
+  Loaded: tabnet_field_seed_101.zip
+  Loaded: tabnet_field_seed_202.zip
+  Loaded: tabnet_field_seed_303.zip
+  Loaded: tabnet_field_seed_404.zip
+
+Running inference...
+  Model 1/5 complete
+  Model 2/5 complete
+  Model 3/5 complete
+  Model 4/5 complete
+  Model 5/5 complete
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tabnet_field_fill_self_median.csv
+
+crop_name
+Lucerne/Medics         1090
+Wheat                   498
+Small grain grazing     423
+Barley                  270
+Canola                  134
+Name: count, dtype: int64
+[done] tabnet_field fill_self_median -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tabnet_field_fill_self_median.csv
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator SimpleImputer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+=== TabNet Field-Level (xr_fresh) Inference ===
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+Feature columns: 170
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_train_mean.parquet
+Shape: (2415, 176), Fields: 2415
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+
+Loading models...
+  Loaded: tabnet_field_seed_42.zip
+  Loaded: tabnet_field_seed_101.zip
+  Loaded: tabnet_field_seed_202.zip
+  Loaded: tabnet_field_seed_303.zip
+  Loaded: tabnet_field_seed_404.zip
+
+Running inference...
+  Model 1/5 complete
+  Model 2/5 complete
+  Model 3/5 complete
+  Model 4/5 complete
+  Model 5/5 complete
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tabnet_field_fill_train_mean.csv
+
+crop_name
+Lucerne/Medics         1031
+Wheat                   511
+Small grain grazing     455
+Barley                  284
+Canola                  134
+Name: count, dtype: int64
+[done] tabnet_field fill_train_mean -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tabnet_field_fill_train_mean.csv
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator SimpleImputer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/base.py:463: InconsistentVersionWarning: Trying to unpickle estimator LabelEncoder from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+=== TabNet Field-Level (xr_fresh) Inference ===
+Classes: ['Barley', 'Canola', 'Lucerne/Medics', 'Small grain grazing', 'Wheat']
+Feature columns: 170
+
+Loading test data: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/data/combined_test_features_fill_interp.parquet
+Shape: (2415, 176), Fields: 2415
+  Adding 2 missing columns (zeros)
+  Dropping 6 extra columns
+
+Loading models...
+  Loaded: tabnet_field_seed_42.zip
+  Loaded: tabnet_field_seed_101.zip
+  Loaded: tabnet_field_seed_202.zip
+  Loaded: tabnet_field_seed_303.zip
+  Loaded: tabnet_field_seed_404.zip
+
+Running inference...
+  Model 1/5 complete
+  Model 2/5 complete
+  Model 3/5 complete
+  Model 4/5 complete
+  Model 5/5 complete
+
+Saved: /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tabnet_field_fill_interp.csv
+
+crop_name
+Lucerne/Medics         1270
+Wheat                   446
+Small grain grazing     331
+Barley                  226
+Canola                  142
+Name: count, dtype: int64
+[done] tabnet_field fill_interp -> /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/predictions/tabnet_field_fill_interp.csv
+CLASSICAL DONE Wed Oct 21 02:06:49 PM EDT 2026
