@@ -20,6 +20,7 @@ from collections import Counter
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(SCRIPT_DIR, "..", "deep_learn", "src"))
 from config import MERGED_DL_TEST_PATH, MODEL_DIR
+from missing import fill_missing  # noqa: E402
 
 # Input
 TEST_PARQUET = MERGED_DL_TEST_PATH
@@ -89,7 +90,7 @@ def load_test_data():
     # Drop columns that are entirely NaN
     feature_cols = [col for col in feature_cols if not df[col].isna().all()]
     # Fill remaining NaN with 0
-    df[feature_cols] = df[feature_cols].fillna(0)
+    df[feature_cols] = fill_missing(df, feature_cols, published="zero")  # see missing.py
 
     print(f"Feature columns: {len(feature_cols)}")
 

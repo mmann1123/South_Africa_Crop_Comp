@@ -23,6 +23,7 @@ from joblib import load
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(SCRIPT_DIR, "..", "deep_learn", "src"))
 from config import MERGED_DL_TEST_PATH, TABNET_DIR
+from missing import fill_missing  # noqa: E402
 
 # Input
 TEST_PARQUET = MERGED_DL_TEST_PATH
@@ -63,8 +64,7 @@ def load_test_data():
 
     # Fill NaN with median, then fill remaining NaN with 0 (match training)
     present_numeric = [c for c in numeric_cols if c in df.columns]
-    df[present_numeric] = df[present_numeric].fillna(df[present_numeric].median())
-    df[present_numeric] = df[present_numeric].fillna(0)
+    df[present_numeric] = fill_missing(df, present_numeric, published="self_median")  # see missing.py
 
     # Use the TRAINING scaler (transform only, not fit_transform)
     df[numeric_cols] = scaler.transform(df[numeric_cols])

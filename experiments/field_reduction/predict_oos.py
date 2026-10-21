@@ -29,6 +29,7 @@ from experiment_config import (
     MODELS_DIR,
     PREDICTIONS_DIR,
 )
+from missing import fill_missing  # noqa: E402  (deep_learn/src, via experiment_config)
 
 sys.stdout.reconfigure(line_buffering=True)
 
@@ -74,8 +75,7 @@ def predict_tabnet(model_dir, output_csv, seeds=None):
             df[col] = 0
 
     present_numeric = [c for c in numeric_cols if c in df.columns]
-    df[present_numeric] = df[present_numeric].fillna(df[present_numeric].median())
-    df[present_numeric] = df[present_numeric].fillna(0)
+    df[present_numeric] = fill_missing(df, present_numeric, published="self_median")  # see missing.py
     df[numeric_cols] = scaler.transform(df[numeric_cols])
     df[numeric_cols] = df[numeric_cols].replace([np.inf, -np.inf], 0).fillna(0)
 
@@ -174,7 +174,7 @@ def predict_ltae_field(model_dir, output_csv):
     for col in feature_cols:
         if col not in df.columns:
             df[col] = 0
-    df[feature_cols] = df[feature_cols].fillna(0)
+    df[feature_cols] = fill_missing(df, feature_cols, published="zero")  # see missing.py
 
     # Aggregate to field level
     df_field = df.groupby('fid')[feature_cols].mean().reset_index()
@@ -232,7 +232,7 @@ def predict_ltae_pixel(model_dir, output_csv):
     for col in feature_cols:
         if col not in df.columns:
             df[col] = 0
-    df[feature_cols] = df[feature_cols].fillna(0)
+    df[feature_cols] = fill_missing(df, feature_cols, published="zero")  # see missing.py
 
     X = scaler.transform(df[feature_cols].values).astype(np.float32)
     X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
@@ -301,7 +301,7 @@ def predict_ltae_sparse_pixel(model_dir, output_csv):
     for col in feature_cols:
         if col not in df.columns:
             df[col] = 0
-    df[feature_cols] = df[feature_cols].fillna(0)
+    df[feature_cols] = fill_missing(df, feature_cols, published="zero")  # see missing.py
 
     X = scaler.transform(df[feature_cols].values).astype(np.float32)
     X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
@@ -366,7 +366,7 @@ def predict_ltae_sparse_field(model_dir, output_csv, seeds=None):
     for col in feature_cols:
         if col not in df.columns:
             df[col] = 0
-    df[feature_cols] = df[feature_cols].fillna(0)
+    df[feature_cols] = fill_missing(df, feature_cols, published="zero")  # see missing.py
 
     # Aggregate to field level
     df_field = df.groupby('fid')[feature_cols].mean().reset_index()
@@ -454,7 +454,7 @@ def predict_cnn_bilstm_field(model_dir, output_csv, seeds=None):
     for col in feature_cols:
         if col not in df.columns:
             df[col] = 0
-    df[feature_cols] = df[feature_cols].fillna(0)
+    df[feature_cols] = fill_missing(df, feature_cols, published="zero")  # see missing.py
 
     # Aggregate to field level (mean), raw reflectance (no scaling)
     df_field = df.groupby("fid")[feature_cols].mean().reset_index()
@@ -518,7 +518,7 @@ def predict_ltae_lr_stack(model_dir, output_csv):
     for col in feature_cols:
         if col not in df.columns:
             df[col] = 0
-    df[feature_cols] = df[feature_cols].fillna(0)
+    df[feature_cols] = fill_missing(df, feature_cols, published="zero")  # see missing.py
 
     X = ltae_scaler.transform(df[feature_cols].values).astype(np.float32)
     X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
@@ -593,7 +593,7 @@ def predict_fasttabnet_pixel(model_dir, output_csv):
     for col in feature_cols:
         if col not in df.columns:
             df[col] = 0
-    df[feature_cols] = df[feature_cols].fillna(0)
+    df[feature_cols] = fill_missing(df, feature_cols, published="zero")  # see missing.py
 
     X = scaler.transform(df[feature_cols].values).astype(np.float32)
     X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
@@ -680,7 +680,7 @@ def predict_lassonet_pixel(model_dir, output_csv):
     for col in feature_cols:
         if col not in df.columns:
             df[col] = 0
-    df[feature_cols] = df[feature_cols].fillna(0)
+    df[feature_cols] = fill_missing(df, feature_cols, published="zero")  # see missing.py
 
     X = scaler.transform(df[feature_cols].values).astype(np.float32)
     X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)

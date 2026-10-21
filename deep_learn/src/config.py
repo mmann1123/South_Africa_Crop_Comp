@@ -24,6 +24,12 @@ TEST_LABELS_DIR = "/mnt/bigdrive/Dropbox/South_Africa_data/Projects/Agriculture_
 # Generated data paths (centralized in data/)
 MERGED_DL_PATH = os.path.join(DATA_OUTPUT_DIR, "merged_dl_train.parquet")           # training only
 MERGED_DL_TEST_PATH = os.path.join(DATA_OUTPUT_DIR, "merged_dl_test.parquet")       # test/inference only
+
+# How inference fills missing raw band x month values (see missing.py). "published" keeps each
+# script's original rule (0 for raw-sequence models, holdout medians for pixel TabNet) so the
+# published results reproduce; override per run with the HOLDOUT_FILL environment variable,
+# e.g. HOLDOUT_FILL=train_median.
+HOLDOUT_FILL = "published"
 FINAL_DATA_PATH = os.path.join(DATA_OUTPUT_DIR, "final_data.parquet")               # training only (xr_fresh features)
 
 # Patch-level data

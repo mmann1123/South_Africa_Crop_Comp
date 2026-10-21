@@ -1,0 +1,65 @@
+%% Missingness-shift manuscript (successor to the withdrawn CEA submission,
+%% git tags cea-submitted / cea-revision1-final). Target journal not yet chosen.
+\documentclass[preprint,authoryear]{elsarticle}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lineno}
+\linenumbers
+
+\begin{document}
+
+\begin{frontmatter}
+\title{Working title: Cloud gaps at prediction time can masquerade as transfer failure in crop classification}
+
+\author[gwgeo]{Michael L. Mann\corref{cor1}}
+\ead{mmann1123@email.gwu.edu}
+\author[gwds]{Sairam Venkatachalam}
+\author[gwds]{Disha Kacha}
+\author[gwds]{Devarsh Sheth}
+\author[gwgeo]{Ryan Engstrom}
+\author[gwds]{Amir Jafari}
+\affiliation[gwgeo]{organization={Department of Geography \& Environment, The George Washington University},
+  city={Washington}, state={DC}, postcode={20052}, country={USA}}
+\affiliation[gwds]{organization={Data Science Program, The George Washington University},
+  city={Washington}, state={DC}, postcode={20052}, country={USA}}
+\cortext[cor1]{Corresponding author.}
+
+\begin{abstract}
+% To write.
+\end{abstract}
+\end{frontmatter}
+
+\section{Introduction}
+% Missing observations in the target region or season are routine (cloud); evaluations of
+% transfer rarely check whether missingness differs between training and target. Missingness
+% shift (Zhou et al. 2023) is named in ML but not connected to SITS crop mapping.
+
+\section{Data}
+% Western Cape, AI4FoodSecurity; per-month missing-data table, training tiles vs holdout.
+
+\section{Methods}
+% 27-model benchmark; fill operators per model (fill sheet); consistent-fill re-run;
+% fill-value sweep; month dropout, indicator channel, sparse gate as remedies.
+
+\section{Results}
+% 1. The artifact: error map vs September gap; observed vs missing field subsets.
+% 2. Before/after ranking; rank stability.
+% 3. Sensitivity to fill value, by model family.
+% 4. Remedies compared.
+% 5. Learning curves on the corrected holdout.
+
+\section{Discussion}
+
+\section{Conclusion}
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{missingness}
+\end{document}

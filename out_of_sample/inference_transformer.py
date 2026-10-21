@@ -28,6 +28,7 @@ from joblib import load
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(SCRIPT_DIR, "..", "deep_learn", "src"))
 from config import MERGED_DL_TEST_PATH, MODEL_DIR
+from missing import fill_missing  # noqa: E402
 
 TEST_PARQUET = MERGED_DL_TEST_PATH
 OUTPUT_CSV = os.path.join(SCRIPT_DIR, "predictions_transformer.csv")
@@ -135,7 +136,7 @@ def main():
         if col not in df.columns:
             print(f"  Warning: missing column '{col}', filling with 0")
             df[col] = 0
-    df[feature_cols] = df[feature_cols].fillna(0)
+    df[feature_cols] = fill_missing(df, feature_cols, published="zero")  # see missing.py
 
     X = scaler.transform(df[feature_cols].values).astype(np.float32)
     X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)

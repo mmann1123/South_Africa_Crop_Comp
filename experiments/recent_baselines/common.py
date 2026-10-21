@@ -32,6 +32,7 @@ from experiment_config import (  # noqa: E402
 )
 from models_arch import get_chrono_feature_cols, T_SEQ, N_BANDS  # noqa: E402
 from subsample import get_fid_split_dl, subsample_train_fids  # noqa: E402
+from missing import fill_missing  # noqa: E402  (deep_learn/src, via experiment_config)
 
 MODELS_DIR = os.path.join(HERE, "models")
 RESULTS_DIR = os.path.join(HERE, "results")
@@ -115,7 +116,7 @@ def load_holdout(level, feature_cols, scaler):
     for c in feature_cols:
         if c not in df.columns:
             df[c] = 0
-    df[feature_cols] = df[feature_cols].fillna(0)
+    df[feature_cols] = fill_missing(df, feature_cols, published="zero")  # see missing.py
     if level == "field":
         df = df.groupby("fid")[feature_cols].mean().reset_index()
     X = scaler.transform(df[feature_cols].values).astype(np.float32)
