@@ -46,6 +46,7 @@ sys.path.insert(0, os.path.join(REPO, "deep_learn", "src"))
 sys.path.insert(0, os.path.join(REPO, "experiments", "field_reduction"))
 from config import MERGED_DL_PATH, MERGED_DL_TEST_PATH  # noqa: E402
 from models_arch import sparsemax  # noqa: E402
+from month_dropout import MonthDropout, scaled_zero_fill  # noqa: E402
 
 sys.stdout.reconfigure(line_buffering=True)
 device = torch.device("cuda")
@@ -203,6 +204,12 @@ class FocalLoss(nn.Module):
         return (self.alpha[y] * (1 - torch.exp(-ce)) ** self.gamma * ce).mean()
 
 
+def gate_of(model):
+    """The GateBlock inside a (possibly MonthDropout-wrapped) model, or None."""
+    inner = getattr(model, "net", model) if isinstance(model, MonthDropout) else model
+    return getattr(inner, "gate", None)
+
+
 @torch.no_grad()
 def logits_of(model, X, bs, stats=False):
     model.eval()
@@ -211,7 +218,7 @@ def logits_of(model, X, bs, stats=False):
         with torch.amp.autocast("cuda"):
             out.append(model(xb.to(device, non_blocking=True)).float().cpu())
         if stats:
-            nz.append((model.gate.last_masks > 0).float().sum(-1).mean().item())
+            nz.append((gate_of(model).last_masks > 0).float().sum(-1).mean().item())
     return torch.cat(out), (float(np.mean(nz)) if stats else None)
 
 
@@ -223,7 +230,10 @@ def field_vote(fids, preds):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--backbone", required=True, choices=list(RECIPE))
-    ap.add_argument("--gate", required=True, choices=["sparsemax", "softmax"])
+    ap.add_argument("--gate", required=True, choices=["sparsemax", "softmax", "none"],
+                    help="none = the published dense backbone (6 input channels, no gate)")
+    ap.add_argument("--month-dropout", type=float, default=0.0,
+                    help="training-time month dropout rate (0 = off); see month_dropout.py")
     ap.add_argument("--seeds", type=int, nargs="+")
     ap.add_argument("--max-epochs", type=int)
     ap.add_argument("--tag", default="")
@@ -231,7 +241,8 @@ def main():
     r = dict(RECIPE[a.backbone])
     seeds = a.seeds or r["seeds"]
     epochs = a.max_epochs or r["epochs"]
-    name = f"{a.backbone}_{a.gate}" + (f"_{a.tag}" if a.tag else "")
+    name = (f"{a.backbone}_{a.gate}" + (f"_md{a.month_dropout:g}" if a.month_dropout > 0 else "")
+            + (f"_{a.tag}" if a.tag else ""))
     mdir, pdir = os.path.join(HERE, "models", name), os.path.join(HERE, "predictions")
     os.makedirs(mdir, exist_ok=True)
     os.makedirs(pdir, exist_ok=True)
@@ -247,7 +258,14 @@ def main():
     test_logits, hold_logits, info = [], {k: [] for k in holdouts}, []
     for seed in seeds:
         torch.manual_seed(seed); np.random.seed(seed); random.seed(seed)
-        model = Gated(a.backbone, a.gate, nc).to(device)
+        if a.gate == "none":
+            model = (TempCNN if a.backbone == "tempcnn" else CNNBiLSTM)(C, nc)
+        else:
+            model = Gated(a.backbone, a.gate, nc)
+        if a.month_dropout > 0:
+            fill = scaled_zero_fill(d["scaler"], len(d["cols"]), lambda z: to_seq(z, r["layout"]))
+            model = MonthDropout(model, a.month_dropout, fill)
+        model = model.to(device)
         if r["opt"] == "adamw_cosine":
             opt = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
             sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=r["epochs"], eta_min=1e-6)
@@ -287,7 +305,7 @@ def main():
         test_logits.append(tlog)
         nz = None
         for k, (Xh, _) in holdouts.items():
-            hlog, s = logits_of(model, Xh, r["batch"], stats=(k == "trainmed"))
+            hlog, s = logits_of(model, Xh, r["batch"], stats=(k == "trainmed" and gate_of(model) is not None))
             hold_logits[k].append(hlog)
             nz = s if s is not None else nz
         info.append({"seed": seed, "best_val_f1m": round(best, 4), "epochs": ep,
@@ -305,7 +323,8 @@ def main():
         pd.DataFrame({"fid": fi, "crop_name": d["le"].inverse_transform(fp)}).to_csv(
             os.path.join(pdir, f"{name}_{k}.csv"), index=False)
     joblib.dump({"scaler": d["scaler"], "le": d["le"], "cols": d["cols"]}, os.path.join(mdir, "artifacts.joblib"))
-    json.dump({"backbone": a.backbone, "gate": a.gate, "recipe": r, "seeds": seeds,
+    json.dump({"backbone": a.backbone, "gate": a.gate, "month_dropout": a.month_dropout,
+               "recipe": r, "seeds": seeds,
                "in_region_field": {k: round(v, 4) for k, v in in_region.items()}, "per_seed": info},
               open(os.path.join(mdir, "metadata.json"), "w"), indent=2)
     print(f"=== {name} in-region (field): {in_region}", flush=True)

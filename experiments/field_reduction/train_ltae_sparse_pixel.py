@@ -30,6 +30,7 @@ from models_arch import (
     T_SEQ, N_BANDS,
 )
 from subsample import get_fid_split_dl, subsample_train_fids
+from month_dropout import MonthDropout, scaled_zero_fill  # deep_learn/src, via experiment_config
 
 sys.stdout.reconfigure(line_buffering=True)
 
@@ -51,6 +52,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--fraction', type=float, required=True)
     parser.add_argument('--output-dir', type=str, required=True)
+    parser.add_argument('--month-dropout', type=float, default=0.0,
+                        help='training-time month dropout rate (0 = off, the published setting)')
     # Sensitivity-sweep options (R1-2). Defaults reproduce the published L-TAE-S.
     parser.add_argument('--gamma', type=float, default=GAMMA)
     parser.add_argument('--n-head', type=int, default=16)
@@ -135,6 +138,9 @@ def main():
             dropout=0.3, num_classes=num_classes,
             gamma=args.gamma, time_varying_gate=TIME_VARYING_GATE,
         ).to(device)
+        if args.month_dropout > 0:  # wraps only when on, so the default run is unchanged
+            fill = scaled_zero_fill(scaler, len(feature_cols), lambda z: z.reshape(-1, T_SEQ, N_BANDS))
+            model = MonthDropout(model, args.month_dropout, fill).to(device)
         optimizer = torch.optim.AdamW(model.parameters(), lr=LR, weight_decay=1e-4)
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=N_EPOCHS, eta_min=1e-6)
         scaler_amp = torch.amp.GradScaler("cuda")

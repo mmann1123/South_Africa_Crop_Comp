@@ -23,15 +23,23 @@ with the date and the files or commits that close them.
 - [x] **Imputation-free check** (2026-10-15): published predictions scored on the 1,352
   September-observed vs 1,063 September-missing fields
   (`experiments/holdout_fill_check/results/sept_observed_subset.csv`).
-  - [ ] Add paired bootstrap intervals per subset and the number of fields that change class.
+  - [x] Bootstrap intervals per subset (2026-10-21; `experiments/missingness/subset_bootstrap.py`,
+    `results/subset_bootstrap.csv`). Published all-field ranking correlates 0.86 with the
+    September-missing ranking and 0.33 with the September-observed one; observed vs missing −0.08.
+    Changed-field counts per fill are in `fill_sweep/results/zero_vs_median.csv`.
   - [ ] Put it in the main text next to the before/after ranking.
-- [ ] **Per-model fill sheet** for the supplement (no compute). One row per model: fill value
+- [x] **Per-model fill sheet** for the supplement (2026-10-21; `experiments/missingness/fill_sheet.py`,
+  `results/fill_sheet.md` and `.csv`). One row per model: fill value
   used, source of the fill statistic (training vs holdout), fill before or after scaling,
   retrained vs re-scored, and whether the re-run reproduces the published predictions. Sources:
   `experiments/holdout_fill_check/README.md`, `results/fill_comparison.csv`. Template:
   Kapoor & Narayanan's model info sheet.
 - [ ] **Name and document the missingness shift** (no compute).
-  - [ ] Per-month missing-data table, training tiles vs holdout, pixel and field level.
+  - [x] Per-month missing-data table (2026-10-21; `experiments/missingness/missing_data_table.py`,
+    `results/missing_data_by_month.csv`). Holdout September: 41.5% of pixels (B2), 40.2% of
+    fields fully and 44.0% partly missing; 0.96% of pixels miss only some bands; training tiles
+    miss nothing but May (missing everywhere). Use 40.2% / 44.0% of fields, not the 39.3% quoted
+    earlier (that required all six bands missing).
   - [ ] State the fill rule in the Data section.
   - [ ] Overlay the September gap on the holdout error map (the old Sec. 4.3 "south-central
     error zone" is probably its footprint); error maps in `out_of_sample/scoring_results/` and
