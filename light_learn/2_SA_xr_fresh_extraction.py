@@ -21,6 +21,10 @@ logging.basicConfig(
 complete_times_series_list = {
     "abs_energy": [{}],
     "absolute_sum_of_changes": [{}],
+    # Known bug, kept so the published features stay reproducible: xr_fresh registers this
+    # function as "autocorrelation", so function_mapping.get("autocorr") returns None and the
+    # loop below reuses the previous func_instance. The three *_autocorr_lag_k features are
+    # therefore copies of absolute_sum_of_changes. See experiments/holdout_fill_check/README.md.
     "autocorr": [{"lag": 1}, {"lag": 2}, {"lag": 3}],
     "count_above_mean": [{}],
     "count_below_mean": [{}],

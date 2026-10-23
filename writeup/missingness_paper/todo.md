@@ -74,10 +74,15 @@ with the date and the files or commits that close them.
 
 - [ ] Re-run the patch CNNs (3D, multi-channel 2D) with a consistent fill; their patches come
   from a separate pipeline (`out_of_sample/create_test_patches.py`) and still use zero fill.
-- [ ] Fix or document the xr_fresh `autocorr_lag_k` bug (three features are copies of
-  `absolute_sum_of_changes`; `light_learn/2_SA_xr_fresh_extraction.py`).
+- [x] Fix or document the xr_fresh `autocorr_lag_k` bug (three features are copies of
+  `absolute_sum_of_changes`; `light_learn/2_SA_xr_fresh_extraction.py`). Documented at the source
+  (2026-10-23; the key should be `autocorrelation`); not fixed, to keep the published features
+  reproducible. 174 features = 6 bands x 29 statistics; the 18 `autocorr_lag_k` columns duplicate
+  `absolute_sum_of_changes`, so 156 are distinct. The new paper must say so, and must not list
+  autocorrelation among the features (the CEA draft's Sec. 3 does, `cea-article.tex:85`).
 - [ ] Note the pixel TabNet checkpoint mismatch (published predictions predate the saved
-  checkpoints; 221 of 2,415 fields differ, 0.603 vs 0.609).
+  checkpoints; 221 of 2,415 fields differ, 0.603 vs 0.609). Recorded in
+  `experiments/holdout_fill_check/README.md`; still to state in the paper's methods.
 - [ ] Do not carry over the Belgiu 2016 and Obadić 2022 citations as used in the CEA draft
   (both mis-cited; see `writeup/literature/0_findings_summary.md`, Section 6).
 - [ ] Add the new papers to `missingness.bib` and to `writeup/literature/references.bib`
