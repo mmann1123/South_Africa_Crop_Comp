@@ -1,0 +1,31 @@
+model,inputs,spec,term,coef,ci_lo,ci_hi,p
+L-TAE,published inputs,distance only,I(dist_km / 10),-0.3245,-0.4527,-0.1963,0.0
+L-TAE,published inputs,distance + September,I(dist_km / 10),-0.0089,-0.1554,0.1376,0.9053
+L-TAE,published inputs,distance + September,sept_missing,-1.4964,-1.7015,-1.2914,0.0
+L-TAE,training-median fill,distance only,I(dist_km / 10),-0.1202,-0.2772,0.0369,0.1336
+L-TAE,training-median fill,distance + September,I(dist_km / 10),-0.1253,-0.2904,0.0398,0.1368
+L-TAE,training-median fill,distance + September,sept_missing,0.0235,-0.2123,0.2594,0.8449
+CNN-BiLSTM,published inputs,distance only,I(dist_km / 10),-0.3137,-0.4418,-0.1857,0.0
+CNN-BiLSTM,published inputs,distance + September,I(dist_km / 10),0.102,-0.0509,0.255,0.191
+CNN-BiLSTM,published inputs,distance + September,sept_missing,-1.9356,-2.1561,-1.7151,0.0
+CNN-BiLSTM,training-median fill,distance only,I(dist_km / 10),-0.0919,-0.2477,0.0638,0.2474
+CNN-BiLSTM,training-median fill,distance + September,I(dist_km / 10),-0.06,-0.2252,0.1052,0.4763
+CNN-BiLSTM,training-median fill,distance + September,sept_missing,-0.1445,-0.3792,0.0902,0.2276
+TempCNN,published inputs,distance only,I(dist_km / 10),-0.3074,-0.4597,-0.1551,0.0001
+TempCNN,published inputs,distance + September,I(dist_km / 10),-0.1129,-0.2782,0.0524,0.1807
+TempCNN,published inputs,distance + September,sept_missing,-0.9613,-1.2041,-0.7185,0.0
+TempCNN,training-median fill,distance only,I(dist_km / 10),-0.0688,-0.224,0.0864,0.3848
+TempCNN,training-median fill,distance + September,I(dist_km / 10),-0.0425,-0.2071,0.122,0.6123
+TempCNN,training-median fill,distance + September,sept_missing,-0.1179,-0.352,0.1161,0.3233
+TabNet (pixel),published inputs,distance only,I(dist_km / 10),0.0689,-0.0982,0.236,0.4192
+TabNet (pixel),published inputs,distance + September,I(dist_km / 10),0.1205,-0.0581,0.2991,0.1861
+TabNet (pixel),published inputs,distance + September,sept_missing,-0.2294,-0.4905,0.0317,0.0851
+TabNet (pixel),training-median fill,distance only,I(dist_km / 10),0.0514,-0.1016,0.2044,0.5103
+TabNet (pixel),training-median fill,distance + September,I(dist_km / 10),0.1362,-0.0293,0.3017,0.1068
+TabNet (pixel),training-median fill,distance + September,sept_missing,-0.3628,-0.598,-0.1276,0.0025
+XGBoost (field),published inputs,distance only,I(dist_km / 10),-0.2653,-0.4299,-0.1007,0.0016
+XGBoost (field),published inputs,distance + September,I(dist_km / 10),-0.1258,-0.301,0.0494,0.1592
+XGBoost (field),published inputs,distance + September,sept_missing,-0.6604,-0.9174,-0.4033,0.0
+XGBoost (field),training-median fill,distance only,I(dist_km / 10),-0.0727,-0.2184,0.0731,0.3284
+XGBoost (field),training-median fill,distance + September,I(dist_km / 10),0.0483,-0.1099,0.2065,0.5497
+XGBoost (field),training-median fill,distance + September,sept_missing,-0.5352,-0.7578,-0.3125,0.0

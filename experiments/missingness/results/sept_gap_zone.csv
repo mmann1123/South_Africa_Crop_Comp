@@ -1,0 +1,41 @@
+model,inputs,zone_8_16km,sept_missing_any,n_fields,pct_correct
+L-TAE,published inputs,False,False,1136,70.6
+L-TAE,published inputs,False,True,392,49.74
+L-TAE,published inputs,True,False,216,71.3
+L-TAE,published inputs,True,True,671,45.01
+L-TAE,training-median fill,False,False,1136,70.6
+L-TAE,training-median fill,False,True,392,81.89
+L-TAE,training-median fill,True,False,216,71.3
+L-TAE,training-median fill,True,True,671,75.56
+CNN-BiLSTM,published inputs,False,False,1136,72.27
+CNN-BiLSTM,published inputs,False,True,392,50.51
+CNN-BiLSTM,published inputs,True,False,216,71.3
+CNN-BiLSTM,published inputs,True,True,671,35.62
+CNN-BiLSTM,training-median fill,False,False,1136,72.27
+CNN-BiLSTM,training-median fill,False,True,392,80.1
+CNN-BiLSTM,training-median fill,True,False,216,71.3
+CNN-BiLSTM,training-median fill,True,True,671,74.52
+TempCNN,published inputs,False,False,1136,71.48
+TempCNN,published inputs,False,True,392,65.56
+TempCNN,published inputs,True,False,216,70.83
+TempCNN,published inputs,True,True,671,67.06
+TempCNN,training-median fill,False,False,1136,71.48
+TempCNN,training-median fill,False,True,392,81.63
+TempCNN,training-median fill,True,False,216,70.83
+TempCNN,training-median fill,True,True,671,74.22
+TabNet (pixel),published inputs,False,False,1136,70.33
+TabNet (pixel),published inputs,False,True,392,83.67
+TabNet (pixel),published inputs,True,False,216,68.06
+TabNet (pixel),published inputs,True,True,671,72.13
+TabNet (pixel),training-median fill,False,False,1136,70.33
+TabNet (pixel),training-median fill,False,True,392,79.85
+TabNet (pixel),training-median fill,True,False,216,68.06
+TabNet (pixel),training-median fill,True,True,671,69.6
+XGBoost (field),published inputs,False,False,1136,70.07
+XGBoost (field),published inputs,False,True,392,73.72
+XGBoost (field),published inputs,True,False,216,67.59
+XGBoost (field),published inputs,True,True,671,70.19
+XGBoost (field),training-median fill,False,False,1136,70.07
+XGBoost (field),training-median fill,False,True,392,76.02
+XGBoost (field),training-median fill,True,False,216,67.59
+XGBoost (field),training-median fill,True,True,671,66.17

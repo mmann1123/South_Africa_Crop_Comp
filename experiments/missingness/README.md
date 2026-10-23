@@ -68,3 +68,34 @@ different fields (deep x tree disagreement 0.32 vs 0.25 within deep), and mixing
 beats deep-5 by +0.032 [0.015, 0.049] and tree-5 by +0.033 [0.013, 0.053]. Mixing families is a
 hedge against missingness shift, not a gain in transfer, and it is a weaker hedge than month
 dropout (single dense models 0.653 to 0.657 under zero fill; `month_dropout/README.md`).
+
+## The September gap is the "south-central error zone" (2026-10-23)
+
+`sept_gap_map.py` overlays each holdout field's share of September-missing pixels on correct and
+incorrect fields (`figures/sept_gap_error_map.pdf`). The gap is a sharp-edged north-south strip
+(likely a scene or cloud-mask boundary) covering 76% of the fields in the 8 to 16 km zone that
+the CEA supplement described as a "south-central error zone", against 26% of fields elsewhere.
+
+Percent of fields correct, by zone and September status (`results/sept_gap_zone.csv`):
+
+| Model, inputs | outside zone, Sept observed | outside, Sept missing | inside, observed | inside, missing |
+|---|---|---|---|---|
+| L-TAE, published (zero) | 71 | 50 | 71 | 45 |
+| L-TAE, training median | 71 | 82 | 71 | 76 |
+| CNN-BiLSTM, published (zero) | 72 | 51 | 71 | 36 |
+| CNN-BiLSTM, training median | 72 | 80 | 71 | 75 |
+| TabNet (pixel), published | 70 | 84 | 68 | 72 |
+
+Inside the zone, fields with September observed are classified as well as anywhere else; the
+zone's errors are the September-missing fields. In a class-adjusted logit of field correctness
+(`results/sept_gap_logit.csv`), the distance effect under the published inputs (L-TAE −0.32,
+CNN-BiLSTM −0.31, TempCNN −0.31 log-odds per 10 km, all p < 0.001) vanishes once September-missing
+share enters the model (−0.01, +0.10, −0.11, all n.s.), and with a training-median fill there is
+no distance effect to explain. The supplement's reading ("local conditions within the tile",
+dense networks most affected) was this artifact. The raw September-missing fields look easier
+under a sensible fill because they differ in crop mix; the logit adjusts for class.
+
+Two residual effects under the training-median fill: a class-adjusted September penalty for
+field XGBoost (−0.54 [−0.76, −0.31]) and pixel TabNet (−0.36 [−0.60, −0.13]), but not for the
+dense networks (CIs span zero). A median fill removes information, so some penalty is expected;
+why it falls on the tabular models only is unexplained.

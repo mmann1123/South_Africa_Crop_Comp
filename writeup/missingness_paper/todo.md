@@ -40,9 +40,11 @@ with the date and the files or commits that close them.
     miss nothing but May (missing everywhere). Use 40.2% / 44.0% of fields, not the 39.3% quoted
     earlier (that required all six bands missing).
   - [ ] State the fill rule in the Data section.
-  - [ ] Overlay the September gap on the holdout error map (the old Sec. 4.3 "south-central
-    error zone" is probably its footprint); error maps in `out_of_sample/scoring_results/` and
-    `experiments/distance_decay/`.
+  - [x] Overlay the September gap on the holdout error map (2026-10-23;
+    `experiments/missingness/sept_gap_map.py`, `figures/sept_gap_error_map.pdf`). Confirmed: the
+    gap covers 76% of the 8 to 16 km zone's fields (26% elsewhere); September-observed fields in
+    the zone score like anywhere else; the published distance effect (about −0.31 log-odds per
+    10 km for L-TAE, CNN-BiLSTM, TempCNN) vanishes once September share is in the logit.
 - [x] **Fill-value sweep** (2026-10-21; `experiments/missingness/fill_sweep/`, README there).
   25 models x 5 fills, no retraining (about 4 h, not the 1 h first estimated). In-range fills are
   interchangeable (median per-model spread 0.014; ranking Spearman 0.89 to 0.97 with training
