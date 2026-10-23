@@ -60,8 +60,10 @@ with the date and the files or commits that close them.
 - [ ] **Missing-data indicator channel, or step deletion with day-of-year encoding** (about 10 to
   20 GPU hours). A "no imputation" row and a direct test of Zhou 2023 Proposition 1. The
   indicator arm can share runs with the month-dropout control.
-- [ ] **Tree + deep ensemble on the filled holdout** (under 1 hour): voting/stacking over
-  `experiments/holdout_fill_check/predictions/` (Shwartz-Ziv & Armon).
+- [x] **Tree + deep ensemble on the filled holdout** (2026-10-23; `experiments/missingness/ensemble.py`).
+  Training-median fill: mixed-10 vote 0.661 = deep-5 0.660 (n.s.); trees add nothing. Zero fill:
+  mixed-10 0.603 beats deep-5 and tree-5 by about +0.03 (significant), a hedge against the
+  mismatch but weaker than month dropout (0.65).
 - [ ] **Learning curves down to 5%, plus TabNet at 10 to 15%** (about 10 to 20 GPU hours) via
   `experiments/holdout_fill_check/run_sweep.py`. Locates the floor; 15 fields per class is noisy.
 - [ ] **Sparsity Normalization at September** (cheap; Yi 2020). Closest precedent found no gain.

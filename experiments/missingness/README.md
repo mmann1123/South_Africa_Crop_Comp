@@ -46,3 +46,25 @@ L-TAE-S inference under both settings must equal the saved re-analysis predictio
 4. Per-month missing-data table (training tiles vs holdout) and the September gap overlaid on the
    holdout error map.
 5. Gradient attribution at the September slot.
+
+## Tree + deep ensembles (2026-10-23)
+
+`ensemble.py`: hard majority vote over saved holdout predictions of five deep raw-sequence pixel
+models (CNN-BiLSTM, TempCNN, L-TAE, Transformer, TimesNet) and five xr_fresh tree models (XGBoost
+and LightGBM field; RF, LightGBM, XGBoost pixel). Members are whole families or every 3-member
+combination, and vote ties go to the higher published in-region F1m, so no holdout information
+enters the ensembles. "Zero" means the published inputs: zero-filled raw sequences for the deep
+models, NaN-aware xr_fresh features for the trees. Unit tests: `tests/test_ensemble_vote.py`.
+
+| Fill | deep-5 | tree-5 | mixed-10 | best single member |
+|---|---|---|---|---|
+| training median | 0.660 | 0.611 | 0.661 | 0.656 (CNN-BiLSTM) |
+| zero (published) | 0.572 | 0.570 | 0.603 | 0.582 (XGBoost field) |
+
+With a sensible fill, adding trees to the deep vote changes nothing (mixed minus deep +0.001,
+CI [−0.012, 0.014]), and among 3-member votes the deep-only triples are best (mean 0.659) while
+1 deep + 2 tree triples never beat their best member. Under zero fill the families fail on
+different fields (deep x tree disagreement 0.32 vs 0.25 within deep), and mixing helps: mixed-10
+beats deep-5 by +0.032 [0.015, 0.049] and tree-5 by +0.033 [0.013, 0.053]. Mixing families is a
+hedge against missingness shift, not a gain in transfer, and it is a weaker hedge than month
+dropout (single dense models 0.653 to 0.657 under zero fill; `month_dropout/README.md`).
