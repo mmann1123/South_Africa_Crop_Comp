@@ -1,0 +1,37 @@
+backbone,fill,contrast,delta,ci_lo,ci_hi,significant,a_only_right,b_only_right,mcnemar_p
+tempcnn,zero,dropout | dense,0.0853,0.0618,0.1092,True,209.0,87.0,0.0
+tempcnn,zero,dropout | sparse,0.0859,0.0628,0.1091,True,182.0,82.0,0.0
+tempcnn,zero,gate | no dropout,0.0007,-0.0121,0.0135,False,84.0,65.0,0.1401
+tempcnn,zero,gate | dropout,0.0013,-0.0137,0.0168,False,62.0,65.0,0.8592
+tempcnn,zero,interaction (dropout x gate),0.0006,-0.018,0.0196,False,,,
+tempcnn,zero,harness dense vs published dense,-0.0057,-0.0166,0.0049,False,77.0,59.0,0.1446
+tempcnn,train_median,dropout | dense,-0.0053,-0.0219,0.0112,False,106.0,82.0,0.0932
+tempcnn,train_median,dropout | sparse,-0.0014,-0.0164,0.0135,False,95.0,70.0,0.0614
+tempcnn,train_median,gate | no dropout,0.0013,-0.0128,0.0152,False,75.0,77.0,0.9354
+tempcnn,train_median,gate | dropout,0.0052,-0.0093,0.02,False,71.0,72.0,1.0
+tempcnn,train_median,interaction (dropout x gate),0.0039,-0.015,0.0229,False,,,
+tempcnn,train_median,harness dense vs published dense,-0.0019,-0.0113,0.0077,False,29.0,41.0,0.1882
+cnn_bilstm,zero,dropout | dense,0.1622,0.1367,0.1878,True,534.0,117.0,0.0
+cnn_bilstm,zero,dropout | sparse,0.0737,0.0515,0.0966,True,158.0,87.0,0.0
+cnn_bilstm,zero,gate | no dropout,0.0812,0.06,0.1019,True,453.0,114.0,0.0
+cnn_bilstm,zero,gate | dropout,-0.0073,-0.0263,0.0112,False,106.0,113.0,0.6852
+cnn_bilstm,zero,interaction (dropout x gate),-0.0884,-0.1138,-0.0618,True,,,
+cnn_bilstm,zero,harness dense vs published dense,-0.0183,-0.0319,-0.005,True,113.0,134.0,0.2031
+cnn_bilstm,train_median,dropout | dense,0.0047,-0.0135,0.0232,False,125.0,129.0,0.8507
+cnn_bilstm,train_median,dropout | sparse,0.0061,-0.012,0.0239,False,94.0,98.0,0.8287
+cnn_bilstm,train_median,gate | no dropout,-0.0044,-0.0221,0.0134,False,118.0,108.0,0.5495
+cnn_bilstm,train_median,gate | dropout,-0.0031,-0.0207,0.0147,False,125.0,115.0,0.5614
+cnn_bilstm,train_median,interaction (dropout x gate),0.0013,-0.0214,0.0239,False,,,
+cnn_bilstm,train_median,harness dense vs published dense,-0.0137,-0.0274,-0.0004,True,53.0,71.0,0.1265
+ltae,zero,dropout | dense,0.1169,0.0932,0.1404,True,457.0,100.0,0.0
+ltae,zero,dropout | sparse,0.056,0.0368,0.0747,True,140.0,60.0,0.0
+ltae,zero,gate | no dropout,0.0592,0.0377,0.0808,True,384.0,116.0,0.0
+ltae,zero,gate | dropout,-0.0016,-0.0171,0.0138,False,69.0,78.0,0.5095
+ltae,zero,interaction (dropout x gate),-0.0609,-0.0863,-0.0353,True,,,
+ltae,zero,harness dense vs published dense,0.0,0.0,0.0,False,0.0,0.0,1.0
+ltae,train_median,dropout | dense,0.0117,-0.0018,0.0255,False,83.0,48.0,0.0028
+ltae,train_median,dropout | sparse,0.0143,-0.0001,0.0286,False,65.0,47.0,0.1078
+ltae,train_median,gate | no dropout,-0.0096,-0.0253,0.0061,False,92.0,92.0,1.0
+ltae,train_median,gate | dropout,-0.007,-0.0218,0.0079,False,65.0,82.0,0.1868
+ltae,train_median,interaction (dropout x gate),0.0026,-0.0153,0.0203,False,,,
+ltae,train_median,harness dense vs published dense,0.0,0.0,0.0,False,0.0,0.0,1.0

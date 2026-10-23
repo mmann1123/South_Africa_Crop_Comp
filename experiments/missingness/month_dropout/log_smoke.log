@@ -1,0 +1,4 @@
+=== tempcnn_none_md0.2_smoke: train 4802658, val 1205790, test 1531914 pixels
+  seed 42 epoch 1: val F1m 0.6949 (12s)
+  seed 42: best val F1m 0.6949, 1 epochs, nonzero channels/head None
+=== tempcnn_none_md0.2_smoke in-region (field): {'f1m': 0.7162803212235288, 'acc': 0.7891566265060241, 'kappa': 0.7029239239812489}

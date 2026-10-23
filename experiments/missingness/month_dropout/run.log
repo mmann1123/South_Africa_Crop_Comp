@@ -1,0 +1,13 @@
+GPU idle; starting Wed Oct 21 09:11:07 PM EDT 2026
+smoke ok: checkpoint loads as a plain TempCNN
+done tempcnn_none
+done tempcnn_none_md0.2
+done cnn_bilstm_none
+done cnn_bilstm_none_md0.2
+done tempcnn_sparsemax_md0.2
+done cnn_bilstm_sparsemax_md0.2
+wrote experiments/missingness/month_dropout/predictions/ltae_pixel_md0.2_orig.csv
+wrote experiments/missingness/month_dropout/predictions/ltae_pixel_md0.2_trainmed.csv
+wrote experiments/missingness/month_dropout/predictions/ltae_sparse_pixel_md0.2_orig.csv
+wrote experiments/missingness/month_dropout/predictions/ltae_sparse_pixel_md0.2_trainmed.csv
+MONTH DROPOUT DONE Thu Oct 22 09:42:50 PM EDT 2026

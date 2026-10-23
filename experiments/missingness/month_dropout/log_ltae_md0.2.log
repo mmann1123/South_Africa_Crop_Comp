@@ -1,0 +1,46 @@
+=== L-TAE Pixel Training === Fraction: 1.0, Device: cuda
+Loading data...
+Shape: (7540362, 73)
+Feature cols: 60
+Train FIDs: 2653 -> 2653 (100%)
+Pixels: train=4802658, val=1205790, test=1531914
+
+=== Seed 42 ===
+  Epoch 1/100 - loss=0.2910, val_f1=0.6875, 10.8s
+  Epoch 10/100 - loss=0.1680, val_f1=0.7057, 10.2s
+  Epoch 20/100 - loss=0.1573, val_f1=0.7088, 10.1s
+  Epoch 30/100 - loss=0.1517, val_f1=0.7034, 10.1s
+  Early stopping at epoch 34
+
+=== Seed 101 ===
+  Epoch 1/100 - loss=0.2912, val_f1=0.6960, 10.7s
+  Epoch 10/100 - loss=0.1688, val_f1=0.6933, 10.5s
+  Epoch 20/100 - loss=0.1584, val_f1=0.7041, 10.5s
+  Early stopping at epoch 24
+
+=== Seed 202 ===
+  Epoch 1/100 - loss=0.2909, val_f1=0.6980, 10.3s
+  Epoch 10/100 - loss=0.1688, val_f1=0.7050, 10.4s
+  Epoch 20/100 - loss=0.1581, val_f1=0.7043, 10.4s
+  Epoch 30/100 - loss=0.1524, val_f1=0.7070, 10.4s
+  Epoch 40/100 - loss=0.1488, val_f1=0.7075, 10.4s
+  Epoch 50/100 - loss=0.1460, val_f1=0.7063, 10.3s
+  Early stopping at epoch 51
+
+=== Seed 303 ===
+  Epoch 1/100 - loss=0.2900, val_f1=0.6974, 10.2s
+  Epoch 10/100 - loss=0.1684, val_f1=0.7050, 10.4s
+  Early stopping at epoch 19
+
+=== Seed 404 ===
+  Epoch 1/100 - loss=0.2933, val_f1=0.6805, 10.9s
+  Epoch 10/100 - loss=0.1690, val_f1=0.7057, 11.1s
+  Epoch 20/100 - loss=0.1585, val_f1=0.7061, 11.5s
+  Epoch 30/100 - loss=0.1530, val_f1=0.7129, 11.1s
+  Epoch 40/100 - loss=0.1496, val_f1=0.7106, 11.1s
+  Early stopping at epoch 40
+
+--- Ensemble Field-Level Results ---
+  acc=0.8253, f1_macro=0.7697, f1_weighted=0.8227, kappa=0.7529
+Artifacts saved to experiments/missingness/month_dropout/models/ltae_pixel_md0.2
+Total time: 1785.6s

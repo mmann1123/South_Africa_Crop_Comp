@@ -1,0 +1,154 @@
+=== tempcnn_none_md0.2_smoke: train 4802658, val 1205790, test 1531914 pixels
+Traceback (most recent call last):
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 334, in <module>
+    main()
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 291, in main
+    vl, _ = logits_of(model, d["X_val"], r["batch"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 219, in logits_of
+    out.append(model(xb.to(device, non_blocking=True)).float().cpu())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/month_dropout.py", line 33, in forward
+    return self.net(x, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 111, in forward
+    x = self.conv3(self.conv2(self.conv1(x.permute(0, 2, 1))))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/container.py", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 194, in forward
+    return F.batch_norm(
+           ^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/functional.py", line 2846, in batch_norm
+    return torch.batch_norm(
+           ^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.00 MiB. GPU 0 has a total capacity of 11.63 GiB of which 9.75 MiB is free. Including non-PyTorch memory, this process has 11.60 GiB memory in use. Of the allocated memory 11.26 GiB is allocated by PyTorch, and 23.20 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+RETRY 1: /home/mmann1123/miniconda3/envs/deep_field/bin/python3 experiments/sparse_gate_backbones/train.py --backbone tempcnn --gate none --month-dropout 0.2 --seeds 42 --max-epochs 1 --tag smoke
+=== tempcnn_none_md0.2_smoke: train 4802658, val 1205790, test 1531914 pixels
+Traceback (most recent call last):
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 334, in <module>
+    main()
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 291, in main
+    vl, _ = logits_of(model, d["X_val"], r["batch"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 219, in logits_of
+    out.append(model(xb.to(device, non_blocking=True)).float().cpu())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/month_dropout.py", line 33, in forward
+    return self.net(x, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 111, in forward
+    x = self.conv3(self.conv2(self.conv1(x.permute(0, 2, 1))))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/container.py", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 194, in forward
+    return F.batch_norm(
+           ^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/functional.py", line 2846, in batch_norm
+    return torch.batch_norm(
+           ^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.00 MiB. GPU 0 has a total capacity of 11.63 GiB of which 9.75 MiB is free. Including non-PyTorch memory, this process has 11.60 GiB memory in use. Of the allocated memory 11.26 GiB is allocated by PyTorch, and 23.20 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+RETRY 2: /home/mmann1123/miniconda3/envs/deep_field/bin/python3 experiments/sparse_gate_backbones/train.py --backbone tempcnn --gate none --month-dropout 0.2 --seeds 42 --max-epochs 1 --tag smoke
+=== tempcnn_none_md0.2_smoke: train 4802658, val 1205790, test 1531914 pixels
+Traceback (most recent call last):
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 334, in <module>
+    main()
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 291, in main
+    vl, _ = logits_of(model, d["X_val"], r["batch"])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 219, in logits_of
+    out.append(model(xb.to(device, non_blocking=True)).float().cpu())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/deep_learn/src/month_dropout.py", line 33, in forward
+    return self.net(x, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/sparse_gate_backbones/train.py", line 111, in forward
+    x = self.conv3(self.conv2(self.conv1(x.permute(0, 2, 1))))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/container.py", line 253, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/modules/batchnorm.py", line 194, in forward
+    return F.batch_norm(
+           ^^^^^^^^^^^^^
+  File "/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/torch/nn/functional.py", line 2846, in batch_norm
+    return torch.batch_norm(
+           ^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.00 MiB. GPU 0 has a total capacity of 11.63 GiB of which 9.75 MiB is free. Including non-PyTorch memory, this process has 11.60 GiB memory in use. Of the allocated memory 11.26 GiB is allocated by PyTorch, and 23.20 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+RETRY 3: /home/mmann1123/miniconda3/envs/deep_field/bin/python3 experiments/sparse_gate_backbones/train.py --backbone tempcnn --gate none --month-dropout 0.2 --seeds 42 --max-epochs 1 --tag smoke
+GAVE UP: /home/mmann1123/miniconda3/envs/deep_field/bin/python3 experiments/sparse_gate_backbones/train.py --backbone tempcnn --gate none --month-dropout 0.2 --seeds 42 --max-epochs 1 --tag smoke

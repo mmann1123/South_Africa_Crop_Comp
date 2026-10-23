@@ -13,13 +13,12 @@ with the date and the files or commits that close them.
 
 ## Needed for the paper
 
-- [ ] **Month-dropout control for the sparse gate** (retraining, about 15 to 30 GPU hours).
-  Retrain CNN-BiLSTM, TempCNN and L-TAE with random month dropout; ideally a 2 x 2 of dropout x
-  gate. Score on the zero-filled, training-median-filled and published holdouts. Builds on
-  `experiments/sparse_gate_backbones/train.py` and `experiments/field_reduction/train_ltae_pixel.py`.
-  Any outcome is reportable: dropout matches the gate (first measurement of the standard remedy
-  under train/test missingness mismatch), the gate wins (it has a niche), or they add.
-  Precedent: Garnot 2022, Mask-PSTIN 2024, Wang/Belgiu 2025, Zhou 2023 Algorithm 1.
+- [x] **Month-dropout control for the sparse gate** (2026-10-23;
+  `experiments/missingness/month_dropout/`). 2 x 2 dropout x gate on TempCNN, CNN-BiLSTM and L-TAE.
+  Under zero fill dropout restores every backbone (+0.085 to +0.162, all significant) and the gate
+  adds nothing on top (interaction −0.088 CNN-BiLSTM, −0.061 L-TAE, significant). Under the
+  training-median fill nothing differs; dense L-TAE + dropout 0.664 is the best single model.
+  The gate is a partial substitute for training-time exposure to missing months.
 - [x] **Imputation-free check** (2026-10-15): published predictions scored on the 1,352
   September-observed vs 1,063 September-missing fields
   (`experiments/holdout_fill_check/results/sept_observed_subset.csv`).

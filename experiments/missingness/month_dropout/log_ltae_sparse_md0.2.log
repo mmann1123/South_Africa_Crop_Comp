@@ -1,0 +1,49 @@
+=== L-TAE-S Pixel Training === Fraction: 1.0, Device: cuda
+  gamma=1.5, n_head=16, lambda_sparse=0.001, time_varying=True
+Loading data...
+Shape: (7540362, 73)
+Feature cols: 60
+Train FIDs: 2653 -> 2653 (100%)
+Pixels: train=4802658, val=1205790, test=1531914
+
+=== Seed 42 ===
+  Epoch 1/100 - loss=0.2840, sparse=0.0078, val_f1=0.6899, 100.1s
+  Epoch 10/100 - loss=0.1589, sparse=0.0078, val_f1=0.7008, 99.5s
+  Epoch 20/100 - loss=0.1431, sparse=0.0078, val_f1=0.7007, 99.5s
+  Early stopping at epoch 23
+
+=== Seed 101 ===
+  Epoch 1/100 - loss=0.2830, sparse=0.0078, val_f1=0.6865, 100.0s
+  Epoch 10/100 - loss=0.1587, sparse=0.0078, val_f1=0.6970, 99.5s
+  Epoch 20/100 - loss=0.1429, sparse=0.0078, val_f1=0.7022, 99.6s
+  Epoch 30/100 - loss=0.1344, sparse=0.0078, val_f1=0.7060, 99.9s
+  Epoch 40/100 - loss=0.1278, sparse=0.0078, val_f1=0.7094, 99.6s
+  Epoch 50/100 - loss=0.1227, sparse=0.0078, val_f1=0.7083, 99.6s
+  Early stopping at epoch 53
+
+=== Seed 202 ===
+  Epoch 1/100 - loss=0.2865, sparse=0.0078, val_f1=0.6956, 100.2s
+  Epoch 10/100 - loss=0.1602, sparse=0.0078, val_f1=0.6975, 99.7s
+  Epoch 20/100 - loss=0.1448, sparse=0.0078, val_f1=0.6945, 99.7s
+  Epoch 30/100 - loss=0.1356, sparse=0.0078, val_f1=0.7003, 99.6s
+  Early stopping at epoch 37
+
+=== Seed 303 ===
+  Epoch 1/100 - loss=0.2831, sparse=0.0078, val_f1=0.6938, 100.2s
+  Epoch 10/100 - loss=0.1578, sparse=0.0078, val_f1=0.7014, 99.7s
+  Epoch 20/100 - loss=0.1421, sparse=0.0078, val_f1=0.6984, 99.7s
+  Epoch 30/100 - loss=0.1334, sparse=0.0078, val_f1=0.7105, 99.6s
+  Epoch 40/100 - loss=0.1272, sparse=0.0078, val_f1=0.7037, 99.7s
+  Early stopping at epoch 45
+
+=== Seed 404 ===
+  Epoch 1/100 - loss=0.2863, sparse=0.0078, val_f1=0.6850, 100.2s
+  Epoch 10/100 - loss=0.1589, sparse=0.0078, val_f1=0.7026, 100.1s
+  Epoch 20/100 - loss=0.1430, sparse=0.0078, val_f1=0.7054, 99.8s
+  Epoch 30/100 - loss=0.1346, sparse=0.0078, val_f1=0.7023, 99.7s
+  Early stopping at epoch 36
+
+--- Ensemble Field-Level Results ---
+  acc=0.8265, f1_macro=0.7678, f1_weighted=0.8224, kappa=0.7537
+Artifacts saved to experiments/missingness/month_dropout/models/ltae_sparse_pixel_md0.2
+Total time: 19407.4s
