@@ -162,3 +162,26 @@ logistic regression by 0.035 to 0.065 and TabNet by 0.062 to 0.097 (all p ≤ 0.
 low-data advantage for sparsity: the gated variants are within noise of their dense versions at
 every fraction. Draws are not paired across models (different splits), so these are unpaired
 comparisons.
+
+## Step deletion: no imputation at all (2026-10-24)
+
+`step_deletion.py` masks each pixel's missing months out of temporal attention (weight exactly 0,
+remaining weights renormalized; for the Transformer also a key-padding mask and a mean over observed
+steps), using the existing checkpoints with no retraining. A month is deleted if any band is
+missing (41.5% of holdout pixels lose at least one month; none loses all). Checks: masked forward
+with all steps observed equals `model(x)`; the output does not depend on a masked step's value;
+the zero-fill rerun reproduces the existing zero-fill predictions (0 to 2 fields differ, AMP).
+
+| Model | Zero fill | Training-median fill | Step deletion | Deletion − median [95% CI] |
+|---|---|---|---|---|
+| L-TAE | 0.540 | 0.652 | 0.653 | +0.001 [−0.007, 0.009] |
+| L-TAE-S | 0.599 | 0.643 | 0.640 | −0.003 [−0.009, 0.002] |
+| Transformer | 0.577 | 0.641 | 0.648 | +0.008 [−0.002, 0.018] |
+| L-TAE + month dropout | 0.656 | 0.664 | 0.659 | −0.005 [−0.012, 0.002] |
+| L-TAE-S + month dropout | 0.655 | 0.657 | 0.654 | −0.003 [−0.008, 0.002] |
+
+Deleting the missing month is as good as filling it with the training median for every model
+(no interval excludes zero), and far better than zero fill for models trained without dropout
+(+0.04 to +0.11). Models trained with month dropout are indifferent among all three. So the
+attention models need no imputation: what hurt them was a fill value outside the training
+distribution, not the missing information. Paired field bootstrap, B = 10,000, seed 42.

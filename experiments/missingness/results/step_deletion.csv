@@ -1,0 +1,6 @@
+model,pixels_with_a_deleted_step_pct,pixels_all_steps_missing,zero_rerun_fields_differing,f1m_step deletion,f1m_zero fill,f1m_training-median fill,stepdel_minus_zero fill,ci_lo_vs_zero fill,ci_hi_vs_zero fill,stepdel_minus_training-median fill,ci_lo_vs_training-median fill,ci_hi_vs_training-median fill
+ltae,41.54,0,0,0.6529,0.5395,0.6523,0.1135,0.0939,0.1341,0.0007,-0.0072,0.0086
+ltae_s,41.54,0,2,0.6396,0.5987,0.6427,0.0409,0.0275,0.0554,-0.0031,-0.0086,0.0021
+transformer,41.54,0,0,0.6484,0.5772,0.6406,0.0712,0.0513,0.0912,0.0077,-0.0016,0.0178
+ltae_md0.2,41.54,0,0,0.659,0.6563,0.6639,0.0027,-0.0008,0.0064,-0.0049,-0.012,0.0019
+ltae_s_md0.2,41.54,0,1,0.6542,0.6547,0.657,-0.0004,-0.0021,0.001,-0.0027,-0.0082,0.0024

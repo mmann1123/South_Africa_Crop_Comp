@@ -51,8 +51,12 @@ with the date and the files or commits that close them.
   median); zero fill hurts every family including the classical models (mean −0.075 raw, −0.096
   xr_fresh); the published ranking flip came from the mixed treatment (Spearman 0.56 vs 0.74 when
   everyone is zero-filled). Also fixed `interp` to skip months never observed in training.
-- [ ] **Step deletion** for L-TAE and the Transformer (attention mask over the missing month), as
-  a "no imputation" row next to the fill sweep.
+- [x] **Step deletion** for L-TAE and the Transformer (2026-10-24; `experiments/missingness/step_deletion.py`,
+  inference only, 10 minutes). Masking the missing month out of attention equals the
+  training-median fill for L-TAE, L-TAE-S, the Transformer and the month-dropout L-TAEs (all
+  within ±0.008, no CI excludes zero) and beats zero fill by +0.04 to +0.11. The retraining
+  variant (train with masked steps) is now low priority: inference-time deletion already matches
+  the best fill and month dropout.
 
 ## Would strengthen it
 
