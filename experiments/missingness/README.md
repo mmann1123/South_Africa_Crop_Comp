@@ -99,3 +99,36 @@ Two residual effects under the training-median fill: a class-adjusted September 
 field XGBoost (−0.54 [−0.76, −0.31]) and pixel TabNet (−0.36 [−0.60, −0.13]), but not for the
 dense networks (CIs span zero). A median fill removes information, so some penalty is expected;
 why it falls on the tabular models only is unexplained.
+
+## Gradient attribution at the September slot (2026-10-23)
+
+`attribution.py`: integrated gradients (baseline = training mean; step count raised per model
+until the completeness error is below 2% on a calibration subset and below 3% on every input set;
+128 to 2,048 steps) and plain gradients, per month, for the predicted class, on 5,000
+September-missing and 5,000 September-observed holdout pixels. Models: the 2 x 2 arms of
+TempCNN and CNN-BiLSTM, 5 seeds each (`figures/attribution_september.pdf`,
+`results/attribution_{september,by_month}.csv`).
+
+| Backbone, arm | IG share on Sept: zero-filled | training-median fill | Sept observed | pixel predictions changed by the fill |
+|---|---|---|---|---|
+| TempCNN, dense | 0.32 | 0.04 | 0.13 | 37% |
+| TempCNN, dense + dropout | 0.18 | 0.05 | 0.15 | 10% |
+| TempCNN, gated | 0.35 | 0.06 | 0.15 | 40% |
+| TempCNN, gated + dropout | 0.27 | 0.05 | 0.13 | 9% |
+| CNN-BiLSTM, dense | 0.37 | 0.06 | 0.17 | 64% |
+| CNN-BiLSTM, dense + dropout | 0.39 | 0.07 | 0.18 | 15% |
+| CNN-BiLSTM, gated | 0.24 | 0.06 | 0.16 | 26% |
+| CNN-BiLSTM, gated + dropout | 0.26 | 0.06 | 0.17 | 9% |
+
+A zero-filled September draws 1.5 to 2.6 times the attribution of a real September in every arm,
+and the training-median fill moves the weight to October, the next observed month. The clearest
+mechanism measure is the flip rate: the zero fill changes 37% (TempCNN) and 64% (CNN-BiLSTM) of
+dense pixel predictions, the gate brings CNN-BiLSTM to 26% but not TempCNN (40%), and month
+dropout brings every arm to 9 to 15%. That ordering matches the holdout F1 results of the 2 x 2.
+
+Caveat: attribution share is not a clean mechanism measure here. Integrated gradients scale with
+the distance from the baseline, which is large for a zero-filled month, so the September share
+stays high under dropout for CNN-BiLSTM (0.39) although its predictions barely move; plain
+gradient shares show no consistent pattern across arms. Dropout makes the decision insensitive
+to the zero without necessarily lowering the attribution assigned to it. Attention maps for
+L-TAE and the Transformer (also in the to-do item) were not computed.

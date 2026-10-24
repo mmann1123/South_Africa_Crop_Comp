@@ -56,9 +56,12 @@ with the date and the files or commits that close them.
 
 ## Would strengthen it
 
-- [ ] **Gradient attribution at the September slot** (under 1 hour): dy/dX share per month under
-  zero fill vs training-median fill, plus L-TAE / Transformer attention (Rußwurm & Körner 2020;
-  Obadić). Mechanism figure.
+- [x] **Gradient attribution at the September slot** (2026-10-23; `experiments/missingness/attribution.py`,
+  about 10 GPU hours, not 1: the gated models need up to 2,048 IG steps). A zero-filled September
+  draws 1.5 to 2.6x the attribution of a real one; the fill flips 37% (TempCNN) and 64%
+  (CNN-BiLSTM) of dense pixel predictions, 9 to 15% with month dropout. IG share itself is
+  confounded by distance from the baseline; flip rate is the robust measure.
+  - [ ] L-TAE / Transformer attention (Rußwurm & Körner 2020; Obadić) not done.
 - [ ] **Missing-data indicator channel, or step deletion with day-of-year encoding** (about 10 to
   20 GPU hours). A "no imputation" row and a direct test of Zhou 2023 Proposition 1. The
   indicator arm can share runs with the month-dropout control.
