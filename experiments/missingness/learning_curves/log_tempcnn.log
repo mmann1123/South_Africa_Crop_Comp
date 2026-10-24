@@ -1,0 +1,28 @@
+
+Ground truth loaded: 2417 fields
+=== tempcnn: 7540362 train-tile pixels, holdout 3409489 pixels
+  tempcnn_dense frac=0.05 draw=42: OOS F1m 0.4927 (28 epochs, 4s/epoch)
+  tempcnn_sparsemax frac=0.05 draw=42: OOS F1m 0.5283 (17 epochs, 31s/epoch)
+  tempcnn_dense frac=0.05 draw=101: OOS F1m 0.4681 (30 epochs, 4s/epoch)
+  tempcnn_sparsemax frac=0.05 draw=101: OOS F1m 0.5024 (59 epochs, 30s/epoch)
+  tempcnn_dense frac=0.05 draw=202: OOS F1m 0.4306 (24 epochs, 9s/epoch)
+  tempcnn_sparsemax frac=0.05 draw=202: OOS F1m 0.4545 (49 epochs, 40s/epoch)
+  tempcnn_dense frac=0.05 draw=303: OOS F1m 0.5539 (51 epochs, 14s/epoch)
+  tempcnn_sparsemax frac=0.05 draw=303: OOS F1m 0.5820 (38 epochs, 38s/epoch)
+  tempcnn_dense frac=0.05 draw=404: OOS F1m 0.4956 (24 epochs, 14s/epoch)
+  tempcnn_sparsemax frac=0.05 draw=404: OOS F1m 0.5524 (29 epochs, 40s/epoch)
+  tempcnn_dense frac=0.05 draw=505: OOS F1m 0.4759 (23 epochs, 14s/epoch)
+  tempcnn_sparsemax frac=0.05 draw=505: OOS F1m 0.4593 (32 epochs, 40s/epoch)
+  tempcnn_dense frac=0.05 draw=606: OOS F1m 0.5029 (18 epochs, 14s/epoch)
+  tempcnn_sparsemax frac=0.05 draw=606: OOS F1m 0.4967 (26 epochs, 41s/epoch)
+  tempcnn_dense frac=0.05 draw=707: OOS F1m 0.5112 (21 epochs, 14s/epoch)
+  tempcnn_sparsemax frac=0.05 draw=707: OOS F1m 0.4873 (48 epochs, 40s/epoch)
+  tempcnn_dense frac=0.05 draw=808: OOS F1m 0.5516 (23 epochs, 14s/epoch)
+missingness/learning_curves/run.sh: line 17: 710714 Killed                  "$@"
+RETRY 1: /home/mmann1123/miniconda3/envs/deep_field/bin/python3 sparse_gate_backbones/sweep_backbones.py --backbone tempcnn --fractions 0.05 --draws 42 101 202 303 404 505 606 707 808 909
+
+Ground truth loaded: 2417 fields
+=== tempcnn: 7540362 train-tile pixels, holdout 3409489 pixels
+  tempcnn_sparsemax frac=0.05 draw=808: OOS F1m 0.5569 (27 epochs, 31s/epoch)
+  tempcnn_dense frac=0.05 draw=909: OOS F1m 0.5265 (36 epochs, 4s/epoch)
+  tempcnn_sparsemax frac=0.05 draw=909: OOS F1m 0.5056 (36 epochs, 31s/epoch)

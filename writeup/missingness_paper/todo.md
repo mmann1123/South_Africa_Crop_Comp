@@ -69,8 +69,10 @@ with the date and the files or commits that close them.
   Training-median fill: mixed-10 vote 0.661 = deep-5 0.660 (n.s.); trees add nothing. Zero fill:
   mixed-10 0.603 beats deep-5 and tree-5 by about +0.03 (significant), a hedge against the
   mismatch but weaker than month dropout (0.65).
-- [ ] **Learning curves down to 5%, plus TabNet at 10 to 15%** (about 10 to 20 GPU hours) via
-  `experiments/holdout_fill_check/run_sweep.py`. Locates the floor; 15 fields per class is noisy.
+- [x] **Learning curves down to 5%, plus TabNet at 10 to 15%** (2026-10-23, about 12 GPU hours;
+  `experiments/missingness/learning_curves/`). At 5 to 15% raw-sequence models and logistic
+  regression are indistinguishable (about 0.50 to 0.59); XGBoost and TabNet trail by 0.04 to 0.10
+  (significant). Deep models separate from about 25%. No low-data gain from sparsity.
 - [ ] **Sparsity Normalization at September** (cheap; Yi 2020). Closest precedent found no gain.
 
 ## Loose ends from the audit

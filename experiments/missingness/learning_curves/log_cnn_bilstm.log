@@ -1,0 +1,23 @@
+
+Ground truth loaded: 2417 fields
+=== cnn_bilstm: 7540362 train-tile pixels, holdout 3409489 pixels
+  cnn_bilstm_dense frac=0.05 draw=42: OOS F1m 0.5081 (21 epochs, 4s/epoch)
+  cnn_bilstm_sparsemax frac=0.05 draw=42: OOS F1m 0.4996 (22 epochs, 23s/epoch)
+  cnn_bilstm_dense frac=0.05 draw=101: OOS F1m 0.5241 (23 epochs, 4s/epoch)
+  cnn_bilstm_sparsemax frac=0.05 draw=101: OOS F1m 0.5328 (26 epochs, 21s/epoch)
+  cnn_bilstm_dense frac=0.05 draw=202: OOS F1m 0.5038 (47 epochs, 4s/epoch)
+  cnn_bilstm_sparsemax frac=0.05 draw=202: OOS F1m 0.5308 (60 epochs, 23s/epoch)
+  cnn_bilstm_dense frac=0.05 draw=303: OOS F1m 0.4668 (53 epochs, 4s/epoch)
+  cnn_bilstm_sparsemax frac=0.05 draw=303: OOS F1m 0.5094 (23 epochs, 21s/epoch)
+  cnn_bilstm_dense frac=0.05 draw=404: OOS F1m 0.5774 (18 epochs, 4s/epoch)
+  cnn_bilstm_sparsemax frac=0.05 draw=404: OOS F1m 0.5343 (40 epochs, 23s/epoch)
+  cnn_bilstm_dense frac=0.05 draw=505: OOS F1m 0.5135 (17 epochs, 4s/epoch)
+  cnn_bilstm_sparsemax frac=0.05 draw=505: OOS F1m 0.4224 (21 epochs, 23s/epoch)
+  cnn_bilstm_dense frac=0.05 draw=606: OOS F1m 0.5692 (19 epochs, 4s/epoch)
+  cnn_bilstm_sparsemax frac=0.05 draw=606: OOS F1m 0.5252 (26 epochs, 22s/epoch)
+  cnn_bilstm_dense frac=0.05 draw=707: OOS F1m 0.5481 (25 epochs, 4s/epoch)
+  cnn_bilstm_sparsemax frac=0.05 draw=707: OOS F1m 0.5551 (36 epochs, 22s/epoch)
+  cnn_bilstm_dense frac=0.05 draw=808: OOS F1m 0.5226 (33 epochs, 4s/epoch)
+  cnn_bilstm_sparsemax frac=0.05 draw=808: OOS F1m 0.5585 (29 epochs, 22s/epoch)
+  cnn_bilstm_dense frac=0.05 draw=909: OOS F1m 0.4841 (20 epochs, 4s/epoch)
+  cnn_bilstm_sparsemax frac=0.05 draw=909: OOS F1m 0.4874 (60 epochs, 21s/epoch)

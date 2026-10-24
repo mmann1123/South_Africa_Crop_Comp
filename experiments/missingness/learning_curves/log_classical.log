@@ -1,0 +1,130 @@
+[sweep] seed_sweep_classical variant=trainmed args=['--fractions', '0.05', '--subsample-seeds', '42', '101', '202', '303', '404', '505', '606', '707', '808', '909', '--out', '/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/results/sweep_classical_trainmed.csv']
+Loading FINAL_DATA + holdout...
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/xgboost/core.py:158: UserWarning: [10:35:06] WARNING: /workspace/src/common/error_msg.cc:58: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  warnings.warn(smsg, UserWarning)
+xgboost_field frac=0.05 sseed=42 -> F1m=0.4389 kappa=0.3171 (11s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.05 sseed=101 -> F1m=0.4680 kappa=0.4030 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.05 sseed=202 -> F1m=0.4772 kappa=0.3822 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.05 sseed=303 -> F1m=0.4547 kappa=0.3434 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.05 sseed=404 -> F1m=0.3886 kappa=0.2697 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.05 sseed=505 -> F1m=0.4480 kappa=0.3603 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.05 sseed=606 -> F1m=0.4754 kappa=0.4130 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.05 sseed=707 -> F1m=0.5184 kappa=0.4057 (5s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.05 sseed=808 -> F1m=0.4628 kappa=0.3610 (5s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/base.py:493: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
+xgboost_field frac=0.05 sseed=909 -> F1m=0.5010 kappa=0.4156 (6s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:469: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+base_lr_pixel frac=0.05 sseed=42 -> F1m=0.5428 kappa=0.4496 (37s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:469: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+base_lr_pixel frac=0.05 sseed=101 -> F1m=0.5554 kappa=0.4727 (34s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:469: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+base_lr_pixel frac=0.05 sseed=202 -> F1m=0.5529 kappa=0.3763 (28s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:469: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+base_lr_pixel frac=0.05 sseed=303 -> F1m=0.5710 kappa=0.4295 (36s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:469: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+base_lr_pixel frac=0.05 sseed=404 -> F1m=0.4877 kappa=0.3756 (32s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:469: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+base_lr_pixel frac=0.05 sseed=505 -> F1m=0.5267 kappa=0.3814 (35s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:469: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+base_lr_pixel frac=0.05 sseed=606 -> F1m=0.5125 kappa=0.4199 (40s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:469: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+base_lr_pixel frac=0.05 sseed=707 -> F1m=0.5469 kappa=0.4664 (33s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:469: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+base_lr_pixel frac=0.05 sseed=808 -> F1m=0.5254 kappa=0.4271 (36s)
+/home/mmann1123/miniconda3/envs/ml_field/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:469: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+base_lr_pixel frac=0.05 sseed=909 -> F1m=0.4601 kappa=0.3605 (37s)

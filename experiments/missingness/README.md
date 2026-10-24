@@ -132,3 +132,33 @@ stays high under dropout for CNN-BiLSTM (0.39) although its predictions barely m
 gradient shares show no consistent pattern across arms. Dropout makes the decision insensitive
 to the zero without necessarily lowering the attribution assigned to it. Attention maps for
 L-TAE and the Transformer (also in the to-do item) were not computed.
+
+## Learning curves down to 5% (2026-10-23)
+
+`learning_curves/run.sh` added 5% for every swept model and 5/10/15% for pixel TabNet (10 draws
+each), appending to the existing sweep files; `learning_curves/summarize.py` combines them
+(`results/learning_curves.csv`, `figures/learning_curves.pdf`). Training-median-filled holdout;
+one training seed per draw, so the 100% points are single models (for example CNN-BiLSTM 0.606
+here vs 0.656 for the published 5-seed ensemble). 5% keeps 132 of 2,653 training fields, at least
+15 per class.
+
+| Model | 5% | 10% | 15% | 25% | 50% | 75% | 100% |
+|---|---|---|---|---|---|---|---|
+| TempCNN, gated | 0.512 | 0.564 | 0.590 | 0.608 | 0.634 | 0.639 | 0.646 |
+| TempCNN | 0.501 | 0.547 | 0.581 | 0.607 | 0.621 | 0.633 | 0.647 |
+| L-TAE-S | 0.508 | 0.557 | 0.565 | 0.612 | 0.636 | 0.644 | 0.652 |
+| L-TAE | 0.503 | 0.554 | 0.568 | 0.592 | 0.636 | 0.638 | 0.647 |
+| CNN-BiLSTM | 0.522 | 0.554 | 0.561 | 0.580 | 0.592 | 0.616 | 0.606 |
+| CNN-BiLSTM, gated | 0.516 | 0.543 | 0.557 | 0.575 | 0.592 | 0.596 | 0.603 |
+| Logistic regression (pixel) | 0.528 | 0.547 | 0.563 | 0.574 | 0.599 | 0.606 | 0.605 |
+| XGBoost (field) | 0.463 | 0.513 | 0.524 | 0.549 | 0.557 | 0.592 | 0.612 |
+| TabNet (pixel) | 0.431 | 0.482 | 0.501 | 0.539 | 0.561 | 0.582 | 0.572 |
+
+At 5 to 15% the raw-sequence models and logistic regression are statistically indistinguishable
+(every Welch test against logistic regression p > 0.05, except gated TempCNN at 15%, +0.027,
+p = 0.02). The two feature-selecting tabular models are the least data-efficient: XGBoost trails
+logistic regression by 0.035 to 0.065 and TabNet by 0.062 to 0.097 (all p ≤ 0.002) across 5 to
+15%. The deep sequence models separate from the linear baseline only from about 25%. There is no
+low-data advantage for sparsity: the gated variants are within noise of their dense versions at
+every fraction. Draws are not paired across models (different splits), so these are unpaired
+comparisons.

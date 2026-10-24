@@ -1,0 +1,86 @@
+[sweep] seed_sweep variant=trainmed args=['--models', 'ltae_pixel', 'ltae_sparse_pixel', '--fractions', '0.05', '--subsample-seeds', '42', '101', '202', '303', '404', '505', '606', '707', '808', '909', '--n-seeds', '1', '--out', '/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/holdout_fill_check/results/sweep_deep_trainmed.csv']
+batch_size=2048, n_seeds=1, compile=False
+Device: cuda
+Loading train pixels...
+  7540362 pixels, 60 feats, 5 classes
+Loading holdout pixels...
+
+=== ltae_pixel frac=0.05 sseed=42 | train fids 249630 px ===
+    seed 42: 2.34s/epoch x 35 epochs
+    -> OOS macro-F1=0.4815, kappa=0.3947  (1.4 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.05 sseed=101 | train fids 227769 px ===
+    seed 42: 1.81s/epoch x 16 epochs
+    -> OOS macro-F1=0.4426, kappa=0.3890  (0.5 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.05 sseed=202 | train fids 235765 px ===
+    seed 42: 2.17s/epoch x 26 epochs
+    -> OOS macro-F1=0.4760, kappa=0.4314  (1.0 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.05 sseed=303 | train fids 192266 px ===
+    seed 42: 2.48s/epoch x 31 epochs
+    -> OOS macro-F1=0.5656, kappa=0.4776  (1.4 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.05 sseed=404 | train fids 234970 px ===
+    seed 42: 2.60s/epoch x 60 epochs
+    -> OOS macro-F1=0.5238, kappa=0.4543  (2.7 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.05 sseed=505 | train fids 239849 px ===
+    seed 42: 2.63s/epoch x 20 epochs
+    -> OOS macro-F1=0.4791, kappa=0.3741  (1.0 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.05 sseed=606 | train fids 249537 px ===
+    seed 42: 2.64s/epoch x 23 epochs
+    -> OOS macro-F1=0.5283, kappa=0.4628  (1.1 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.05 sseed=707 | train fids 220527 px ===
+    seed 42: 2.55s/epoch x 28 epochs
+    -> OOS macro-F1=0.4886, kappa=0.3641  (1.3 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.05 sseed=808 | train fids 266104 px ===
+    seed 42: 2.70s/epoch x 46 epochs
+    -> OOS macro-F1=0.5264, kappa=0.4571  (2.2 min for the 5-seed cell)
+
+=== ltae_pixel frac=0.05 sseed=909 | train fids 246517 px ===
+    seed 42: 2.64s/epoch x 19 epochs
+    -> OOS macro-F1=0.5217, kappa=0.4582  (0.9 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.05 sseed=42 | train fids 249630 px ===
+    seed 42: 30.29s/epoch x 35 epochs
+    -> OOS macro-F1=0.4962, kappa=0.4557  (18.8 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.05 sseed=101 | train fids 227769 px ===
+    seed 42: 27.13s/epoch x 17 epochs
+    -> OOS macro-F1=0.4824, kappa=0.4107  (8.8 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.05 sseed=202 | train fids 235765 px ===
+    seed 42: 29.78s/epoch x 38 epochs
+    -> OOS macro-F1=0.4484, kappa=0.4060  (20.0 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.05 sseed=303 | train fids 192266 px ===
+    seed 42: 28.08s/epoch x 30 epochs
+    -> OOS macro-F1=0.5796, kappa=0.4810  (15.2 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.05 sseed=404 | train fids 234970 px ===
+    seed 42: 29.82s/epoch x 27 epochs
+    -> OOS macro-F1=0.5371, kappa=0.4715  (14.6 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.05 sseed=505 | train fids 239849 px ===
+    seed 42: 30.05s/epoch x 22 epochs
+    -> OOS macro-F1=0.4654, kappa=0.3453  (12.2 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.05 sseed=606 | train fids 249537 px ===
+    seed 42: 30.43s/epoch x 34 epochs
+    -> OOS macro-F1=0.5171, kappa=0.4231  (18.4 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.05 sseed=707 | train fids 220527 px ===
+    seed 42: 29.28s/epoch x 50 epochs
+    -> OOS macro-F1=0.5208, kappa=0.4261  (25.5 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.05 sseed=808 | train fids 266104 px ===
+    seed 42: 31.09s/epoch x 24 epochs
+    -> OOS macro-F1=0.5313, kappa=0.4714  (13.6 min for the 5-seed cell)
+
+=== ltae_sparse_pixel frac=0.05 sseed=909 | train fids 246517 px ===
+    seed 42: 30.29s/epoch x 27 epochs
+    -> OOS macro-F1=0.4978, kappa=0.4234  (14.8 min for the 5-seed cell)
