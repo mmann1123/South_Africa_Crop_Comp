@@ -1,0 +1,28 @@
+{
+  "script": "03_summarise",
+  "git_commit": "2be71225626c162f20090f9de796b332fc72a49b",
+  "run_date": "2026-10-28T21:39:10.923248+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/daccn/results/daccn_counters.csv"
+  ],
+  "rows": 24,
+  "columns": [
+    "region",
+    "country",
+    "year",
+    "variant",
+    "frame",
+    "n_points",
+    "median_n_valid",
+    "mean_n_valid",
+    "share_any_zero",
+    "mean_n_zero",
+    "share_zero_step01",
+    "share_zero_step22",
+    "share_zero_apr",
+    "share_zero_oct",
+    "share_zero_by_step",
+    "n_cells",
+    "cell_sd_share_any_zero"
+  ]
+}

@@ -38,3 +38,13 @@ def test_pairs_table():
     assert np.isclose(r["difference"], 0.25)
     t = p.loc[("Minnesota 2018", "Minnesota 2019", 2019, "A")]
     assert t["kind"] == "temporal" and t["source_share_any_zero"] == 0.5 and t["target_share_any_zero"] == 1.0
+
+
+def test_region_year_summary_cell_spread():
+    df = _counters()
+    df["cell"] = [0, 0, 1, 1] * 4
+    s = dcsummary.region_year_summary(df).set_index(["region", "year", "variant"])
+    r = s.loc[("Minnesota", 2018, "A")]
+    # cells: cell 0 shares any-zero [0,0] -> 0.0 ; cell 1 [1,1] -> 1.0 ; sd (ddof=1) of [0,1] = 0.7071
+    assert r["n_cells"] == 2
+    assert np.isclose(r["cell_sd_share_any_zero"], 0.70710678)

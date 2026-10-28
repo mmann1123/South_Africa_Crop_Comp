@@ -1,12 +1,12 @@
 {
   "script": "02_run_counters",
   "args": {
-    "smoke": true,
+    "smoke": false,
     "force": false,
     "regions_only": null
   },
   "seed": 42,
-  "git_commit": "db13fee04151c45630681d80e1c9086ae882928c",
+  "git_commit": "36e2285cd167f67ae92a200c1fcb028fae370652",
   "python": "3.13.9",
   "packages": {
     "ee": "1.7.50",
@@ -17,9 +17,11 @@
     "matplotlib": "3.10.7"
   },
   "counts": {
-    "jobs_run": 0
+    "jobs_run": 24,
+    "failed_cells": 40,
+    "rows_total": 79529
   },
-  "started": "2026-10-28T20:20:41.693564+00:00",
+  "started": "2026-10-28T20:26:57.470599+00:00",
   "collections": {
     "s2": "COPERNICUS/S2_HARMONIZED",
     "gaul": "FAO/GAUL/2015/level1",
@@ -65,6 +67,276 @@
     "points_per_cell": 300,
     "seed": 42,
     "scale": 10
+  },
+  "cells_Minnesota": [
+    [
+      -93.76107099932459,
+      45.07435258806101
+    ],
+    [
+      -95.22922909184689,
+      46.29832076584747
+    ],
+    [
+      -93.2428146588756,
+      44.608266819057164
+    ],
+    [
+      -93.54542298035021,
+      48.1455333422641
+    ],
+    [
+      -94.34081717536533,
+      44.12683211844332
+    ],
+    [
+      -92.36199247205082,
+      44.43292251100518
+    ],
+    [
+      -95.51963081191957,
+      46.48192005315935
+    ],
+    [
+      -94.29067480176208,
+      47.37661556955977
+    ],
+    [
+      -93.8903004494104,
+      47.488233351155834
+    ],
+    [
+      -94.47123501143147,
+      46.88714906780702
+    ],
+    [
+      -94.26387180683287,
+      47.520249010145825
+    ],
+    [
+      -94.69089924972187,
+      47.00955107515118
+    ],
+    [
+      -94.29031430149125,
+      44.79956742645818
+    ],
+    [
+      -96.14681157459486,
+      43.83525521736223
+    ],
+    [
+      -95.99790298587267,
+      48.89159253526003
+    ],
+    [
+      -90.92337684127928,
+      47.9931386549622
+    ]
+  ],
+  "Minnesota_2018_A": {
+    "points": 2109,
+    "cells_with_points": 9,
+    "seconds": 340,
+    "failed_cells_so_far": 5
+  },
+  "Minnesota_2018_B": {
+    "points": 2709,
+    "cells_with_points": 11,
+    "seconds": 109,
+    "failed_cells_so_far": 5
+  },
+  "Minnesota_2019_A": {
+    "points": 1500,
+    "cells_with_points": 6,
+    "seconds": 359,
+    "failed_cells_so_far": 12
+  },
+  "Minnesota_2019_B": {
+    "points": 2700,
+    "cells_with_points": 10,
+    "seconds": 101,
+    "failed_cells_so_far": 12
+  },
+  "cells_Nebraska": [
+    [
+      -100.74587249691695,
+      42.11990858429102
+    ],
+    [
+      -97.37769951540048,
+      42.514524572293375
+    ],
+    [
+      -100.45452591771131,
+      41.49178140464933
+    ],
+    [
+      -99.66097026718232,
+      41.57028285405065
+    ],
+    [
+      -100.18972171363535,
+      40.09860011311921
+    ],
+    [
+      -99.81910252906684,
+      40.33288469265372
+    ],
+    [
+      -97.49727148734202,
+      41.611538932993646
+    ],
+    [
+      -99.81205336969565,
+      41.848285326555455
+    ],
+    [
+      -100.26066603352362,
+      41.85599296702323
+    ],
+    [
+      -99.30605500963557,
+      42.14754233214552
+    ],
+    [
+      -98.20018519707986,
+      41.620500704763536
+    ],
+    [
+      -99.00326843401443,
+      42.033558636788605
+    ],
+    [
+      -102.65776506429553,
+      42.11932062595215
+    ],
+    [
+      -102.3519838603019,
+      41.14572878410176
+    ],
+    [
+      -103.80521304865928,
+      42.02693921779873
+    ],
+    [
+      -98.34807617252153,
+      40.51379255511798
+    ]
+  ],
+  "Nebraska_2018_A": {
+    "points": 2110,
+    "cells_with_points": 9,
+    "seconds": 296,
+    "failed_cells_so_far": 16
+  },
+  "Nebraska_2018_B": {
+    "points": 2810,
+    "cells_with_points": 12,
+    "seconds": 88,
+    "failed_cells_so_far": 16
+  },
+  "Nebraska_2019_A": {
+    "points": 1924,
+    "cells_with_points": 7,
+    "seconds": 265,
+    "failed_cells_so_far": 20
+  },
+  "Nebraska_2019_B": {
+    "points": 2624,
+    "cells_with_points": 10,
+    "seconds": 90,
+    "failed_cells_so_far": 20
+  },
+  "cells_Wisconsin": [
+    [
+      -92.30442350490435,
+      45.77755309730154
+    ],
+    [
+      -89.92862508848539,
+      45.11276092721644
+    ],
+    [
+      -90.1644197816852,
+      43.69262581274269
+    ],
+    [
+      -92.07929683322752,
+      45.90010955650574
+    ],
+    [
+      -89.73386362514222,
+      43.081383153730066
+    ],
+    [
+      -88.09459175674831,
+      43.6318271966473
+    ],
+    [
+      -90.09678130953456,
+      44.90897816353097
+    ],
+    [
+      -89.75027397349221,
+      45.135434332081154
+    ],
+    [
+      -88.66274725242779,
+      45.51601403648973
+    ],
+    [
+      -89.94650516651035,
+      45.084944777280604
+    ],
+    [
+      -89.29073011856525,
+      45.17418959651258
+    ],
+    [
+      -90.20581688606353,
+      45.21740880161723
+    ],
+    [
+      -88.13145713094083,
+      45.63176691924323
+    ],
+    [
+      -88.20292157531856,
+      42.9844765765296
+    ],
+    [
+      -89.50471954888317,
+      42.486790903994205
+    ],
+    [
+      -90.47566811143079,
+      46.419546149401334
+    ]
+  ],
+  "Wisconsin_2018_A": {
+    "points": 3227,
+    "cells_with_points": 12,
+    "seconds": 266,
+    "failed_cells_so_far": 22
+  },
+  "Wisconsin_2018_B": {
+    "points": 3827,
+    "cells_with_points": 14,
+    "seconds": 97,
+    "failed_cells_so_far": 22
+  },
+  "Wisconsin_2019_A": {
+    "points": 3086,
+    "cells_with_points": 12,
+    "seconds": 277,
+    "failed_cells_so_far": 24
+  },
+  "Wisconsin_2019_B": {
+    "points": 3586,
+    "cells_with_points": 14,
+    "seconds": 95,
+    "failed_cells_so_far": 24
   },
   "cells_Iowa": [
     [
@@ -132,5 +404,491 @@
       41.755923571568125
     ]
   ],
-  "ended": "2026-10-28T20:21:13.514004+00:00"
+  "Iowa_2018_A": {
+    "points": 3727,
+    "cells_with_points": 14,
+    "seconds": 266,
+    "failed_cells_so_far": 26
+  },
+  "Iowa_2018_B": {
+    "points": 4327,
+    "cells_with_points": 16,
+    "seconds": 93,
+    "failed_cells_so_far": 26
+  },
+  "Iowa_2019_A": {
+    "points": 3196,
+    "cells_with_points": 12,
+    "seconds": 327,
+    "failed_cells_so_far": 30
+  },
+  "Iowa_2019_B": {
+    "points": 4267,
+    "cells_with_points": 16,
+    "seconds": 85,
+    "failed_cells_so_far": 30
+  },
+  "cells_Heilongjiang": [
+    [
+      124.67248533970658,
+      52.15561963258078
+    ],
+    [
+      128.94094018355807,
+      47.8316332948149
+    ],
+    [
+      126.15082110681952,
+      46.7091261584795
+    ],
+    [
+      124.32755811042364,
+      52.499719904223
+    ],
+    [
+      123.53584702340216,
+      47.32365240773758
+    ],
+    [
+      122.1888266659753,
+      53.07563668790516
+    ],
+    [
+      132.05796004806325,
+      46.68341284275567
+    ],
+    [
+      127.7446555929112,
+      47.84512446523613
+    ],
+    [
+      127.23727668980177,
+      47.614772866268666
+    ],
+    [
+      133.17546268600185,
+      46.35562539177069
+    ],
+    [
+      127.69279806819385,
+      47.59375528646925
+    ],
+    [
+      133.05351415890286,
+      46.240516071236435
+    ],
+    [
+      134.1497975347931,
+      47.70896962736946
+    ],
+    [
+      121.749964885979,
+      53.344566607748995
+    ],
+    [
+      126.0561527723279,
+      45.31935445604547
+    ],
+    [
+      127.95454150584168,
+      45.68745378908912
+    ]
+  ],
+  "Heilongjiang_2018_A": {
+    "points": 3000,
+    "cells_with_points": 10,
+    "seconds": 223,
+    "failed_cells_so_far": 33
+  },
+  "Heilongjiang_2018_B": {
+    "points": 3900,
+    "cells_with_points": 13,
+    "seconds": 68,
+    "failed_cells_so_far": 33
+  },
+  "Heilongjiang_2019_A": {
+    "points": 3000,
+    "cells_with_points": 10,
+    "seconds": 214,
+    "failed_cells_so_far": 36
+  },
+  "Heilongjiang_2019_B": {
+    "points": 3900,
+    "cells_with_points": 13,
+    "seconds": 71,
+    "failed_cells_so_far": 36
+  },
+  "cells_Jilin": [
+    [
+      127.0526022830141,
+      43.29963196141975
+    ],
+    [
+      127.2743824135236,
+      42.33086072886978
+    ],
+    [
+      126.05040930187414,
+      44.923176114177025
+    ],
+    [
+      126.56511144672272,
+      42.97075686353401
+    ],
+    [
+      122.76736548728313,
+      44.88849760762246
+    ],
+    [
+      123.43331654839295,
+      45.37717085114308
+    ],
+    [
+      128.49733958649338,
+      42.7943522551692
+    ],
+    [
+      125.51967324706408,
+      43.53083961800574
+    ],
+    [
+      126.79946666292963,
+      43.17309618123082
+    ],
+    [
+      127.20881340649994,
+      42.87919411348701
+    ],
+    [
+      125.1187631512985,
+      43.658063706461256
+    ],
+    [
+      127.12919645395729,
+      42.72292983507766
+    ],
+    [
+      124.23384437557668,
+      44.49259323936246
+    ],
+    [
+      123.5779084676269,
+      46.15655216065825
+    ],
+    [
+      122.49848030491455,
+      45.76488880746769
+    ],
+    [
+      129.60838312657455,
+      43.56961232180061
+    ]
+  ],
+  "Jilin_2018_A": {
+    "points": 4200,
+    "cells_with_points": 14,
+    "seconds": 193,
+    "failed_cells_so_far": 38
+  },
+  "Jilin_2018_B": {
+    "points": 4800,
+    "cells_with_points": 16,
+    "seconds": 58,
+    "failed_cells_so_far": 38
+  },
+  "Jilin_2019_A": {
+    "points": 4200,
+    "cells_with_points": 14,
+    "seconds": 175,
+    "failed_cells_so_far": 40
+  },
+  "Jilin_2019_B": {
+    "points": 4800,
+    "cells_with_points": 16,
+    "seconds": 50,
+    "failed_cells_so_far": 40
+  },
+  "failed_cells": [
+    {
+      "region": "Minnesota",
+      "year": 2018,
+      "variant": "A",
+      "cell": 1,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Minnesota",
+      "year": 2018,
+      "variant": "A",
+      "cell": 6,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Minnesota",
+      "year": 2018,
+      "variant": "A",
+      "cell": 7,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Minnesota",
+      "year": 2018,
+      "variant": "A",
+      "cell": 9,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Minnesota",
+      "year": 2018,
+      "variant": "A",
+      "cell": 10,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Minnesota",
+      "year": 2019,
+      "variant": "A",
+      "cell": 2,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Minnesota",
+      "year": 2019,
+      "variant": "A",
+      "cell": 1,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Minnesota",
+      "year": 2019,
+      "variant": "A",
+      "cell": 4,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Minnesota",
+      "year": 2019,
+      "variant": "A",
+      "cell": 6,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Minnesota",
+      "year": 2019,
+      "variant": "A",
+      "cell": 7,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Minnesota",
+      "year": 2019,
+      "variant": "A",
+      "cell": 9,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Minnesota",
+      "year": 2019,
+      "variant": "A",
+      "cell": 10,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Nebraska",
+      "year": 2018,
+      "variant": "A",
+      "cell": 4,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Nebraska",
+      "year": 2018,
+      "variant": "A",
+      "cell": 11,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Nebraska",
+      "year": 2018,
+      "variant": "A",
+      "cell": 13,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Nebraska",
+      "year": 2018,
+      "variant": "A",
+      "cell": 14,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Nebraska",
+      "year": 2019,
+      "variant": "A",
+      "cell": 4,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Nebraska",
+      "year": 2019,
+      "variant": "A",
+      "cell": 13,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Nebraska",
+      "year": 2019,
+      "variant": "A",
+      "cell": 11,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Nebraska",
+      "year": 2019,
+      "variant": "A",
+      "cell": 14,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Wisconsin",
+      "year": 2018,
+      "variant": "A",
+      "cell": 9,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Wisconsin",
+      "year": 2018,
+      "variant": "A",
+      "cell": 13,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Wisconsin",
+      "year": 2019,
+      "variant": "A",
+      "cell": 9,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Wisconsin",
+      "year": 2019,
+      "variant": "A",
+      "cell": 13,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Iowa",
+      "year": 2018,
+      "variant": "A",
+      "cell": 6,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Iowa",
+      "year": 2018,
+      "variant": "A",
+      "cell": 14,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Iowa",
+      "year": 2019,
+      "variant": "A",
+      "cell": 3,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Iowa",
+      "year": 2019,
+      "variant": "A",
+      "cell": 6,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Iowa",
+      "year": 2019,
+      "variant": "A",
+      "cell": 14,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Iowa",
+      "year": 2019,
+      "variant": "A",
+      "cell": 15,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Heilongjiang",
+      "year": 2018,
+      "variant": "A",
+      "cell": 1,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Heilongjiang",
+      "year": 2018,
+      "variant": "A",
+      "cell": 7,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Heilongjiang",
+      "year": 2018,
+      "variant": "A",
+      "cell": 10,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Heilongjiang",
+      "year": 2019,
+      "variant": "A",
+      "cell": 1,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Heilongjiang",
+      "year": 2019,
+      "variant": "A",
+      "cell": 7,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Heilongjiang",
+      "year": 2019,
+      "variant": "A",
+      "cell": 10,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Jilin",
+      "year": 2018,
+      "variant": "A",
+      "cell": 1,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Jilin",
+      "year": 2018,
+      "variant": "A",
+      "cell": 7,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Jilin",
+      "year": 2019,
+      "variant": "A",
+      "cell": 1,
+      "error": "EEException: User memory limit exceeded."
+    },
+    {
+      "region": "Jilin",
+      "year": 2019,
+      "variant": "A",
+      "cell": 7,
+      "error": "EEException: User memory limit exceeded."
+    }
+  ],
+  "ended": "2026-10-28T21:37:38.178918+00:00"
 }

@@ -47,8 +47,7 @@ def figure(summary: pd.DataFrame, out: Path) -> Path:
         ax.set_title(region)
         ax.set_ylim(0, 1)
         ax.set_xticks([1, 6, 11, 16, 22])
-    for ax in axes[1]:
-        ax.set_xlabel("10-day step (1 = DOY 90, 22 = DOY 300)")
+    axes[1, 1].set_xlabel("10-day composite step (1 = DOY 90, 22 = DOY 300)")
     for ax in axes[:, 0]:
         ax.set_ylabel("share of pixels zero-filled")
     handles, labels = axes[0, 0].get_legend_handles_labels()

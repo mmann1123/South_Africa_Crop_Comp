@@ -11,6 +11,7 @@ def region_year_summary(df: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for (region, year, variant), g in df.groupby(["region", "year", "variant"], sort=True):
         z = g[ZERO_COLS].mean().values
+        cell_shares = g.groupby("cell")["n_zero"].apply(lambda x: (x > 0).mean()) if "cell" in g.columns else pd.Series(dtype=float)
         rows.append(
             {
                 "region": region,
@@ -28,6 +29,8 @@ def region_year_summary(df: pd.DataFrame) -> pd.DataFrame:
                 "share_zero_apr": float(z[0:3].mean()),
                 "share_zero_oct": float(z[19:22].mean()),
                 "share_zero_by_step": ";".join(f"{v:.4f}" for v in z),
+                "n_cells": int(len(cell_shares)),
+                "cell_sd_share_any_zero": float(cell_shares.std(ddof=1)) if len(cell_shares) > 1 else np.nan,
             }
         )
     return pd.DataFrame(rows)

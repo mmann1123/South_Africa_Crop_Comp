@@ -36,6 +36,8 @@ SEED = 42
 SCALE = 10
 WORKERS = 4
 STEP_COLS = [f"{p}_{k:02d}" for p in ("valid", "zero") for k in range(22)]
+TILE_SCALE = 16
+FAILED_CELLS: list[dict] = []  # cells that exceeded the EE memory limit after retries (logged, skipped)
 
 
 def region_cells(region_name: str, country: str) -> list:
@@ -54,7 +56,7 @@ def sample_cell(cell, cell_id: int, region_name: str, country: str, year: int, v
     cls, frame, legend = regions.frame_image(country, year)
     per_class = max(1, POINTS_PER_CELL // len(legend))
     img = you2021_recipe.counters(cell, year, variant).addBands(cls)
-    fc = img.stratifiedSample(numPoints=per_class, classBand="class", region=cell, scale=SCALE, seed=SEED + cell_id, geometries=False, tileScale=4, dropNulls=True)
+    fc = img.stratifiedSample(numPoints=per_class, classBand="class", region=cell, scale=SCALE, seed=SEED + cell_id, geometries=False, tileScale=TILE_SCALE, dropNulls=True)
     feats = None
     for attempt in range(4):
         try:
@@ -62,7 +64,8 @@ def sample_cell(cell, cell_id: int, region_name: str, country: str, year: int, v
             break
         except Exception as e:  # noqa: BLE001
             if attempt == 3:
-                raise
+                FAILED_CELLS.append({"region": region_name, "year": year, "variant": variant, "cell": cell_id, "error": f"{type(e).__name__}: {e}"[:200]})
+                return pd.DataFrame()
             time.sleep(10 * 2**attempt)
     recs = []
     for f in feats:
@@ -112,9 +115,11 @@ def main(smoke: bool = False, force: bool = False, regions_only: list[str] | Non
                 continue
             df.to_csv(OUT, mode="a", header=not OUT.exists(), index=False)
             n_jobs += 1
-            log.add(f"{region_name}_{year}_{variant}", {"points": int(len(df)), "cells_with_points": int(df["cell"].nunique()) if len(df) else 0, "seconds": round(time.time() - t)})
+            log.add(f"{region_name}_{year}_{variant}", {"points": int(len(df)), "cells_with_points": int(df["cell"].nunique()) if len(df) else 0, "seconds": round(time.time() - t), "failed_cells_so_far": len(FAILED_CELLS)})
             print(f"{region_name} {year} {variant}: {len(df)} points from {df['cell'].nunique() if len(df) else 0} cells, mean n_valid {df['n_valid'].mean():.2f}, share any zero {(df['n_zero'] > 0).mean():.3f} ({time.time() - t:.0f} s)", flush=True)
         log.count("jobs_run", n_jobs)
+        log.add("failed_cells", FAILED_CELLS)
+        log.count("failed_cells", len(FAILED_CELLS))
         if OUT.exists():
             log.count("rows_total", int(len(pd.read_csv(OUT))))
 

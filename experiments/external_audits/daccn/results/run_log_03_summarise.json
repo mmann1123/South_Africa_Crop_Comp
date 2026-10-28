@@ -1,0 +1,21 @@
+{
+  "script": "03_summarise",
+  "args": {},
+  "seed": 42,
+  "git_commit": "2be71225626c162f20090f9de796b332fc72a49b",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "rows_in": 79529
+  },
+  "started": "2026-10-28T21:39:10.745449+00:00",
+  "figure": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/daccn/figures/daccn_zero_by_step.png",
+  "ended": "2026-10-28T21:39:11.376551+00:00"
+}
