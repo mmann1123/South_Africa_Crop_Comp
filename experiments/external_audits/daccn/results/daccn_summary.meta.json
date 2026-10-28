@@ -1,7 +1,7 @@
 {
   "script": "03_summarise",
-  "git_commit": "2be71225626c162f20090f9de796b332fc72a49b",
-  "run_date": "2026-10-28T21:39:10.923248+00:00",
+  "git_commit": "e3e06f7882d8b02514323c81494bd241ccb8f247",
+  "run_date": "2026-10-28T21:39:56.655643+00:00",
   "inputs": [
     "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/daccn/results/daccn_counters.csv"
   ],

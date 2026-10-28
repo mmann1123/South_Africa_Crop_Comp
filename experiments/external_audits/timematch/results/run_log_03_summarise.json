@@ -2,7 +2,7 @@
   "script": "03_summarise",
   "args": {},
   "seed": 42,
-  "git_commit": "c9f8c4ba770e3c785a303f9eea587779b4c230f5",
+  "git_commit": "e3e06f7882d8b02514323c81494bd241ccb8f247",
   "python": "3.13.9",
   "packages": {
     "ee": "1.7.50",
@@ -17,7 +17,7 @@
     "dates_without_images": 0,
     "dates_failed": 0
   },
-  "started": "2026-10-28T19:25:40.841243+00:00",
+  "started": "2026-10-28T21:39:46.712748+00:00",
   "figure": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/timematch/figures/timematch_cloud_by_date.png",
-  "ended": "2026-10-28T19:25:41.498084+00:00"
+  "ended": "2026-10-28T21:39:47.307673+00:00"
 }

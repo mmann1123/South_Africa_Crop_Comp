@@ -2,7 +2,7 @@
   "script": "04_summarise",
   "args": {},
   "seed": 42,
-  "git_commit": "36e2285cd167f67ae92a200c1fcb028fae370652",
+  "git_commit": "e3e06f7882d8b02514323c81494bd241ccb8f247",
   "python": "3.13.9",
   "packages": {
     "ee": "1.7.50",
@@ -13,7 +13,7 @@
     "matplotlib": "3.10.7"
   },
   "counts": {},
-  "started": "2026-10-28T20:47:27.754905+00:00",
+  "started": "2026-10-28T21:39:49.188666+00:00",
   "pfqa_season": [
     {
       "tile": "17E-243N",
@@ -49,5 +49,5 @@
     "benchmark_difference": -9.0
   },
   "figure": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/denethor/figures/denethor_clear_and_synthetic.png",
-  "ended": "2026-10-28T20:47:28.121694+00:00"
+  "ended": "2026-10-28T21:39:49.551191+00:00"
 }
