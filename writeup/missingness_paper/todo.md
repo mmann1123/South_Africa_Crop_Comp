@@ -72,14 +72,16 @@ found in our own pipeline. These three answer it.
 - [ ] **Second dataset** (retraining; scope depends on the target journal). BreizhCrops or the
   Germany track of AI4FoodSecurity, with its natural cloud gaps or simulated ones. Turns the
   paper from a case study into a general finding.
-- [ ] **Paper-by-paper audit of published transfer failures** (steps 1, 2, 4 running 2026-10-28;
-  `research_notes/Transfer failure missingness audit/`). For 14 papers reporting cross-region
-  failure (TimeMatch, T3S, Sen4AgriNet, Hoppe, Wijesingha, Mohammadi, Pandžić, Rusňák, Orynbaikyzy,
-  Xie, EuroCropsML, Kerner, Valinho, Chen & Liu): claimed drop and code/data availability; how
-  missing and cloudy observations are handled in training and inference; whether source and target
-  plausibly differ in missingness; verdict likely / possible / unlikely.
-  - [ ] Step 3 (later): compare per-month missingness between source and target regions in the
-    public data for the two or three likeliest cases (TimeMatch, Sen4AgriNet candidates).
+- [x] **Paper-by-paper audit of published transfer failures** (steps 1, 2, 4 done 2026-10-28;
+  `research_notes/Transfer failure missingness audit/summary.md`, details in part1.md, part2.md).
+  14 papers: none "likely", none fills a target gap with an out-of-distribution constant. Six
+  "possible" through differing observation patterns (Sen4AgriNet strongest, TimeMatch, T3S,
+  Orynbaikyzy, Chen & Liu, Valinho), each also confounded; the rest unlikely. Our mechanism
+  appears partially in the Togo crop-mask code (raw 0 before the normaliser at inference, no
+  missing-share cap), checked, but that paper makes no transfer claim. Side finding: Sen4AgriNet's
+  public object-level loader may train on its test file (unverified for the published runs).
+  - [ ] Step 3 (later): compare missingness between source and target in the public data for
+    Sen4AgriNet, TimeMatch/T3S and Orynbaikyzy (checks listed in summary.md).
 - [x] **Background: nodata handling in general-purpose SITS codebases** (2026-10-28;
   `research_notes/SITS nodata handling audit/audit.md`, 17 codebases, commit-pinned links). Result
   does NOT support "probably common in public code": none reproduces our failure mode. 4 mask
