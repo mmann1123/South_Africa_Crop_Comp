@@ -59,6 +59,13 @@ untested confound in several well-cited failures (Sen4AgriNet, TimeMatch, T3S, O
 almost no transfer paper reports per-region observation statistics. Recommending that they do is
 a fair, modest contribution.
 
+Counter-example and precedent (from the user's separate review, `reports/Missingness confound audit
+of transfer papers.md`): Pham et al. 2024 (IJAEOG 129:103867) report annual clear-observation
+counts, test missingness as the main hypothesis, and show cross-year loss tracks observation
+density and is fixed by training-time observation dropout. It is the published demonstration of
+the mechanism (across years, not regions) and must be cited, not audited. Briefer:
+`writeup/literature/Temporally transferable crop mapping with temporal encoding and deep learning augmentations.md`.
+
 ## Data checks for step 3 (priority order)
 
 1. Sen4AgriNet: count filled and extrapolated months per parcel by region; compare French parcels

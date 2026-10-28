@@ -57,3 +57,9 @@ not the published model.
 Reading: the sparse gate's robustness is real but is a weaker form of what the standard remedy,
 training with missing months, already provides. Missingness robustness is a property of training
 exposure, not of sparse architectures.
+
+Prior art: Pham et al. 2024 (IJAEOG 129:103867; briefer in `writeup/literature/`) found the same
+pattern across years in Brandenburg. Random Observation Selection, training-time dropout of
+5 to 95% of observations, recovered 20 to 30 OA points when a model trained on the densest year
+was applied to sparser years, and added only about 5 points in the training year. Our result is
+the cross-region, single-season version, with the gate comparison and the fill-value contrast added.
