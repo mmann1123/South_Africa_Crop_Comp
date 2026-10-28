@@ -41,7 +41,7 @@ def figure(s: pd.DataFrame, monthly: pd.DataFrame | None, out: Path) -> Path:
         parts[key].set_color(plotting.INK_SECONDARY)
         parts[key].set_linewidth(0.9)
     ax1.set_xticks(range(4))
-    ax1.set_xticklabels([SHORT[t].replace(" (", "\n(") for t in ORDER], fontsize=7.5)
+    ax1.set_xticklabels([SHORT[t].replace(" 20", "\n20") for t in ORDER], fontsize=7.5)
     ax1.set_ylabel("clear Sentinel-2 acquisitions per field, Apr to Oct")
     ax1.set_title("(a) Clear observations, s2cloudless < 40 %")
     if monthly is not None:

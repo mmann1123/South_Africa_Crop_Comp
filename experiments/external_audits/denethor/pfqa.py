@@ -16,6 +16,7 @@ from experiments.external_audits.common import zonal
 
 NODATA = -1000
 SYNTHETIC_THRESHOLD = 50
+DAYS_UNKNOWN = 900  # layer 2 sentinel: no real observation within the search window
 
 
 def read_day(url_or_path: str, window: Window) -> tuple[np.ndarray, np.ndarray] | None:
@@ -47,7 +48,11 @@ def field_day_stats(
     idx = np.where(valid, index_map, -1)
     frac_syn = zonal.field_fraction((pct > synthetic_threshold)[None], idx, n_fields)[0]
     mean_pct = zonal.field_means(np.nan_to_num(pct)[None], idx, n_fields)[0]
-    mean_days = zonal.field_means(np.nan_to_num(np.abs(days))[None], idx, n_fields)[0]
+    known = valid & ~np.isnan(days) & (np.abs(days) < DAYS_UNKNOWN)
+    idx_known = np.where(known, index_map, -1)
+    with np.errstate(invalid="ignore", divide="ignore"):
+        mean_days = zonal.field_means(np.nan_to_num(np.abs(days))[None], idx_known, n_fields)[0]
+    frac_unknown = zonal.field_fraction((~known)[None], idx, n_fields)[0]
     n_valid = np.bincount(idx[idx >= 0], minlength=n_fields)
     out = pd.DataFrame(
         {
@@ -56,9 +61,10 @@ def field_day_stats(
             "frac_synthetic": frac_syn,
             "mean_percent_synthetic": mean_pct,
             "mean_days_to_real": mean_days,
+            "frac_days_to_real_unknown": frac_unknown,
         }
     )
-    out.loc[out["n_valid_pixels"] == 0, ["frac_synthetic", "mean_percent_synthetic", "mean_days_to_real"]] = np.nan
+    out.loc[out["n_valid_pixels"] == 0, ["frac_synthetic", "mean_percent_synthetic", "mean_days_to_real", "frac_days_to_real_unknown"]] = np.nan
     return out
 
 
@@ -78,6 +84,7 @@ def summarise(daily: pd.DataFrame) -> pd.DataFrame:
             "share_days_mostly_synthetic": d[d["has_qa"]].groupby(["field_pos", "month"], sort=True)["mostly_synthetic"].mean(),
             "mean_percent_synthetic": g["mean_percent_synthetic"].mean(),
             "mean_days_to_real": g["mean_days_to_real"].mean(),
+            "mean_frac_days_to_real_unknown": g["frac_days_to_real_unknown"].mean() if "frac_days_to_real_unknown" in d.columns else np.nan,
         }
     ).reset_index()
     return out

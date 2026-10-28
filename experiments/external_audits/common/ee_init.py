@@ -20,8 +20,11 @@ def project_id() -> str:
 
 
 def init() -> str:
+    import warnings
+
     import ee
 
+    warnings.filterwarnings("ignore", category=DeprecationWarning, module="ee")  # FAO/GAUL/2015 deprecation notice
     proj = project_id()
     ee.Initialize(project=proj)
     return proj

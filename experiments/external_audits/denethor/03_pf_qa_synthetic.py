@@ -67,7 +67,7 @@ def process(tile: str, year: int, smoke: bool, log: RunLog) -> pd.DataFrame:
             layers = pfqa.read_day(str(path), win) if path else None
             if layers is None:
                 missing.append(date)
-                df = pd.DataFrame({"field_pos": np.arange(n), "n_valid_pixels": 0, "frac_synthetic": np.nan, "mean_percent_synthetic": np.nan, "mean_days_to_real": np.nan})
+                df = pd.DataFrame({"field_pos": np.arange(n), "n_valid_pixels": 0, "frac_synthetic": np.nan, "mean_percent_synthetic": np.nan, "mean_days_to_real": np.nan, "frac_days_to_real_unknown": np.nan})
             else:
                 df = pfqa.field_day_stats(layers[0], layers[1], idx, n)
             df["date"] = date
