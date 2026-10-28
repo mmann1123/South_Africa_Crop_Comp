@@ -187,3 +187,69 @@ Deleting the missing month is as good as filling it with the training median for
 (+0.04 to +0.11). Models trained with month dropout are indifferent among all three. So the
 attention models need no imputation: what hurt them was a fill value outside the training
 distribution, not the missing information. Paired field bootstrap, B = 10,000, seed 42.
+
+## Nodata handling in general-purpose SITS codebases (2026-10-28)
+
+Background audit of 17 widely used codebases, read at pinned commits without running them
+(`research_notes/SITS nodata handling audit/audit.md`, with file and line links). The question was
+whether our failure mode appears in public code: a constant written into a month that training
+almost always observes, at inference only, before a training-fitted scaler.
+
+| How gaps are handled | Count | Codebases |
+|---|---|---|
+| Masked consistently | 4 | SITS-BERT, U-TAE, WorldCereal/prometheo, EuroCropsML |
+| Interpolated identically in training and prediction | 3 | R `sits`, eo-learn, Sen4AgriNet |
+| Composited away upstream | 3 | Presto, CropHarvest, OpenMapFlow |
+| No gap handling (irregular dates; cloudy values left raw) | 5 | BreizhCrops, PSE-TAE, L-TAE, TimeMatch, AI4Food starter pack |
+| Zero padding without a mask, but identical in training | 1 | TSViT |
+| Loader only | 1 | torchgeo PASTIS |
+
+None reproduces our failure mode. The closest case is an edge path in OpenMapFlow's `_fillna`,
+reused by Presto: a band that is NaN across a whole tile is filled with raw 0 before normalisation.
+A month missing over a whole tile falls back to the band's mean over the other months, which is in
+range. Both behaviours were checked against the pinned commit. WorldCereal is the strongest
+counter-example: it masks missing composites and also simulates missing timesteps in training.
+
+The paper should therefore not claim this failure is common in public code. The supported claim is
+narrower: reference pipelines are protected by masking, consistent interpolation or compositing,
+and a hand-built fixed monthly grid that reuses their architectures without that data handling
+(like ours) loses the protection. Six codebases come from two groups, so the sample is not
+independent; MCTNet and Che et al. were not checked. Whether published transfer failures had a
+missing-data contribution is a separate paper-by-paper audit.
+
+## Month-by-month missing-month injection (2026-10-28)
+
+`month_injection.py` blanks each of the ten months in turn, for every pixel, on the holdout and on
+the in-region test fields. The injected month is then zero-filled, filled with the training
+median, or deleted from attention; natural gaps get the training median in every condition, so
+each row isolates the injected month. 13 models, 5-seed ensembles, at most 50 pixels per field
+(the same pixels everywhere). Results: `results/month_injection.csv`,
+`figures/month_injection.pdf`.
+
+Mean change in macro-F1 over the ten months relative to no injection (worst month in brackets):
+
+| Model | Holdout, zero | Holdout, median | Holdout, deletion | In-region, zero | In-region, median |
+|---|---|---|---|---|---|
+| TempCNN, dense | −0.24 (−0.47) | −0.03 (−0.11) | | −0.30 (−0.56) | −0.04 (−0.10) |
+| TempCNN, gated | −0.28 (−0.41) | −0.02 (−0.09) | | −0.35 (−0.52) | −0.03 (−0.09) |
+| CNN-BiLSTM, dense | −0.23 (−0.47) | −0.03 (−0.13) | | −0.32 (−0.60) | −0.07 (−0.16) |
+| CNN-BiLSTM, gated | −0.11 (−0.27) | −0.02 (−0.11) | | −0.17 (−0.26) | −0.04 (−0.11) |
+| L-TAE | −0.18 (−0.42) | −0.03 (−0.10) | −0.02 (−0.08) | −0.22 (−0.46) | −0.04 (−0.10) |
+| L-TAE-S | −0.08 (−0.19) | −0.01 (−0.06) | −0.01 (−0.04) | −0.09 (−0.19) | −0.03 (−0.09) |
+| Transformer | −0.11 (−0.23) | −0.03 (−0.12) | −0.02 (−0.10) | −0.14 (−0.28) | −0.03 (−0.08) |
+| any model + month dropout (6) | −0.01 to 0.00 (≤ −0.06) | −0.03 to −0.00 | −0.01 to 0.00 | −0.02 to 0.00 | −0.04 to −0.02 |
+
+Zero fill damages every month for every model trained without dropout, in-region as much as on the
+holdout. The failure is therefore not specific to September or to the transfer setting: zero-filling
+any month that training always observed breaks the dense networks wherever they are applied. It is
+worst in August to November, the months that separate the crops. The sparse gate softens it for
+CNN-BiLSTM and L-TAE but not for TempCNN, as in the 2 x 2. Month dropout, trained on random months
+and never targeted, removes the damage in every month. The injected losses are larger than the real
+September effect (about 0.1) because every pixel loses the month, not 41%.
+
+The median-fill and deletion rows isolate the real information loss, and they agree: most months
+cost under 0.03, while October costs 0.04 to 0.16 for every model, with or without dropout. That is
+genuine information no fill can restore, separate from the artifact. Deletion is slightly better
+than the median fill for the attention models (mean −0.00 to −0.02 against −0.01 to −0.03). With
+dropout, zero fill is as good as the median, because the dropout models were trained on that value.
+These median-fill rows also serve as the leave-one-month-out occlusion test.

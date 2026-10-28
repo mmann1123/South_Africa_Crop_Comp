@@ -63,17 +63,24 @@ with the date and the files or commits that close them.
 A reviewer's first objection will be one dataset, one tile, one missing month: a preprocessing bug
 found in our own pipeline. These three answer it.
 
-- [ ] **Month-by-month missing-month injection** (inference only, cheap). Blank each of the ten
-  months in turn, on the holdout and on the in-region test fields, and score every raw-sequence
-  model under zero fill, training-median fill and step deletion, plus the month-dropout models
-  (trained on random months, never targeted). Shows whether zero fill damages every month, whether
-  the three fixes hold everywhere, and whether dropout covers months it was not aimed at. Turns
-  "September broke things" into a dose-response result. Builds on `deep_learn/src/missing.py`,
-  `experiments/missingness/step_deletion.py` and the 2 x 2 checkpoints.
+- [x] **Month-by-month missing-month injection** (2026-10-28; `experiments/missingness/month_injection.py`,
+  13 models, holdout and in-region). Zero fill damages every month for every model trained
+  without dropout, in-region as much as on the holdout (mean −0.08 to −0.35, worst month −0.19 to
+  −0.60), so the failure is neither September- nor transfer-specific. Month dropout removes it in
+  every month. Median fill and deletion agree on the real information loss: under 0.03 for most
+  months, 0.04 to 0.16 for October.
 - [ ] **Second dataset** (retraining; scope depends on the target journal). BreizhCrops or the
   Germany track of AI4FoodSecurity, with its natural cloud gaps or simulated ones. Turns the
   paper from a case study into a general finding.
-- [x] **Audit of nodata handling in open-source SITS codebases** (2026-10-28;
+- [ ] **Paper-by-paper audit of published transfer failures** (steps 1, 2, 4 running 2026-10-28;
+  `research_notes/Transfer failure missingness audit/`). For 14 papers reporting cross-region
+  failure (TimeMatch, T3S, Sen4AgriNet, Hoppe, Wijesingha, Mohammadi, Pandžić, Rusňák, Orynbaikyzy,
+  Xie, EuroCropsML, Kerner, Valinho, Chen & Liu): claimed drop and code/data availability; how
+  missing and cloudy observations are handled in training and inference; whether source and target
+  plausibly differ in missingness; verdict likely / possible / unlikely.
+  - [ ] Step 3 (later): compare per-month missingness between source and target regions in the
+    public data for the two or three likeliest cases (TimeMatch, Sen4AgriNet candidates).
+- [x] **Background: nodata handling in general-purpose SITS codebases** (2026-10-28;
   `research_notes/SITS nodata handling audit/audit.md`, 17 codebases, commit-pinned links). Result
   does NOT support "probably common in public code": none reproduces our failure mode. 4 mask
   consistently (WorldCereal also simulates gaps in training), 3 interpolate identically in train
@@ -97,10 +104,10 @@ found in our own pipeline. These three answer it.
   split and identical field draws for every model, so draws and fields pair across models. Needed
   if the paper claims logistic regression matches the deep models at low data (a null claim from
   the current unpaired tests is weak).
-- [ ] **Mechanism figure** (inference only). Flip-rate bar chart done
+- [x] **Mechanism figure** (inference only). Flip-rate bar chart done
   (`experiments/missingness/flip_rate_figure.py`, `figures/flip_rate.pdf`). The leave-one-month-out
   occlusion is the training-median arm of the month-by-month injection (fields changed and F1 per
-  month); finish when that run completes. Integrated-gradients figure goes to the supplement.
+  month; done). Integrated-gradients figure goes to the supplement.
 
 ## Would strengthen it
 

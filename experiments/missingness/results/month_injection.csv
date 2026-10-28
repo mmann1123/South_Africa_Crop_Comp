@@ -1,0 +1,647 @@
+model,data,month,treatment,f1m,fields_changed
+"TempCNN, dense",in-region,none,none,0.7707,0
+"TempCNN, dense",in-region,January,zero,0.4944,211
+"TempCNN, dense",in-region,January,train_median,0.7555,49
+"TempCNN, dense",in-region,February,zero,0.5094,213
+"TempCNN, dense",in-region,February,train_median,0.7142,76
+"TempCNN, dense",in-region,March,zero,0.5456,202
+"TempCNN, dense",in-region,March,train_median,0.7267,62
+"TempCNN, dense",in-region,April,zero,0.642,194
+"TempCNN, dense",in-region,April,train_median,0.7467,60
+"TempCNN, dense",in-region,July,zero,0.6114,183
+"TempCNN, dense",in-region,July,train_median,0.7256,55
+"TempCNN, dense",in-region,August,zero,0.449,265
+"TempCNN, dense",in-region,August,train_median,0.7572,42
+"TempCNN, dense",in-region,September,zero,0.3079,339
+"TempCNN, dense",in-region,September,train_median,0.7034,89
+"TempCNN, dense",in-region,October,zero,0.2062,498
+"TempCNN, dense",in-region,October,train_median,0.6704,124
+"TempCNN, dense",in-region,November,zero,0.2954,389
+"TempCNN, dense",in-region,November,train_median,0.752,71
+"TempCNN, dense",in-region,December,zero,0.6282,165
+"TempCNN, dense",in-region,December,train_median,0.7377,69
+"TempCNN, dense",holdout,none,none,0.6475,0
+"TempCNN, dense",holdout,January,zero,0.4172,700
+"TempCNN, dense",holdout,January,train_median,0.6432,196
+"TempCNN, dense",holdout,February,zero,0.4657,592
+"TempCNN, dense",holdout,February,train_median,0.6173,310
+"TempCNN, dense",holdout,March,zero,0.5121,623
+"TempCNN, dense",holdout,March,train_median,0.637,269
+"TempCNN, dense",holdout,April,zero,0.5506,618
+"TempCNN, dense",holdout,April,train_median,0.6448,273
+"TempCNN, dense",holdout,July,zero,0.5013,768
+"TempCNN, dense",holdout,July,train_median,0.6343,250
+"TempCNN, dense",holdout,August,zero,0.4158,655
+"TempCNN, dense",holdout,August,train_median,0.6331,246
+"TempCNN, dense",holdout,September,zero,0.27,800
+"TempCNN, dense",holdout,September,train_median,0.6266,174
+"TempCNN, dense",holdout,October,zero,0.1809,1449
+"TempCNN, dense",holdout,October,train_median,0.5354,555
+"TempCNN, dense",holdout,November,zero,0.2545,1005
+"TempCNN, dense",holdout,November,train_median,0.6161,335
+"TempCNN, dense",holdout,December,zero,0.4901,587
+"TempCNN, dense",holdout,December,train_median,0.6354,341
+"TempCNN, dense + dropout",in-region,none,none,0.7652,0
+"TempCNN, dense + dropout",in-region,January,zero,0.7502,18
+"TempCNN, dense + dropout",in-region,January,train_median,0.7474,26
+"TempCNN, dense + dropout",in-region,February,zero,0.7529,27
+"TempCNN, dense + dropout",in-region,February,train_median,0.7497,41
+"TempCNN, dense + dropout",in-region,March,zero,0.7577,21
+"TempCNN, dense + dropout",in-region,March,train_median,0.7563,41
+"TempCNN, dense + dropout",in-region,April,zero,0.7469,21
+"TempCNN, dense + dropout",in-region,April,train_median,0.7483,32
+"TempCNN, dense + dropout",in-region,July,zero,0.7462,23
+"TempCNN, dense + dropout",in-region,July,train_median,0.7433,28
+"TempCNN, dense + dropout",in-region,August,zero,0.7538,28
+"TempCNN, dense + dropout",in-region,August,train_median,0.7472,37
+"TempCNN, dense + dropout",in-region,September,zero,0.744,36
+"TempCNN, dense + dropout",in-region,September,train_median,0.7226,65
+"TempCNN, dense + dropout",in-region,October,zero,0.7316,44
+"TempCNN, dense + dropout",in-region,October,train_median,0.687,99
+"TempCNN, dense + dropout",in-region,November,zero,0.7537,19
+"TempCNN, dense + dropout",in-region,November,train_median,0.7504,50
+"TempCNN, dense + dropout",in-region,December,zero,0.7694,23
+"TempCNN, dense + dropout",in-region,December,train_median,0.7575,49
+"TempCNN, dense + dropout",holdout,none,none,0.6452,0
+"TempCNN, dense + dropout",holdout,January,zero,0.6515,87
+"TempCNN, dense + dropout",holdout,January,train_median,0.6527,157
+"TempCNN, dense + dropout",holdout,February,zero,0.6428,91
+"TempCNN, dense + dropout",holdout,February,train_median,0.6393,249
+"TempCNN, dense + dropout",holdout,March,zero,0.6445,120
+"TempCNN, dense + dropout",holdout,March,train_median,0.6371,212
+"TempCNN, dense + dropout",holdout,April,zero,0.6502,77
+"TempCNN, dense + dropout",holdout,April,train_median,0.6432,124
+"TempCNN, dense + dropout",holdout,July,zero,0.6376,113
+"TempCNN, dense + dropout",holdout,July,train_median,0.6378,156
+"TempCNN, dense + dropout",holdout,August,zero,0.6317,99
+"TempCNN, dense + dropout",holdout,August,train_median,0.6312,146
+"TempCNN, dense + dropout",holdout,September,zero,0.6406,128
+"TempCNN, dense + dropout",holdout,September,train_median,0.6193,134
+"TempCNN, dense + dropout",holdout,October,zero,0.606,291
+"TempCNN, dense + dropout",holdout,October,train_median,0.5563,543
+"TempCNN, dense + dropout",holdout,November,zero,0.6466,113
+"TempCNN, dense + dropout",holdout,November,train_median,0.6427,263
+"TempCNN, dense + dropout",holdout,December,zero,0.6628,122
+"TempCNN, dense + dropout",holdout,December,train_median,0.6496,247
+"TempCNN, gated",in-region,none,none,0.7718,0
+"TempCNN, gated",in-region,January,zero,0.4615,246
+"TempCNN, gated",in-region,January,train_median,0.7632,47
+"TempCNN, gated",in-region,February,zero,0.5143,225
+"TempCNN, gated",in-region,February,train_median,0.7252,80
+"TempCNN, gated",in-region,March,zero,0.4638,258
+"TempCNN, gated",in-region,March,train_median,0.7358,57
+"TempCNN, gated",in-region,April,zero,0.4747,245
+"TempCNN, gated",in-region,April,train_median,0.7588,48
+"TempCNN, gated",in-region,July,zero,0.5404,217
+"TempCNN, gated",in-region,July,train_median,0.745,55
+"TempCNN, gated",in-region,August,zero,0.3197,330
+"TempCNN, gated",in-region,August,train_median,0.758,45
+"TempCNN, gated",in-region,September,zero,0.2505,359
+"TempCNN, gated",in-region,September,train_median,0.7096,92
+"TempCNN, gated",in-region,October,zero,0.2713,341
+"TempCNN, gated",in-region,October,train_median,0.6796,109
+"TempCNN, gated",in-region,November,zero,0.3337,328
+"TempCNN, gated",in-region,November,train_median,0.7751,57
+"TempCNN, gated",in-region,December,zero,0.559,228
+"TempCNN, gated",in-region,December,train_median,0.7544,60
+"TempCNN, gated",holdout,none,none,0.6521,0
+"TempCNN, gated",holdout,January,zero,0.3984,718
+"TempCNN, gated",holdout,January,train_median,0.6483,172
+"TempCNN, gated",holdout,February,zero,0.4999,569
+"TempCNN, gated",holdout,February,train_median,0.6381,324
+"TempCNN, gated",holdout,March,zero,0.3925,740
+"TempCNN, gated",holdout,March,train_median,0.6374,234
+"TempCNN, gated",holdout,April,zero,0.4351,708
+"TempCNN, gated",holdout,April,train_median,0.6486,231
+"TempCNN, gated",holdout,July,zero,0.4983,584
+"TempCNN, gated",holdout,July,train_median,0.6318,262
+"TempCNN, gated",holdout,August,zero,0.3249,780
+"TempCNN, gated",holdout,August,train_median,0.6239,249
+"TempCNN, gated",holdout,September,zero,0.2424,861
+"TempCNN, gated",holdout,September,train_median,0.6267,167
+"TempCNN, gated",holdout,October,zero,0.2496,865
+"TempCNN, gated",holdout,October,train_median,0.5629,492
+"TempCNN, gated",holdout,November,zero,0.2889,845
+"TempCNN, gated",holdout,November,train_median,0.6364,189
+"TempCNN, gated",holdout,December,zero,0.3981,731
+"TempCNN, gated",holdout,December,train_median,0.6443,282
+"TempCNN, gated + dropout",in-region,none,none,0.7763,0
+"TempCNN, gated + dropout",in-region,January,zero,0.7624,19
+"TempCNN, gated + dropout",in-region,January,train_median,0.7622,28
+"TempCNN, gated + dropout",in-region,February,zero,0.7619,16
+"TempCNN, gated + dropout",in-region,February,train_median,0.7503,48
+"TempCNN, gated + dropout",in-region,March,zero,0.7677,23
+"TempCNN, gated + dropout",in-region,March,train_median,0.7554,34
+"TempCNN, gated + dropout",in-region,April,zero,0.7704,20
+"TempCNN, gated + dropout",in-region,April,train_median,0.7606,28
+"TempCNN, gated + dropout",in-region,July,zero,0.7755,25
+"TempCNN, gated + dropout",in-region,July,train_median,0.753,29
+"TempCNN, gated + dropout",in-region,August,zero,0.7757,29
+"TempCNN, gated + dropout",in-region,August,train_median,0.7559,33
+"TempCNN, gated + dropout",in-region,September,zero,0.7499,33
+"TempCNN, gated + dropout",in-region,September,train_median,0.73,70
+"TempCNN, gated + dropout",in-region,October,zero,0.7571,35
+"TempCNN, gated + dropout",in-region,October,train_median,0.7184,69
+"TempCNN, gated + dropout",in-region,November,zero,0.7681,27
+"TempCNN, gated + dropout",in-region,November,train_median,0.7637,45
+"TempCNN, gated + dropout",in-region,December,zero,0.776,25
+"TempCNN, gated + dropout",in-region,December,train_median,0.7592,50
+"TempCNN, gated + dropout",holdout,none,none,0.6487,0
+"TempCNN, gated + dropout",holdout,January,zero,0.6445,90
+"TempCNN, gated + dropout",holdout,January,train_median,0.6565,128
+"TempCNN, gated + dropout",holdout,February,zero,0.6529,82
+"TempCNN, gated + dropout",holdout,February,train_median,0.6536,146
+"TempCNN, gated + dropout",holdout,March,zero,0.6431,113
+"TempCNN, gated + dropout",holdout,March,train_median,0.6472,129
+"TempCNN, gated + dropout",holdout,April,zero,0.6543,78
+"TempCNN, gated + dropout",holdout,April,train_median,0.6584,101
+"TempCNN, gated + dropout",holdout,July,zero,0.6525,112
+"TempCNN, gated + dropout",holdout,July,train_median,0.6491,150
+"TempCNN, gated + dropout",holdout,August,zero,0.642,104
+"TempCNN, gated + dropout",holdout,August,train_median,0.632,163
+"TempCNN, gated + dropout",holdout,September,zero,0.6527,132
+"TempCNN, gated + dropout",holdout,September,train_median,0.6285,132
+"TempCNN, gated + dropout",holdout,October,zero,0.6015,279
+"TempCNN, gated + dropout",holdout,October,train_median,0.5974,353
+"TempCNN, gated + dropout",holdout,November,zero,0.6427,110
+"TempCNN, gated + dropout",holdout,November,train_median,0.6459,178
+"TempCNN, gated + dropout",holdout,December,zero,0.6722,119
+"TempCNN, gated + dropout",holdout,December,train_median,0.6553,241
+"CNN-BiLSTM, dense",in-region,none,none,0.7874,0
+"CNN-BiLSTM, dense",in-region,January,zero,0.5766,193
+"CNN-BiLSTM, dense",in-region,January,train_median,0.7424,58
+"CNN-BiLSTM, dense",in-region,February,zero,0.6137,169
+"CNN-BiLSTM, dense",in-region,February,train_median,0.6895,117
+"CNN-BiLSTM, dense",in-region,March,zero,0.5949,224
+"CNN-BiLSTM, dense",in-region,March,train_median,0.7119,102
+"CNN-BiLSTM, dense",in-region,April,zero,0.556,235
+"CNN-BiLSTM, dense",in-region,April,train_median,0.7416,65
+"CNN-BiLSTM, dense",in-region,July,zero,0.5627,276
+"CNN-BiLSTM, dense",in-region,July,train_median,0.7189,85
+"CNN-BiLSTM, dense",in-region,August,zero,0.4308,291
+"CNN-BiLSTM, dense",in-region,August,train_median,0.739,62
+"CNN-BiLSTM, dense",in-region,September,zero,0.2736,496
+"CNN-BiLSTM, dense",in-region,September,train_median,0.7038,104
+"CNN-BiLSTM, dense",in-region,October,zero,0.1853,572
+"CNN-BiLSTM, dense",in-region,October,train_median,0.6262,164
+"CNN-BiLSTM, dense",in-region,November,zero,0.4143,424
+"CNN-BiLSTM, dense",in-region,November,train_median,0.7524,41
+"CNN-BiLSTM, dense",in-region,December,zero,0.4228,320
+"CNN-BiLSTM, dense",in-region,December,train_median,0.7281,67
+"CNN-BiLSTM, dense",holdout,none,none,0.6336,0
+"CNN-BiLSTM, dense",holdout,January,zero,0.4796,531
+"CNN-BiLSTM, dense",holdout,January,train_median,0.6436,252
+"CNN-BiLSTM, dense",holdout,February,zero,0.515,559
+"CNN-BiLSTM, dense",holdout,February,train_median,0.6086,315
+"CNN-BiLSTM, dense",holdout,March,zero,0.5701,686
+"CNN-BiLSTM, dense",holdout,March,train_median,0.6115,328
+"CNN-BiLSTM, dense",holdout,April,zero,0.4764,775
+"CNN-BiLSTM, dense",holdout,April,train_median,0.6308,286
+"CNN-BiLSTM, dense",holdout,July,zero,0.5352,668
+"CNN-BiLSTM, dense",holdout,July,train_median,0.6151,338
+"CNN-BiLSTM, dense",holdout,August,zero,0.3537,670
+"CNN-BiLSTM, dense",holdout,August,train_median,0.615,293
+"CNN-BiLSTM, dense",holdout,September,zero,0.2352,1559
+"CNN-BiLSTM, dense",holdout,September,train_median,0.5983,197
+"CNN-BiLSTM, dense",holdout,October,zero,0.1609,1798
+"CNN-BiLSTM, dense",holdout,October,train_median,0.5035,602
+"CNN-BiLSTM, dense",holdout,November,zero,0.2788,1346
+"CNN-BiLSTM, dense",holdout,November,train_median,0.6108,253
+"CNN-BiLSTM, dense",holdout,December,zero,0.4083,738
+"CNN-BiLSTM, dense",holdout,December,train_median,0.6238,355
+"CNN-BiLSTM, dense + dropout",in-region,none,none,0.7604,0
+"CNN-BiLSTM, dense + dropout",in-region,January,zero,0.7539,20
+"CNN-BiLSTM, dense + dropout",in-region,January,train_median,0.7489,34
+"CNN-BiLSTM, dense + dropout",in-region,February,zero,0.7561,21
+"CNN-BiLSTM, dense + dropout",in-region,February,train_median,0.7182,75
+"CNN-BiLSTM, dense + dropout",in-region,March,zero,0.7581,27
+"CNN-BiLSTM, dense + dropout",in-region,March,train_median,0.7159,81
+"CNN-BiLSTM, dense + dropout",in-region,April,zero,0.7576,20
+"CNN-BiLSTM, dense + dropout",in-region,April,train_median,0.7421,50
+"CNN-BiLSTM, dense + dropout",in-region,July,zero,0.7628,25
+"CNN-BiLSTM, dense + dropout",in-region,July,train_median,0.7317,41
+"CNN-BiLSTM, dense + dropout",in-region,August,zero,0.7685,38
+"CNN-BiLSTM, dense + dropout",in-region,August,train_median,0.7405,59
+"CNN-BiLSTM, dense + dropout",in-region,September,zero,0.7524,28
+"CNN-BiLSTM, dense + dropout",in-region,September,train_median,0.7017,93
+"CNN-BiLSTM, dense + dropout",in-region,October,zero,0.7397,42
+"CNN-BiLSTM, dense + dropout",in-region,October,train_median,0.6745,107
+"CNN-BiLSTM, dense + dropout",in-region,November,zero,0.7657,22
+"CNN-BiLSTM, dense + dropout",in-region,November,train_median,0.7193,64
+"CNN-BiLSTM, dense + dropout",in-region,December,zero,0.7728,29
+"CNN-BiLSTM, dense + dropout",in-region,December,train_median,0.7342,69
+"CNN-BiLSTM, dense + dropout",holdout,none,none,0.6456,0
+"CNN-BiLSTM, dense + dropout",holdout,January,zero,0.6527,126
+"CNN-BiLSTM, dense + dropout",holdout,January,train_median,0.6475,193
+"CNN-BiLSTM, dense + dropout",holdout,February,zero,0.6554,127
+"CNN-BiLSTM, dense + dropout",holdout,February,train_median,0.6246,343
+"CNN-BiLSTM, dense + dropout",holdout,March,zero,0.6499,158
+"CNN-BiLSTM, dense + dropout",holdout,March,train_median,0.6292,356
+"CNN-BiLSTM, dense + dropout",holdout,April,zero,0.6411,103
+"CNN-BiLSTM, dense + dropout",holdout,April,train_median,0.6559,285
+"CNN-BiLSTM, dense + dropout",holdout,July,zero,0.6463,159
+"CNN-BiLSTM, dense + dropout",holdout,July,train_median,0.6345,283
+"CNN-BiLSTM, dense + dropout",holdout,August,zero,0.6361,135
+"CNN-BiLSTM, dense + dropout",holdout,August,train_median,0.6129,275
+"CNN-BiLSTM, dense + dropout",holdout,September,zero,0.6555,196
+"CNN-BiLSTM, dense + dropout",holdout,September,train_median,0.6162,209
+"CNN-BiLSTM, dense + dropout",holdout,October,zero,0.5874,446
+"CNN-BiLSTM, dense + dropout",holdout,October,train_median,0.5369,624
+"CNN-BiLSTM, dense + dropout",holdout,November,zero,0.6427,139
+"CNN-BiLSTM, dense + dropout",holdout,November,train_median,0.6219,364
+"CNN-BiLSTM, dense + dropout",holdout,December,zero,0.6501,176
+"CNN-BiLSTM, dense + dropout",holdout,December,train_median,0.6168,410
+"CNN-BiLSTM, gated",in-region,none,none,0.7713,0
+"CNN-BiLSTM, gated",in-region,January,zero,0.6813,96
+"CNN-BiLSTM, gated",in-region,January,train_median,0.7479,53
+"CNN-BiLSTM, gated",in-region,February,zero,0.6567,104
+"CNN-BiLSTM, gated",in-region,February,train_median,0.7222,70
+"CNN-BiLSTM, gated",in-region,March,zero,0.5996,175
+"CNN-BiLSTM, gated",in-region,March,train_median,0.7487,66
+"CNN-BiLSTM, gated",in-region,April,zero,0.6614,150
+"CNN-BiLSTM, gated",in-region,April,train_median,0.7474,58
+"CNN-BiLSTM, gated",in-region,July,zero,0.6143,166
+"CNN-BiLSTM, gated",in-region,July,train_median,0.7371,58
+"CNN-BiLSTM, gated",in-region,August,zero,0.5709,206
+"CNN-BiLSTM, gated",in-region,August,train_median,0.7642,56
+"CNN-BiLSTM, gated",in-region,September,zero,0.5119,238
+"CNN-BiLSTM, gated",in-region,September,train_median,0.7213,71
+"CNN-BiLSTM, gated",in-region,October,zero,0.5313,236
+"CNN-BiLSTM, gated",in-region,October,train_median,0.6598,106
+"CNN-BiLSTM, gated",in-region,November,zero,0.6426,135
+"CNN-BiLSTM, gated",in-region,November,train_median,0.7408,52
+"CNN-BiLSTM, gated",in-region,December,zero,0.5911,192
+"CNN-BiLSTM, gated",in-region,December,train_median,0.7132,85
+"CNN-BiLSTM, gated",holdout,none,none,0.6296,0
+"CNN-BiLSTM, gated",holdout,January,zero,0.5838,282
+"CNN-BiLSTM, gated",holdout,January,train_median,0.6307,192
+"CNN-BiLSTM, gated",holdout,February,zero,0.5888,325
+"CNN-BiLSTM, gated",holdout,February,train_median,0.6317,296
+"CNN-BiLSTM, gated",holdout,March,zero,0.5272,414
+"CNN-BiLSTM, gated",holdout,March,train_median,0.6298,302
+"CNN-BiLSTM, gated",holdout,April,zero,0.6041,300
+"CNN-BiLSTM, gated",holdout,April,train_median,0.6441,250
+"CNN-BiLSTM, gated",holdout,July,zero,0.5786,325
+"CNN-BiLSTM, gated",holdout,July,train_median,0.5968,253
+"CNN-BiLSTM, gated",holdout,August,zero,0.4365,547
+"CNN-BiLSTM, gated",holdout,August,train_median,0.6081,227
+"CNN-BiLSTM, gated",holdout,September,zero,0.4266,487
+"CNN-BiLSTM, gated",holdout,September,train_median,0.6217,144
+"CNN-BiLSTM, gated",holdout,October,zero,0.3651,807
+"CNN-BiLSTM, gated",holdout,October,train_median,0.5157,456
+"CNN-BiLSTM, gated",holdout,November,zero,0.5719,498
+"CNN-BiLSTM, gated",holdout,November,train_median,0.5965,279
+"CNN-BiLSTM, gated",holdout,December,zero,0.494,561
+"CNN-BiLSTM, gated",holdout,December,train_median,0.5868,543
+"CNN-BiLSTM, gated + dropout",in-region,none,none,0.7825,0
+"CNN-BiLSTM, gated + dropout",in-region,January,zero,0.7825,22
+"CNN-BiLSTM, gated + dropout",in-region,January,train_median,0.7756,27
+"CNN-BiLSTM, gated + dropout",in-region,February,zero,0.7709,22
+"CNN-BiLSTM, gated + dropout",in-region,February,train_median,0.7461,53
+"CNN-BiLSTM, gated + dropout",in-region,March,zero,0.7808,17
+"CNN-BiLSTM, gated + dropout",in-region,March,train_median,0.7487,42
+"CNN-BiLSTM, gated + dropout",in-region,April,zero,0.7726,14
+"CNN-BiLSTM, gated + dropout",in-region,April,train_median,0.7771,34
+"CNN-BiLSTM, gated + dropout",in-region,July,zero,0.7809,22
+"CNN-BiLSTM, gated + dropout",in-region,July,train_median,0.7712,26
+"CNN-BiLSTM, gated + dropout",in-region,August,zero,0.7856,22
+"CNN-BiLSTM, gated + dropout",in-region,August,train_median,0.7706,37
+"CNN-BiLSTM, gated + dropout",in-region,September,zero,0.7681,22
+"CNN-BiLSTM, gated + dropout",in-region,September,train_median,0.7449,56
+"CNN-BiLSTM, gated + dropout",in-region,October,zero,0.7748,31
+"CNN-BiLSTM, gated + dropout",in-region,October,train_median,0.7277,76
+"CNN-BiLSTM, gated + dropout",in-region,November,zero,0.7768,26
+"CNN-BiLSTM, gated + dropout",in-region,November,train_median,0.7709,49
+"CNN-BiLSTM, gated + dropout",in-region,December,zero,0.7795,30
+"CNN-BiLSTM, gated + dropout",in-region,December,train_median,0.7471,58
+"CNN-BiLSTM, gated + dropout",holdout,none,none,0.6425,0
+"CNN-BiLSTM, gated + dropout",holdout,January,zero,0.6527,125
+"CNN-BiLSTM, gated + dropout",holdout,January,train_median,0.6545,174
+"CNN-BiLSTM, gated + dropout",holdout,February,zero,0.6425,118
+"CNN-BiLSTM, gated + dropout",holdout,February,train_median,0.6428,236
+"CNN-BiLSTM, gated + dropout",holdout,March,zero,0.6418,125
+"CNN-BiLSTM, gated + dropout",holdout,March,train_median,0.6413,226
+"CNN-BiLSTM, gated + dropout",holdout,April,zero,0.6451,106
+"CNN-BiLSTM, gated + dropout",holdout,April,train_median,0.6565,168
+"CNN-BiLSTM, gated + dropout",holdout,July,zero,0.6399,137
+"CNN-BiLSTM, gated + dropout",holdout,July,train_median,0.6366,196
+"CNN-BiLSTM, gated + dropout",holdout,August,zero,0.6342,123
+"CNN-BiLSTM, gated + dropout",holdout,August,train_median,0.6195,204
+"CNN-BiLSTM, gated + dropout",holdout,September,zero,0.6393,131
+"CNN-BiLSTM, gated + dropout",holdout,September,train_median,0.6247,140
+"CNN-BiLSTM, gated + dropout",holdout,October,zero,0.5977,277
+"CNN-BiLSTM, gated + dropout",holdout,October,train_median,0.555,459
+"CNN-BiLSTM, gated + dropout",holdout,November,zero,0.6382,135
+"CNN-BiLSTM, gated + dropout",holdout,November,train_median,0.614,241
+"CNN-BiLSTM, gated + dropout",holdout,December,zero,0.6481,159
+"CNN-BiLSTM, gated + dropout",holdout,December,train_median,0.6257,376
+L-TAE,in-region,none,none,0.7806,0
+L-TAE,in-region,January,zero,0.6681,106
+L-TAE,in-region,January,train_median,0.7673,25
+L-TAE,in-region,January,deletion,0.7739,21
+L-TAE,in-region,February,zero,0.6609,111
+L-TAE,in-region,February,train_median,0.7508,45
+L-TAE,in-region,February,deletion,0.7577,21
+L-TAE,in-region,March,zero,0.6353,132
+L-TAE,in-region,March,train_median,0.7471,56
+L-TAE,in-region,March,deletion,0.7605,30
+L-TAE,in-region,April,zero,0.6768,111
+L-TAE,in-region,April,train_median,0.7598,46
+L-TAE,in-region,April,deletion,0.785,20
+L-TAE,in-region,July,zero,0.638,154
+L-TAE,in-region,July,train_median,0.7521,30
+L-TAE,in-region,July,deletion,0.7586,27
+L-TAE,in-region,August,zero,0.5174,283
+L-TAE,in-region,August,train_median,0.7574,37
+L-TAE,in-region,August,deletion,0.7707,33
+L-TAE,in-region,September,zero,0.3787,391
+L-TAE,in-region,September,train_median,0.7334,63
+L-TAE,in-region,September,deletion,0.7484,36
+L-TAE,in-region,October,zero,0.3169,436
+L-TAE,in-region,October,train_median,0.6798,90
+L-TAE,in-region,October,deletion,0.7085,73
+L-TAE,in-region,November,zero,0.5532,265
+L-TAE,in-region,November,train_median,0.7581,43
+L-TAE,in-region,November,deletion,0.7593,25
+L-TAE,in-region,December,zero,0.5729,242
+L-TAE,in-region,December,train_median,0.75,62
+L-TAE,in-region,December,deletion,0.7647,30
+L-TAE,holdout,none,none,0.6577,0
+L-TAE,holdout,January,zero,0.5904,404
+L-TAE,holdout,January,train_median,0.6479,162
+L-TAE,holdout,January,deletion,0.6466,97
+L-TAE,holdout,February,zero,0.5645,497
+L-TAE,holdout,February,train_median,0.6438,240
+L-TAE,holdout,February,deletion,0.6517,93
+L-TAE,holdout,March,zero,0.5814,442
+L-TAE,holdout,March,train_median,0.6419,347
+L-TAE,holdout,March,deletion,0.6535,99
+L-TAE,holdout,April,zero,0.5975,312
+L-TAE,holdout,April,train_median,0.6458,251
+L-TAE,holdout,April,deletion,0.6505,77
+L-TAE,holdout,July,zero,0.5441,409
+L-TAE,holdout,July,train_median,0.633,223
+L-TAE,holdout,July,deletion,0.6384,198
+L-TAE,holdout,August,zero,0.4172,883
+L-TAE,holdout,August,train_median,0.6261,181
+L-TAE,holdout,August,deletion,0.6307,149
+L-TAE,holdout,September,zero,0.2936,1295
+L-TAE,holdout,September,train_median,0.6337,167
+L-TAE,holdout,September,deletion,0.6519,197
+L-TAE,holdout,October,zero,0.2424,1373
+L-TAE,holdout,October,train_median,0.5537,571
+L-TAE,holdout,October,deletion,0.5803,432
+L-TAE,holdout,November,zero,0.4438,913
+L-TAE,holdout,November,train_median,0.6413,216
+L-TAE,holdout,November,deletion,0.6355,137
+L-TAE,holdout,December,zero,0.4773,820
+L-TAE,holdout,December,train_median,0.6352,436
+L-TAE,holdout,December,deletion,0.6544,154
+L-TAE-S,in-region,none,none,0.7723,0
+L-TAE-S,in-region,January,zero,0.6729,93
+L-TAE-S,in-region,January,train_median,0.7657,18
+L-TAE-S,in-region,January,deletion,0.7631,18
+L-TAE-S,in-region,February,zero,0.6739,92
+L-TAE-S,in-region,February,train_median,0.7426,40
+L-TAE-S,in-region,February,deletion,0.7565,30
+L-TAE-S,in-region,March,zero,0.7109,74
+L-TAE-S,in-region,March,train_median,0.7431,41
+L-TAE-S,in-region,March,deletion,0.7521,29
+L-TAE-S,in-region,April,zero,0.7381,49
+L-TAE-S,in-region,April,train_median,0.7648,40
+L-TAE-S,in-region,April,deletion,0.7652,23
+L-TAE-S,in-region,July,zero,0.7157,87
+L-TAE-S,in-region,July,train_median,0.7509,44
+L-TAE-S,in-region,July,deletion,0.758,39
+L-TAE-S,in-region,August,zero,0.7375,64
+L-TAE-S,in-region,August,train_median,0.759,37
+L-TAE-S,in-region,August,deletion,0.7695,31
+L-TAE-S,in-region,September,zero,0.6484,155
+L-TAE-S,in-region,September,train_median,0.7525,40
+L-TAE-S,in-region,September,deletion,0.7561,31
+L-TAE-S,in-region,October,zero,0.6615,117
+L-TAE-S,in-region,October,train_median,0.6846,79
+L-TAE-S,in-region,October,deletion,0.7331,64
+L-TAE-S,in-region,November,zero,0.6546,166
+L-TAE-S,in-region,November,train_median,0.7566,37
+L-TAE-S,in-region,November,deletion,0.7671,26
+L-TAE-S,in-region,December,zero,0.5805,240
+L-TAE-S,in-region,December,train_median,0.7561,52
+L-TAE-S,in-region,December,deletion,0.7802,36
+L-TAE-S,holdout,none,none,0.6387,0
+L-TAE-S,holdout,January,zero,0.5896,354
+L-TAE-S,holdout,January,train_median,0.6455,110
+L-TAE-S,holdout,January,deletion,0.6429,109
+L-TAE-S,holdout,February,zero,0.5666,399
+L-TAE-S,holdout,February,train_median,0.6467,169
+L-TAE-S,holdout,February,deletion,0.6474,144
+L-TAE-S,holdout,March,zero,0.6242,222
+L-TAE-S,holdout,March,train_median,0.6464,174
+L-TAE-S,holdout,March,deletion,0.6414,161
+L-TAE-S,holdout,April,zero,0.6181,177
+L-TAE-S,holdout,April,train_median,0.6528,157
+L-TAE-S,holdout,April,deletion,0.6418,119
+L-TAE-S,holdout,July,zero,0.572,291
+L-TAE-S,holdout,July,train_median,0.6357,187
+L-TAE-S,holdout,July,deletion,0.6329,174
+L-TAE-S,holdout,August,zero,0.5855,229
+L-TAE-S,holdout,August,train_median,0.6285,124
+L-TAE-S,holdout,August,deletion,0.6236,106
+L-TAE-S,holdout,September,zero,0.5557,526
+L-TAE-S,holdout,September,train_median,0.6195,130
+L-TAE-S,holdout,September,deletion,0.6259,110
+L-TAE-S,holdout,October,zero,0.5175,567
+L-TAE-S,holdout,October,train_median,0.5762,337
+L-TAE-S,holdout,October,deletion,0.5964,280
+L-TAE-S,holdout,November,zero,0.5024,591
+L-TAE-S,holdout,November,train_median,0.6358,144
+L-TAE-S,holdout,November,deletion,0.6331,134
+L-TAE-S,holdout,December,zero,0.454,754
+L-TAE-S,holdout,December,train_median,0.633,252
+L-TAE-S,holdout,December,deletion,0.6494,201
+Transformer,in-region,none,none,0.7735,0
+Transformer,in-region,January,zero,0.6323,138
+Transformer,in-region,January,train_median,0.7676,44
+Transformer,in-region,January,deletion,0.7772,31
+Transformer,in-region,February,zero,0.6663,116
+Transformer,in-region,February,train_median,0.7499,53
+Transformer,in-region,February,deletion,0.7497,33
+Transformer,in-region,March,zero,0.6931,110
+Transformer,in-region,March,train_median,0.7492,55
+Transformer,in-region,March,deletion,0.7611,28
+Transformer,in-region,April,zero,0.6984,119
+Transformer,in-region,April,train_median,0.7569,59
+Transformer,in-region,April,deletion,0.7642,22
+Transformer,in-region,July,zero,0.6164,159
+Transformer,in-region,July,train_median,0.7677,43
+Transformer,in-region,July,deletion,0.7724,35
+Transformer,in-region,August,zero,0.6934,127
+Transformer,in-region,August,train_median,0.7592,45
+Transformer,in-region,August,deletion,0.767,39
+Transformer,in-region,September,zero,0.4984,228
+Transformer,in-region,September,train_median,0.7365,72
+Transformer,in-region,September,deletion,0.7379,55
+Transformer,in-region,October,zero,0.6345,162
+Transformer,in-region,October,train_median,0.6931,107
+Transformer,in-region,October,deletion,0.7209,67
+Transformer,in-region,November,zero,0.6425,149
+Transformer,in-region,November,train_median,0.7522,51
+Transformer,in-region,November,deletion,0.7716,28
+Transformer,in-region,December,zero,0.6101,187
+Transformer,in-region,December,train_median,0.7234,100
+Transformer,in-region,December,deletion,0.7619,49
+Transformer,holdout,none,none,0.6385,0
+Transformer,holdout,January,zero,0.55,471
+Transformer,holdout,January,train_median,0.6288,220
+Transformer,holdout,January,deletion,0.6232,138
+Transformer,holdout,February,zero,0.5633,473
+Transformer,holdout,February,train_median,0.6294,259
+Transformer,holdout,February,deletion,0.6303,165
+Transformer,holdout,March,zero,0.6111,332
+Transformer,holdout,March,train_median,0.6303,288
+Transformer,holdout,March,deletion,0.6333,85
+Transformer,holdout,April,zero,0.5849,409
+Transformer,holdout,April,train_median,0.6223,359
+Transformer,holdout,April,deletion,0.6384,106
+Transformer,holdout,July,zero,0.5771,385
+Transformer,holdout,July,train_median,0.6131,273
+Transformer,holdout,July,deletion,0.6213,218
+Transformer,holdout,August,zero,0.5226,392
+Transformer,holdout,August,train_median,0.6004,213
+Transformer,holdout,August,deletion,0.6049,174
+Transformer,holdout,September,zero,0.4156,734
+Transformer,holdout,September,train_median,0.6266,169
+Transformer,holdout,September,deletion,0.6428,216
+Transformer,holdout,October,zero,0.4087,666
+Transformer,holdout,October,train_median,0.5236,553
+Transformer,holdout,October,deletion,0.5342,474
+Transformer,holdout,November,zero,0.5323,500
+Transformer,holdout,November,train_median,0.6248,194
+Transformer,holdout,November,deletion,0.6174,137
+Transformer,holdout,December,zero,0.5292,561
+Transformer,holdout,December,train_median,0.6084,527
+Transformer,holdout,December,deletion,0.6368,187
+L-TAE + dropout,in-region,none,none,0.7653,0
+L-TAE + dropout,in-region,January,zero,0.7551,10
+L-TAE + dropout,in-region,January,train_median,0.7539,27
+L-TAE + dropout,in-region,January,deletion,0.7551,10
+L-TAE + dropout,in-region,February,zero,0.7674,19
+L-TAE + dropout,in-region,February,train_median,0.7538,34
+L-TAE + dropout,in-region,February,deletion,0.7646,17
+L-TAE + dropout,in-region,March,zero,0.7747,19
+L-TAE + dropout,in-region,March,train_median,0.7513,41
+L-TAE + dropout,in-region,March,deletion,0.7695,19
+L-TAE + dropout,in-region,April,zero,0.7617,16
+L-TAE + dropout,in-region,April,train_median,0.7706,33
+L-TAE + dropout,in-region,April,deletion,0.7613,19
+L-TAE + dropout,in-region,July,zero,0.7675,17
+L-TAE + dropout,in-region,July,train_median,0.7544,23
+L-TAE + dropout,in-region,July,deletion,0.7658,17
+L-TAE + dropout,in-region,August,zero,0.7677,29
+L-TAE + dropout,in-region,August,train_median,0.7445,52
+L-TAE + dropout,in-region,August,deletion,0.7672,30
+L-TAE + dropout,in-region,September,zero,0.7529,18
+L-TAE + dropout,in-region,September,train_median,0.7377,51
+L-TAE + dropout,in-region,September,deletion,0.7558,21
+L-TAE + dropout,in-region,October,zero,0.7402,41
+L-TAE + dropout,in-region,October,train_median,0.7049,83
+L-TAE + dropout,in-region,October,deletion,0.7342,53
+L-TAE + dropout,in-region,November,zero,0.7668,18
+L-TAE + dropout,in-region,November,train_median,0.7581,56
+L-TAE + dropout,in-region,November,deletion,0.7597,18
+L-TAE + dropout,in-region,December,zero,0.775,23
+L-TAE + dropout,in-region,December,train_median,0.7426,77
+L-TAE + dropout,in-region,December,deletion,0.7699,24
+L-TAE + dropout,holdout,none,none,0.655,0
+L-TAE + dropout,holdout,January,zero,0.651,69
+L-TAE + dropout,holdout,January,train_median,0.654,177
+L-TAE + dropout,holdout,January,deletion,0.6526,69
+L-TAE + dropout,holdout,February,zero,0.6564,70
+L-TAE + dropout,holdout,February,train_median,0.6552,255
+L-TAE + dropout,holdout,February,deletion,0.6551,70
+L-TAE + dropout,holdout,March,zero,0.6625,59
+L-TAE + dropout,holdout,March,train_median,0.6441,293
+L-TAE + dropout,holdout,March,deletion,0.663,64
+L-TAE + dropout,holdout,April,zero,0.6546,70
+L-TAE + dropout,holdout,April,train_median,0.6539,210
+L-TAE + dropout,holdout,April,deletion,0.6557,71
+L-TAE + dropout,holdout,July,zero,0.6535,101
+L-TAE + dropout,holdout,July,train_median,0.6399,136
+L-TAE + dropout,holdout,July,deletion,0.6539,102
+L-TAE + dropout,holdout,August,zero,0.631,120
+L-TAE + dropout,holdout,August,train_median,0.6273,181
+L-TAE + dropout,holdout,August,deletion,0.6296,122
+L-TAE + dropout,holdout,September,zero,0.65,116
+L-TAE + dropout,holdout,September,train_median,0.6364,138
+L-TAE + dropout,holdout,September,deletion,0.6487,134
+L-TAE + dropout,holdout,October,zero,0.6153,232
+L-TAE + dropout,holdout,October,train_median,0.5758,434
+L-TAE + dropout,holdout,October,deletion,0.607,267
+L-TAE + dropout,holdout,November,zero,0.6426,85
+L-TAE + dropout,holdout,November,train_median,0.6368,272
+L-TAE + dropout,holdout,November,deletion,0.6427,88
+L-TAE + dropout,holdout,December,zero,0.6702,121
+L-TAE + dropout,holdout,December,train_median,0.6434,427
+L-TAE + dropout,holdout,December,deletion,0.6691,117
+L-TAE-S + dropout,in-region,none,none,0.7643,0
+L-TAE-S + dropout,in-region,January,zero,0.7561,15
+L-TAE-S + dropout,in-region,January,train_median,0.7643,22
+L-TAE-S + dropout,in-region,January,deletion,0.7572,14
+L-TAE-S + dropout,in-region,February,zero,0.7537,27
+L-TAE-S + dropout,in-region,February,train_median,0.7476,40
+L-TAE-S + dropout,in-region,February,deletion,0.7504,25
+L-TAE-S + dropout,in-region,March,zero,0.7649,29
+L-TAE-S + dropout,in-region,March,train_median,0.7504,39
+L-TAE-S + dropout,in-region,March,deletion,0.7642,29
+L-TAE-S + dropout,in-region,April,zero,0.7662,22
+L-TAE-S + dropout,in-region,April,train_median,0.7686,29
+L-TAE-S + dropout,in-region,April,deletion,0.7687,26
+L-TAE-S + dropout,in-region,July,zero,0.763,22
+L-TAE-S + dropout,in-region,July,train_median,0.7563,20
+L-TAE-S + dropout,in-region,July,deletion,0.7606,21
+L-TAE-S + dropout,in-region,August,zero,0.7626,33
+L-TAE-S + dropout,in-region,August,train_median,0.7562,41
+L-TAE-S + dropout,in-region,August,deletion,0.76,33
+L-TAE-S + dropout,in-region,September,zero,0.752,27
+L-TAE-S + dropout,in-region,September,train_median,0.7331,46
+L-TAE-S + dropout,in-region,September,deletion,0.758,27
+L-TAE-S + dropout,in-region,October,zero,0.7322,37
+L-TAE-S + dropout,in-region,October,train_median,0.7027,69
+L-TAE-S + dropout,in-region,October,deletion,0.7289,46
+L-TAE-S + dropout,in-region,November,zero,0.7485,29
+L-TAE-S + dropout,in-region,November,train_median,0.7377,60
+L-TAE-S + dropout,in-region,November,deletion,0.7526,27
+L-TAE-S + dropout,in-region,December,zero,0.7629,34
+L-TAE-S + dropout,in-region,December,train_median,0.749,71
+L-TAE-S + dropout,in-region,December,deletion,0.7636,32
+L-TAE-S + dropout,holdout,none,none,0.6458,0
+L-TAE-S + dropout,holdout,January,zero,0.6514,82
+L-TAE-S + dropout,holdout,January,train_median,0.6388,97
+L-TAE-S + dropout,holdout,January,deletion,0.6467,82
+L-TAE-S + dropout,holdout,February,zero,0.6614,72
+L-TAE-S + dropout,holdout,February,train_median,0.6575,105
+L-TAE-S + dropout,holdout,February,deletion,0.6615,68
+L-TAE-S + dropout,holdout,March,zero,0.6572,102
+L-TAE-S + dropout,holdout,March,train_median,0.6543,136
+L-TAE-S + dropout,holdout,March,deletion,0.6595,111
+L-TAE-S + dropout,holdout,April,zero,0.6568,68
+L-TAE-S + dropout,holdout,April,train_median,0.6525,111
+L-TAE-S + dropout,holdout,April,deletion,0.657,73
+L-TAE-S + dropout,holdout,July,zero,0.6457,95
+L-TAE-S + dropout,holdout,July,train_median,0.65,117
+L-TAE-S + dropout,holdout,July,deletion,0.6438,98
+L-TAE-S + dropout,holdout,August,zero,0.6344,120
+L-TAE-S + dropout,holdout,August,train_median,0.6375,135
+L-TAE-S + dropout,holdout,August,deletion,0.6334,119
+L-TAE-S + dropout,holdout,September,zero,0.636,93
+L-TAE-S + dropout,holdout,September,train_median,0.6299,103
+L-TAE-S + dropout,holdout,September,deletion,0.6344,102
+L-TAE-S + dropout,holdout,October,zero,0.5996,211
+L-TAE-S + dropout,holdout,October,train_median,0.6087,289
+L-TAE-S + dropout,holdout,October,deletion,0.6094,208
+L-TAE-S + dropout,holdout,November,zero,0.6493,107
+L-TAE-S + dropout,holdout,November,train_median,0.6511,164
+L-TAE-S + dropout,holdout,November,deletion,0.6476,111
+L-TAE-S + dropout,holdout,December,zero,0.6681,140
+L-TAE-S + dropout,holdout,December,train_median,0.6529,263
+L-TAE-S + dropout,holdout,December,deletion,0.6645,150
