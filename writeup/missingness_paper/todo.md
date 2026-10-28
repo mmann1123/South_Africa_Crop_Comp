@@ -1,13 +1,16 @@
 # Missingness-shift paper: to-do
 
 Branch `missingness-shift`. Background: `experiments/missingness/README.md` and
-`reports/Missing data robustness novelty check.md` ("Ways to push this forward"). Tick items
+`reports/Missing data robustness novelty check.md` ("Ways to push this forward"), and the
+literature review of missingness in transfer papers, `reports/Missingness confound audit of
+transfer papers.md` (notes in `research_notes/Missingness confound audit of transfer papers/`).
+Tick items
 with the date and the files or commits that close them.
 
 ## Withdrawal of the CEA submission
 
-- [ ] Email co-authors (draft agreed in the session of 2026-10-21) and agree on withdrawal.
-- [ ] Contact the editor (Fernando Auat Cheein) before the 2026-11-01 deadline: withdraw, or ask
+- [x] Email co-authors (draft agreed in the session of 2026-10-21) and agree on withdrawal.
+- [x] Contact the editor (Fernando Auat Cheein) before the 2026-11-01 deadline: withdraw, or ask
   whether a substantially reframed manuscript can be submitted as a new paper.
 - [x] Freeze the CEA version: git tags `cea-submitted`, `cea-revision1-final` (2026-10-21).
 
@@ -82,6 +85,23 @@ found in our own pipeline. These three answer it.
   public object-level loader may train on its test file (unverified for the published runs).
   - [ ] Step 3 (later): compare missingness between source and target in the public data for
     Sen4AgriNet, TimeMatch/T3S and Orynbaikyzy (checks listed in summary.md).
+- [x] **Literature review: missingness confound in transfer papers** (user's separate report,
+  `reports/Missingness confound audit of transfer papers.md`). 45 papers plus 13 benchmarks,
+  ranked by a five-condition rubric: 14 rank 3 ("highly suspect"), 19 rank 2, 12 rank 1. Only 5 of
+  about 33 papers reporting a transfer loss publish a per-domain valid-observation statistic.
+  Benchmarks carry the confound (TimeSen2Crop zero-fills months, Sen4AgriNet interpolates,
+  CropHarvest uses the pixel mean, Planet Fusion hides synthesised days). Granule cloud cover for
+  our 2017 tiles is near identical, so the September shift is sub-tile.
+  - [ ] Reconcile with our 14-paper audit: the review ranks TimeMatch, Wijesingha, Sen4AgriNet and
+    Kerner (GSN, NaN to 0 in code) higher than `summary.md` does.
+  - [ ] Reconcile the September figure: the review quotes 40.6% of holdout pixels, our table says
+    41.5% (B2) and 40.2% / 44.0% of fields.
+  - [ ] **Prior art to engage:** Pham et al. 2024 (IJAEOG 129, 103867; and RSE 308, 114206) zero-fill
+    cloudy days, show cross-year transfer fails with observation density, and fix it with Random
+    Observation Selection (training-time observation dropout). That is close to our month-dropout
+    result, it is not in the novelty check, and it must be briefed and cited. Our contribution
+    over it: spatial (not cross-year) transfer, the model-ranking reversal, fill value vs
+    information loss (step deletion), the sparse-gate comparison.
 - [x] **Background: nodata handling in general-purpose SITS codebases** (2026-10-28;
   `research_notes/SITS nodata handling audit/audit.md`, 17 codebases, commit-pinned links). Result
   does NOT support "probably common in public code": none reproduces our failure mode. 4 mask
