@@ -4,12 +4,14 @@ from __future__ import annotations
 import datetime as _dt
 import hashlib
 import json
+import time
 from pathlib import Path
 
 import requests
 
 CHUNK = 8 * 1024 * 1024
 TIMEOUT = 120
+RETRIES = 4
 
 
 def manifest_entries(manifest: Path) -> list[dict]:
@@ -42,15 +44,22 @@ def download(
         return dest
     dest.parent.mkdir(parents=True, exist_ok=True)
     part = dest.with_suffix(dest.suffix + ".part")
-    sha = hashlib.sha256()
-    n = 0
-    with requests.get(url, stream=True, timeout=TIMEOUT) as r:
-        r.raise_for_status()
-        with open(part, "wb") as fh:
-            for chunk in r.iter_content(CHUNK):
-                fh.write(chunk)
-                sha.update(chunk)
-                n += len(chunk)
+    for attempt in range(RETRIES):
+        sha = hashlib.sha256()
+        n = 0
+        try:
+            with requests.get(url, stream=True, timeout=TIMEOUT) as r:
+                r.raise_for_status()
+                with open(part, "wb") as fh:
+                    for chunk in r.iter_content(CHUNK):
+                        fh.write(chunk)
+                        sha.update(chunk)
+                        n += len(chunk)
+            break
+        except Exception:  # noqa: BLE001  (5xx, connection resets, timeouts)
+            if attempt == RETRIES - 1:
+                raise
+            time.sleep(5 * 2**attempt)
     if expected_bytes is not None and n != expected_bytes:
         part.unlink(missing_ok=True)
         raise IOError(f"{url}: got {n} bytes, expected {expected_bytes}")

@@ -94,3 +94,20 @@ def test_paper_root_creates_dir(tmp_path, monkeypatch):
     root = paths.paper_root("denethor")
     assert root == tmp_path / "denethor"
     assert root.is_dir()
+
+
+def test_download_retries_on_server_error(tmp_path, monkeypatch):
+    attempts = []
+
+    def flaky_get(url, headers=None, stream=False, timeout=None, **kw):
+        attempts.append(url)
+        if len(attempts) < 3:
+            return _StubResponse(b"", 520)
+        return _StubResponse(b"hello")
+
+    monkeypatch.setattr(fetch.requests, "get", flaky_get)
+    monkeypatch.setattr(fetch.time, "sleep", lambda s: None)
+    manifest = tmp_path / "manifest.json"
+    dest = fetch.download("http://x/flaky", tmp_path / "f.bin", manifest, key="k/f")
+    assert dest.read_bytes() == b"hello"
+    assert len(attempts) == 3
