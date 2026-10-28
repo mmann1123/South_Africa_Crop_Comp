@@ -1,0 +1,24 @@
+{
+  "script": "02_s2_clear_counts",
+  "git_commit": "e75934258a44c99386be752448245a4865c7f771",
+  "run_date": "2026-10-28T19:38:48.129698+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/denethor/manifest.json"
+  ],
+  "rows": 9184,
+  "columns": [
+    "tile_year",
+    "tile",
+    "year",
+    "labels_from_year",
+    "field_id",
+    "crop",
+    "n_pixels",
+    "n_clear_literal40",
+    "n_clear_s2cp40",
+    "n_clear_scl",
+    "n_clear_s2cp40_aprOct",
+    "longest_gap_days_s2cp40_aprOct",
+    "clear_by_month_s2cp40"
+  ]
+}

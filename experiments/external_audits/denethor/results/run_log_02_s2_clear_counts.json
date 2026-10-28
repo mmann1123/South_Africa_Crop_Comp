@@ -1,0 +1,122 @@
+{
+  "script": "02_s2_clear_counts",
+  "args": {
+    "tile_years": [
+      "s2-utm-33N-18E-242N-2018",
+      "s2-utm-33N-17E-243N-2018",
+      "s2-utm-33N-18E-242N-2019",
+      "s2-utm-33N-17E-243N-2019"
+    ],
+    "force": true
+  },
+  "seed": 42,
+  "git_commit": "e75934258a44c99386be752448245a4865c7f771",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "fields_total": 9184,
+    "field_dates_rows": 1322496
+  },
+  "started": "2026-10-28T19:38:07.955972+00:00",
+  "s2-utm-33N-18E-242N-2018": {
+    "T": 144,
+    "grid": [
+      2400,
+      2400
+    ],
+    "bbox": [
+      431999.7316112638,
+      5808000.141433241,
+      455999.9836081388,
+      5832000.453722215
+    ],
+    "crs": "EPSG:32633",
+    "clp_scale": 255,
+    "n_label_polygons": 2534,
+    "n_fields_rasterised": 2530,
+    "n_fields_dropped_no_pixels": 4,
+    "crop_column": "crop_name",
+    "first_date": "2018-01-02",
+    "last_date": "2018-12-30",
+    "n_dates_aprOct": 84
+  },
+  "s2-utm-33N-17E-243N-2018": {
+    "T": 144,
+    "grid": [
+      2400,
+      2400
+    ],
+    "bbox": [
+      408000.1106542662,
+      5831999.778170622,
+      432000.083625369,
+      5856000.355934586
+    ],
+    "crs": "EPSG:32633",
+    "clp_scale": 255,
+    "n_label_polygons": 2064,
+    "n_fields_rasterised": 2062,
+    "n_fields_dropped_no_pixels": 2,
+    "crop_column": "crop_name",
+    "first_date": "2018-01-02",
+    "last_date": "2018-12-30",
+    "n_dates_aprOct": 84
+  },
+  "s2-utm-33N-18E-242N-2019": {
+    "T": 144,
+    "grid": [
+      2400,
+      2400
+    ],
+    "bbox": [
+      431999.7316112638,
+      5808000.141433241,
+      455999.9836081388,
+      5832000.453722215
+    ],
+    "crs": "EPSG:32633",
+    "clp_scale": 255,
+    "n_label_polygons": 2534,
+    "n_fields_rasterised": 2530,
+    "n_fields_dropped_no_pixels": 4,
+    "crop_column": "crop_name",
+    "first_date": "2019-01-02",
+    "last_date": "2019-12-30",
+    "n_dates_aprOct": 84
+  },
+  "s2-utm-33N-17E-243N-2019": {
+    "T": 144,
+    "grid": [
+      2400,
+      2400
+    ],
+    "bbox": [
+      408000.1106542662,
+      5831999.778170622,
+      432000.083625369,
+      5856000.355934586
+    ],
+    "crs": "EPSG:32633",
+    "clp_scale": 255,
+    "n_label_polygons": 2064,
+    "n_fields_rasterised": 2062,
+    "n_fields_dropped_no_pixels": 2,
+    "crop_column": "crop_name",
+    "first_date": "2019-01-02",
+    "last_date": "2019-12-30",
+    "n_dates_aprOct": 84
+  },
+  "s2_field_dates": {
+    "size_mb_uncompressed": 128.4,
+    "committed_as": "s2_field_dates.csv.gz",
+    "uncompressed_copy": "/mnt/bigdrive/external_audits/denethor/s2_field_dates.csv"
+  },
+  "ended": "2026-10-28T19:38:57.265928+00:00"
+}
