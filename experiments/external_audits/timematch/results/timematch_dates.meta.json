@@ -1,0 +1,16 @@
+{
+  "script": "01_fetch_footprints",
+  "git_commit": "b8d1c1e14c0aceacff1069db3cd64bb886c24dcb",
+  "run_date": "2026-10-28T19:05:26.549537+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/research_notes/Missingness confound audit of transfer papers/recon_timematch_metadata_summary.json"
+  ],
+  "rows": 211,
+  "columns": [
+    "country",
+    "tile",
+    "label",
+    "date",
+    "tile_cloudy_pct"
+  ]
+}
