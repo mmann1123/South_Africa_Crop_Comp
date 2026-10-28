@@ -58,6 +58,26 @@ with the date and the files or commits that close them.
   variant (train with masked steps) is now low priority: inference-time deletion already matches
   the best fill and month dropout.
 
+### Generality (added 2026-10-28, after the novelty-report review)
+
+A reviewer's first objection will be one dataset, one tile, one missing month: a preprocessing bug
+found in our own pipeline. These three answer it.
+
+- [ ] **Month-by-month missing-month injection** (inference only, cheap). Blank each of the ten
+  months in turn, on the holdout and on the in-region test fields, and score every raw-sequence
+  model under zero fill, training-median fill and step deletion, plus the month-dropout models
+  (trained on random months, never targeted). Shows whether zero fill damages every month, whether
+  the three fixes hold everywhere, and whether dropout covers months it was not aimed at. Turns
+  "September broke things" into a dose-response result. Builds on `deep_learn/src/missing.py`,
+  `experiments/missingness/step_deletion.py` and the 2 x 2 checkpoints.
+- [ ] **Second dataset** (retraining; scope depends on the target journal). BreizhCrops or the
+  Germany track of AI4FoodSecurity, with its natural cloud gaps or simulated ones. Turns the
+  paper from a case study into a general finding.
+- [ ] **Audit of nodata handling in open-source SITS codebases** (no compute). Check how popular
+  repositories fill missing observations (zero, interpolation, mask) and whether training and
+  inference match. The literature already admits zero-padding (Che et al. 2024, Zhao et al. 2021);
+  a short audit supports "this failure is probably common" instead of asserting it.
+
 ## Would strengthen it
 
 - [x] **Gradient attribution at the September slot** (2026-10-23; `experiments/missingness/attribution.py`,
