@@ -102,6 +102,16 @@ found in our own pipeline. These three answer it.
     result, it is not in the novelty check, and it must be briefed and cited. Our contribution
     over it: spatial (not cross-year) transfer, the model-ranking reversal, fill value vs
     information loss (step deletion), the sparse-gate comparison.
+    - [x] IJAEOG paper briefed (2026-10-28; `writeup/literature/Temporally transferable crop
+      mapping with temporal encoding and deep learning augmentations.md`, PDF alongside, CC BY).
+      Confirms the overlap: a model that never saw sparse inputs "only performed well in the
+      training year and poorly in unseen years"; ROS beats phenology shifting by up to 30 OA
+      points. Differences: their zero is a consistent no-observation token (over 75% of daily cells
+      even in training), so only density shifts; OA only, single runs, cross-year. Do not claim we
+      are first to show missingness passing for a transfer failure; claim first cross-region,
+      same-season, single-fill case that reorders a multi-family benchmark.
+    - [ ] RSE paper (land-cover fractions) needs the PDF: ScienceDirect blocks scripted download
+      and no repository copy exists (CC BY, so the user can download it from the DOI page).
 - [x] **Background: nodata handling in general-purpose SITS codebases** (2026-10-28;
   `research_notes/SITS nodata handling audit/audit.md`, 17 codebases, commit-pinned links). Result
   does NOT support "probably common in public code": none reproduces our failure mode. 4 mask
