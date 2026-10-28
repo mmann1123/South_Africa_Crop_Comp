@@ -20,7 +20,7 @@ Limitations paragraph. Those are the deliverables.
 common/      paths, SHA-256 manifest downloads, run logs, EE init, zonal stats, plot theme, cleanup
 timematch/   01 range-fetch footprints from the Zenodo zip, 02 Earth Engine cloud fractions per shipped date, 03 summarise
 denethor/    01 fetch CLP/SCL/IS_DATA + labels, 02 per-field clear counts (2x2 tile-years), 03 Planet Fusion QA synthetic fraction, 04 summarise
-daccn/       you2021_recipe (EE port) + reference (numpy model), 01 regions, 02 counter samples via batch export, 03 summarise
+daccn/       you2021_recipe (EE port) + reference (numpy model), 01 regions, 02 counter samples per random 5 km cell, 03 summarise
 tests/       pytest unit tests for every pure function
 env/         conda env exports and pip freeze of the `ee` environment used
 run_all.sh   everything in order, then clean-up
@@ -42,8 +42,9 @@ bash experiments/external_audits/run_all.sh                                # add
 
 Individual steps are the numbered scripts in each folder, run from the repo
 root; each skips work whose output exists and takes `--force` to redo it. The
-Earth Engine loops are resumable row by row and the DACCN sampler resumes from
-`results/ee_tasks.json`. Fixed seed 42 throughout.
+Earth Engine loops are resumable row by row (TimeMatch by tile and date, DACCN by
+region, year and variant from `results/daccn_counters.csv`), and a run that finds
+nothing to do leaves the earlier run log untouched. Fixed seed 42 throughout.
 
 ## Data root and clean-up
 
@@ -53,15 +54,15 @@ Fusion QA rasters (deleted day by day as they are read), and under 100 MB for
 TimeMatch. `run_all.sh` ends by running `<paper>/99_cleanup.py`, which checks
 the results are complete and then deletes everything under the paper's data
 root except `manifest.json` (object key, URL, bytes, SHA-256, fetch time of
-every file) so the download is reproducible. The DACCN sampler writes its
-samples to Earth Engine assets under
-`projects/mmann1123-malawi/assets/external_audits_daccn/` and deletes each
-asset after reading it (`--keep-assets` to retain). No Drive exports are used.
+every file) so the download is reproducible. The DACCN sampler computes each cell interactively
+(`getInfo`) and writes nothing to Earth Engine assets or Drive.
 
 ## Replicability notes
 
-Earth Engine collection ids, thresholds and the image ids used per date are
-written to the run logs; a later run can diff them against the catalogue.
+Earth Engine collection ids and thresholds are written to the run logs, the
+Sentinel-2 image ids used per date to `timematch/results/cloud_by_date.csv`, and
+the DACCN cell coordinates to `daccn/results/run_log_02_run_counters.json`; a
+later run can diff them against the catalogue.
 Source Cooperative object keys and byte sizes come from the saved listing
 `research_notes/Missingness confound audit of transfer papers/recon_fusion_competition_s3_listing.tsv`.
 `pip_freeze_ee.txt` pins every package version used for the committed results.

@@ -100,6 +100,10 @@ def main(smoke: bool = False, force: bool = False, regions_only: list[str] | Non
         log.add("design", {"n_cells": N_CELLS, "cell_half_m": CELL_HALF_M, "points_per_cell": POINTS_PER_CELL, "seed": SEED, "scale": SCALE})
         cells_by_region: dict[str, list] = {}
         n_jobs = 0
+        if not smoke and all((r, y, v) in done for r, c, y, v in jobs):
+            print("all jobs already in results; nothing to do (use --force to redo)")
+            log.discard()
+            return
         for region_name, country, year, variant in jobs:
             if (region_name, year, variant) in done and not smoke:
                 continue
@@ -108,6 +112,9 @@ def main(smoke: bool = False, force: bool = False, regions_only: list[str] | Non
                 log.add(f"cells_{region_name}", [c.bounds().getInfo()["coordinates"][0][0] for c in cells_by_region[region_name]])
             t = time.time()
             df = run_job(region_name, country, year, variant, cells_by_region[region_name], 2 if smoke else N_CELLS)
+            if not len(df) and not smoke:
+                log.add(f"{region_name}_{year}_{variant}", {"points": 0, "note": "every cell failed; job left pending for a resume"})
+                continue
             if smoke:
                 print(f"{region_name} {year} {variant}: {len(df)} points in {time.time() - t:.0f} s")
                 print(df.groupby("class")[["n_valid", "n_zero"]].agg(["mean", "count"]).round(2))

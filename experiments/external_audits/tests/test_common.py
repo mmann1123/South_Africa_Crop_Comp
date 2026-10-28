@@ -111,3 +111,13 @@ def test_download_retries_on_server_error(tmp_path, monkeypatch):
     dest = fetch.download("http://x/flaky", tmp_path / "f.bin", manifest, key="k/f")
     assert dest.read_bytes() == b"hello"
     assert len(attempts) == 3
+
+
+def test_runlog_discard_does_not_overwrite(tmp_path, monkeypatch):
+    monkeypatch.setattr(paths, "results_dir", lambda paper: tmp_path)
+    with runlog.RunLog("x", {"a": 1}, paper="demo") as log:
+        log.count("rows", 3)
+    before = (tmp_path / "run_log_x.json").read_text()
+    with runlog.RunLog("x", {"a": 2}, paper="demo") as log:
+        log.discard()  # no work done this run: keep the earlier record
+    assert (tmp_path / "run_log_x.json").read_text() == before

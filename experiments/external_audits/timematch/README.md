@@ -30,22 +30,22 @@ Per tile, 2017 (Cloud Score+ unless stated; "obs" = observations in one parcel's
 | FR1 30TXT | 62 | 34.6 | 0.404 | 23 | 25.0 | 37.0 | 33.2 |
 | FR2 31TCJ | 39 | 27.3 | 0.314 | 11 | 12.3 | 26.7 | 25.6 |
 
-Expected clear observations per series inside the growing season, April to September (sum of the monthly values in `results/monthly_summary.csv`):
+Expected clear observations per series inside the growing season, April to September (monthly values rounded; the last column is the unrounded sum from `results/monthly_summary.csv`):
 
 | Tile | Apr | May | Jun | Jul | Aug | Sep | Apr to Sep |
 |---|---|---|---|---|---|---|---|
-| AT1 | 2.5 | 2.7 | 4.2 | 6.1 | 7.7 | 3.3 | 26.5 |
-| DK1 | 1.8 | 1.2 | 0.8 | 2.4 | 3.5 | 1.9 | 11.6 |
-| FR1 | 4.5 | 1.8 | 3.7 | 2.7 | 4.0 | 1.9 | 18.6 |
+| AT1 | 2.5 | 2.7 | 4.2 | 6.1 | 7.7 | 3.3 | 26.4 |
+| DK1 | 1.8 | 1.2 | 0.8 | 2.4 | 3.5 | 1.9 | 11.7 |
+| FR1 | 4.5 | 1.8 | 3.7 | 2.7 | 4.0 | 1.9 | 18.5 |
 | FR2 | 1.0 | 2.3 | 1.6 | 1.9 | 4.3 | 2.5 | 13.6 |
 
 ![Per-date fraction of cropland flagged cloudy, four tiles](figures/timematch_cloud_by_date.png)
 
 ## Finding
 
-The Danish tile is the cloudiest of the four by every rule. Over its 52 shipped dates a parcel series on DK1 is expected to contain 28.6 cloud-contaminated observations and only 23.4 clear ones, against 25.0 cloudy and 37.0 clear on FR1 and 12.3 cloudy and 26.7 clear on FR2. More than half of all cropland is cloudy on 32 of DK1's 52 dates, compared with 23 of 62 on FR1 and 11 of 39 on FR2. Inside the growing season the gap widens: between April and September a DK1 series holds about 11.6 clear observations, FR1 18.6, FR2 13.6 and AT1 26.5, and in June, the month in which Danish winter cereals head, DK1 averages fewer than one clear observation. The tile-level metadata percentage that the dataset's 80 percent filter saw understates all of this, because it is computed over the whole granule rather than over fields and because a 40 percent cloudy tile can leave most of its cropland under cloud.
+The Danish tile is the cloudiest of the four by every rule. Over its 52 shipped dates a parcel series on DK1 is expected to contain 28.6 cloud-contaminated observations and only 23.4 clear ones, against 25.0 cloudy and 37.0 clear on FR1 and 12.3 cloudy and 26.7 clear on FR2. More than half of all cropland is cloudy on 32 of DK1's 52 dates, compared with 23 of 62 on FR1 and 11 of 39 on FR2. Inside the growing season the gap widens: between April and September a DK1 series holds about 11.7 clear observations against 18.5 on FR1 (1.6 times as many), 13.6 on FR2 (1.2 times) and 26.4 on AT1 (2.3 times), and in June, the month in which Danish winter cereals head, DK1 averages fewer than one clear observation. The tile-level metadata percentage that the dataset's 80 percent filter saw understates all of this, because it is computed over the whole granule rather than over fields and because a 40 percent cloudy tile can leave most of its cropland under cloud.
 
-The paper's three Denmark transfer cases (DK1 to FR1, DK1 to FR2, FR1 to DK1) therefore pair the cloudiest tile with clearer ones, and in every case a source-only model meets a different mixture of cloud spectra from the one it was trained on. That difference is of the same order as the phenological shift the paper estimates, and the paper never measures it. This audit cannot say how much of the 43 point collapse it explains; it does show that the domains differ in cloud contamination by a factor of roughly two in clear growing-season observations, that the dataset's own filter cannot see the difference, and that TimeMatch's conclusion rests on an untested assumption that it does not matter.
+The paper's three Denmark transfer cases (DK1 to FR1, DK1 to FR2, FR1 to DK1) therefore pair the cloudiest tile with clearer ones, and in every case a source-only model meets a different mixture of cloud spectra from the one it was trained on. The paper never measures that difference. This audit cannot say how much of the 43 point collapse it explains; it does show that the Denmark pairs differ in growing-season clear observations by a factor of 1.6 (FR1) and 1.2 (FR2), in cloudy observations per series by 28.6 against 25.0 and 12.3, that the dataset's own filter cannot see the difference, and that TimeMatch's conclusion rests on an untested assumption that it does not matter.
 
 ## Limitations of this audit
 

@@ -48,3 +48,11 @@ def test_field_day_stats_excludes_days_to_real_sentinel():
     out = pfqa.field_day_stats(pct, days, idx, 1)
     assert out.loc[0, "mean_days_to_real"] == (0 + 2 + 0) / 3
     assert out.loc[0, "frac_days_to_real_unknown"] == 0.25
+
+
+def test_cache_missing_day_only_when_object_absent():
+    # A key absent from the bucket listing is a real gap and may be cached as "no QA";
+    # a transient fetch error must not be cached, so a resume retries the day.
+    assert pfqa.cache_as_missing(KeyError("not in listing")) is True
+    assert pfqa.cache_as_missing(IOError("520 Server Error")) is False
+    assert pfqa.cache_as_missing(RuntimeError("timeout")) is False

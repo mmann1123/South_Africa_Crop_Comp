@@ -59,11 +59,12 @@ def process(tile: str, year: int, smoke: bool, log: RunLog) -> pd.DataFrame:
             df = pd.read_parquet(cache)
         else:
             key = catalogue.pfqa_key(tile, date)
+            path, cacheable = None, True
             try:
                 path = fetch.download(catalogue.url(key), cog_dir / f"{date}.tif", manifest, key, expected_bytes=catalogue.listing_size(key))
             except Exception as e:  # noqa: BLE001
-                path = None
-                log.add(f"missing_{tile}_{date}", f"{type(e).__name__}: {e}")
+                cacheable = pfqa.cache_as_missing(e)  # absent object: cache as "no QA"; transient error: do not cache
+                log.add(f"{'missing' if cacheable else 'fetch_failed'}_{tile}_{date}", f"{type(e).__name__}: {e}")
             layers = pfqa.read_day(str(path), win) if path else None
             if layers is None:
                 missing.append(date)
@@ -71,7 +72,8 @@ def process(tile: str, year: int, smoke: bool, log: RunLog) -> pd.DataFrame:
             else:
                 df = pfqa.field_day_stats(layers[0], layers[1], idx, n)
             df["date"] = date
-            df.to_parquet(cache, index=False)
+            if layers is not None or cacheable:
+                df.to_parquet(cache, index=False)
             if path and Path(path).exists():
                 Path(path).unlink()  # keep disk low; the manifest records the fetch
         frames.append(df)

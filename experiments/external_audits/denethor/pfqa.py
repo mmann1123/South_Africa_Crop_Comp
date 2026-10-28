@@ -19,6 +19,12 @@ SYNTHETIC_THRESHOLD = 50
 DAYS_UNKNOWN = 900  # layer 2 sentinel: no real observation within the search window
 
 
+def cache_as_missing(exc: BaseException) -> bool:
+    """True only when the object is genuinely absent (not in the bucket listing);
+    transient fetch errors must not be cached, so a resume retries the day."""
+    return isinstance(exc, KeyError)
+
+
 def read_day(url_or_path: str, window: Window) -> tuple[np.ndarray, np.ndarray] | None:
     """(percent_synthetic, days_to_real) as float32 with NaN at nodata, or None if unreadable."""
     src = url_or_path

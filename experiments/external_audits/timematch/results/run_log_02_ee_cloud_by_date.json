@@ -6,7 +6,7 @@
     "force": false
   },
   "seed": 42,
-  "git_commit": "e3e06f7882d8b02514323c81494bd241ccb8f247",
+  "git_commit": "9a9a0204f3f9264a1aafb9ab8997f1ec6d596cb9",
   "python": "3.13.9",
   "packages": {
     "ee": "1.7.50",
@@ -17,12 +17,12 @@
     "matplotlib": "3.10.7"
   },
   "counts": {
-    "rows_written": 0,
+    "rows_written": 209,
     "dates_without_images": 0,
     "dates_failed": 0,
     "rows_total": 211
   },
-  "started": "2026-10-28T21:39:45.125345+00:00",
+  "started": "2026-10-28T19:12:44.046125+00:00",
   "ee_project": "327687702789",
   "collections": {
     "s2": "COPERNICUS/S2_HARMONIZED",
@@ -36,5 +36,5 @@
     "p16": 16,
     "scale_m": 60
   },
-  "ended": "2026-10-28T21:39:46.043947+00:00"
+  "ended": "2026-10-28T19:24:08.010300+00:00"
 }

@@ -51,6 +51,10 @@ class RunLog:
     def add(self, key: str, value: Any) -> None:
         self.data[key] = value
 
+    def discard(self) -> None:
+        """Do not write this run's log (nothing was done); keeps the earlier record on disk."""
+        self._discard = True
+
     def count(self, key: str, n: int) -> None:
         self.data["counts"][key] = n
 
@@ -59,6 +63,8 @@ class RunLog:
         return self
 
     def __exit__(self, exc_type, exc, tb) -> bool:
+        if getattr(self, "_discard", False):
+            return False
         self.data["ended"] = _dt.datetime.now(_dt.timezone.utc).isoformat()
         if exc is not None:
             self.data["error"] = f"{exc_type.__name__}: {exc}"

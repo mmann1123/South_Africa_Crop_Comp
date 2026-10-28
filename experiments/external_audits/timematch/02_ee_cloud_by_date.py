@@ -40,6 +40,10 @@ def main(smoke: bool = False, tiles: list[str] | None = None, force: bool = Fals
             done = set(zip(prev["tile"], prev["date"]))
         elif OUT.exists() and force:
             OUT.unlink()
+        if not force and all((t, d) in done for t, d in zip(dates["tile"], dates["date"])):
+            print("all dates already in results; nothing to do (use --force to redo)")
+            log.discard()
+            return
         cropland = eecloud.cropland_mask()
         supports = {}
         n_new, n_empty, n_failed = 0, 0, 0
