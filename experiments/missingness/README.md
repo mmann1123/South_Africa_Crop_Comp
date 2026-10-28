@@ -138,21 +138,23 @@ L-TAE and the Transformer (also in the to-do item) were not computed.
 `learning_curves/run.sh` added 5% for every swept model and 5/10/15% for pixel TabNet (10 draws
 each), appending to the existing sweep files; `learning_curves/summarize.py` combines them
 (`results/learning_curves.csv`, `figures/learning_curves.pdf`). Training-median-filled holdout;
-one training seed per draw, so the 100% points are single models (for example CNN-BiLSTM 0.606
-here vs 0.656 for the published 5-seed ensemble). 5% keeps 132 of 2,653 training fields, at least
+one training seed per draw. At 100% the draws are the 5 training seeds of each full-data model
+scored singly (`learning_curves/single_seed_100.py`; XGBoost and logistic regression are
+deterministic single runs); the 5-seed ensembles, 0.01 to 0.04 higher, are separate markers in the
+figure and the last column below. 5% keeps 132 of 2,653 training fields, at least
 15 per class.
 
-| Model | 5% | 10% | 15% | 25% | 50% | 75% | 100% |
-|---|---|---|---|---|---|---|---|
-| TempCNN, gated | 0.512 | 0.564 | 0.590 | 0.608 | 0.634 | 0.639 | 0.646 |
-| TempCNN | 0.501 | 0.547 | 0.581 | 0.607 | 0.621 | 0.633 | 0.647 |
-| L-TAE-S | 0.508 | 0.557 | 0.565 | 0.612 | 0.636 | 0.644 | 0.652 |
-| L-TAE | 0.503 | 0.554 | 0.568 | 0.592 | 0.636 | 0.638 | 0.647 |
-| CNN-BiLSTM | 0.522 | 0.554 | 0.561 | 0.580 | 0.592 | 0.616 | 0.606 |
-| CNN-BiLSTM, gated | 0.516 | 0.543 | 0.557 | 0.575 | 0.592 | 0.596 | 0.603 |
-| Logistic regression (pixel) | 0.528 | 0.547 | 0.563 | 0.574 | 0.599 | 0.606 | 0.605 |
-| XGBoost (field) | 0.463 | 0.513 | 0.524 | 0.549 | 0.557 | 0.592 | 0.612 |
-| TabNet (pixel) | 0.431 | 0.482 | 0.501 | 0.539 | 0.561 | 0.582 | 0.572 |
+| Model | 5% | 10% | 15% | 25% | 50% | 75% | 100% | 100%, 5-seed ensemble |
+|---|---|---|---|---|---|---|---|---|
+| TempCNN, gated | 0.512 | 0.564 | 0.590 | 0.608 | 0.634 | 0.639 | 0.645 | 0.654 |
+| TempCNN | 0.501 | 0.547 | 0.581 | 0.607 | 0.621 | 0.633 | 0.637 | 0.653 |
+| L-TAE-S | 0.508 | 0.557 | 0.565 | 0.612 | 0.636 | 0.644 | 0.643 | 0.643 |
+| L-TAE | 0.503 | 0.554 | 0.568 | 0.592 | 0.636 | 0.638 | 0.643 | 0.652 |
+| CNN-BiLSTM | 0.522 | 0.554 | 0.561 | 0.580 | 0.592 | 0.616 | 0.615 | 0.642 |
+| CNN-BiLSTM, gated | 0.516 | 0.543 | 0.557 | 0.575 | 0.592 | 0.596 | 0.619 | 0.638 |
+| Logistic regression (pixel) | 0.528 | 0.547 | 0.563 | 0.574 | 0.599 | 0.606 | 0.605 | 0.605 |
+| XGBoost (field) | 0.463 | 0.513 | 0.524 | 0.549 | 0.557 | 0.592 | 0.612 | 0.612 |
+| TabNet (pixel) | 0.431 | 0.482 | 0.501 | 0.539 | 0.561 | 0.582 | 0.579 | 0.616 |
 
 At 5 to 15% the raw-sequence models and logistic regression are statistically indistinguishable
 (every Welch test against logistic regression p > 0.05, except gated TempCNN at 15%, +0.027,

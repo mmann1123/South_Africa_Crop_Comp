@@ -78,6 +78,21 @@ found in our own pipeline. These three answer it.
   inference match. The literature already admits zero-padding (Che et al. 2024, Zhao et al. 2021);
   a short audit supports "this failure is probably common" instead of asserting it.
 
+### Caveats to fix (added 2026-10-28)
+
+- [x] **Learning curves, 100% points** (2026-10-28; `learning_curves/single_seed_100.py`). Each
+  seed scored singly; the seed average reproduces every saved ensemble. Single models sit 0.01 to
+  0.04 below their ensembles (largest for CNN-BiLSTM and TabNet); ensembles shown as open markers.
+- [ ] **Learning curves, paired comparisons at 5 to 15%** (about 8 to 10 GPU hours; decide once
+  the low-data result's prominence is settled). Rerun 5/10/15% with one shared train/validation
+  split and identical field draws for every model, so draws and fields pair across models. Needed
+  if the paper claims logistic regression matches the deep models at low data (a null claim from
+  the current unpaired tests is weak).
+- [ ] **Mechanism figure** (inference only). Lead with the prediction-flip rate per arm (bar chart
+  next to the 2 x 2 table); add a leave-one-month-out occlusion test (swap each month for the
+  training median, measure the change in predicted-class probability), which needs no baseline.
+  Move the integrated-gradients figure to the supplement with its caveat.
+
 ## Would strengthen it
 
 - [x] **Gradient attribution at the September slot** (2026-10-23; `experiments/missingness/attribution.py`,

@@ -6,7 +6,10 @@ retried step re-appends):
   experiments/holdout_fill_check/results/sweep_deep_trainmed.csv    L-TAE, L-TAE-S
   experiments/holdout_fill_check/results/sweep_tabnet_trainmed.csv  pixel TabNet
   experiments/holdout_fill_check/results/sweep_classical_trainmed.csv  field XGBoost, pixel LR
-Draws: 10 at 5/10/15%, 5 at 25/50/75%, 1 at 100%. Per model and fraction: mean holdout macro-F1
+Draws: 10 at 5/10/15%, 5 at 25/50/75%. At 100% the draws are the 5 training seeds of each
+full-data model scored singly (single_seed_100.py, results/learning_curve_100pct.csv); XGBoost
+(field) and logistic regression are deterministic and keep their single sweep run. The 5-seed
+ensembles are drawn as separate open markers. Per model and fraction: mean holdout macro-F1
 and a 95% t-interval over draws. Models use different train/validation splits, so draws are not
 paired across models; differences are unpaired (Welch). Writes results/learning_curves.csv and
 figures/learning_curves.{pdf,png}.
@@ -41,7 +44,10 @@ def load():
     d = d.drop_duplicates(["model", "fraction", "subsample_seed"], keep="last")
     d = d[d["model"].isin(NAMES)]
     d["model"] = d["model"].map(NAMES)
-    return d
+    single = pd.read_csv(os.path.join(HERE, "..", "results", "learning_curve_100pct.csv"))
+    d = d[~((d.fraction == 1.0) & d.model.isin(single.model.unique()))]
+    add = single.rename(columns={"seed": "subsample_seed", "f1m_single": "oos_f1_macro"}).assign(fraction=1.0)
+    return pd.concat([d, add[["model", "fraction", "subsample_seed", "oos_f1_macro"]]], ignore_index=True)
 
 
 def summarize(d):
@@ -75,6 +81,10 @@ def figure(s):
         ls = "--" if FAMILY[m] == "sparse" else "-"
         ax.plot(g.fraction, g.mean_f1m, ls=ls, marker=marker[m], ms=4, lw=1.3, color=col[FAMILY[m]], label=m)
         ax.fill_between(g.fraction, g.ci_lo, g.ci_hi, color=col[FAMILY[m]], alpha=0.08, lw=0)
+    ens = pd.read_csv(os.path.join(HERE, "..", "results", "learning_curve_100pct.csv")).groupby("model").f1m_ensemble.first()
+    for m, v in ens.items():
+        ax.plot(1.0, v, marker=marker[m], ms=6, mfc="none", color=col[FAMILY[m]], ls="none")
+    ax.plot([], [], marker="o", mfc="none", color="grey", ls="none", label="5-seed ensemble (100%)")
     fr = sorted(s.fraction.unique())
     ax.set_xscale("log")
     ax.set_xticks(fr, [f"{100 * f:g}%" for f in fr])
