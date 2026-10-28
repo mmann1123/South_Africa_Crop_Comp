@@ -110,8 +110,12 @@ found in our own pipeline. These three answer it.
       even in training), so only density shifts; OA only, single runs, cross-year. Do not claim we
       are first to show missingness passing for a transfer failure; claim first cross-region,
       same-season, single-fill case that reorders a multi-family benchmark.
-    - [ ] RSE paper (land-cover fractions) needs the PDF: ScienceDirect blocks scripted download
-      and no repository copy exists (CC BY, so the user can download it from the DOI page).
+    - [x] RSE paper briefed (2026-10-28; `writeup/literature/Learning the variations in annual
+      spectral-temporal metrics ... land cover fraction monitoring.md`). Land-cover fractions from
+      annual percentiles, no fill: the densest-year model transfers worst; observation subsampling
+      cuts transfer MAE by up to 19%, and by up to 16% for same-year transfer to sparser external
+      tiles (the only published same-season spatial hint). Single runs, MAE only. Implication for
+      us: NaN-aware annual statistics (our xr_fresh features) are still density-sensitive.
 - [x] **Background: nodata handling in general-purpose SITS codebases** (2026-10-28;
   `research_notes/SITS nodata handling audit/audit.md`, 17 codebases, commit-pinned links). Result
   does NOT support "probably common in public code": none reproduces our failure mode. 4 mask
