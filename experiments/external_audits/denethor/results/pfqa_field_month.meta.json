@@ -1,0 +1,21 @@
+{
+  "script": "03_pf_qa_synthetic",
+  "git_commit": "0af1577bf9b48302123e96ab33d02456cedf5f2e",
+  "run_date": "2026-10-28T20:18:25.552440+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/denethor/manifest.json"
+  ],
+  "rows": 32165,
+  "columns": [
+    "field_pos",
+    "month",
+    "n_days_with_qa",
+    "n_days_missing",
+    "share_days_mostly_synthetic",
+    "mean_percent_synthetic",
+    "mean_days_to_real",
+    "tile",
+    "year",
+    "field_id"
+  ]
+}

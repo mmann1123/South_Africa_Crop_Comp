@@ -1,0 +1,29 @@
+{
+  "script": "04_summarise",
+  "git_commit": "0af1577bf9b48302123e96ab33d02456cedf5f2e",
+  "run_date": "2026-10-28T20:18:38.741133+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/denethor/results/s2_field_summary.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/denethor/results/pfqa_field_month.csv"
+  ],
+  "rows": 4,
+  "columns": [
+    "tile_year",
+    "tile",
+    "year",
+    "n_fields",
+    "median_n_clear_s2cp40",
+    "iqr_n_clear_s2cp40",
+    "median_n_clear_literal40",
+    "median_n_clear_scl",
+    "median_n_clear_s2cp40_aprOct",
+    "share_fields_under_20_clear_aprOct_s2cp40",
+    "median_longest_gap_days",
+    "mean_clear_by_month",
+    "mean_share_days_mostly_synthetic_season",
+    "mean_percent_synthetic",
+    "mean_days_to_real",
+    "n_fields_pf",
+    "by_month"
+  ]
+}

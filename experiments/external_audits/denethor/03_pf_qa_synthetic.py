@@ -85,8 +85,14 @@ def process(tile: str, year: int, smoke: bool, log: RunLog) -> pd.DataFrame:
     return daily
 
 
-def main(smoke: bool = False, force: bool = False) -> None:
+def main(smoke: bool = False, force: bool = False, cache_only: str | None = None) -> None:
     out_month = RES / "pfqa_field_month.csv"
+    if cache_only:
+        # Populate the per-day cache for one benchmark tile-year in a separate process, e.g. "17E-243N:2019".
+        tile, year = cache_only.split(":")
+        with RunLog(f"03_pf_qa_synthetic_cache_{tile}_{year}", {"cache_only": cache_only}, paper=PAPER) as log:
+            process(tile, int(year), smoke, log)
+        return
     if out_month.exists() and not force and not smoke:
         print(f"{out_month} exists; use --force")
         return
@@ -112,4 +118,5 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--cache-only", default=None, dest="cache_only", help="TILE:YEAR, populate the day cache only")
     main(**vars(ap.parse_args()))
