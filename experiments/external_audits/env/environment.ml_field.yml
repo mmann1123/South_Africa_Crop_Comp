@@ -1,0 +1,7 @@
+name: ml_field
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+prefix: /home/mmann1123/miniconda3/envs/ml_field

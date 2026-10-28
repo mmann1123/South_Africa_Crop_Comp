@@ -1,0 +1,63 @@
+{
+  "script": "02_run_counters",
+  "args": {
+    "smoke": true,
+    "force": false,
+    "regions_only": null
+  },
+  "seed": 42,
+  "git_commit": "e75934258a44c99386be752448245a4865c7f771",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {},
+  "started": "2026-10-28T19:31:46.965660+00:00",
+  "collections": {
+    "s2": "COPERNICUS/S2_HARMONIZED",
+    "gaul": "FAO/GAUL/2015/level1",
+    "cdl": "USDA/NASS/CDL",
+    "worldcover": "ESA/WorldCover/v100/2020"
+  },
+  "recipe": {
+    "cloud_score_threshold": 0.2,
+    "targets": [
+      9,
+      30
+    ],
+    "search": 9,
+    "variants": {
+      "A": [
+        "01-01",
+        null
+      ],
+      "B": [
+        "04-01",
+        "11-01"
+      ]
+    }
+  },
+  "cdl_classes": {
+    "named": {
+      "1": "corn",
+      "5": "soybeans"
+    },
+    "other_pooled": [
+      23,
+      24,
+      36,
+      28,
+      42,
+      41
+    ],
+    "confidence_min": 90
+  },
+  "getinfo_failed_Iowa_2018_A": "EEException: User memory limit exceeded.",
+  "ended": "2026-10-28T19:35:30.144547+00:00",
+  "error": "EEException: User memory limit exceeded."
+}

@@ -1,0 +1,47 @@
+{
+  "script": "03_pf_qa_synthetic",
+  "args": {
+    "smoke": true,
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "bd435c938b637de53d51bddcd48450d977ec65f2",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {},
+  "started": "2026-10-28T19:48:42.125737+00:00",
+  "18E-242N_2018": {
+    "n_label_polygons": 2534,
+    "n_fields_rasterised": 2532,
+    "n_dropped": 2,
+    "window": [
+      0,
+      0,
+      8000,
+      8000
+    ],
+    "n_days": 3
+  },
+  "18E-242N_2018_missing_days": [],
+  "17E-243N_2019": {
+    "n_label_polygons": 2064,
+    "n_fields_rasterised": 2063,
+    "n_dropped": 1,
+    "window": [
+      0,
+      0,
+      8000,
+      8000
+    ],
+    "n_days": 3
+  },
+  "17E-243N_2019_missing_days": [],
+  "ended": "2026-10-28T19:49:28.928276+00:00"
+}

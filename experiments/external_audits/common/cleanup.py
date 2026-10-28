@@ -1,0 +1,60 @@
+"""Completeness checks and deletion of downloaded external data (manifests kept)."""
+from __future__ import annotations
+
+import shutil
+from pathlib import Path
+
+from . import paths
+
+# (relative path under results_dir(paper), minimum data rows)
+EXPECTED: dict[str, list[tuple[str, int]]] = {
+    "timematch": [("cloud_by_date.csv", 200), ("tile_summary.csv", 4), ("monthly_summary.csv", 40)],
+    "denethor": [("s2_field_summary.csv", 1000), ("denethor_summary.csv", 4), ("pfqa_field_month.csv", 1000)],
+    "daccn": [("daccn_counters.csv|daccn_counters.csv.gz", 20000), ("daccn_summary.csv", 24)],
+}
+KEEP = ("manifest.json", "central_directory.json")
+
+
+def expected_outputs(paper: str) -> list[tuple[Path, int]]:
+    return [(Path(rel), n) for rel, n in EXPECTED[paper]]
+
+
+def _count_rows(p: Path) -> int:
+    import gzip
+
+    opener = gzip.open if p.suffix == ".gz" else open
+    with opener(p, "rt") as fh:
+        return max(0, sum(1 for _ in fh) - 1)
+
+
+def complete(paper: str) -> tuple[bool, list[str]]:
+    res = paths.results_dir(paper)
+    problems = []
+    for rel, min_rows in expected_outputs(paper):
+        candidates = [res / name for name in rel.name.split("|")]
+        found = next((c for c in candidates if c.exists()), None)
+        if found is None:
+            problems.append(f"missing {rel.name}")
+            continue
+        n = _count_rows(found)
+        if n < min_rows:
+            problems.append(f"{found.name}: {n} rows < {min_rows}")
+    return (not problems), problems
+
+
+def purge(paper: str, keep: tuple[str, ...] = KEEP, force: bool = False) -> int:
+    ok, problems = complete(paper)
+    if not ok and not force:
+        raise RuntimeError(f"{paper} results incomplete, refusing to delete data: {problems}")
+    root = paths.paper_root(paper)
+    freed = 0
+    for child in list(root.iterdir()):
+        if child.name in keep:
+            continue
+        if child.is_dir():
+            freed += sum(f.stat().st_size for f in child.rglob("*") if f.is_file())
+            shutil.rmtree(child)
+        else:
+            freed += child.stat().st_size
+            child.unlink()
+    return freed
