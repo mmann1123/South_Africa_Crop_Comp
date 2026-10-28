@@ -1,0 +1,22 @@
+{
+  "script": "03_summarise",
+  "git_commit": "c9f8c4ba770e3c785a303f9eea587779b4c230f5",
+  "run_date": "2026-10-28T19:25:40.879072+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/timematch/results/cloud_by_date.csv"
+  ],
+  "rows": 48,
+  "columns": [
+    "country",
+    "tile",
+    "label",
+    "month",
+    "n_dates",
+    "expected_cloudy_obs_csplus",
+    "expected_clear_obs_csplus",
+    "expected_cloudy_obs_s2cp40",
+    "expected_clear_obs_s2cp40",
+    "expected_cloudy_obs_s2cp16",
+    "expected_clear_obs_s2cp16"
+  ]
+}

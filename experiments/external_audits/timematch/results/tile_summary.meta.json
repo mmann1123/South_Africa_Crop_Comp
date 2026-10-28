@@ -1,0 +1,41 @@
+{
+  "script": "03_summarise",
+  "git_commit": "c9f8c4ba770e3c785a303f9eea587779b4c230f5",
+  "run_date": "2026-10-28T19:25:40.875036+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/timematch/results/cloud_by_date.csv"
+  ],
+  "rows": 4,
+  "columns": [
+    "country",
+    "tile",
+    "label",
+    "n_dates",
+    "n_dates_with_images",
+    "mean_tile_cloudy_pct",
+    "median_tile_cloudy_pct",
+    "dates_tile_over50",
+    "mean_frac_nodata",
+    "mean_field_cloudy_csplus",
+    "median_field_cloudy_csplus",
+    "dates_field_over50_csplus",
+    "dates_field_over80_csplus",
+    "expected_cloudy_obs_per_series_csplus",
+    "expected_clear_obs_per_series_csplus",
+    "expected_cloudy_obs_csplus",
+    "mean_field_cloudy_s2cp40",
+    "median_field_cloudy_s2cp40",
+    "dates_field_over50_s2cp40",
+    "dates_field_over80_s2cp40",
+    "expected_cloudy_obs_per_series_s2cp40",
+    "expected_clear_obs_per_series_s2cp40",
+    "expected_cloudy_obs_s2cp40",
+    "mean_field_cloudy_s2cp16",
+    "median_field_cloudy_s2cp16",
+    "dates_field_over50_s2cp16",
+    "dates_field_over80_s2cp16",
+    "expected_cloudy_obs_per_series_s2cp16",
+    "expected_clear_obs_per_series_s2cp16",
+    "expected_cloudy_obs_s2cp16"
+  ]
+}
