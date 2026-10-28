@@ -73,10 +73,19 @@ found in our own pipeline. These three answer it.
 - [ ] **Second dataset** (retraining; scope depends on the target journal). BreizhCrops or the
   Germany track of AI4FoodSecurity, with its natural cloud gaps or simulated ones. Turns the
   paper from a case study into a general finding.
-- [ ] **Audit of nodata handling in open-source SITS codebases** (no compute). Check how popular
-  repositories fill missing observations (zero, interpolation, mask) and whether training and
-  inference match. The literature already admits zero-padding (Che et al. 2024, Zhao et al. 2021);
-  a short audit supports "this failure is probably common" instead of asserting it.
+- [x] **Audit of nodata handling in open-source SITS codebases** (2026-10-28;
+  `research_notes/SITS nodata handling audit/audit.md`, 17 codebases, commit-pinned links). Result
+  does NOT support "probably common in public code": none reproduces our failure mode. 4 mask
+  consistently (WorldCereal also simulates gaps in training), 3 interpolate identically in train
+  and predict (R `sits`, eo-learn, Sen4AgriNet), 3 composite gaps away upstream (NASA Harvest),
+  5 do no gap handling (irregular sequences; clouds left raw), TSViT zero-pads consistently.
+  Closest case: OpenMapFlow/Presto fill an all-NaN tile band with raw 0 before normalising (edge
+  path). Claim to make instead: reference pipelines protect against this through masking,
+  interpolation or compositing; hand-built fixed monthly grids that reuse reference
+  architectures without that data handling (like ours) fall outside that protection. Only 6 of
+  17 come from two groups, so the sample is not independent. MCTNet and Che et al. code not
+  checked. OpenMapFlow `_fillna` spot-checked against the pinned commit (confirmed); spot-check any
+  other line before quoting it.
 
 ### Caveats to fix (added 2026-10-28)
 
@@ -88,10 +97,10 @@ found in our own pipeline. These three answer it.
   split and identical field draws for every model, so draws and fields pair across models. Needed
   if the paper claims logistic regression matches the deep models at low data (a null claim from
   the current unpaired tests is weak).
-- [ ] **Mechanism figure** (inference only). Lead with the prediction-flip rate per arm (bar chart
-  next to the 2 x 2 table); add a leave-one-month-out occlusion test (swap each month for the
-  training median, measure the change in predicted-class probability), which needs no baseline.
-  Move the integrated-gradients figure to the supplement with its caveat.
+- [ ] **Mechanism figure** (inference only). Flip-rate bar chart done
+  (`experiments/missingness/flip_rate_figure.py`, `figures/flip_rate.pdf`). The leave-one-month-out
+  occlusion is the training-median arm of the month-by-month injection (fields changed and F1 per
+  month); finish when that run completes. Integrated-gradients figure goes to the supplement.
 
 ## Would strengthen it
 
