@@ -2,7 +2,7 @@
   "script": "04_summarise",
   "args": {},
   "seed": 42,
-  "git_commit": "0af1577bf9b48302123e96ab33d02456cedf5f2e",
+  "git_commit": "36e2285cd167f67ae92a200c1fcb028fae370652",
   "python": "3.13.9",
   "packages": {
     "ee": "1.7.50",
@@ -13,23 +13,23 @@
     "matplotlib": "3.10.7"
   },
   "counts": {},
-  "started": "2026-10-28T20:18:38.661269+00:00",
+  "started": "2026-10-28T20:47:27.754905+00:00",
   "pfqa_season": [
     {
       "tile": "17E-243N",
       "year": 2019,
-      "mean_share_days_mostly_synthetic_season": 0.6598613249585944,
-      "mean_percent_synthetic": 66.20914972599195,
-      "mean_days_to_real": 45.504967090407604,
+      "mean_share_days_mostly_synthetic_season": 0.6668251908209376,
+      "mean_percent_synthetic": 66.91645873312558,
+      "mean_days_to_real": 1.568036889185512,
       "n_fields": 2063,
-      "by_month": "0.373;0.810;0.488;0.771;0.712;0.750;0.716"
+      "by_month": "0.373;0.810;0.488;0.771;0.690;0.743;0.793"
     },
     {
       "tile": "18E-242N",
       "year": 2018,
       "mean_share_days_mostly_synthetic_season": 0.6167011257440855,
       "mean_percent_synthetic": 61.94477257041102,
-      "mean_days_to_real": 57.57343583067397,
+      "mean_days_to_real": 1.4412045853227595,
       "n_fields": 2532,
       "by_month": "0.507;0.409;0.790;0.753;0.575;0.629;0.653"
     }
@@ -49,5 +49,5 @@
     "benchmark_difference": -9.0
   },
   "figure": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/denethor/figures/denethor_clear_and_synthetic.png",
-  "ended": "2026-10-28T20:18:39.053300+00:00"
+  "ended": "2026-10-28T20:47:28.121694+00:00"
 }

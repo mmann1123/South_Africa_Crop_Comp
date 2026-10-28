@@ -1,7 +1,7 @@
 {
   "script": "04_summarise",
-  "git_commit": "0af1577bf9b48302123e96ab33d02456cedf5f2e",
-  "run_date": "2026-10-28T20:18:38.745114+00:00",
+  "git_commit": "36e2285cd167f67ae92a200c1fcb028fae370652",
+  "run_date": "2026-10-28T20:47:27.829244+00:00",
   "inputs": [
     "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/denethor/results/s2_field_summary.csv"
   ],

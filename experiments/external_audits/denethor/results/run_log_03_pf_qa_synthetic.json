@@ -2,10 +2,10 @@
   "script": "03_pf_qa_synthetic",
   "args": {
     "smoke": false,
-    "force": false
+    "force": true
   },
   "seed": 42,
-  "git_commit": "bd435c938b637de53d51bddcd48450d977ec65f2",
+  "git_commit": "db13fee04151c45630681d80e1c9086ae882928c",
   "python": "3.13.9",
   "packages": {
     "ee": "1.7.50",
@@ -19,7 +19,7 @@
     "field_days": 983330,
     "field_months": 32165
   },
-  "started": "2026-10-28T19:49:38.823223+00:00",
+  "started": "2026-10-28T20:20:38.319023+00:00",
   "18E-242N_2018": {
     "n_label_polygons": 2534,
     "n_fields_rasterised": 2532,
@@ -45,52 +45,7 @@
     ],
     "n_days": 214
   },
-  "missing_17E-243N_2019-08-20": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-08-20.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-08-20.tif'",
-  "missing_17E-243N_2019-08-21": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-08-21.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-08-21.tif'",
-  "missing_17E-243N_2019-08-23": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-08-23.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-08-23.tif'",
-  "missing_17E-243N_2019-08-24": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-08-24.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-08-24.tif'",
-  "missing_17E-243N_2019-08-26": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-08-26.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-08-26.tif'",
-  "missing_17E-243N_2019-09-08": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-08.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-08.tif'",
-  "missing_17E-243N_2019-09-09": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-09.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-09.tif'",
-  "missing_17E-243N_2019-09-10": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-10.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-10.tif'",
-  "missing_17E-243N_2019-09-11": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-11.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-11.tif'",
-  "missing_17E-243N_2019-09-17": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-17.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-17.tif'",
-  "missing_17E-243N_2019-09-19": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-19.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-09-19.tif'",
-  "missing_17E-243N_2019-10-01": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-01.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-01.tif'",
-  "missing_17E-243N_2019-10-02": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-02.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-02.tif'",
-  "missing_17E-243N_2019-10-05": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-05.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-05.tif'",
-  "missing_17E-243N_2019-10-06": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-06.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-06.tif'",
-  "missing_17E-243N_2019-10-17": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-17.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-17.tif'",
-  "missing_17E-243N_2019-10-19": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-19.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-19.tif'",
-  "missing_17E-243N_2019-10-21": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-21.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-21.tif'",
-  "missing_17E-243N_2019-10-22": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-22.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-22.tif'",
-  "missing_17E-243N_2019-10-27": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-27.tif.part' -> '/mnt/bigdrive/external_audits/denethor/pfqa_cogs/17E-243N/2019-10-27.tif'",
-  "17E-243N_2019_missing_days": [
-    "2019-08-20",
-    "2019-08-21",
-    "2019-08-23",
-    "2019-08-24",
-    "2019-08-26",
-    "2019-09-05",
-    "2019-09-08",
-    "2019-09-09",
-    "2019-09-10",
-    "2019-09-11",
-    "2019-09-17",
-    "2019-09-19",
-    "2019-10-01",
-    "2019-10-02",
-    "2019-10-05",
-    "2019-10-06",
-    "2019-10-09",
-    "2019-10-17",
-    "2019-10-19",
-    "2019-10-21",
-    "2019-10-22",
-    "2019-10-25",
-    "2019-10-27",
-    "2019-10-29"
-  ],
+  "17E-243N_2019_missing_days": [],
   "pfqa_field_day": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/denethor/results/pfqa_field_day.csv.gz",
-  "ended": "2026-10-28T20:18:29.806885+00:00"
+  "ended": "2026-10-28T20:47:19.071929+00:00"
 }
