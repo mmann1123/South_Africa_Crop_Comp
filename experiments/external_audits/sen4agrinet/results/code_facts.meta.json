@@ -1,0 +1,32 @@
+{
+  "script": "01_fetch_code",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:00:58.430384+00:00",
+  "inputs": [
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A-Models/ae5a3761395cd259724516fa52a89879850558ab/utils/PAD_dataset.py",
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A-Models/ae5a3761395cd259724516fa52a89879850558ab/utils/PAD_dataset.py",
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A-Models/ae5a3761395cd259724516fa52a89879850558ab/utils/PAD_dataset.py",
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A-Models/ae5a3761395cd259724516fa52a89879850558ab/utils/PAD_dataset.py",
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A-Models/ae5a3761395cd259724516fa52a89879850558ab/utils/PAD_dataset.py",
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A-Models/ae5a3761395cd259724516fa52a89879850558ab/export_medians_multi.py",
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A-Models/ae5a3761395cd259724516fa52a89879850558ab/object-based-csv.py",
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A/7ac66dce57abb6dd05683891bc810c2ddc36a966/patches_dataset.py",
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A-Models/ae5a3761395cd259724516fa52a89879850558ab/utils/OAD_datamodule.py",
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A-Models/ae5a3761395cd259724516fa52a89879850558ab/utils/OAD_datamodule.py",
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A-Models/ae5a3761395cd259724516fa52a89879850558ab/utils/OAD_datamodule.py",
+    "https://raw.githubusercontent.com/Orion-AI-Lab/S4A-Models/ae5a3761395cd259724516fa52a89879850558ab/pad_experiments.py"
+  ],
+  "rows": 12,
+  "columns": [
+    "fact_id",
+    "repo",
+    "commit",
+    "path",
+    "sha256",
+    "line_start",
+    "line_end",
+    "pattern_found",
+    "note",
+    "text"
+  ]
+}

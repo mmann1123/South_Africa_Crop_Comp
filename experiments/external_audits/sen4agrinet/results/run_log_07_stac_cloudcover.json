@@ -1,0 +1,37 @@
+{
+  "script": "07_stac_cloudcover",
+  "args": {
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "granules_31TBF_2019": 223,
+    "granules_31TCF_2019": 224,
+    "granules_31TCG_2019": 222,
+    "granules_31TCJ_2019": 336,
+    "granules_31TCL_2019": 220,
+    "granules_31TDF_2019": 223,
+    "granules_31TDG_2019": 225,
+    "granules_31TDK_2019": 223,
+    "granules_31TDM_2019": 329,
+    "granules_31UCP_2019": 227,
+    "granules_31UDR_2019": 218,
+    "granules_31TBF_2020": 165,
+    "granules_31TCF_2020": 166,
+    "granules_31TCG_2020": 170,
+    "granules_31TDF_2020": 167,
+    "granules_31TDG_2020": 168
+  },
+  "started": "2026-10-29T14:10:32.048813+00:00",
+  "ended": "2026-10-29T14:10:55.221333+00:00"
+}

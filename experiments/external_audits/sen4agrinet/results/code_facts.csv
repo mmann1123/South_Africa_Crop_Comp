@@ -1,0 +1,106 @@
+fact_id,repo,commit,path,sha256,line_start,line_end,pattern_found,note,text
+pad_bin_median,Orion-AI-Lab/S4A-Models,ae5a3761395cd259724516fa52a89879850558ab,utils/PAD_dataset.py,01141772cad40c2a87cbacc49c5191b851548cfe276142522363e9e38491f354,293,299,True,"monthly bins (start, end], median over acquisitions","            band_data = band_data.groupby_bins(
+                'time',
+                bins=date_range,
+                right=True,
+                include_lowest=False,
+                labels=date_range[:-1]
+            ).median(dim='time')"
+pad_resample,Orion-AI-Lab/S4A-Models,ae5a3761395cd259724516fa52a89879850558ab,utils/PAD_dataset.py,01141772cad40c2a87cbacc49c5191b851548cfe276142522363e9e38491f354,301,302,True,upsample so empty months are NaN,"            # Upsample so months without data are initiated with NaN values
+            band_data = band_data.resample(time_bins=self.group_freq).median(dim='time_bins')"
+pad_interpolate,Orion-AI-Lab/S4A-Models,ae5a3761395cd259724516fa52a89879850558ab,utils/PAD_dataset.py,01141772cad40c2a87cbacc49c5191b851548cfe276142522363e9e38491f354,304,307,True,"linear interpolation, linear extrapolation, no max_gap","            # Fill:
+            # NaN months with linear interpolation
+            # NaN months outsize of range (e.x month 12) using extrapolation
+            band_data = band_data.interpolate_na(dim='time_bins', method='linear', fill_value='extrapolate')"
+pad_date_range,Orion-AI-Lab/S4A-Models,ae5a3761395cd259724516fa52a89879850558ab,utils/PAD_dataset.py,01141772cad40c2a87cbacc49c5191b851548cfe276142522363e9e38491f354,281,282,True,calendar-year month bins,"        # output intervals
+        date_range = pd.date_range(start=f'{year}-01-01', end=f'{int(year) + 1}-01-01', freq=self.group_freq)"
+pad_docstring_claim,Orion-AI-Lab/S4A-Models,ae5a3761395cd259724516fa52a89879850558ab,utils/PAD_dataset.py,01141772cad40c2a87cbacc49c5191b851548cfe276142522363e9e38491f354,31,38,True,docstring describes a different fill than the code applies,"    If data for a time bin is absent then the median of all data from previous and
+    following bins is calculated.
+    E.g. if time frequency is ""1 month"" and there are no images for March, then
+    the median of all images from February and April is calculated and used.
+    In the case where there are no data before or after that specific bin, then
+    the following or previous median is replicated respectively.
+    E.g. if time frequency is ""1 month"" and there are no images for January, then
+    the median of February is used for this month too."
+median_export_chain,Orion-AI-Lab/S4A-Models,ae5a3761395cd259724516fa52a89879850558ab,export_medians_multi.py,84ac27335f32cda30e48f1b6ce74d5a8e12a8f1632344fb4c6f43413d1f20525,126,140,True,precomputed-median path used by --saved_medians,"        band_data = band_data.groupby_bins(
+            'time',
+            bins=date_range,
+            right=True,
+            include_lowest=False,
+            labels=date_range[:-1]
+        ).median(dim='time')
+
+        # Upsample so months without data are initiated with NaN values
+        band_data = band_data.resample(time_bins=group_freq).median(dim='time_bins')
+
+        # Fill:
+        # NaN months with linear interpolation
+        # NaN months outsize of range (e.x month 12) using extrapolation
+        band_data = band_data.interpolate_na(dim='time_bins', method='linear', fill_value='extrapolate')"
+oad_csv_builder_chain,Orion-AI-Lab/S4A-Models,ae5a3761395cd259724516fa52a89879850558ab,object-based-csv.py,d9d55ce4854a6f484260b0f0bc7f74a2877d2d004faec9bf72888c403dd3623f,69,83,True,OAD parcel statistics are built from the filled monthly series,"        data = data.groupby_bins(
+            'time',
+            bins=date_range,
+            right=True,
+            include_lowest=False,
+            labels=date_range[:-1]
+        ).median(dim='time')
+
+        # Upsample so months without data are initiated with NaN values
+        data = data.resample(time_bins=freq).median(dim='time_bins')
+
+        # Fill:
+        # NaN months with linear interpolation
+        # NaN months outsize of range (e.x month 12) using extrapolation
+        data = data.interpolate_na(dim='time_bins', method='linear', fill_value='extrapolate')"
+loader_chain,Orion-AI-Lab/S4A,7ac66dce57abb6dd05683891bc810c2ddc36a966,patches_dataset.py,692e7b13163c8ecfbd709e1655a5dc034f3addc37f322f219c0e29da4b4ac4b3,284,298,True,same chain in the S4A loader repository,"            band_data = band_data.groupby_bins(
+                'time',
+                bins=date_range,
+                right=True,
+                include_lowest=False,
+                labels=date_range[:-1]
+            ).median(dim='time')
+
+            # Upsample so months without data are initiated with NaN values
+            band_data = band_data.resample(time_bins=self.group_freq).median(dim='time_bins')
+
+            # Fill:
+            # NaN months with linear interpolation
+            # NaN months outsize of range (e.x month 12) using extrapolation
+            band_data = band_data.interpolate_na(dim='time_bins', method='linear', fill_value='extrapolate')"
+oad_window_slice,Orion-AI-Lab/S4A-Models,ae5a3761395cd259724516fa52a89879850558ab,utils/OAD_datamodule.py,2ac36f7be9ddd8c3f30e35ea1d55096c3d0814d2b9b0e52f8922d8a18d49ba25,53,53,True,"month indices 4 to 10, i.e. May to November","        self.data = self.data.iloc[:, 4 * self.num_bands * self.metrics_per_band:-(self.num_bands * self.metrics_per_band + 3)].values"
+oad_fit_loads_test_csv,Orion-AI-Lab/S4A-Models,ae5a3761395cd259724516fa52a89879850558ab,utils/OAD_datamodule.py,2ac36f7be9ddd8c3f30e35ea1d55096c3d0814d2b9b0e52f8922d8a18d49ba25,90,99,True,train and eval datasets both read the _test file,"        if stage == 'fit':
+            self.dataset_train = OADDataset(
+                file=self.file.parent / f'{self.file.stem}_test.csv.gz',
+                linear_encoder=self.linear_encoder
+            )
+
+            self.dataset_eval = OADDataset(
+                file=self.file.parent / f'{self.file.stem}_test.csv.gz',
+                linear_encoder=self.linear_encoder
+            )"
+oad_validate_test_predict_load_test_csv,Orion-AI-Lab/S4A-Models,ae5a3761395cd259724516fa52a89879850558ab,utils/OAD_datamodule.py,2ac36f7be9ddd8c3f30e35ea1d55096c3d0814d2b9b0e52f8922d8a18d49ba25,101,117,True,"validate, test and predict read the _test file","        elif stage == 'validate':
+            self.dataset_eval = OADDataset(
+                file=self.file.parent / f'{self.file.stem}_test.csv.gz',
+                linear_encoder=self.linear_encoder
+            )
+
+        elif stage == 'test':
+            self.dataset_test = OADDataset(
+                file=self.file.parent / f'{self.file.stem}_test.csv.gz',
+                linear_encoder=self.linear_encoder
+            )
+
+        elif stage == 'predict':
+            # TODO: Replace with Predict Dataset
+            self.dataset_test = OADDataset(
+                file=self.file.parent / f'{self.file.stem}_test.csv.gz',
+                linear_encoder=self.linear_encoder"
+masks_default_off,Orion-AI-Lab/S4A-Models,ae5a3761395cd259724516fa52a89879850558ab,pad_experiments.py,f38999f30c2da14f175e8e9a965fc573c4abf7a48754577293ade91e247901b7,167,175,True,"no cloud mask unless a flag is passed, and none is passed by the README command","    parser.add_argument('--return_masks', action='store_true', default=False, required=False,
+                             help='Use hollstein masks for various weather conditions. Default False')
+    parser.add_argument('--clouds', action='store_true', default=False, required=False,
+                             help='hollstein mask for clouds. Default False')
+    parser.add_argument('--cirrus', action='store_true', default=False, required=False,
+                             help='hollstein mask for cirrus. Default False')
+    parser.add_argument('--shadow', action='store_true', default=False, required=False,
+                             help='hollstein mask for shadow. Default False')
+    parser.add_argument('--snow', action='store_true', default=False, required=False,"

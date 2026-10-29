@@ -1,0 +1,34 @@
+{
+  "script": "05_summarise",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:03:04.363110+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/scl_tile_summary.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/scl_t30tyn_french_part.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/l1c_tile_summary.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/fig19_kappa_digitised_wide.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/table1_class_areas.csv"
+  ],
+  "rows": 11,
+  "columns": [
+    "tile",
+    "region",
+    "scl_median_year",
+    "scl_median_marOct",
+    "scl_p10_year",
+    "scl_gap_marOct_days",
+    "neg_gap_marOct",
+    "scl_median_year_frpart",
+    "l1c_year",
+    "l1c_marOct",
+    "fg_11",
+    "fg_10p1",
+    "rf_11",
+    "rf_10p1",
+    "fg_drop",
+    "rf_drop",
+    "mountain",
+    "composition_jsd",
+    "mountain_class_share"
+  ]
+}

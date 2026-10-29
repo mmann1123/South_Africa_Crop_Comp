@@ -1,0 +1,25 @@
+{
+  "script": "05_summarise",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:03:04.365872+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/scl_tile_summary.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/scl_t30tyn_french_part.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/l1c_tile_summary.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/fig19_kappa_digitised_wide.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/table1_class_areas.csv"
+  ],
+  "rows": 32,
+  "columns": [
+    "measure",
+    "measure_key",
+    "target",
+    "target_key",
+    "subset",
+    "n",
+    "spearman_rho",
+    "spearman_p",
+    "pearson_r",
+    "pearson_p"
+  ]
+}

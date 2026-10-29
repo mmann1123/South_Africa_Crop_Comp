@@ -1,0 +1,12 @@
+tile,region,scl_median_year,scl_median_marOct,scl_p10_year,scl_gap_marOct_days,neg_gap_marOct,scl_median_year_frpart,l1c_year,l1c_marOct,fg_11,fg_10p1,rf_11,rf_10p1,fg_drop,rf_drop,mountain,composition_jsd,mountain_class_share
+T30TWT,"Oceanic coast, Loire estuary",22.0,18.0,9.0,47.0,-47.0,22.0,17.525,13.5,0.847,0.787,0.822,0.8,0.06,0.022,False,0.2062,0.0069
+T30TXQ,"Oceanic, Landes forest and Gironde coast",17.0,14.0,14.0,50.0,-50.0,17.0,19.235,14.789,0.913,0.653,0.855,0.687,0.26,0.168,False,0.352,0.0
+T30TYN,"Mountain, central Pyrenees (about half in Spain)",18.0,13.0,9.0,47.0,-47.0,15.0,27.076,17.901,0.61,0.463,0.668,0.587,0.147,0.081,True,0.2288,0.4753
+T30UXV,"Oceanic, Normandy (Caen)",24.0,18.0,12.0,40.0,-40.0,24.0,23.943,17.575,0.927,0.937,0.922,0.917,-0.01,0.005,False,0.3341,0.001
+T31TDJ,"South-western basin, Tarn/Albi",28.0,22.0,18.0,30.0,-30.0,28.0,26.157,20.082,0.8,0.77,0.762,0.73,0.03,0.032,False,0.0988,0.147
+T31TDN,"Degraded oceanic, Centre (Bourges)",13.0,9.0,10.0,50.0,-50.0,13.0,16.745,11.529,0.913,0.783,0.882,0.857,0.13,0.025,False,0.2807,0.0009
+T31TEL,"Mountain/semi-continental, Massif Central",18.0,15.0,13.0,40.0,-40.0,18.0,20.532,15.209,0.85,0.707,0.792,0.73,0.143,0.062,False,0.1185,0.012
+T31TGK,"Mountain/altered Mediterranean, southern Alps",23.0,16.0,16.0,33.0,-33.0,23.0,28.122,18.839,0.69,0.387,0.675,0.557,0.303,0.118,True,0.3488,0.532
+T31UDQ,"Degraded oceanic, Paris",21.0,16.0,10.0,50.0,-50.0,21.0,20.793,14.087,0.84,0.683,0.715,0.65,0.157,0.065,False,0.4026,0.0002
+T31UDS,"Oceanic coast, Calais/Dunkirk",26.0,21.0,22.0,50.0,-50.0,26.0,27.241,20.659,0.92,0.89,0.862,0.84,0.03,0.022,False,0.3072,0.0062
+T32ULU,"Semi-continental, Alsace/Vosges",26.0,20.0,16.0,33.0,-33.0,26.0,23.759,16.885,0.9,0.787,0.858,0.82,0.113,0.038,False,0.1274,0.0142

@@ -4,6 +4,8 @@ Claim under test (audit card, `reports/Missingness confound audit of transfer pa
 
 Sources read: the full paper (HAL deposit hal-02627773, the published MDPI version, 26 pp. plus HAL cover; MDPI's own PDF endpoint returned "Access Denied" to curl), Figure 1 (tile map with eco-climatic zones, p. 5), Table 1 (class areas per tile, p. 6), Section 5.1 and Figure 6 (p. 14 to 15), Section 5.3 and Figure 19 (p. 22). Figure 19 was extracted as the embedded raster (739 x 312 px) and digitised by marker colour with a y-axis calibration from the tick labels. The Zenodo record 1474224 holds only the source code (`RT_DL_OSO_public-1.0.zip`, 66 kB), no data and no date lists. The Theia catalogue (theia.cnes.fr resto2) did not respond from this machine, so per-tile clear counts were measured independently from two public archives (see Section 2). No downloaded code was executed.
 
+**Correction (29 Oct 2026, from the reproducible rebuild in `experiments/external_audits/stoian/`):** the T30TYN French-part median is 15 clear dates (10 for March to October), not 23 (17). The French mask is geoBoundaries FRA ADM0 at a pinned commit. The French-part correlation is unchanged (rho -0.58), and the mountain-tile verdict below stands. T31TGK's median longest March to October gap is 33 days, not 30.
+
 ## Verdict
 
 **Weakens** the hypothesis as stated, while leaving a weaker, different version of it open.

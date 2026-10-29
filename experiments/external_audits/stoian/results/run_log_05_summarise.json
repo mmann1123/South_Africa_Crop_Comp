@@ -1,0 +1,19 @@
+{
+  "script": "05_summarise",
+  "args": {},
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {},
+  "started": "2026-10-29T14:03:04.332767+00:00",
+  "figure": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/figures/stoian_clear_vs_kappa_drop.png",
+  "ended": "2026-10-29T14:03:04.703287+00:00"
+}

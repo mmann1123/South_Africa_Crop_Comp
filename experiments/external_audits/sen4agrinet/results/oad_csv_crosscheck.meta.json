@@ -1,0 +1,22 @@
+{
+  "script": "06_oad_csv_crosscheck",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:11:29.955594+00:00",
+  "inputs": [
+    "exp2_patches5000_strat_coco_test.csv.gz",
+    "exp3_patches5000_strat_coco_test.csv.gz"
+  ],
+  "rows": 16,
+  "columns": [
+    "scenario",
+    "country",
+    "year",
+    "subset",
+    "weighting",
+    "window",
+    "n_rows",
+    "share_filled",
+    "share_extrapolated",
+    "share_rows_any_fill"
+  ]
+}

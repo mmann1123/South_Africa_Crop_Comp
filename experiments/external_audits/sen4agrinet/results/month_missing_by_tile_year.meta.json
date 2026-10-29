@@ -1,0 +1,19 @@
+{
+  "script": "05_fill_rates",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:27:27.570071+00:00",
+  "inputs": [
+    "patch_sample.csv",
+    "patch_time_stacks.csv.gz",
+    "split_composition.csv"
+  ],
+  "rows": 192,
+  "columns": [
+    "country",
+    "year",
+    "tile",
+    "month",
+    "share_missing",
+    "n_patches_sampled"
+  ]
+}

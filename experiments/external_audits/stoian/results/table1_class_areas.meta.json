@@ -1,0 +1,28 @@
+{
+  "script": "02_transcribe_table1",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T13:57:34.844782+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/stoian/hal-02627773.pdf",
+    "https://hal.science/hal-02627773/document"
+  ],
+  "rows": 17,
+  "columns": [
+    "class",
+    "class_name",
+    "T30TWT",
+    "T30TXQ",
+    "T30TYN",
+    "T30UXV",
+    "T31TDJ",
+    "T31TDN",
+    "T31TEL",
+    "T31TGK",
+    "T31UDQ",
+    "T31UDS",
+    "T32ULU",
+    "total_ha",
+    "total_pct",
+    "source"
+  ]
+}

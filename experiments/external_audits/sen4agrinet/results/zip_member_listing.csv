@@ -1,0 +1,45 @@
+name,bytes,kept,sha256
+/,0,False,
+oad/,0,False,
+coco_files/,0,False,
+model_weights/,0,False,
+model_weights/PAD/,0,False,
+model_weights/PAD/UNet/,0,False,
+model_weights/PAD/ConvLSTM/,0,False,
+model_weights/PAD/ConvSTAR/,0,False,
+model_weights/PAD/UNet/Scenario 1/,0,False,
+model_weights/PAD/UNet/Scenario 2/,0,False,
+model_weights/PAD/UNet/Scenario 3/,0,False,
+model_weights/PAD/ConvLSTM/Scenario 1/,0,False,
+model_weights/PAD/ConvLSTM/Scenario 2/,0,False,
+model_weights/PAD/ConvLSTM/Scenario 3/,0,False,
+model_weights/PAD/ConvSTAR/Scenario 1/,0,False,
+model_weights/PAD/ConvSTAR/Scenario 2/,0,False,
+model_weights/PAD/ConvSTAR/Scenario 3/,0,False,
+oad/exp3_patches5000_strat_coco_val.csv.gz,764729565,False,
+oad/exp2_patches5000_strat_coco_val.csv.gz,684488028,False,
+oad/exp1_patches5000_strat_coco_val.csv.gz,725577091,False,
+oad/exp3_patches5000_strat_coco_test.csv.gz,717381791,True,4227afa13576d2f54644478af83e41092af3a99d6c9041515f8af215eb5f71f7
+oad/exp2_patches5000_strat_coco_test.csv.gz,752962743,True,95b85ae5c98320a2287db2a43b45849df74c9cd1bd4f74264b27ce1532a2ac35
+oad/exp1_patches5000_strat_coco_test.csv.gz,739586839,True,3a49b0be8564be64f79d404492266c020c93fea69cc015debfb3886ebb9320bb
+oad/exp3_patches5000_strat_coco_train.csv.gz,2262001963,False,
+oad/exp2_patches5000_strat_coco_train.csv.gz,2122187903,False,
+oad/exp1_patches5000_strat_coco_train.csv.gz,2211124365,False,
+coco_files/exp1_patches5000_strat_coco_val.json,160996978,True,7ab1c56dc6e29cfb7da118201e87e1672e6c23e74cc0b1bc84d97e3bfc92124a
+coco_files/exp2_patches5000_strat_coco_val.json,220509157,True,f0fa416536c14772cb9a1e34bb6913f269bdf4a23c9bc85bc0fde00a39f8483b
+coco_files/exp3_patches5000_strat_coco_val.json,112879786,True,27c72ebac1dac8eeb4d04732f5bf5759ca6a3b9dacd23559a3eca6763f528fc1
+coco_files/exp1_patches5000_strat_coco_test.json,166477826,True,a6da86717d044f49fbae24eda24fa44a49db5ecc8fe6867dffded4bd7cb0c6cb
+coco_files/exp2_patches5000_strat_coco_test.json,111737205,True,bd75442e9bc1ec6e1ad202c3e2edd94f9cde59cb4e14eafc9b760787e556e4e5
+coco_files/exp3_patches5000_strat_coco_test.json,228741797,True,1fd5f8db464489556fc80bf5d755efa4bb4785ccf6b6061effc38191ed76143c
+coco_files/exp1_patches5000_strat_coco_train.json,499077247,True,ef6248c200cb76eca17c1c5b70ae333c4e659b3c34e2939398b4e269ac3cd70b
+coco_files/exp2_patches5000_strat_coco_train.json,688653303,True,6ec97f0d272a82b16f9d3b87bf7e8115d0bdbce9322892f0b1ef9373355691dd
+coco_files/exp3_patches5000_strat_coco_train.json,336018433,True,971c34eec5cce3a49f9e320a236064faac9491736f8d2d39eb30eee0b564a966
+model_weights/PAD/UNet/Scenario 1/epoch=16-step=28695.ckpt,22606611,False,
+model_weights/PAD/UNet/Scenario 2/epoch=19-step=34039.ckpt,22606569,False,
+model_weights/PAD/UNet/Scenario 3/epoch=20-step=35447.ckpt,22606588,False,
+model_weights/PAD/ConvLSTM/Scenario 1/epoch=17-step=60749.ckpt,48537020,False,
+model_weights/PAD/ConvLSTM/Scenario 2/epoch=20-step=71483.ckpt,48536741,False,
+model_weights/PAD/ConvLSTM/Scenario 3/epoch=25-step=87749.ckpt,48536666,False,
+model_weights/PAD/ConvSTAR/Scenario 1/epoch=15-step=27007.ckpt,3182281,False,
+model_weights/PAD/ConvSTAR/Scenario 2/epoch=19-step=34039.ckpt,3182022,False,
+model_weights/PAD/ConvSTAR/Scenario 3/epoch=15-step=27007.ckpt,3181954,False,

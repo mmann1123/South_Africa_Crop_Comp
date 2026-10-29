@@ -1,0 +1,18 @@
+quantity,value
+"leave-one-out Spearman rho range, SCL median Mar to Oct vs FG drop",-0.72 to -0.57
+"leave-one-out Spearman rho range, SCL median year vs FG drop",-0.72 to -0.50
+"Spearman rho, composition JSD vs fg_drop",0.46
+"partial Spearman rho, SCL median Mar to Oct vs fg_drop | composition JSD",-0.60
+"partial Spearman rho, SCL median year vs fg_drop | composition JSD",-0.53
+"partial Spearman rho, composition JSD vs fg_drop | SCL median Mar to Oct",0.36
+"partial Spearman rho, composition JSD vs fg_drop | SCL median year",0.37
+"OLS R2, fg_drop ~ SCL median Mar to Oct + composition JSD",0.30
+"Spearman rho, composition JSD vs rf_drop",0.32
+"partial Spearman rho, SCL median Mar to Oct vs rf_drop | composition JSD",-0.42
+"partial Spearman rho, SCL median year vs rf_drop | composition JSD",-0.33
+"partial Spearman rho, composition JSD vs rf_drop | SCL median Mar to Oct",0.20
+"partial Spearman rho, composition JSD vs rf_drop | SCL median year",0.23
+"OLS R2, rf_drop ~ SCL median Mar to Oct + composition JSD",0.18
+"Spearman rho, SCL median Mar to Oct vs composition JSD",-0.31
+"Pearson r, mountain-class share (BRO+NGL+GPS) vs fg_10p1 (held-out kappa)",-0.85
+"Pearson r, mountain-class share (BRO+NGL+GPS) vs rf_10p1 (held-out kappa)",-0.75

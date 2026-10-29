@@ -1,0 +1,84 @@
+{
+  "script": "01_digitise_fig19",
+  "args": {
+    "force": true
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "not installed",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "not installed"
+  },
+  "counts": {
+    "markers": 44,
+    "partly_hidden": 19
+  },
+  "started": "2026-10-29T14:02:30.401656+00:00",
+  "figure": {
+    "pdf_page": 23,
+    "xref": 423,
+    "size": [
+      739,
+      312
+    ],
+    "rgb_sha256": "46c155a4939e5ed1db1bcc49c9c3826dd15afc1df65fa324b44dfd935d49ce80"
+  },
+  "calibration": {
+    "y_calibration_slope_per_px": -0.003333333333333335,
+    "y_calibration_intercept": 1.1466666666666665,
+    "tick_label_rows": [
+      [
+        40,
+        48
+      ],
+      [
+        70,
+        78
+      ],
+      [
+        100,
+        108
+      ],
+      [
+        130,
+        138
+      ],
+      [
+        160,
+        168
+      ],
+      [
+        190,
+        198
+      ],
+      [
+        220,
+        228
+      ],
+      [
+        250,
+        258
+      ]
+    ],
+    "tick_fit_residual_max": 5.551115123125783e-16,
+    "x_centres_px": [
+      94.0,
+      155.0,
+      215.0,
+      276.5,
+      337.0,
+      398.0,
+      459.5,
+      520.0,
+      581.5,
+      642.0,
+      703.0
+    ]
+  },
+  "ended": "2026-10-29T14:02:31.389453+00:00"
+}

@@ -1,0 +1,25 @@
+{
+  "script": "06_oad_csv_crosscheck",
+  "args": {
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "scenario2_rows": 309010,
+    "scenario3_rows": 329839
+  },
+  "started": "2026-10-29T14:08:23.647973+00:00",
+  "scenario2_seconds": 160.4,
+  "scenario3_seconds": 25.7,
+  "ended": "2026-10-29T14:11:29.959215+00:00"
+}

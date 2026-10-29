@@ -1,0 +1,2 @@
+tile,region,n_land_pixels,n_dates,median_clear_year,mean_clear_year,p10_clear_year,median_clear_marOct,p10_clear_marOct,median_longest_gap_marOct_days
+T30TYN,French part (geoBoundaries FRA ADM0),67429,64,15.0,19.50040783639087,8.0,10.0,5.0,60.0

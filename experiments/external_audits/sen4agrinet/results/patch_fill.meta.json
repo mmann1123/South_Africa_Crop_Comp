@@ -1,0 +1,39 @@
+{
+  "script": "05_fill_rates",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:27:26.168149+00:00",
+  "inputs": [
+    "patch_sample.csv",
+    "patch_time_stacks.csv.gz",
+    "split_composition.csv"
+  ],
+  "rows": 675,
+  "columns": [
+    "scenario",
+    "split",
+    "country",
+    "year",
+    "tile",
+    "stem",
+    "n_obs",
+    "n_obs_in_year",
+    "present_01",
+    "present_02",
+    "present_03",
+    "present_04",
+    "present_05",
+    "present_06",
+    "present_07",
+    "present_08",
+    "present_09",
+    "present_10",
+    "present_11",
+    "present_12",
+    "PAD_Apr-Sep_filled",
+    "PAD_Apr-Sep_interpolated",
+    "PAD_Apr-Sep_extrapolated",
+    "OAD_May-Nov_filled",
+    "OAD_May-Nov_interpolated",
+    "OAD_May-Nov_extrapolated"
+  ]
+}

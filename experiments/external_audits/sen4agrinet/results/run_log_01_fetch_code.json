@@ -1,0 +1,24 @@
+{
+  "script": "01_fetch_code",
+  "args": {
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "facts": 12,
+    "facts_pattern_found": 12,
+    "files": 6
+  },
+  "started": "2026-10-29T14:00:57.055318+00:00",
+  "ended": "2026-10-29T14:00:58.431059+00:00"
+}

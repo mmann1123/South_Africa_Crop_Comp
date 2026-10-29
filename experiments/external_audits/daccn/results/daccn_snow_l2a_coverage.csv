@@ -1,0 +1,13 @@
+region,year,country,n_l1c,n_l2a,n_mod10a1
+Minnesota,2018,United States of America,890.0,879.0,214.0
+Minnesota,2019,United States of America,901.0,893.0,214.0
+Nebraska,2018,United States of America,932.0,932.0,214.0
+Nebraska,2019,United States of America,934.0,934.0,214.0
+Wisconsin,2018,United States of America,807.0,806.0,214.0
+Wisconsin,2019,United States of America,822.0,822.0,214.0
+Iowa,2018,United States of America,844.0,836.0,214.0
+Iowa,2019,United States of America,861.0,861.0,214.0
+Heilongjiang,2018,China,1378.0,168.0,214.0
+Heilongjiang,2019,China,1412.0,1412.0,214.0
+Jilin,2018,China,934.0,127.0,214.0
+Jilin,2019,China,943.0,942.0,214.0

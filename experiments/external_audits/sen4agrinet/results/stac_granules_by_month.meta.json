@@ -1,0 +1,17 @@
+{
+  "script": "07_stac_cloudcover",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:10:55.221164+00:00",
+  "inputs": [
+    "https://earth-search.aws.element84.com/v1/search (collection sentinel-2-l1c, one query per tile-year)"
+  ],
+  "rows": 192,
+  "columns": [
+    "country",
+    "year",
+    "tile",
+    "month",
+    "n_granules",
+    "n_cloud_lt10"
+  ]
+}

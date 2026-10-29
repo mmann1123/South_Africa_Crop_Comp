@@ -1,0 +1,22 @@
+{
+  "script": "08_summarise",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:27:57.848453+00:00",
+  "inputs": [
+    "stac_granules_by_month.csv",
+    "month_missing_by_tile_year.csv"
+  ],
+  "rows": 192,
+  "columns": [
+    "country",
+    "year",
+    "tile",
+    "month",
+    "n_granules",
+    "n_cloud_lt10",
+    "share_missing",
+    "n_patches_sampled",
+    "patch_month_mostly_missing",
+    "stac_no_clear_granule"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "script": "05_summarise",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:14:59.462211+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/kerner/results/kerner_sample.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/kerner/results/kerner_pixel_states.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/kerner/results/kerner_hls_acquisitions.csv"
+  ],
+  "rows": 32,
+  "columns": [
+    "basis",
+    "stage",
+    "class",
+    "zero_clear_train",
+    "zero_clear_test2019",
+    "zero_clear_diff",
+    "zero_clear_diff_lo",
+    "zero_clear_diff_hi",
+    "exact_cloudy_train",
+    "exact_cloudy_test2019",
+    "exact_cloudy_diff",
+    "exact_cloudy_diff_lo",
+    "exact_cloudy_diff_hi",
+    "exact_not_clear_train",
+    "exact_not_clear_test2019",
+    "exact_not_clear_diff",
+    "exact_not_clear_diff_lo",
+    "exact_not_clear_diff_hi"
+  ]
+}

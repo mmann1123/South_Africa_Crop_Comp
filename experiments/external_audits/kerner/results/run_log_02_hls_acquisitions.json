@@ -1,0 +1,33 @@
+{
+  "script": "02_hls_acquisitions",
+  "args": {
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "n_2017_L30": 56,
+    "n_2017_S30": 43,
+    "n_2018_L30": 58,
+    "n_2018_S30": 101,
+    "n_2019_L30": 51,
+    "n_2019_S30": 98
+  },
+  "started": "2026-10-29T14:11:22.771225+00:00",
+  "ee_project": "327687702789",
+  "collections": {
+    "S": "NASA/HLS/HLSS30/v002",
+    "L": "NASA/HLS/HLSL30/v002"
+  },
+  "bit0_set_cells_total": 0.0,
+  "ended": "2026-10-29T14:11:37.376389+00:00"
+}

@@ -1,0 +1,16 @@
+{
+  "script": "08_summarise",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:27:57.837865+00:00",
+  "inputs": [
+    "month_missing_by_tile_year.csv",
+    "split_composition.csv"
+  ],
+  "rows": 36,
+  "columns": [
+    "country",
+    "year",
+    "month",
+    "share_missing"
+  ]
+}

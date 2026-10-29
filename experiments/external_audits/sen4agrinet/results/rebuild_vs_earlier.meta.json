@@ -1,0 +1,19 @@
+{
+  "script": "08_summarise",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:27:57.843311+00:00",
+  "inputs": [
+    "fill_by_split.csv"
+  ],
+  "rows": 8,
+  "columns": [
+    "scenario",
+    "split",
+    "window",
+    "share_filled",
+    "share_filled_ci_low",
+    "share_filled_ci_high",
+    "earlier_share_filled",
+    "difference"
+  ]
+}

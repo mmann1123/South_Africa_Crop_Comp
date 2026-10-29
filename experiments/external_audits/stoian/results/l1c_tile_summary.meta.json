@@ -1,0 +1,19 @@
+{
+  "script": "04_l1c_effective_clear",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:01:02.686518+00:00",
+  "inputs": [
+    "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/scl_tile_summary.csv"
+  ],
+  "rows": 11,
+  "columns": [
+    "tile",
+    "n_granules",
+    "n_dates",
+    "baselines",
+    "mean_cloud_cover_pct",
+    "l1c_eff_clear_year",
+    "l1c_eff_clear_marOct"
+  ]
+}

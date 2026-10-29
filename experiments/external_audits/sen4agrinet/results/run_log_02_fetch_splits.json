@@ -1,0 +1,40 @@
+{
+  "script": "02_fetch_splits",
+  "args": {
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "members": 44,
+    "members_kept": 12
+  },
+  "started": "2026-10-29T13:59:40.641880+00:00",
+  "zip_bytes": 13728117098,
+  "stream_bytes_consumed": 13728112444,
+  "minutes": 5.4,
+  "kept_names": [
+    "oad/exp3_patches5000_strat_coco_test.csv.gz",
+    "oad/exp2_patches5000_strat_coco_test.csv.gz",
+    "oad/exp1_patches5000_strat_coco_test.csv.gz",
+    "coco_files/exp1_patches5000_strat_coco_val.json",
+    "coco_files/exp2_patches5000_strat_coco_val.json",
+    "coco_files/exp3_patches5000_strat_coco_val.json",
+    "coco_files/exp1_patches5000_strat_coco_test.json",
+    "coco_files/exp2_patches5000_strat_coco_test.json",
+    "coco_files/exp3_patches5000_strat_coco_test.json",
+    "coco_files/exp1_patches5000_strat_coco_train.json",
+    "coco_files/exp2_patches5000_strat_coco_train.json",
+    "coco_files/exp3_patches5000_strat_coco_train.json"
+  ],
+  "ended": "2026-10-29T14:05:03.373088+00:00"
+}

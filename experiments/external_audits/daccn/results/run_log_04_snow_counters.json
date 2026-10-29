@@ -1,0 +1,336 @@
+{
+  "script": "04_snow_counters",
+  "args": {
+    "smoke": false,
+    "force": false,
+    "regions_only": null
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "jobs_run": 24,
+    "failed_cells": 0,
+    "rows_total": 88500
+  },
+  "started": "2026-10-29T14:06:25.823255+00:00",
+  "collections": {
+    "l1c": "COPERNICUS/S2_HARMONIZED",
+    "l2a_scl": "COPERNICUS/S2_SR_HARMONIZED",
+    "modis": "MODIS/061/MOD10A1"
+  },
+  "snow_rule": {
+    "ndsi_min": 0.42,
+    "nir_min": 0.11,
+    "green_min": 0.1,
+    "modis_min": 40,
+    "scl_class": 11,
+    "ndsi": "(B3 - B11)/(B3 + B11) of the 10-day median composite"
+  },
+  "design": {
+    "n_cells": 16,
+    "cell_half_m": 2500,
+    "points_per_cell": 300,
+    "seed": 42,
+    "scale": 10,
+    "same_cells_as": "02_run_counters.py"
+  },
+  "Minnesota_2018_A": {
+    "points": 2709,
+    "cells": 11,
+    "seconds": 142,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 9,
+      "cells_identical_valid_rows": 9,
+      "cells_snow_only": 2,
+      "cells_ref_only": 0
+    }
+  },
+  "Minnesota_2018_B": {
+    "points": 2709,
+    "cells": 11,
+    "seconds": 108,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 11,
+      "cells_identical_valid_rows": 11,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "Minnesota_2019_A": {
+    "points": 2700,
+    "cells": 10,
+    "seconds": 146,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 6,
+      "cells_identical_valid_rows": 6,
+      "cells_snow_only": 4,
+      "cells_ref_only": 0
+    }
+  },
+  "Minnesota_2019_B": {
+    "points": 2700,
+    "cells": 10,
+    "seconds": 91,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 10,
+      "cells_identical_valid_rows": 10,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "Nebraska_2018_A": {
+    "points": 2810,
+    "cells": 12,
+    "seconds": 127,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 9,
+      "cells_identical_valid_rows": 9,
+      "cells_snow_only": 3,
+      "cells_ref_only": 0
+    }
+  },
+  "Nebraska_2018_B": {
+    "points": 2810,
+    "cells": 12,
+    "seconds": 88,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 12,
+      "cells_identical_valid_rows": 12,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "Nebraska_2019_A": {
+    "points": 2624,
+    "cells": 10,
+    "seconds": 160,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 7,
+      "cells_identical_valid_rows": 7,
+      "cells_snow_only": 3,
+      "cells_ref_only": 0
+    }
+  },
+  "Nebraska_2019_B": {
+    "points": 2624,
+    "cells": 10,
+    "seconds": 96,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 10,
+      "cells_identical_valid_rows": 10,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "Wisconsin_2018_A": {
+    "points": 3827,
+    "cells": 14,
+    "seconds": 277,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 12,
+      "cells_identical_valid_rows": 12,
+      "cells_snow_only": 2,
+      "cells_ref_only": 0
+    }
+  },
+  "Wisconsin_2018_B": {
+    "points": 3827,
+    "cells": 14,
+    "seconds": 160,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 14,
+      "cells_identical_valid_rows": 14,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "Wisconsin_2019_A": {
+    "points": 3586,
+    "cells": 14,
+    "seconds": 138,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 12,
+      "cells_identical_valid_rows": 12,
+      "cells_snow_only": 2,
+      "cells_ref_only": 0
+    }
+  },
+  "Wisconsin_2019_B": {
+    "points": 3586,
+    "cells": 14,
+    "seconds": 101,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 14,
+      "cells_identical_valid_rows": 14,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "Iowa_2018_A": {
+    "points": 4327,
+    "cells": 16,
+    "seconds": 125,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 14,
+      "cells_identical_valid_rows": 14,
+      "cells_snow_only": 2,
+      "cells_ref_only": 0
+    }
+  },
+  "Iowa_2018_B": {
+    "points": 4327,
+    "cells": 16,
+    "seconds": 95,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 16,
+      "cells_identical_valid_rows": 16,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "Iowa_2019_A": {
+    "points": 4267,
+    "cells": 16,
+    "seconds": 130,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 12,
+      "cells_identical_valid_rows": 12,
+      "cells_snow_only": 4,
+      "cells_ref_only": 0
+    }
+  },
+  "Iowa_2019_B": {
+    "points": 4267,
+    "cells": 16,
+    "seconds": 91,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 16,
+      "cells_identical_valid_rows": 16,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "Heilongjiang_2018_A": {
+    "points": 3900,
+    "cells": 13,
+    "seconds": 86,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 10,
+      "cells_identical_valid_rows": 10,
+      "cells_snow_only": 3,
+      "cells_ref_only": 0
+    }
+  },
+  "Heilongjiang_2018_B": {
+    "points": 3900,
+    "cells": 13,
+    "seconds": 58,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 13,
+      "cells_identical_valid_rows": 13,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "Heilongjiang_2019_A": {
+    "points": 3900,
+    "cells": 13,
+    "seconds": 87,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 10,
+      "cells_identical_valid_rows": 10,
+      "cells_snow_only": 3,
+      "cells_ref_only": 0
+    }
+  },
+  "Heilongjiang_2019_B": {
+    "points": 3900,
+    "cells": 13,
+    "seconds": 79,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 13,
+      "cells_identical_valid_rows": 13,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "Jilin_2018_A": {
+    "points": 4800,
+    "cells": 16,
+    "seconds": 78,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 14,
+      "cells_identical_valid_rows": 14,
+      "cells_snow_only": 2,
+      "cells_ref_only": 0
+    }
+  },
+  "Jilin_2018_B": {
+    "points": 4800,
+    "cells": 16,
+    "seconds": 55,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 16,
+      "cells_identical_valid_rows": 16,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "Jilin_2019_A": {
+    "points": 4800,
+    "cells": 16,
+    "seconds": 89,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 14,
+      "cells_identical_valid_rows": 14,
+      "cells_snow_only": 2,
+      "cells_ref_only": 0
+    }
+  },
+  "Jilin_2019_B": {
+    "points": 4800,
+    "cells": 16,
+    "seconds": 63,
+    "alignment_with_counters": {
+      "checked": true,
+      "cells_in_both": 16,
+      "cells_identical_valid_rows": 16,
+      "cells_snow_only": 0,
+      "cells_ref_only": 0
+    }
+  },
+  "failed_cells": [],
+  "ended": "2026-10-29T14:53:24.733650+00:00"
+}

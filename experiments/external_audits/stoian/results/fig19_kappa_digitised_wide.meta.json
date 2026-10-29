@@ -1,0 +1,20 @@
+{
+  "script": "01_digitise_fig19",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:02:31.385342+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/stoian/results/fig19_kappa_digitised.csv"
+  ],
+  "rows": 11,
+  "columns": [
+    "tile",
+    "fg_unet_10p1",
+    "fg_unet_11",
+    "rf_10p1",
+    "rf_11",
+    "fg_unet_10p1_partly_hidden",
+    "fg_unet_11_partly_hidden",
+    "rf_10p1_partly_hidden",
+    "rf_11_partly_hidden"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "script": "04_sample_time_stacks",
+  "args": {
+    "workers": 6,
+    "force": false,
+    "n_per_group": 25
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "sample_rows": 675,
+    "unique_files_needed": 657,
+    "to_fetch": 657,
+    "read_ok": 657
+  },
+  "started": "2026-10-29T14:06:32.620232+00:00",
+  "hf_revision": "4eb44157012b9ec251767721d6bae55cf0c564e2",
+  "failed": [],
+  "ended": "2026-10-29T14:23:43.381592+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "script": "01_fetch_zenodo",
+  "args": {
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "zip_members_total": 25,
+    "members_fetched": 6
+  },
+  "started": "2026-10-29T14:01:53.620228+00:00",
+  "zip_bytes": 7269005245,
+  "ended": "2026-10-29T14:03:43.185608+00:00"
+}

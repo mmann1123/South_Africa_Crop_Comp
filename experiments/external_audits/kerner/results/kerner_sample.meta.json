@@ -1,0 +1,21 @@
+{
+  "script": "03_make_sample",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:06:35.578015+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/kerner/data"
+  ],
+  "rows": 9000,
+  "columns": [
+    "year",
+    "pid",
+    "class",
+    "row",
+    "col",
+    "x",
+    "y",
+    "greenup",
+    "peak",
+    "senescence"
+  ]
+}

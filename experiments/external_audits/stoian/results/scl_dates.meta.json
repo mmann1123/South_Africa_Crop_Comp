@@ -1,0 +1,15 @@
+{
+  "script": "03_scl_clear_counts",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:00:36.448584+00:00",
+  "inputs": [
+    "https://planetarycomputer.microsoft.com/api/stac/v1/search"
+  ],
+  "rows": 802,
+  "columns": [
+    "tile",
+    "date",
+    "clear_pixels",
+    "observed_pixels"
+  ]
+}

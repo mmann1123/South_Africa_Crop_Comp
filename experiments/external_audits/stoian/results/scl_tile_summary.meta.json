@@ -1,0 +1,26 @@
+{
+  "script": "03_scl_clear_counts",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:00:36.440085+00:00",
+  "inputs": [
+    "https://planetarycomputer.microsoft.com/api/stac/v1/search",
+    "/mnt/bigdrive/external_audits/stoian/manifest.json"
+  ],
+  "rows": 11,
+  "columns": [
+    "tile",
+    "n_land_pixels",
+    "n_dates",
+    "median_clear_year",
+    "mean_clear_year",
+    "p10_clear_year",
+    "median_clear_marOct",
+    "p10_clear_marOct",
+    "median_longest_gap_marOct_days",
+    "epsg",
+    "bounds_left",
+    "bounds_bottom",
+    "bounds_right",
+    "bounds_top"
+  ]
+}

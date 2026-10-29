@@ -1,0 +1,54 @@
+{
+  "script": "05_summarise",
+  "args": {
+    "force": true,
+    "n_boot": 1000
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "pixels_sampled": 9000,
+    "pixels_with_states": 9000
+  },
+  "started": "2026-10-29T14:14:55.219058+00:00",
+  "doy_offsets": [
+    {
+      "year": 2017,
+      "match_share_offsetm1": 0.7015555555555556,
+      "match_share_offset0": 0.647,
+      "match_share_offset1": 0.03133333333333333,
+      "n_acquisition_days": 90,
+      "n_pixels": 3000,
+      "offset_used_all_years": 0
+    },
+    {
+      "year": 2018,
+      "match_share_offsetm1": 0.31155555555555553,
+      "match_share_offset0": 0.9171111111111111,
+      "match_share_offset1": 0.6865555555555556,
+      "n_acquisition_days": 144,
+      "n_pixels": 3000,
+      "offset_used_all_years": 0
+    },
+    {
+      "year": 2019,
+      "match_share_offsetm1": 0.17755555555555555,
+      "match_share_offset0": 0.752,
+      "match_share_offset1": 0.5674444444444444,
+      "n_acquisition_days": 133,
+      "n_pixels": 3000,
+      "offset_used_all_years": 0
+    }
+  ],
+  "figure": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/kerner/figures/kerner_fill_shares.png",
+  "ended": "2026-10-29T14:14:59.851193+00:00"
+}

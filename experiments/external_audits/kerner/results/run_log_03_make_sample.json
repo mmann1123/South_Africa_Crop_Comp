@@ -1,0 +1,28 @@
+{
+  "script": "03_make_sample",
+  "args": {
+    "force": true,
+    "n_per_class": 1000
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "sample_2017": 3000,
+    "sample_2018": 3000,
+    "sample_2019": 3000
+  },
+  "started": "2026-10-29T14:06:33.429097+00:00",
+  "valid_share_2017": 0.9999495356684285,
+  "valid_share_2018": 0.9999949237062916,
+  "valid_share_2019": 0.9999976111559019,
+  "ended": "2026-10-29T14:06:35.584927+00:00"
+}

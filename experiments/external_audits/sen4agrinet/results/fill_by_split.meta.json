@@ -1,0 +1,27 @@
+{
+  "script": "05_fill_rates",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:27:27.540339+00:00",
+  "inputs": [
+    "patch_sample.csv",
+    "patch_time_stacks.csv.gz",
+    "split_composition.csv"
+  ],
+  "rows": 8,
+  "columns": [
+    "scenario",
+    "split",
+    "window",
+    "country",
+    "years",
+    "n_patches_split",
+    "n_patches_sampled",
+    "share_filled",
+    "share_interpolated",
+    "share_extrapolated",
+    "share_patches_any_fill",
+    "mean_obs_per_patch_year",
+    "share_filled_ci_low",
+    "share_filled_ci_high"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "script": "02_transcribe_table1",
+  "args": {
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "not installed",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "not installed"
+  },
+  "counts": {
+    "classes": 17
+  },
+  "started": "2026-10-29T13:57:34.833613+00:00",
+  "row_total_problems": [],
+  "printed_minus_summed_column_totals_ha": {
+    "T30TWT": 7,
+    "T30TXQ": 9,
+    "T30TYN": 7,
+    "T30UXV": 7,
+    "T31TDJ": 5,
+    "T31TDN": 7,
+    "T31TEL": 7,
+    "T31TGK": 9,
+    "T31UDQ": 5,
+    "T31UDS": 5,
+    "T32ULU": 6,
+    "total_ha": 74
+  },
+  "grand_total_ha": 1729977,
+  "ended": "2026-10-29T13:57:34.846799+00:00"
+}

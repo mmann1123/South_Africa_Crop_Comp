@@ -1,0 +1,33 @@
+measure,measure_key,target,target_key,subset,n,spearman_rho,spearman_p,pearson_r,pearson_p
+"SCL median, year",scl_median_year,FG-UNET drop,fg_drop,all 11 tiles,11,-0.5927,0.0547,-0.4574,0.1572
+"SCL median, year",scl_median_year,RF drop,rf_drop,all 11 tiles,11,-0.3973,0.2263,-0.3558,0.2829
+"SCL median, year",scl_median_year,FG-UNET 10+1 kappa,fg_10p1,all 11 tiles,11,0.4508,0.1641,0.2902,0.3867
+"SCL median, year",scl_median_year,RF 10+1 kappa,rf_10p1,all 11 tiles,11,0.2037,0.5481,0.1527,0.6541
+"SCL median, year, T30TYN French part",scl_median_year_frpart,FG-UNET drop,fg_drop,all 11 tiles,11,-0.5776,0.0627,-0.4434,0.1719
+"SCL median, year, T30TYN French part",scl_median_year_frpart,RF drop,rf_drop,all 11 tiles,11,-0.3872,0.2393,-0.3624,0.2734
+"SCL median, year, T30TYN French part",scl_median_year_frpart,FG-UNET 10+1 kappa,fg_10p1,all 11 tiles,11,0.4726,0.1421,0.3651,0.2696
+"SCL median, year, T30TYN French part",scl_median_year_frpart,RF 10+1 kappa,rf_10p1,all 11 tiles,11,0.2374,0.482,0.2264,0.5031
+"SCL median, Mar to Oct",scl_median_marOct,FG-UNET drop,fg_drop,all 11 tiles,11,-0.6499,0.0304,-0.5129,0.1067
+"SCL median, Mar to Oct",scl_median_marOct,RF drop,rf_drop,all 11 tiles,11,-0.4795,0.1356,-0.353,0.2869
+"SCL median, Mar to Oct",scl_median_marOct,FG-UNET 10+1 kappa,fg_10p1,all 11 tiles,11,0.5515,0.0786,0.3975,0.226
+"SCL median, Mar to Oct",scl_median_marOct,RF 10+1 kappa,rf_10p1,all 11 tiles,11,0.2883,0.3899,0.2214,0.513
+"SCL 10th percentile, year",scl_p10_year,FG-UNET drop,fg_drop,all 11 tiles,11,-0.1835,0.5892,-0.1238,0.7169
+"SCL 10th percentile, year",scl_p10_year,RF drop,rf_drop,all 11 tiles,11,0.0503,0.8831,-0.0202,0.953
+"SCL 10th percentile, year",scl_p10_year,FG-UNET 10+1 kappa,fg_10p1,all 11 tiles,11,0.1376,0.6866,0.2064,0.5426
+"SCL 10th percentile, year",scl_p10_year,RF 10+1 kappa,rf_10p1,all 11 tiles,11,0.0872,0.7989,0.1217,0.7216
+Longest Mar to Oct gap (sign flipped),neg_gap_marOct,FG-UNET drop,fg_drop,all 11 tiles,11,-0.2043,0.5468,-0.0385,0.9106
+Longest Mar to Oct gap (sign flipped),neg_gap_marOct,RF drop,rf_drop,all 11 tiles,11,-0.0328,0.9237,-0.0964,0.778
+Longest Mar to Oct gap (sign flipped),neg_gap_marOct,FG-UNET 10+1 kappa,fg_10p1,all 11 tiles,11,-0.0188,0.9563,-0.1173,0.7313
+Longest Mar to Oct gap (sign flipped),neg_gap_marOct,RF 10+1 kappa,rf_10p1,all 11 tiles,11,-0.1104,0.7466,-0.0902,0.7921
+"L1C effective clear, year",l1c_year,FG-UNET drop,fg_drop,all 11 tiles,11,-0.0364,0.9153,-0.0354,0.9178
+"L1C effective clear, year",l1c_year,RF drop,rf_drop,all 11 tiles,11,0.1545,0.65,0.0327,0.9239
+"L1C effective clear, year",l1c_year,FG-UNET 10+1 kappa,fg_10p1,all 11 tiles,11,-0.164,0.6299,-0.3003,0.3696
+"L1C effective clear, year",l1c_year,RF 10+1 kappa,rf_10p1,all 11 tiles,11,-0.3189,0.3391,-0.3345,0.3146
+"L1C effective clear, Mar to Oct",l1c_marOct,FG-UNET drop,fg_drop,all 11 tiles,11,-0.2506,0.4574,-0.2166,0.5223
+"L1C effective clear, Mar to Oct",l1c_marOct,RF drop,rf_drop,all 11 tiles,11,0.0273,0.9366,-0.052,0.8793
+"L1C effective clear, Mar to Oct",l1c_marOct,FG-UNET 10+1 kappa,fg_10p1,all 11 tiles,11,0.0,1.0,-0.0609,0.8589
+"L1C effective clear, Mar to Oct",l1c_marOct,RF 10+1 kappa,rf_10p1,all 11 tiles,11,-0.1412,0.6787,-0.1447,0.6711
+"SCL median, year",scl_median_year,FG-UNET drop,fg_drop,"9 tiles, T30TYN and T31TGK removed",9,-0.7269,0.0265,-0.6606,0.0528
+"SCL median, year",scl_median_year,RF drop,rf_drop,"9 tiles, T30TYN and T31TGK removed",9,-0.3598,0.3415,-0.4117,0.2709
+"SCL median, Mar to Oct",scl_median_marOct,FG-UNET drop,fg_drop,"9 tiles, T30TYN and T31TGK removed",9,-0.7227,0.0278,-0.5985,0.0886
+"SCL median, Mar to Oct",scl_median_marOct,RF drop,rf_drop,"9 tiles, T30TYN and T31TGK removed",9,-0.3766,0.3178,-0.321,0.3997

@@ -1,0 +1,23 @@
+{
+  "script": "05_snow_summarise",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:53:50.327998+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/daccn/results/daccn_snow_counters.csv"
+  ],
+  "rows": 12,
+  "columns": [
+    "region",
+    "year",
+    "n_valid_composites",
+    "n_flagged",
+    "scl_coverage",
+    "scl_n_flagged_with_data",
+    "scl_snow_given_flag",
+    "scl_snow_given_noflag",
+    "modis_coverage",
+    "modis_n_flagged_with_data",
+    "modis_snow_given_flag",
+    "modis_snow_given_noflag"
+  ]
+}

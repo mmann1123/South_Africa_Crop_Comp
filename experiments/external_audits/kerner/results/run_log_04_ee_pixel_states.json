@@ -1,0 +1,57 @@
+{
+  "script": "04_ee_pixel_states",
+  "args": {
+    "smoke": false,
+    "force": false,
+    "years": null
+  },
+  "seed": 42,
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "pixels_written": 9000,
+    "rows_total": 9000
+  },
+  "started": "2026-10-29T14:12:00.370312+00:00",
+  "ee_project": "327687702789",
+  "collections": {
+    "S": "NASA/HLS/HLSS30/v002",
+    "L": "NASA/HLS/HLSL30/v002"
+  },
+  "design": {
+    "chunk": 200,
+    "workers": 3,
+    "tile_scale": 4,
+    "fmask_bits_mask": 15,
+    "grid": {
+      "crs": "EPSG:32616",
+      "ulx": 199980.0,
+      "uly": 4600020.0,
+      "res": 30.0
+    }
+  },
+  "year_2017": {
+    "n_acq": 99,
+    "pixels_requested": 3000,
+    "seconds": 28
+  },
+  "year_2018": {
+    "n_acq": 159,
+    "pixels_requested": 3000,
+    "seconds": 47
+  },
+  "year_2019": {
+    "n_acq": 149,
+    "pixels_requested": 3000,
+    "seconds": 39
+  },
+  "ended": "2026-10-29T14:13:55.285042+00:00"
+}

@@ -1,0 +1,21 @@
+{
+  "script": "05_snow_summarise",
+  "git_commit": "1fe706ff55d81d05403d3d30862f62594a02db4a",
+  "run_date": "2026-10-29T14:53:50.331880+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/daccn/results/daccn_snow_counters.csv"
+  ],
+  "rows": 28,
+  "columns": [
+    "kind",
+    "source",
+    "target",
+    "year",
+    "variant",
+    "source_share_any_snow",
+    "target_share_any_snow",
+    "difference",
+    "source_mean_n_snow",
+    "target_mean_n_snow"
+  ]
+}

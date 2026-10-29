@@ -10,7 +10,22 @@ from . import paths
 EXPECTED: dict[str, list[tuple[str, int]]] = {
     "timematch": [("cloud_by_date.csv", 200), ("tile_summary.csv", 4), ("monthly_summary.csv", 40)],
     "denethor": [("s2_field_summary.csv", 1000), ("denethor_summary.csv", 4), ("pfqa_field_month.csv", 1000)],
-    "daccn": [("daccn_counters.csv|daccn_counters.csv.gz", 20000), ("daccn_summary.csv", 24)],
+    "daccn": [
+        ("daccn_counters.csv|daccn_counters.csv.gz", 20000),
+        ("daccn_summary.csv", 24),
+        ("daccn_snow_counters.csv|daccn_snow_counters.csv.gz", 20000),
+        ("daccn_snow_summary.csv", 24),
+    ],
+    "kerner": [("kerner_summary.csv", 96), ("kerner_pixel_states.csv", 9000), ("kerner_sample.csv", 9000)],
+    "sen4agrinet": [("fill_by_split.csv", 8), ("patch_fill.csv", 600), ("oad_csv_crosscheck.csv", 16), ("rebuild_vs_earlier.csv", 8)],
+    "stoian": [
+        ("fig19_kappa_digitised.csv", 44),
+        ("table1_class_areas.csv", 17),
+        ("scl_tile_summary.csv", 11),
+        ("l1c_tile_summary.csv", 11),
+        ("stoian_tile_table.csv", 11),
+        ("stoian_correlations.csv", 30),
+    ],
 }
 KEEP = ("manifest.json", "central_directory.json")
 

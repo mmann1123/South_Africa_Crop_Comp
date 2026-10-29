@@ -1,11 +1,12 @@
 # External missingness audits
 
-Descriptive audits of the cloud and gap structure behind three published
+Descriptive audits of the cloud and gap structure behind six published
 crop-type transfer papers that the audit report
-(`reports/Missingness confound audit of transfer papers.md`) ranked as highly
-suspect of a missingness confound: TimeMatch (Nyborg et al. 2022), DENETHOR
-(Kondmann et al. 2021) and DACCN (Wang et al. 2023, via the You et al. 2021
-recipe it states it followed). Each audit measures, from the paper's own data
+(`reports/Missingness confound audit of transfer papers.md`) ranked as suspect
+of a missingness confound: TimeMatch (Nyborg et al. 2022), DENETHOR
+(Kondmann et al. 2021), DACCN (Wang et al. 2023, via the You et al. 2021
+recipe it states it followed), Kerner et al. 2020, Sen4AgriNet (Sykas et al.
+2022) and Stoian et al. 2019. Each audit measures, from the paper's own data
 or deposited recipe, how cloud contamination, clear-observation counts or
 zero-fill rates differ between the paper's source and target domains. No
 model is re-run. Design: `docs/superpowers/specs/2026-10-28-external-missingness-audits-design.md`;
@@ -20,7 +21,10 @@ Limitations paragraph. Those are the deliverables.
 common/      paths, SHA-256 manifest downloads, run logs, EE init, zonal stats, plot theme, cleanup
 timematch/   01 range-fetch footprints from the Zenodo zip, 02 Earth Engine cloud fractions per shipped date, 03 summarise
 denethor/    01 fetch CLP/SCL/IS_DATA + labels, 02 per-field clear counts (2x2 tile-years), 03 Planet Fusion QA synthetic fraction, 04 summarise
-daccn/       you2021_recipe (EE port) + reference (numpy model), 01 regions, 02 counter samples per random 5 km cell, 03 summarise
+daccn/       you2021_recipe (EE port) + reference (numpy model), 01 regions, 02 counter samples per random 5 km cell, 03 summarise, snow check
+kerner/      01 Zenodo phenology/CDL members, 02 HLS acquisitions, 03 pixel sample, 04 EE per-acquisition Fmask states, 05 summarise
+sen4agrinet/ 01 pinned code facts, 02 split files streamed from the Dropbox bundle, 03-06 patch time stacks, fill rates, OAD CSV cross-check, 07 STAC cloud cover, 08 summarise
+stoian/      01 digitised Figure 19 kappas, 02 Table 1 class areas, 03 Planetary Computer SCL clear counts, 04 L1C effective clear, 05 correlations
 tests/       pytest unit tests for every pure function
 env/         conda env exports and pip freeze of the `ee` environment used
 run_all.sh   everything in order, then clean-up
@@ -50,8 +54,10 @@ nothing to do leaves the earlier run log untouched. Fixed seed 42 throughout.
 
 Downloads go to `/mnt/bigdrive/external_audits/<paper>/` (set in
 `common/paths.py`), about 10 GB for DENETHOR masks, 12 GB of transient Planet
-Fusion QA rasters (deleted day by day as they are read), and under 100 MB for
-TimeMatch. `run_all.sh` ends by running `<paper>/99_cleanup.py`, which checks
+Fusion QA rasters (deleted day by day as they are read), about 5 GB for
+Sen4AgriNet (one streamed pass over the authors' Dropbox bundle plus patch
+time stacks), about 80 MB for Kerner, and under 100 MB each for TimeMatch and
+Stoian. `run_all.sh` ends by running `<paper>/99_cleanup.py`, which checks
 the results are complete and then deletes everything under the paper's data
 root except `manifest.json` (object key, URL, bytes, SHA-256, fetch time of
 every file) so the download is reproducible. The DACCN sampler computes each cell interactively
