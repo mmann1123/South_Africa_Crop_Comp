@@ -1,0 +1,45 @@
+\documentclass[11pt]{letter}
+\usepackage[top=0.5in,bottom=0.4in,left=1in,right=1in]{geometry}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\setlength{\parskip}{3pt}
+
+\address{Department of Geography \& Environment \\ The George Washington University \\ Washington, DC 20052, USA}
+
+\begin{document}
+
+\begin{letter}{Dr. Fernando Auat Cheein \\ Associate Editor, \textit{Computers and Electronics in Agriculture}}
+
+\date{October 21, 2026}
+\opening{Dear Dr. Auat Cheein,}
+
+\noindent\textbf{Re: COMPAG-D-26-07034, ``Sparse Feature Selection, Not Deep Learning Capacity, Drives Spatial Transfer in Crop Classification''}
+
+Thank you, and through you the two reviewers, for the time and care given to our manuscript. The reviews were unusually thorough, and we are grateful for them. In working through the requested analyses we found a problem in our evaluation pipeline that changes the paper's central conclusion. We would not have found it without the reviewers' questions, and we want to tell you about it now, before the 1 November resubmission deadline, and ask how you would like us to proceed.
+
+When plotting out the requested map of hold out accuracy, it became clear there was a problem with cloud cover in September. The holdout tile has no September observations for $\sim$40\% of its pixels, while the training tiles had no missing months. Our pipelines handled these gaps differently. The raw-input deep temporal models received a reflectance of zero for the missing month, a value that was never seen in training. Meanwhile the classical models used time series features computed with Sept omitted. The out-of-region comparison at the core of the paper was therefore biased by inconsistent treatment of the missing values rather than between model families.
+
+We re-ran holdout inference for all 27 models without retraining, filling the missing month from training tile medians so that every model receives the same inputs. Here dense pixel-level temporal networks rank first, ahead of the tree ensembles, logistic regression, and TabNet. The ranking inversion between in-region and out-of-region evaluation therefore disappears. So the primary claim in our title, that sparse feature selection rather than deep learning capacity drives transfer, does not hold.
+
+Several results remain and, we believe, are useful. The benchmark itself is unchanged and, with consistent inputs, agrees with comparable regional-fold studies. The sparse gate we introduced (L-TAE-S) does make temporal encoders more robust when a month is missing at inference; adding it to CNN-BiLSTM improves holdout macro-F1 under zero fill. Practically, this shows that a missing data mismatch can pass for a spatial transfer failure and even reorder a benchmark testing, which we think is a warning worth publishing for the crop-mapping community. All corrected results, scripts, and reproduction checks are in our public repository.
+
+Because the paper's conclusions, title, and framing would change substantially, we would value your guidance on which of the following you prefer: (1) we submit the revision by 1 November with corrected results, a new title and framing, and a full account of the error in the response to reviewers; (2) we request an extension so that we can also run the control experiments the corrected framing requires (in particular, training-time month dropout as a baseline for the sparse gate) before resubmitting; or (3) we withdraw the manuscript and submit the corrected study as a new paper. We are happy to follow whichever route you and the reviewers consider most appropriate.
+
+We regret the error and the extra work it may cause. We are sincerely thankful to the reviewers, whose careful reading led directly to finding it, and to you for handling the manuscript. We look forward to your advice.
+
+\vspace{10pt}
+\noindent Sincerely,
+
+\vspace{2pt}
+\noindent\includegraphics[width=1.1in]{signature.jpg}
+
+\vspace{1pt}
+\noindent Michael L. Mann, on behalf of all co-authors \\
+Department of Geography \& Environment \\
+The George Washington University \\
+\href{mailto:mmann1123@email.gwu.edu}{mmann1123@email.gwu.edu}
+
+\end{letter}
+\end{document}
