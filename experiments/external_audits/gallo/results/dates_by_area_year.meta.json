@@ -1,0 +1,16 @@
+{
+  "script": "02_date_counts",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-30T02:27:55.387185+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/gallo/listing.tsv"
+  ],
+  "rows": 683,
+  "columns": [
+    "area",
+    "year",
+    "date",
+    "patches_with_date",
+    "n_patches"
+  ]
+}

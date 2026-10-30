@@ -1,0 +1,27 @@
+{
+  "script": "01_digitise_fig7",
+  "args": {
+    "force": true
+  },
+  "seed": 42,
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "oa_markers": 75
+  },
+  "started": "2026-10-29T20:00:57.063454+00:00",
+  "figure": {
+    "pdf_page": 12,
+    "top_sha256": "c8484759a1c2c6d485699dc278d31868301c0f562cb4025e20d8444bc773917a",
+    "bottom_sha256": "1979b99c0ddcd0a5086f480694425c780b1d76077b7c29209ac4c8748eedf32f"
+  },
+  "ended": "2026-10-29T20:00:57.183658+00:00"
+}

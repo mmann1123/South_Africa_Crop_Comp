@@ -1,0 +1,27 @@
+{
+  "script": "04_ee_cloud_by_date",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-30T02:50:05.324379+00:00",
+  "inputs": [
+    "COPERNICUS/S2_HARMONIZED",
+    "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED",
+    "ESA/WorldCover/v100/2020"
+  ],
+  "rows": 683,
+  "columns": [
+    "area",
+    "year",
+    "date",
+    "ee_date",
+    "offset_days",
+    "n_images",
+    "image_ids",
+    "n_crop_pixels",
+    "crop_cloudy",
+    "crop_nodata",
+    "crop_clear",
+    "all_cloudy",
+    "all_nodata",
+    "all_clear"
+  ]
+}

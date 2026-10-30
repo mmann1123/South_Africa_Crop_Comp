@@ -1,0 +1,32 @@
+{
+  "script": "03_interp_metrics",
+  "args": {
+    "force": false,
+    "n_boot": 1000
+  },
+  "seed": 42,
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "Camargue_points_used": 2000,
+    "Camargue_points_without_data": 0,
+    "Champagne_points_used": 2000,
+    "Champagne_points_without_data": 0,
+    "summary_rows": 33
+  },
+  "started": "2026-10-29T22:28:23.613983+00:00",
+  "grid_days": [
+    1,
+    355
+  ],
+  "half_window": 3,
+  "ended": "2026-10-29T22:28:24.215803+00:00"
+}

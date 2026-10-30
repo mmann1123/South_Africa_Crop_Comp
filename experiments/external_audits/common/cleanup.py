@@ -26,6 +26,37 @@ EXPECTED: dict[str, list[tuple[str, int]]] = {
         ("stoian_tile_table.csv", 11),
         ("stoian_correlations.csv", 30),
     ],
+    "gallo": [
+        ("dates_by_area_year.csv", 600),
+        ("date_counts_by_area_year.csv", 12),
+        ("patch_footprints.csv", 90),
+        ("cloud_by_date.csv", 680),
+        ("pixel_state_raw.csv", 2000),
+        ("gallo_area_year.csv", 12),
+        ("gallo_pools.csv", 6),
+    ],
+    "wijesingha": [
+        ("notebook_facts.csv", 18),
+        ("cropland_points.csv", 4000),
+        ("obs_counts_points.csv.gz", 36000),
+        ("year_summary.csv", 18),
+        ("period_contrast.csv", 2),
+    ],
+    "verhulst": [
+        ("fig7_oa_digitised.csv", 75),
+        ("forest_points.csv", 3000),
+        ("valid_dekads_summary.csv", 15),
+        ("dekad_valid_share.csv", 540),
+        ("oa_loss_scenarios.csv", 180),
+        ("oa_loss_correlations.csv", 100),
+    ],
+    "maleki": [
+        ("site_inventory.csv", 4),
+        ("interp_summary.csv", 30),
+        ("monthly_valid.csv", 24),
+        ("pixel_metrics.csv", 3000),
+        ("maleki_direction_table.csv", 2),
+    ],
 }
 KEEP = ("manifest.json", "central_directory.json")
 

@@ -1,0 +1,24 @@
+{
+  "script": "03_footprints",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-30T02:28:59.083648+00:00",
+  "inputs": [
+    "https://www.kaggle.com/api/v1/datasets/download/ignazio/sentinel2-crop-mapping"
+  ],
+  "rows": 90,
+  "columns": [
+    "area",
+    "patch",
+    "status",
+    "crs",
+    "left",
+    "bottom",
+    "right",
+    "top",
+    "lon",
+    "lat",
+    "height",
+    "width",
+    "bands"
+  ]
+}

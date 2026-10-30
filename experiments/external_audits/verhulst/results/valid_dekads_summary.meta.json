@@ -1,0 +1,30 @@
+{
+  "script": "04_summarise_gaps",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-29T20:03:44.124718+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/verhulst/chunks"
+  ],
+  "rows": 15,
+  "columns": [
+    "year",
+    "variant",
+    "n_pixels",
+    "valid_dekads_mean",
+    "valid_dekads_median",
+    "valid_dekads_jan_jun_mean",
+    "valid_share",
+    "interp_share",
+    "edge_share",
+    "filled_share",
+    "longest_gap_mean",
+    "longest_gap_jan_jun_mean",
+    "longest_interp_mean",
+    "share_pixels_gap_ge_6_jan_jun",
+    "share_pixels_gap_ge_9_year",
+    "share_pixels_no_valid_dekad",
+    "valid_dekads_se",
+    "acquisitions_per_pixel",
+    "dekads_without_acquisition_mean"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "script": "04_ee_cloud_by_date",
+  "args": {
+    "areas": [
+      "L2"
+    ],
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "rows_new": 229,
+    "failed": 0
+  },
+  "started": "2026-10-30T02:37:23.035227+00:00",
+  "ee_project": "327687702789",
+  "collections": {
+    "s2": "COPERNICUS/S2_HARMONIZED",
+    "csplus": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED",
+    "cropland": "ESA/WorldCover/v100/2020"
+  },
+  "thresholds": {
+    "cs_cdf_clear_ge": 0.6,
+    "scale_m": 10,
+    "match_offset_days_max": 1
+  },
+  "L2_2016_ee_dates": 34,
+  "L2_2017_ee_dates": 56,
+  "L2_2018_ee_dates": 71,
+  "L2_2019_ee_dates": 72,
+  "ended": "2026-10-30T02:50:05.324690+00:00"
+}

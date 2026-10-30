@@ -1,0 +1,29 @@
+{
+  "script": "03_observation_counts",
+  "args": {
+    "force": false,
+    "todo": 18
+  },
+  "seed": 42,
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "rows": 36000
+  },
+  "started": "2026-10-29T19:53:58.045148+00:00",
+  "sensors": {
+    "L5": "LANDSAT/LT05/C02/T1_L2",
+    "L7": "LANDSAT/LE07/C02/T1_L2",
+    "L8": "LANDSAT/LC08/C02/T1_L2"
+  },
+  "rule": "valid = QA_PIXEL clear (bits 3,4; plus 2 on L8) and all six SR bands unmasked; scene CLOUD_COVER < 60",
+  "ended": "2026-10-29T20:00:20.278375+00:00"
+}

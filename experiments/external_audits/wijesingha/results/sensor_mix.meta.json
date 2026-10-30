@@ -1,0 +1,16 @@
+{
+  "script": "04_summarise",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-29T20:00:38.566503+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/wijesingha/results/obs_counts_points.csv.gz"
+  ],
+  "rows": 18,
+  "columns": [
+    "region",
+    "year",
+    "mean_obs_L5",
+    "mean_obs_L7",
+    "mean_obs_L8"
+  ]
+}

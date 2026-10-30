@@ -11,17 +11,17 @@ for a in "$@"; do [[ "$a" == "--keep-data" ]] && KEEP=1; done
 source "$HOME/miniconda3/etc/profile.d/conda.sh"
 conda activate ee
 python -m pytest experiments/external_audits/tests -q
-for paper in timematch denethor daccn kerner sen4agrinet stoian; do
+for paper in timematch denethor daccn kerner sen4agrinet stoian gallo wijesingha verhulst maleki; do
   bash "experiments/external_audits/$paper/run.sh"
 done
 if [[ $KEEP -eq 0 ]]; then
-  for paper in timematch denethor daccn kerner sen4agrinet stoian; do
+  for paper in timematch denethor daccn kerner sen4agrinet stoian gallo wijesingha verhulst maleki; do
     python "experiments/external_audits/$paper/99_cleanup.py"
   done
 fi
 echo
 echo "== Findings =="
-for paper in timematch denethor daccn kerner sen4agrinet stoian; do
+for paper in timematch denethor daccn kerner sen4agrinet stoian gallo wijesingha verhulst maleki; do
   echo "--- $paper ---"
   awk '/^## Finding/{f=1;next} /^## /{f=0} f' "experiments/external_audits/$paper/README.md"
 done

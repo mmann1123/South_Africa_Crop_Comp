@@ -1,0 +1,3 @@
+train,test,n_configs,oa_mean,oa_best,drop_vs_source_baseline_mean,drop_vs_source_baseline_min,drop_vs_source_baseline_max,drop_vs_target_baseline_mean,drop_vs_target_baseline_min,drop_vs_target_baseline_max
+Camargue,Champagne,12,84.7,90.0,8.4,3.8,16.9,10.8,5.5,19.4
+Champagne,Camargue,12,79.2,84.2,16.2,11.0,23.8,13.8,7.4,21.7

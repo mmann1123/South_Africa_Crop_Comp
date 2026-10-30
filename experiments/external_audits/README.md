@@ -25,6 +25,10 @@ daccn/       you2021_recipe (EE port) + reference (numpy model), 01 regions, 02 
 kerner/      01 Zenodo phenology/CDL members, 02 HLS acquisitions, 03 pixel sample, 04 EE per-acquisition Fmask states, 05 summarise
 sen4agrinet/ 01 pinned code facts, 02 split files streamed from the Dropbox bundle, 03-06 patch time stacks, fill rates, OAD CSV cross-check, 07 STAC cloud cover, 08 summarise
 stoian/      01 digitised Figure 19 kappas, 02 Table 1 class areas, 03 Planetary Computer SCL clear counts, 04 L1C effective clear, 05 correlations
+gallo/       01 Kaggle deposit file listing, 02 dates per area-year, 03 patch footprints, 04 EE Cloud Score+ per date, 05 raw-raster cloud check, 06 summarise
+wijesingha/ 01 saved notebook outputs, 02 cropland points, 03 EE Landsat valid counts per bimonth, 04 summarise
+verhulst/   01 digitised Figure 7 OA, 02 forest points, 03 EE valid dekads, 04 gap summary, 05 OA-loss correlations
+maleki/     01 Ramsar site geometry and inventory, 02 EE per-date validity sample, 03 6-day grid interpolation metrics, 04 summarise
 tests/       pytest unit tests for every pure function
 env/         conda env exports and pip freeze of the `ee` environment used
 run_all.sh   everything in order, then clean-up
@@ -56,8 +60,9 @@ Downloads go to `/mnt/bigdrive/external_audits/<paper>/` (set in
 `common/paths.py`), about 10 GB for DENETHOR masks, 12 GB of transient Planet
 Fusion QA rasters (deleted day by day as they are read), about 5 GB for
 Sen4AgriNet (one streamed pass over the authors' Dropbox bundle plus patch
-time stacks), about 80 MB for Kerner, and under 100 MB each for TimeMatch and
-Stoian. `run_all.sh` ends by running `<paper>/99_cleanup.py`, which checks
+time stacks), about 80 MB for Kerner, about 200 MB for Gallo (mostly the 90 MB Kaggle file
+listing, which takes about four hours to re-crawl), and under 100 MB each for
+TimeMatch, Stoian, Wijesingha, Verhulst and Maleki. `run_all.sh` ends by running `<paper>/99_cleanup.py`, which checks
 the results are complete and then deletes everything under the paper's data
 root except `manifest.json` (object key, URL, bytes, SHA-256, fetch time of
 every file) so the download is reproducible. The DACCN sampler computes each cell interactively

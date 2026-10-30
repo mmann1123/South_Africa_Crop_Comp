@@ -1,0 +1,19 @@
+{
+  "script": "05_correlate_oa",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-29T20:03:49.037853+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/verhulst/results/oa_loss_scenarios.csv"
+  ],
+  "rows": 120,
+  "columns": [
+    "variant",
+    "algo",
+    "target",
+    "predictor",
+    "n",
+    "spearman_rho",
+    "spearman_p",
+    "level"
+  ]
+}

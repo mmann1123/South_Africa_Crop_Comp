@@ -1,0 +1,24 @@
+{
+  "script": "01_list_kaggle",
+  "args": {
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "python": "3.9.10",
+  "packages": {
+    "ee": "not installed",
+    "geopandas": "1.0.1",
+    "rasterio": "1.4.3",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "matplotlib": "3.9.4"
+  },
+  "counts": {
+    "files_this_run": 2852427,
+    "pages_this_run": 14263
+  },
+  "started": "2026-10-29T21:42:11.144765+00:00",
+  "source": "https://www.kaggle.com/api/v1/datasets/list/ignazio/sentinel2-crop-mapping",
+  "ended": "2026-10-30T02:27:41.920057+00:00"
+}

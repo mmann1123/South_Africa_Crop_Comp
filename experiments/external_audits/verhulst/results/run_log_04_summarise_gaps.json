@@ -1,0 +1,27 @@
+{
+  "script": "04_summarise_gaps",
+  "args": {
+    "force": true
+  },
+  "seed": 42,
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "pixels_2018": 3000,
+    "pixels_2019": 3000,
+    "pixels_2020": 3000,
+    "pixels_2021": 3000,
+    "pixels_2022": 3000,
+    "summary_rows": 15
+  },
+  "started": "2026-10-29T20:03:43.776733+00:00",
+  "ended": "2026-10-29T20:03:44.131682+00:00"
+}

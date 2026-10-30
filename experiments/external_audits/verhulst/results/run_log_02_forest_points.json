@@ -1,0 +1,36 @@
+{
+  "script": "02_forest_points",
+  "args": {
+    "force": false,
+    "n_points": 3000
+  },
+  "seed": 42,
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "random_points": 40000,
+    "forest_points": 3000
+  },
+  "started": "2026-10-29T19:53:54.446829+00:00",
+  "ee_project": "327687702789",
+  "flanders_area_km2": 13460.855680652174,
+  "worldcover_class_share": {
+    "30": 0.2872,
+    "40": 0.2846,
+    "10": 0.269,
+    "50": 0.1407,
+    "80": 0.0152,
+    "90": 0.002,
+    "60": 0.0012,
+    "20": 0.0
+  },
+  "ended": "2026-10-29T19:57:29.427894+00:00"
+}

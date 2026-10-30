@@ -1,0 +1,16 @@
+{
+  "script": "02_sample_cropland",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-29T19:53:38.922591+00:00",
+  "inputs": [
+    "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/DEU/ADM2/geoBoundaries-DEU-ADM2.geojson",
+    "ESA/WorldCover/v200"
+  ],
+  "rows": 4000,
+  "columns": [
+    "region",
+    "point_id",
+    "lon",
+    "lat"
+  ]
+}

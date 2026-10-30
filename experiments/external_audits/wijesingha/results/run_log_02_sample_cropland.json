@@ -1,0 +1,27 @@
+{
+  "script": "02_sample_cropland",
+  "args": {
+    "n_points": 2000,
+    "force": true
+  },
+  "seed": 42,
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "NH_points": 2000,
+    "WE_points": 2000
+  },
+  "started": "2026-10-29T19:53:23.971946+00:00",
+  "NH_area_km2": 8258.8,
+  "WE_area_km2": 14956.2,
+  "cropland_rule": "WorldCover v200 class 40 mean over 3x3 10 m cells >= 0.5 at a 30 m grid (EPSG:32632)",
+  "ended": "2026-10-29T19:53:38.922697+00:00"
+}

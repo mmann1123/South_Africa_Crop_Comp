@@ -1,0 +1,32 @@
+{
+  "script": "04_summarise",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-29T22:29:06.075767+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/maleki/results/interp_summary.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/maleki/results/paper_transfer_oa.csv"
+  ],
+  "rows": 2,
+  "columns": [
+    "train",
+    "test",
+    "n_configs",
+    "oa_mean",
+    "oa_best",
+    "drop_vs_source_baseline_mean",
+    "drop_vs_source_baseline_min",
+    "drop_vs_source_baseline_max",
+    "drop_vs_target_baseline_mean",
+    "drop_vs_target_baseline_min",
+    "drop_vs_target_baseline_max",
+    "source_n_valid_median",
+    "target_n_valid_median",
+    "source_share_not_observed_mean",
+    "target_share_not_observed_mean",
+    "source_longest_unobserved_steps_median",
+    "target_longest_unobserved_steps_median",
+    "source_longest_gap_days_median",
+    "target_longest_gap_days_median",
+    "source_more_interpolated"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "script": "06_summarise",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-30T02:54:29.907345+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/gallo/results/dates_by_area_year.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/gallo/results/cloud_by_date.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/gallo/results/pixel_state_raw.csv"
+  ],
+  "rows": 6,
+  "columns": [
+    "pool",
+    "series",
+    "n_dates",
+    "pad_share",
+    "zero_share",
+    "clear_share",
+    "cloudy_share",
+    "nodata_dates",
+    "mean_crop_cloudy",
+    "px_cloud",
+    "px_nodata_dates"
+  ]
+}

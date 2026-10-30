@@ -1,0 +1,13 @@
+pair,pool,slots_compared,median_abs_doy_shift,max_abs_doy_shift,slots_beyond_other
+L1 2016 vs L1 2019 (test Y),test Y,34,98.5,186.0,0
+L1 2016 vs L3 2019 (test A),test A,34,100.5,188.0,0
+L1 2017 vs L1 2019 (test Y),test Y,53,90.0,95.0,0
+L1 2017 vs L3 2019 (test A),test A,53,92.0,97.0,0
+L1 2018 vs L1 2019 (test Y),test Y,68,10.0,20.0,0
+L1 2018 vs L3 2019 (test A),test A,68,12.0,22.0,0
+L2 2016 vs L2 2019 (test Y),test Y,33,121.0,196.0,0
+L2 2016 vs L3 2019 (test A),test A,33,121.0,196.0,0
+L2 2017 vs L2 2019 (test Y),test Y,53,95.0,100.0,0
+L2 2017 vs L3 2019 (test A),test A,53,95.0,100.0,0
+L2 2018 vs L2 2019 (test Y),test Y,71,0.0,5.0,0
+L2 2018 vs L3 2019 (test A),test A,71,0.0,5.0,0

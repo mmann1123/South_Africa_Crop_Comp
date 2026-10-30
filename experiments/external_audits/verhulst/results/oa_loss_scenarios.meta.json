@@ -1,0 +1,32 @@
+{
+  "script": "05_correlate_oa",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-29T20:03:49.033397+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/verhulst/results/fig7_oa_digitised.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/verhulst/results/valid_dekads_summary.csv"
+  ],
+  "rows": 180,
+  "columns": [
+    "algo",
+    "variant",
+    "train_year",
+    "test_year",
+    "oa_same_year",
+    "oa_cross",
+    "oa_loss",
+    "valid_train",
+    "valid_test",
+    "valid_jj_train",
+    "valid_jj_test",
+    "gap_jj_train",
+    "gap_jj_test",
+    "filled_train",
+    "filled_test",
+    "diff_valid",
+    "abs_diff_valid",
+    "diff_valid_jj",
+    "diff_gap_jj",
+    "diff_filled"
+  ]
+}

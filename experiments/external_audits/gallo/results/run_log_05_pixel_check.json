@@ -1,0 +1,24 @@
+{
+  "script": "05_pixel_check",
+  "args": {
+    "force": false,
+    "n_patches": 3
+  },
+  "seed": 42,
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "images_new": 2049
+  },
+  "started": "2026-10-30T02:32:21.190593+00:00",
+  "cloud_blue_threshold": 2000,
+  "ended": "2026-10-30T02:52:58.882629+00:00"
+}

@@ -1,0 +1,20 @@
+{
+  "script": "06_summarise",
+  "args": {},
+  "seed": 42,
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "area_years": 12
+  },
+  "started": "2026-10-30T02:54:29.865608+00:00",
+  "ended": "2026-10-30T02:54:30.178436+00:00"
+}

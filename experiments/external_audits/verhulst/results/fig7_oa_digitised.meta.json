@@ -1,0 +1,19 @@
+{
+  "script": "01_digitise_fig7",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-29T20:00:57.172526+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/verhulst/dl/paper.pdf",
+    "https://www.mdpi.com/2072-4292/16/14/2653/pdf"
+  ],
+  "rows": 75,
+  "columns": [
+    "algo",
+    "validation_year",
+    "training_year",
+    "oa",
+    "box_q3",
+    "box_q1",
+    "degenerate_box"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "script": "01_notebook_outputs",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-29T19:52:54.091365+00:00",
+  "inputs": [
+    "https://github.com/jmatics/landsat-croptype-spatial-temporal-transferability",
+    "/mnt/bigdrive/external_audits/wijesingha/manifest.json"
+  ],
+  "rows": 18,
+  "columns": [
+    "region",
+    "notebook",
+    "fact",
+    "value"
+  ]
+}

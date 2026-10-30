@@ -1,0 +1,41 @@
+{
+  "script": "04_summarise",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-29T20:00:38.562767+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/wijesingha/results/obs_counts_points.csv.gz"
+  ],
+  "rows": 18,
+  "columns": [
+    "region",
+    "year",
+    "period",
+    "n_points",
+    "dropped_share",
+    "empty_share_m03",
+    "mean_obs_m03",
+    "median_obs_m03",
+    "mean_L5_m03",
+    "mean_L7_m03",
+    "mean_L8_m03",
+    "empty_share_m05",
+    "mean_obs_m05",
+    "median_obs_m05",
+    "mean_L5_m05",
+    "mean_L7_m05",
+    "mean_L8_m05",
+    "empty_share_m07",
+    "mean_obs_m07",
+    "median_obs_m07",
+    "mean_L5_m07",
+    "mean_L7_m07",
+    "mean_L8_m07",
+    "empty_share_m09",
+    "mean_obs_m09",
+    "median_obs_m09",
+    "mean_L5_m09",
+    "mean_L7_m09",
+    "mean_L8_m09",
+    "mean_obs_all_bimonths"
+  ]
+}

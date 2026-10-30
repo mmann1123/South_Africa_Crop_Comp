@@ -1,0 +1,23 @@
+{
+  "script": "03_interp_metrics",
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "run_date": "2026-10-29T22:28:24.215692+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/maleki/Camargue_validity.npz",
+    "/mnt/bigdrive/external_audits/maleki/Champagne_validity.npz"
+  ],
+  "rows": 4000,
+  "columns": [
+    "site",
+    "lon",
+    "lat",
+    "worldcover",
+    "n_valid",
+    "obs_steps",
+    "interp_steps",
+    "extrap_steps",
+    "share_not_observed",
+    "longest_unobserved_steps",
+    "longest_gap_days"
+  ]
+}

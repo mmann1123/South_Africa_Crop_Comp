@@ -1,0 +1,5 @@
+site,product,wdpa_name,area_km2,lon_min,lat_min,lon_max,lat_max,granules_all,granules_cloudy_lt50,dates_cloudy_lt50,mgrs_tiles,orbits
+Camargue,COPERNICUS/S2_SR_HARMONIZED,Camargue,843.9,4.23,43.327,4.848,43.707,436,277,106,31TEJ 31TFH 31TFJ,8 108
+Camargue,COPERNICUS/S2_SR,Camargue,843.9,4.23,43.327,4.848,43.707,436,277,106,31TEJ 31TFH 31TFJ,8 108
+Champagne,COPERNICUS/S2_SR_HARMONIZED,Etangs de la Champagne humide,2557.9,4.155,48.165,5.05,49.092,429,169,71,31UEP 31UFP 31UFQ,8 51
+Champagne,COPERNICUS/S2_SR,Etangs de la Champagne humide,2557.9,4.155,48.165,5.05,49.092,429,169,71,31UEP 31UFP 31UFQ,8 51

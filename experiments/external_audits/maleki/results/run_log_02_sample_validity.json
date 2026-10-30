@@ -1,0 +1,33 @@
+{
+  "script": "02_sample_validity",
+  "args": {
+    "sites": [
+      "Camargue",
+      "Champagne"
+    ],
+    "n": 2000,
+    "force": true
+  },
+  "seed": 42,
+  "git_commit": "e12b1203a1c7083de264edb9f3efa9205c6164eb",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "Camargue_points": 2000,
+    "Camargue_dates": 106,
+    "Camargue_missing_rows": 0,
+    "Champagne_points": 2000,
+    "Champagne_dates": 71,
+    "Champagne_missing_rows": 0
+  },
+  "started": "2026-10-29T22:21:01.815036+00:00",
+  "ee_project": "327687702789",
+  "ended": "2026-10-29T22:28:16.516385+00:00"
+}
