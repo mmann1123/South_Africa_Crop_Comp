@@ -1,0 +1,30 @@
+{
+  "script": "04_summarise_windows",
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "run_date": "2026-10-30T14:53:34.608629+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/hao/chunks"
+  ],
+  "rows": 35,
+  "columns": [
+    "stream",
+    "domain",
+    "rule",
+    "n_points",
+    "n_dropped_no_hls",
+    "empty_share",
+    "empty_ci_lo",
+    "empty_ci_hi",
+    "empty_windows_mean",
+    "interior_filled_share",
+    "edge_share",
+    "strict_fillable_share",
+    "share_points_any_empty",
+    "share_points_run_ge2",
+    "share_points_run_ge3",
+    "longest_run_mean",
+    "empty_share_early_w1_5",
+    "empty_share_mid_w6_11",
+    "empty_share_late_w12_18"
+  ]
+}

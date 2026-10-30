@@ -57,6 +57,24 @@ EXPECTED: dict[str, list[tuple[str, int]]] = {
         ("pixel_metrics.csv", 3000),
         ("maleki_direction_table.csv", 2),
     ],
+    "hao": [
+        ("fig_oa_digitised.csv", 108),
+        ("points.csv", 10000),
+        ("window_shares.csv", 400),
+        ("domain_summary.csv", 20),
+        ("prefix_summary.csv", 400),
+        ("gap_vs_oa.csv", 100),
+        ("hs_residual_cloud.csv", 60),
+    ],
+    "hexi": [
+        ("points.csv", 2900),
+        ("weekly_gap_summary.csv", 96),
+        ("residual_cloud.csv", 24),
+        ("weekly_valid_share.csv", 1200),
+        ("monthly_qa60.csv", 72),
+        ("discard_rules.csv", 24),
+        ("qa60_images.csv", 100),
+    ],
 }
 KEEP = ("manifest.json", "central_directory.json")
 

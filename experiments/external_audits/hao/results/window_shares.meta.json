@@ -1,0 +1,22 @@
+{
+  "script": "04_summarise_windows",
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "run_date": "2026-10-30T14:53:34.603950+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/hao/chunks"
+  ],
+  "rows": 576,
+  "columns": [
+    "window",
+    "empty_share",
+    "interior_share",
+    "edge_share",
+    "strict_share",
+    "n_points",
+    "doy_start",
+    "doy_end",
+    "stream",
+    "domain",
+    "rule"
+  ]
+}

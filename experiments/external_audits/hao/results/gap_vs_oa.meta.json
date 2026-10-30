@@ -1,0 +1,31 @@
+{
+  "script": "05_relate_oa",
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "run_date": "2026-10-30T14:53:35.458252+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/hao/results/fig_oa_digitised.csv",
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/hao/results/prefix_summary.csv"
+  ],
+  "rows": 108,
+  "columns": [
+    "region",
+    "reference",
+    "k",
+    "doy_end",
+    "oa_tl",
+    "oa_lo",
+    "oa_gap_lo_minus_tl",
+    "target_empty_share",
+    "ref_empty_share",
+    "diff_empty_share",
+    "target_share_points_any_empty",
+    "ref_share_points_any_empty",
+    "diff_share_points_any_empty",
+    "target_share_points_run_ge2",
+    "ref_share_points_run_ge2",
+    "diff_share_points_run_ge2",
+    "target_edge_share",
+    "ref_edge_share",
+    "diff_edge_share"
+  ]
+}

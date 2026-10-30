@@ -1,0 +1,23 @@
+{
+  "script": "04_summarise_windows",
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "run_date": "2026-10-30T14:53:34.617138+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/hao/chunks"
+  ],
+  "rows": 630,
+  "columns": [
+    "stream",
+    "domain",
+    "rule",
+    "k",
+    "doy_end",
+    "empty_share",
+    "edge_share",
+    "interior_share",
+    "share_points_any_empty",
+    "share_points_run_ge2",
+    "share_points_no_obs",
+    "longest_run_mean"
+  ]
+}

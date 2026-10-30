@@ -1,0 +1,48 @@
+{
+  "script": "01_points",
+  "args": {
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "Hexi|cropland": 1800,
+    "Iowa|alfalfa": 60,
+    "Iowa|maize": 60,
+    "Iowa|oats": 60,
+    "Kansas|alfalfa": 60,
+    "Kansas|canola": 6,
+    "Kansas|maize": 60,
+    "Kansas|oats": 4,
+    "Kansas|spring wheat": 1,
+    "Minnesota|alfalfa": 60,
+    "Minnesota|canola": 60,
+    "Minnesota|maize": 60,
+    "Minnesota|oats": 13,
+    "Minnesota|spring wheat": 60,
+    "Missouri|alfalfa": 8,
+    "Missouri|maize": 60,
+    "North Dakota|alfalfa": 60,
+    "North Dakota|canola": 60,
+    "North Dakota|maize": 60,
+    "North Dakota|oats": 10,
+    "North Dakota|spring wheat": 60,
+    "South Dakota|alfalfa": 60,
+    "South Dakota|canola": 9,
+    "South Dakota|maize": 60,
+    "South Dakota|oats": 60,
+    "South Dakota|spring wheat": 60
+  },
+  "started": "2026-10-30T14:29:05.939579+00:00",
+  "ee_project": "327687702789",
+  "ended": "2026-10-30T14:29:17.854767+00:00"
+}

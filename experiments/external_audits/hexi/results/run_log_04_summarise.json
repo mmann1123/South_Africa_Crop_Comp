@@ -1,0 +1,24 @@
+{
+  "script": "04_summarise",
+  "args": {
+    "force": true
+  },
+  "seed": 42,
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "points_without_data_2021": 0,
+    "points_without_data_2022": 0,
+    "points_without_data_2023": 0
+  },
+  "started": "2026-10-30T16:22:38.091922+00:00",
+  "ended": "2026-10-30T16:22:39.437186+00:00"
+}

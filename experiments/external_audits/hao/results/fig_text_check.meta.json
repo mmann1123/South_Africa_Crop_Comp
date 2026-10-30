@@ -1,0 +1,17 @@
+{
+  "script": "01_digitise_figs",
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "run_date": "2026-10-30T14:23:48.593910+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/literature/Transfer Learning for Crop classification with Cropland Data Layer data (CDL) as training samples.pdf"
+  ],
+  "rows": 16,
+  "columns": [
+    "region",
+    "series",
+    "doy_end",
+    "oa_text",
+    "oa_digitised",
+    "diff"
+  ]
+}

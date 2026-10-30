@@ -1,0 +1,52 @@
+{
+  "script": "01_digitise_figs",
+  "args": {
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "bars": 108
+  },
+  "started": "2026-10-30T14:23:48.135366+00:00",
+  "pdf": "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/writeup/literature/Transfer Learning for Crop classification with Cropland Data Layer data (CDL) as training samples.pdf",
+  "figure_HS": {
+    "pdf_page": 6,
+    "raster_sha256": "9204a886d10f461b45557d5e4c1da5a35ee9b0c188e8bfcc4aff26a072c5e98c",
+    "shape": [
+      1793,
+      2135,
+      3
+    ]
+  },
+  "figure_AB": {
+    "pdf_page": 10,
+    "raster_sha256": "c4cdae2058661a812202859f5db7e10fe38df163c517483b9b68e583e9b325eb",
+    "shape": [
+      1887,
+      2847,
+      3
+    ]
+  },
+  "figure_NE": {
+    "pdf_page": 12,
+    "raster_sha256": "fa81e3bda6be1e30b6f9b8f8473a9ffe91ff185cfe5b0ac2b0f1e1854cf479d8",
+    "shape": [
+      1798,
+      2759,
+      3
+    ]
+  },
+  "text_check_mean_abs_diff": 0.49,
+  "text_check_max_abs_diff": 1.0,
+  "ended": "2026-10-30T14:23:48.599523+00:00"
+}

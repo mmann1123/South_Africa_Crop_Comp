@@ -1,0 +1,23 @@
+{
+  "script": "03_qa60_images",
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "run_date": "2026-10-30T15:58:50.324810+00:00",
+  "inputs": [
+    "COPERNICUS/S2_HARMONIZED",
+    "COPERNICUS/S2_SR_HARMONIZED",
+    "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED"
+  ],
+  "rows": 144,
+  "columns": [
+    "product",
+    "domain",
+    "year",
+    "month",
+    "n_images",
+    "share_images_qa60_flag",
+    "mean_qa60_frac",
+    "qa60_present_share",
+    "mean_cs_cloud_frac",
+    "mean_cloudy_pct"
+  ]
+}

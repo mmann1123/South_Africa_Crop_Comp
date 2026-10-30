@@ -1,0 +1,20 @@
+{
+  "script": "02_points",
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "run_date": "2026-10-30T14:37:44.172845+00:00",
+  "inputs": [
+    "USDA/NASS/CDL/{year}",
+    "AAFC/ACI",
+    "projects/sat-io/open-datasets/GFSAD/GCEP30"
+  ],
+  "rows": 14448,
+  "columns": [
+    "pid",
+    "domain",
+    "crop",
+    "lon",
+    "lat",
+    "cell",
+    "chunk"
+  ]
+}

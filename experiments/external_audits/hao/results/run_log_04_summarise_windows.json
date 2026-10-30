@@ -1,0 +1,39 @@
+{
+  "script": "04_summarise_windows",
+  "args": {
+    "force": true
+  },
+  "seed": 42,
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "points_hls_CONUS": 8170,
+    "dropped_no_hls_CONUS": 0,
+    "points_hls_NE": 1999,
+    "dropped_no_hls_NE": 0,
+    "points_hls_AB": 2000,
+    "dropped_no_hls_AB": 0,
+    "points_hls_CONUS@2018": 915,
+    "dropped_no_hls_CONUS@2018": 24,
+    "points_hls_NE@2017": 665,
+    "dropped_no_hls_NE@2017": 0,
+    "points_hls_AB@2017": 667,
+    "dropped_no_hls_AB@2017": 0,
+    "points_l8s2_HS": 2000,
+    "dropped_no_hls_HS": 0,
+    "points_l8s2_NE": 666,
+    "points_l8s2_AB": 667,
+    "points_l8s2_CONUS": 936,
+    "summary_rows": 35
+  },
+  "started": "2026-10-30T14:53:27.607266+00:00",
+  "ended": "2026-10-30T14:53:34.645394+00:00"
+}

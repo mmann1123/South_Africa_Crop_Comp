@@ -1,0 +1,28 @@
+{
+  "script": "04_summarise",
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "run_date": "2026-10-30T16:22:39.403436+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/hexi/chunks"
+  ],
+  "rows": 96,
+  "columns": [
+    "year",
+    "group",
+    "scenario",
+    "n_points",
+    "valid_weeks_mean",
+    "valid_weeks_median",
+    "empty_share",
+    "interp_share",
+    "edge_share",
+    "longest_gap_mean",
+    "longest_interp_mean",
+    "season_valid_weeks_mean",
+    "season_empty_share",
+    "season_interp_share",
+    "season_longest_gap_mean",
+    "share_points_season_gap_ge_4",
+    "share_points_no_valid_week"
+  ]
+}

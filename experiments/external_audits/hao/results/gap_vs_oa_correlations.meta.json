@@ -1,0 +1,18 @@
+{
+  "script": "05_relate_oa",
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "run_date": "2026-10-30T14:53:35.477637+00:00",
+  "inputs": [
+    "/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/external_audits/hao/results/gap_vs_oa.csv"
+  ],
+  "rows": 64,
+  "columns": [
+    "reference",
+    "scope",
+    "metric",
+    "outcome",
+    "n",
+    "spearman_rho",
+    "spearman_p"
+  ]
+}

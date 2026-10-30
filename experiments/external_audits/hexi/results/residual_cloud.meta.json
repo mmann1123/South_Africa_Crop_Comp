@@ -1,0 +1,24 @@
+{
+  "script": "04_summarise",
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "run_date": "2026-10-30T16:22:39.407994+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/hexi/chunks"
+  ],
+  "rows": 24,
+  "columns": [
+    "year",
+    "group",
+    "images_per_week_mean",
+    "images_per_year_mean",
+    "qa60_flagged_obs_share",
+    "resid_cs50_obs_share",
+    "resid_cs50_week_any",
+    "resid_cs50_week_all",
+    "cs_flagged_obs_share_cs50",
+    "resid_cs65_obs_share",
+    "resid_cs65_week_any",
+    "resid_cs65_week_all",
+    "cs_flagged_obs_share_cs65"
+  ]
+}

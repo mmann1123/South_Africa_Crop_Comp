@@ -1,0 +1,32 @@
+{
+  "script": "02_weekly_counts",
+  "args": {
+    "force": false,
+    "years": [
+      2021
+    ]
+  },
+  "seed": 42,
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {},
+  "started": "2026-10-30T16:06:56.196462+00:00",
+  "ee_project": "327687702789",
+  "collections": {
+    "s2": "COPERNICUS/S2_HARMONIZED",
+    "cloud_score_plus": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED"
+  },
+  "cs_thresholds": {
+    "cs50": 0.5,
+    "cs65": 0.65
+  },
+  "ended": "2026-10-30T16:22:10.199580+00:00"
+}

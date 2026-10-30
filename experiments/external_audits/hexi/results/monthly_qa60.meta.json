@@ -1,0 +1,18 @@
+{
+  "script": "04_summarise",
+  "git_commit": "75f52ee71fd5c3d9d7907431d142f46806cc0ad9",
+  "run_date": "2026-10-30T16:22:39.418145+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/hexi/chunks"
+  ],
+  "rows": 72,
+  "columns": [
+    "year",
+    "domain",
+    "month",
+    "images_sampled",
+    "qa60_flagged_share",
+    "cs50_flagged_share",
+    "qa60_pass_cs50_flagged_share"
+  ]
+}

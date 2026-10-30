@@ -29,6 +29,8 @@ gallo/       01 Kaggle deposit file listing, 02 dates per area-year, 03 patch fo
 wijesingha/ 01 saved notebook outputs, 02 cropland points, 03 EE Landsat valid counts per bimonth, 04 summarise
 verhulst/   01 digitised Figure 7 OA, 02 forest points, 03 EE valid dekads, 04 gap summary, 05 OA-loss correlations
 maleki/     01 Ramsar site geometry and inventory, 02 EE per-date validity sample, 03 6-day grid interpolation metrics, 04 summarise
+hao/        01 digitised in-season OA figures, 02 CDL and cropland points, 03 EE 15-day window validity (HLS and L8+L1C streams), 04 summarise, 05 relate to OA gaps, 06 figure
+hexi/       01 CDL and Hexi cropland points, 02 EE weekly validity under four cloud rules, 03 QA60 population per image, 04 summarise, 05 figure
 tests/       pytest unit tests for every pure function
 env/         conda env exports and pip freeze of the `ee` environment used
 run_all.sh   everything in order, then clean-up
@@ -62,7 +64,7 @@ Fusion QA rasters (deleted day by day as they are read), about 5 GB for
 Sen4AgriNet (one streamed pass over the authors' Dropbox bundle plus patch
 time stacks), about 80 MB for Kerner, about 200 MB for Gallo (mostly the 90 MB Kaggle file
 listing, which takes about four hours to re-crawl), and under 100 MB each for
-TimeMatch, Stoian, Wijesingha, Verhulst and Maleki. `run_all.sh` ends by running `<paper>/99_cleanup.py`, which checks
+TimeMatch, Stoian, Wijesingha, Verhulst, Maleki, Hao and Hexi. `run_all.sh` ends by running `<paper>/99_cleanup.py`, which checks
 the results are complete and then deletes everything under the paper's data
 root except `manifest.json` (object key, URL, bytes, SHA-256, fetch time of
 every file) so the download is reproducible. The DACCN sampler computes each cell interactively
