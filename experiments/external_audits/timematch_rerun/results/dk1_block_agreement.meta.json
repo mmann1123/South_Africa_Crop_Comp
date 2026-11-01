@@ -1,0 +1,18 @@
+{
+  "script": "05_emulator",
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "run_date": "2026-10-30T18:07:19.957846+00:00",
+  "inputs": [
+    "features_DK1_all.npz",
+    "block_cloud_by_date.csv"
+  ],
+  "rows": 14352,
+  "columns": [
+    "threshold",
+    "date",
+    "block",
+    "n_parcels",
+    "emulated_frac_cloudy",
+    "ee_block_frac_cloudy"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "script": "02_ee_parcel_cloud",
+  "args": {
+    "max_chunks": null,
+    "force": false
+  },
+  "seed": 42,
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "fr1_parcels_in_test_union": 56444,
+    "chunks_done": 113,
+    "chunks_total": 113
+  },
+  "started": "2026-10-30T17:26:11.512680+00:00",
+  "ee_project": "327687702789",
+  "collections": {
+    "s2": "COPERNICUS/S2_HARMONIZED",
+    "csplus": "GOOGLE/CLOUD_SCORE_PLUS/V1/S2_HARMONIZED"
+  },
+  "thresholds_cs_cdf_lt": [
+    0.5,
+    0.6,
+    0.7
+  ],
+  "scale_m": 10,
+  "ended": "2026-10-30T18:04:47.838455+00:00"
+}

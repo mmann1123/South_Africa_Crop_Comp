@@ -9,7 +9,9 @@ recipe it states it followed), Kerner et al. 2020, Sen4AgriNet (Sykas et al.
 2022) and Stoian et al. 2019. Each audit measures, from the paper's own data
 or deposited recipe, how cloud contamination, clear-observation counts or
 zero-fill rates differ between the paper's source and target domains. No
-model is re-run. Design: `docs/superpowers/specs/2026-10-28-external-missingness-audits-design.md`;
+model is re-run, except in `timematch_rerun/`, which evaluates TimeMatch's
+released models with cloud-flagged target dates removed (GPU and the full
+74 GB archive; not part of `run_all.sh`). Design: `docs/superpowers/specs/2026-10-28-external-missingness-audits-design.md`;
 plan: `docs/superpowers/plans/2026-10-28-external-missingness-audits.md`.
 
 Each paper folder has a README that ends with a Finding paragraph and a
@@ -19,6 +21,7 @@ Limitations paragraph. Those are the deliverables.
 
 ```text
 common/      paths, SHA-256 manifest downloads, run logs, EE init, zonal stats, plot theme, cleanup
+timematch_rerun/ 01 parcel tables, 02 EE per-parcel Cloud Score+, 03 reproduce Table 1, 04 band features, 05 DK1 cloud emulator, 06 conditions (one GPU process at a time), 07 summarise, 08 figure
 timematch/   01 range-fetch footprints from the Zenodo zip, 02 Earth Engine cloud fractions per shipped date, 03 summarise
 denethor/    01 fetch CLP/SCL/IS_DATA + labels, 02 per-field clear counts (2x2 tile-years), 03 Planet Fusion QA synthetic fraction, 04 summarise
 daccn/       you2021_recipe (EE port) + reference (numpy model), 01 regions, 02 counter samples per random 5 km cell, 03 summarise, snow check

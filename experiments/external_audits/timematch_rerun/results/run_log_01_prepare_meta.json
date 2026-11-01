@@ -1,0 +1,26 @@
+{
+  "script": "01_prepare_meta",
+  "args": {},
+  "seed": 42,
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "parcels_DK1": 60332,
+    "dates_DK1": 52,
+    "parcels_FR1": 115755,
+    "dates_FR1": 62,
+    "fr1_polygons": 115755
+  },
+  "started": "2026-10-30T17:25:21.227139+00:00",
+  "fr1_shapefile_order_matches_metadata": true,
+  "fr1_block_matches": true,
+  "ended": "2026-10-30T17:25:23.383571+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "script": "07_summarise",
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "run_date": "2026-10-31T16:52:54.056707+00:00",
+  "inputs": [
+    "conditions_by_fold.csv"
+  ],
+  "rows": 68,
+  "columns": [
+    "direction",
+    "cloud_source",
+    "threshold",
+    "condition",
+    "n_folds",
+    "macro_f1_mean",
+    "accuracy_mean",
+    "macro_f1_fold_sd",
+    "accuracy_fold_sd",
+    "macro_f1_draw_sd_mean",
+    "accuracy_draw_sd_mean",
+    "mean_dates_kept",
+    "mean_removed"
+  ]
+}

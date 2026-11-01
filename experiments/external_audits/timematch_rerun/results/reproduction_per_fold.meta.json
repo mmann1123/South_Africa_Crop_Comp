@@ -1,0 +1,25 @@
+{
+  "script": "03_reproduce",
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "run_date": "2026-10-30T17:58:41.803219+00:00",
+  "inputs": [
+    "released models fold_*/model.pt",
+    "test_metrics_*.json"
+  ],
+  "rows": 6,
+  "columns": [
+    "direction",
+    "fold",
+    "n_test",
+    "rerun_accuracy",
+    "rerun_macro_f1",
+    "rerun_weighted_f1",
+    "rerun_kappa",
+    "stored_accuracy",
+    "stored_macro_f1",
+    "stored_weighted_f1",
+    "stored_kappa",
+    "d_macro_f1",
+    "d_accuracy"
+  ]
+}

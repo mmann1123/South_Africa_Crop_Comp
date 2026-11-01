@@ -1,0 +1,23 @@
+{
+  "script": "05_emulator",
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "run_date": "2026-10-30T18:07:19.963772+00:00",
+  "inputs": [
+    "features_FR1_union.npz",
+    "ee_chunks/*.npz"
+  ],
+  "rows": 3,
+  "columns": [
+    "threshold",
+    "n_train_parcel_dates",
+    "n_heldout_parcel_dates",
+    "heldout_base_rate",
+    "auc",
+    "accuracy",
+    "precision",
+    "recall",
+    "dk1_block_pearson_r",
+    "dk1_mean_emulated_frac",
+    "dk1_mean_ee_block_frac"
+  ]
+}

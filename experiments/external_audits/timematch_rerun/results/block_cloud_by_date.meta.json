@@ -1,0 +1,17 @@
+{
+  "script": "02_ee_parcel_cloud",
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "run_date": "2026-10-30T18:04:47.838265+00:00",
+  "inputs": [
+    "EE Cloud Score+ x WorldCover 2020 x block rectangles"
+  ],
+  "rows": 11400,
+  "columns": [
+    "tile",
+    "block",
+    "date",
+    "frac_cloudy_t50",
+    "frac_cloudy_t60",
+    "frac_cloudy_t70"
+  ]
+}

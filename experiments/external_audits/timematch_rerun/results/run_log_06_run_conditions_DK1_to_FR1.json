@@ -1,0 +1,33 @@
+{
+  "script": "06_run_conditions_DK1_to_FR1",
+  "args": {
+    "folds": [
+      0,
+      1,
+      2
+    ],
+    "thresholds": [
+      60,
+      50,
+      70
+    ],
+    "draws": 10,
+    "shift": 32
+  },
+  "seed": 42,
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "python": "3.12.12",
+  "packages": {
+    "ee": "not installed",
+    "geopandas": "1.0.1",
+    "rasterio": "1.4.4",
+    "numpy": "2.4.2",
+    "pandas": "2.2.3",
+    "matplotlib": "3.9.4"
+  },
+  "counts": {},
+  "started": "2026-10-31T15:56:39.872388+00:00",
+  "shift_days": 32,
+  "min_keep": 3,
+  "ended": "2026-10-31T16:52:38.458571+00:00"
+}

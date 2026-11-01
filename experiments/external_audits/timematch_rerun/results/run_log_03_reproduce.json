@@ -1,0 +1,49 @@
+{
+  "script": "03_reproduce",
+  "args": {},
+  "seed": 42,
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "python": "3.12.12",
+  "packages": {
+    "ee": "not installed",
+    "geopandas": "1.0.1",
+    "rasterio": "1.4.4",
+    "numpy": "2.4.2",
+    "pandas": "2.2.3",
+    "matplotlib": "3.9.4"
+  },
+  "counts": {},
+  "started": "2026-10-30T17:57:35.648815+00:00",
+  "torch": "2.10.0+cu126",
+  "authors_commit": "a652df95282de9a3fc12d2fd204f438ff4ccb122",
+  "classes_DK1_to_FR1": [
+    "corn",
+    "horsebeans",
+    "meadow",
+    "spring_barley",
+    "spring_oat",
+    "spring_peas",
+    "spring_wheat",
+    "unknown",
+    "winter_barley",
+    "winter_rapeseed",
+    "winter_rye",
+    "winter_triticale",
+    "winter_wheat"
+  ],
+  "classes_FR1_to_DK1": [
+    "corn",
+    "horsebeans",
+    "meadow",
+    "spring_barley",
+    "spring_peas",
+    "sunflowers",
+    "unknown",
+    "winter_barley",
+    "winter_oat",
+    "winter_rapeseed",
+    "winter_triticale",
+    "winter_wheat"
+  ],
+  "ended": "2026-10-30T17:58:41.824348+00:00"
+}

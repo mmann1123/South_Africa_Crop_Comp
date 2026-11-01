@@ -1,0 +1,39 @@
+{
+  "script": "07_summarise",
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "run_date": "2026-10-31T16:52:54.072879+00:00",
+  "inputs": [
+    "conditions_by_fold.csv",
+    "archive upperbound_*/timematch_* overall json"
+  ],
+  "rows": 27,
+  "columns": [
+    "direction",
+    "fold",
+    "cloud_source",
+    "threshold",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "e_shift",
+    "e_draw_sd",
+    "e_shift_draw_sd",
+    "oa_a",
+    "oa_b",
+    "oa_c",
+    "oa_d",
+    "oa_e",
+    "oa_e_shift",
+    "upper",
+    "effect_b",
+    "effect_d",
+    "oa_effect_b",
+    "oa_effect_d",
+    "share_of_unshifted_gap",
+    "share_of_shifted_gap",
+    "timematch",
+    "share_of_timematch_gap"
+  ]
+}

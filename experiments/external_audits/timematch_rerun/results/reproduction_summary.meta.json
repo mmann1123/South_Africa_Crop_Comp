@@ -1,0 +1,20 @@
+{
+  "script": "03_reproduce",
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "run_date": "2026-10-30T17:58:41.818785+00:00",
+  "inputs": [
+    "reproduction_per_fold.csv"
+  ],
+  "rows": 2,
+  "columns": [
+    "direction",
+    "rerun_macro_f1_mean",
+    "rerun_macro_f1_std",
+    "stored_macro_f1_mean",
+    "paper_table1_macro_f1",
+    "paper_table1_std",
+    "rerun_oa_mean",
+    "stored_oa_mean",
+    "max_abs_fold_diff_macro_f1_pts"
+  ]
+}

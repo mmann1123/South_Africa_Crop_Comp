@@ -1,0 +1,24 @@
+{
+  "script": "07_summarise",
+  "git_commit": "d2300a605515a95f972d914b7e1d7b70e5410a3b",
+  "run_date": "2026-10-31T16:52:54.046905+00:00",
+  "inputs": [
+    "conditions_DK1_to_FR1.csv",
+    "conditions_FR1_to_DK1.csv"
+  ],
+  "rows": 204,
+  "columns": [
+    "direction",
+    "fold",
+    "cloud_source",
+    "threshold",
+    "condition",
+    "n_draws",
+    "macro_f1",
+    "accuracy",
+    "macro_f1_draw_sd",
+    "accuracy_draw_sd",
+    "mean_dates_kept",
+    "mean_removed"
+  ]
+}
