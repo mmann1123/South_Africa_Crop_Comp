@@ -1,0 +1,4 @@
+split,samples,steps,centre_zero_share,patch_zero_share,samples_with_any_zero_step,mean_zero_steps_per_sample,max_zero_steps
+train,3316,19,0.0998,0.0951,0.8806,1.8966,7
+val,1919,19,0.0967,0.0924,0.8729,1.8369,7
+test,2168,19,0.0993,0.0948,0.8759,1.8861,7

@@ -35,6 +35,7 @@ maleki/     01 Ramsar site geometry and inventory, 02 EE per-date validity sampl
 hao/        01 digitised in-season OA figures, 02 CDL and cropland points, 03 EE 15-day window validity (HLS and L8+L1C streams), 04 summarise, 05 relate to OA gaps, 06 figure
 hexi/       01 CDL and Hexi cropland points, 02 EE weekly validity under four cloud rules, 03 QA60 population per image, 04 summarise, 05 figure
 masolele/    01 Hansen 2001-05 loss pixels at tropical confluence units, 02 EE valid Landsat 5/7 obs per six-month window, 03 summarise and figure
+mask_pstin/  count zero-filled 20-day composites in the authors' released region A 2021 arrays (needs a clone of ZhiwenCai-RS/Mask-PSTIN; not in run_all.sh)
 tests/       pytest unit tests for every pure function
 env/         conda env exports and pip freeze of the `ee` environment used
 run_all.sh   everything in order, then clean-up
