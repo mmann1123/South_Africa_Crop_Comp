@@ -1,0 +1,29 @@
+{
+  "script": "01_points",
+  "args": {
+    "force": true
+  },
+  "seed": 42,
+  "git_commit": "a7a6d0c3aa1a89a10e4fdcd275c5ad0abe3bd763",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "units_Latin America": 3995,
+    "points_Latin America": 2972,
+    "units_Africa": 3290,
+    "points_Africa": 2838,
+    "units_Asia": 4512,
+    "points_Asia": 1520
+  },
+  "started": "2026-11-02T15:07:14.711996+00:00",
+  "hansen": "UMD/hansen/global_forest_change_2023_v1_11",
+  "rule": "lossyear (1, 5), |lat| <= 23, unit half-width 0.045 deg, 3 pixels per unit, seed 42",
+  "ended": "2026-11-02T15:10:01.741171+00:00"
+}

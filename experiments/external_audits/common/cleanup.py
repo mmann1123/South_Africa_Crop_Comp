@@ -66,6 +66,20 @@ EXPECTED: dict[str, list[tuple[str, int]]] = {
         ("gap_vs_oa.csv", 100),
         ("hs_residual_cloud.csv", 60),
     ],
+    "timematch_rerun": [
+        ("reproduction_summary.csv", 2),
+        ("conditions_DK1_to_FR1.csv", 300),
+        ("conditions_FR1_to_DK1.csv", 370),
+        ("conditions_summary.csv", 60),
+        ("cloud_effect_summary.csv", 9),
+        ("emulator_validation.csv", 3),
+    ],
+    "masolele": [
+        ("points.csv", 3000),
+        ("window_counts.csv.gz", 3000),
+        ("continent_summary.csv", 3),
+        ("window_summary.csv", 36),
+    ],
     "hexi": [
         ("points.csv", 2900),
         ("weekly_gap_summary.csv", 96),

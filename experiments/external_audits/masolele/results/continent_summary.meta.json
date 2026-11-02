@@ -1,0 +1,20 @@
+{
+  "script": "03_summarise",
+  "git_commit": "a7a6d0c3aa1a89a10e4fdcd275c5ad0abe3bd763",
+  "run_date": "2026-11-02T15:15:54.027125+00:00",
+  "inputs": [
+    "window_counts.csv.gz"
+  ],
+  "rows": 3,
+  "columns": [
+    "continent",
+    "n_points",
+    "empty_share",
+    "points_any_empty",
+    "mean_empty_windows",
+    "mean_obs_per_window",
+    "median_obs_per_window",
+    "share_windows_le1_obs",
+    "empty_share_ratio_max_over_min"
+  ]
+}

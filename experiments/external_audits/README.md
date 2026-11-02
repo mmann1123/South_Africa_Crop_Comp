@@ -34,6 +34,7 @@ verhulst/   01 digitised Figure 7 OA, 02 forest points, 03 EE valid dekads, 04 g
 maleki/     01 Ramsar site geometry and inventory, 02 EE per-date validity sample, 03 6-day grid interpolation metrics, 04 summarise
 hao/        01 digitised in-season OA figures, 02 CDL and cropland points, 03 EE 15-day window validity (HLS and L8+L1C streams), 04 summarise, 05 relate to OA gaps, 06 figure
 hexi/       01 CDL and Hexi cropland points, 02 EE weekly validity under four cloud rules, 03 QA60 population per image, 04 summarise, 05 figure
+masolele/    01 Hansen 2001-05 loss pixels at tropical confluence units, 02 EE valid Landsat 5/7 obs per six-month window, 03 summarise and figure
 tests/       pytest unit tests for every pure function
 env/         conda env exports and pip freeze of the `ee` environment used
 run_all.sh   everything in order, then clean-up
