@@ -39,6 +39,12 @@ MODEL_PATHS = [os.path.join(MODEL_DIR, f"conv3d_time_patch_level_seed{s}.h5") fo
 # Output
 OUTPUT_CSV = os.path.join(SCRIPT_DIR, "predictions_3d_cnn.csv")
 
+# Fill for holdout values missing in a column that training always observed (September for about
+# 40% of holdout patch pixels). None reproduces the published behaviour (0). A pandas Series indexed
+# by column name (e.g. training-patch column medians) fills each column with its own value; see
+# experiments/holdout_fill_check/run_deep_field.py.
+FILL = None
+
 # Model parameters (must match training)
 BAND_PREFIXES = ["SA_B11", "SA_B12", "SA_B2", "SA_B6", "SA_EVI", "SA_hue"]
 TARGET_SIZE = (128, 128)
@@ -152,8 +158,15 @@ def main():
     # Fill any remaining NaN in test data with 0 (training had no NaN in surviving cols)
     nan_count = df[clean_cols].isna().sum().sum()
     if nan_count > 0:
-        print(f"Filling {nan_count} NaN values in test data with 0")
-        df[clean_cols] = df[clean_cols].fillna(0)
+        if FILL is None:
+            print(f"Filling {nan_count} NaN values in test data with 0 (published rule)")
+            df[clean_cols] = df[clean_cols].fillna(0)
+        else:
+            missing_fill = [c for c in clean_cols if c not in FILL.index]
+            if missing_fill:
+                raise ValueError(f"FILL has no value for columns: {missing_fill}")
+            print(f"Filling {nan_count} NaN values in test data with the supplied per-column values")
+            df[clean_cols] = df[clean_cols].fillna(FILL[clean_cols])
 
     # Get patch IDs
     patch_ids = df["patch_id"].unique()

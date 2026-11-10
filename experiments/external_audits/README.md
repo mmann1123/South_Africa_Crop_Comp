@@ -9,9 +9,17 @@ recipe it states it followed), Kerner et al. 2020, Sen4AgriNet (Sykas et al.
 2022) and Stoian et al. 2019. Each audit measures, from the paper's own data
 or deposited recipe, how cloud contamination, clear-observation counts or
 zero-fill rates differ between the paper's source and target domains. No
-model is re-run, except in `timematch_rerun/`, which evaluates TimeMatch's
-released models with cloud-flagged target dates removed (GPU and the full
-74 GB archive; not part of `run_all.sh`). Design: `docs/superpowers/specs/2026-10-28-external-missingness-audits-design.md`;
+model is re-run, except in four causal re-runs that need the GPU and full
+archives and are not part of `run_all.sh`: `timematch_rerun/` evaluates
+TimeMatch's released models with cloud-flagged target dates removed,
+`denethor_rerun/` retrains PseLTae on Planet Fusion with and without the PF-QA
+synthetic-day channel and rebuilds the Sentinel-2 random forest under
+density-matched thinning, and `sen4agrinet_rerun/` evaluates the released PAD
+checkpoints under month deletion, source/target gap-pattern imposition and
+cloud masking, and `timesen2crop_rerun/` retrains LSTM and TempCNN under zero, median,
+linear and masked fills, with pass marks fixed in advance. Re-run designs:
+`docs/superpowers/specs/2026-11-04-denethor-sen4agrinet-reruns-design.md`,
+`docs/superpowers/specs/2026-11-05-timesen2crop-rerun-design.md`. Design: `docs/superpowers/specs/2026-10-28-external-missingness-audits-design.md`;
 plan: `docs/superpowers/plans/2026-10-28-external-missingness-audits.md`.
 
 Each paper folder has a README that ends with a Finding paragraph and a
@@ -22,6 +30,9 @@ Limitations paragraph. Those are the deliverables.
 ```text
 common/      paths, SHA-256 manifest downloads, run logs, EE init, zonal stats, plot theme, cleanup
 timematch_rerun/ 01 parcel tables, 02 EE per-parcel Cloud Score+, 03 reproduce Table 1, 04 band features, 05 DK1 cloud emulator, 06 conditions (one GPU process at a time), 07 summarise, 08 figure
+denethor_rerun/ 01 Planet Fusion pixel extracts, 02 PseLTae train/test A0-A2 (GPU), 03 Sentinel-2 field series, 04 random-forest conditions, 05 summarise and figure
+sen4agrinet_rerun/ 00 PAD checkpoints, 01 test NetCDFs (79 GB), 02 conditions on the released models (GPU), 03 summarise, 04 figure; stubs/ for pytorch_lightning etc.
+timesen2crop_rerun/ 01 arrays from the Zenodo zip, 02 composites and empty-month table, 03 tune, 04 train and test fills (GPU), 05 test-time interventions, 06 verdict, 07 exploratory, 08 figure
 timematch/   01 range-fetch footprints from the Zenodo zip, 02 Earth Engine cloud fractions per shipped date, 03 summarise
 denethor/    01 fetch CLP/SCL/IS_DATA + labels, 02 per-field clear counts (2x2 tile-years), 03 Planet Fusion QA synthetic fraction, 04 summarise
 daccn/       you2021_recipe (EE port) + reference (numpy model), 01 regions, 02 counter samples per random 5 km cell, 03 summarise, snow check

@@ -1,0 +1,20 @@
+{
+  "script": "03_summarise",
+  "args": {},
+  "seed": 42,
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "python": "3.12.12",
+  "packages": {
+    "ee": "not installed",
+    "geopandas": "1.0.1",
+    "rasterio": "1.4.4",
+    "numpy": "2.4.2",
+    "pandas": "3.1.1",
+    "matplotlib": "3.9.4"
+  },
+  "counts": {
+    "rows": 166374
+  },
+  "started": "2026-11-05T02:18:28.738895+00:00",
+  "ended": "2026-11-05T02:18:53.929660+00:00"
+}

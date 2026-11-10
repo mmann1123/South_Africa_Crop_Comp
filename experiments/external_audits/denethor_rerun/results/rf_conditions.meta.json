@@ -1,0 +1,19 @@
+{
+  "script": "04_rf",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-04T22:47:06.183515+00:00",
+  "inputs": [
+    "s2_<tile>_<year>.npz from 03_s2_field_series.py"
+  ],
+  "rows": 84,
+  "columns": [
+    "rule",
+    "condition",
+    "test",
+    "draw",
+    "accuracy",
+    "f1_macro",
+    "kappa",
+    "median_clear"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "script": "02_train_eval",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-04T20:19:23.980339+00:00",
+  "inputs": [
+    "/mnt/bigdrive/external_audits/denethor_rerun/pf_18E-242N_2018.npz",
+    "/mnt/bigdrive/external_audits/denethor_rerun/pf_17E-243N_2019.npz"
+  ],
+  "rows": 30,
+  "columns": [
+    "cond",
+    "seed",
+    "best_epoch",
+    "minutes",
+    "val_accuracy",
+    "val_f1_macro",
+    "val_kappa",
+    "val_f1_weighted",
+    "test_accuracy",
+    "test_f1_macro",
+    "test_kappa",
+    "test_f1_weighted",
+    "test10_accuracy",
+    "test10_f1_macro",
+    "test10_kappa",
+    "test10_f1_weighted"
+  ]
+}

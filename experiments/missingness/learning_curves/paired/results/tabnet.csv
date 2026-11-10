@@ -1,0 +1,6 @@
+model,fraction,subsample_seed,oos_f1_macro,oos_kappa,n_seeds,mean_epoch_s,epochs_run
+tabnet_pixel,0.05,42,0.4175,0.3628,1,4.27,28
+tabnet_pixel,0.05,101,0.3751,0.2259,1,4.03,33
+tabnet_pixel,0.05,202,0.4220,0.3269,1,4.04,44
+tabnet_pixel,0.05,303,0.4638,0.3567,1,4.02,18
+tabnet_pixel,0.05,404,0.4293,0.3620,1,4.41,15

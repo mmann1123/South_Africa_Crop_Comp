@@ -1,0 +1,21 @@
+{
+  "script": "03_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T02:18:53.910882+00:00",
+  "inputs": [
+    "results/raw/*.parquet"
+  ],
+  "rows": 216,
+  "columns": [
+    "scenario",
+    "arch",
+    "month",
+    "patches_with_month",
+    "metric",
+    "f1_published",
+    "f1_deleted",
+    "cost",
+    "cost_ci_low",
+    "cost_ci_high"
+  ]
+}

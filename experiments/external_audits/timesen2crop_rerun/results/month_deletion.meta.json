@@ -1,0 +1,22 @@
+{
+  "script": "05_testtime",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T19:00:50.966122+00:00",
+  "inputs": [
+    "runs/*.pt",
+    "composites/*.npz"
+  ],
+  "rows": 420,
+  "columns": [
+    "model",
+    "train_fill",
+    "seed",
+    "tile",
+    "month",
+    "pixels",
+    "f1m_asis",
+    "f1m_blanked",
+    "oa_asis",
+    "oa_blanked"
+  ]
+}

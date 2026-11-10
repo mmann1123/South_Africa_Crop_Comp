@@ -1,0 +1,31 @@
+{
+  "script": "02_train_eval",
+  "args": {
+    "conds": [
+      "A0",
+      "A1",
+      "A2"
+    ],
+    "seeds": [
+      0
+    ],
+    "epochs": 100,
+    "batch_size": 64
+  },
+  "seed": 0,
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "python": "3.12.12",
+  "packages": {
+    "ee": "not installed",
+    "geopandas": "1.0.1",
+    "rasterio": "1.4.4",
+    "numpy": "2.4.2",
+    "pandas": "3.1.1",
+    "matplotlib": "3.9.4"
+  },
+  "counts": {
+    "runs_this_call": 3
+  },
+  "started": "2026-11-04T20:19:23.954375+00:00",
+  "ended": "2026-11-04T20:19:23.980698+00:00"
+}

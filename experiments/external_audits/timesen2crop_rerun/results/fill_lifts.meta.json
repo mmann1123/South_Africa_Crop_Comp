@@ -1,0 +1,26 @@
+{
+  "script": "06_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T19:01:47.318830+00:00",
+  "inputs": [
+    "results/train_eval.csv"
+  ],
+  "rows": 10,
+  "columns": [
+    "model",
+    "train_fill",
+    "test_fill",
+    "lift_33TWN",
+    "lo_33TWN",
+    "hi_33TWN",
+    "f1m_33TWN",
+    "lift_33UVP",
+    "lo_33UVP",
+    "hi_33UVP",
+    "f1m_33UVP",
+    "lift_2019_33UVP",
+    "lo_2019_33UVP",
+    "hi_2019_33UVP",
+    "f1m_2019_33UVP"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "script": "06_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T19:01:47.310575+00:00",
+  "inputs": [
+    "results/train_eval.csv"
+  ],
+  "rows": 6,
+  "columns": [
+    "model",
+    "metric",
+    "gap_2018_minus_2019",
+    "ci_low",
+    "ci_high"
+  ]
+}

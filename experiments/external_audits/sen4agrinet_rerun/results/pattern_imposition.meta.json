@@ -1,0 +1,33 @@
+{
+  "script": "03_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T02:18:53.915066+00:00",
+  "inputs": [
+    "results/raw/*.parquet",
+    "../sen4agrinet/results/patch_time_stacks.csv.gz"
+  ],
+  "rows": 27,
+  "columns": [
+    "scenario",
+    "arch",
+    "metric",
+    "subset",
+    "patches",
+    "f1_published",
+    "f1_source_pattern",
+    "f1_target_pattern",
+    "f1_random",
+    "source_minus_target",
+    "st_ci_low",
+    "st_ci_high",
+    "source_minus_random",
+    "sr_ci_low",
+    "sr_ci_high",
+    "target_minus_random",
+    "tr_ci_low",
+    "tr_ci_high",
+    "months_deleted_source",
+    "months_deleted_target",
+    "months_deleted_random"
+  ]
+}

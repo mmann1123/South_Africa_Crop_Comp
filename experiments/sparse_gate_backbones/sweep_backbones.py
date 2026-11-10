@@ -30,7 +30,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import train as tr  # noqa: E402  (recipes, gate, backbones, helpers)
-from subsample import subsample_train_fids  # noqa: E402  (experiments/field_reduction, via train.py's sys.path)
+from subsample import get_fid_split_dl, paired_fid_file, subsample_train_fids  # noqa: E402  (experiments/field_reduction, via train.py's sys.path)
 
 sys.path.insert(0, os.path.join(tr.REPO, "out_of_sample"))
 from compare_predictions import load_ground_truth  # noqa: E402
@@ -113,6 +113,8 @@ def main():
     fids = df["fid"].unique()
     trf, _ = train_test_split(fids, test_size=0.2, random_state=42)
     trf, vaf = train_test_split(trf, test_size=r["val_size"], random_state=42)
+    if paired_fid_file() is not None:  # PAIRED_FID_FILE set: shared split (val 0.2 for every model)
+        trf, vaf, _ = get_fid_split_dl(df)
     va = df[df["fid"].isin(vaf)]
     hold = pd.read_parquet(tr.HOLDOUT["trainmed"])
     for c in cols:

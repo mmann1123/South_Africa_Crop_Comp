@@ -1,0 +1,23 @@
+{
+  "script": "07_exploratory",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T19:03:38.197243+00:00",
+  "inputs": [
+    "runs/*_M_seed*.pt",
+    "composites/*.npz"
+  ],
+  "rows": 570,
+  "columns": [
+    "tile",
+    "model",
+    "seed",
+    "month",
+    "draw",
+    "f1m_base",
+    "oa_base",
+    "f1m_median",
+    "f1m_zero",
+    "oa_median",
+    "oa_zero"
+  ]
+}

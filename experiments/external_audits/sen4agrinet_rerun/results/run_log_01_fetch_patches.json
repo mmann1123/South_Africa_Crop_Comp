@@ -1,0 +1,31 @@
+{
+  "script": "01_fetch_patches",
+  "args": {
+    "scenarios": [
+      1,
+      2,
+      3
+    ],
+    "split": "test",
+    "workers": 8
+  },
+  "seed": 42,
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {
+    "files": 2820,
+    "fetched_now": 2820
+  },
+  "started": "2026-11-04T16:24:24.007141+00:00",
+  "gigabytes": 78.64,
+  "hf_revision": "4eb44157012b9ec251767721d6bae55cf0c564e2",
+  "ended": "2026-11-04T17:43:50.737980+00:00"
+}

@@ -1,0 +1,21 @@
+{
+  "script": "06_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T19:01:47.237227+00:00",
+  "inputs": [
+    "results/train_eval.csv"
+  ],
+  "rows": 42,
+  "columns": [
+    "model",
+    "train_fill",
+    "test_fill",
+    "tile",
+    "oa_mean",
+    "oa_std",
+    "f1m_mean",
+    "f1m_std",
+    "oa_reweighted_mean",
+    "oa_reweighted_std"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "script": "01_build_arrays",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T18:12:33.727438+00:00",
+  "inputs": [
+    "TimeSen2Crop.zip md5 b5b7aad3fef192e78252e11c9a0e5cb8"
+  ],
+  "rows": 16,
+  "columns": [
+    "tile",
+    "samples",
+    "wrong_shape",
+    "acquisitions",
+    "first",
+    "last"
+  ]
+}

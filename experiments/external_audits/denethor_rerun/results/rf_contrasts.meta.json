@@ -1,0 +1,19 @@
+{
+  "script": "05_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-04T22:47:30.563659+00:00",
+  "inputs": [
+    "results/rf_conditions.csv"
+  ],
+  "rows": 8,
+  "columns": [
+    "test",
+    "contrast",
+    "metric",
+    "mean_a",
+    "mean_b",
+    "diff",
+    "welch_p",
+    "draws"
+  ]
+}

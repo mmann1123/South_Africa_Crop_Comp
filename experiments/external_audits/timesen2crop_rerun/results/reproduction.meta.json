@@ -1,0 +1,17 @@
+{
+  "script": "06_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T19:01:47.306751+00:00",
+  "inputs": [
+    "results/train_eval.csv"
+  ],
+  "rows": 2,
+  "columns": [
+    "model",
+    "oa_33UVP_2018",
+    "sd",
+    "paper_oa",
+    "diff",
+    "within_2_points"
+  ]
+}

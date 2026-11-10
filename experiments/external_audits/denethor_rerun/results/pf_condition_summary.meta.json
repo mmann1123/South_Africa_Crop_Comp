@@ -1,0 +1,29 @@
+{
+  "script": "05_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-04T22:47:30.216675+00:00",
+  "inputs": [
+    "results/train_eval_summary.csv"
+  ],
+  "rows": 3,
+  "columns": [
+    "cond",
+    "val_accuracy_mean",
+    "val_accuracy_std",
+    "val_accuracy_count",
+    "test_accuracy_mean",
+    "test_accuracy_std",
+    "test_accuracy_count",
+    "test10_accuracy_mean",
+    "test10_accuracy_std",
+    "test10_accuracy_count",
+    "test_f1_macro_mean",
+    "test_f1_macro_std",
+    "test_f1_macro_count",
+    "test_kappa_mean",
+    "test_kappa_std",
+    "test_kappa_count",
+    "paper_test_accuracy",
+    "paper_val_accuracy"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "script": "02_run_conditions_a",
+  "args": {
+    "scenarios": [
+      2,
+      3,
+      1
+    ],
+    "full": false,
+    "workers": 16,
+    "limit": null
+  },
+  "seed": 42,
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "python": "3.12.12",
+  "packages": {
+    "ee": "not installed",
+    "geopandas": "1.0.1",
+    "rasterio": "1.4.4",
+    "numpy": "2.4.2",
+    "pandas": "2.2.3",
+    "matplotlib": "3.9.4"
+  },
+  "counts": {},
+  "started": "2026-11-04T17:44:29.414695+00:00",
+  "scenario_2": {
+    "patches": 1014,
+    "full": false
+  },
+  "scenario_3": {
+    "patches": 1003,
+    "full": false
+  },
+  "scenario_1": {
+    "patches": 1000,
+    "full": false
+  },
+  "ended": "2026-11-04T18:03:25.284365+00:00"
+}

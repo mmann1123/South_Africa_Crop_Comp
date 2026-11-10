@@ -1,0 +1,20 @@
+{
+  "script": "03_tune",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T18:21:16.200174+00:00",
+  "inputs": [
+    "composites/*.npz"
+  ],
+  "rows": 20,
+  "columns": [
+    "model",
+    "conf",
+    "lr",
+    "wd",
+    "hidden",
+    "layers",
+    "val_oa",
+    "minutes",
+    "kernel"
+  ]
+}

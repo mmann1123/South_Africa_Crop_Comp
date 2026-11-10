@@ -1,0 +1,14 @@
+{
+  "script": "03_s2_field_series",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-04T19:19:20.946882+00:00",
+  "inputs": [
+    "https://data.source.coop/esa/fusion-competition/sentinel-2/s2-utm-33N-18E-242N-2018/data/BANDS.npy"
+  ],
+  "rows": 2533,
+  "columns": [
+    "fid",
+    "crop_id",
+    "n_pixels"
+  ]
+}

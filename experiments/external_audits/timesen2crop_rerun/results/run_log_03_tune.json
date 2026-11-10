@@ -1,0 +1,23 @@
+{
+  "script": "03_tune",
+  "args": {
+    "n_conf": 10,
+    "epochs": 10
+  },
+  "seed": 42,
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "python": "3.12.12",
+  "packages": {
+    "ee": "not installed",
+    "geopandas": "1.0.1",
+    "rasterio": "1.4.4",
+    "numpy": "2.4.2",
+    "pandas": "3.1.1",
+    "matplotlib": "3.9.4"
+  },
+  "counts": {
+    "configs": 20
+  },
+  "started": "2026-11-05T18:14:53.256505+00:00",
+  "ended": "2026-11-05T18:21:16.202197+00:00"
+}

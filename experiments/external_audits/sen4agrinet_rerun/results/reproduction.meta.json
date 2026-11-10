@@ -1,0 +1,19 @@
+{
+  "script": "03_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T02:18:29.217069+00:00",
+  "inputs": [
+    "results/raw/*.parquet"
+  ],
+  "rows": 9,
+  "columns": [
+    "scenario",
+    "arch",
+    "patches",
+    "readme_f1w",
+    "f1w_authors",
+    "f1w_corrected",
+    "f1m_corrected",
+    "diff_authors_minus_readme"
+  ]
+}

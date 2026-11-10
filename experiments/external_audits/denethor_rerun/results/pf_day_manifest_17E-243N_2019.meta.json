@@ -1,0 +1,14 @@
+{
+  "script": "01_extract_pf",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-04T18:53:48.162959+00:00",
+  "inputs": [
+    "https://data.source.coop/esa/fusion-competition/planet/UTM-24000/33N/<tile>/PF-{SR,QA}/<date>.tif"
+  ],
+  "rows": 365,
+  "columns": [
+    "date",
+    "sha_sr",
+    "sha_qa"
+  ]
+}

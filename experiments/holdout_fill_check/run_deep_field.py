@@ -1,4 +1,4 @@
-"""Re-run holdout inference for the raw-input deep models under two holdout files.
+"""Re-run holdout inference for the raw-input deep models and the patch CNNs under two fills.
 
   orig      data/merged_dl_test.parquet as published (missing September filled by each
             pipeline: 0 for the sequence models, holdout medians for pixel TabNet)
@@ -14,6 +14,8 @@ Writes only to experiments/holdout_fill_check/predictions/. Run in the deep_fiel
 import argparse
 import os
 import sys
+
+import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
@@ -38,6 +40,27 @@ OOS = {"ltae": "inference_ltae", "ltae_field": "inference_ltae_field",
 PO = {"ltae_s": ("predict_ltae_sparse_pixel", os.path.join(FR_MODELS, "ltae_sparse_pixel", "frac_1.00")),
       "ltae_s_field": ("predict_ltae_sparse_field", os.path.join(FR_MODELS, "ltae_sparse_field", "frac_1.00")),
       "cnn_bilstm_field": ("predict_cnn_bilstm_field", MODEL_DIR)}
+# key -> inference module for the patch CNNs (module reads TEST_PATCH_DATA, fills NaN with FILL,
+# writes OUTPUT_CSV). 'orig' keeps FILL = None (0, as published); 'trainmed' fills each column with
+# its median over the training patch pixels (patch_level_data.parquet), the patch analogue of the
+# training-tile medians used for the pixel models.
+PATCH = {"cnn3d": "inference_3d_cnn", "mc2d": "inference_multi_channel_cnn"}
+PATCH_MEDIANS = os.path.join(HERE, "data", "train_patch_medians.csv")
+
+
+def patch_medians():
+    """Per-column medians of the training patch pixels, cached as CSV (index = column name)."""
+    if os.path.exists(PATCH_MEDIANS):
+        return pd.read_csv(PATCH_MEDIANS, index_col=0).iloc[:, 0]
+    from config import PATCH_DATA_PATH
+    import pyarrow.parquet as pq
+    ignore = {"patch_id", "field_id", "crop_name", "row", "col"}
+    cols = [c for c in pq.ParquetFile(PATCH_DATA_PATH).schema.names if c not in ignore]
+    med = pd.read_parquet(PATCH_DATA_PATH, columns=cols).median(axis=0, skipna=True)
+    med = med.dropna()  # May columns are all-NaN in training and are dropped by the inference scripts
+    os.makedirs(os.path.dirname(PATCH_MEDIANS), exist_ok=True)
+    med.rename("median").to_csv(PATCH_MEDIANS)
+    return med
 
 
 def tabnet_shim():
@@ -97,6 +120,12 @@ def run(key, variant):
         mod.TEST_PARQUET = FILES[variant]
         mod.OUTPUT_CSV = out
         mod.main()
+    elif key in PATCH:
+        import importlib
+        mod = importlib.import_module(PATCH[key])
+        mod.FILL = None if variant == "orig" else patch_medians()
+        mod.OUTPUT_CSV = out
+        mod.main()
     else:
         import predict_oos as po
         po.MERGED_DL_TEST_PATH = FILES[variant]
@@ -107,7 +136,7 @@ def run(key, variant):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--models", nargs="+", default=list(OOS) + list(PO) + ["tabnet_field"])
+    ap.add_argument("--models", nargs="+", default=list(OOS) + list(PO) + ["tabnet_field"] + list(PATCH))
     ap.add_argument("--variants", nargs="+", default=list(FILES))
     args = ap.parse_args()
     os.makedirs(PRED, exist_ok=True)

@@ -6,8 +6,8 @@ trainmed; (3) paired field bootstrap (B=10,000, seed 42) and exact McNemar of tr
 vs. orig (same checkpoints, only the holdout fill differs). For the xr_fresh models 'orig' uses
 features rebuilt from the raw series (rebuild_xrfresh.py), which differ from the published
 feature file on 85 fields, so 'orig' need not equal the published predictions; the
-trainmed-vs-orig comparison is still like for like. The patch CNNs were not re-run and
-enter the ranking with their published predictions. Run in the deep_field env:
+trainmed-vs-orig comparison is still like for like. The patch CNNs are re-run from their
+patch pipeline with the NaN fill switched from 0 to training-patch column medians. Run in the deep_field env:
   python experiments/holdout_fill_check/score.py
 """
 import os
@@ -50,11 +50,11 @@ MODELS = {
     "TimesNet, field": ("predictions_timesnet_field.csv", "timesnet_field"),
     "CNN-BiLSTM, pixel": ("predictions_cnn_bilstm.csv", "cnn_bilstm"),
     "CNN-BiLSTM, field": ("predictions_cnn_bilstm_field.csv", "cnn_bilstm_field"),
-    "3D CNN, patch": ("predictions_3d_cnn.csv", None),
+    "3D CNN, patch": ("predictions_3d_cnn.csv", "cnn3d"),
     "MiniRocket, pixel": ("predictions_minirocket.csv", "minirocket"),
     "SMOTE Stacked, field": ("predictions_smote_stacked.csv", "smote_stacked"),
     "MiniRocket, field": ("predictions_minirocket_field.csv", "minirocket_field"),
-    "Multi-Channel 2D CNN, patch": ("predictions_multi_channel_cnn.csv", None),
+    "Multi-Channel 2D CNN, patch": ("predictions_multi_channel_cnn.csv", "mc2d"),
     "TabNet (raw, field-avg), field": ("predictions_tabnet_temporal_field.csv", "tabnet_temporal_field"),
     "TabNet (xr_fresh), field": ("predictions_tabnet_field.csv", "tabnet_field"),
 }

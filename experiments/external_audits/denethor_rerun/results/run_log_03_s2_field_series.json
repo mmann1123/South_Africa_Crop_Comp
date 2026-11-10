@@ -1,0 +1,44 @@
+{
+  "script": "03_s2_field_series",
+  "args": {
+    "keep_bands": false
+  },
+  "seed": 42,
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "python": "3.13.9",
+  "packages": {
+    "ee": "1.7.50",
+    "geopandas": "1.1.2",
+    "rasterio": "1.4.3",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.7"
+  },
+  "counts": {},
+  "started": "2026-11-04T17:57:52.641007+00:00",
+  "18E-242N_2018": {
+    "fields": 2533,
+    "fields_without_pixels": 1,
+    "acquisitions": 144,
+    "minutes": 81.5
+  },
+  "17E-243N_2019": {
+    "fields": 2062,
+    "fields_without_pixels": 2,
+    "acquisitions": 144,
+    "minutes": 165.2
+  },
+  "17E-243N_2018": {
+    "fields": 2062,
+    "fields_without_pixels": 2,
+    "acquisitions": 144,
+    "minutes": 38.9
+  },
+  "18E-242N_2019": {
+    "fields": 2533,
+    "fields_without_pixels": 1,
+    "acquisitions": 144,
+    "minutes": 1.5
+  },
+  "ended": "2026-11-04T22:44:53.082627+00:00"
+}

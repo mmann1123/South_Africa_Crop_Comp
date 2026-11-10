@@ -1,0 +1,25 @@
+{
+  "script": "06_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T19:01:47.322609+00:00",
+  "inputs": [
+    "results/fill_lifts.csv",
+    "results/assay_check.csv"
+  ],
+  "rows": 2,
+  "columns": [
+    "model",
+    "best_on_33TWN",
+    "lift_2019",
+    "lo_2019",
+    "hi_2019",
+    "lift_2018",
+    "lo_2018",
+    "hi_2018",
+    "supported_model",
+    "weak_model",
+    "passes_gate",
+    "overall",
+    "assay_passes_both_models"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "script": "03_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T02:18:53.917827+00:00",
+  "inputs": [
+    "results/month_deletion.csv",
+    "../sen4agrinet/results/month_missing_by_split.csv"
+  ],
+  "rows": 12,
+  "columns": [
+    "scenario",
+    "arch",
+    "metric",
+    "predicted_loss_from_fill_difference",
+    "bound_gap",
+    "share_of_gap",
+    "empty_diff_m1",
+    "empty_diff_m2",
+    "empty_diff_m3",
+    "empty_diff_m4",
+    "empty_diff_m5",
+    "empty_diff_m6",
+    "empty_diff_m7",
+    "empty_diff_m8",
+    "empty_diff_m9",
+    "empty_diff_m10",
+    "empty_diff_m11",
+    "empty_diff_m12"
+  ]
+}

@@ -135,8 +135,11 @@ found in our own pipeline. These three answer it.
 - [x] **Learning curves, 100% points** (2026-10-28; `learning_curves/single_seed_100.py`). Each
   seed scored singly; the seed average reproduces every saved ensemble. Single models sit 0.01 to
   0.04 below their ensembles (largest for CNN-BiLSTM and TabNet); ensembles shown as open markers.
-- [ ] **Learning curves, paired comparisons at 5 to 15%** (about 8 to 10 GPU hours; decide once
-  the low-data result's prominence is settled). Rerun 5/10/15% with one shared train/validation
+- [ ] **Learning curves, paired comparisons at 5 to 15%** (decided 2026-11-09: the low-data null claim
+  is kept, so the paired sweep runs; `learning_curves/paired/`: `make_splits.py` wrote `splits.json`
+  (shared 64/16/20 split and 10 stratified draws per fraction), every sweep script reads it through
+  `PAIRED_FID_FILE` (`field_reduction/subsample.py`, unit test `tests/test_paired_splits.py`),
+  `run.sh` started 2026-11-09, `summarize.py` does the paired tests). Rerun 5/10/15% with one shared train/validation
   split and identical field draws for every model, so draws and fields pair across models. Needed
   if the paper claims logistic regression matches the deep models at low data (a null claim from
   the current unpaired tests is weak).
@@ -168,8 +171,12 @@ found in our own pipeline. These three answer it.
 
 ## Loose ends from the audit
 
-- [ ] Re-run the patch CNNs (3D, multi-channel 2D) with a consistent fill; their patches come
-  from a separate pipeline (`out_of_sample/create_test_patches.py`) and still use zero fill.
+- [x] Re-run the patch CNNs (3D, multi-channel 2D) with a consistent fill (decided 2026-11-09: correct
+  them). `out_of_sample/inference_{3d_cnn,multi_channel_cnn}.py` gained a per-column `FILL` hook
+  (None = published 0); `holdout_fill_check/run_deep_field.py` keys `cnn3d`, `mc2d` fill with
+  training-patch column medians (`data/train_patch_medians.csv`); `score.py` now scores them.
+  Done 2026-11-09: `orig` reproduces the published predictions (2D on every field, 3D on all but
+  one); median fill lifts the 3D CNN 0.50 → 0.59 and the 2D CNN 0.45 → 0.59, both mid-table.
 - [x] Fix or document the xr_fresh `autocorr_lag_k` bug (three features are copies of
   `absolute_sum_of_changes`; `light_learn/2_SA_xr_fresh_extraction.py`). Documented at the source
   (2026-10-23; the key should be `autocorrelation`); not fixed, to keep the published features
@@ -188,7 +195,7 @@ found in our own pipeline. These three answer it.
 
 ## Writing
 
-- [ ] Choose the target journal.
+- [x] Choose the target journal: Computers and Electronics in Agriculture (confirmed 2026-11-09).
 - [ ] Write the manuscript (`article.tex`) around the missingness-shift finding.
 - [ ] Supplement, figures, data and code availability, generative-AI declaration.
 

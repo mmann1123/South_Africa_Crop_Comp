@@ -1,0 +1,23 @@
+{
+  "script": "07_exploratory",
+  "args": {
+    "share": 0.406,
+    "draws": 3
+  },
+  "seed": 42,
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "python": "3.12.12",
+  "packages": {
+    "ee": "not installed",
+    "geopandas": "1.0.1",
+    "rasterio": "1.4.4",
+    "numpy": "2.4.2",
+    "pandas": "3.1.1",
+    "matplotlib": "3.9.4"
+  },
+  "counts": {
+    "rows": 570
+  },
+  "started": "2026-11-05T19:01:48.555459+00:00",
+  "ended": "2026-11-05T19:03:38.197395+00:00"
+}

@@ -1,0 +1,21 @@
+{
+  "script": "05_testtime",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T19:00:50.975350+00:00",
+  "inputs": [
+    "runs/*.pt",
+    "composites/*.npz"
+  ],
+  "rows": 130,
+  "columns": [
+    "model",
+    "train_fill",
+    "seed",
+    "tile",
+    "empty_months",
+    "pixels",
+    "oa",
+    "f1m",
+    "oa_reweighted"
+  ]
+}

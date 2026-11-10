@@ -1,0 +1,18 @@
+{
+  "script": "05_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-04T22:47:30.332330+00:00",
+  "inputs": [
+    "results/train_eval_summary.csv"
+  ],
+  "rows": 9,
+  "columns": [
+    "metric",
+    "contrast",
+    "seeds",
+    "mean",
+    "ci_low",
+    "ci_high",
+    "wilcoxon_p"
+  ]
+}

@@ -1,0 +1,42 @@
+[sweep] seed_sweep_tabnet variant=trainmed args=['--fractions', '0.05', '0.10', '0.15', '--subsample-seeds', '42', '101', '202', '303', '404', '505', '606', '707', '808', '909', '--out', '/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/missingness/learning_curves/paired/results/tabnet.csv']
+TabNet sweep: batch=4096, vbs=256, train_seed=42
+Loading train pixels...
+[paired] splits and draws from /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/missingness/learning_curves/paired/splits.json: 2653 train, 664 val, 830 test FIDs; fractions ['0.05', '0.10', '0.15']
+Loading holdout pixels...
+
+=== tabnet_pixel frac=0.05 sseed=42 | train 249630 px ===
+
+Early stopping occurred at epoch 27 with best_epoch = 17 and best_val_0_f1_macro = 0.49258
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/callbacks/container.py:113: UserWarning: Best weights from best epoch are automatically used!
+  callback.on_train_end(logs)
+    -> OOS macro-F1=0.4175, kappa=0.3628  (28 epochs, 2.0 min)
+
+=== tabnet_pixel frac=0.05 sseed=101 | train 227769 px ===
+
+Early stopping occurred at epoch 32 with best_epoch = 22 and best_val_0_f1_macro = 0.50693
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/callbacks/container.py:113: UserWarning: Best weights from best epoch are automatically used!
+  callback.on_train_end(logs)
+    -> OOS macro-F1=0.3751, kappa=0.2259  (33 epochs, 2.2 min)
+
+=== tabnet_pixel frac=0.05 sseed=202 | train 235765 px ===
+
+Early stopping occurred at epoch 43 with best_epoch = 33 and best_val_0_f1_macro = 0.54839
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/callbacks/container.py:113: UserWarning: Best weights from best epoch are automatically used!
+  callback.on_train_end(logs)
+    -> OOS macro-F1=0.4220, kappa=0.3269  (44 epochs, 3.0 min)
+
+=== tabnet_pixel frac=0.05 sseed=303 | train 192266 px ===
+
+Early stopping occurred at epoch 17 with best_epoch = 7 and best_val_0_f1_macro = 0.46604
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/callbacks/container.py:113: UserWarning: Best weights from best epoch are automatically used!
+  callback.on_train_end(logs)
+    -> OOS macro-F1=0.4638, kappa=0.3567  (18 epochs, 1.2 min)
+
+=== tabnet_pixel frac=0.05 sseed=404 | train 234970 px ===
+
+Early stopping occurred at epoch 14 with best_epoch = 4 and best_val_0_f1_macro = 0.45353
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/callbacks/container.py:113: UserWarning: Best weights from best epoch are automatically used!
+  callback.on_train_end(logs)
+    -> OOS macro-F1=0.4293, kappa=0.3620  (15 epochs, 1.1 min)
+
+=== tabnet_pixel frac=0.05 sseed=505 | train 239849 px ===

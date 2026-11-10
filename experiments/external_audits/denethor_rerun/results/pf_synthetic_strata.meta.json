@@ -1,0 +1,18 @@
+{
+  "script": "05_summarise",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-04T22:47:30.541102+00:00",
+  "inputs": [
+    "pf_17E-243N_2019.npz",
+    "results/runs/A0_seed*/test_predictions.csv"
+  ],
+  "rows": 12,
+  "columns": [
+    "variable",
+    "tercile",
+    "fields",
+    "range_low",
+    "range_high",
+    "a0_accuracy"
+  ]
+}

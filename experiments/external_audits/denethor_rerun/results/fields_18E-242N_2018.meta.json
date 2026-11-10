@@ -1,0 +1,15 @@
+{
+  "script": "01_extract_pf",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-04T17:58:50.186527+00:00",
+  "inputs": [
+    "https://data.source.coop/esa/fusion-competition/br-18E-242N-crop-labels-train-2018.geojson"
+  ],
+  "rows": 2504,
+  "columns": [
+    "fid",
+    "crop_id",
+    "crop_name",
+    "n_pixels"
+  ]
+}

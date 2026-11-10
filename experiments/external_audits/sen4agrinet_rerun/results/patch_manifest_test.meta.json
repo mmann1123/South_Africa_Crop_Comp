@@ -1,0 +1,15 @@
+{
+  "script": "01_fetch_patches",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-04T17:43:50.737667+00:00",
+  "inputs": [
+    "https://huggingface.co/datasets/orion-ai-lab/S4A/resolve/4eb44157012b9ec251767721d6bae55cf0c564e2/data/<year>/<tile>/<stem>.nc"
+  ],
+  "rows": 2820,
+  "columns": [
+    "stem",
+    "bytes",
+    "sha256",
+    "fetched"
+  ]
+}

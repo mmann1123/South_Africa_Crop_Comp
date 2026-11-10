@@ -11,6 +11,7 @@ these gaps differently:
 | Raw-input deep models (L-TAE, L-TAE-S, TempCNN, Transformer, CNN-BiLSTM, TimesNet, MiniRocket) | 0 reflectance before scaling, a value never seen in training |
 | Pixel TabNet | the holdout's own column medians |
 | xr_fresh classical models | features computed on the shortened series (NaN-aware xr_fresh functions) |
+| Patch CNNs (3D CNN, multi-channel 2D CNN) | 0 for NaN patch pixels in a column training always observed (separate patch pipeline) |
 
 This experiment re-runs holdout inference with the missing September values filled from
 **training-tile** medians (no holdout statistic), so every model faces the same, plausible
@@ -36,7 +37,7 @@ Every published file is left unchanged; outputs go to `predictions/` and `result
 ## Reproduction checks
 
 - **Deep models:** the original-file re-run reproduces the published predictions field for
-  field for every model except pixel TabNet. TabNet's published file (2026-02-10) predates its
+  field for every model except pixel TabNet (the 3D CNN differs on one field). TabNet's published file (2026-02-10) predates its
   saved checkpoints (2026-02-17/18); the current checkpoints differ on 221 of 2,415 fields and
   score 0.609 vs. 0.603.
 - **xr_fresh features:** the rebuild from the original series matches the published holdout
@@ -55,11 +56,19 @@ Every published file is left unchanged; outputs go to `predictions/` and `result
 
 ## Results
 
-`results/fill_comparison.csv` (all 27 models; patch CNNs not re-run): with September filled
+`results/fill_comparison.csv` (all 27 models): with September filled
 from training medians, the dense pixel networks rise most (CNN-BiLSTM 0.51 → 0.66, L-TAE
 0.54 → 0.65, TempCNN 0.57 → 0.66, MiniRocket 0.50 → 0.61), pixel TabNet barely changes
 (0.61 → 0.62), and the xr_fresh classical models gain 0.02 to 0.05. The top six are pixel
 deep temporal models (0.63 to 0.66).
+
+Patch CNNs (added 2026-11-09): `run_deep_field.py --models mc2d cnn3d` re-runs the two patch
+pipelines with NaN patch pixels filled by training-patch column medians (`data/train_patch_medians.csv`,
+from `patch_level_data.parquet`) instead of 0. The published-rule re-run reproduces the published
+predictions (2D CNN on every field, 3D CNN on all but one). With the median fill the 3D CNN rises
+0.50 → 0.59 and the 2D CNN 0.45 → 0.59 (paired Δ +0.089 [0.070, 0.108] and +0.143 [0.125, 0.160]),
+placing both mid-table (17th and 19th of 27), below every pixel deep temporal model and the field
+tree learners. The 2D CNN, which stacks all band-months as channels, gained as much as CNN-BiLSTM.
 
 `results/sept_observed_subset.csv`: on the 1,352 holdout fields with September observed, the
 published predictions already rank the dense pixel networks first (CNN-BiLSTM 0.66, TempCNN

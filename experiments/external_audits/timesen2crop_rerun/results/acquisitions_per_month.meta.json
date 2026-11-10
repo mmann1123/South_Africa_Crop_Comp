@@ -1,0 +1,24 @@
+{
+  "script": "02_composites",
+  "git_commit": "4dbaba77c2df5bfd7555d0ea3954a1e0b0b309a6",
+  "run_date": "2026-11-05T18:13:22.784151+00:00",
+  "inputs": [
+    "arrays/*.npz"
+  ],
+  "rows": 16,
+  "columns": [
+    "tile",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug"
+  ]
+}

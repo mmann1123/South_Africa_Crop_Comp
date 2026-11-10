@@ -72,19 +72,21 @@ MODELS = {
     "Voting, pixel": ("Voting, pixel", dict(XR, order="features per pixel, training-fitted imputer and "
                                                        "scaler, pixel votes per field"),
                       "experiments/field_reduction/voting_hybrid_oos.py"),
-    "3D CNN, patch": (None, dict(inputs="image patches (band x month)", operator="0",
-                                 statistic="none (constant)", order="fill per patch, no re-analysis",
-                                 may="column dropped"), "out_of_sample/inference_3d_cnn.py"),
-    "Multi-Channel 2D CNN, patch": (None, dict(inputs="image patches (band x month)", operator="0",
-                                               statistic="none (constant)", order="fill per patch, no re-analysis",
-                                               may="column dropped"), "out_of_sample/inference_multi_channel_cnn.py"),
+    "3D CNN, patch": ("3D CNN, patch", dict(inputs="image patches (band x month)", operator="0 (raw patch pixel value)",
+                                             statistic="none (constant)", order="fill per patch pixel, then resize to 128 x 128; no scaling",
+                                             may="column dropped"), "out_of_sample/inference_3d_cnn.py"),
+    "Multi-Channel 2D CNN, patch": ("Multi-Channel 2D CNN, patch", dict(inputs="image patches (band x month)", operator="0 (raw patch pixel value)",
+                                                                        statistic="none (constant)", order="fill per patch pixel, then resize to 128 x 128; no scaling",
+                                                                        may="column dropped"), "out_of_sample/inference_multi_channel_cnn.py"),
 }
 
 
 def reanalysis(name, row):
     if name is None:
-        return "not re-run (separate patch pipeline)", ""
-    if "xr_fresh" in MODELS_FAMILY.get(name, ""):
+        return "not re-run", ""
+    if "patch" in MODELS_FAMILY.get(name, ""):
+        how = "re-scored with the saved checkpoints on patches filled with training-patch column medians; no retraining"
+    elif "xr_fresh" in MODELS_FAMILY.get(name, ""):
         how = "xr_fresh features rebuilt from the filled series; inference re-run"
     elif name in ("Stacking, field", "Voting, pixel"):
         how = "retrained inside its script (fixed seeds) on rebuilt features"
