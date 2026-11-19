@@ -18,3 +18,4 @@
 2026-10-14T15:52:07 pid=499614 rows=200000 rows_differing=1 a==c=False b==c=True
 2026-10-21T14:41:50 pid=2480392 rows=200000 rows_differing=1 a==c=True b==c=False
 2026-10-21T14:53:00 pid=2480392 rows=200000 rows_differing=1 a==c=False b==c=True
+2026-11-19T16:49:15 pid=2050862 rows=200000 rows_differing=1 a==c=True b==c=False
