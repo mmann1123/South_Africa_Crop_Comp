@@ -258,6 +258,44 @@ through XGBoost's native missing-value branch rather than a zero. The table stan
 raw-vs-xr_fresh comparison; note that the default direction for a feature never missing in
 training is arbitrary, so the fairest version would use the training-median fill for both arms.
 
+## Ensemble-size and loss/sampler ablations under the fill (2026-11-19)
+
+The two supplement ablations (S-D iv and v) were re-inference on the zero-filled holdout.
+`experiments/ablations/rescore_filled.py` re-scores the same checkpoints with
+`HOLDOUT_FILL=train_median` (the xr_fresh TabNet reads the field features rebuilt from the
+filled series); outputs `experiments/ablations/results/{ensemble_size_sweep,loss_sampler_ablation}_filled.csv`
+with the published value alongside. The 5-seed CNN-BiLSTM (field) and L-TAE-S (field) rows
+reproduce the fill check (0.591 and 0.599).
+
+Ensemble size, holdout macro-F1 (published zero-fill value in brackets):
+
+| Model | 1 seed, mean ± SD | 3 seeds | 5 seeds |
+|---|---|---|---|
+| CNN-BiLSTM (field) | 0.578 ± 0.014 (0.481 ± 0.018) | 0.586 (0.520) | 0.591 (0.506) |
+| L-TAE-S (field) | 0.558 ± 0.020 (0.562 ± 0.022) | 0.575 (0.581) | 0.599 (0.601) |
+| TabNet (xr_fresh, field) | 0.313 ± 0.020 (0.313 ± 0.024) | 0.391 (0.395) | 0.446 (0.433) |
+
+Loss and sampler, holdout macro-F1 (published in brackets):
+
+| Setting | CNN-BiLSTM (field) | L-TAE-S (field) | TabNet (xr_fresh, field) |
+|---|---|---|---|
+| focal, no resampling (published config) | 0.591 (0.509) | 0.599 (0.601) | 0.446 (0.433) |
+| weighted CE | 0.589 (0.487) | 0.605 (0.598) | 0.427 (0.419) |
+| plain CE | 0.572 (0.409) | 0.594 (0.588) | 0.388 (0.350) |
+| focal + resampling | 0.547 (0.558) | 0.598 (0.600) | 0.392 (0.395) |
+| plain CE + resampling | 0.594 (0.503) | 0.600 (0.601) | 0.458 (0.463) |
+
+Two published sentences do not survive. "A single-seed L-TAE-S (0.56) already exceeds the
+five-seed CNN-BiLSTM field ensemble": on filled inputs a single CNN-BiLSTM seed (0.578) exceeds a
+single L-TAE-S seed (0.558), and the CNN-BiLSTM ensemble gains only 0.013 from five seeds against
+L-TAE-S's 0.041. "The fragile CNN-BiLSTM swings widely (0.41 to 0.56) across objectives and even
+at its best stays below L-TAE-S's worst": filled, CNN-BiLSTM spans 0.547 to 0.594 and L-TAE-S
+0.594 to 0.605; the two ranges touch, and the published spread was the zero fill interacting with
+the loss (plain CE lost 0.18 under zero fill and 0.02 under the training-median fill). What
+survives: ensembling and the imbalance objective move scores by at most a few hundredths for the
+raw-sequence models and never reorder them; the xr_fresh TabNet is unaffected by the fill
+(its features are NaN-aware) and remains the model most sensitive to the objective.
+
 ## Step deletion: no imputation at all (2026-10-24)
 
 `step_deletion.py` masks each pixel's missing months out of temporal attention (weight exactly 0,

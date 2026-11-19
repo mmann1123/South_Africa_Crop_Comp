@@ -148,6 +148,13 @@ found in our own pipeline. These three answer it.
   XGBoost, MiniRocket not separable from LR; aggregation lowers F1 for 7 of 7 architectures);
   per-class figure `figures/per_class_f1_filled.pdf`; cereal merge (+0.17 to +0.25, top unchanged);
   per-seed SD 0.007 to 0.011 on filled (was 0.015 to 0.037); raw XGBoost confirmed to have read NaN.
+- [x] **Ensemble-size and loss/sampler ablations under the fill** (2026-11-19;
+  `experiments/ablations/rescore_filled.py`, results `*_filled.csv`). Published sentences on
+  single-seed L-TAE-S beating the CNN-BiLSTM ensemble and on CNN-BiLSTM "swinging 0.41 to 0.56"
+  across objectives do not survive (filled: 0.547 to 0.594 vs L-TAE-S 0.594 to 0.605).
+- [ ] **MiniRocket gate table (S-I) under the fill** (`minirocket_sparsity/rescore_filled.py`,
+  ts_baselines env). Field level done: L2 0.586, L1 0.577, ridge 0.579, sparse gate 0.566,
+  softmax gate 0.590 (the sparse gate's field advantage is gone). Pixel level running.
 - [x] **Mechanism figure** (inference only). Flip-rate bar chart done
   (`experiments/missingness/flip_rate_figure.py`, `figures/flip_rate.pdf`). The leave-one-month-out
   occlusion is the training-median arm of the month-by-month injection (fields changed and F1 per
