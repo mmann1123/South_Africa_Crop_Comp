@@ -215,6 +215,49 @@ temporal model leads a pixel logistic regression by 0.01 to 0.03 macro-F1, a qua
 of its full-data lead, the recurrent model does not lead at all, and sparsity gives no low-data
 advantage.
 
+## Re-scoring the filled predictions: paired tests, per-class, cereal merge, seed SD (2026-11-19)
+
+`filled_rescoring.py` re-scores the training-median-filled holdout predictions saved by
+`holdout_fill_check` (no retraining) for the four items the paper plan still needed. Outputs in
+`results/`: `paired_bootstrap_filled.csv`, `per_class_filled.csv`, `cereal_merge_filled.csv`,
+`per_seed_sd_filled.csv`; figure `figures/per_class_f1_filled.pdf`.
+
+**Paired field bootstrap (B = 10,000, seed 42), macro-F1, filled predictions.** The three dense
+pixel models lead every reference model by a significant margin: over pixel TabNet by 0.036 to
+0.040 (CNN-BiLSTM +0.040 [0.021, 0.060], TempCNN +0.039, L-TAE +0.036), over field XGBoost by
+0.040 to 0.044, over pixel logistic regression by 0.047 to 0.051; the Transformer leads logistic
+regression by 0.035 [0.010, 0.060]. TabNet (+0.011), XGBoost (+0.007) and MiniRocket (0.000) are
+not separable from logistic regression. The two published paired claims reverse or vanish:
+TabNet over CNN-BiLSTM is now −0.040 [−0.060, −0.020]; L-TAE-S over L-TAE is −0.010
+[−0.025, 0.006] at pixel level and −0.001 at field level; Transformer vs L-TAE −0.012, n.s.
+Aggregation to field level lowers macro-F1 for all seven raw-sequence architectures, significantly
+for six (TempCNN −0.040, L-TAE −0.052, L-TAE-S −0.044, CNN-BiLSTM −0.065, TimesNet −0.047, TabNet
+−0.127; MiniRocket −0.020 [−0.040, 0.000]), while it raises XGBoost by 0.054 [0.032, 0.077] and
+leaves LightGBM unchanged (+0.013, n.s.).
+
+**Per-class F1 (field-bootstrap CIs).** Lucerne/medics 0.85 to 0.88 and canola 0.82 to 0.87 for
+all four figure models; the cereals sit at barley 0.50 to 0.59, wheat 0.47 to 0.50, small-grain
+grazing 0.39 to 0.46. The structural finding stands; the model ordering within each class now
+follows the overall ranking (CNN-BiLSTM and L-TAE above XGBoost and TabNet on every cereal).
+
+**Cereal merge.** With barley, wheat and small-grain grazing merged, macro-F1 rises by 0.17 to
+0.25 for every model (3-class 0.63 to 0.85). The top of the ranking is unchanged (CNN-BiLSTM
+0.850, TempCNN 0.849, L-TAE 0.848, Transformer 0.842, L-TAE-S 0.840), so the S-F sentence
+"sparse models remain at the top" is withdrawn.
+
+**Per-seed SD.** On the filled holdout the five-member SD of macro-F1 is 0.007 (L-TAE pixel),
+0.010 (TempCNN) and 0.011 (CNN-BiLSTM), against 0.037, 0.015 and 0.023 under the published fill;
+L-TAE field 0.018 (was 0.027), TabNet 0.007 (was 0.005). The published range "0.015 to 0.037" was
+itself inflated by the zero fill, which amplified seed-to-seed disagreement on the September-gap
+fields.
+
+**Raw XGBoost (Table raw vs xr_fresh).** `experiments/xrfresh_vs_raw_xgb.py` reads
+`merged_dl_test.parquet` without any fill, and that parquet holds NaN for the missing September
+(it is the source of the 44.0 percent field-missing count above), so raw XGBoost routed September
+through XGBoost's native missing-value branch rather than a zero. The table stands as a
+raw-vs-xr_fresh comparison; note that the default direction for a feature never missing in
+training is arbitrary, so the fairest version would use the training-median fill for both arms.
+
 ## Step deletion: no imputation at all (2026-10-24)
 
 `step_deletion.py` masks each pixel's missing months out of temporal attention (weight exactly 0,

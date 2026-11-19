@@ -1,0 +1,11 @@
+model,fill,n_seeds,seed_mean_f1m,seed_sd_f1m,seed_min_f1m,seed_max_f1m,ensemble_f1m
+"CNN-BiLSTM, pixel",published,5,0.4975,0.0232,0.4681,0.532,0.5134
+"CNN-BiLSTM, pixel",training median,5,0.6284,0.0111,0.6133,0.6405,0.6562
+"TempCNN, pixel",published,5,0.5643,0.0147,0.5425,0.5839,0.5737
+"TempCNN, pixel",training median,5,0.6443,0.0098,0.6318,0.6583,0.6546
+"L-TAE, pixel",published,5,0.5597,0.0365,0.5084,0.5931,0.5395
+"L-TAE, pixel",training median,5,0.6426,0.0073,0.6307,0.6486,0.6523
+"L-TAE, field",published,5,0.5672,0.0267,0.5347,0.6057,0.5939
+"L-TAE, field",training median,5,0.566,0.0176,0.5484,0.5872,0.6002
+"TabNet (raw), pixel",published,5,0.5771,0.0053,0.5719,0.5845,0.6093
+"TabNet (raw), pixel",training median,5,0.579,0.0068,0.5703,0.5865,0.6161

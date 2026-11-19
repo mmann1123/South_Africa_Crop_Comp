@@ -1,0 +1,136 @@
+model,class,f1,f1_lo,f1_hi,support
+"TabNet (raw), pixel",Barley,0.5,0.4367,0.5607,192
+"TabNet (raw), pixel",Canola,0.8315,0.7798,0.8786,138
+"TabNet (raw), pixel",Lucerne/Medics,0.8671,0.8535,0.8801,1358
+"TabNet (raw), pixel",Small grain grazing,0.3941,0.3485,0.4378,427
+"TabNet (raw), pixel",Wheat,0.4876,0.4383,0.5344,300
+"L-TAE-S, field",Barley,0.4925,0.425,0.5573,192
+"L-TAE-S, field",Canola,0.8273,0.7754,0.873,138
+"L-TAE-S, field",Lucerne/Medics,0.8643,0.8507,0.8774,1358
+"L-TAE-S, field",Small grain grazing,0.3636,0.318,0.4071,427
+"L-TAE-S, field",Wheat,0.4464,0.3976,0.4914,300
+"L-TAE-S, pixel",Barley,0.5805,0.5161,0.6398,192
+"L-TAE-S, pixel",Canola,0.8528,0.8031,0.8966,138
+"L-TAE-S, pixel",Lucerne/Medics,0.881,0.8684,0.8934,1358
+"L-TAE-S, pixel",Small grain grazing,0.4169,0.3716,0.46,427
+"L-TAE-S, pixel",Wheat,0.4821,0.4304,0.5321,300
+"L-TAE, field",Barley,0.5618,0.4971,0.6216,192
+"L-TAE, field",Canola,0.7593,0.7007,0.8108,138
+"L-TAE, field",Lucerne/Medics,0.8353,0.8196,0.8501,1358
+"L-TAE, field",Small grain grazing,0.3688,0.3242,0.4118,427
+"L-TAE, field",Wheat,0.4758,0.4306,0.5194,300
+"Transformer, pixel",Barley,0.5714,0.508,0.6295,192
+"Transformer, pixel",Canola,0.8453,0.7954,0.8897,138
+"Transformer, pixel",Lucerne/Medics,0.8846,0.872,0.8966,1358
+"Transformer, pixel",Small grain grazing,0.4085,0.3636,0.4524,427
+"Transformer, pixel",Wheat,0.4932,0.4412,0.5424,300
+"TempCNN, pixel",Barley,0.5956,0.5333,0.6525,192
+"TempCNN, pixel",Canola,0.8636,0.8174,0.9053,138
+"TempCNN, pixel",Lucerne/Medics,0.8798,0.8671,0.8921,1358
+"TempCNN, pixel",Small grain grazing,0.4599,0.4175,0.5,427
+"TempCNN, pixel",Wheat,0.4741,0.4211,0.5249,300
+"TimesNet, pixel",Barley,0.5886,0.526,0.6468,192
+"TimesNet, pixel",Canola,0.779,0.72,0.8307,138
+"TimesNet, pixel",Lucerne/Medics,0.8672,0.8534,0.8802,1358
+"TimesNet, pixel",Small grain grazing,0.4326,0.3899,0.474,427
+"TimesNet, pixel",Wheat,0.4966,0.4471,0.5455,300
+"XGBoost, field",Barley,0.5192,0.4503,0.5836,192
+"XGBoost, field",Canola,0.8163,0.7592,0.8657,138
+"XGBoost, field",Lucerne/Medics,0.8459,0.8309,0.86,1358
+"XGBoost, field",Small grain grazing,0.4102,0.3677,0.4506,427
+"XGBoost, field",Wheat,0.4704,0.419,0.5191,300
+"LightGBM, pixel",Barley,0.4281,0.3583,0.4942,192
+"LightGBM, pixel",Canola,0.8226,0.7647,0.8716,138
+"LightGBM, pixel",Lucerne/Medics,0.8632,0.8496,0.8765,1358
+"LightGBM, pixel",Small grain grazing,0.3424,0.2964,0.387,427
+"LightGBM, pixel",Wheat,0.5113,0.4654,0.5565,300
+"Logistic Regression, pixel",Barley,0.5667,0.5033,0.6263,192
+"Logistic Regression, pixel",Canola,0.7938,0.7355,0.8456,138
+"Logistic Regression, pixel",Lucerne/Medics,0.8154,0.7989,0.8315,1358
+"Logistic Regression, pixel",Small grain grazing,0.4346,0.3982,0.4706,427
+"Logistic Regression, pixel",Wheat,0.4163,0.3615,0.4686,300
+"LightGBM, field",Barley,0.5109,0.4423,0.5762,192
+"LightGBM, field",Canola,0.805,0.7455,0.856,138
+"LightGBM, field",Lucerne/Medics,0.853,0.8388,0.8663,1358
+"LightGBM, field",Small grain grazing,0.3643,0.3201,0.4071,427
+"LightGBM, field",Wheat,0.4973,0.4449,0.5479,300
+"Voting, pixel",Barley,0.3584,0.2826,0.4304,192
+"Voting, pixel",Canola,0.8496,0.7987,0.8935,138
+"Voting, pixel",Lucerne/Medics,0.8613,0.8475,0.8745,1358
+"Voting, pixel",Small grain grazing,0.2535,0.2059,0.3007,427
+"Voting, pixel",Wheat,0.5316,0.4879,0.5732,300
+"Random Forest, pixel",Barley,0.4729,0.4051,0.5374,192
+"Random Forest, pixel",Canola,0.8614,0.813,0.9035,138
+"Random Forest, pixel",Lucerne/Medics,0.8737,0.8606,0.8865,1358
+"Random Forest, pixel",Small grain grazing,0.3099,0.2622,0.357,427
+"Random Forest, pixel",Wheat,0.4665,0.4183,0.514,300
+"XGBoost, pixel",Barley,0.4266,0.361,0.4886,192
+"XGBoost, pixel",Canola,0.83,0.7778,0.8775,138
+"XGBoost, pixel",Lucerne/Medics,0.8009,0.7839,0.8174,1358
+"XGBoost, pixel",Small grain grazing,0.3747,0.337,0.4112,427
+"XGBoost, pixel",Wheat,0.3584,0.308,0.4075,300
+"L-TAE, pixel",Barley,0.5928,0.5287,0.651,192
+"L-TAE, pixel",Canola,0.8603,0.8127,0.9018,138
+"L-TAE, pixel",Lucerne/Medics,0.8834,0.8706,0.8957,1358
+"L-TAE, pixel",Small grain grazing,0.4442,0.4024,0.4844,427
+"L-TAE, pixel",Wheat,0.4806,0.427,0.532,300
+"TempCNN, field",Barley,0.4984,0.4286,0.564,192
+"TempCNN, field",Canola,0.7902,0.7361,0.8391,138
+"TempCNN, field",Lucerne/Medics,0.8455,0.8305,0.8598,1358
+"TempCNN, field",Small grain grazing,0.4538,0.4145,0.4911,427
+"TempCNN, field",Wheat,0.4829,0.4307,0.5318,300
+"Stacking, field",Barley,0.526,0.4624,0.5854,192
+"Stacking, field",Canola,0.591,0.5306,0.6475,138
+"Stacking, field",Lucerne/Medics,0.8464,0.8315,0.8608,1358
+"Stacking, field",Small grain grazing,0.432,0.3915,0.4718,427
+"Stacking, field",Wheat,0.3784,0.3246,0.4298,300
+"TimesNet, field",Barley,0.5312,0.4667,0.5916,192
+"TimesNet, field",Canola,0.6882,0.6227,0.7475,138
+"TimesNet, field",Lucerne/Medics,0.8673,0.8532,0.8801,1358
+"TimesNet, field",Small grain grazing,0.3391,0.2925,0.3833,427
+"TimesNet, field",Wheat,0.5016,0.4533,0.5486,300
+"CNN-BiLSTM, pixel",Barley,0.5722,0.5114,0.6294,192
+"CNN-BiLSTM, pixel",Canola,0.8689,0.822,0.9091,138
+"CNN-BiLSTM, pixel",Lucerne/Medics,0.8795,0.8666,0.8922,1358
+"CNN-BiLSTM, pixel",Small grain grazing,0.4586,0.4152,0.5013,427
+"CNN-BiLSTM, pixel",Wheat,0.5018,0.4507,0.5506,300
+"CNN-BiLSTM, field",Barley,0.4452,0.3741,0.5119,192
+"CNN-BiLSTM, field",Canola,0.831,0.7811,0.8754,138
+"CNN-BiLSTM, field",Lucerne/Medics,0.7682,0.7494,0.7863,1358
+"CNN-BiLSTM, field",Small grain grazing,0.4105,0.3746,0.4461,427
+"CNN-BiLSTM, field",Wheat,0.5015,0.4531,0.5479,300
+"3D CNN, patch",Barley,0.5369,0.4698,0.5995,192
+"3D CNN, patch",Canola,0.8352,0.784,0.88,138
+"3D CNN, patch",Lucerne/Medics,0.8092,0.7925,0.825,1360
+"3D CNN, patch",Small grain grazing,0.3778,0.3399,0.4152,427
+"3D CNN, patch",Wheat,0.4032,0.3478,0.4557,300
+"MiniRocket, pixel",Barley,0.5233,0.4548,0.5852,192
+"MiniRocket, pixel",Canola,0.8227,0.7717,0.8681,138
+"MiniRocket, pixel",Lucerne/Medics,0.7891,0.771,0.8065,1358
+"MiniRocket, pixel",Small grain grazing,0.4114,0.3748,0.448,427
+"MiniRocket, pixel",Wheat,0.4804,0.4307,0.5298,300
+"SMOTE Stacked, field",Barley,0.4248,0.3569,0.4896,192
+"SMOTE Stacked, field",Canola,0.7164,0.6517,0.7742,138
+"SMOTE Stacked, field",Lucerne/Medics,0.8516,0.8375,0.865,1358
+"SMOTE Stacked, field",Small grain grazing,0.2618,0.2157,0.3055,427
+"SMOTE Stacked, field",Wheat,0.4628,0.4122,0.5106,300
+"MiniRocket, field",Barley,0.4498,0.3792,0.5161,192
+"MiniRocket, field",Canola,0.8134,0.7605,0.8615,138
+"MiniRocket, field",Lucerne/Medics,0.8323,0.8164,0.8473,1358
+"MiniRocket, field",Small grain grazing,0.3778,0.3373,0.4176,427
+"MiniRocket, field",Wheat,0.4541,0.405,0.5008,300
+"Multi-Channel 2D CNN, patch",Barley,0.5524,0.4923,0.6108,192
+"Multi-Channel 2D CNN, patch",Canola,0.7793,0.7234,0.8289,138
+"Multi-Channel 2D CNN, patch",Lucerne/Medics,0.8604,0.8471,0.8735,1360
+"Multi-Channel 2D CNN, patch",Small grain grazing,0.3263,0.2797,0.3717,427
+"Multi-Channel 2D CNN, patch",Wheat,0.4266,0.3705,0.4798,300
+"TabNet (raw, field-avg), field",Barley,0.4286,0.3664,0.4872,192
+"TabNet (raw, field-avg), field",Canola,0.6045,0.5327,0.6715,138
+"TabNet (raw, field-avg), field",Lucerne/Medics,0.7821,0.7642,0.7992,1358
+"TabNet (raw, field-avg), field",Small grain grazing,0.3027,0.2652,0.3392,427
+"TabNet (raw, field-avg), field",Wheat,0.3276,0.2777,0.3752,300
+"TabNet (xr_fresh), field",Barley,0.2869,0.2329,0.3416,192
+"TabNet (xr_fresh), field",Canola,0.4965,0.4225,0.5654,138
+"TabNet (xr_fresh), field",Lucerne/Medics,0.7124,0.6912,0.7328,1358
+"TabNet (xr_fresh), field",Small grain grazing,0.2389,0.2025,0.2765,427
+"TabNet (xr_fresh), field",Wheat,0.2893,0.2478,0.3295,300

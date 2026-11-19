@@ -142,6 +142,12 @@ found in our own pipeline. These three answer it.
   8 to 9 of 10 draws), L-TAE and L-TAE-S by 0.01 to 0.03 with CIs mostly crossing zero,
   CNN-BiLSTM equals it; XGBoost and TabNet trail; the gate adds nothing at low data. Wording for
   the paper: the best deep model keeps a quarter to a half of its full-data lead at 5 to 15%.
+- [x] **Filled-prediction re-scoring** (2026-11-19; `experiments/missingness/filled_rescoring.py`,
+  README section "Re-scoring the filled predictions"). Paired bootstraps on filled predictions
+  (dense pixel models over TabNet +0.04, over XGBoost +0.04, over LR +0.05, all significant; TabNet,
+  XGBoost, MiniRocket not separable from LR; aggregation lowers F1 for 7 of 7 architectures);
+  per-class figure `figures/per_class_f1_filled.pdf`; cereal merge (+0.17 to +0.25, top unchanged);
+  per-seed SD 0.007 to 0.011 on filled (was 0.015 to 0.037); raw XGBoost confirmed to have read NaN.
 - [x] **Mechanism figure** (inference only). Flip-rate bar chart done
   (`experiments/missingness/flip_rate_figure.py`, `figures/flip_rate.pdf`). The leave-one-month-out
   occlusion is the training-median arm of the month-by-month injection (fields changed and F1 per

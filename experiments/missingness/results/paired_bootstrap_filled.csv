@@ -1,0 +1,85 @@
+Model A,Model B,metric,A,B,Delta,Delta_lo,Delta_hi,p_two_sided,significant_95,A_only_correct,B_only_correct,mcnemar_p
+"CNN-BiLSTM, pixel","TabNet (raw), pixel",macro_f1,0.6562,0.6161,0.0401,0.0208,0.0604,0.0,True,173,110,0.0002
+"CNN-BiLSTM, pixel","TabNet (raw), pixel",kappa,0.576,0.5326,0.0434,0.0218,0.0652,0.0,True,173,110,0.0002
+"CNN-BiLSTM, pixel","TabNet (raw), pixel",accuracy,0.7408,0.7147,0.0261,0.0128,0.0398,0.0002,True,173,110,0.0002
+"TempCNN, pixel","TabNet (raw), pixel",macro_f1,0.6546,0.6161,0.0385,0.0172,0.0595,0.0002,True,178,121,0.0012
+"TempCNN, pixel","TabNet (raw), pixel",kappa,0.5707,0.5326,0.038,0.0147,0.0605,0.0014,True,178,121,0.0012
+"TempCNN, pixel","TabNet (raw), pixel",accuracy,0.7383,0.7147,0.0236,0.0091,0.0377,0.0014,True,178,121,0.0012
+"L-TAE, pixel","TabNet (raw), pixel",macro_f1,0.6523,0.6161,0.0362,0.0145,0.058,0.001,True,192,134,0.0016
+"L-TAE, pixel","TabNet (raw), pixel",kappa,0.5713,0.5326,0.0386,0.0151,0.0621,0.0008,True,192,134,0.0016
+"L-TAE, pixel","TabNet (raw), pixel",accuracy,0.7387,0.7147,0.024,0.0095,0.0385,0.001,True,192,134,0.0016
+"L-TAE-S, pixel","TabNet (raw), pixel",macro_f1,0.6427,0.6161,0.0266,0.0032,0.0504,0.023,True,206,148,0.0024
+"L-TAE-S, pixel","TabNet (raw), pixel",kappa,0.5612,0.5326,0.0285,0.0031,0.0542,0.025,True,206,148,0.0024
+"L-TAE-S, pixel","TabNet (raw), pixel",accuracy,0.7387,0.7147,0.024,0.0087,0.0393,0.0006,True,206,148,0.0024
+"CNN-BiLSTM, pixel","XGBoost, field",macro_f1,0.6562,0.6124,0.0438,0.0193,0.0687,0.0002,True,266,161,0.0
+"CNN-BiLSTM, pixel","XGBoost, field",kappa,0.576,0.5034,0.0726,0.0458,0.0989,0.0,True,266,161,0.0
+"CNN-BiLSTM, pixel","XGBoost, field",accuracy,0.7408,0.6973,0.0435,0.0269,0.0596,0.0,True,266,161,0.0
+"TempCNN, pixel","XGBoost, field",macro_f1,0.6546,0.6124,0.0422,0.0183,0.0668,0.0004,True,247,148,0.0
+"TempCNN, pixel","XGBoost, field",kappa,0.5707,0.5034,0.0672,0.0413,0.0937,0.0,True,247,148,0.0
+"TempCNN, pixel","XGBoost, field",accuracy,0.7383,0.6973,0.041,0.0248,0.0571,0.0,True,247,148,0.0
+"L-TAE, pixel","XGBoost, field",macro_f1,0.6523,0.6124,0.0399,0.0155,0.0648,0.0018,True,255,155,0.0
+"L-TAE, pixel","XGBoost, field",kappa,0.5713,0.5034,0.0678,0.0415,0.0944,0.0,True,255,155,0.0
+"L-TAE, pixel","XGBoost, field",accuracy,0.7387,0.6973,0.0414,0.0248,0.058,0.0,True,255,155,0.0
+"CNN-BiLSTM, pixel","Logistic Regression, pixel",macro_f1,0.6562,0.6054,0.0508,0.0257,0.0754,0.0,True,350,169,0.0
+"CNN-BiLSTM, pixel","Logistic Regression, pixel",kappa,0.576,0.481,0.095,0.0679,0.1216,0.0,True,350,169,0.0
+"CNN-BiLSTM, pixel","Logistic Regression, pixel",accuracy,0.7408,0.6658,0.0749,0.0567,0.0928,0.0,True,350,169,0.0
+"TempCNN, pixel","Logistic Regression, pixel",macro_f1,0.6546,0.6054,0.0492,0.0273,0.0715,0.0,True,319,144,0.0
+"TempCNN, pixel","Logistic Regression, pixel",kappa,0.5707,0.481,0.0897,0.0643,0.1155,0.0,True,319,144,0.0
+"TempCNN, pixel","Logistic Regression, pixel",accuracy,0.7383,0.6658,0.0725,0.0555,0.0899,0.0,True,319,144,0.0
+"L-TAE, pixel","Logistic Regression, pixel",macro_f1,0.6523,0.6054,0.0469,0.024,0.0703,0.0,True,327,151,0.0
+"L-TAE, pixel","Logistic Regression, pixel",kappa,0.5713,0.481,0.0903,0.0643,0.1165,0.0,True,327,151,0.0
+"L-TAE, pixel","Logistic Regression, pixel",accuracy,0.7387,0.6658,0.0729,0.0555,0.0903,0.0,True,327,151,0.0
+"Transformer, pixel","Logistic Regression, pixel",macro_f1,0.6406,0.6054,0.0353,0.0103,0.0604,0.0036,True,351,179,0.0
+"Transformer, pixel","Logistic Regression, pixel",kappa,0.564,0.481,0.083,0.0553,0.1108,0.0,True,351,179,0.0
+"Transformer, pixel","Logistic Regression, pixel",accuracy,0.7371,0.6658,0.0712,0.053,0.0899,0.0,True,351,179,0.0
+"TabNet (raw), pixel","Logistic Regression, pixel",macro_f1,0.6161,0.6054,0.0107,-0.0148,0.0366,0.409,False,325,207,0.0
+"TabNet (raw), pixel","Logistic Regression, pixel",kappa,0.5326,0.481,0.0517,0.0239,0.0798,0.0,True,325,207,0.0
+"TabNet (raw), pixel","Logistic Regression, pixel",accuracy,0.7147,0.6658,0.0489,0.0302,0.0675,0.0,True,325,207,0.0
+"XGBoost, field","Logistic Regression, pixel",macro_f1,0.6124,0.6054,0.007,-0.0151,0.0292,0.532,False,232,156,0.0001
+"XGBoost, field","Logistic Regression, pixel",kappa,0.5034,0.481,0.0225,-0.0015,0.0463,0.0642,False,232,156,0.0001
+"XGBoost, field","Logistic Regression, pixel",accuracy,0.6973,0.6658,0.0315,0.0157,0.0472,0.0,True,232,156,0.0001
+"MiniRocket, pixel","Logistic Regression, pixel",macro_f1,0.6054,0.6054,0.0,-0.0244,0.0238,0.9904,False,203,248,0.0382
+"MiniRocket, pixel","Logistic Regression, pixel",kappa,0.4659,0.481,-0.0151,-0.0408,0.0095,0.223,False,203,248,0.0382
+"MiniRocket, pixel","Logistic Regression, pixel",accuracy,0.6472,0.6658,-0.0186,-0.0364,-0.0012,0.038,True,203,248,0.0382
+"TabNet (raw), pixel","CNN-BiLSTM, pixel",macro_f1,0.6161,0.6562,-0.0401,-0.0602,-0.0203,0.0,True,110,173,0.0002
+"TabNet (raw), pixel","CNN-BiLSTM, pixel",kappa,0.5326,0.576,-0.0434,-0.0646,-0.0216,0.0004,True,110,173,0.0002
+"TabNet (raw), pixel","CNN-BiLSTM, pixel",accuracy,0.7147,0.7408,-0.0261,-0.0393,-0.0124,0.0006,True,110,173,0.0002
+"L-TAE-S, pixel","L-TAE, pixel",macro_f1,0.6427,0.6523,-0.0096,-0.0251,0.0061,0.2212,False,92,92,1.0
+"L-TAE-S, pixel","L-TAE, pixel",kappa,0.5612,0.5713,-0.0101,-0.028,0.0081,0.2722,False,92,92,1.0
+"L-TAE-S, pixel","L-TAE, pixel",accuracy,0.7387,0.7387,0.0,-0.0108,0.0112,1.0,False,92,92,1.0
+"L-TAE-S, field","L-TAE, field",macro_f1,0.5988,0.6002,-0.0014,-0.0213,0.0187,0.8806,False,180,125,0.0019
+"L-TAE-S, field","L-TAE, field",kappa,0.5142,0.5001,0.0141,-0.0074,0.0359,0.2044,False,180,125,0.0019
+"L-TAE-S, field","L-TAE, field",accuracy,0.7035,0.6807,0.0228,0.0083,0.0373,0.0022,True,180,125,0.0019
+"Transformer, pixel","L-TAE, pixel",macro_f1,0.6406,0.6523,-0.0116,-0.0276,0.0043,0.1582,False,86,90,0.8212
+"Transformer, pixel","L-TAE, pixel",kappa,0.564,0.5713,-0.0073,-0.0245,0.0099,0.4212,False,86,90,0.8212
+"Transformer, pixel","L-TAE, pixel",accuracy,0.7371,0.7387,-0.0017,-0.012,0.0091,0.7858,False,86,90,0.8212
+"L-TAE-S, pixel","Transformer, pixel",macro_f1,0.6427,0.6406,0.002,-0.0167,0.0201,0.8284,False,105,101,0.8345
+"L-TAE-S, pixel","Transformer, pixel",kappa,0.5612,0.564,-0.0028,-0.0224,0.0164,0.7948,False,105,101,0.8345
+"L-TAE-S, pixel","Transformer, pixel",accuracy,0.7387,0.7371,0.0017,-0.0099,0.0133,0.8096,False,105,101,0.8345
+"TempCNN, field","TempCNN, pixel",macro_f1,0.6142,0.6546,-0.0404,-0.0636,-0.017,0.0002,True,145,250,0.0
+"TempCNN, field","TempCNN, pixel",kappa,0.5201,0.5707,-0.0505,-0.0746,-0.0257,0.0,True,145,250,0.0
+"TempCNN, field","TempCNN, pixel",accuracy,0.6948,0.7383,-0.0435,-0.0592,-0.0277,0.0,True,145,250,0.0
+"L-TAE, field","L-TAE, pixel",macro_f1,0.6002,0.6523,-0.0521,-0.0738,-0.0299,0.0,True,127,267,0.0
+"L-TAE, field","L-TAE, pixel",kappa,0.5001,0.5713,-0.0712,-0.0956,-0.0465,0.0,True,127,267,0.0
+"L-TAE, field","L-TAE, pixel",accuracy,0.6807,0.7387,-0.058,-0.0741,-0.0414,0.0,True,127,267,0.0
+"L-TAE-S, field","L-TAE-S, pixel",macro_f1,0.5988,0.6427,-0.0438,-0.0675,-0.0204,0.0002,True,128,213,0.0
+"L-TAE-S, field","L-TAE-S, pixel",kappa,0.5142,0.5612,-0.047,-0.0719,-0.0227,0.0002,True,128,213,0.0
+"L-TAE-S, field","L-TAE-S, pixel",accuracy,0.7035,0.7387,-0.0352,-0.0501,-0.0203,0.0,True,128,213,0.0
+"CNN-BiLSTM, field","CNN-BiLSTM, pixel",macro_f1,0.5913,0.6562,-0.0649,-0.0915,-0.0388,0.0,True,206,479,0.0
+"CNN-BiLSTM, field","CNN-BiLSTM, pixel",kappa,0.4494,0.576,-0.1266,-0.156,-0.0971,0.0,True,206,479,0.0
+"CNN-BiLSTM, field","CNN-BiLSTM, pixel",accuracy,0.6277,0.7408,-0.113,-0.1337,-0.0923,0.0,True,206,479,0.0
+"TimesNet, field","TimesNet, pixel",macro_f1,0.5855,0.6328,-0.0473,-0.0713,-0.0241,0.0,True,151,187,0.0568
+"TimesNet, field","TimesNet, pixel",kappa,0.5166,0.5471,-0.0305,-0.0543,-0.0067,0.012,True,151,187,0.0568
+"TimesNet, field","TimesNet, pixel",accuracy,0.7081,0.723,-0.0149,-0.0294,0.0,0.0508,False,151,187,0.0568
+"MiniRocket, field","MiniRocket, pixel",macro_f1,0.5855,0.6054,-0.0199,-0.04,0.0001,0.052,False,204,157,0.0154
+"MiniRocket, field","MiniRocket, pixel",kappa,0.4758,0.4659,0.0099,-0.0116,0.0318,0.3764,False,204,157,0.0154
+"MiniRocket, field","MiniRocket, pixel",accuracy,0.6667,0.6472,0.0195,0.0046,0.0348,0.0114,True,204,157,0.0154
+"TabNet (raw, field-avg), field","TabNet (raw), pixel",macro_f1,0.4891,0.6161,-0.127,-0.1559,-0.0985,0.0,True,195,502,0.0
+"TabNet (raw, field-avg), field","TabNet (raw), pixel",kappa,0.3671,0.5326,-0.1655,-0.1966,-0.1347,0.0,True,195,502,0.0
+"TabNet (raw, field-avg), field","TabNet (raw), pixel",accuracy,0.5876,0.7147,-0.1271,-0.1474,-0.1068,0.0,True,195,502,0.0
+"XGBoost, field","XGBoost, pixel",macro_f1,0.6124,0.5581,0.0543,0.0316,0.0769,0.0,True,295,123,0.0
+"XGBoost, field","XGBoost, pixel",kappa,0.5034,0.4252,0.0782,0.0533,0.1026,0.0,True,295,123,0.0
+"XGBoost, field","XGBoost, pixel",accuracy,0.6973,0.6261,0.0712,0.0547,0.0874,0.0,True,295,123,0.0
+"LightGBM, field","LightGBM, pixel",macro_f1,0.6061,0.5935,0.0126,-0.0083,0.0333,0.2496,False,124,120,0.8477
+"LightGBM, field","LightGBM, pixel",kappa,0.5036,0.5121,-0.0084,-0.0297,0.0125,0.4164,False,124,120,0.8477
+"LightGBM, field","LightGBM, pixel",accuracy,0.7081,0.7064,0.0017,-0.0112,0.0145,0.8298,False,124,120,0.8477

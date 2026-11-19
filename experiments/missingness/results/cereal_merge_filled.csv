@@ -1,0 +1,82 @@
+model,scheme,macro_f1,kappa,accuracy,f1_merged_class
+"TabNet (raw), pixel",5-class,0.6161,0.5326,0.7147,
+"TabNet (raw), pixel",wheat+barley,0.7078,0.6024,0.7652,0.7386
+"TabNet (raw), pixel",all cereals,0.8245,0.6808,0.8319,0.775
+"L-TAE-S, field",5-class,0.5988,0.5142,0.7035,
+"L-TAE-S, field",wheat+barley,0.6815,0.5722,0.7474,0.6706
+"L-TAE-S, field",all cereals,0.8195,0.6729,0.8273,0.7669
+"L-TAE-S, pixel",5-class,0.6427,0.5612,0.7387,
+"L-TAE-S, pixel",wheat+barley,0.7194,0.6159,0.7776,0.7269
+"L-TAE-S, pixel",all cereals,0.8404,0.7064,0.8472,0.7875
+"L-TAE, field",5-class,0.6002,0.5001,0.6807,
+"L-TAE, field",wheat+barley,0.6577,0.5419,0.718,0.6673
+"L-TAE, field",all cereals,0.7804,0.6242,0.7963,0.7465
+"Transformer, pixel",5-class,0.6406,0.564,0.7371,
+"Transformer, pixel",wheat+barley,0.7187,0.6224,0.7793,0.7364
+"Transformer, pixel",all cereals,0.8417,0.7152,0.8509,0.7953
+"TempCNN, pixel",5-class,0.6546,0.5707,0.7383,
+"TempCNN, pixel",wheat+barley,0.733,0.6234,0.7768,0.7285
+"TempCNN, pixel",all cereals,0.8487,0.7171,0.8509,0.8027
+"TimesNet, pixel",5-class,0.6328,0.5471,0.723,
+"TimesNet, pixel",wheat+barley,0.6983,0.5937,0.7586,0.7143
+"TimesNet, pixel",all cereals,0.8062,0.6738,0.8277,0.7723
+"XGBoost, field",5-class,0.6124,0.5034,0.6973,
+"XGBoost, field",wheat+barley,0.6902,0.5528,0.7342,0.6885
+"XGBoost, field",all cereals,0.8039,0.6359,0.8087,0.7494
+"LightGBM, pixel",5-class,0.5935,0.5121,0.7064,
+"LightGBM, pixel",wheat+barley,0.6907,0.5859,0.759,0.7346
+"LightGBM, pixel",all cereals,0.8164,0.6652,0.8257,0.7634
+"Logistic Regression, pixel",5-class,0.6054,0.481,0.6658,
+"Logistic Regression, pixel",wheat+barley,0.6843,0.53,0.7048,0.6934
+"Logistic Regression, pixel",all cereals,0.7859,0.607,0.7867,0.7484
+"LightGBM, field",5-class,0.6061,0.5036,0.7081,
+"LightGBM, field",wheat+barley,0.6843,0.5583,0.747,0.7149
+"LightGBM, field",all cereals,0.7971,0.63,0.8095,0.7334
+"Voting, pixel",5-class,0.5709,0.5042,0.7072,
+"Voting, pixel",wheat+barley,0.6747,0.5819,0.7615,0.7343
+"Voting, pixel",all cereals,0.819,0.6558,0.8219,0.746
+"Random Forest, pixel",5-class,0.5969,0.5201,0.7155,
+"Random Forest, pixel",wheat+barley,0.6925,0.5967,0.7689,0.7249
+"Random Forest, pixel",all cereals,0.8356,0.6885,0.8385,0.7716
+"XGBoost, pixel",5-class,0.5581,0.4252,0.6261,
+"XGBoost, pixel",wheat+barley,0.6577,0.4834,0.6733,0.6251
+"XGBoost, pixel",all cereals,0.7909,0.5917,0.7776,0.7416
+"L-TAE, pixel",5-class,0.6523,0.5713,0.7387,
+"L-TAE, pixel",wheat+barley,0.7255,0.6186,0.7739,0.714
+"L-TAE, pixel",all cereals,0.8484,0.7207,0.8526,0.8016
+"TempCNN, field",5-class,0.6142,0.5201,0.6948,
+"TempCNN, field",wheat+barley,0.7011,0.576,0.7371,0.7148
+"TempCNN, field",all cereals,0.8014,0.6533,0.812,0.7686
+"Stacking, field",5-class,0.5548,0.491,0.6725,
+"Stacking, field",wheat+barley,0.6309,0.5406,0.7122,0.6541
+"Stacking, field",all cereals,0.7265,0.6168,0.7872,0.742
+"TimesNet, field",5-class,0.5855,0.5166,0.7081,
+"TimesNet, field",wheat+barley,0.6497,0.5676,0.7474,0.7043
+"TimesNet, field",all cereals,0.7667,0.6459,0.8141,0.7445
+"CNN-BiLSTM, pixel",5-class,0.6562,0.576,0.7408,
+"CNN-BiLSTM, pixel",wheat+barley,0.7404,0.6377,0.7855,0.7544
+"CNN-BiLSTM, pixel",all cereals,0.8502,0.7173,0.8509,0.8023
+"CNN-BiLSTM, field",5-class,0.5913,0.4494,0.6277,
+"CNN-BiLSTM, field",wheat+barley,0.6907,0.5163,0.6816,0.7531
+"CNN-BiLSTM, field",all cereals,0.777,0.564,0.7557,0.7317
+"3D CNN, patch",5-class,0.5924,0.4545,0.6578,
+"3D CNN, patch",wheat+barley,0.6764,0.506,0.6971,0.6833
+"3D CNN, patch",all cereals,0.7863,0.5794,0.7741,0.7145
+"MiniRocket, pixel",5-class,0.6054,0.4659,0.6472,
+"MiniRocket, pixel",wheat+barley,0.6873,0.5205,0.6915,0.7261
+"MiniRocket, pixel",all cereals,0.7813,0.5783,0.7669,0.7321
+"SMOTE Stacked, field",5-class,0.5435,0.4649,0.687,
+"SMOTE Stacked, field",wheat+barley,0.6346,0.5384,0.7383,0.7085
+"SMOTE Stacked, field",all cereals,0.7594,0.6072,0.7975,0.7102
+"MiniRocket, field",5-class,0.5855,0.4758,0.6667,
+"MiniRocket, field",wheat+barley,0.6736,0.5313,0.7106,0.6708
+"MiniRocket, field",all cereals,0.7997,0.6292,0.8,0.7533
+"Multi-Channel 2D CNN, patch",5-class,0.589,0.5068,0.7116,
+"Multi-Channel 2D CNN, patch",wheat+barley,0.6689,0.567,0.7542,0.7095
+"Multi-Channel 2D CNN, patch",all cereals,0.7917,0.6428,0.8151,0.7353
+"TabNet (raw, field-avg), field",5-class,0.4891,0.3671,0.5876,
+"TabNet (raw, field-avg), field",wheat+barley,0.5729,0.4223,0.6352,0.6024
+"TabNet (raw, field-avg), field",all cereals,0.6925,0.5139,0.7346,0.691
+"TabNet (xr_fresh), field",5-class,0.4048,0.2751,0.4998,
+"TabNet (xr_fresh), field",wheat+barley,0.4947,0.338,0.5636,0.5311
+"TabNet (xr_fresh), field",all cereals,0.6248,0.4284,0.6787,0.6654
