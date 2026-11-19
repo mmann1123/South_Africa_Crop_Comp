@@ -135,14 +135,13 @@ found in our own pipeline. These three answer it.
 - [x] **Learning curves, 100% points** (2026-10-28; `learning_curves/single_seed_100.py`). Each
   seed scored singly; the seed average reproduces every saved ensemble. Single models sit 0.01 to
   0.04 below their ensembles (largest for CNN-BiLSTM and TabNet); ensembles shown as open markers.
-- [ ] **Learning curves, paired comparisons at 5 to 15%** (decided 2026-11-09: the low-data null claim
-  is kept, so the paired sweep runs; `learning_curves/paired/`: `make_splits.py` wrote `splits.json`
-  (shared 64/16/20 split and 10 stratified draws per fraction), every sweep script reads it through
-  `PAIRED_FID_FILE` (`field_reduction/subsample.py`, unit test `tests/test_paired_splits.py`),
-  `run.sh` started 2026-11-09, `summarize.py` does the paired tests). Rerun 5/10/15% with one shared train/validation
-  split and identical field draws for every model, so draws and fields pair across models. Needed
-  if the paper claims logistic regression matches the deep models at low data (a null claim from
-  the current unpaired tests is weak).
+- [x] **Learning curves, paired comparisons at 5 to 15%** (done 2026-11-18, about 23 GPU hours;
+  `learning_curves/paired/`, `summarize.py`, `results/paired_summary.csv` and
+  `paired_contrasts.csv`; README section "Paired low-data comparison"). Pairing softens the null:
+  TempCNN leads logistic regression at every fraction by 0.014 to 0.029 (paired CIs exclude zero,
+  8 to 9 of 10 draws), L-TAE and L-TAE-S by 0.01 to 0.03 with CIs mostly crossing zero,
+  CNN-BiLSTM equals it; XGBoost and TabNet trail; the gate adds nothing at low data. Wording for
+  the paper: the best deep model keeps a quarter to a half of its full-data lead at 5 to 15%.
 - [x] **Mechanism figure** (inference only). Flip-rate bar chart done
   (`experiments/missingness/flip_rate_figure.py`, `figures/flip_rate.pdf`). The leave-one-month-out
   occlusion is the training-median arm of the month-by-month injection (fields changed and F1 per

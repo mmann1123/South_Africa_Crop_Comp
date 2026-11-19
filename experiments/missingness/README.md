@@ -165,6 +165,56 @@ low-data advantage for sparsity: the gated variants are within noise of their de
 every fraction. Draws are not paired across models (different splits), so these are unpaired
 comparisons.
 
+## Paired low-data comparison, 5 to 15% (2026-11-18)
+
+The 5 to 15% comparison above was unpaired (each sweep script rebuilt its own split, so draws did
+not share fields). `learning_curves/paired/` reruns it paired: `make_splits.py` wrote `splits.json`
+(one 64/16/20 field split, 2,653/664/830 fields, and 10 stratified draws per fraction of
+132/265/397 training fields), every sweep script reads it through `PAIRED_FID_FILE`
+(`field_reduction/subsample.py`; `tests/test_paired_splits.py` checks that an unset variable
+reproduces the published splits). Nine models, 3 fractions, 10 draws, one training seed per
+draw, training-median-filled holdout; `run.sh` then `resume.sh` (the first launch stopped on
+2026-11-09), about 23 GPU hours; `summarize.py` writes `results/paired_summary.csv` and
+`results/paired_contrasts.csv` (paired t-interval, Wilcoxon signed-rank, draws favouring).
+
+| Model | 5% | 10% | 15% |
+|---|---|---|---|
+| TempCNN, gated | 0.512 | 0.556 | 0.585 |
+| TempCNN | 0.503 | 0.556 | 0.584 |
+| L-TAE-S | 0.508 | 0.557 | 0.565 |
+| L-TAE | 0.503 | 0.554 | 0.568 |
+| CNN-BiLSTM, gated | 0.482 | 0.522 | 0.559 |
+| CNN-BiLSTM | 0.491 | 0.530 | 0.556 |
+| Logistic regression (pixel) | 0.489 | 0.531 | 0.554 |
+| XGBoost (field) | 0.467 | 0.510 | 0.528 |
+| TabNet (pixel) | 0.431 | 0.482 | 0.501 |
+
+Paired contrasts against pixel logistic regression (mean difference over the 10 draws, 95% paired
+t-interval, draws favouring the model):
+
+| Model | 5% | 10% | 15% |
+|---|---|---|---|
+| TempCNN | +0.014 [0.000, 0.028], 8/10 | +0.025 [0.004, 0.046], 9/10 | +0.029 [0.011, 0.047], 9/10 |
+| TempCNN, gated | +0.023 [0.006, 0.040], 8/10 | +0.026 [−0.000, 0.051], 7/10 | +0.030 [0.011, 0.050], 8/10 |
+| L-TAE | +0.015 [−0.005, 0.035], 6/10 | +0.023 [−0.006, 0.052], 7/10 | +0.013 [−0.006, 0.033], 6/10 |
+| L-TAE-S | +0.019 [0.005, 0.033], 9/10 | +0.026 [0.005, 0.047], 7/10 | +0.011 [−0.009, 0.031], 7/10 |
+| CNN-BiLSTM | +0.002 [−0.011, 0.016], 5/10 | −0.001 [−0.024, 0.022], 6/10 | +0.002 [−0.016, 0.018], 6/10 |
+| CNN-BiLSTM, gated | −0.007 [−0.030, 0.016], 5/10 | −0.009 [−0.046, 0.027], 4/10 | +0.005 [−0.022, 0.031], 6/10 |
+| XGBoost (field) | −0.022 [−0.047, 0.003], 3/10 | −0.020 [−0.051, 0.010], 3/10 | −0.027 [−0.047, −0.007], 2/10 |
+| TabNet (pixel) | −0.057 [−0.079, −0.036], 1/10 | −0.048 [−0.071, −0.026], 1/10 | −0.054 [−0.068, −0.039], 0/10 |
+
+Pairing sharpens the picture and softens the earlier null. TempCNN is ahead of logistic regression
+at every fraction (paired intervals exclude zero, Wilcoxon p = 0.02 to 0.03, 8 or 9 draws of 10),
+but by 0.014 to 0.029, against 0.05 at 100%. L-TAE and L-TAE-S lead by 0.011 to 0.026 with
+intervals that cross zero at most fractions. CNN-BiLSTM, dense or gated, equals logistic
+regression. The two feature-selecting tabular models still trail (XGBoost by 0.02 to 0.03,
+TabNet by 0.05 to 0.06; TabNet significant at every fraction, XGBoost at 15% and by Wilcoxon at 5%).
+The gate adds nothing at low data on any backbone (gated minus dense −0.009 to +0.009, every
+interval crossing zero). The defensible wording is: at 5 to 15% of training fields the best deep
+temporal model leads a pixel logistic regression by 0.01 to 0.03 macro-F1, a quarter to a half
+of its full-data lead, the recurrent model does not lead at all, and sparsity gives no low-data
+advantage.
+
 ## Step deletion: no imputation at all (2026-10-24)
 
 `step_deletion.py` masks each pixel's missing months out of temporal attention (weight exactly 0,

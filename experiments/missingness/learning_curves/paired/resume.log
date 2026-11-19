@@ -1,0 +1,7 @@
+resume Tue Nov 17 09:16:28 AM EST 2026  PAIRED_FID_FILE=/home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/missingness/learning_curves/paired/splits.json
+done tabnet 0.05 Tue Nov 17 09:27:49 AM EST 2026
+done tabnet Tue Nov 17 10:39:53 AM EST 2026
+done ltae Tue Nov 17 05:08:41 PM EST 2026
+done tempcnn Tue Nov 17 11:40:51 PM EST 2026
+done cnn_bilstm Wed Nov 18 08:21:55 AM EST 2026
+PAIRED SWEEP DONE Wed Nov 18 08:21:55 AM EST 2026
