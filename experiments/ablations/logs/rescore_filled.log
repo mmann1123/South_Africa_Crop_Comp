@@ -1,0 +1,378 @@
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/TabNet_field_5seed.csv
+Fields: 2415
+  ST F1 macro:    0.4463
+  ST F1 weighted: 0.5563
+  ST Cohen kappa: 0.3108
+  ST Accuracy:    0.5267
+  ST Cross-Ent:   7.6286
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/TabNet_field_3seed.csv
+Fields: 2415
+  ST F1 macro:    0.3911
+  ST F1 weighted: 0.5117
+  ST Cohen kappa: 0.2585
+  ST Accuracy:    0.4754
+  ST Cross-Ent:   8.4562
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/TabNet_field_1seed_42.csv
+Fields: 2415
+  ST F1 macro:    0.3093
+  ST F1 weighted: 0.4193
+  ST Cohen kappa: 0.1679
+  ST Accuracy:    0.3785
+  ST Cross-Ent:   10.0179
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/TabNet_field_1seed_101.csv
+Fields: 2415
+  ST F1 macro:    0.2882
+  ST F1 weighted: 0.4015
+  ST Cohen kappa: 0.1531
+  ST Accuracy:    0.3573
+  ST Cross-Ent:   10.3583
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/TabNet_field_1seed_202.csv
+Fields: 2415
+  ST F1 macro:    0.3408
+  ST F1 weighted: 0.4560
+  ST Cohen kappa: 0.1928
+  ST Accuracy:    0.4133
+  ST Cross-Ent:   9.4573
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/TabNet_field_1seed_303.csv
+Fields: 2415
+  ST F1 macro:    0.2946
+  ST F1 weighted: 0.4019
+  ST Cohen kappa: 0.1357
+  ST Accuracy:    0.3627
+  ST Cross-Ent:   10.2715
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/TabNet_field_1seed_404.csv
+Fields: 2415
+  ST F1 macro:    0.3317
+  ST F1 weighted: 0.4588
+  ST Cohen kappa: 0.2064
+  ST Accuracy:    0.4203
+  ST Cross-Ent:   9.3438
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/L-TAE-S_field_5seed.csv
+Fields: 2415
+  ST F1 macro:    0.5988
+  ST F1 weighted: 0.6922
+  ST Cohen kappa: 0.5142
+  ST Accuracy:    0.7035
+  ST Cross-Ent:   4.7787
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/L-TAE-S_field_3seed.csv
+Fields: 2415
+  ST F1 macro:    0.5753
+  ST F1 weighted: 0.6794
+  ST Cohen kappa: 0.4977
+  ST Accuracy:    0.6932
+  ST Cross-Ent:   4.9456
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/L-TAE-S_field_1seed_42.csv
+Fields: 2415
+  ST F1 macro:    0.5274
+  ST F1 weighted: 0.6470
+  ST Cohen kappa: 0.4452
+  ST Accuracy:    0.6638
+  ST Cross-Ent:   5.4194
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/L-TAE-S_field_1seed_101.csv
+Fields: 2415
+  ST F1 macro:    0.5524
+  ST F1 weighted: 0.6602
+  ST Cohen kappa: 0.4755
+  ST Accuracy:    0.6675
+  ST Cross-Ent:   5.3594
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/L-TAE-S_field_1seed_202.csv
+Fields: 2415
+  ST F1 macro:    0.5731
+  ST F1 weighted: 0.6779
+  ST Cohen kappa: 0.4925
+  ST Accuracy:    0.6915
+  ST Cross-Ent:   4.9722
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/L-TAE-S_field_1seed_303.csv
+Fields: 2415
+  ST F1 macro:    0.5512
+  ST F1 weighted: 0.6449
+  ST Cohen kappa: 0.4402
+  ST Accuracy:    0.6414
+  ST Cross-Ent:   5.7798
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/L-TAE-S_field_1seed_404.csv
+Fields: 2415
+  ST F1 macro:    0.5856
+  ST F1 weighted: 0.6823
+  ST Cohen kappa: 0.4989
+  ST Accuracy:    0.6940
+  ST Cross-Ent:   4.9322
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/CNN-BiLSTM_field_5seed.csv
+Fields: 2415
+  ST F1 macro:    0.5913
+  ST F1 weighted: 0.6497
+  ST Cohen kappa: 0.4494
+  ST Accuracy:    0.6277
+  ST Cross-Ent:   6.0001
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/CNN-BiLSTM_field_3seed.csv
+Fields: 2415
+  ST F1 macro:    0.5864
+  ST F1 weighted: 0.6471
+  ST Cohen kappa: 0.4442
+  ST Accuracy:    0.6253
+  ST Cross-Ent:   6.0401
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/CNN-BiLSTM_field_1seed_42.csv
+Fields: 2415
+  ST F1 macro:    0.5876
+  ST F1 weighted: 0.6592
+  ST Cohen kappa: 0.4597
+  ST Accuracy:    0.6414
+  ST Cross-Ent:   5.7798
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/CNN-BiLSTM_field_1seed_101.csv
+Fields: 2415
+  ST F1 macro:    0.5643
+  ST F1 weighted: 0.6236
+  ST Cohen kappa: 0.4173
+  ST Accuracy:    0.5992
+  ST Cross-Ent:   6.4606
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/CNN-BiLSTM_field_1seed_202.csv
+Fields: 2415
+  ST F1 macro:    0.5729
+  ST F1 weighted: 0.6386
+  ST Cohen kappa: 0.4331
+  ST Accuracy:    0.6166
+  ST Cross-Ent:   6.1803
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/CNN-BiLSTM_field_1seed_303.csv
+Fields: 2415
+  ST F1 macro:    0.5635
+  ST F1 weighted: 0.6312
+  ST Cohen kappa: 0.4268
+  ST Accuracy:    0.6091
+  ST Cross-Ent:   6.3004
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/CNN-BiLSTM_field_1seed_404.csv
+Fields: 2415
+  ST F1 macro:    0.6005
+  ST F1 weighted: 0.6616
+  ST Cohen kappa: 0.4682
+  ST Accuracy:    0.6422
+  ST Cross-Ent:   5.7665
+
+=== ensemble size, filled holdout ===
+             model  n_seeds              seeds  f1_macro  kappa  f1_macro_mean  f1_macro_std  kappa_mean  kappa_std  f1_macro_published  kappa_published  f1_macro_mean_published  f1_macro_std_published
+    TabNet (field)        1                 42    0.3093 0.1679         0.3129        0.0204      0.1712     0.0257              0.3100           0.1768                   0.3130                  0.0241
+    TabNet (field)        3         42,101,202    0.3911 0.2585            NaN           NaN         NaN        NaN              0.3946           0.2927                      NaN                     NaN
+    TabNet (field)        5 42,101,202,303,404    0.4463 0.3108            NaN           NaN         NaN        NaN              0.4331           0.3409                      NaN                     NaN
+   L-TAE-S (field)        1                 42    0.5274 0.4452         0.5579        0.0200      0.4705     0.0240              0.5275           0.4428                   0.5621                  0.0217
+   L-TAE-S (field)        3         42,101,202    0.5753 0.4977            NaN           NaN         NaN        NaN              0.5806           0.4951                      NaN                     NaN
+   L-TAE-S (field)        5 42,101,202,303,404    0.5988 0.5142            NaN           NaN         NaN        NaN              0.6012           0.5155                      NaN                     NaN
+CNN-BiLSTM (field)        1                 42    0.5876 0.4597         0.5778        0.0143      0.4410     0.0196              0.4870           0.3108                   0.4807                  0.0183
+CNN-BiLSTM (field)        3         42,101,202    0.5864 0.4442            NaN           NaN         NaN        NaN              0.5201           0.3416                      NaN                     NaN
+CNN-BiLSTM (field)        5 42,101,202,303,404    0.5913 0.4494            NaN           NaN         NaN        NaN              0.5060           0.3256                      NaN                     NaN
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/tabnet_field_focal_off.csv
+Fields: 2415
+  ST F1 macro:    0.4463
+  ST F1 weighted: 0.5563
+  ST Cohen kappa: 0.3108
+  ST Accuracy:    0.5267
+  ST Cross-Ent:   7.6286
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/tabnet_field_weighted_ce_off.csv
+Fields: 2415
+  ST F1 macro:    0.4266
+  ST F1 weighted: 0.5664
+  ST Cohen kappa: 0.3157
+  ST Accuracy:    0.5478
+  ST Cross-Ent:   7.2882
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/tabnet_field_plain_ce_off.csv
+Fields: 2415
+  ST F1 macro:    0.3879
+  ST F1 weighted: 0.5561
+  ST Cohen kappa: 0.3201
+  ST Accuracy:    0.6257
+  ST Cross-Ent:   6.0334
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/tabnet_field_focal_on.csv
+Fields: 2415
+  ST F1 macro:    0.3923
+  ST F1 weighted: 0.3793
+  ST Cohen kappa: 0.1836
+  ST Accuracy:    0.3644
+  ST Cross-Ent:   10.2448
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/pytorch_tabnet/tab_models/tab_class.py:25: UserWarning: Device used : cuda
+  super(TabNetClassifier, self).__post_init__()
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/tabnet_field_plain_ce_on.csv
+Fields: 2415
+  ST F1 macro:    0.4576
+  ST F1 weighted: 0.5677
+  ST Cohen kappa: 0.3238
+  ST Accuracy:    0.5445
+  ST Cross-Ent:   7.3416
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/ltaes_field_focal_off.csv
+Fields: 2415
+  ST F1 macro:    0.5988
+  ST F1 weighted: 0.6922
+  ST Cohen kappa: 0.5142
+  ST Accuracy:    0.7035
+  ST Cross-Ent:   4.7787
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/ltaes_field_weighted_ce_off.csv
+Fields: 2415
+  ST F1 macro:    0.6046
+  ST F1 weighted: 0.6929
+  ST Cohen kappa: 0.5161
+  ST Accuracy:    0.7072
+  ST Cross-Ent:   4.7186
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/ltaes_field_plain_ce_off.csv
+Fields: 2415
+  ST F1 macro:    0.5944
+  ST F1 weighted: 0.6820
+  ST Cohen kappa: 0.5079
+  ST Accuracy:    0.7106
+  ST Cross-Ent:   4.6652
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/ltaes_field_focal_on.csv
+Fields: 2415
+  ST F1 macro:    0.5978
+  ST F1 weighted: 0.6787
+  ST Cohen kappa: 0.4927
+  ST Accuracy:    0.6841
+  ST Cross-Ent:   5.0924
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/ltaes_field_plain_ce_on.csv
+Fields: 2415
+  ST F1 macro:    0.6002
+  ST F1 weighted: 0.6846
+  ST Cohen kappa: 0.5015
+  ST Accuracy:    0.6944
+  ST Cross-Ent:   4.9255
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/cnn_bilstm_field_focal_off.csv
+Fields: 2415
+  ST F1 macro:    0.5914
+  ST F1 weighted: 0.6627
+  ST Cohen kappa: 0.4662
+  ST Accuracy:    0.6455
+  ST Cross-Ent:   5.7131
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/cnn_bilstm_field_weighted_ce_off.csv
+Fields: 2415
+  ST F1 macro:    0.5885
+  ST F1 weighted: 0.6678
+  ST Cohen kappa: 0.4754
+  ST Accuracy:    0.6559
+  ST Cross-Ent:   5.5462
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/cnn_bilstm_field_plain_ce_off.csv
+Fields: 2415
+  ST F1 macro:    0.5724
+  ST F1 weighted: 0.6860
+  ST Cohen kappa: 0.5179
+  ST Accuracy:    0.7077
+  ST Cross-Ent:   4.7120
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/cnn_bilstm_field_focal_on.csv
+Fields: 2415
+  ST F1 macro:    0.5474
+  ST F1 weighted: 0.5564
+  ST Cohen kappa: 0.3415
+  ST Accuracy:    0.5230
+  ST Cross-Ent:   7.6886
+/home/mmann1123/miniconda3/envs/deep_field/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/ablations/results/predictions_filled/cnn_bilstm_field_plain_ce_on.csv
+Fields: 2415
+  ST F1 macro:    0.5942
+  ST F1 weighted: 0.6695
+  ST Cohen kappa: 0.4760
+  ST Accuracy:    0.6559
+  ST Cross-Ent:   5.5462
+
+=== loss / sampler, filled holdout ===
+             model        loss sampler  f1_macro  kappa    xent  f1_macro_published  kappa_published  xent_published
+    TabNet (field)       focal     off    0.4463 0.3108  7.6286              0.4331           0.3409          6.7276
+    TabNet (field) weighted_ce     off    0.4266 0.3157  7.2882              0.4191           0.3327          6.5340
+    TabNet (field)    plain_ce     off    0.3879 0.3201  6.0334              0.3497           0.2475          6.2136
+    TabNet (field)       focal      on    0.3923 0.1836 10.2448              0.3952           0.2287          9.2637
+    TabNet (field)    plain_ce      on    0.4576 0.3238  7.3416              0.4631           0.3692          6.3338
+   L-TAE-S (field)       focal     off    0.5988 0.5142  4.7787              0.6012           0.5155          4.7720
+   L-TAE-S (field) weighted_ce     off    0.6046 0.5161  4.7186              0.5978           0.5036          4.8655
+   L-TAE-S (field)    plain_ce     off    0.5944 0.5079  4.6652              0.5881           0.4980          4.7787
+   L-TAE-S (field)       focal      on    0.5978 0.4927  5.0924              0.6002           0.4943          5.0724
+   L-TAE-S (field)    plain_ce      on    0.6002 0.5015  4.9255              0.6008           0.5001          4.9322
+CNN-BiLSTM (field)       focal     off    0.5914 0.4662  5.7131              0.5088           0.3357          7.6953
+CNN-BiLSTM (field) weighted_ce     off    0.5885 0.4754  5.5462              0.4874           0.3413          7.5418
+CNN-BiLSTM (field)    plain_ce     off    0.5724 0.5179  4.7120              0.4094           0.3041          8.0290
+CNN-BiLSTM (field)       focal      on    0.5474 0.3415  7.6886              0.5582           0.3891          6.9011
+CNN-BiLSTM (field)    plain_ce      on    0.5942 0.4760  5.5462              0.5027           0.3448          7.4550

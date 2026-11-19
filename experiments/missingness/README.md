@@ -296,6 +296,32 @@ survives: ensembling and the imbalance objective move scores by at most a few hu
 raw-sequence models and never reorder them; the xr_fresh TabNet is unaffected by the fill
 (its features are NaN-aware) and remains the model most sensitive to the objective.
 
+## MiniRocket gate table (S-I) under the fill (2026-11-19)
+
+Supplement Table S-I compared five classifier heads on the same frozen MiniRocket features and
+reported the sparsemax gate 0.06 above the softmax gate at pixel level. It was scored under the
+zero fill. `experiments/recent_baselines/minirocket_sparsity/rescore_filled.py` (ts_baselines env)
+applies the saved heads to the training-median-filled holdout, transforming each seed's features
+once and feeding every head the same batch; results in `minirocket_sparsity/results/filled_rescoring.csv`,
+predictions `results/predictions/<name>_<level>_trainmed.csv`. The L2 reference reproduces the
+fill check (0.605 pixel, 0.585 field).
+
+| Head on MiniRocket features | Pixel, filled (published) | Field, filled (published) |
+|---|---|---|
+| Linear, L2 logistic (Table 1) | 0.605 (0.50) | 0.585 (0.48) |
+| Linear, ridge | 0.620 (0.49) | 0.579 (0.45) |
+| Linear, L1 logistic | 0.608 (0.51) | 0.577 (0.49) |
+| Dense gate (softmax) | 0.623 (0.49) | 0.590 (0.50) |
+| Sparse gate (sparsemax) | 0.620 (0.55) | 0.566 (0.50) |
+
+Under a consistent in-range fill every head lands between 0.58 and 0.62 and the sparse gate's
+advantage disappears: at pixel level it is 0.003 below the softmax gate (was 0.06 above), at field
+level 0.024 below. The published gap was robustness to the out-of-range fill (the sparse gate lost
+0.075 to the zero fill, the softmax gate 0.136), the same pattern as L-TAE-S against L-TAE. The S-I
+sentence "adding the L-TAE-S style gate to MiniRocket's features raises its holdout macro-F1 by
+0.06 over an identical network with a dense gate" is withdrawn; the table can stay as a second
+backbone showing the fill effect.
+
 ## Step deletion: no imputation at all (2026-10-24)
 
 `step_deletion.py` masks each pixel's missing months out of temporal attention (weight exactly 0,

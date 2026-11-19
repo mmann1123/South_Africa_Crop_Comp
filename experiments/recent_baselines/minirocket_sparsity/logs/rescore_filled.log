@@ -1,0 +1,119 @@
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/numba/np/ufunc/parallel.py:373: NumbaWarning: The TBB threading layer requires TBB version 2021 update 6 or later i.e., TBB_INTERFACE_VERSION >= 12060. Found TBB_INTERFACE_VERSION = 12050. The TBB threading layer is disabled.
+  warnings.warn(problem)
+  field seed 42 done
+  field seed 101 done
+  field seed 202 done
+  field seed 303 done
+  field seed 404 done
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_field_trainmed.csv
+Fields: 2415
+  ST F1 macro:    0.5855
+  ST F1 weighted: 0.6735
+  ST Cohen kappa: 0.4758
+  ST Accuracy:    0.6667
+  ST Cross-Ent:   5.3727
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_l1_field_trainmed.csv
+Fields: 2415
+  ST F1 macro:    0.5770
+  ST F1 weighted: 0.6660
+  ST Cohen kappa: 0.4672
+  ST Accuracy:    0.6571
+  ST Cross-Ent:   5.5262
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_ridge_field_trainmed.csv
+Fields: 2415
+  ST F1 macro:    0.5785
+  ST F1 weighted: 0.6697
+  ST Cohen kappa: 0.4748
+  ST Accuracy:    0.6687
+  ST Cross-Ent:   5.3393
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_s_field_trainmed.csv
+Fields: 2415
+  ST F1 macro:    0.5661
+  ST F1 weighted: 0.6603
+  ST Cohen kappa: 0.4613
+  ST Accuracy:    0.6770
+  ST Cross-Ent:   5.2058
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_softmax_field_trainmed.csv
+Fields: 2415
+  ST F1 macro:    0.5903
+  ST F1 weighted: 0.6839
+  ST Cohen kappa: 0.5000
+  ST Accuracy:    0.6961
+  ST Cross-Ent:   4.8988
+                     model                key level  f1_macro  kappa   xent                                                                                                predictions  f1_macro_published  delta
+        MiniRocket (field)         minirocket field    0.5855 0.4758 5.3727         experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_field_trainmed.csv              0.4822 0.1033
+     MiniRocket-L1 (field)      minirocket_l1 field    0.5770 0.4672 5.5262      experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_l1_field_trainmed.csv              0.4864 0.0906
+  MiniRocket-ridge (field)   minirocket_ridge field    0.5785 0.4748 5.3393   experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_ridge_field_trainmed.csv              0.4547 0.1238
+      MiniRocket-S (field)       minirocket_s field    0.5661 0.4613 5.2058       experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_s_field_trainmed.csv              0.4964 0.0697
+MiniRocket-softmax (field) minirocket_softmax field    0.5903 0.5000 4.8988 experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_softmax_field_trainmed.csv              0.5019 0.0884
+  pixel seed 42 done
+  pixel seed 101 done
+  pixel seed 202 done
+  pixel seed 303 done
+  pixel seed 404 done
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_pixel_trainmed.csv
+Fields: 2415
+  ST F1 macro:    0.6054
+  ST F1 weighted: 0.6648
+  ST Cohen kappa: 0.4659
+  ST Accuracy:    0.6472
+  ST Cross-Ent:   5.6864
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_l1_pixel_trainmed.csv
+Fields: 2415
+  ST F1 macro:    0.6081
+  ST F1 weighted: 0.6642
+  ST Cohen kappa: 0.4647
+  ST Accuracy:    0.6455
+  ST Cross-Ent:   5.7131
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_ridge_pixel_trainmed.csv
+Fields: 2415
+  ST F1 macro:    0.6196
+  ST F1 weighted: 0.6852
+  ST Cohen kappa: 0.4952
+  ST Accuracy:    0.6745
+  ST Cross-Ent:   5.2459
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_s_pixel_trainmed.csv
+Fields: 2415
+  ST F1 macro:    0.6196
+  ST F1 weighted: 0.7071
+  ST Cohen kappa: 0.5396
+  ST Accuracy:    0.7222
+  ST Cross-Ent:   4.4784
+/home/mmann1123/miniconda3/envs/ts_baselines/lib/python3.12/site-packages/sklearn/metrics/_classification.py:310: UserWarning: The y_prob values do not sum to one. Make sure to pass probabilities.
+  warnings.warn(
+File:   /home/mmann1123/Documents/github/South_Africa_Crop_Comp/experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_softmax_pixel_trainmed.csv
+Fields: 2415
+  ST F1 macro:    0.6233
+  ST F1 weighted: 0.7130
+  ST Cohen kappa: 0.5493
+  ST Accuracy:    0.7313
+  ST Cross-Ent:   4.3315
+                     model                key level  f1_macro  kappa   xent                                                                                                predictions  f1_macro_published  delta
+        MiniRocket (field)         minirocket field    0.5855 0.4758 5.3727         experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_field_trainmed.csv              0.4822 0.1033
+     MiniRocket-L1 (field)      minirocket_l1 field    0.5770 0.4672 5.5262      experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_l1_field_trainmed.csv              0.4864 0.0906
+  MiniRocket-ridge (field)   minirocket_ridge field    0.5785 0.4748 5.3393   experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_ridge_field_trainmed.csv              0.4547 0.1238
+      MiniRocket-S (field)       minirocket_s field    0.5661 0.4613 5.2058       experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_s_field_trainmed.csv              0.4964 0.0697
+MiniRocket-softmax (field) minirocket_softmax field    0.5903 0.5000 4.8988 experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_softmax_field_trainmed.csv              0.5019 0.0884
+        MiniRocket (pixel)         minirocket pixel    0.6054 0.4659 5.6864         experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_pixel_trainmed.csv              0.5003 0.1051
+     MiniRocket-L1 (pixel)      minirocket_l1 pixel    0.6081 0.4647 5.7131      experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_l1_pixel_trainmed.csv              0.5083 0.0998
+  MiniRocket-ridge (pixel)   minirocket_ridge pixel    0.6196 0.4952 5.2459   experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_ridge_pixel_trainmed.csv              0.4913 0.1283
+      MiniRocket-S (pixel)       minirocket_s pixel    0.6196 0.5396 4.4784       experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_s_pixel_trainmed.csv              0.5450 0.0746
+MiniRocket-softmax (pixel) minirocket_softmax pixel    0.6233 0.5493 4.3315 experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_softmax_pixel_trainmed.csv              0.4870 0.1363

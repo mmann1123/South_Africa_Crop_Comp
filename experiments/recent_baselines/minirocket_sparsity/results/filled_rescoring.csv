@@ -1,0 +1,11 @@
+model,key,level,f1_macro,kappa,xent,predictions,f1_macro_published,delta
+MiniRocket (field),minirocket,field,0.5854938041226828,0.47580702785153084,5.372698616986112,experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_field_trainmed.csv,0.4822,0.1032938041226828
+MiniRocket-L1 (field),minirocket_l1,field,0.5770169816125015,0.46718175113085525,5.526204288900001,experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_l1_field_trainmed.csv,0.4864,0.09061698161250148
+MiniRocket-ridge (field),minirocket_ridge,field,0.5785117738708713,0.47477792240414696,5.3393278187439615,experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_ridge_field_trainmed.csv,0.4547,0.12381177387087128
+MiniRocket-S (field),minirocket_s,field,0.5661037899578212,0.4613288936409814,5.205844625775363,experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_s_field_trainmed.csv,0.4964,0.06970378995782117
+MiniRocket-softmax (field),minirocket_softmax,field,0.5903263795546503,0.5000156543916492,4.898833281947586,experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_softmax_field_trainmed.csv,0.5019,0.08842637955465027
+MiniRocket (pixel),minirocket,pixel,0.605384874075246,0.46591516129383925,5.686384120462319,experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_pixel_trainmed.csv,0.5003,0.10508487407524603
+MiniRocket-L1 (pixel),minirocket_l1,pixel,0.6081207384582272,0.4646816351960871,5.713080759056039,experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_l1_pixel_trainmed.csv,0.5083,0.09982073845822725
+MiniRocket-ridge (pixel),minirocket_ridge,pixel,0.6196173647349807,0.49516424801496806,5.245889583665942,experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_ridge_pixel_trainmed.csv,0.4913,0.12831736473498073
+MiniRocket-S (pixel),minirocket_s,pixel,0.6196307775904601,0.5396229684945302,4.478361224096499,experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_s_pixel_trainmed.csv,0.545,0.0746307775904601
+MiniRocket-softmax (pixel),minirocket_softmax,pixel,0.623255979107276,0.5493194222515008,4.33152971183104,experiments/recent_baselines/minirocket_sparsity/results/predictions/minirocket_softmax_pixel_trainmed.csv,0.487,0.13625597910727605

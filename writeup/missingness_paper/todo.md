@@ -152,9 +152,10 @@ found in our own pipeline. These three answer it.
   `experiments/ablations/rescore_filled.py`, results `*_filled.csv`). Published sentences on
   single-seed L-TAE-S beating the CNN-BiLSTM ensemble and on CNN-BiLSTM "swinging 0.41 to 0.56"
   across objectives do not survive (filled: 0.547 to 0.594 vs L-TAE-S 0.594 to 0.605).
-- [ ] **MiniRocket gate table (S-I) under the fill** (`minirocket_sparsity/rescore_filled.py`,
-  ts_baselines env). Field level done: L2 0.586, L1 0.577, ridge 0.579, sparse gate 0.566,
-  softmax gate 0.590 (the sparse gate's field advantage is gone). Pixel level running.
+- [x] **MiniRocket gate table (S-I) under the fill** (2026-11-19; `minirocket_sparsity/rescore_filled.py`,
+  ts_baselines env, `results/filled_rescoring.csv`). Every head 0.58 to 0.62; pixel sparse gate
+  0.620 vs softmax 0.623 (published 0.55 vs 0.49), field 0.566 vs 0.590. The gate's published
+  0.06 gain was robustness to the zero fill. Sentence withdrawn; table kept with both columns.
 - [x] **Mechanism figure** (inference only). Flip-rate bar chart done
   (`experiments/missingness/flip_rate_figure.py`, `figures/flip_rate.pdf`). The leave-one-month-out
   occlusion is the training-median arm of the month-by-month injection (fields changed and F1 per
